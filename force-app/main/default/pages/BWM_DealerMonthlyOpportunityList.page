@@ -1,0 +1,38 @@
+<apex:page renderAs="pdf" applyBodyTag="false" showHeader="false" standardStylesheets="false" controller="BWM_DealerMonthlyListCtrl">
+    <html>
+        <head>
+            <style type="text/css">
+                body { font-family: Arial, sans-serif; font-size: 10pt; }
+                h1 { font-size: 14pt; margin-bottom: 12px; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #cccccc; padding: 6px; text-align: left; }
+                th { background-color: #f3f3f3; }
+            </style>
+        </head>
+        <body>
+            <h1>Open Opportunities for {!dealerName}</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opportunity Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Amount</th>
+                        <th>Expected Closure Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!rows}" var="row">
+                        <tr>
+                            <td>{!row.name}</td>
+                            <td>{!row.phone}</td>
+                            <td>{!row.email}</td>
+                            <td>{!row.amountDisplay}</td>
+                            <td>{!row.closeDateDisplay}</td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>

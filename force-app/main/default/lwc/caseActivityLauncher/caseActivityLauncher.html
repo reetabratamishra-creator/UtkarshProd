@@ -1,0 +1,104 @@
+<template>
+    <lightning-quick-action-panel header="New Activity">
+
+        <template lwc:if={isBusy}>
+            <lightning-spinner alternative-text="Saving" size="small"></lightning-spinner>
+        </template>
+
+        <div class="slds-align_absolute-center slds-m-bottom_small">
+            <lightning-button-group>
+                <lightning-button
+                    label="Log a Call"
+                    icon-name="utility:call"
+                    data-mode="call"
+                    variant={callVariant}
+                    onclick={handleModeChange}>
+                </lightning-button>
+                <lightning-button
+                    label="New Meeting"
+                    icon-name="utility:event"
+                    data-mode="event"
+                    variant={eventVariant}
+                    onclick={handleModeChange}>
+                </lightning-button>
+            </lightning-button-group>
+        </div>
+
+        <template lwc:if={ownerName}>
+            <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+                This {modeLabel} will be assigned to <strong>{ownerName}</strong> (Case owner).
+            </p>
+        </template>
+
+        <lightning-input
+            data-field="subject"
+            label="Subject"
+            value={subject}
+            max-length="255"
+            required
+            onchange={handleChange}>
+        </lightning-input>
+
+        <!-- Call -->
+        <template lwc:if={isCall}>
+            <lightning-input
+                data-field="followUpDateTime"
+                type="datetime"
+                label="Date & Time"
+                value={followUpDateTime}
+                min={minDateTime}
+                required
+                message-when-range-underflow="Date & Time cannot be in the past."
+                onchange={handleChange}>
+            </lightning-input>
+        </template>
+
+        <!-- Event -->
+        <template lwc:else>
+            <lightning-input
+                data-field="startDateTime"
+                type="datetime"
+                label="Start Date & Time"
+                value={startDateTime}
+                min={minDateTime}
+                required
+                message-when-range-underflow="Start Date & Time cannot be in the past."
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input
+                data-field="endDateTime"
+                type="datetime"
+                label="End Date & Time"
+                value={endDateTime}
+                required
+                message-when-value-missing="Please enter the end date and time."
+                onchange={handleChange}>
+            </lightning-input>
+        </template>
+
+        <lightning-textarea
+            data-field="comments"
+            label="Comments"
+            value={comments}
+            max-length="32000"
+            onchange={handleChange}>
+        </lightning-textarea>
+
+        <div slot="footer">
+            <lightning-button
+                variant="neutral"
+                label="Cancel"
+                onclick={handleCancel}>
+            </lightning-button>
+            <lightning-button
+                class="slds-m-left_x-small"
+                variant="brand"
+                label={saveLabel}
+                disabled={saveDisabled}
+                onclick={handleSave}>
+            </lightning-button>
+        </div>
+
+    </lightning-quick-action-panel>
+</template>

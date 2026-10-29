@@ -1,0 +1,1580 @@
+/* ============================================================
+   WEIGHT ESTIMATOR MODAL - Core Modal Styling
+   ============================================================ */
+
+.modal-container {
+    position: fixed;           
+    top: 50%;                  
+    left: 50%;                 
+    transform: translate(-50%, -50%);  
+    background: #ffffff;
+    border-radius: 4px;
+    width: 1540px;
+    height: 1540px;
+    max-width: 95vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 9000;             
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 50px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.modal-title { font-size: 18px; font-weight: 700; color: #1a1a1a; letter-spacing: 0.5px; text-align: center; margin: 0; }
+
+.close-btn {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: #c23934; border: none;
+    border-radius: 4px; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.close-btn:hover { background: #a61c17; }
+
+.modal-body { flex: 1; overflow-y: auto; padding-bottom: 100px; }
+
+.accordion-section { border: 1px solid #e5e5e5; border-radius: 8px; margin: 10px; overflow: visible; position: relative; }
+.accordion-section:focus-within { z-index: 10; position: relative; }
+
+.section-header {
+    display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #ffffff; cursor: pointer;
+    border-left: 4px solid transparent; user-select: none; transition: background 0.15s; border-radius: 8px 8px 0 0;
+}
+.section-header.has-required { border-left-color: #c23934; }
+.section-header:hover { background: #f8f8f8; }
+.chevron-icon { color: #c23934; }
+.section-label { font-size: 14px; font-weight: 600; color: #1a1a1a; letter-spacing: 0.2px; }
+
+/* Base cell structural rules shared by both modes */
+.field-cell-grid { display: flex; flex-direction: column; position: relative; }
+.field-cell-grid .field-divider { display: none; }
+
+
+/* ============================================================
+   1. STANDARD MODE (For "Flag Mast Segments", etc.)
+   ============================================================ */
+
+.standard-mode {
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+}
+
+.standard-mode .field-cell-grid {
+    padding: 8px 12px;
+    justify-content: flex-end;
+    min-height: 65px;
+}
+.standard-mode .field-label-cell {
+    text-align: left;
+    margin-bottom: 4px;
+    padding: 0;
+}
+.standard-mode .field-label {
+    font-size: 12px;
+    color: #0e6fad;
+    font-weight: 600;
+}
+.standard-mode .field-input-cell {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* Let Standard Mode use natural SLDS borders and background! */
+.standard-mode lightning-input,
+.standard-mode lightning-combobox,
+.standard-mode lightning-textarea {
+    width: 100%;
+    --slds-c-input-text-align: center; /* Centers the text */
+    font-weight: bold; /* Makes the text bold */
+}
+.standard-mode .field-action-cell { position: absolute; right: 14px; top: 32px; width: auto; }
+
+/* Standard Full-width Row Fallback */
+.standard-mode .field-row-standard {
+    display: grid; grid-template-columns: 1fr 3px 1fr 36px; align-items: center; min-height: 48px;
+    border-bottom: 1px solid #f0f0f0; background: #fff; width: 100%;
+}
+.standard-mode .field-row-standard:hover { background: #fafbfc; }
+.standard-mode .field-row-standard .field-label-cell { padding: 10px 20px 10px 24px; display: flex; flex-direction: column; justify-content: center; }
+.standard-mode .field-row-standard .field-label { font-size: 13px; font-weight: 500; color: #0e6fad; text-transform: uppercase; }
+.standard-mode .field-row-standard .field-input-cell { padding: 6px 12px 6px 16px; display: flex; flex-direction: column; justify-content: center; position: relative; width: 100%; }
+
+.standard-mode .field-row-standard .slds-combobox__form-element,
+.standard-mode .field-row-standard .slds-input {
+    border: none !important; 
+    box-shadow: none !important; 
+    background: transparent !important; 
+    padding-left: 0 !important;
+    text-align: center !important; /* Forces text to center */
+    font-weight: bold !important;   /* Forces text to be bold */
+    color: #1a1a1a !important;     /* Ensures it matches the dark bold color of read-only text */
+}
+/* ============================================================
+   READ-ONLY ROW STYLING (Matches DealDox Screenshots Perfectly)
+   ============================================================ */
+
+/* 1. For Grid Cells (e.g. Lighting Mast 4-columns): The ENTIRE block becomes gray */
+.standard-mode .field-cell-grid.readonly-row {
+    background-color: #ebebeb !important; 
+}
+
+/* 2. For Standard Full-Width Rows (e.g. OVERLAP, SEGMENT LENGTH): ONLY the right side becomes gray! */
+.standard-mode .field-row-standard.readonly-row .field-input-cell,
+.standard-mode .field-row-standard.readonly-row .field-action-cell {
+    background-color: #ebebeb !important; 
+}
+
+/* 3. Center the number and remove all borders */
+.standard-mode .readonly-row .readonly-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    background: transparent; 
+    border: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* 4. Ensure the unit text (e.g., 'mm') stacks perfectly underneath the number */
+.standard-mode .readonly-row .field-input-cell {
+    flex-direction: column;
+    justify-content: center;
+}
+.standard-mode .readonly-row .field-unit {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 0px;
+}
+
+/* ============================================================
+   2. SPREADSHEET MODE (Strictly for Accessories & Estimation)
+   ============================================================ */
+
+.spreadsheet-mode {
+    border-top: 1px solid #c9c9c9;
+    border-left: 1px solid #c9c9c9;
+    background: #ffffff;
+    width: 100%;
+}
+
+.spreadsheet-mode .field-row-header {
+    background-color: #f8fbfe;
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    border-top: 4px solid #1b5297;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.spreadsheet-mode > .field-row-header:first-child { border-top: none; padding-top: 12px; }
+.spreadsheet-mode .header-text { font-size: 15px; font-weight: 800; color: #1b5297; text-transform: uppercase; letter-spacing: 1.5px; }
+
+.spreadsheet-mode .field-cell-grid {
+    justify-content: space-between;
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    padding: 12px 6px;
+    min-height: 80px;
+}
+.spreadsheet-mode .field-label-cell { text-align: center; margin-bottom: 8px; width: 100%; padding: 0; }
+.spreadsheet-mode .field-label { font-size: 11px; color: #1b5297; text-transform: uppercase; font-weight: 600; }
+.spreadsheet-mode .field-input-cell { width: 100%; display: flex; justify-content: center; align-items: center; padding: 0 8px; }
+.spreadsheet-mode .checkbox-wrapper { display: flex; justify-content: center; width: 100%; padding-top: 4px; }
+
+/* Force Inputs to Look like Flat Cells */
+.spreadsheet-mode lightning-input,
+.spreadsheet-mode lightning-combobox,
+.spreadsheet-mode lightning-textarea {
+    width: 100%;
+    --slds-c-input-color-border: transparent;
+    --slds-c-input-color-background: transparent;
+    --slds-c-input-shadow-focus: none;
+    --slds-c-input-text-align: center;
+    --slds-c-textarea-color-border: transparent;
+    --slds-c-textarea-color-background: transparent;
+}
+.spreadsheet-mode lightning-input:hover,
+.spreadsheet-mode lightning-combobox:hover,
+.spreadsheet-mode lightning-textarea:hover,
+.spreadsheet-mode lightning-input:focus,
+.spreadsheet-mode lightning-combobox:focus,
+.spreadsheet-mode lightning-textarea:focus {
+    --slds-c-input-color-background: #fdfdfd;
+    --slds-c-input-color-border: #e5e5e5;
+    border-bottom: 1px solid #1b5297;
+}
+
+.spreadsheet-mode .field-action-cell { position: absolute; top: 2px; right: 2px; opacity: 0; transition: opacity 0.2s; width: auto; }
+.spreadsheet-mode .field-cell-grid:hover .field-action-cell { opacity: 1; }
+
+.spreadsheet-mode .readonly-value {
+    font-size: 12px; font-weight: 600; color: #1a1a1a; background: #eaeaea; width: 90%; height: 28px;
+    display: flex; align-items: center; justify-content: center; border-radius: 2px;
+}
+
+
+/* ============================================================
+   GLOBAL UTILITIES
+   ============================================================ */
+
+.clear-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.clear-btn:hover { background: #f0f0f0; }
+
+/* 👉 THE FIX: Ensure Required Error Icons are always visible */
+.required-icon { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 1 !important; /* Forces it to be visible */
+    color: #c23934; /* Salesforce Error Red */
+}
+
+/* Optional fields don't need a heavy error icon */
+.optional-icon { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.25; 
+}
+
+/* Make sure the spreadsheet mode doesn't hide the error icon! */
+.spreadsheet-mode .field-action-cell { 
+    position: absolute; 
+    top: 2px; 
+    right: 2px; 
+    width: auto; 
+    /* Remove opacity: 0 so required icons aren't hidden */
+}
+.spreadsheet-mode .field-action-cell .clear-btn {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.spreadsheet-mode .field-cell-grid:hover .field-action-cell .clear-btn { 
+    opacity: 1; /* Only hide the 'Clear' button, not the 'Error' button */
+}
+
+
+.field-unit { font-size: 11px; color: #888; margin-top: 2px; padding-left: 2px; }
+
+.modal-footer { display: flex; justify-content: flex-start; align-items: center; padding: 14px 20px; border-top: 1px solid #e5e5e5; background: #fff; flex-shrink: 0; }
+.apply-btn { background: #0e6fad; color: #fff; border: none; border-radius: 4px; padding: 10px 36px; font-size: 13px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: background 0.15s; }
+.apply-btn:hover { background: #0a5a8e; }
+.apply-btn:active { background: #084873; }
+
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: #f5f5f5; }
+.modal-body::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 3px; }
+.modal-body::-webkit-scrollbar-thumb:hover { background: #999; }
+/* ============================================================
+   RESTORED: STANDARD MODE RED DIVIDER LINES
+   ============================================================ */
+
+/* Draws the physical 3px line space between the label and input */
+.field-divider {
+    width: 3px;
+    align-self: stretch;
+    background: transparent;
+    margin: 2px 0;
+}
+
+/* Colors the line red if the field is required and empty */
+.required-divider {
+    background: #c23934; /* Salesforce Error Red */
+}
+/* ============================================================
+   RESTORED: SPREADSHEET MODE RED REQUIRED LINES
+   ============================================================ */
+
+/* Attaches the thick red line to the left border of the grid cell */
+.spreadsheet-mode .field-cell-grid .required-divider {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin: 0;
+    background: #c23934; /* Salesforce Error Red */
+    z-index: 2;
+}
+/* ============================================================
+   MOBILE VIEW OVERRIDES (max-width: 600px)
+   Desktop/Laptop/Tablet styles remain UNCHANGED above.
+   No functionality affected — visual/layout only.
+   ============================================================ */
+/* ============================================================
+   WEIGHT ESTIMATOR MODAL - Core Modal Styling
+   ============================================================ */
+
+.modal-container {
+    position: fixed;           
+    top: 50%;                  
+    left: 50%;                 
+    transform: translate(-50%, -50%);  
+    background: #ffffff;
+    border-radius: 4px;
+    width: 1540px;
+    height: 1540px;
+    max-width: 95vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 9000;             
+}
+
+/* ✅ FIX #2: Backdrop covers parent-page Quick Actions (Generate Quote, Account Details, Quotes).
+   Sits between the parent page (z-index 0–8998) and the modal (z-index 9000).
+   On desktop the semi-transparent overlay is the standard modal pattern.
+   On mobile it goes even higher to beat Salesforce's own utility-bar layers. */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;                        /* covers top / right / bottom / left = 0 */
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 8999;                   /* one below modal-container's 9000 */
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 50px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.modal-title { font-size: 18px; font-weight: 700; color: #1a1a1a; letter-spacing: 0.5px; text-align: center; margin: 0; }
+
+.close-btn {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: #c23934; border: none;
+    border-radius: 4px; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.close-btn:hover { background: #a61c17; }
+
+.modal-body { flex: 1; overflow-y: auto; padding-bottom: 100px; }
+
+.accordion-section { border: 1px solid #e5e5e5; border-radius: 8px; margin: 10px; overflow: visible; position: relative; }
+.accordion-section:focus-within { z-index: 10; position: relative; }
+
+.section-header {
+    display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #ffffff; cursor: pointer;
+    border-left: 4px solid transparent; user-select: none; transition: background 0.15s; border-radius: 8px 8px 0 0;
+}
+.section-header.has-required { border-left-color: #c23934; }
+.section-header:hover { background: #f8f8f8; }
+.chevron-icon { color: #c23934; }
+.section-label { font-size: 14px; font-weight: 600; color: #1a1a1a; letter-spacing: 0.2px; }
+
+/* Base cell structural rules shared by both modes */
+.field-cell-grid { display: flex; flex-direction: column; position: relative; }
+.field-cell-grid .field-divider { display: none; }
+
+
+/* ============================================================
+   1. STANDARD MODE (For "Flag Mast Segments", etc.)
+   ============================================================ */
+
+.standard-mode {
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+}
+
+.standard-mode .field-cell-grid {
+    padding: 8px 12px;
+    justify-content: flex-end;
+    min-height: 65px;
+}
+.standard-mode .field-label-cell {
+    text-align: left;
+    margin-bottom: 4px;
+    padding: 0;
+}
+.standard-mode .field-label {
+    font-size: 12px;
+    color: #0e6fad;
+    font-weight: 600;
+}
+.standard-mode .field-input-cell {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* Let Standard Mode use natural SLDS borders and background! */
+.standard-mode lightning-input,
+.standard-mode lightning-combobox,
+.standard-mode lightning-textarea {
+    width: 100%;
+    --slds-c-input-text-align: center; /* Centers the text */
+    font-weight: bold; /* Makes the text bold */
+}
+.standard-mode .field-action-cell { position: absolute; right: 14px; top: 32px; width: auto; }
+
+/* Standard Full-width Row Fallback */
+.standard-mode .field-row-standard {
+    display: grid; grid-template-columns: 1fr 3px 1fr 36px; align-items: center; min-height: 48px;
+    border-bottom: 1px solid #f0f0f0; background: #fff; width: 100%;
+}
+.standard-mode .field-row-standard:hover { background: #fafbfc; }
+.standard-mode .field-row-standard .field-label-cell { padding: 10px 20px 10px 24px; display: flex; flex-direction: column; justify-content: center; }
+.standard-mode .field-row-standard .field-label { font-size: 13px; font-weight: 500; color: #0e6fad; text-transform: uppercase; }
+.standard-mode .field-row-standard .field-input-cell { padding: 6px 12px 6px 16px; display: flex; flex-direction: column; justify-content: center; position: relative; width: 100%; }
+
+.standard-mode .field-row-standard .slds-combobox__form-element,
+.standard-mode .field-row-standard .slds-input {
+    border: none !important; 
+    box-shadow: none !important; 
+    background: transparent !important; 
+    padding-left: 0 !important;
+    text-align: center !important; /* Forces text to center */
+    font-weight: bold !important;   /* Forces text to be bold */
+    color: #1a1a1a !important;     /* Ensures it matches the dark bold color of read-only text */
+}
+/* ============================================================
+   READ-ONLY ROW STYLING (Matches DealDox Screenshots Perfectly)
+   ============================================================ */
+
+/* 1. For Grid Cells (e.g. Lighting Mast 4-columns): The ENTIRE block becomes gray */
+.standard-mode .field-cell-grid.readonly-row {
+    background-color: #ebebeb !important; 
+}
+
+/* 2. For Standard Full-Width Rows (e.g. OVERLAP, SEGMENT LENGTH): ONLY the right side becomes gray! */
+.standard-mode .field-row-standard.readonly-row .field-input-cell,
+.standard-mode .field-row-standard.readonly-row .field-action-cell {
+    background-color: #ebebeb !important; 
+}
+
+/* 3. Center the number and remove all borders */
+.standard-mode .readonly-row .readonly-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    background: transparent; 
+    border: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* 4. Ensure the unit text (e.g., 'mm') stacks perfectly underneath the number */
+.standard-mode .readonly-row .field-input-cell {
+    flex-direction: column;
+    justify-content: center;
+}
+.standard-mode .readonly-row .field-unit {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 0px;
+}
+
+/* ============================================================
+   2. SPREADSHEET MODE (Strictly for Accessories & Estimation)
+   ============================================================ */
+
+.spreadsheet-mode {
+    border-top: 1px solid #c9c9c9;
+    border-left: 1px solid #c9c9c9;
+    background: #ffffff;
+    width: 100%;
+}
+
+.spreadsheet-mode .field-row-header {
+    background-color: #f8fbfe;
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    border-top: 4px solid #1b5297;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.spreadsheet-mode > .field-row-header:first-child { border-top: none; padding-top: 12px; }
+.spreadsheet-mode .header-text { font-size: 15px; font-weight: 800; color: #1b5297; text-transform: uppercase; letter-spacing: 1.5px; }
+
+.spreadsheet-mode .field-cell-grid {
+    justify-content: space-between;
+    border-right: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+    padding: 12px 6px;
+    min-height: 80px;
+}
+.spreadsheet-mode .field-label-cell { text-align: center; margin-bottom: 8px; width: 100%; padding: 0; }
+.spreadsheet-mode .field-label { font-size: 11px; color: #1b5297; text-transform: uppercase; font-weight: 600; }
+.spreadsheet-mode .field-input-cell { width: 100%; display: flex; justify-content: center; align-items: center; padding: 0 8px; }
+
+/* ✅ FIX #1: Checkbox/toggle going above the screen on first expand.
+   Root cause: lightning-input[type=toggle] calculates its shadow-DOM position
+   relative to the viewport on the very first paint inside a collapsed section,
+   placing the toggle ABOVE the visible area. Forcing a GPU composite layer
+   (transform: translateZ(0)) and clipping overflow makes the browser anchor
+   it correctly within its parent cell instead. After any re-render it was
+   fine — this eliminates the bad first-paint entirely. */
+.checkbox-wrapper {
+    position: relative;          /* anchor for the toggle's internal absolute elements */
+    overflow: hidden;            /* clip anything that tries to render outside the cell  */
+    min-height: 44px;            /* guarantee the cell has enough room for the toggle    */
+    transform: translateZ(0);    /* promote to GPU layer → correct position on 1st paint */
+}
+
+.spreadsheet-mode .checkbox-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 4px;
+    /* inherits position/overflow/min-height/transform from .checkbox-wrapper above */
+}
+
+/* Force Inputs to Look like Flat Cells */
+.spreadsheet-mode lightning-input,
+.spreadsheet-mode lightning-combobox,
+.spreadsheet-mode lightning-textarea {
+    width: 100%;
+    --slds-c-input-color-border: transparent;
+    --slds-c-input-color-background: transparent;
+    --slds-c-input-shadow-focus: none;
+    --slds-c-input-text-align: center;
+    --slds-c-textarea-color-border: transparent;
+    --slds-c-textarea-color-background: transparent;
+}
+.spreadsheet-mode lightning-input:hover,
+.spreadsheet-mode lightning-combobox:hover,
+.spreadsheet-mode lightning-textarea:hover,
+.spreadsheet-mode lightning-input:focus,
+.spreadsheet-mode lightning-combobox:focus,
+.spreadsheet-mode lightning-textarea:focus {
+    --slds-c-input-color-background: #fdfdfd;
+    --slds-c-input-color-border: #e5e5e5;
+    border-bottom: 1px solid #1b5297;
+}
+
+.spreadsheet-mode .field-action-cell { position: absolute; top: 2px; right: 2px; opacity: 0; transition: opacity 0.2s; width: auto; }
+.spreadsheet-mode .field-cell-grid:hover .field-action-cell { opacity: 1; }
+
+.spreadsheet-mode .readonly-value {
+    font-size: 12px; font-weight: 600; color: #1a1a1a; background: #eaeaea; width: 90%; height: 28px;
+    display: flex; align-items: center; justify-content: center; border-radius: 2px;
+}
+
+
+/* ============================================================
+   GLOBAL UTILITIES
+   ============================================================ */
+
+.clear-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.clear-btn:hover { background: #f0f0f0; }
+
+/* 👉 THE FIX: Ensure Required Error Icons are always visible */
+.required-icon { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 1 !important; /* Forces it to be visible */
+    color: #c23934; /* Salesforce Error Red */
+}
+
+/* Optional fields don't need a heavy error icon */
+.optional-icon { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0.25; 
+}
+
+/* Make sure the spreadsheet mode doesn't hide the error icon! */
+.spreadsheet-mode .field-action-cell { 
+    position: absolute; 
+    top: 2px; 
+    right: 2px; 
+    width: auto; 
+    /* Remove opacity: 0 so required icons aren't hidden */
+}
+.spreadsheet-mode .field-action-cell .clear-btn {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.spreadsheet-mode .field-cell-grid:hover .field-action-cell .clear-btn { 
+    opacity: 1; /* Only hide the 'Clear' button, not the 'Error' button */
+}
+
+
+.field-unit { font-size: 11px; color: #888; margin-top: 2px; padding-left: 2px; }
+
+.modal-footer { display: flex; justify-content: flex-start; align-items: center; padding: 14px 20px; border-top: 1px solid #e5e5e5; background: #fff; flex-shrink: 0; }
+.apply-btn { background: #0e6fad; color: #fff; border: none; border-radius: 4px; padding: 10px 36px; font-size: 13px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: background 0.15s; }
+.apply-btn:hover { background: #0a5a8e; }
+.apply-btn:active { background: #084873; }
+
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: #f5f5f5; }
+.modal-body::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 3px; }
+.modal-body::-webkit-scrollbar-thumb:hover { background: #999; }
+/* ============================================================
+   RESTORED: STANDARD MODE RED DIVIDER LINES
+   ============================================================ */
+
+/* Draws the physical 3px line space between the label and input */
+.field-divider {
+    width: 3px;
+    align-self: stretch;
+    background: transparent;
+    margin: 2px 0;
+}
+
+/* Colors the line red if the field is required and empty */
+.required-divider {
+    background: #c23934; /* Salesforce Error Red */
+}
+/* ============================================================
+   RESTORED: SPREADSHEET MODE RED REQUIRED LINES
+   ============================================================ */
+
+/* Attaches the thick red line to the left border of the grid cell */
+.spreadsheet-mode .field-cell-grid .required-divider {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin: 0;
+    background: #c23934; /* Salesforce Error Red */
+    z-index: 2;
+}
+.mobile-close-btn {
+    display: none; 
+}
+/* ============================================================
+   COLUMN-REPEATER ALIGNMENT FIX
+   Used by weightEstimatorModal.js (isReservedSlot) when a
+   column-repeater label or per-column cell is hidden by its own
+   controllingField (not by being beyond the entered item count).
+   visibility:hidden keeps the cell's slds-size_X-of-12 width/height
+   reserved so sibling columns in that row don't slide out of place;
+   display:none would collapse it and shift everything after it.
+   ============================================================ */
+.repeater-slot-hidden {
+    visibility: hidden !important;
+}
+/* ============================================================
+   MOBILE VIEW OVERRIDES (max-width: 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+
+    :host {
+        display: block !important;
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* 👉 FIX 1: Locks the background parent page from scrolling */
+    .modal-backdrop {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        z-index: 9999998 !important;
+        overscroll-behavior: none !important; 
+        touch-action: none !important; /* Stops iOS scroll bleeding */
+    }
+
+    /* 👉 FIX 2: Pins the modal strictly to the exact screen bounds */
+    .modal-container {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important; /* Wipes out the desktop -50% translation completely */
+        width: 100vw !important;
+        height: 100vh !important; 
+        height: 100dvh !important;
+        max-width: 100vw !important;
+        max-height: 100dvh !important;
+        border-radius: 0 !important;
+        z-index: 9999999 !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: #ffffff !important;
+        overscroll-behavior: none !important; 
+    }
+
+    .modal-header {
+        padding: 14px 40px 12px;
+        flex-shrink: 0 !important; /* Prevents the header from getting squished */
+    }
+
+    .modal-title {
+        font-size: 15px;
+    }
+
+    .close-btn {
+        right: 10px;
+        width: 26px;
+        height: 26px;
+    }
+
+    /* 👉 FIX 3: Forces the body to scroll internally instead of pushing the modal off-screen */
+    .modal-body {
+        padding-top: 24px !important;
+        padding-bottom: 20px !important;
+        flex: 1 1 0% !important; 
+        min-height: 0 !important; /* CRITICAL: Stops flexbox from stretching the parent height */
+        height: 100% !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important; /* Prevents scroll chaining to the parent page */
+    }
+
+    .accordion-section {
+        margin: 6px;
+    }
+
+    .accordion-section:first-of-type {
+        margin-top: 24px !important; 
+    }
+
+    .section-header {
+        padding: 12px 14px;
+    }
+
+    .section-label {
+        font-size: 13px;
+    }
+
+    /* --- Standard mode overrides --- */
+    .standard-mode { padding: 6px; }
+    .standard-mode .field-row-standard { grid-template-columns: 1fr; grid-template-rows: auto auto; row-gap: 4px; min-height: auto; padding: 8px 0; }
+    .standard-mode .field-row-standard .field-label-cell { padding: 8px 12px 0; }
+    .standard-mode .field-row-standard .field-input-cell { padding: 0 12px 8px; }
+    .standard-mode .field-row-standard .field-action-cell { position: static; display: flex; justify-content: flex-end; padding: 0 12px 4px; width: auto; }
+    .standard-mode .field-cell-grid { padding: 8px 10px; min-height: auto; }
+    .standard-mode .field-action-cell { right: 8px; top: 28px; }
+
+    /* --- Spreadsheet mode overrides --- */
+    .spreadsheet-mode .field-row-header { padding: 12px 14px; }
+    .spreadsheet-mode .header-text { font-size: 13px; }
+    .spreadsheet-mode { display: block !important; grid-template-columns: 1fr !important; }
+    .spreadsheet-mode .field-cell-grid { width: 100% !important; flex: 1 1 100% !important; grid-column: 1 / -1 !important; min-height: 60px; padding: 10px 12px; box-sizing: border-box; }
+    .spreadsheet-mode .field-label { font-size: 11px; }
+    .spreadsheet-mode .readonly-value { width: 100%; height: 32px; font-size: 13px; }
+
+    /* --- Modal footer / apply button --- */
+    .modal-footer {
+        padding: 12px 14px 85px !important; 
+        flex-shrink: 0 !important;
+        background-color: #ffffff !important;
+        display: flex !important;
+        gap: 12px !important; /* 👉 Creates a nice space between CLOSE and APPLY */
+    }
+
+    /* 👉 Styles the new mobile close button as a clean outline button */
+    .mobile-close-btn {
+        display: block !important;
+        flex: 1; /* Takes up exactly half the footer */
+        padding: 12px 0;
+        font-size: 14px;
+        background: #ffffff;
+        color: #1a1a1a;
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    .apply-btn { 
+        flex: 1; /* Takes up the other half of the footer */
+        width: auto !important; /* Overrides the previous 100% width */
+        padding: 12px 0; 
+        font-size: 14px; 
+    }
+
+    /* --- Column totals row stacks --- */
+    .modal-body .slds-grid.slds-wrap { flex-direction: column; align-items: stretch !important; }
+    .modal-body .slds-grid.slds-wrap > div { width: 100% !important; padding: 4px 12px !important; text-align: left !important; }
+}
+
+.calculate-btn {
+    background: #ffffff;
+    color: #0176d3;
+    border: 1px solid #0176d3;
+    padding: 8px 22px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.calculate-btn:hover {
+    background: #eef4fb;
+}
+
+/* space the footer buttons evenly */
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+/* ================================================================
+   MOBILE v2 — appended overrides. Reetabrata (16th July 2026)
+
+   The earlier @media block (line 682) got the modal SHELL right:
+   fixed full-screen container, internal body scroll, stacked
+   standard-mode rows. It is untouched above and still applies.
+
+   What it got wrong is the SPREADSHEET sections (grid-repeaters,
+   column-repeaters, matrix segments): `display:block` +
+   `grid-column: 1/-1` stacked every cell full-width, so a segment
+   grid became one endless single column, the per-cell clear/required
+   icons stayed hover-only (invisible on touch), and the three footer
+   buttons never shared the row evenly.
+
+   This block runs LATER in the file, so on equal specificity it
+   wins the cascade over the earlier mobile rules - nothing above
+   needed deleting. Every spreadsheet cell already renders its own
+   label INSIDE the cell (.field-label-cell sits above the input),
+   so a 2-column form grid keeps label+value together and halves
+   the scrolling.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    /* ── spreadsheet sections become a 2-column form grid ─────── */
+    .spreadsheet-mode {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        border-left: 1px solid #c9c9c9;
+    }
+
+    /* the earlier block forced grid-column:1/-1 on every cell; give
+       cells their natural flow back first (same specificity, later
+       in file -> this wins), then re-span the wide ones below */
+    .spreadsheet-mode .field-cell-grid {
+        grid-column: auto !important;
+        width: 100% !important;
+        flex: none !important;
+        min-height: 62px;
+        padding: 8px 8px 10px;
+        box-sizing: border-box;
+    }
+
+    /* full-width rows: section headers, 12-span rows, header cells */
+    .spreadsheet-mode .field-row-header,
+    .spreadsheet-mode .field-row-standard,
+    .spreadsheet-mode .field-cell-grid.grid-header-cell {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+    }
+
+    /* wide cells (colSpan 6..12 on desktop) keep the full row.
+       [class*=] adds specificity (0,3,0) so these beat the
+       grid-column:auto reset above regardless of order.
+       Substring is safe: 'slds-size_1-of-12' cannot match inside
+       'slds-size_11-of-12'. */
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_6-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_7-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_8-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_9-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_10-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_11-of-12"],
+    .spreadsheet-mode .field-cell-grid[class*="slds-size_12-of-12"] {
+        grid-column: 1 / -1 !important;
+    }
+
+    /* textareas and toggles want the full row whatever their span.
+       Kept as separate rules on purpose: if a browser/compiler ever
+       rejects :has(), only these two rules are lost - the block
+       stays valid. */
+    .spreadsheet-mode .field-cell-grid:has(lightning-textarea) {
+        grid-column: 1 / -1 !important;
+    }
+    .spreadsheet-mode .field-cell-grid:has(.checkbox-wrapper) {
+        grid-column: 1 / -1 !important;
+    }
+
+    /* ── cell internals ───────────────────────────────────────── */
+    .spreadsheet-mode .field-label-cell { margin-bottom: 4px; }
+    .spreadsheet-mode .field-label {
+        font-size: 10.5px;
+        letter-spacing: 0.2px;
+        line-height: 1.25;
+        white-space: normal;          /* long labels wrap, never clip */
+        word-break: break-word;
+    }
+    .spreadsheet-mode .field-input-cell { padding: 0 4px; }
+    .spreadsheet-mode .readonly-value { width: 100%; height: 34px; font-size: 13px; }
+    .spreadsheet-mode .field-row-header { padding: 10px 12px; border-top-width: 3px; }
+    .spreadsheet-mode .header-text { font-size: 12px; letter-spacing: 0.6px; }
+
+    /* ── touch: clear buttons / required icons are hover-revealed on
+          desktop (opacity 0) - there is no hover on a phone ──────── */
+    .spreadsheet-mode .field-action-cell {
+        opacity: 1 !important;
+        top: 0;
+        right: 0;
+    }
+
+    /* ── inputs: a focused input under 16px makes iOS Safari zoom the
+          whole page. font-size on the host inherits into the base
+          component's inner input. ───────────────────────────────── */
+    .spreadsheet-mode lightning-input,
+    .spreadsheet-mode lightning-combobox,
+    .spreadsheet-mode lightning-textarea,
+    .standard-mode lightning-input,
+    .standard-mode lightning-combobox,
+    .standard-mode lightning-textarea {
+        font-size: 16px;
+    }
+
+    /* ── footer: three equal buttons (CLOSE / CALCULATE / APPLY).
+          The earlier block sized only close+apply; CALCULATE kept its
+          desktop padding and broke the row. ──────────────────────── */
+    .modal-footer { gap: 8px !important; }
+    .mobile-close-btn,
+    .calculate-btn,
+    .apply-btn {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        padding: 12px 0 !important;
+        font-size: 13px !important;
+        letter-spacing: 0.5px !important;
+        text-align: center;
+    }
+}
+
+/* ================================================================
+   MOBILE v3 — appended after v2. Reetabrata (17th July 2026)
+
+   Two problems the phone screenshots exposed:
+
+   1) INVISIBLE INPUTS. Desktop spreadsheet cells intentionally strip
+      the input chrome (transparent border/background) so the grid
+      lines carry the "cell" look. Stacked on a phone there are no
+      grid lines around a lone cell, so an empty field renders as
+      NOTHING and a picklist is a floating chevron. v3 gives inputs
+      back a visible box - via the very same styling hooks the
+      desktop rules set to transparent, so the override is certain.
+
+   2) COLUMN-REPEATER SECTIONS (a label column + c1..cN value
+      columns, e.g. General Details on LCLM). Stacking these breaks
+      the label<->value pairing: all labels pile up, then all values.
+      The JS now marks such sections `has-col-repeater`; here they
+      keep their EXACT desktop 12-column table shape on a fixed
+      672px track and pan sideways instead. Everything else stays in
+      the v2 two-column form grid.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    /* ── 1. visible inputs everywhere in the modal ─────────────── */
+    .spreadsheet-mode lightning-input,
+    .spreadsheet-mode lightning-combobox {
+        --slds-c-input-color-border: #c9c9c9;
+        --slds-c-input-color-background: #ffffff;
+    }
+    .spreadsheet-mode lightning-textarea {
+        --slds-c-textarea-color-border: #c9c9c9;
+        --slds-c-textarea-color-background: #ffffff;
+    }
+    .spreadsheet-mode .field-input-cell { min-height: 36px; }
+
+    /* ── 2. column-repeater sections: desktop table, sideways pan ── */
+    .spreadsheet-mode.has-col-repeater {
+        display: grid !important;
+        grid-template-columns: repeat(12, 56px) !important;  /* 672px track */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-left: 1px solid #c9c9c9;
+    }
+
+    /* cells give up the v1 width:100% / v2 grid-column overrides.
+       (0,3,0) beats both earlier (0,2,0) rules on specificity. */
+    .spreadsheet-mode.has-col-repeater .field-cell-grid {
+        width: auto !important;
+        grid-column: auto !important;
+        min-height: 72px;
+        padding: 10px 6px;
+    }
+
+    /* the label cells are type:header (grid-header-cell); v2 spanned
+       every header cell full-row - inside the table they must occupy
+       only their own span again. The span rules below ((0,4,0), later)
+       finish the job for every colSpan. */
+    .spreadsheet-mode.has-col-repeater .field-cell-grid.grid-header-cell {
+        grid-column: auto !important;
+    }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_1-of-12"]  { grid-column: span 1 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_2-of-12"]  { grid-column: span 2 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_3-of-12"]  { grid-column: span 3 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_4-of-12"]  { grid-column: span 4 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_5-of-12"]  { grid-column: span 5 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_6-of-12"]  { grid-column: span 6 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_7-of-12"]  { grid-column: span 7 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_8-of-12"]  { grid-column: span 8 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_9-of-12"]  { grid-column: span 9 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_10-of-12"] { grid-column: span 10 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_11-of-12"] { grid-column: span 11 !important; }
+    .spreadsheet-mode.has-col-repeater .field-cell-grid[class*="slds-size_12-of-12"] { grid-column: span 12 !important; }
+
+    /* full-width section headers stay full-width inside the table */
+    .spreadsheet-mode.has-col-repeater .field-row-header,
+    .spreadsheet-mode.has-col-repeater .field-row-standard {
+        grid-column: 1 / -1 !important;
+    }
+
+    /* a hint that the table pans - subtle right fade */
+    .spreadsheet-mode.has-col-repeater::after {
+        content: '';
+        position: sticky;
+        right: 0;
+        grid-column: 12;
+        pointer-events: none;
+    }
+}
+/* ================================================================
+   MOBILE v4 — appended after v3. Reetabrata (17th July 2026)
+
+   The JS marker was widened this same day: sections containing
+   grid-header cells (type:'header' with colSpan < 12) now also get
+   .has-col-repeater, so grid-header TABLES (LM/LCLM General Details,
+   HDPE Accessories Details, Base Plate, Foundation Bolt...) keep
+   their desktop 12-column shape on the phone and pan sideways -
+   exactly like the HDPE Pipe Data Entry table already did.
+
+   This block only polishes those tables. Same cascade rule as v2/v3:
+   appended later in the file, so on equal specificity it wins.
+   Nothing outside @media (max-width: 600px), desktop untouched.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    /* column headings must read as headings while panning */
+    .spreadsheet-mode.has-col-repeater .field-cell-grid.grid-header-cell {
+        background: #f8fbfe;
+        border-bottom: 2px solid #1b5297;
+    }
+    .spreadsheet-mode.has-col-repeater .grid-header-cell .header-text {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        line-height: 1.25;
+        white-space: normal;
+        word-break: break-word;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    /* inside a panning table the cells stay compact like desktop */
+    .spreadsheet-mode.has-col-repeater .field-label { font-size: 10px; }
+    .spreadsheet-mode.has-col-repeater .field-unit { font-size: 10px; }
+    .spreadsheet-mode.has-col-repeater .readonly-value { font-size: 12px; height: 30px; }
+
+    /* the table pans, the page must not: horizontal touch gestures on
+       the grid belong to the grid */
+    .spreadsheet-mode.has-col-repeater {
+        touch-action: pan-x pan-y;
+        overscroll-behavior-x: contain;
+    }
+}
+/* ================================================================
+   MOBILE v5 — footer height + width reclaim. Deepanjan (17th July 2026)
+
+   1) BUTTONS SITTING TOO HIGH: the mobile footer carried
+      padding-bottom: 85px (inherited guesswork for the app's bottom
+      bar). Inside the Salesforce-app quick-action panel that space is
+      pure dead white below the buttons - exactly the gap in the
+      screenshot. Replaced with a small padding + env(safe-area-inset-
+      bottom) so the buttons drop to the modal's real bottom edge and
+      notched phones still get their inset.
+
+   2) WIDTH: the panel the app gives us is a hard outer cap - nothing
+      can exceed it. What we CAN do is stop wasting the inside:
+      anchoring by all four insets (left/right/top/bottom: 0 with
+      auto size) makes the container fill its containing block exactly
+      even when the app wraps us in transformed/odd-sized frames
+      (100vw can over- or under-shoot there), and trimming the
+      section side-margins hands ~8px per side back to the tables.
+
+   Appended last; equal-specificity !important conflicts resolve to
+   the later rule, i.e. this block. Desktop untouched.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    .modal-container {
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
+
+    .modal-footer {
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    /* body no longer needs its own bottom cushion either */
+    .modal-body {
+        padding-bottom: 12px !important;
+    }
+
+    /* hand the side gutters to the content */
+    .accordion-section {
+        margin: 6px 2px;
+    }
+}/* ================================================================
+   MOBILE v6 — Core subtype-qty widget (sqg-*). Deepanjan (22nd July 2026)
+
+   The subtype multiselect widget renders inside a column-repeater
+   cell. On phones (has-col-repeater table, 56px per span) a column
+   can be as narrow as 1-2 spans, so the desktop one-line qty row
+   (name + 64px input + 52px weight) cannot fit. This block re-stacks
+   the widget CONTENT vertically inside its own cell:
+
+     [checkbox list  - bigger touch targets]
+     subtype name    (full line, ellipsis)
+     [ qty input     - full width          ]
+     weight          (right-aligned, under)
+
+   The widget markup carries inline styles (desktop look). Rules here
+   use !important so, within this media query only, they beat those
+   inline styles. The sqg-* classes exist nowhere else in the sheet,
+   so desktop rendering is untouched. Appended last per convention.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    /* checkbox list: taller rows + real touch targets */
+    .sqg-list {
+        max-height: 132px !important;
+        padding: 2px 4px !important;
+    }
+    .sqg-opt {
+        font-size: 13px !important;
+        padding: 5px 0 !important;
+    }
+    .sqg-cb {
+        width: 16px !important;
+        height: 16px !important;
+        flex: 0 0 16px !important;
+    }
+
+    /* qty rows: stack vertically so any column width works */
+    .sqg-qty-row {
+        flex-wrap: wrap !important;
+        padding: 6px 0 !important;
+        row-gap: 2px !important;
+        border-bottom: 1px dashed #ececec;
+    }
+    .sqg-qty-row .sqg-name {
+        flex: 1 1 100% !important;
+        font-size: 12px !important;
+        font-weight: 600;
+    }
+    .sqg-qty-row .sqg-qty-cell {
+        width: auto !important;
+        flex: 1 1 56px !important;
+        min-width: 48px;
+    }
+    .sqg-qty-row .sqg-wt {
+        width: auto !important;
+        flex: 0 0 auto !important;
+        font-size: 11px !important;
+        align-self: center;
+    }
+
+    /* TOTAL row: same stacked rhythm, no dashed border */
+    .sqg-total-row {
+        flex-wrap: wrap !important;
+        padding-top: 5px !important;
+    }
+    .sqg-total-row .sqg-qty-cell {
+        width: auto !important;
+        flex: 1 1 auto !important;
+        text-align: left !important;
+    }
+    .sqg-total-row .sqg-wt {
+        width: auto !important;
+        flex: 0 0 auto !important;
+    }
+
+    /* the number input itself: v3 already restores its border/bg;
+       give it a comfortable tap height inside the widget */
+    .sqg-qty-cell lightning-input {
+        --slds-c-input-sizing-min-height: 32px;
+    }
+
+    /* blocked hint wraps instead of overflowing a narrow cell */
+    .sqg-blocked {
+        white-space: normal !important;
+        display: block;
+        padding: 4px 0;
+    }
+}
+/* ================================================================
+   MOBILE v7 — Core subtype widget: launcher + bottom sheet.
+   Deepanjan (22nd July 2026)
+
+   A column-repeater cell on the phone can be 1-2 spans (56-112px);
+   no inline widget is usable there. So on phones the cell shows only
+   a compact LAUNCHER button; tapping it opens a full-width BOTTOM
+   SHEET (same checkboxes / qty inputs, same handlers) where the user
+   works comfortably, then taps DONE.
+
+   Desktop is untouched: the launcher is display:none inline and the
+   sheet can only be opened from it, so sqgSheetOpen never becomes
+   true on desktop. Sheet base styles live outside the media query
+   ONLY so a mid-edit orientation change cannot strand an unstyled
+   sheet; they affect nothing until the sheet exists in the DOM.
+   ================================================================ */
+
+/* ---- sheet base (inert until opened; opened only from phones) ---- */
+.sqg-sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 10000000;   /* above the mobile modal shell (9999999) */
+}
+.sqg-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 92vh;
+    height: 92vh;
+    background: #ffffff;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
+    z-index: 10000001;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.sqg-sheet-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.sqg-sheet-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #16325c;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.sqg-sheet-x {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+.sqg-sheet-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 14px;
+    flex: 1 1 auto;
+}
+.sqg-sheet-list {
+    max-height: 48vh !important;   /* beats the inline 150px cap from the reused class */
+    overflow-y: auto !important;   /* the sheet copy carries no inline overflow -
+                                      without this the options spill over the qty
+                                      rows (overlap seen on phone) */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;  /* finger stays on the list, sheet doesn't drag */
+    flex: 0 0 auto;
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+    padding: 4px 8px !important;
+}
+.sqg-sheet-qty { margin-top: 10px; }
+.sqg-sheet-foot {
+    padding: 10px 14px;
+    border-top: 1px solid #e5e5e5;
+}
+.sqg-sheet-done {
+    width: 100%;
+    background: #1a73a8;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+/* ---- phone layout: hide inline widget, show launcher; sheet rows ---- */
+@media (max-width: 600px) {
+
+    .sqg-inline { display: none !important; }
+
+    .sqg-mobile-launch {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        width: 100%;
+        min-height: 40px;
+        background: #ffffff;
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+        padding: 6px 8px;
+        font-size: 12px;
+        color: #16325c;
+        text-align: left;
+        cursor: pointer;
+    }
+    .sqg-mobile-launch:disabled { opacity: 0.55; }
+    .sqg-launch-txt {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* sheet checkbox rows: roomy touch targets */
+    .sqg-sheet-list .sqg-opt {
+        display: flex;
+        align-items: center;
+        font-size: 14px !important;
+        padding: 9px 0 !important;
+        border-bottom: 1px solid #f4f4f4;
+    }
+    .sqg-sheet-list .sqg-opt:last-child { border-bottom: none; }
+    .sqg-sheet-list .sqg-cb {
+        width: 18px !important;
+        height: 18px !important;
+        flex: 0 0 18px !important;
+        margin-right: 10px !important;
+    }
+
+    /* sheet qty rows: one comfortable line - name / input / weight */
+    .sqg-sheet-qty .sqg-qty-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 0 !important;
+        flex-wrap: nowrap !important;      /* overrides v6 wrap inside the sheet */
+        border-bottom: 1px dashed #ececec;
+        font-size: 13px;
+    }
+    .sqg-sheet-qty .sqg-name {
+        flex: 1 1 0 !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+    .sqg-sheet-qty .sqg-qty-cell {
+        flex: 0 0 96px !important;
+        width: 96px !important;
+        min-width: 96px;
+    }
+    .sqg-sheet-qty .sqg-qty-cell lightning-input {
+        --slds-c-input-sizing-min-height: 36px;
+    }
+    .sqg-sheet-qty .sqg-wt {
+        flex: 0 0 64px !important;
+        width: 64px !important;
+        text-align: right;
+        font-size: 12px !important;
+    }
+    .sqg-sheet-qty .sqg-total-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-top: 8px !important;
+        flex-wrap: nowrap !important;
+        font-size: 13px;
+        font-weight: 700;
+        color: #16325c;
+    }
+    .sqg-sheet-qty .sqg-total-row .sqg-qty-cell {
+        flex: 0 0 96px !important;
+        width: 96px !important;
+        text-align: center !important;
+    }
+    .sqg-sheet-qty .sqg-total-row .sqg-wt {
+        flex: 0 0 64px !important;
+        width: 64px !important;
+    }
+}
+/* ================================================================
+   v8 — Core subtype widget: SAME launcher + popup on DESKTOP too.
+   Deepanjan (22nd July 2026)
+
+   The narrow-column problem exists on desktop as well (a span-1/2
+   cell is ~56-112px there too), and one consistent UI is easier to
+   learn. So the inline list is retired everywhere; every viewport
+   shows the compact launcher. Phones keep the v7 bottom sheet;
+   desktop (min-width: 601px) restyles the very same sheet markup as
+   a CENTERED DIALOG. Only sqg-* selectors — nothing else changes.
+   ================================================================ */
+
+/* inline list retired on every viewport (launcher replaces it) */
+.sqg-inline { display: none !important; }
+
+/* launcher: base look on all viewports (v7's mobile rules only
+   re-assert these inside the media query, so they stay in accord) */
+.sqg-mobile-launch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    width: 100%;
+    min-height: 32px;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #16325c;
+    text-align: left;
+    cursor: pointer;
+}
+.sqg-mobile-launch:disabled { opacity: 0.55; }
+.sqg-launch-txt {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* desktop: the sheet becomes a centered dialog */
+@media (min-width: 601px) {
+
+    .sqg-sheet {
+        left: 50% !important;
+        right: auto !important;
+        top: 50% !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%);
+        width: 680px;
+        max-width: 94vw;
+        height: auto !important;
+        max-height: 88vh !important;
+        border-radius: 12px !important;
+        padding-bottom: 0;
+    }
+
+    .sqg-sheet-list {
+        max-height: 52vh !important;
+    }
+
+    /* comfortable one-line qty rows in the dialog (same shape the
+       phone uses inside the sheet) */
+    .sqg-sheet-qty .sqg-qty-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 0 !important;
+        border-bottom: 1px dashed #ececec;
+        font-size: 13px;
+    }
+    .sqg-sheet-qty .sqg-name {
+        flex: 1 1 0 !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+    .sqg-sheet-qty .sqg-qty-cell {
+        flex: 0 0 96px !important;
+        width: 96px !important;
+    }
+    .sqg-sheet-qty .sqg-wt {
+        flex: 0 0 72px !important;
+        width: 72px !important;
+        text-align: right;
+        font-size: 12px !important;
+    }
+    .sqg-sheet-qty .sqg-total-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-top: 8px !important;
+        font-size: 13px;
+        font-weight: 700;
+        color: #16325c;
+    }
+    .sqg-sheet-qty .sqg-total-row .sqg-qty-cell {
+        flex: 0 0 96px !important;
+        width: 96px !important;
+        text-align: center !important;
+    }
+    .sqg-sheet-qty .sqg-total-row .sqg-wt {
+        flex: 0 0 72px !important;
+        width: 72px !important;
+    }
+
+    /* option rows: desktop hover + slightly tighter than phone */
+    .sqg-sheet-list .sqg-opt {
+        display: flex;
+        align-items: center;
+        font-size: 13px !important;
+        padding: 6px 2px !important;
+        border-bottom: 1px solid #f4f4f4;
+        cursor: pointer;
+    }
+    .sqg-sheet-list .sqg-opt:last-child { border-bottom: none; }
+    .sqg-sheet-list .sqg-opt:hover { background: #f6f9fc; }
+    .sqg-sheet-list .sqg-cb {
+        width: 15px !important;
+        height: 15px !important;
+        flex: 0 0 15px !important;
+        margin-right: 8px !important;
+    }
+}
+
+
+/* ================================================================
+   MOBILE v9 — tables with inputs in 1-span columns. Deepanjan (24th September 2026)
+   Only tables the JS marks .has-narrow-inputs get 120px columns and
+   slimmer cell padding; they still pan sideways. Every other table
+   keeps v3. Inside @media (max-width: 600px) only - desktop untouched.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    .spreadsheet-mode.has-col-repeater.has-narrow-inputs {
+        grid-template-columns: repeat(12, 120px) !important;   /* 1440px track */
+    }
+
+    .spreadsheet-mode.has-col-repeater.has-narrow-inputs .field-cell-grid {
+        padding: 8px 3px;
+    }
+
+    .spreadsheet-mode.has-col-repeater.has-narrow-inputs .field-input-cell {
+        padding: 0 2px;
+    }
+}

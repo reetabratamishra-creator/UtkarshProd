@@ -1,0 +1,66 @@
+<template>
+    <div class="picker">
+        <div class="picker__label-row">
+            <span class="picker__label">{label}</span>
+            <template if:true={selectedCount}>
+                <span class="picker__count">{selectedCount}</span>
+            </template>
+        </div>
+
+        <template if:true={hasSelection}>
+            <div class="picker__chips">
+                <template for:each={selectedChips} for:item="chip">
+                    <span key={chip.value} class="picker__chip">
+                        <span class="picker__chip-text">{chip.label}</span>
+                        <button
+                            type="button"
+                            class="picker__chip-remove"
+                            data-value={chip.value}
+                            onclick={handleRemoveChip}
+                            title="Remove"
+                        >
+                            <span aria-hidden="true">×</span>
+                            <span class="slds-assistive-text">Remove {chip.label}</span>
+                        </button>
+                    </span>
+                </template>
+            </div>
+        </template>
+
+        <div class="picker__search">
+            <lightning-input
+                type="search"
+                label="Filter options"
+                variant="label-hidden"
+                placeholder={searchPlaceholder}
+                value={filterText}
+                onchange={handleFilterTextChange}
+            ></lightning-input>
+            <p class="picker__match">{matchSummary}</p>
+        </div>
+
+        <div class="picker__list">
+            <template if:true={hasVisibleOptions}>
+                <template for:each={optionRows} for:item="option">
+                    <label key={option.value} class="picker__option">
+                        <input
+                            type="checkbox"
+                            value={option.value}
+                            checked={option.checked}
+                            onchange={handleCheckboxChange}
+                        />
+                        <span>{option.label}</span>
+                    </label>
+                </template>
+            </template>
+            <template if:false={hasVisibleOptions}>
+                <p class="picker__empty">No options match.</p>
+            </template>
+        </div>
+
+        <div class="picker__actions">
+            <button type="button" class="picker__link" onclick={handleSelectAll}>Select all</button>
+            <button type="button" class="picker__link" onclick={handleClear}>Clear</button>
+        </div>
+    </div>
+</template>

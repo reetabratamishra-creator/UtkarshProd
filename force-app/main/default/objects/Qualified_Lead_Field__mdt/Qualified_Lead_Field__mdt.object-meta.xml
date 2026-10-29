@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Defines the fields to display in the Qualified Leads LWC datatables for Lead object.</description>
+    <label>Qualified Lead Field</label>
+    <pluralLabel>Qualified Lead Fields</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

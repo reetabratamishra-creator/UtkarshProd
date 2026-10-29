@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_can_not_have_special_character</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+    NOT(REGEX( Company , &quot;^[a-zA-Z0-9 ]*$&quot;)),
+    NOT(REGEX( Company_Name__c , &quot;^[a-zA-Z0-9 ]*$&quot;))
+)</errorConditionFormula>
+    <errorMessage>Company can&apos;t have special character</errorMessage>
+</ValidationRule>

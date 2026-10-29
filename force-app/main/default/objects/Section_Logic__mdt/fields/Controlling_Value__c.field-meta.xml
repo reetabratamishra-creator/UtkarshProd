@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Controlling_Value__c</fullName>
+    <description>The specific picklist value selected in the root field that triggers this JSON payload to load into the UI</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The specific picklist value selected in the root field that triggers this JSON payload to load into the UI</inlineHelpText>
+    <label>Controlling Value</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

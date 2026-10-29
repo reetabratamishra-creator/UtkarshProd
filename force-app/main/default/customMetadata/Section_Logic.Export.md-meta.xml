@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Export</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">IS_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Export</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;steel_pipes_folder&quot;,
+      &quot;label&quot;: &quot;Steel Pipe Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;market_type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Export&quot;: {
+          &quot;title&quot;: &quot;Export PIPE CONFIGURATION&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;setup_section&quot;,
+              &quot;label&quot;: &quot;Step 1: Configuration Setup&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pipe_count&quot;,
+                  &quot;label&quot;: &quot;Configurations to Compare:&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 5
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;vertical_table_section&quot;,
+              &quot;label&quot;: &quot;Step 2: Pipe Data Entry&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;pipe_count&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;vertical_pipe_grid&quot;,
+                  &quot;type&quot;: &quot;column-repeater&quot;,
+                  &quot;countApiName&quot;: &quot;pipe_count&quot;,
+                  &quot;maxColumns&quot;: 5,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;steel_type&quot;,
+                      &quot;label&quot;: &quot;STEEL TYPE&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;Black Steel&quot;,
+                        &quot;Galvanized Iron (GI)&quot;,
+                        &quot;Stainless Steel&quot;
+                      ],
+                      &quot;defaultValue&quot;: &quot;Black Steel&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;designation&quot;,
+                      &quot;label&quot;: &quot;PIPE / DESIGNATION&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;MS ERW&quot;,
+                        &quot;GI ERW&quot;,
+                        &quot;CS ERW&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;standard_spec_grade&quot;,
+                      &quot;label&quot;: &quot;STANDARD (SPECIFICATION &amp; GRADE)&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;controllingFields&quot;: [
+                        &quot;steel_type&quot;
+                      ],
+                      &quot;options&quot;: [
+                        &quot;EN 10255~BS1387&quot;,
+                        &quot;ASTM A 53&quot;,
+                        &quot;ISO 65&quot;,
+                        &quot;AS1074:1989&quot;,
+                        &quot;EN 10255:2004+A1:2007&quot;,
+                        &quot;AS1163-EN10219&quot;
+                      ],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;Black Steel&quot;: [
+                          &quot;EN 10255~BS1387&quot;,
+                          &quot;ASTM A 53&quot;,
+                          &quot;AS1074:1989&quot;,
+                          &quot;EN 10255:2004+A1:2007&quot;,
+                          &quot;AS1163-EN10219&quot;
+                        ],
+                        &quot;Galvanized Iron (GI)&quot;: [
+                          &quot;EN 10255~BS1387&quot;,
+                          &quot;ASTM A 53&quot;,
+                          &quot;AS1074:1989&quot;,
+                          &quot;EN 10255:2004+A1:2007&quot;,
+                          &quot;AS1163-EN10219&quot;
+                        ],
+                        &quot;Stainless Steel&quot;: [
+                          &quot;ISO 65&quot;
+                        ]
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;shape_type&quot;,
+                      &quot;label&quot;: &quot;SHAPE&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;controllingFields&quot;: [
+                        &quot;standard_spec_grade&quot;
+                      ],
+                      &quot;defaultValue&quot;: &quot;Default&quot;,
+                      &quot;disableControllingField&quot;: &quot;standard_spec_grade&quot;,
+                      &quot;disableControllingValues&quot;: [
+                        &quot;EN 10255~BS1387&quot;,
+                        &quot;ISO 65&quot;,
+                        &quot;AS1074:1989&quot;,
+                        &quot;EN 10255:2004+A1:2007&quot;
+                      ],
+                      &quot;options&quot;: [
+                        &quot;Rectangular&quot;,
+                        &quot;Default&quot;
+                      ],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;EN 10255~BS1387&quot;: [
+                          &quot;Light&quot;,
+                          &quot;Medium&quot;,
+                          &quot;Heavy&quot;
+                        ],
+                        &quot;ISO 65&quot;: [
+                          &quot;Light 1&quot;,
+                          &quot;Light 2&quot;,
+                          &quot;Medium&quot;,
+                          &quot;Heavy&quot;
+                        ],
+                        &quot;AS1074:1989&quot;: [
+                          &quot;Light&quot;,
+                          &quot;Medium&quot;,
+                          &quot;Heavy&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007&quot;: [
+                          &quot;L1&quot;,
+                          &quot;L2&quot;,
+                          &quot;Medium&quot;,
+                          &quot;Heavy&quot;
+                        ],
+                        &quot;ASTM A 53&quot;: [
+                          &quot;Default&quot;
+                        ],
+                        &quot;AS1163-EN10219&quot;: [
+                          &quot;Default&quot;
+                        ]
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pipe_class&quot;,
+                      &quot;label&quot;: &quot;WALL THICKNESS (MM) / CLASS&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;defaultValue&quot;: &quot;Default&quot;,
+                      &quot;controllingField&quot;: [
+                        &quot;standard_spec_grade&quot;,
+                        &quot;shape_type&quot;
+                      ],
+                      &quot;options&quot;: [
+                        &quot;2&quot;,
+                        &quot;2.3&quot;,
+                        &quot;2.5&quot;,
+                        &quot;2.6&quot;,
+                        &quot;2.77&quot;,
+                        &quot;2.87&quot;,
+                        &quot;2.9&quot;,
+                        &quot;3&quot;,
+                        &quot;3.2&quot;,
+                        &quot;3.38&quot;,
+                        &quot;3.56&quot;,
+                        &quot;3.6&quot;,
+                        &quot;3.68&quot;,
+                        &quot;3.91&quot;,
+                        &quot;4&quot;,
+                        &quot;4.5&quot;,
+                        &quot;5&quot;,
+                        &quot;5.16&quot;,
+                        &quot;5.4&quot;,
+                        &quot;5.49&quot;,
+                        &quot;5.74&quot;,
+                        &quot;6&quot;,
+                        &quot;6.02&quot;,
+                        &quot;6.3&quot;,
+                        &quot;6.35&quot;,
+                        &quot;6.55&quot;,
+                        &quot;7.04&quot;,
+                        &quot;7.11&quot;,
+                        &quot;7.8&quot;,
+                        &quot;7.92&quot;,
+                        &quot;8&quot;,
+                        &quot;8.18&quot;,
+                        &quot;8.38&quot;,
+                        &quot;9.27&quot;,
+                        &quot;9.52&quot;,
+                        &quot;10.31&quot;,
+						&quot;Default&quot;
+                      ],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;ASTM A 53|Default&quot;: [
+                          &quot;2.77&quot;,
+                          &quot;2.87&quot;,
+                          &quot;3.38&quot;,
+                          &quot;3.56&quot;,
+                          &quot;3.68&quot;,
+                          &quot;3.91&quot;,
+                          &quot;5.16&quot;,
+                          &quot;5.49&quot;,
+                          &quot;5.74&quot;,
+                          &quot;6.02&quot;,
+                          &quot;6.35&quot;,
+                          &quot;6.55&quot;,
+                          &quot;7.04&quot;,
+                          &quot;7.11&quot;,
+                          &quot;7.8&quot;,
+                          &quot;7.92&quot;,
+                          &quot;8.18&quot;,
+                          &quot;8.38&quot;,
+                          &quot;9.27&quot;,
+                          &quot;9.52&quot;,
+                          &quot;10.31&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default&quot;: [
+                          &quot;2&quot;,
+                          &quot;2.5&quot;,
+                          &quot;2.9&quot;,
+                          &quot;3&quot;,
+                          &quot;3.2&quot;,
+                          &quot;3.6&quot;,
+                          &quot;4&quot;,
+                          &quot;5&quot;,
+                          &quot;6&quot;,
+                          &quot;6.3&quot;,
+                          &quot;8&quot;
+                        ]
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;size_nb&quot;,
+                      &quot;label&quot;: &quot;SIZE (NB)&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;controllingFields&quot;: [
+                        &quot;standard_spec_grade&quot;,
+                        &quot;shape_type&quot;,
+                        &quot;pipe_class&quot;
+                      ],
+                      &quot;options&quot;: [
+                        &quot;15mm&quot;,
+                        &quot;20mm&quot;,
+                        &quot;25mm&quot;,
+                        &quot;32mm&quot;,
+                        &quot;40mm&quot;,
+                        &quot;50mm&quot;,
+                        &quot;65mm&quot;,
+                        &quot;80mm&quot;,
+                        &quot;90mm&quot;,
+                        &quot;100mm&quot;,
+                        &quot;110&quot;,
+                        &quot;110mm&quot;,
+                        &quot;125mm&quot;,
+                        &quot;135mm&quot;,
+                        &quot;150mm&quot;,
+                        &quot;175&quot;,
+                        &quot;175mm&quot;,
+                        &quot;200&quot;,
+                        &quot;200mm&quot;,
+                        &quot;225mm&quot;,
+                        &quot;250mm&quot;,
+                        &quot;300mm&quot;,
+                        &quot;350mm&quot;,
+                        &quot;400mm&quot;
+                      ],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;EN 10255~BS1387|Light|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;
+                        ],
+                        &quot;EN 10255~BS1387|Medium|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;EN 10255~BS1387|Heavy|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|2.77&quot;: [
+                          &quot;15mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|2.87&quot;: [
+                          &quot;20mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|3.38&quot;: [
+                          &quot;25mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|3.56&quot;: [
+                          &quot;32mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|3.68&quot;: [
+                          &quot;40mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|3.91&quot;: [
+                          &quot;50mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|5.16&quot;: [
+                          &quot;65mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|5.49&quot;: [
+                          &quot;80mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|5.74&quot;: [
+                          &quot;90mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|6.02&quot;: [
+                          &quot;100mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|6.35&quot;: [
+                          &quot;200mm&quot;,
+                          &quot;250mm&quot;,
+                          &quot;300mm&quot;,
+                          &quot;350mm&quot;,
+                          &quot;400mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|6.55&quot;: [
+                          &quot;125mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|7.04&quot;: [
+                          &quot;200mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|7.11&quot;: [
+                          &quot;150mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|7.8&quot;: [
+                          &quot;250mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|7.92&quot;: [
+                          &quot;350mm&quot;,
+                          &quot;400mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|8.18&quot;: [
+                          &quot;200mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|8.38&quot;: [
+                          &quot;300mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|9.27&quot;: [
+                          &quot;250mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|9.52&quot;: [
+                          &quot;350mm&quot;,
+                          &quot;400mm&quot;
+                        ],
+                        &quot;ASTM A 53|Default|10.31&quot;: [
+                          &quot;200mm&quot;
+                        ],
+                        &quot;ISO 65|Heavy|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;ISO 65|Medium|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;ISO 65|Light 1|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;
+                        ],
+                        &quot;ISO 65|Light 2|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;
+                        ],
+                        &quot;AS1074:1989|Light|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;
+                        ],
+                        &quot;AS1074:1989|Medium|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;AS1074:1989|Heavy|Default&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|2&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;90mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|2.5&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;90mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|2.9&quot;: [
+                          &quot;110&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|3&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;,
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;90mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;135mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|3.2&quot;: [
+                          &quot;110&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|3.6&quot;: [
+                          &quot;110&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|4&quot;: [
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;90mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;110&quot;,
+                          &quot;125mm&quot;,
+                          &quot;135mm&quot;,
+                          &quot;150mm&quot;,
+                          &quot;175&quot;,
+                          &quot;200&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|5&quot;: [
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;,
+                          &quot;90mm&quot;,
+                          &quot;100mm&quot;,
+                          &quot;110mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;135mm&quot;,
+                          &quot;150mm&quot;,
+                          &quot;175mm&quot;,
+                          &quot;200mm&quot;,
+                          &quot;250mm&quot;,
+                          &quot;350mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|6&quot;: [
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;135mm&quot;,
+                          &quot;150mm&quot;,
+                          &quot;175mm&quot;,
+                          &quot;200mm&quot;,
+                          &quot;250mm&quot;,
+                          &quot;300mm&quot;,
+                          &quot;350mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|6.3&quot;: [
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;135mm&quot;,
+                          &quot;150mm&quot;,
+                          &quot;175mm&quot;,
+                          &quot;200mm&quot;,
+                          &quot;250mm&quot;,
+                          &quot;300mm&quot;,
+                          &quot;350mm&quot;
+                        ],
+                        &quot;AS1163-EN10219|Default|8&quot;: [
+                          &quot;200mm&quot;,
+                          &quot;250mm&quot;,
+                          &quot;300mm&quot;,
+                          &quot;350mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Heavy|3.2&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Heavy|4&quot;: [
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Heavy|4.5&quot;: [
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Heavy|5&quot;: [
+                          &quot;80mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Heavy|5.4&quot;: [
+                          &quot;100mm&quot;,
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|2.6&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|3.2&quot;: [
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|3.6&quot;: [
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|4&quot;: [
+                          &quot;80mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|4.5&quot;: [
+                          &quot;100mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|Medium|5&quot;: [
+                          &quot;125mm&quot;,
+                          &quot;150mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L1|2.3&quot;: [
+                          &quot;15mm&quot;,
+                          &quot;20mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L1|2.9&quot;: [
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;,
+                          &quot;40mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L1|3.2&quot;: [
+                          &quot;50mm&quot;,
+                          &quot;65mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L1|3.6&quot;: [
+                          &quot;80mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L1|4&quot;: [
+                          &quot;100mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|2&quot;: [
+                          &quot;15mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|2.3&quot;: [
+                          &quot;20mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|2.6&quot;: [
+                          &quot;25mm&quot;,
+                          &quot;32mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|2.9&quot;: [
+                          &quot;40mm&quot;,
+                          &quot;50mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|3.2&quot;: [
+                          &quot;65mm&quot;,
+                          &quot;80mm&quot;
+                        ],
+                        &quot;EN 10255:2004+A1:2007|L2|3.6&quot;: [
+                          &quot;100mm&quot;
+                        ]
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;end_finish&quot;,
+                      &quot;label&quot;: &quot;END FINISH&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;Plain End&quot;,
+                        &quot;Beveled End&quot;,
+                        &quot;Screwed &amp; Socket (SWS)&quot;,
+                        &quot;Screwed (SS)&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;quantity&quot;,
+                      &quot;label&quot;: &quot;QUANTITY&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isQuantity&quot;: true,
+                      &quot;step&quot;: &quot;1&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;uom&quot;,
+                      &quot;label&quot;: &quot;UOM&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;MT&quot;,
+                        &quot;Meters&quot;,
+                        &quot;Pieces&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Discount&quot;,
+                      &quot;label&quot;: &quot;Discount%&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;1&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Header&quot;,
+                      &quot;label&quot;: &quot;Header&quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;step&quot;: &quot;1&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Value&quot;,
+                      &quot;label&quot;: &quot;Value&quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;step&quot;: &quot;1&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rate&quot;,
+                      &quot;label&quot;: &quot;RATE (Rs./MTR)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;controllingFields&quot;: [
+                        &quot;standard_spec_grade&quot;,
+                        &quot;shape_type&quot;,
+                        &quot;pipe_class&quot;,
+                        &quot;size_nb&quot;
+                      ],
+                      &quot;lookupWeight&quot;: true,
+                      &quot;useManifestBaseRate&quot;: true,
+                      &quot;calculateSecretWeight&quot;: true,
+                      &quot;extraChargesMap&quot;: {
+                        &quot;Beveled End&quot;: 0.5,
+                        &quot;Varnish&quot;: 0.5,
+                        &quot;Nested Loading&quot;: 0.5
+                      },
+                      &quot;baseRatesMap&quot;: {
+                        &quot;Black Steel&quot;: 62.5,
+                        &quot;Black Steel|MS ERW&quot;: 62.5,
+                        &quot;Black Steel|CS ERW&quot;: 62.5,
+                        &quot;Galvanized Iron (GI)&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW&quot;: 70,
+                        &quot;Stainless Steel&quot;: 150,
+                        &quot;--- MS ERW: SQUARE PIPE (SHS) ---&quot;: 0,
+                        &quot;Black Steel|MS ERW|Square|Default|19&quot;: 65.5,
+                        &quot;Black Steel|MS ERW|Square|Default|25&quot;: 63,
+                        &quot;Black Steel|MS ERW|Square|Default|32&quot;: 63,
+                        &quot;Black Steel|MS ERW|Square|Default|38&quot;: 63,
+                        &quot;Black Steel|MS ERW|Square|Default|49.5&quot;: 63,
+                        &quot;Black Steel|MS ERW|Square|Default|60&quot;: 63,
+                        &quot;--- MS ERW: RECTANGULAR PIPE (RHS) ---&quot;: 0,
+                        &quot;Black Steel|MS ERW|Rectangular|Default|50&quot;: 63,
+                        &quot;Black Steel|MS ERW|Rectangular|Default|60&quot;: 63,
+                        &quot;Black Steel|MS ERW|Rectangular|Default|66&quot;: 63,
+                        &quot;--- MS ERW: ROUND PIPE (IS 1239) ---&quot;: 0,
+                        &quot;Black Steel|MS ERW|Light|Default|15mm&quot;: 65,
+                        &quot;Black Steel|MS ERW|Light|Default|20mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Light|Default|25mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Light|Default|32mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Medium|Default|15mm&quot;: 65,
+                        &quot;Black Steel|MS ERW|Medium|Default|20mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Medium|Default|25mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Medium|Default|32mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Heavy|Default|15mm&quot;: 65,
+                        &quot;Black Steel|MS ERW|Heavy|Default|20mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Heavy|Default|25mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Heavy|Default|32mm&quot;: 63,
+                        &quot;--- MS ERW: ROUND PIPE (Default) ---&quot;: 0,
+                        &quot;Black Steel|MS ERW|Default|Default|15mm&quot;: 65,
+                        &quot;Black Steel|MS ERW|Default|Default|20mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Default|Default|25mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Default|Default|32mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Default|Default|40mm&quot;: 63.5,
+                        &quot;Black Steel|MS ERW|Default|Default|50mm&quot;: 63.5,
+                        &quot;Black Steel|MS ERW|Default|Default|65mm&quot;: 63.5,
+                        &quot;Black Steel|MS ERW|Default|Default|80mm&quot;: 63.5,
+                        &quot;Black Steel|MS ERW|Default|Default|90mm&quot;: 63.5,
+                        &quot;Black Steel|MS ERW|Default|Default|175mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Default|Default|200mm&quot;: 63,
+                        &quot;Black Steel|MS ERW|Default|Default|250mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Default|Default|300mm&quot;: 64,
+                        &quot;Black Steel|MS ERW|Default|Default|350mm&quot;: 64.5,
+                        &quot;Black Steel|MS ERW|Default|Default|400mm&quot;: 64.5,
+                        &quot;--- GI ERW: SQUARE PIPE (SHS) ---&quot;: 0,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|19&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|25&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|32&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|38&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|49.5&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Square|Default|60&quot;: 70,
+                        &quot;--- GI ERW: RECTANGULAR PIPE (RHS) ---&quot;: 0,
+                        &quot;Galvanized Iron (GI)|GI ERW|Rectangular|Default|50&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Rectangular|Default|60&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Rectangular|Default|66&quot;: 70,
+                        &quot;--- GI ERW: ROUND PIPE (IS 1239) ---&quot;: 0,
+                        &quot;Galvanized Iron (GI)|GI ERW|Light|Default|15mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Light|Default|20mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Light|Default|25mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Light|Default|32mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Medium|Default|15mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Medium|Default|20mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Medium|Default|25mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Medium|Default|32mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Heavy|Default|15mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Heavy|Default|20mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Heavy|Default|25mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Heavy|Default|32mm&quot;: 70,
+                        &quot;--- GI ERW: ROUND PIPE (Default) ---&quot;: 0,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|15mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|20mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|25mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|32mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|40mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|50mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|65mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|80mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|90mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|175mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|200mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|250mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|300mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|350mm&quot;: 70,
+                        &quot;Galvanized Iron (GI)|GI ERW|Default|Default|400mm&quot;: 70,
+                        &quot;--- CS ERW: SQUARE PIPE (SHS) ---&quot;: 0,
+                        &quot;Black Steel|CS ERW|Square|Default|19&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Square|Default|25&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Square|Default|32&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Square|Default|38&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Square|Default|49.5&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Square|Default|60&quot;: 62.5,
+                        &quot;--- CS ERW: RECTANGULAR PIPE (RHS) ---&quot;: 0,
+                        &quot;Black Steel|CS ERW|Rectangular|Default|50&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Rectangular|Default|60&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Rectangular|Default|66&quot;: 62.5,
+                        &quot;--- CS ERW: ROUND PIPE (IS 1239) ---&quot;: 0,
+                        &quot;Black Steel|CS ERW|Light|Default|15mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Light|Default|20mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Light|Default|25mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Light|Default|32mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Medium|Default|15mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Medium|Default|20mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Medium|Default|25mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Medium|Default|32mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Heavy|Default|15mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Heavy|Default|20mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Heavy|Default|25mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Heavy|Default|32mm&quot;: 62.5,
+                        &quot;--- CS ERW: ROUND PIPE (Default) ---&quot;: 0,
+                        &quot;Black Steel|CS ERW|Default|Default|15mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|20mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|25mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|32mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|40mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|50mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|65mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|80mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|90mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|175mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|200mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|250mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|300mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|350mm&quot;: 62.5,
+                        &quot;Black Steel|CS ERW|Default|Default|400mm&quot;: 62.5
+                      },
+                      &quot;weightMap&quot;: {
+                        &quot;EN 10255~BS1387|Light|Default|15mm&quot;: 0.947,
+                        &quot;EN 10255~BS1387|Light|Default|20mm&quot;: 1.38,
+                        &quot;EN 10255~BS1387|Light|Default|25mm&quot;: 1.98,
+                        &quot;EN 10255~BS1387|Light|Default|32mm&quot;: 2.54,
+                        &quot;EN 10255~BS1387|Light|Default|40mm&quot;: 3.23,
+                        &quot;EN 10255~BS1387|Light|Default|50mm&quot;: 4.08,
+                        &quot;EN 10255~BS1387|Light|Default|65mm&quot;: 5.71,
+                        &quot;EN 10255~BS1387|Light|Default|80mm&quot;: 6.72,
+                        &quot;EN 10255~BS1387|Light|Default|100mm&quot;: 9.75,
+                        &quot;EN 10255~BS1387|Medium|Default|15mm&quot;: 1.21,
+                        &quot;EN 10255~BS1387|Medium|Default|20mm&quot;: 1.56,
+                        &quot;EN 10255~BS1387|Medium|Default|25mm&quot;: 2.41,
+                        &quot;EN 10255~BS1387|Medium|Default|32mm&quot;: 3.1,
+                        &quot;EN 10255~BS1387|Medium|Default|40mm&quot;: 3.56,
+                        &quot;EN 10255~BS1387|Medium|Default|50mm&quot;: 5.03,
+                        &quot;EN 10255~BS1387|Medium|Default|65mm&quot;: 6.42,
+                        &quot;EN 10255~BS1387|Medium|Default|80mm&quot;: 8.36,
+                        &quot;EN 10255~BS1387|Medium|Default|100mm&quot;: 12.2,
+                        &quot;EN 10255~BS1387|Medium|Default|125mm&quot;: 16.6,
+                        &quot;EN 10255~BS1387|Medium|Default|150mm&quot;: 19.8,
+                        &quot;EN 10255~BS1387|Heavy|Default|15mm&quot;: 1.44,
+                        &quot;EN 10255~BS1387|Heavy|Default|20mm&quot;: 1.87,
+                        &quot;EN 10255~BS1387|Heavy|Default|25mm&quot;: 2.93,
+                        &quot;EN 10255~BS1387|Heavy|Default|32mm&quot;: 3.79,
+                        &quot;EN 10255~BS1387|Heavy|Default|40mm&quot;: 4.37,
+                        &quot;EN 10255~BS1387|Heavy|Default|50mm&quot;: 6.19,
+                        &quot;EN 10255~BS1387|Heavy|Default|65mm&quot;: 7.93,
+                        &quot;EN 10255~BS1387|Heavy|Default|80mm&quot;: 10.3,
+                        &quot;EN 10255~BS1387|Heavy|Default|100mm&quot;: 14.5,
+                        &quot;EN 10255~BS1387|Heavy|Default|125mm&quot;: 17.9,
+                        &quot;EN 10255~BS1387|Heavy|Default|150mm&quot;: 21.3,
+                        &quot;ASTM A 53|Default|Default|15mm&quot;: 1.27,
+                        &quot;ASTM A 53|Default|Default|20mm&quot;: 1.69,
+                        &quot;ASTM A 53|Default|Default|25mm&quot;: 2.5,
+                        &quot;ASTM A 53|Default|Default|32mm&quot;: 3.39,
+                        &quot;ASTM A 53|Default|Default|40mm&quot;: 4.05,
+                        &quot;ASTM A 53|Default|Default|50mm&quot;: 5.44,
+                        &quot;ASTM A 53|Default|Default|65mm&quot;: 8.63,
+                        &quot;ASTM A 53|Default|Default|80mm&quot;: 11.29,
+                        &quot;ASTM A 53|Default|Default|90mm&quot;: 13.57,
+                        &quot;ASTM A 53|Default|Default|100mm&quot;: 16.07,
+                        &quot;ASTM A 53|Default|Default|125mm&quot;: 21.77,
+                        &quot;ASTM A 53|Default|Default|150mm&quot;: 28.26,
+                        &quot;ASTM A 53|Default|Default|200mm&quot;: 54.06,
+                        &quot;ASTM A 53|Default|Default|250mm&quot;: 60.29,
+                        &quot;ASTM A 53|Default|Default|300mm&quot;: 65.2,
+                        &quot;ASTM A 53|Default|Default|350mm&quot;: 81.25,
+                        &quot;ASTM A 53|Default|Default|400mm&quot;: 93.29,
+                        &quot;ISO 65|Heavy|Default|15mm&quot;: 1.44,
+                        &quot;ISO 65|Heavy|Default|20mm&quot;: 1.87,
+                        &quot;ISO 65|Heavy|Default|25mm&quot;: 2.93,
+                        &quot;ISO 65|Heavy|Default|32mm&quot;: 3.97,
+                        &quot;ISO 65|Heavy|Default|40mm&quot;: 4.37,
+                        &quot;ISO 65|Heavy|Default|50mm&quot;: 6.19,
+                        &quot;ISO 65|Heavy|Default|65mm&quot;: 7.93,
+                        &quot;ISO 65|Heavy|Default|80mm&quot;: 10.3,
+                        &quot;ISO 65|Heavy|Default|100mm&quot;: 14.5,
+                        &quot;ISO 65|Heavy|Default|125mm&quot;: 17.9,
+                        &quot;ISO 65|Heavy|Default|150mm&quot;: 21.3,
+                        &quot;ISO 65|Medium|Default|15mm&quot;: 1.21,
+                        &quot;ISO 65|Medium|Default|20mm&quot;: 1.56,
+                        &quot;ISO 65|Medium|Default|25mm&quot;: 2.41,
+                        &quot;ISO 65|Medium|Default|32mm&quot;: 3.1,
+                        &quot;ISO 65|Medium|Default|40mm&quot;: 3.56,
+                        &quot;ISO 65|Medium|Default|50mm&quot;: 5.03,
+                        &quot;ISO 65|Medium|Default|65mm&quot;: 6.42,
+                        &quot;ISO 65|Medium|Default|80mm&quot;: 8.36,
+                        &quot;ISO 65|Medium|Default|100mm&quot;: 12.2,
+                        &quot;ISO 65|Medium|Default|125mm&quot;: 16.6,
+                        &quot;ISO 65|Medium|Default|150mm&quot;: 19.8,
+                        &quot;ISO 65|Light 1|Default|15mm&quot;: 1.09,
+                        &quot;ISO 65|Light 1|Default|20mm&quot;: 1.39,
+                        &quot;ISO 65|Light 1|Default|25mm&quot;: 2.2,
+                        &quot;ISO 65|Light 1|Default|32mm&quot;: 2.82,
+                        &quot;ISO 65|Light 1|Default|40mm&quot;: 3.24,
+                        &quot;ISO 65|Light 1|Default|50mm&quot;: 4.49,
+                        &quot;ISO 65|Light 1|Default|65mm&quot;: 5.73,
+                        &quot;ISO 65|Light 1|Default|80mm&quot;: 7.55,
+                        &quot;ISO 65|Light 1|Default|100mm&quot;: 10.8,
+                        &quot;ISO 65|Light 2|Default|15mm&quot;: 0.947,
+                        &quot;ISO 65|Light 2|Default|20mm&quot;: 1.38,
+                        &quot;ISO 65|Light 2|Default|25mm&quot;: 1.98,
+                        &quot;ISO 65|Light 2|Default|32mm&quot;: 2.54,
+                        &quot;ISO 65|Light 2|Default|40mm&quot;: 3.23,
+                        &quot;ISO 65|Light 2|Default|50mm&quot;: 4.08,
+                        &quot;ISO 65|Light 2|Default|65mm&quot;: 5.71,
+                        &quot;ISO 65|Light 2|Default|80mm&quot;: 6.72,
+                        &quot;ISO 65|Light 2|Default|100mm&quot;: 9.75,
+                        &quot;AS1074:1989|Light|Default|15mm&quot;: 0.947,
+                        &quot;AS1074:1989|Light|Default|20mm&quot;: 1.38,
+                        &quot;AS1074:1989|Light|Default|25mm&quot;: 1.98,
+                        &quot;AS1074:1989|Light|Default|32mm&quot;: 2.54,
+                        &quot;AS1074:1989|Light|Default|40mm&quot;: 3.23,
+                        &quot;AS1074:1989|Light|Default|50mm&quot;: 4.08,
+                        &quot;AS1074:1989|Light|Default|65mm&quot;: 5.71,
+                        &quot;AS1074:1989|Light|Default|80mm&quot;: 6.72,
+                        &quot;AS1074:1989|Light|Default|100mm&quot;: 9.75,
+                        &quot;AS1074:1989|Medium|Default|15mm&quot;: 1.21,
+                        &quot;AS1074:1989|Medium|Default|20mm&quot;: 1.56,
+                        &quot;AS1074:1989|Medium|Default|25mm&quot;: 2.41,
+                        &quot;AS1074:1989|Medium|Default|32mm&quot;: 3.1,
+                        &quot;AS1074:1989|Medium|Default|40mm&quot;: 3.57,
+                        &quot;AS1074:1989|Medium|Default|50mm&quot;: 5.03,
+                        &quot;AS1074:1989|Medium|Default|65mm&quot;: 6.43,
+                        &quot;AS1074:1989|Medium|Default|80mm&quot;: 8.37,
+                        &quot;AS1074:1989|Medium|Default|100mm&quot;: 12.2,
+                        &quot;AS1074:1989|Medium|Default|125mm&quot;: 16.6,
+                        &quot;AS1074:1989|Medium|Default|150mm&quot;: 19.7,
+                        &quot;AS1074:1989|Heavy|Default|15mm&quot;: 1.44,
+                        &quot;AS1074:1989|Heavy|Default|20mm&quot;: 1.87,
+                        &quot;AS1074:1989|Heavy|Default|25mm&quot;: 2.94,
+                        &quot;AS1074:1989|Heavy|Default|32mm&quot;: 3.8,
+                        &quot;AS1074:1989|Heavy|Default|40mm&quot;: 4.38,
+                        &quot;AS1074:1989|Heavy|Default|50mm&quot;: 6.19,
+                        &quot;AS1074:1989|Heavy|Default|65mm&quot;: 7.93,
+                        &quot;AS1074:1989|Heavy|Default|80mm&quot;: 10.3,
+                        &quot;AS1074:1989|Heavy|Default|100mm&quot;: 14.5,
+                        &quot;AS1074:1989|Heavy|Default|125mm&quot;: 17.9,
+                        &quot;AS1074:1989|Heavy|Default|150mm&quot;: 21.3,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|15mm&quot;: 1.44,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|20mm&quot;: 1.87,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|25mm&quot;: 2.93,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|32mm&quot;: 3.79,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|40mm&quot;: 4.37,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|50mm&quot;: 6.19,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|65mm&quot;: 7.93,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|80mm&quot;: 10.3,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|100mm&quot;: 14.5,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|125mm&quot;: 17.9,
+                        &quot;EN 10255:2004+A1:2007|Heavy|Default|150mm&quot;: 21.3,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|15mm&quot;: 1.21,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|20mm&quot;: 1.56,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|25mm&quot;: 2.41,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|32mm&quot;: 3.1,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|40mm&quot;: 3.56,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|50mm&quot;: 5.03,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|65mm&quot;: 6.42,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|80mm&quot;: 8.36,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|100mm&quot;: 12.2,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|125mm&quot;: 16.6,
+                        &quot;EN 10255:2004+A1:2007|Medium|Default|150mm&quot;: 19.8,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|15mm&quot;: 1.08,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|20mm&quot;: 1.39,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|25mm&quot;: 2.2,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|32mm&quot;: 2.82,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|40mm&quot;: 3.24,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|50mm&quot;: 4.49,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|65mm&quot;: 5.73,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|80mm&quot;: 7.55,
+                        &quot;EN 10255:2004+A1:2007|L1|Default|100mm&quot;: 10.8,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|15mm&quot;: 0.947,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|20mm&quot;: 1.38,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|25mm&quot;: 1.98,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|32mm&quot;: 2.54,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|40mm&quot;: 3.23,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|50mm&quot;: 4.08,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|65mm&quot;: 5.71,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|80mm&quot;: 6.72,
+                        &quot;EN 10255:2004+A1:2007|L2|Default|100mm&quot;: 9.75,
+                        &quot;AS1163-EN10219|Default|Default|15mm&quot;: 1.35,
+                        &quot;AS1163-EN10219|Default|Default|20mm&quot;: 1.77,
+                        &quot;AS1163-EN10219|Default|Default|25mm&quot;: 2.27,
+                        &quot;AS1163-EN10219|Default|Default|32mm&quot;: 3.79,
+                        &quot;AS1163-EN10219|Default|Default|40mm&quot;: 4.37,
+                        &quot;AS1163-EN10219|Default|Default|50mm&quot;: 5.55,
+                        &quot;AS1163-EN10219|Default|Default|65mm&quot;: 8.77,
+                        &quot;AS1163-EN10219|Default|Default|80mm&quot;: 10.35,
+                        &quot;AS1163-EN10219|Default|Default|90mm&quot;: 11.91,
+                        &quot;AS1163-EN10219|Default|Default|100mm&quot;: 16.78,
+                        &quot;AS1163-EN10219|Default|Default|110mm&quot;: 15.04,
+                        &quot;AS1163-EN10219|Default|Default|125mm&quot;: 20.73,
+                        &quot;AS1163-EN10219|Default|Default|135mm&quot;: 22.7,
+                        &quot;AS1163-EN10219|Default|Default|150mm&quot;: 24.67,
+                        &quot;AS1163-EN10219|Default|Default|175mm&quot;: 29.12,
+                        &quot;AS1163-EN10219|Default|Default|200mm&quot;: 41.65,
+                        &quot;AS1163-EN10219|Default|Default|250mm&quot;: 52.28,
+                        &quot;AS1163-EN10219|Default|Default|300mm&quot;: 62.32,
+                        &quot;AS1163-EN10219|Default|Default|350mm&quot;: 68.58
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;gst&quot;,
+                      &quot;label&quot;: &quot;GST @18%&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(rate * (1 - (Discount / 100))) * 0.18&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;price_per_uom&quot;,
+                      &quot;label&quot;: &quot;PRICE (PER UOM)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(rate * (1 - (Discount / 100))) + gst&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;total_price&quot;,
+                      &quot;label&quot;: &quot;TOTAL PRICE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;price_per_uom * quantity&quot;
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

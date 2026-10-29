@@ -1,0 +1,637 @@
+<apex:page standardController="Quote" extensions="TelecomDocumentController" renderAs="pdf" showHeader="false" sidebar="false" applyBodyTag="false" >
+	<head>
+     <style>
+         /* 1. Global - 0 margin so a cover is full-bleed. Body keeps its own
+               named rule below, so its 45mm margin and running header/footer
+               never land on a cover. Deepanjan (21st Aug 2026) */
+         @page { size: A4; margin: 0mm; }
+
+         /* 2. The original body page, unchanged except for being named.
+               NOTE: no separate portrait @page for the covers - iText ignores a
+               per-page size change here (measured: every page still came out
+               841.88 x 595.28), which is what split each cover across 2-3 pages.
+               The covers are therefore sized for a LANDSCAPE A4 sheet, and the
+               artwork must be landscape too. Height 209mm not 210mm: the page box
+               is 595.28pt while 210mm converts to 595.276pt, and any overflow at
+               all opens a blank page. */
+         @page standard-content { 
+         		size: A4;
+         		margin: 30mm 6mm 8mm 6mm;
+                @top-center {
+                    content: element(header);
+                }
+                @bottom-center {
+                    content: element(footer);
+                }
+         }
+
+         /* Cover pages - full bleed on a landscape sheet */
+         div.page-cover,
+         div.page-cover-last { width: 99.9%; height:99.9% margin: 0mm;
+                               line-height: 0; font-size: 0; overflow: hidden; }
+         div.page-cover      { page-break-after: always; }
+         div.page-cover-last { page-break-before: always; }
+         .cover-img          { width: 100%; height: 100%; display: block; object-position: center; }
+
+         /* Everything between the covers uses the named landscape page.
+            The tables below are untouched - no page-break rule is added or
+            changed here, so tele-table splits exactly where it does today. */
+         div.document-body   { page: standard-content; }
+        body { font-family: sans-serif; font-size: 10px; margin: 0; padding: 0; width:100%; }
+         
+         .image-container{
+         	position: running(header);
+            width: 200%;
+            height: 60px;
+         }
+         
+         .pdf-header {
+            width: 100%;
+            height: 100%;
+            display: block;
+         	object-fit: cover;
+         	margin-bottom: 60px;
+          }
+            
+            .pdf-footer {
+                position: running(footer);
+                text-align: right;
+                font-size: 8px;
+                line-height: 1.3;
+                color: #333;
+            }
+
+        .main-container{
+            width: 90%;
+            max-width:100%;
+         	height: auto;
+         	background:#f3f3f3;
+            border-top:1px solid #d7d7d7;
+            padding: 6px 8px;
+            box-sizing:border-box;
+        }
+        
+        .ref-section{
+            font-size:11px;
+            font-weight:bold;
+            line-height:17px;
+            margin-bottom:28px;
+        }
+        
+        .to-section{
+            font-size:11px;
+            line-height:17px;
+            margin-bottom:40px;
+        }
+        
+        .subject-section{
+            margin: 30px 0;
+         	line-height: 6px;
+        }
+        
+        .subject-divider{
+            border:0;
+            border-top:1px solid #bfbfbf;
+            margin:8px 0 14px 0;
+        }
+        
+        .content-text{
+            font-size:11px;
+            line-height:17px;
+            text-align:justify;
+            margin-bottom:18px;
+        }
+        
+        .section-heading{
+            font-size:11px;
+            font-weight:bold;
+            text-decoration:underline;
+            margin:22px 0 16px 0;
+            letter-spacing:0.2px;
+        }
+        
+        .sub-heading{
+            font-size:11px;
+            font-weight:bold;
+            margin:16px 0px 10px 6px;
+        }
+        
+        .normal-text{
+            font-size:11px;
+            line-height:17px;
+            margin-bottom:14px;
+            text-align:justify;
+        }
+        
+        ul{
+            margin:0 0 16px 18px;
+            padding-left:14px;
+        }
+        
+        li{
+            font-size:11px;
+            line-height:17px;
+            margin-bottom:2px;
+        }
+        
+        .bold{
+            font-weight:bold;
+        }
+         .general-heading{
+            text-align:center;
+            font-size:11px;
+            font-weight:bold;
+            text-decoration:underline;
+            margin:30px 0 20px 0;
+        }
+
+        .general-terms{
+            font-size:11px;
+            line-height:13px;
+        }
+    
+        .general-terms p{
+            margin:0 0 10px 0;
+        }
+    
+        .general-terms .point-title{
+            font-weight:bold;
+        }
+    
+        .general-terms ol{
+            margin:0;
+            padding-left:18px;
+        }
+    
+        .general-terms li{
+            margin-bottom:10px;
+        }
+    
+        .general-terms ul{
+            margin:4px 0 4px 18px;
+            padding-left:12px;
+        }
+    
+        .general-terms ul li{
+            margin-bottom:0;
+            line-height:13px;
+        }
+         
+        .general-terms li ol li{
+            margin-bottom:0;
+            line-height:13px;
+        }
+    
+        .signature-block{
+            margin-top:18px;
+            font-size:12px;
+            line-height:16px;
+        }
+
+        .bottom-space {
+            height: 30px;
+        }
+     
+        /* Structure header (blue full-width band) */
+        .structure-header td {
+            background-color: #4a90c4;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 8px;
+        }
+        .subst-col-detail { text-align: center; width: 40%; }
+        .subst-col-uom    { text-align: center; width: 20%; }
+        .subst-col-price  { text-align: center; width: 40%; }
+    
+        .row-subst-data td { background-color: #ffffff; text-align: center; }
+        .row-subst-nuts td { background-color: #f5f5f5; text-align: center; }
+         
+         .tele-table {
+            width: 98%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-bottom: 25px;
+         	align-items: center;
+         	margin: auto;
+         	background: red;
+        }
+
+        .tele-table th {
+            background-color: #7BBFBF;
+            color: #ffffff;
+            border: 1px solid #5a9999;
+            padding: 6px 4px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 15px;
+        }
+
+        .tele-table td {
+            border: 1px solid #aaaaaa;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 15px;
+            background-color: #ffffff;
+        }
+
+        .tele-table {
+            text-align: right;
+        }
+        .td-right{
+         	text-align: center;
+         }
+
+        /* Bold italic note between the two tables */
+        .freight-note {
+            font-size: 11px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+    
+    </style>
+    </head>
+    
+    <body>
+        
+      	<div class="image-container">
+             <div class="pdf-header">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding:0;">
+                            <img src="{!$Resource.UtkarshHeader}" alt="Utkarsh header" style="width: 100%; height: auto; display:block;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- PAGE 1: Front Cover (landscape artwork) -->
+        <div class="page-cover"><apex:image url="{!$Resource.Telecom1stPage}" styleClass="cover-img"/></div>
+
+        <!-- PAGE 2 onwards: offer body -->
+        <div class="document-body">
+
+        <div class="main-container">
+                <div class="ref-section">
+                    Ref:- {!quoteNumber}<br/>
+                    Date:- {!todayDate}
+                </div>
+    
+                <div class="to-section">
+                    To,<br/>
+                    <b>{!quoteAccount}</b>
+                </div>
+            	    
+                <div style="font-size: 12px; overflow-wrap: anywhere; max-width: 100%; box-sizing: border-box;word-break: break-word;">
+                   We are pleased to submit herewith our offer for Manufacturing, and Supply of Telecom Tower as per your requirement. The details
+of our proposal are as here under:
+                </div>
+    
+                <div class="section-heading">
+                    PRICES:
+                </div>
+    			
+            	<apex:outputPanel rendered="{!isBOMNotAvailable}">
+            		<div style="margin: 0 0 20px 0; font-size: 12px;">
+                        Please refer to our below price Offer which is tentative and the weight considered is also tentative. Further, prices are basic and all applicable taxes are extra.
+                    </div>
+            	</apex:outputPanel>
+            
+            	<apex:outputPanel rendered="{!isBOMAvailable}">
+            		<div style="margin: 0 0 20px 0;">
+                        Further, prices are basic and all applicable taxes are extra.
+                    </div>
+            	</apex:outputPanel>
+            
+            <apex:outputPanel rendered="{!!isBOMAvailable && !isBOMNotAvailable}">
+                <div style="margin: 0 0 20px 0;">
+                    Further, prices are basic and all applicable taxes are extra.
+                </div>
+            </apex:outputPanel>
+            
+            <!-- ═══ TELECOM TOWER PART DETAILS (dynamic) ═══ -->
+            <apex:repeat value="{!towerDetailGroups}" var="grp">
+                <apex:outputPanel rendered="{!grp.showTable}">
+                	<div class="sub-heading">{!grp.subType}</div>
+                <table class="tele-table">
+                    <colgroup>
+                        <col style="width:5%;"/>
+                        <col style="width:14%;"/>
+                        <col style="width:11%;"/>
+                        <col style="width:8%;"/>
+                        <col style="width:6%;"/>
+                        <col style="width:8%;"/>
+                        <col style="width:15%;"/>
+                        <col style="width:13%;"/>
+                        <col style="width:15%;"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Sl<br/>No</th>
+                            <th>Description</th>
+                            <th>Tower weight<br/>(in MT)</th>
+                            <th>Qty</th>
+                            <th>Uom</th>
+                            <th>Rate Per MT</th>
+                            <th>Unit Rate</th>
+                            <th>Total Basic<br/>Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!grp.rows}" var="r">
+                            <tr>
+                                <td>{!r.slNo}</td>
+                                <td>{!r.description}</td>
+                                <td>{!r.towerWeight}</td>
+                                <td>{!r.quantity}</td>
+                                <td>{!r.uom}</td>
+                                <td class="td-right"><apex:outputText >{!r.ratePerMT}</apex:outputText></td>
+                                <td class="td-right"><apex:outputText >{!r.unitRate}</apex:outputText></td>
+                                <td class="td-right"><apex:outputText >{!r.totalBasicRate}</apex:outputText></td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                </apex:outputPanel>
+            </apex:repeat>
+            
+            <apex:outputPanel rendered="{!isMGLForType}">
+                <!-- ═══ MINIMUM GUARANTEED LOADABILITY (dynamic) ═══ -->
+                    <div class="freight-note">
+                        Tentative Freight: Freight is basic and all applicable taxes as per Minimum Guaranteed Freight.
+                    </div>
+                    <table class="tele-table">
+                    <colgroup>
+                        <col style="width:20%;"/>
+                        <col style="width:32%;"/>
+                        <col style="width:24%;"/>
+                        <col style="width:24%;"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Description of the Tower</th>
+                            <th>Vehicle Loadability - MT</th>
+                            <th>Minimum Guaranteed<br/>Freight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!mglRows}" var="m">
+                            <tr>
+                                <td>{!m.location}</td>
+                                <td>{!m.descriptionOfTower}</td>
+                                <td>{!m.vehicleLoadability}</td>
+                                <td class="td-right">{!m.minimumGuaranteedFreight}</td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            
+            </apex:outputPanel>
+            
+             
+            <apex:outputPanel rendered="{!isRPTForType}">
+                <!-- ═══ MINIMUM GUARANTEED LOADABILITY (dynamic) ═══ -->
+                    <div class="freight-note">
+                        Tentative Freight: Freight is basic and all applicable taxes.
+                    </div>
+                    <table class="tele-table">
+                    <colgroup>
+                        <col style="width:45%;"/>
+                        <col style="width:45%;"/>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Rate Per Ton</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!rptRows}" var="r">
+                            <tr>
+                                <td>{!r.location}</td>
+                                <td class="td-right">{!r.ratePerTon}</td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            
+            </apex:outputPanel>
+          
+          
+                <div class="general-heading">
+                    GENERAL TERMS &amp; CONDITIONS:
+                </div>
+                
+                <div class="general-terms">
+                
+                    <ol>
+                
+                        <li>
+                            <span class="point-title">Buyer:</span>
+                            Buyer shall mean Adani Energy Limited.
+                        </li>
+                
+                        <li>
+                            <span class="point-title">Supplier:</span>
+                            Supplier shall mean <strong>Utkarsh India Limited</strong> having its office at 95A, Elliot Road, Arrjavv Square, Kolkata. 
+
+                        </li>
+                
+                        <li>
+                            	<span class="point-title">Payment Terms:</span> {!tcPaymentDetails}
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Scope of Work:</span>
+                            Manufacturing and Supply of Galvanized Tower Structures.
+                        </li>
+                        
+                        <li>
+                            	<span class="point-title">Delivery:</span> {!tcDeliveryDetail}
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Packing &amp; Forwarding:</span>
+                
+                            <ol style="list-style-type: lower-alpha;">
+                                <li>
+                                    The above pricing includes packaging charges for section wise bundling. 
+                                </li>
+                
+                                <li>
+                                    The special type of packing if any required has to be intimated to the supplier before the finalization of the Order and will be charged Extra. 
+                                </li>
+                            </ol>
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Price Basis: </span>
+                            <apex:outputPanel rendered="{!tcMonthDays!=null && tcMonthDays>0}">
+                            	<ol style="list-style-type: lower-alpha;">
+                                <li>
+                                    FIRM till <strong>{!tcMonthDays}</strong> Month/Days.
+                                </li>
+                            </ol>
+                            </apex:outputPanel>
+                        </li>
+                        
+                            <li>
+                                <span class="point-title">Price Validity: </span>
+                                <apex:outputPanel rendered="{!tcPriceValidity!=null && tcPriceValidity>0}">
+                                    <ol style="list-style-type: lower-alpha;">
+                                        <li>
+                                            <strong>{!tcPriceValidity} Days</strong> from the Date of Issuance of offer.
+                                        </li>
+                                    </ol>
+                                </apex:outputPanel>
+                            </li>
+                        
+                        <li>
+                            <span class="point-title">Offer Validity: </span>
+                            <apex:outputPanel rendered="{!tcOfferValidity!=null && tcOfferValidity>0}">
+                            	<strong> {!tcOfferValidity} Days </strong> from the date of issuance of offer.
+                            </apex:outputPanel> 
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Detention Charges: </span>
+                            <ol style="list-style-type: lower-alpha;">
+                                <li>
+                                    Any vehicle not being unloaded within 24 hours of arrival at the delivery site shall incur detention charges at a rate of Rs. 2,500/day. These charges shall be borne exclusively by the Buyer. 
+                                </li>
+                            </ol>
+                        </li>           
+                        
+                        <li>
+                            <span class="point-title">Inspection:</span>
+                
+                            <ol style="list-style-type: lower-alpha;">
+                                <li>
+                                    We have not considered any third-party inspection fees. However, we will provide necessary facilities to carry out routine Inspection as per our standard procedure at our works by your authorized representatives. 
+                                </li>
+                
+                                <li>
+                                    Any travelling, lodging, boarding expenses of the representatives shall be borne by the Buyer. 
+                                </li>
+                
+                                <li>
+                                    The raw material testing is conducted at UIL’s in house laboratory. 
+                                </li>
+                                <li>
+                                   Any testing required at a 3rd party laboratory shall be conducted at extra charge. 
+                                </li>
+                                <li>
+                                   Any requirement of third-party inspection of testing shall be at Buyer’s scope.
+                                </li>
+                                <li>
+                                   If for any reason the Buyer fails to depute any third-party inspection agency to carry out the pre-delivery inspection, the Supplier shall at the cost of the Buyer conduct such third - party pre-delivery inspection at the Supplier’s factory and such inspection for all practical purposes shall be deemed to have been conducted at the behest of the Buyer. Such third-party inspection conducted prior to delivery or dispatch of the materials shall be considered as final for all issues on quality and technical parameters.
+                                </li>
+                            </ol>
+                        </li>
+                       
+                        <li>
+                            <span class="point-title">Round Rent and Penal Interest:</span>
+ 							In the event if the Buyer fails to lift the material by make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @18% per annum quarterly compoundable and Ground rent @ 1% per month.                        
+                        </li>
+                
+                        <li>
+                            <span class="point-title">Lifting of Materials:</span>
+                            If for any reason the Buyer fails to take delivery of the materials within two/three days from the date of being notified that the materials are lying ready for taking delivery and/or dispatch and/or from the date of inspection recording acceptance of the materials, whichever is earlier, in that event the Supplier shall become entitled to impose storing charges for holding the materials till the time it is dispatched. Such charges shall be imposed at the rate of 5.00% of the total contract value for every week’s delay caused in taking delivery of the materials. 
+                        </li>
+                
+                        <li>
+                            <span class="point-title">Risk Of Purchase</span>
+                             Once the manufacturing Clearance is given by the buyer and the supplier has procured the material, then the buyer should no longer hold the rights to cancel the order.
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Late Delivery Charges:</span>
+                            Unless prevented by force majeure condition the Supplier shall be liable to deliver the materials within the agreed delivery schedule. However, since the Supplier has agreed to supply the materials at an extremely competitive rates it is being made clear that for the purpose of this contract the Buyer shall not be entitled to impose any late delivery charges for any delay caused in delivery of the materials. 
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Drawing:</span>
+                            It shall always be at the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions’ specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products based on the drawings.
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Return of Goods:</span>
+                            After obtaining satisfactory inspection clearance certificate, once the goods are dispatched, the Buyer will not be entitled to return the same by raising any technical issues or defects. 
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Quality:</span>
+                             In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer’s destination, by any independent inspection agency and/or surveyor engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports by two different independentagencies both being appointed by the Buyers. If the Buyer fails to substantiate the claim with 
+proper and acceptable explanation in that event the Buyer’s claim on quality related issues shall stand set aside.
+                        </li>
+                
+                        <li>
+                            <span class="point-title">Confidentiality:</span>
+                			The terms and conditions described in this contract including its existence shall be confidential information and shall not be disclosed by any party to any third party without the prior written consent of the other party. 
+                        </li>
+                        
+                        <li>
+                            <span class="point-title">Force Majeure:</span>
+                            <ol style="list-style-type: lower-alpha;">
+                                <li>
+                                	In this agreement, “force majeure” means any cause preventing Supplier from performing any or all of its obligations which arises from or is attributable to acts or events beyond the reasonable control of the party so prevented, including, without 
+								limitation, strikes, lock-outs or other industrial disputes (whether involving the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or default of suppliers or sub-contractors. 
+                                </li>
+                                <li>
+                                	 If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no liability in respect of the 
+performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is necessary for that party, using all reasonable endeavors, to recommence its affected operations in order for it to perform its obligations. 
+                                </li>
+                                <li>
+                                	If Supplier is prevented from performance of its obligations for a continuous period in excess of two months, the Buyer and/or the Supplier may terminate this agreement 
+forthwith on service of written notice on the party so prevented, in which case neither party shall have any liability to the other except those rights and liabilities which accrued prior to such termination shall continue to subsist. 
+
+                                </li>
+                            </ol>
+                        </li>
+                
+                        <li>
+                            <span class="point-title">Jurisdiction:</span>
+                            In Kolkata Court. 
+                        </li>
+                                        
+                        <li>
+                            <span class="point-title">Miscellaneous:</span>
+                            Notwithstanding anything otherwise or contrary recorded anywhere within the purchase/supply order arising from this quotation, the terms and conditions of this quotation shall be deemed to be a part of the contract and in the event of any conflict in interpretation of 
+the clauses of this quotation in that event the clauses of the quotation shall prevail over the clauses of the purchase/supply order. We hope you will find our offer competitive Techno-commercially and we trust our offer meets your 
+requirements. We look forward to receiving your valued order which shall receive our best attention. 
+
+
+                        </li>
+                    </ol>
+                
+                    <div class="signature-block">
+                        Thanking you,<br/>
+                        Yours truly,<br/><br/>
+                        <b style="font-size: 12px;">{!currentUser}</b><br/>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(currentUserPhone))}">
+                            	<strong>{!currentUserPhone}</strong><br/>
+                        </apex:outputPanel>
+                    
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(currentUserEmail))}">
+                           <strong>{!currentUserEmail}</strong><br/><br/>
+                        </apex:outputPanel>
+                
+                        <b>UTKARSH INDIA LIMITED</b>
+                    </div>
+                
+                </div>
+    
+                <div class="bottom-space"></div>
+    
+            </div>
+
+        </div><!-- /document-body -->
+
+        <!-- LAST PAGE: back cover (landscape artwork) -->
+        <div class="page-cover-last"><apex:image url="{!$Resource.HM_Last_Page}" styleClass="cover-img"/></div>
+    </body>
+    
+</apex:page>

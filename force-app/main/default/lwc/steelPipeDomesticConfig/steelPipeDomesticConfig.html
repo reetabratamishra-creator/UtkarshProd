@@ -1,0 +1,644 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" style="z-index: 999999;">
+        <div class="slds-modal__container" style="max-width: 95%; width: 95%;">
+            <header class="slds-modal__header">
+                 <button class="slds-button slds-button_icon slds-modal__close custom-close-btn" title="Close" onclick={handleClose}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate">DOMESTIC PIPE CONFIGURATION</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium custom-scrollbar" onscroll={handleModalScroll} style="max-height: 70vh; overflow-y: auto;">
+                
+                <!-- QUOTATION SCOPE SELECTION -->
+                <div class="slds-box slds-m-bottom_small border-blue" style="background-color: #f8fafd; border-left: 4px solid #0070d2;">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                        <div class="slds-m-right_medium" style="min-width: 280px;">
+                            <lightning-combobox
+                                label="Quotation Scope"
+                                value={quoteScope}
+                                options={quoteScopeOptions}
+                                onchange={handleQuoteScopeChange}
+                                disabled={isReadOnly}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-m-right_medium" style="min-width: 200px;">
+                            <lightning-input 
+                                type="number" 
+                                label="Commission/Inspection (%)" 
+                                value={commissionInspection} 
+                                onchange={handleCommissionInspectionChange}
+                                onblur={handleCommissionInspectionBlur} 
+                                disabled={isReadOnly} 
+                                min="0"
+                                step="0.01">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-m-top_medium">
+                            <template if:true={isCoreOnly}>
+                                <span class="slds-badge slds-theme_warning" style="font-size: 12px; font-weight: bold;">
+                                    Quoting Core Pipes Only (Regular Pipes Excluded)
+                                </span>
+                            </template>
+                            <template if:true={isRegularOnly}>
+                                <span class="slds-badge slds-theme_info" style="font-size: 12px; font-weight: bold;">
+                                    Quoting Regular Pipes Only (Core Pipes Excluded)
+                                </span>
+                            </template>
+                            <template if:true={isBoth}>
+                                <span class="slds-badge slds-theme_success" style="font-size: 12px; font-weight: bold;">
+                                    Quoting Both Regular and Core Pipes
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRIMARY PIPES TABLE -->
+                <template if:true={isRegularPipesVisible}>
+                <div class="slds-box slds-m-bottom_medium border-blue regular-pipes-box">
+                    <!-- TOP ACTIONS BAR -->
+                    <div class="top-actions-bar slds-m-bottom_small">
+                        <!-- Left Group: Item Count & Add Row -->
+                        <div class="control-group">
+                            <div class="control-item item-count-box">
+                                <lightning-input disabled={isReadOnly} 
+                                    type="number" 
+                                    label="Number of items" 
+                                    value={pipeCount} 
+                                    min="1" 
+                                    onchange={handlePipeCountChange}>
+                                </lightning-input>
+                            </div>
+                            <template if:false={isReadOnly}>
+                                <div class="control-item button-box">
+                                    <lightning-button 
+                                        label="Add Row" 
+                                        icon-name="utility:add" 
+                                        onclick={handleAddRow} 
+                                        variant="neutral">
+                                    </lightning-button>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Right Group: Pricing & Document Settings -->
+                        <div class="control-group pricing-settings-group">
+                            <template if:false={isReadOnly}>
+                                <div class="control-item toggle-box">
+                                    <lightning-input 
+                                        type="toggle" 
+                                        label="Show Rate in Doc" 
+                                        checked={showRateInDoc} 
+                                        onchange={handleShowRateToggle} 
+                                        message-toggle-active="Yes" 
+                                        message-toggle-inactive="No">
+                                    </lightning-input>
+                                </div>
+                                <div class="control-item toggle-box zone-toggle-box">
+                                    <lightning-input 
+                                        type="toggle" 
+                                        label="Out of Eastern Zone (-1 ₹/kg)" 
+                                        checked={globalOutOfEasternZone} 
+                                        onchange={handleGlobalZoneToggle} 
+                                        message-toggle-active="Yes" 
+                                        message-toggle-inactive="No" 
+                                        disabled={isReadOnly}>
+                                    </lightning-input>
+                                </div>
+                                <div class="control-item lumpsum-box">
+                                    <lightning-input 
+                                        type="number" 
+                                        label="Lump Sum Value (₹)" 
+                                        value={lumpSumValue} 
+                                        onchange={handleLumpSumChange} 
+                                        disabled={isReadOnly} 
+                                        step="0.01">
+                                    </lightning-input>
+                                </div>
+                            </template>
+                            <template if:true={isReadOnly}>
+                                <div class="control-item lumpsum-box">
+                                    <lightning-input 
+                                        type="number" 
+                                        label="Lump Sum Value (₹)" 
+                                        value={lumpSumValue} 
+                                        disabled 
+                                        step="0.01">
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- TABLE NAVIGATION & VIEW BAR -->
+                    <div class="table-nav-bar slds-m-bottom_x-small">
+                        <div class="nav-left">
+                            <span class="jump-label">JUMP TO:</span>
+                            <lightning-button-group class="jump-group">
+                                <lightning-button label="Specs &amp; Dimensions" data-section="specs" onclick={handleScrollToSection} variant="neutral" size="small"></lightning-button>
+                                <lightning-button label="Finish &amp; Coating" data-section="finish" onclick={handleScrollToSection} variant="neutral" size="small"></lightning-button>
+                                <lightning-button label="Freight &amp; Pricing" data-section="pricing" onclick={handleScrollToSection} variant="neutral" size="small"></lightning-button>
+                            </lightning-button-group>
+
+                            <div class="scroll-buttons slds-m-left_small">
+                                <lightning-button-icon icon-name="utility:chevronleft" variant="border-filled" onclick={handleScrollLeft} alternative-text="Scroll Left" title="Scroll Left (600px)" class="slds-m-right_xx-small"></lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:chevronright" variant="border-filled" onclick={handleScrollRight} alternative-text="Scroll Right" title="Scroll Right (600px)"></lightning-button-icon>
+                            </div>
+                        </div>
+
+                        <div class="nav-right">
+                            <lightning-button 
+                                label={calculationToggleLabel} 
+                                icon-name="utility:preview" 
+                                variant={calcButtonVariant} 
+                                onclick={toggleCalculations} 
+                                size="small"
+                                title="Show/Hide Intermediate Calculations">
+                            </lightning-button>
+                        </div>
+                    </div>
+                    
+                    <!-- Synced Top Horizontal Scrollbar Track -->
+                    <div class="top-scrollbar-track custom-scrollbar" onscroll={handleTopScroll} onpointerdown={handleTopPointerDown}>
+                        <div style={tableWidthStyle}>&nbsp;</div>
+                    </div>
+
+                    <div class="table-scroll custom-scrollbar" onscroll={handleTableScroll} onpointerdown={handleTablePointerDown} onwheel={handleTableWheel}>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered custom-table" style={tableWidthStyle}>
+                            <thead>
+                                <tr class="slds-line-height_reset bg-blue">
+                                    <th style="width:125px; min-width:125px;" data-col-section="specs">STEEL TYPE</th>
+                                    <th style="width:125px; min-width:125px;">DESIGNATION</th>
+                                    <th style="width:135px; min-width:135px;">STANDARD</th>
+                                    <th style="width:125px; min-width:125px;">SHAPE / CLASS</th>
+                                    <th style="width:115px; min-width:115px;">NB / SHAPE</th>
+                                    <th style="width:135px; min-width:135px;">OD</th>
+                                    <th style="width:135px; min-width:135px;">WALL THICKNESS</th>
+                                    <th style="width:110px; min-width:110px; text-align:center;">REFLECT IN DOC</th>
+                                    <th style="width:95px; min-width:95px;">CUST OD</th>
+                                    <th style="width:95px; min-width:95px;">CUST THK</th>
+                                    <th style="width:140px; min-width:140px;" data-col-section="finish">END FINISH</th>
+                                    <th style="width:135px; min-width:135px;">END FINISH EXTRA RATE</th>
+                                    <th style="width:135px; min-width:135px;">GRADE</th>
+                                    <th style="width:125px; min-width:125px;">GRADE EXTRA RATE</th>
+                                    <th style="width:140px; min-width:140px;">PAINT</th>
+                                    <th style="width:125px; min-width:125px;">PAINT EXTRA RATE</th>
+                                    <th style="width:140px; min-width:140px;">ZINC COATING</th>
+                                    <th style="width:125px; min-width:125px;">ZINC EXTRA RATE</th>
+                                    <th style="width:100px; min-width:100px;">LENGTH (M)</th>
+                                    <th style="width:180px; min-width:180px;">SPECIAL DESCRIPTION</th>
+                                    <th style="width:130px; min-width:130px;">QTY</th>
+                                    <th style="width:100px; min-width:100px;">UOM</th>
+                                    <th style="width:90px; min-width:90px;">DISC%</th>
+                                   
+                                    <th style="width:105px; min-width:105px;">TOLERANCE</th>
+                                    <th style="width:120px; min-width:120px;" data-col-section="pricing">FREIGHT</th>
+                                    <th style="width:125px; min-width:125px;">FREIGHT COST</th>
+                                    <template if:true={showCalculations}>
+                                        <th style="width:115px; min-width:115px;">KG / MTR</th>
+                                    </template>
+                                    <th style="width:130px; min-width:130px;">TOTAL WT (KG)</th>
+                                    <template if:true={showCalculations}>
+                                        <th style="width:115px; min-width:115px;">RATE (PER KG)</th>
+                                        <th style="width:115px; min-width:115px;">COST PRICE</th>
+                                    </template>
+                                    <th style="width:125px; min-width:125px;">PRICE (PER UOM)</th>
+                                    <th style="width:120px; min-width:120px;">CUTTOFF PRICE</th>
+                                    <th style="width:125px; min-width:125px;">QUOTED PRICE</th>
+                                    <th style="width:140px; min-width:140px;">COMMISSION / INSPECTION</th>
+                                    <th style="width:110px; min-width:110px;">{gstColumnHeader}</th>
+                                    <th style="width:140px; min-width:140px;">FINAL OFFER PRICE</th>
+                                    <th style="width:140px; min-width:140px;">TOTAL PRICE</th>
+                                    <th style="width:60px; min-width:60px; text-align:center;">DEL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={pipes} for:item="pipe" for:index="index">
+                                    <tr key={pipe.key}>
+                                        <td>
+                                            <div class="slds-select_container">
+                                                <select class="slds-select steel-type-select" disabled={isReadOnly} data-index={index} data-field="steelType" onchange={handleFieldChange}>
+                                                    <option value="Black Steel" selected={pipe.isBlackSteel}>Black Steel</option>
+                                                    <option value="Galvanized Iron (GI)" selected={pipe.isGalvanized}>Galvanized Iron (GI)</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="designation" value={pipe.designation} options={pipe.designationOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="standardSpecGrade" value={pipe.standardSpecGrade} options={standardOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <td>
+                                            <template if:false={isReadOnly}>
+                                                <lightning-combobox data-index={index} data-field="shapeType" value={pipe.shapeType} options={pipe.shapeOptions} onchange={handleFieldChange} variant="label-hidden" disabled={pipe.isShapeDisabled} dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={isReadOnly}>
+                                                <span>{pipe.shapeType}</span>
+                                            </template>
+                                        </td>
+                                        <!-- NB / SHAPE -->
+                                        <td>
+                                            <template if:true={pipe.isCustomDriven}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                            <template if:true={pipe.isOdDriven}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                            <template if:true={pipe.isShapeDriven}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="sizeNb" value={pipe.sizeNb} options={pipe.sizeOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={pipe.isNbFirst}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="sizeNb" value={pipe.sizeNb} options={pipe.sizeOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={pipe.isNbDriven}>
+                                                <lightning-input disabled value={pipe.mappedNB} variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                        </td>
+                                        <!-- OD -->
+                                        <td>
+                                            <template if:true={pipe.isCustomDriven}>
+                                                <lightning-input disabled={isReadOnly} style="min-width: 100px; width: 100%;" type="number" step="0.1" data-index={index} data-field="sizeNb" value={pipe.sizeNb} onchange={handleFieldChange} variant="label-hidden" placeholder="Manual OD"></lightning-input>
+                                            </template>
+                                            <template if:true={pipe.isNbDriven}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="sizeNb" value={pipe.sizeNb} options={pipe.sizeOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={pipe.isNbFirst}>
+                                                <lightning-combobox disabled data-index={index} data-field="customOD" value={pipe.mappedOD} options={pipe.odOptions} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={pipe.isOdDriven}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="sizeNb" value={pipe.sizeNb} options={pipe.sizeOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:true={pipe.isShapeDriven}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                        </td>
+                                        <td>
+                                            <template if:false={isReadOnly}>
+                                                <template if:true={pipe.isCustomDriven}>
+                                                    <lightning-input disabled={isReadOnly} style="min-width: 100px; width: 100%;" type="number" step="0.1" data-index={index} data-field="pipeClass" value={pipe.pipeClass} onchange={handleFieldChange} variant="label-hidden" placeholder="Manual WT"></lightning-input>
+                                                </template>
+                                                <template if:false={pipe.isCustomDriven}>
+                                                    <template if:false={pipe.isClassDefault}>
+                                                        <lightning-combobox data-index={index} data-field="pipeClass" value={pipe.pipeClass} options={pipe.classOptions} onchange={handleFieldChange} variant="label-hidden" required="true" disabled={pipe.isClassDisabled} dropdown-alignment="left"></lightning-combobox>
+                                                    </template>
+                                                    <template if:true={pipe.isClassDefault}>
+                                                        <lightning-input type="text" data-index={index} data-field="pipeClass" value={pipe.pipeClass} onchange={handleFieldChange} variant="label-hidden" placeholder="Wall Thickness" required="true"></lightning-input>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                            <template if:true={isReadOnly}>
+                                                <span>{pipe.pipeClass}</span>
+                                            </template>
+                                        </td>
+                                        <td class="slds-text-align_center">
+                                            <lightning-input disabled={isReadOnly} type="toggle" data-index={index} data-field="reflectInOfferDocToggle" checked={pipe.reflectInOfferDocToggle} onchange={handleFieldChange} variant="label-hidden" message-toggle-active="Yes" message-toggle-inactive="No"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="text" data-index={index} data-field="customOD" value={pipe.customOD} onchange={handleFieldChange} variant="label-hidden" placeholder="OD"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input 
+                                                disabled={isReadOnly}
+                                                type="number" 
+                                                step="0.01" 
+                                                data-field="customThickness" 
+                                                data-index={index} 
+                                                value={pipe.customThickness} 
+                                                onchange={handleFieldChange}
+                                                variant="label-hidden">
+                                            </lightning-input>
+                                            <template if:true={pipe.showThicknessWarning}>
+                                                <div class="slds-text-color_error" style="font-size: 0.65rem; line-height: 1; padding-top: 2px;">
+                                                    {pipe.thicknessWarningMessage}
+                                                </div>
+                                            </template>
+                                        </td>
+                                        <!-- END FINISH -->
+                                        <td>
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="endFinish" value={pipe.endFinish} options={pipe.endFinishOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <!-- END FINISH EXTRA RATE -->
+                                        <td>
+                                            <template if:true={isReadOnly}>
+                                                <lightning-input disabled="true" type="number" step="0.01" value={pipe.endFinishRate} variant="label-hidden"></lightning-input>
+                                            </template>
+                                            <template if:false={isReadOnly}>
+                                                <lightning-input
+                                                    disabled={pipe.isEndFinishRateDisabled}
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    data-index={index}
+                                                    data-field="endFinishRate"
+                                                    value={pipe.endFinishRate}
+                                                    onchange={handleFieldChange}
+                                                    variant="label-hidden">
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <!-- GRADE -->
+                                        <td>
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="gradeType" value={pipe.gradeType} options={pipe.gradeOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <!-- GRADE EXTRA RATE -->
+                                        <td>
+                                              <template if:true={isReadOnly}>
+                                                <lightning-input disabled="true" type="number" step="0.01" value={pipe.gradeRate} variant="label-hidden"></lightning-input>
+                                            </template>
+                                            <template if:false={isReadOnly}>
+                                                <lightning-input
+                                                    disabled={pipe.isGradeRateDisabled}
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    data-index={index}
+                                                    data-field="gradeRate"
+                                                    value={pipe.gradeRate}
+                                                    onchange={handleFieldChange}
+                                                    variant="label-hidden">
+                                                </lightning-input>
+                                            </template>
+                                        </td>
+                                        <!-- PAINT: only applicable for MS/CS designation -->
+                                        <td>
+                                            <template if:true={pipe.isPaintApplicable}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="paintType" value={pipe.paintType} options={pipe.paintOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:false={pipe.isPaintApplicable}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                        </td>
+                                        <!-- PAINT EXTRA RATE: fixed 0.3 for Varnish/Anti Rust, editable for Any Special -->
+                                        <td>
+                                            <template if:false={pipe.isPaintApplicable}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                            <template if:true={pipe.isPaintApplicable}>
+                                                <template if:true={isReadOnly}>
+                                                    <lightning-input disabled type="number" step="0.01" value={pipe.paintRate} variant="label-hidden"></lightning-input>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-input disabled={pipe.isPaintRateDisabled} type="number" step="0.01" min="0" data-index={index} data-field="paintRate" value={pipe.paintRate} onchange={handleFieldChange} variant="label-hidden"></lightning-input>
+                                                </template>
+                                            </template>
+                                        </td>
+                                        <!-- ZINC COATING: only applicable for GI designation -->
+                                        <td>
+                                            <template if:true={pipe.isZincApplicable}>
+                                                <lightning-combobox disabled={isReadOnly} data-index={index} data-field="zincCoating" value={pipe.zincCoating} options={pipe.zincOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                            </template>
+                                            <template if:false={pipe.isZincApplicable}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                        </td>
+                                        <!-- ZINC EXTRA RATE: fixed per GSM tier (0/4/8), editable for Any Special -->
+                                        <td>
+                                            <template if:false={pipe.isZincApplicable}>
+                                                <lightning-input disabled value="N/A" variant="label-hidden" class="short-input"></lightning-input>
+                                            </template>
+                                            <template if:true={pipe.isZincApplicable}>
+                                                <template if:true={isReadOnly}>
+                                                    <lightning-input disabled type="number" step="0.01" value={pipe.zincRate} variant="label-hidden"></lightning-input>
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-input disabled={pipe.isZincRateDisabled} type="number" step="0.01" min="0" data-index={index} data-field="zincRate" value={pipe.zincRate} onchange={handleFieldChange} variant="label-hidden"></lightning-input>
+                                                </template>
+                                            </template>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" min="0" data-index={index} data-field="pipeLength" value={pipe.pipeLength} onchange={handleFieldChange} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-textarea disabled={isReadOnly} data-index={index} data-field="specialDescription" value={pipe.specialDescription} onchange={handleFieldChange} variant="label-hidden" placeholder="Notes..."></lightning-textarea>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} style="min-width: 140px;" type="number" step="1" maxlength="15" max="999999999999999" data-index={index} data-field="quantity" value={pipe.quantity} onchange={handleFieldChange} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="uom" value={pipe.uom} options={uomOptions} onchange={handleFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" data-index={index} data-field="discount" value={pipe.discount} onchange={handleFieldChange} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.1" value={pipe.toleranceDisplay} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" data-index={index} data-field="freight" value={pipe.freight} onchange={handleFieldChange} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" value={pipe.freightCost} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <template if:true={showCalculations}>
+                                            <td>
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.01" value={pipe.singlePipeWeight} variant="label-hidden" readonly></lightning-input>
+                                            </td>
+                                        </template>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" value={pipe.totalWeight} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <template if:true={showCalculations}>
+                                            <td>
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.01" value={pipe.rateRsMtr} variant="label-hidden" readonly></lightning-input>
+                                            </td>
+                                            <td>
+                                                <lightning-input disabled type="number" step="0.01" value={pipe.costPrice} variant="label-hidden" readonly></lightning-input>
+                                            </td>
+                                        </template>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" value={pipe.pricePerUom} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" value={pipe.cutoffPrice} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" data-index={index} data-field="quotedPrice" value={pipe.quotedPrice} onchange={handleFieldChange} onblur={handleQuotedPriceBlur} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" value={pipe.commissionAmount} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" value={pipe.gst} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled type="number" step="0.01" value={pipe.finalOfferPrice} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" value={pipe.totalPrice} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td class="slds-text-align_center">
+                                            <template if:false={isReadOnly}>
+                                                <lightning-button-icon icon-name="utility:delete" alternative-text="Delete Row" title="Delete Row" data-index={index} onclick={handleDeleteRow} variant="border-filled"></lightning-button-icon>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </template>
+
+                <!-- CORE PIPES TABLE -->
+                <template if:true={isCorePipesVisible}>
+                <div class="slds-box border-blue core-pipes-box">
+                    <div class="slds-m-bottom_small slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <h3 class="slds-text-heading_small slds-m-right_medium"><strong>CORE PIPES</strong></h3>
+                            <template if:false={isReadOnly}>
+                                <lightning-button label="Add Item" icon-name="utility:add" onclick={handleAddManualRow} variant="neutral"></lightning-button>
+                            </template>
+                        </div>
+                        <div class="scroll-buttons">
+                            <lightning-button-icon icon-name="utility:chevronleft" variant="border-filled" onclick={handleCoreScrollLeft} alternative-text="Scroll Left" title="Scroll Left (600px)" class="slds-m-right_xx-small"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:chevronright" variant="border-filled" onclick={handleCoreScrollRight} alternative-text="Scroll Right" title="Scroll Right (600px)"></lightning-button-icon>
+                        </div>
+                    </div>
+
+                    <!-- Synced Top Horizontal Scrollbar Track for Core Pipes -->
+                    <div class="top-scrollbar-track core-top-scrollbar-track custom-scrollbar" onscroll={handleCoreTopScroll} onpointerdown={handleCoreTopPointerDown}>
+                        <div style="width: 1960px; min-width: 1960px;">&nbsp;</div>
+                    </div>
+                    
+                    <div class="table-scroll core-table-scroll custom-scrollbar" onscroll={handleCoreTableScroll} onpointerdown={handleCoreTablePointerDown} onwheel={handleCoreTableWheel}>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="width: 100%; min-width: 1960px;">
+                            <thead>
+                                <tr class="slds-line-height_reset bg-blue">
+                                    <th style="width: 60px; min-width: 60px; text-align: center;">SL.NO</th>
+                                    <th style="width: 250px; min-width: 240px; max-width: 260px;">PIPE DESCRIPTION</th>
+                                    <th style="width: 150px; min-width: 150px;">ZINC COATING</th>
+                                    <th style="width: 130px; min-width: 130px;">ZINC EXTRA RATE</th>
+                                    <th style="width: 110px; min-width: 110px;">LENGTH (M)</th>
+                                    <th style="width: 120px; min-width: 120px;">UOM</th>
+                                    <th style="width: 140px; min-width: 140px;">QUANTITY</th>
+                                    <th style="width: 120px; min-width: 120px;">KG/METER</th>
+                                    <th style="width: 130px; min-width: 130px;">BASE RATE</th>
+                                    <th style="width: 130px; min-width: 130px;">ZINC ADDON</th>
+                                    <th style="width: 130px; min-width: 130px;">FINAL RATE</th>
+                                    <th style="width: 140px; min-width: 140px;">COMMISSION / INSPECTION</th>
+                                    <th style="width: 130px; min-width: 130px;">{gstColumnHeader}</th>
+                                    <th style="width: 160px; min-width: 160px;">COST</th>
+                                    <th style="width: 60px; min-width: 60px; text-align: center;">DEL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={manualItems} for:item="item" for:index="index">
+                                    <tr key={item.key}>
+                                        <td style="text-align: center; vertical-align: middle; width: 60px; min-width: 60px;">
+                                             <strong>{item.slNo}</strong>
+                                        </td>
+                                        <td style="width: 250px; min-width: 240px; max-width: 260px; vertical-align: middle;">
+                                            <div class="core-combobox-wrapper">
+                                                <button type="button" 
+                                                        class="core-desc-btn slds-input_faux" 
+                                                        disabled={isReadOnly} 
+                                                        data-index={index} 
+                                                        onclick={handleToggleCoreDropdown}>
+                                                    <template if:true={item.description}>
+                                                        <span class="core-desc-text">{item.description}</span>
+                                                    </template>
+                                                    <template if:false={item.description}>
+                                                        <span class="core-desc-placeholder">Select Description...</span>
+                                                    </template>
+                                                    <template if:false={isReadOnly}>
+                                                        <lightning-icon icon-name="utility:down" size="xx-small" class="core-desc-icon"></lightning-icon>
+                                                    </template>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td style="width: 150px; min-width: 150px;">
+                                            <lightning-combobox disabled={isReadOnly} data-index={index} data-field="zincCoating" value={item.zincCoating} options={zincOptions} onchange={handleManualFieldChange} variant="label-hidden" dropdown-alignment="left"></lightning-combobox>
+                                        </td>
+                                        <td style="width: 130px; min-width: 130px;">
+                                            <template if:true={isReadOnly}>
+                                                <lightning-input disabled type="number" step="0.01" value={item.zincRate} variant="label-hidden"></lightning-input>
+                                            </template>
+                                            <template if:false={isReadOnly}>
+                                                <lightning-input disabled={item.isZincRateDisabled} type="number" step="0.01" min="0" data-index={index} data-field="zincRate" value={item.zincRate} onchange={handleManualFieldChange} variant="label-hidden"></lightning-input>
+                                            </template>
+                                        </td>
+                                        <td style="width: 110px; min-width: 110px;">
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" min="0" data-index={index} data-field="pipeLength" value={item.pipeLength} onchange={handleManualFieldChange} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td style="width: 120px; min-width: 120px;">
+                                            <lightning-combobox disabled="true" style="min-width: 110px;" data-index={index} data-field="uom" value={item.uom} options={uomOptions} variant="label-hidden"></lightning-combobox>
+                                        </td>
+                                        <td style="width: 140px; min-width: 140px;">
+                                            <lightning-input disabled={isReadOnly} style="min-width: 120px;" type="number" step="0.01" data-index={index} data-field="quantity" value={item.quantity} onchange={handleManualFieldChange} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td style="width: 120px; min-width: 120px;">
+                                            <lightning-input disabled style="min-width: 100px;" type="number" step="0.01" value={item.kgPerMeter} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="width: 130px; min-width: 130px;">
+                                            <lightning-input disabled={isReadOnly} style="min-width: 110px;" type="number" step="0.01" data-index={index} data-field="baseRate" value={item.baseRate} min={item.baseMinRate} onchange={handleManualFieldChange} onblur={handleManualBaseRateBlur} variant="label-hidden"></lightning-input>
+                                        </td>
+                                        <td style="width: 130px; min-width: 130px;">
+                                            <lightning-input disabled style="min-width: 110px;" type="number" step="0.01" value={item.zincAdder} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="width: 130px; min-width: 130px;">
+                                            <lightning-input disabled style="min-width: 110px;" type="number" step="0.01" value={item.rate} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="width: 140px; min-width: 140px;">
+                                            <lightning-input disabled style="min-width: 120px;" type="number" step="0.01" value={item.commissionAmount} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="width: 130px; min-width: 130px;">
+                                            <lightning-input disabled style="min-width: 110px;" type="number" step="0.01" value={item.gstAmount} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="width: 160px; min-width: 160px;">
+                                            <lightning-input disabled style="min-width: 140px;" type="number" step="0.01" value={item.cost} variant="label-hidden" readonly></lightning-input>
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 60px; min-width: 60px;">
+                                            <template if:false={isReadOnly}>
+                                                <lightning-button-icon icon-name="utility:delete" alternative-text="Delete Row" title="Delete Row" data-index={index} onclick={handleDeleteManualRow} variant="border-filled"></lightning-button-icon>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </template>
+
+                <!-- GLOBAL POPUP FOR CORE PIPE DESCRIPTION -->
+                <template if:true={activeCoreDropdown}>
+                    <div class="core-dropdown-backdrop" onclick={handleCloseCoreDropdowns}></div>
+                    <div class="core-dropdown-menu slds-dropdown slds-dropdown_left" 
+                         role="listbox" 
+                         style={activeCoreDropdown.style} 
+                         onwheel={handleDropdownMenuWheel}>
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <template for:each={corePipeOptions} for:item="opt">
+                                <li key={opt.value} 
+                                    role="presentation" 
+                                    class="core-dropdown-item slds-listbox__item" 
+                                    data-index={activeCoreDropdown.index} 
+                                    data-value={opt.value} 
+                                    onclick={handleSelectCoreDescription}>
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small core-dropdown-option" role="option">
+                                        <span class="slds-media__body">
+                                            <span class="core-option-text">{opt.label}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+
+            </div>
+
+            <footer class="slds-modal__footer">
+                <lightning-button label="Cancel" onclick={handleClose} class="slds-m-right_x-small"></lightning-button>
+                <template if:false={isReadOnly}>
+                    <lightning-button label="Apply" variant="brand" onclick={handleApply}></lightning-button>
+                </template>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" style="z-index: 999998;"></div>
+</template>

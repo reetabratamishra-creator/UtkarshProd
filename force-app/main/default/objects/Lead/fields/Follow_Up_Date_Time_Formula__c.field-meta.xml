@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Follow_Up_Date_Time_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(DATEVALUE(Follow_Up_Date_Time__c + (5.5/24)))
+&amp; &quot; &quot; &amp;
+TEXT(
+    IF(
+        MOD(HOUR(TIMEVALUE(Follow_Up_Date_Time__c + (5.5/24))),12)=0,
+        12,
+        MOD(HOUR(TIMEVALUE(Follow_Up_Date_Time__c + (5.5/24))),12)
+    )
+)
+&amp; &quot;:&quot; &amp;
+RIGHT(
+    &quot;00&quot; &amp; TEXT(MINUTE(TIMEVALUE(Follow_Up_Date_Time__c + (5.5/24)))),
+    2
+)
+&amp; &quot; &quot; &amp;
+IF(
+    HOUR(TIMEVALUE(Follow_Up_Date_Time__c + (5.5/24))) &lt; 12,
+    &quot;AM&quot;,
+    &quot;PM&quot;
+)</formula>
+    <label>Follow-Up Date/Time</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

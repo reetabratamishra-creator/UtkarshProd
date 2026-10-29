@@ -1,0 +1,711 @@
+<apex:page standardController="Quote"
+           extensions="CoreOfferLetterController"
+           renderAs="pdf"
+           applyBodyTag="false"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false">
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+
+        /* ── PAGE SETUP ──────────────────────────────────────────────────
+           Three page rules, the same shape HMScopeSingle / HMScopeCombined use.
+
+           The global rule MUST carry 0 margin and no running header, otherwise
+           the 297mm cover image is laid into 297 - 35 - 28 = 234mm of usable
+           height and spills onto a second page with the header printed over it.
+           The document pages opt back in to margins + header/footer through the
+           named page below. Deepanjan (19th Aug 2026) */
+        @page {
+            size: A4;
+            margin: 0mm;
+        }
+
+        @page standard-content {
+            size: A4;
+            margin: 35mm 0mm 28mm 0mm;
+            @top-left    { content: element(header); }
+            @bottom-left { content: element(footer); }
+        }
+
+        @page final-page {
+            size: A4;
+            margin: 0mm;
+        }
+
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial, sans-serif;
+            font-size: 9.5pt;
+            color: #111;
+            line-height: 1.45;
+        }
+
+        div.document-body-inner {
+            page: standard-content;   /* margins + running header/footer */
+            padding: 2mm 20mm 2mm 20mm;
+        }
+
+        .page-break  { page-break-before: always; }
+        .avoid-break { page-break-inside: avoid; }
+
+        /* ── RUNNING HEADER ── */
+        div.corporate-header {
+            position: running(header);
+            top: 0; left: 0;
+            width: 300%;
+            height: 35mm;
+            padding: 0; margin: 0;
+        }
+        .header-lime-line {
+            width: 155%;
+            border-bottom: 3px solid #99cc33;
+        }
+        .header-inner { padding: 4mm 20mm 0mm 20mm; }
+        .header-left  { float: left; width: 75%; margin-top: 2mm; }
+        .company-name {
+            font-size: 14pt; font-weight: bold;
+            color: #000; margin-bottom: 2px; text-align: right;
+        }
+        .office-details {
+            font-size: 7.5pt; color: #333;
+            line-height: 1.4; text-align: right;
+        }
+        .header-right {
+            float: right; width: 20%;
+            text-align: right;
+            position: relative; z-index: 999;
+        }
+        .logo-img {
+            height: 22mm; width: auto;
+            display: inline-block;
+            background-color: #fff; padding: 1px;
+        }
+        /* Cover pages - full bleed */
+        div.page-cover {
+            page-break-after: always;
+            width: 210mm;
+            height: 297mm;
+            margin: 0mm;
+        }
+        div.page-cover-last {
+            page-break-before: always;
+            width: 210mm;
+            height: 297mm;
+            margin: 0mm;
+        }
+        
+        .cover-img {
+            width: 210mm;
+            height: 297mm;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* ── RUNNING FOOTER ── */
+        div.corporate-footer {
+            position: running(footer);
+            bottom: 0; left: 0;
+            width: 300%;
+            height: 28mm;
+            padding: 0; margin: 0;
+        }
+        .footer-lime-line {
+            width: 155%;
+            border-top: 3px solid #99cc33;
+        }
+        .footer-inner {
+            padding: 2mm 20mm 0mm 20mm;
+            font-size: 7pt; color: #333;
+            line-height: 1.4; text-align: right;
+        }
+        .factory-details { margin-bottom: 3px; }
+        .social-row      { margin-top: 4px; font-size: 7.5pt; }
+
+        /* ── CONTENT STYLES (unchanged from original) ── */
+        .bold      { font-weight: bold; }
+        .underline { text-decoration: underline; }
+        .highlight { background-color: #FFFF00; }
+        p          { margin: 5px 0; }
+        .gap       { margin-top: 10px; }
+
+        .tnc-title {
+            font-size: 10pt; font-weight: bold;
+            text-decoration: underline; margin: 14px 0 6px 0;
+        }
+        table.tnc { width: 100%; border-collapse: seperate; border-spacing: 0 12px; }
+        table.tnc td { vertical-align: top; padding: 3px 2px 10px 2px; }
+        table.tnc td.num { width: 28px; font-weight: bold; white-space: nowrap; }
+
+        /* ── SIGNATURE — kept on single page ── */
+        .signoff {
+            margin-top: 18px;
+            line-height: 1.8;
+            page-break-inside: avoid;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .annex-title {
+            text-align: center; font-size: 12pt;
+            font-weight: bold; margin: 14px 0 10px 0;
+        }
+        table.annex  { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+        table.annex th {
+            background-color: #e8f5e9; border: 1px solid #444;
+            padding: 5px 3px; text-align: center; font-weight: bold;
+        }
+        table.annex td { border: 1px solid #444; padding: 4px 3px; text-align: center; }
+        table.annex td.la { text-align: left; }
+        table.annex tr.total td { font-weight: bold; background-color: #f5f5f5; }
+        .total-note {
+            font-size: 8.5pt; font-weight: bold;
+            text-align: center; margin-top: 10px; line-height: 1.5;
+        }
+
+        /* ── BLANK PAGE FIX — Deepanjan (24th September 2026) ──
+           When the offer letter ends right at the bottom of a page, the empty
+           space after its last line (p margin + inline-block baseline gap +
+           2mm body padding) spilled onto a new page, and the Annexure's
+           page-break then started yet another page - a blank page with only
+           the header. Nothing visible is removed: these are gaps at the very
+           end of a block. */
+        div.document-body-inner { padding-bottom: 0mm; }
+        .signoff { vertical-align: top; }
+        .signoff-last { margin-bottom: 0; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ══════════ RUNNING HEADER ══════════ -->
+    <div class="corporate-header">
+        <div class="header-inner">
+            <div class="header-right">
+                <apex:image url="{!$Resource.UtkarshLogo}" styleClass="logo-img"/>
+            </div>
+            <div class="header-left">
+                <div class="company-name">Utkarsh India Limited</div>
+                <div class="office-details">
+                    Corporate Office: Arrjavv Square, 95A Elliot Road, 4th Floor,
+                    Kolkata - 700016<br/>
+                    P: 033 2264 6666 / 2265 888 &nbsp;|&nbsp;
+                    E: info@utkarshindia.in &nbsp;|&nbsp;
+                    W: www.utkarshindia.in
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="header-lime-line"></div>
+    </div>
+
+    <!-- ══════════ RUNNING FOOTER ══════════ -->
+    <div class="corporate-footer">
+        <div class="footer-lime-line"></div>
+        <!-- factory / CIN / DealDox lines removed from the footer on every page.
+             The lime line and the running-footer shell stay so page margins and
+             the bottom reserve are unchanged. Deepanjan (24th July 2026) -->
+        <div class="footer-inner"></div>
+    </div>
+    
+    <!-- PAGE 1: Front Cover -->
+    <div class="page-cover">
+        <apex:image url="{!$Resource.CoreFrontPage}" styleClass="cover-img"/>
+    </div>
+
+    <!-- ══════════ PAGE 2 — OFFER LETTER ══════════ -->
+    <div class="document-body-inner">
+
+        <!-- REF & DATE -->
+        <div style="margin:8px 0 2px 0;">
+            <span class="bold">Ref:-</span>
+            <apex:outputText value=" {!quoteRecord.Quote_Reference__c}"/><br/>
+            <span class="bold">Date:-</span>
+            <apex:outputText value=" {0,date,dd/MM/yyyy}">
+                <apex:param value="{!TODAY()}"/>
+            </apex:outputText>
+        </div>
+
+        <!-- TO BLOCK -->
+        <div class="gap" style="line-height:1.6;">
+            To,<br/>
+            <span class="bold">
+                <apex:outputText value="{!quoteRecord.Account.Name}"/>
+            </span><br/>
+            <apex:outputText value="{!quoteRecord.Account.BillingStreet}"/><br/>
+            <apex:outputText value="{!quoteRecord.Account.BillingCity}"/><br/>
+            <apex:outputText value="{!quoteRecord.Account.BillingState}"/><br/>
+            <apex:outputText value="{!quoteRecord.Account.BillingPostalCode}"/>
+        </div>
+
+        <p class="gap">
+            <span class="bold">Ref: </span>
+             <apex:outputText value="{!quoteRecord.QuoteNumber}" rendered="{!ISBLANK(yourRef)}"/>
+			 <apex:outputText value="{!yourRef}" rendered="{!!ISBLANK(yourRef)}"/>
+        </p>
+
+        <!-- SUBJECT -->
+        <div class="gap">
+            <span class="bold">Sub:</span>
+            Offer for Galvanized Steel Structure and Small Parts Steel of given specification
+            design and drawings for Railway Electrification Works (CORE) of "Utkarsh Brand".
+            Manufacturing, Galvanizing and Supply of
+            <span class="bold">
+                <apex:outputText value="{!subjectLine}"/> Structures.
+            </span>
+        </div>
+
+        <!-- BODY -->
+        <p class="gap" Style="margin-top:12px;">
+            Your for supplying of the product as mentioned in the captioned subject has given
+            us this opportunity to connect and introduce our company and the "Utkarsh" brand
+            and the various range of products of the company. We are obliged to have got this
+            opportunity to submit our offer and/or quotation for manufacturing and supply of
+            the product described in the captioned subject,
+             <span>as against your enquiry dated &#160;<apex:outputText value="{!enquiryDate}"/>.</span>
+        </p>
+        <p Style="margin-top:12px;">
+            We take pride to mention that you have approached one of the leading brands in the
+            country engaged in the manufacturing of the product as described herein and we can
+            assure you that if you decide to accept our offer and place the purchase/supply
+            order in our favour you will always feel proud for having made the right decision
+            by relying upon the best quality product.
+        </p>
+        <p Style="margin-top:12px;">
+            Our offer and/or quotation for the
+            <span class="bold">Galvanized Steel Structure and Small Parts Steel of given
+            specification design and drawing for Railway Electrification Works (CORE) of
+            "Utkarsh"</span> brand as enquired by you is/are more clearly mentioned and
+            recorded in the <span class="bold">Annexure "A"</span> to this quotation.
+            The said Annexure "A" shall for all practical purposes be considered as a part
+            of the present quotation.
+        </p>
+
+        <!-- T&C -->
+        <div class="tnc-title">TERMS &amp; CONDITIONS OF THE CONTRACT:-</div>
+
+        <table class="tnc">
+
+            <tr>
+                <td class="num">1.</td>
+                <td>
+                    <span class="bold">Buyer</span>: Buyer shall mean
+                    <span class="bold">
+                        <apex:outputText value="{!quoteRecord.Account.Name}"/>
+                    </span>
+                    having its office at
+                    <apex:outputText value="{!quoteRecord.Account.BillingStreet}"/>,
+                    <apex:outputText value="{!quoteRecord.Account.BillingCity}"/>,
+                    <apex:outputText value="{!quoteRecord.Account.BillingState}"/>,
+                    <apex:outputText value="{!quoteRecord.Account.BillingPostalCode}"/>.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">2.</td>
+                <td>
+                    <span class="bold">Supplier</span>: Supplier shall mean Utkarsh India
+                    Limited having its office at 95A, Elliot Road, Arrjavv Square, Kolkata, India.
+                </td>
+            </tr>
+
+            <tr><td class="num">3.</td><td><apex:outputText value="{!clause3}" escape="false"/></td></tr>
+
+
+            <tr>
+                <td class="num">4.</td>
+                <td>
+                    <span class="bold">Payment Terms</span>:
+                    <apex:outputText value="{!paymentTerms}"/>
+
+                    <apex:outputPanel rendered="{!isAgainstLC}">
+                        (I) Usance Interest in Buyer's Account:
+                        <apex:outputText value="{!usanceBuyerDays}"/> Days<br/>
+                        (II) Usance Interest in Seller's Account:
+                        <apex:outputText value="{!usanceSellerDays}"/> Days<br/>
+                        (III) % of Usance Interest:
+                        <apex:outputText value="{!usancePct}"/>%
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!isAgainstPDC}">
+                        <br/>PDC Days: <apex:outputText value="{!pdcDays}"/> Days
+                        &nbsp;|&nbsp; Interest: <apex:outputText value="{!pdcInterestPct}"/>%
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!isAgainstOpenCredit}">
+                        <br/>Open Credit: <apex:outputText value="{!openCreditDays}"/> Days
+                        &nbsp;|&nbsp; Interest: <apex:outputText value="{!openCreditInterestPct}"/>%
+                    </apex:outputPanel>
+                    <!-- Optional user note under Point 4; blank = nothing extra prints.
+                         Deepanjan (25th July 2026) -->
+                    <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(paymentTermsNote))}">
+                        <br/><apex:outputText value="{!paymentTermsNote}"/>
+                    </apex:outputPanel>
+                </td>
+            </tr>
+
+            <tr><td class="num">5.</td><td><apex:outputText value="{!clause5}" escape="false"/></td></tr>
+
+
+            <tr>
+                <td class="num">6.</td>
+                <td>
+                    <span class="bold">Packing &amp; Forwarding</span>: The rates quoted for
+                    supply of the materials are inclusive of any packing and forwarding charges.
+                    Packing and forwarding charges if any shall be borne by the Supplier.
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="num">7.</td>
+                <td>
+                    <apex:outputText value="{!clause7PerMtExcluded}"   rendered="{!isLoadingPerMtExcluded}"   escape="false"/>
+                    <apex:outputText value="{!clause7LumpsumExcluded}" rendered="{!isLoadingLumpsumExcluded}" escape="false"/>
+                    <apex:outputText value="{!clause7PerMtIncluded}"   rendered="{!isLoadingPerMtIncluded}"   escape="false"/>
+                    <apex:outputText value="{!clause7LumpsumIncluded}" rendered="{!isLoadingLumpsumIncluded}" escape="false"/>
+                    <apex:outputPanel layout="none" rendered="{!NOT(isLoadingPerMtExcluded ||isLoadingLumpsumExcluded ||isLoadingPerMtIncluded ||isLoadingLumpsumIncluded)}"><b>Loading Charge :</b> N/A.</apex:outputPanel>
+
+                </td>
+            </tr>
+            <tr><td class="num">8.</td><td><apex:outputText value="{!clause8}" escape="false"/></td></tr>
+
+            <tr><td class="num">9.</td><td><apex:outputText value="{!clause9}" escape="false"/></td></tr>
+
+
+            <tr>
+                <td class="num">10.</td>
+                <td>
+                    <span class="bold">Drawing</span>: It shall always be the absolute obligation of the Buyer to provide a proper legible valid drawing with
+                    all dimensions specifications and information of the product in order to facilitate the Supplier to undertake
+                    the manufacturing of the products based on the drawings. Be it noted here that any delay caused due to
+                    insufficient improper illegible and/or inadequate drawings and information provided by the Buyer, the
+                    Supplier will not be made liable for such delays caused owing to insufficient improper illegible and/or
+                    inadequate drawings and designs as provided by the Buyer.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">11.</td>
+                <td>
+                    <span class="bold">Test Certificates</span>: The Supplier will provide at
+                    the request of the Buyer such third party test certificates for the
+                    materials manufactured and supplied subject to the Buyer having made full
+                    payments in favour of the Supplier.
+                </td>
+            </tr>
+
+            <tr><td class="num">12.</td><td><apex:outputText value="{!clause12}" escape="false"/></td></tr>
+
+
+            <tr><td class="num">13.</td><td><apex:outputText value="{!clause13}" escape="false"/></td></tr>
+
+
+            <tr>
+                <td class="num">14.</td>
+                <td>
+                    <span class="bold">Quality</span>: In the event if the results of the
+                    pre-delivery inspection are found to be in conflict with the findings of
+                    the inspection made at the Buyer's destination by any independent inspection
+                    agency, the Buyer shall provide a reasonable and acceptable explanation. If
+                    the Buyer fails to substantiate the claim, the Buyer's claim on quality
+                    related issues shall stand set aside and/or determined.
+                </td>
+            </tr>
+
+            <tr><td class="num">15.</td><td><apex:outputText value="{!clause15}" escape="false"/></td></tr>
+
+
+            <tr><td class="num">16.</td><td><apex:outputText value="{!clause16}" escape="false"/></td></tr>
+
+
+            <tr>
+                <td class="num">17.</td>
+                <td>
+                    <span class="bold">Breach &amp; Default</span>: If the Buyer or the
+                    Supplier fails to comply with the terms and conditions of this agreement
+                    the defaulting party shall become liable to compensate the other party by
+                    way of damages, provided such claim is duly substantiated with proper
+                    evidence.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">18.</td>
+                <td>
+                    <span class="bold">Lifting of Materials</span>: If the Buyer fails to take
+                    delivery of the materials within <span class="underline bold">two/three</span>
+                    daysfrom the date of being notified that the materials are lying ready for taking delivery and/or dIspatch and/or
+                    from the date of inspection recording acceptance of the materials, whichever is earlier, in that event the
+                    Supplier shall become entitled to impose storing charges for holding the materials till the time it is
+                    dIspatched. Such charges shall be imposed at the rate of 5.00% of the total contract value for every weeks
+                    delay caused in taking delivery of the materials.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">19.</td>
+                <td>
+                    <span class="bold">Late Delivery Charges</span>: Unless prevented by force majeure condition the Supplier shall be liable to deliver the
+                    materials within the agreed delivery schedule. However since the Supplier has agreed to supply the materials
+                    at an extremely competitive rates it is being made clear that for the purpose of this contract the Buyer shall
+                    not be entitled to impose any late delivery charges for any delay caused in delivery of the materials.
+                </td>
+            </tr>
+
+            <tr><td class="num">20.</td><td><apex:outputText value="{!clause20}" escape="false"/></td></tr>
+
+            <tr>
+                <td class="num">21.</td>
+                <td>
+                    <span class="bold">Short Supply</span>: The Supplier will take full care to dispatch material in correct quantum. The Buyer should
+                    instruct transporter to acknowledge receipt of goods as per packing list is provided (along with invoice)
+                    before shipment. The Buyer shall be liable to depute its own representative at the factory site of the Supplier
+                    for checking the packing list and counting the materials as per the packing list in order to avoid any issues of
+                    short supply arising after shipment of the materials BE IT NOTED HERE that no subsequent claim for short
+                    supply after shipment of materials will be entertained by the Supplier.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">22.</td>
+                <td>
+                    <span class="bold">Confidentiality</span>: The terms and conditions described in this contract including its existence shall be confidential information and 
+                    shall not be disclosed by any party to any third party without the prior written consent of the other party. Each of the Parties agrees,
+                    (unless otherwise required by law), that it shall not disclose to any other person the fact that the confidential information has been made available to the other party, 
+                    that discussions or negotiations are taking place concerning the said enquiry/tender proceedings between the Parties, or any of the terms, conditions or other facts with 
+                    respect thereto (including the status thereof). 
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="num">23.</td>
+                <td>
+                    <span class="bold">Force Majeure</span>: (a) In this agreement, “force majeure” means any cause preventing Supplier from performing any or all of its obligations which arises from or is 
+                    attributable to acts or events beyond the reasonable control of the party so prevented, including, without limitation, strikes, lock-outs or other industrial disputes (whether involving 
+                    the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or 
+                    default of suppliers or sub-contractors. (b) If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith 
+                    serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no 
+                    liability in respect of the performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is 
+                    necessary for that party, using all reasonable endeavours, to recommence its affected operations in order for it to perform its obligations. (c) If Supplier is prevented from performance of its 
+                    obligations for a continuous period in excess of two months, the Buyer and/or the Supplier may terminate this agreement forthwith on service of written notice on the party so prevented, in which 
+                    case neither party shall have any liability to the other except that rights and liabilities which accrued prior to such termination shall continue to subsist.	 
+
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">24.</td>
+                <td>
+                    <span class="bold">Governing Law, Arbitration and Jurisdiction</span>:
+                    The Courts at Kolkata shall have exclusive jurisdiction over all
+                    unresolved disputes relating to this Agreement. The Parties expressly consent to this jurisdiction and waive,
+                    as well as undertake, that they will not assert any claim, with respect to personal applicability, inconvenience
+                    of forum, venue or any other hardship related to jurisdiction. Should there be any dispute or difference of
+                    opinion regarding this contract, both the parties will make all efforts to amicably settle such disputes. Efforts
+                    at reaching an amicable settlement will be deemed to have failed as soon as one of the contractual parties
+                    informs the other in writing about such a deadlock. If efforts at amicable settlement fail, all disputes arising
+                    out of this contract or its validity will be finally decided in accordance with the provisions of the Arbitration
+                    and Conciliation Act 1996, as amended from time to time. The arbitration proceedings shall be headed by a
+                    sole arbitrator. The decision of the sole arbitrator shall be binding upon the parties. The arbitration
+                    proceedings shall be held at KOLKATA, India and conducted in English language.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="num">25.</td>
+                <td>
+                    <span class="bold">Miscellaneous</span>: The Company would issue various work orders from time to time during the tenure of this
+                    agreement and the present Agreement contains the general terms and conditions of the contract which
+                    would govern and administer the work order issued by the Company from time to time. Any specific terms
+                    and conditions not mentioned in this agreement but mentioned in the work order shall prevail and govern
+                    the contract. Any specific terms and conditions mentioned herein but not mentioned in the work order shall
+                    also continue to prevail and govern the contract. However, in the event of any conflicting interpretation of
+                    any clauses of this Agreement with the work order, the present agreement shall prevail over the work order.
+                </td>
+            </tr>
+            
+            <apex:outputPanel rendered="{!hasPoint26}">
+            <tr>
+                <td class="num">26.</td>
+                <td><span class="bold"><apex:outputText value="{!point26Label}"/>: </span><apex:outputText value="{!point26Text}" escape="false"/></td>
+            </tr>
+            </apex:outputPanel>
+
+        </table>
+
+        <!-- SIGN-OFF — page-break-inside:avoid keeps it on one page -->
+        <div class="signoff">
+            <p>Hopefully you will find our rates, terms &amp; condition competitive and
+            thereby proceed to award the contract in our favour.</p>
+            <br/>
+            <p class="signoff-last">
+                Thanking you,<br/>
+                Yours faithfully,<br/>
+                <span class="bold">For Utkarsh India Limited</span><br/>
+                Authorized Signatory<br/>
+                E-mail: info@utkarshindia.in
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ══════════ PAGE 2 — ANNEXURE A ══════════ -->
+    <div class="document-body-inner page-break">
+
+        <div class="annex-title">ANNEXURE - A</div>
+
+        <table class="annex">
+            <thead>
+                <tr>
+                    <th style="width:5%;">Sl. No.</th>
+                    <th style="width:34%;">
+                        Item Description (Zinc Coating
+                        <apex:outputText value="{!zincCoating}"/> GM/SQM)
+                    </th>
+                    <th style="width:10%;">Item Rate / MT</th>
+                    <apex:outputPanel layout="none" rendered="{!showUsanceColumn}">
+                        <th style="width:9%;">Usance Interest</th>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!showLoadingColumn}">
+                        <th style="width:8%;">Loading Charge</th>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!showFreightColumn}">
+                        <th style="width:8%;">Transportation Charge</th>
+                    </apex:outputPanel>
+                    <th style="width:7%;">GST (%)</th>
+                    <th style="width:10%;">GST Amount / MT</th>
+                    <th style="width:12%;">Unit Rate / MT (incl. GST)</th>
+                    <th style="width:8%;">Quantity (MT)</th>
+                    <th style="width:14%;">Total Amount (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!lineItems}" var="li">
+                <tr>
+                    <td><apex:outputText value="{!li.slNo}"/></td>
+                    <td class="la">
+                        <apex:outputText value="Supply of Fabricated and Galvanized Steel Structure ({!li.itemName})" rendered="{!li.itemType == 'material'}"/>
+                        <apex:outputText value="{!li.itemName}" rendered="{!li.itemType == 'special'}"/>
+                        <apex:outputText value="{!li.itemName}" rendered="{!li.itemType == 'transportation'}"/>
+                    </td>
+                    <td>
+                        <apex:outputText value="{!li.itemRateDisplay}"  rendered="{!showUsanceColumn}"/>
+                        <apex:outputText value="{!li.unitPrice}" rendered="{!NOT(showUsanceColumn)}"/>
+                    </td>
+                    <apex:outputPanel layout="none" rendered="{!showUsanceColumn}">
+                        <td>
+                            <apex:outputText value="{!li.usanceInterest}" rendered="{!li.usanceInterest != null}"/>
+                            <apex:outputText value="-" rendered="{!AND(li.isFlatCharge, li.usanceInterest == null)}"/>
+                        </td>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!showLoadingColumn}">
+                        <td>
+                            <apex:outputText value="-" rendered="{!li.isFlatCharge}"/>
+                            <apex:outputText value="{!li.loadingCharge}" rendered="{!NOT(li.isFlatCharge)}"/>
+                        </td>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!showFreightColumn}">
+                        <td>
+                            <apex:outputText value="-" rendered="{!li.isFlatCharge}"/>
+                            <apex:outputText value="{!li.freightCharge}" rendered="{!NOT(li.isFlatCharge)}"/>
+                        </td>
+                    </apex:outputPanel>
+                    <td><apex:outputText value="{!li.gstPct}"/>%</td>
+                    <td><apex:outputText value="{!li.gstAmount}"/></td>
+                    <td><apex:outputText value="{!li.unitRateInclGST}"/></td>
+                    <td>
+                        <apex:outputText value="-" rendered="{!li.isFlatCharge}"/>
+                        <apex:outputText value="{!li.quantityDisplay}" rendered="{!NOT(li.isFlatCharge)}"/>
+                    </td>
+                    <td><apex:outputText value="{!li.totalInclGSTFmt}"/></td>
+                </tr>
+                </apex:repeat>
+            </tbody>
+            <tfoot>
+                <tr class="total">
+                    <td colspan="{!6 + IF(showUsanceColumn,1,0) + IF(showLoadingColumn,1,0) + IF(showFreightColumn,1,0)}" style="text-align:right;">TOTAL</td>
+                    <td><apex:outputText value="{!totalQuantityDisplay}"/></td>
+                    <td><apex:outputText value="{!grandTotalIncGSTFmt}"/></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <apex:outputPanel layout="none" rendered="{!OR(loadingIncludedNote, freightIncludedNote)}">
+            <div style="border:1px solid #444; background-color:#f5f5f5; padding:6px 10px; margin-top:6px; font-weight:bold;">
+                <apex:outputText value="Loading Charge and Transportation Charges Included" rendered="{!AND(loadingIncludedNote, freightIncludedNote)}"/>
+                <apex:outputText value="Loading Charge Included" rendered="{!AND(loadingIncludedNote, NOT(freightIncludedNote))}"/>
+                <apex:outputText value="Transportation Charges Included" rendered="{!AND(NOT(loadingIncludedNote), freightIncludedNote)}"/>
+            </div>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!isLoadingLumpsumIncluded}">
+            <div style="border:1px solid #444; background-color:#f5f5f5; padding:6px 10px; margin-top:6px;">
+                <b>Included Loading Charge:</b> Rs. <apex:outputText value="{!lumpIncBase}"/>
+                &#160;|&#160; GST @18%: Rs. <apex:outputText value="{!lumpIncGst}"/>
+                &#160;|&#160; <b>With GST: Rs. <apex:outputText value="{!lumpIncTotal}"/></b> (added to Total)
+            </div>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!isFreightLumpsumIncluded}">
+            <div style="border:1px solid #444; background-color:#f5f5f5; padding:6px 10px; margin-top:6px;">
+                <b>Included Transportation Charges:</b> Rs. <apex:outputText value="{!freightLumpIncBase}"/>
+                &#160;|&#160; GST @18%: Rs. <apex:outputText value="{!freightLumpIncGst}"/>
+                &#160;|&#160; <b>With GST: Rs. <apex:outputText value="{!freightLumpIncTotal}"/></b> (added to Total)
+            </div>
+        </apex:outputPanel>
+
+                <div class="total-note">
+            The Total order value is of Rs.
+            <apex:outputText value="{!grandTotalIncGSTFmt}"/> /-
+            ( <apex:outputText value="{!grandTotalWords}"/> )
+            <apex:outputText value="{!totalNoteSuffix}"/>
+        </div>
+
+        <apex:outputPanel layout="none" rendered="{!showMaterialList}">
+            <div style="text-align:center; font-weight:bold; font-size:12px; margin-top:14px;">MATERIAL LIST</div>
+            <table class="annex" style="margin-top:4px;">
+                <thead>
+                    <tr>
+                        <th style="width:8%;">SL NO.</th>
+                        <th style="width:24%;">Description</th>
+                        <th style="width:22%;">Item(R.I NO.)</th>
+                        <th style="width:16%;">WEIGHT / NOS (KG)</th>
+                        <th style="width:14%;">REQUIRED QTY</th>
+                        <th style="width:16%;">TOTAL WEIGHT (MT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!materialListRows}" var="mr">
+                        <tr>
+                            <td style="text-align:center;"><apex:outputText value="{!mr.slNo}"/></td>
+                            <td><apex:outputText value="{!mr.groupName}"/></td>
+                            <td style="text-align:center;"><apex:outputText value="{!mr.riNo}"/></td>
+                            <td style="text-align:right;"><apex:outputText value="{!mr.weightNosKg}"/></td>
+                            <td style="text-align:center;"><apex:outputText value="{!mr.requiredQty}"/></td>
+                            <td style="text-align:right;"><apex:outputText value="{!mr.totalWeightMt}"/></td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+                <tfoot>
+                    <!-- TOTAL WEIGHT box - Deepanjan (25th July 2026) -->
+                    <tr class="total">
+                        <td colspan="5" style="text-align:right; font-weight:bold;">TOTAL WEIGHT (MT)</td>
+                        <td style="text-align:right; font-weight:bold;"><apex:outputText value="{!materialListTotalWeight}"/></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </apex:outputPanel>
+
+    </div>
+
+    <!-- ══════════ LAST PAGE — full bleed cover ══════════ -->
+    <div class="page-cover-last">
+        <apex:image url="{!$Resource.HM_Last_Page}" styleClass="cover-img"/>
+    </div>
+
+</body>
+</html>
+</apex:page>

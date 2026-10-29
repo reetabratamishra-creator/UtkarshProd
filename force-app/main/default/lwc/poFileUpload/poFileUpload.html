@@ -1,0 +1,284 @@
+<template>
+    <div class="po-extractor">
+
+        <!-- Header -->
+        <div class="po-header">
+            <div class="po-header-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M6 2h9l5 5v15H6z"/>
+                    <path d="M15 2v5h5"/>
+                    <path d="M9 13h6M9 16.5h6M9 9.5h3"/>
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="po-title">Purchase Order</h2>
+                <p class="po-subtitle">
+                    Upload PO documents to pull key fields automatically
+                </p>
+            </div>
+        </div>
+
+        <div class="po-body">
+
+            <!-- LEFT PANEL -->
+            <div class="po-panel po-panel-upload">
+
+                <div class="upload-zone">
+
+                    <div class="upload-icon">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 16V4M12 4l-4 4M12 4l4 4"/>
+                            <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/>
+                        </svg>
+                    </div>
+
+                    <p class="upload-label">
+                        Drop PO files here, or
+                    </p>
+
+                    <lightning-file-upload
+                        label=""
+                        name="fileUploader"
+                        accept={acceptedFormats}
+                        record-id={recordId}
+                        multiple
+                        onuploadfinished={handleUploadFinished}>
+                    </lightning-file-upload>
+
+                    <p class="upload-hint">
+                        PDF, JPG or PNG
+                    </p>
+
+                </div>
+
+                <template if:true={hasFiles}>
+
+                    <div class="staged-list">
+
+                        <p class="staged-heading">
+                            {fileCountLabel}
+                        </p>
+
+                        <template for:each={uploadedFiles} for:item="file">
+
+                            <div key={file.documentId} class="staged-row">
+
+                                <svg class="staged-icon"
+                                    viewBox="0 0 24 24"
+                                    width="14"
+                                    height="14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8">
+
+                                    <path d="M6 2h9l5 5v15H6z"/>
+                                    <path d="M15 2v5h5"/>
+
+                                </svg>
+
+                                <span class="staged-name">
+                                    {file.name}
+                                </span>
+
+                                <button
+                                    class="staged-remove"
+                                    data-id={file.documentId}
+                                    onclick={handleRemoveFile}
+                                    title="Remove">
+
+                                    ×
+
+                                </button>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </template>
+
+                <button
+                    class="process-btn"
+                    onclick={handleProcessFiles}
+                    disabled={isProcessDisabled}>
+
+                    <template if:false={isLoading}>
+                        <span>Process Files</span>
+                    </template>
+
+                    <template if:true={isLoading}>
+                        <span class="btn-spinner"></span>
+                        <span>Processing…</span>
+                    </template>
+
+                </button>
+
+                <template if:true={isLoading}>
+
+                    <div class="loading-track">
+
+                        <p class="loading-text">
+                            {loadingMessage}
+                        </p>
+
+                        <div class="loading-bar">
+                            <div class="loading-bar-fill"></div>
+                        </div>
+
+                    </div>
+
+                </template>
+
+            </div>
+
+            <!-- RIGHT PANEL -->
+
+            <div class="po-panel po-panel-results">
+
+                <div class="results-heading-row">
+
+                    <p class="results-heading">
+                        Processed Files
+                    </p>
+
+                    <span class="results-count">
+                        {existingItemsCount}
+                    </span>
+
+                </div>
+
+                <template if:true={isLoadingExisting}>
+
+                    <div class="skeleton-list">
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                        <div class="skeleton-row"></div>
+                    </div>
+
+                </template>
+
+                <template if:false={isLoadingExisting}>
+
+                    <template if:true={hasExistingItems}>
+
+                        <div class="results-list">
+
+                            <template for:each={existingItems} for:item="item">
+
+                                <div key={item.Id} class="result-card">
+
+                                    <div class="result-top">
+
+                                        <!-- Only Name is clickable -->
+
+                                        <a href={item.recordUrl} class="result-name-link">
+                                            <span class="result-name">
+                                                {item.Name}
+                                            </span>
+                                        </a>
+
+                                        <span class={item.badgeClass}>
+                                             {item.displayStatus}
+                                        </span>
+
+                                    </div>
+
+                                    <p class="result-meta">
+
+                                        <template if:true={item.PO_Number__c}>
+                                            <span class="result-po">
+                                                {item.PO_Number__c}
+                                            </span>
+
+                                            <span class="result-dot">
+                                                ·
+                                            </span>
+                                        </template>
+
+                                        <span>
+                                            {item.formattedDate}
+                                        </span>
+
+                                    </p>
+
+                                    <template if:true={item.showManualReview}>
+
+                                        <div class="manual-review-warning">
+
+                                            ⚠ Manual Review Required
+
+                                        </div>
+
+                                        <div class="slds-m-top_small">
+
+                                            <lightning-button
+                                                label="Review Missing Details"
+                                                variant="brand"
+                                                icon-name="utility:edit"
+                                                data-id={item.Id}
+                                                onclick={handleManualReview}>
+                                            </lightning-button>
+
+                                        </div>
+
+                                    </template>
+
+                                </div>
+
+                            </template>
+
+                        </div>
+
+                    </template>
+
+                    <template if:false={hasExistingItems}>
+
+                        <div class="empty-state">
+
+                            <svg viewBox="0 0 24 24"
+                                width="32"
+                                height="32"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.3">
+
+                                <path d="M6 2h9l5 5v15H6z"/>
+                                <path d="M15 2v5h5"/>
+
+                            </svg>
+
+                            <p>
+                                No files processed yet
+                            </p>
+
+                            <p class="empty-sub">
+                                Uploaded POs will appear here once processed
+                            </p>
+
+                        </div>
+
+                    </template>
+
+                </template>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Manual Review Modal -->
+
+    <template if:true={showManualReviewModal}>
+
+        <c-po-manual-review
+            record-id={selectedRecordId}
+            onsuccess={handleReviewSuccess}
+            onclose={handleModalClose}>
+        </c-po-manual-review>
+
+    </template>
+
+</template>

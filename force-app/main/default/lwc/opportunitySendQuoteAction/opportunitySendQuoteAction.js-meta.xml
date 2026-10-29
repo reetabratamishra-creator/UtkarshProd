@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Send Quote to Customer</masterLabel>
+    <description>Sends the quotation_manual_trigger WhatsApp message to the primary contact.</description>
+    <targets>
+        <target>lightning__RecordAction</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordAction">
+            <actionType>Action</actionType>
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property
+                name="recordId"
+                type="String"
+                role="inputOnly"
+                label="Opportunity Id"
+                description="Id of the Opportunity to send the quote WhatsApp message to."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

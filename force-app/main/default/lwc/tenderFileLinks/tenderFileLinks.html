@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Tender Documents" icon-name="standard:file">
+        <div class="slds-p-around_small">
+            <template if:true={hasAnyLink}>
+                <template if:true={zipUrl}>
+                    <lightning-button
+                        variant="brand"
+                        label="Download Zip File"
+                        icon-name="utility:download"
+                        onclick={handleZipClick}
+                        class="slds-m-right_small">
+                    </lightning-button>
+                </template>
+
+                <template if:true={sourceUrl}>
+                    <lightning-button
+                        variant="neutral"
+                        label="Open Source File"
+                        icon-name="utility:preview"
+                        onclick={handleSourceClick}>
+                    </lightning-button>
+                </template>
+            </template>
+
+            <template if:false={hasAnyLink}>
+                <p class="slds-text-color_weak">No file/document link is available for this Tender.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

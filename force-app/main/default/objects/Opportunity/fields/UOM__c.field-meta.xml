@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UOM__c</fullName>
+    <label>UOM</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Metric Ton</fullName>
+                <default>false</default>
+                <label>Metric Ton</label>
+            </value>
+            <value>
+                <fullName>Kgs</fullName>
+                <default>false</default>
+                <label>Kgs</label>
+            </value>
+            <value>
+                <fullName>Pcs</fullName>
+                <default>false</default>
+                <label>Pcs</label>
+            </value>
+            <value>
+                <fullName>Bundle</fullName>
+                <default>false</default>
+                <label>Bundle</label>
+            </value>
+            <value>
+                <fullName>Meter</fullName>
+                <default>false</default>
+                <label>Meter</label>
+            </value>
+            <value>
+                <fullName>Set</fullName>
+                <default>false</default>
+                <label>Set</label>
+            </value>
+            <value>
+                <fullName>Roll</fullName>
+                <default>false</default>
+                <label>Roll</label>
+            </value>
+            <value>
+                <fullName>Alternative Unit</fullName>
+                <default>false</default>
+                <label>Alternative Unit</label>
+            </value>
+            <value>
+                <fullName>KM</fullName>
+                <default>false</default>
+                <label>KM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

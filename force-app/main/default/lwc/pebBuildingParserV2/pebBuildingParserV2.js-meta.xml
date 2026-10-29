@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>PEB Building Parser V2</masterLabel>
+    <description>Grid-based Building Description reader - wraps pebBuildingParser and replaces only docSections</description>
+</LightningComponentBundle>

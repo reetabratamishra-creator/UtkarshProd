@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Segment Above 5</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Weight_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Segment Above 5</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg5_mast_type&quot;,
+      &quot;label&quot;: &quot;Type of Mast - Segment Above 5&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Lighting Mast&quot;,
+        &quot;Stadium Mast&quot;,
+        &quot;Flag Mast&quot;,
+        &quot;LCLM&quot;
+      ],
+      &quot;controllingField&quot;: &quot;type_of_mast&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Segment Above 5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;seg5_folder&quot;,
+      &quot;labelFormat&quot;: &quot;Weight Estimator - {value}&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;seg5_mast_type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Lighting Mast&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - LIGHTING MAST (SEGMENT ABOVE 5)&quot;,
+          &quot;dynamicSegments&quot;: true,
+          &quot;mastType&quot;: &quot;Lighting Mast&quot;
+        },
+        &quot;Stadium Mast&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - STADIUM MAST&quot;,
+          &quot;dynamicSegments&quot;: true,
+          &quot;mastType&quot;: &quot;Stadium Mast&quot;
+        },
+        &quot;Flag Mast&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - FLAG MAST&quot;,
+          &quot;dynamicSegments&quot;: true,
+          &quot;mastType&quot;: &quot;Flag Mast&quot;
+        },
+        &quot;LCLM&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - LCLM&quot;,
+          &quot;dynamicSegments&quot;: true,
+          &quot;mastType&quot;: &quot;LCLM&quot;
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,105 @@
+<template>
+    <lightning-card title="Tender Actions" icon-name="standard:record">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Tender User Choice -->
+            <template if:true={tenderUserChoice}>
+                <div class="slds-box slds-theme_default slds-m-bottom_large">
+                    <span class="slds-text-title_bold">Tender User Choice:</span>
+                    <span class="slds-m-left_small">{tenderUserChoice}</span>
+                </div>
+            </template>
+
+            <!--<template for:each={hodCommentList} for:item="c">
+                <li key={c.key} class="slds-p-vertical_xx-small">{c.text}</li>
+            </template>-->
+            <h1>Tender User Comments:</h1>
+            <template for:each={tenderUserCommentList} for:item="c">
+                <li key={c.key} class="slds-p-vertical_xx-small">{c.text}</li>
+            </template>
+
+            <template if:true={showAccountDetails}>
+                <div class="slds-box slds-m-bottom_medium">
+                    <span class="slds-text-title_bold">Account Details</span>
+                    <p>Name: {accountDetails.Name}</p>
+                    <p>Phone: {accountDetails.Phone}</p>
+                </div>
+
+            <template if:true={addressBookData.length}>
+                <div class="slds-m-bottom_medium">
+                    <span class="slds-text-title_bold">Address Book</span>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={addressBookData}
+                        columns={addressBookColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+            </template>
+
+            <!-- Dynamic Buttons -->
+            <div class="slds-grid slds-wrap slds-gutters_small slds-grid_align-center slds-m-bottom_large">
+
+                <template for:each={displayedButtons} for:item="btn">
+
+                    <div key={btn.value} class="slds-m-bottom_small">
+
+                        <lightning-button
+                            label={btn.label}
+                            data-value={btn.value}
+                            variant={btn.variant}
+                            onclick={handleButtonClick}>
+                        </lightning-button>
+
+                    </div>
+
+                </template>
+
+            </div>
+             <div class="slds-m-bottom_medium">
+
+                    <lightning-textarea
+                        label="Notes"
+                        value={rejectReason}
+                        onchange={handleReason}
+                        required>
+                    </lightning-textarea>
+
+                </div>
+            <!-- Notes -->
+            <template if:true={showDetails}>
+                
+
+                <template if:true={showProjectOwner}>
+
+                    <div class="slds-m-bottom_medium">
+
+                        <lightning-combobox
+                            label="Select Owner"
+                            value={selectedProjectOwner}
+                            options={projectOwnerOptions}
+                            onchange={handleProjectOwner}>
+                        </lightning-combobox>
+
+                    </div>
+
+                </template>
+            </template>
+
+            
+        </div>
+     <div class="slds-text-align_right">
+
+    <lightning-button
+        variant="brand"
+        label="Submit"
+        onclick={handleSubmit}
+        disabled={isSubmitDisabled}>
+    </lightning-button>
+
+        </div>
+    </lightning-card>
+
+</template>

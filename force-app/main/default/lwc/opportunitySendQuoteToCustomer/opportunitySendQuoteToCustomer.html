@@ -1,0 +1,12 @@
+<template>
+    <template if:true={showButton}>
+        <div class="slds-p-horizontal_medium slds-p-bottom_x-small">
+            <lightning-button
+                label="Send Quote to Customer"
+                variant="brand"
+                onclick={handleSend}
+                disabled={isSending}
+            ></lightning-button>
+        </div>
+    </template>
+</template>

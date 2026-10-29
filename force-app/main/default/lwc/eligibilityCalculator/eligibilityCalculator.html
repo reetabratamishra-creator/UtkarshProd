@@ -1,0 +1,171 @@
+<template>
+    <lightning-card title="My Travel Expense Eligibility" icon-name="standard:calibration">
+        <!-- Loading State -->
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium slds-text-align_center">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Eligibility Information -->
+        <template if:true={hasEligibility}>
+            <div class="slds-p-around_medium">
+                <!-- Employee Level and Designation -->
+                <div class="slds-grid slds-gutters slds-wrap slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="slds-box slds-theme_shade">
+                            <div class="slds-text-title slds-text-color_weak">Level & Grade</div>
+                            <div class="slds-text-heading_medium">{levelInfo}</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="slds-box slds-theme_shade">
+                            <div class="slds-text-title slds-text-color_weak">Designation</div>
+                            <div class="slds-text-heading_medium">{designationInfo}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lodging Limits -->
+                <div class="slds-section slds-is-open slds-m-bottom_medium">
+                    <h3 class="slds-section__title slds-text-heading_small slds-m-bottom_small">
+                        <lightning-icon icon-name="utility:home" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        Lodging (Per Day)
+                    </h3>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-box">
+                                <div class="slds-text-body_small slds-text-color_weak">Tier 1 Cities</div>
+                                <lightning-formatted-number
+                                    value={lodgingTier1}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    minimum-fraction-digits="0"
+                                    class="slds-text-heading_large slds-text-color_success">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-box">
+                                <div class="slds-text-body_small slds-text-color_weak">Tier 2 Cities</div>
+                                <lightning-formatted-number
+                                    value={lodgingTier2}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    minimum-fraction-digits="0"
+                                    class="slds-text-heading_large slds-text-color_success">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fooding Limits -->
+                <div class="slds-section slds-is-open slds-m-bottom_medium">
+                    <h3 class="slds-section__title slds-text-heading_small slds-m-bottom_small">
+                        <lightning-icon icon-name="utility:food_and_drink" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        Fooding (Per Day)
+                    </h3>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-box">
+                                <div class="slds-text-body_small slds-text-color_weak">Tier 1 Cities</div>
+                                <lightning-formatted-number
+                                    value={foodingTier1}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    minimum-fraction-digits="0"
+                                    class="slds-text-heading_large slds-text-color_success">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-box">
+                                <div class="slds-text-body_small slds-text-color_weak">Tier 2 Cities</div>
+                                <lightning-formatted-number
+                                    value={foodingTier2}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    minimum-fraction-digits="0"
+                                    class="slds-text-heading_large slds-text-color_success">
+                                </lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Air Travel -->
+                <div class="slds-section slds-is-open slds-m-bottom_medium">
+                    <h3 class="slds-section__title slds-text-heading_small slds-m-bottom_small">
+                        <lightning-icon icon-name="utility:airplane" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        Air Travel
+                    </h3>
+                    <div class="slds-box">
+                        <div class="slds-text-body_small slds-text-color_weak">Eligible Class</div>
+                        <div class={airClass}>
+                            <span class="slds-text-heading_medium">{airEligibility}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Train Travel -->
+                <div class="slds-section slds-is-open slds-m-bottom_medium">
+                    <h3 class="slds-section__title slds-text-heading_small slds-m-bottom_small">
+                        <lightning-icon icon-name="utility:travel_and_places" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        Train Travel
+                    </h3>
+                    <div class="slds-box">
+                        <div class="slds-text-body_small slds-text-color_weak">Eligible Classes</div>
+                        <div class="slds-text-heading_medium">{trainEligibility}</div>
+                    </div>
+                </div>
+
+                <!-- Own Vehicle -->
+                <template if:true={hasOwnVehicle}>
+                    <div class="slds-section slds-is-open slds-m-bottom_medium">
+                        <h3 class="slds-section__title slds-text-heading_small slds-m-bottom_small">
+                            <lightning-icon icon-name="utility:transport_walking" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                            Own Vehicle
+                        </h3>
+                        <div class="slds-box">
+                            <div class="slds-text-body_small slds-text-color_weak">Rate per KM</div>
+                            <lightning-formatted-number
+                                value={ownVehicleRate}
+                                format-style="currency"
+                                currency-code="INR"
+                                minimum-fraction-digits="2"
+                                class="slds-text-heading_large slds-text-color_success">
+                            </lightning-formatted-number>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Important Notes -->
+                <div class="slds-box slds-theme_warning slds-m-top_medium">
+                    <h4 class="slds-text-heading_small slds-m-bottom_x-small">
+                        <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        Important Notes
+                    </h4>
+                    <ul class="slds-list_dotted slds-text-body_small">
+                        <li>Tier 1 Cities: Delhi, Kolkata, Mumbai, Chennai, Bengaluru, Hyderabad, Ahmedabad, Guwahati, Pune, Chandigarh</li>
+                        <li>All other cities are Tier 2</li>
+                        <li>Expense reports must be submitted within 10 days of trip completion</li>
+                        <li>All food expenses must be supported by bills</li>
+                        <li>Maximum 50% of entitled allowance can be claimed without bills for food</li>
+                        <li>Flights and trains must be booked through UIL empaneled travel agency only</li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+        <!-- Error State -->
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>Unable to load your eligibility information. Please contact your administrator.</h2>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

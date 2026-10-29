@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Department_Mode__c</fullName>
+    <description>ANY_PRODUCT = all product departments except Enquiry; ENQUIRY_ONLY = Enquiry only; SPECIFIC = exact Department_Value__c; LIST = comma-separated Department_Value__c</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Department Mode</label>
+    <length>50</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

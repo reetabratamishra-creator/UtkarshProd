@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Nurture not responding dept</label>
+    <protected>false</protected>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Journey_Name__c</field>
+        <value xsi:type="xsd:string">Nurture_not_responding_dept</value>
+    </values>
+    <values>
+        <field>Payload_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;journeyname&quot;:&quot;Nurture_not_responding_dept&quot;,&quot;journeypayload&quot;:{&quot;nodes&quot;:{&quot;1&quot;:{&quot;templateType&quot;:&quot;WHATSAPP&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;poly_nur_nt_resp_cont&quot;}},&quot;2&quot;:{&quot;templateType&quot;:&quot;RCSMESSAGE&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;poly_Nur_nt_resp_con&quot;,&quot;headerData&quot;:{},&quot;bodyData&quot;:{&quot;{{1}}&quot;:&quot;Opportunity_owner_name&quot;,&quot;{{2}}&quot;:&quot;Opportunity_owner_number&quot;,&quot;{{3}}&quot;:&quot;Opportunity_owner_email&quot;},&quot;footerData&quot;:{},&quot;cardData&quot;:[]}},&quot;3&quot;:{&quot;templateType&quot;:&quot;SMS&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;Nurture_not_responding_cont&quot;,&quot;variableMappings&quot;:{&quot;1&quot;:&quot;Lead.Owner.Phone&quot;}}}}}}</value>
+    </values>
+    <values>
+        <field>Sort_Order__c</field>
+        <value xsi:type="xsd:double">103.0</value>
+    </values>
+</CustomMetadata>

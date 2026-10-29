@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Price Variation</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Price_Basis_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">Price_Basis_Price_Variation</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Price Variation</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;Price_Variation&quot;,
+      &quot;label&quot;: &quot;Price Variation&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;Price_Basis&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Price Variation&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Price Variation&quot;: {
+          &quot;title&quot;: &quot;Price Variation&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;number_of_materials_section&quot;,
+              &quot;label&quot;: &quot;Number of Materials&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;h_number_of_materials&quot;,
+                  &quot;label&quot;: &quot;Number of Materials&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;number_of_materials&quot;,
+                  &quot;label&quot;: &quot;How many material types? (1–10)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 10,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;material_list_details&quot;,
+              &quot;label&quot;: &quot;Material List Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;number_of_materials&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;pv_material_list&quot;
+            },
+            {
+              &quot;id&quot;: &quot;pv_base_month&quot;,
+              &quot;label&quot;: &quot;PV Base Month&quot;,
+              &quot;expanded&quot;: false,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;h_price_variable_month&quot;,
+                  &quot;label&quot;: &quot;Price Variable (Month)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;price_variable_month&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;unit&quot;: &quot;Base Month&quot;,
+                  &quot;options&quot;: [
+                    &quot;January&quot;,
+                    &quot;February&quot;,
+                    &quot;March&quot;,
+                    &quot;April&quot;,
+                    &quot;May&quot;,
+                    &quot;June&quot;,
+                    &quot;July&quot;,
+                    &quot;August&quot;,
+                    &quot;September&quot;,
+                    &quot;October&quot;,
+                    &quot;November&quot;,
+                    &quot;December&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_price_variable_year&quot;,
+                  &quot;label&quot;: &quot;Price Variable (Year)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;price_variable_year&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;unit&quot;: &quot;Year&quot;,
+                  &quot;options&quot;: [
+                    &quot;2016&quot;,
+                    &quot;2017&quot;,
+                    &quot;2018&quot;,
+                    &quot;2019&quot;,
+                    &quot;2020&quot;,
+                    &quot;2021&quot;,
+                    &quot;2022&quot;,
+                    &quot;2023&quot;,
+                    &quot;2024&quot;,
+                    &quot;2025&quot;,
+                    &quot;2026&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_billets&quot;,
+                  &quot;label&quot;: &quot;Billets&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;billets_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_zinc_rate&quot;,
+                  &quot;label&quot;: &quot;Zinc&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;zinc_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_cpi&quot;,
+                  &quot;label&quot;: &quot;CPI&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;cpi_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;price_variable_month&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;Zinc Coating&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;zinc_coating&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;unit&quot;: &quot;(GSM)&quot;,
+                  &quot;options&quot;: [
+                    &quot;610&quot;,
+                    &quot;1000&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_discount&quot;,
+                  &quot;label&quot;: &quot;Discount&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6,
+				  &quot;isDiscount&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;discount&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+				  &quot;isDiscount&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;number_of_materials_special_section&quot;,
+              &quot;label&quot;: &quot;Number of Special Materials&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;h_number_of_materials&quot;,
+                  &quot;label&quot;: &quot;Number of Special Materials&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;number_of_special_materials&quot;,
+                  &quot;label&quot;: &quot;How many material types? (1–10)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 10,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;Special Section&quot;,
+              &quot;label&quot;: &quot; Special Section&quot;,
+              &quot;controllingField&quot;: &quot;number_of_special_materials&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;SpecialSection&quot;
+            },
+            {
+              &quot;id&quot;: &quot;material_price_summary&quot;,
+              &quot;label&quot;: &quot;Material Price Summary&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;number_of_materials&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;pv_material_price_summary&quot;
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,12 @@
+.related-list-header {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #032d60;
+    margin: 0 0 8px 4px;
+    line-height: 1.5;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+}

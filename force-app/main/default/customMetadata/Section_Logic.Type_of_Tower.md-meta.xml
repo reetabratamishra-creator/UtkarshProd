@@ -1,0 +1,3134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Type of Tower</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Telecom_Tower_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">Telecom_Tubular_Json</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Domestic</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;type_of_tower&quot;,
+      &quot;label&quot;: &quot;Type of Tower&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Angular&quot;,
+        &quot;Tubular&quot;,
+        &quot;Tubular Signalling&quot;
+      ],
+      &quot;controllingField&quot;: &quot;Sales_Region_Telecom_Tower&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_standard_folder&quot;,
+      &quot;labelFormat&quot;: &quot;Telecom Tower Part Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;type_of_tower&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TELECOM TOWER PART DETAILS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;ang_part_a_rmc&quot;,
+              &quot;label&quot;: &quot;Part A - Raw Material Cost&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;type_of_tower&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Angular&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_rmc&quot;,
+                  &quot;label&quot;: &quot;RAW MATERAL COST&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 55000,
+                  &quot;formula&quot;: &quot;&quot;,
+                  &quot;readOnly&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_part_a_bom_material&quot;,
+              &quot;label&quot;: &quot;PART A - BOM Materials&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;type_of_tower&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Tubular&quot;,
+                &quot;Tubular Signalling&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_material&quot;,
+                  &quot;label&quot;: &quot;MATERIAL LIST&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_material_list&quot;,
+                  &quot;label&quot;: &quot;List&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;BOM Availabel&quot;,
+                    &quot;BOM Not Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_without_bom&quot;,
+                  &quot;label&quot;: &quot;WITHOUT BOM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Not Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_without_bom_value1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Not Availabel&quot;
+                  ],
+                  &quot;defaultValue&quot;: 61000,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_wt_space1&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_wt_space2&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_tower_weight&quot;,
+                  &quot;label&quot;: &quot;Tower Weight(Kg)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_wt_space3&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_wt_space4&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_structure&quot;,
+                  &quot;label&quot;: &quot;STRUCTURE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_composition&quot;,
+                  &quot;label&quot;: &quot;PROPORTIONATE COMPOSITION (%)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_weight&quot;,
+                  &quot;label&quot;: &quot;WT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_rate&quot;,
+                  &quot;label&quot;: &quot;RATE/KG&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_total&quot;,
+                  &quot;label&quot;: &quot;TOTAL&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_pipe&quot;,
+                  &quot;label&quot;: &quot;PIPE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_pipe_com&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_pipe_wt&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;33.666&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;formula&quot;: &quot;Number(tub_tower_weight||0) * (Number(tub_pipe_com||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_pipe_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;61&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_pipe_total&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: &quot;4&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;formula&quot;: &quot;tub_tower_weight == &apos;&apos; ? &apos;&apos; : Math.round(Number(tub_pipe_rate||0) * Number(tub_pipe_wt||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_plate&quot;,
+                  &quot;label&quot;: &quot;PLATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_plate_com&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_plate_wt&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1341.203&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;formula&quot;: &quot;Number(tub_tower_weight||0) * (Number(tub_plate_com||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_plate_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;57&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_plate_total&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;tub_tower_weight == &apos;&apos; ? &apos;&apos; : Math.round(Number(tub_plate_rate||0) * Number(tub_plate_wt||0))&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_ang_chan&quot;,
+                  &quot;label&quot;: &quot;ANGLES AND CHANNELS&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_ang_chan_com&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_ang_chan_wt&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;313.47&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;formula&quot;: &quot;Number(tub_tower_weight||0) * (Number(tub_ang_chan_com||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_ang_chan_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;55&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_ang_chan_total&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;tub_tower_weight == &apos;&apos; ? &apos;&apos; : Math.round(Number(tub_ang_chan_rate||0) * Number(tub_ang_chan_wt||0))&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_misc_chan&quot;,
+                  &quot;label&quot;: &quot;MISCELLANEOUS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_misc_com&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_misc_chan_wt&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;313.47&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;formula&quot;: &quot;Number(tub_tower_weight||0) * (Number(tub_misc_com||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_misc_chan_rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;130&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_misc_total&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;tub_tower_weight == &apos;&apos; ? &apos;&apos; : Math.round(Number(tub_misc_chan_rate||0) * Number(tub_misc_chan_wt||0))&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space1&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space2&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space3&quot;,
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_total_rm_cost&quot;,
+                  &quot;label&quot;: &quot;TOTAL RM COST&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_total_rm_cost_value&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_misc_total||0)+ Number(tub_ang_chan_total||0)+Number(tub_plate_total||0)+Number(tub_pipe_total||0)&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space4&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space5&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_st_space6&quot;,
+                  &quot;colSpan&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_rate_kg&quot;,
+                  &quot;label&quot;: &quot;RATE/KG&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;2&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_rate_kg_value&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_total_rm_cost_value||0)/Number(tub_tower_weight||0)&quot;,
+                  &quot;controllingField&quot;: &quot;tub_material_list&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;BOM Availabel&quot;
+                  ],
+                  &quot;colSpan&quot;: &quot;4&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ang_part_b_zinc&quot;,
+              &quot;label&quot;: &quot;Part B - Zinc&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_zinc_value&quot;,
+                  &quot;label&quot;: &quot;ZINC VALUE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 375000,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_zinc_conversion_percent&quot;,
+                  &quot;label&quot;: &quot;ZINC CONVERSION (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: 6,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_zinc_value&quot;,
+                  &quot;label&quot;: &quot;TOTAL ZINC VALUE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Math.round(((((ang_gsm_610 || ang_gsm_900 || ang_gsm_1000) ? ((Number(ang_zinc_value || 0) * Number(ang_zinc_conversion_percent || 0)) / 100) : 0) + (ang_gsm_1000 ? 6000 : 0) + (ang_gsm_900 ? 5000 : 0)) * 100)) / 100&quot;,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_zinc_value_addition_amount&quot;,
+                  &quot;label&quot;: &quot;Add on Amount in Zinc value&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(ang_gsm_610 ? 0 : 0) + (ang_gsm_900 ? 5000 : 0) + (ang_gsm_1000 ? 6000 : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_gsm_610&quot;,
+                  &quot;label&quot;: &quot;610 GSM&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;defaultValue&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_gsm_900&quot;,
+                  &quot;label&quot;: &quot;900 GSM&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_gsm_1000&quot;,
+                  &quot;label&quot;: &quot;1000 GSM&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ang_part_c_conversion&quot;,
+              &quot;label&quot;: &quot;Part C - Conversion&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_fabrication&quot;,
+                  &quot;label&quot;: &quot;Fabrication&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_fabrication_cost&quot;,
+                  &quot;label&quot;: &quot;Fabrication-Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 8000,
+                  &quot;controllingField&quot;: &quot;ang_fabrication&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_labour&quot;,
+                  &quot;label&quot;: &quot;Labour&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_labour_cost&quot;,
+                  &quot;label&quot;: &quot;Labour-Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 2000,
+                  &quot;formula&quot;: &quot;&quot;,
+                  &quot;controllingField&quot;: &quot;ang_labour&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ang_part_d_margin&quot;,
+              &quot;label&quot;: &quot;Part D - Margin&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_margin_checkbox&quot;,
+                  &quot;label&quot;: &quot;Margin % for BOM ?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_margin&quot;,
+                  &quot;label&quot;: &quot;MARGIN (% BOM)&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 5,
+                  &quot;isMargin&quot;: true,
+                  &quot;controllingField&quot;: &quot;ang_margin_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_margin_awt_checkbox&quot;,
+                  &quot;label&quot;: &quot;Margin % for Actual?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_margin_awt&quot;,
+                  &quot;label&quot;: &quot;Margin (% Actual)&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 10,
+                  &quot;isMargin&quot;: true,
+                  &quot;controllingField&quot;: &quot;ang_margin_awt_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ang_part_payment_terms&quot;,
+              &quot;label&quot;: &quot;Payment Terms Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_select_payment_terms&quot;,
+                  &quot;label&quot;: &quot;Select Payment Terms&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_bank_int_rate&quot;,
+                  &quot;label&quot;: &quot;Prevailing rate of Bank Interest &quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;controllingField&quot;: &quot;ang_select_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;required&quot;: true,
+                  &quot;formula&quot;: &quot;ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; ? (Number(ang_payment_terms_days||0)&lt;=90 ? Number(against_LC_percent||0) : 8.5) : ang_select_payment_terms==&apos;Against VFS&apos; ? Number(against_VFS_percent||0) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_payment_terms_days&quot;,
+                  &quot;label&quot;: &quot;No Of Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;ang_select_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_ex_works_price&quot;,
+              &quot;label&quot;: &quot;Ex-works Price (Margin as BOM)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;required&quot;: true,
+              &quot;cloneFrom&quot;: &quot;tubularSignallingEval&quot;,
+              &quot;controllingField&quot;: &quot;ang_margin_checkbox&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_ex_works_price_awt&quot;,
+              &quot;label&quot;: &quot;Ex-works Price (Margin as Actual Weight)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;required&quot;: true,
+              &quot;cloneFrom&quot;: &quot;tubularSignallingEvalAWT&quot;,
+              &quot;controllingField&quot;: &quot;ang_margin_awt_checkbox&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod1_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details1} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line1_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up1_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate1_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq1_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod1_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details1} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line1_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up1_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate1_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq1_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod1_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details1} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line1_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up1_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate1_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq1_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod2_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details2} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line2_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up2_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate2_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq2_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod2_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details2} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line2_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up2_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate2_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq2_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod2_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details2} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line2_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up2_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate2_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq2_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod3_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details3} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line3_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up3_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate3_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq3_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod3_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details3} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line3_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up3_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate3_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq3_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod3_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details3} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line3_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up3_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate3_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq3_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod4_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details4} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line4_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up4_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate4_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq4_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod4_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details4} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line4_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up4_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate4_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq4_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod4_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details4} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line4_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up4_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate4_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq4_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod5_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details5} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line5_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up5_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate5_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq5_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod5_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details5} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line5_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up5_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate5_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq5_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod5_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details5} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line5_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up5_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate5_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq5_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod6_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details6} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line6_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up6_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate6_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq6_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod6_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details6} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line6_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up6_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate6_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq6_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod6_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details6} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line6_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up6_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate6_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq6_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod7_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details7} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line7_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up7_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate7_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq7_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod7_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details7} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line7_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up7_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate7_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq7_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod7_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details7} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line7_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up7_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate7_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq7_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod8_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details8} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line8_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up8_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate8_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq8_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod8_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details8} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line8_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up8_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate8_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq8_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod8_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details8} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line8_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up8_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate8_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq8_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod9_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details9} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line9_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up9_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate9_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq9_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod9_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details9} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line9_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up9_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate9_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq9_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod9_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details9} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line9_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up9_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate9_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq9_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod10_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details10} - 610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line10_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up10_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate10_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq10_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod10_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details10} - 900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line10_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up10_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate10_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq10_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_prod10_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_product_details10} - 1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_line10_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_up10_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_basic_rate10_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_uq10_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod1_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details1} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line1_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up1_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate1_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq1_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod1_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details1} - 900 GSM (AWT) &quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line1_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up1_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate1_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq1_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod1_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details1} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line1_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up1_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate1_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq1_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity1)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod2_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details2} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line2_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up2_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate2_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq2_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod2_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details2} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line2_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up2_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate2_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq2_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod2_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details2} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line2_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up2_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate2_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq2_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity2)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod3_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details3} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line3_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up3_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate3_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq3_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod3_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details3} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line3_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up3_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate3_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq3_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod3_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details3} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line3_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up3_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate3_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq3_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity3)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod4_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details4} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line4_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up4_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate4_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq4_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod4_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details4} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line4_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up4_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate4_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq4_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod4_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details4} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line4_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up4_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate4_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq4_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity4)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod5_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details5} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line5_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up5_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate5_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq5_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod5_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details5} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line5_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up5_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate5_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq5_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod5_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details5} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line5_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up5_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate5_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq5_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity5)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod6_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details6} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line6_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up6_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate6_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq6_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod6_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details6} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line6_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up6_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate6_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq6_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod6_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details6} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line6_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up6_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate6_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq6_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity6)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod7_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details7} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line7_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up7_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate7_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq7_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod7_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details7} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line7_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up7_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate7_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq7_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod7_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details7} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line7_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up7_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate7_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq7_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity7)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod8_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details8} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line8_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up8_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate8_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq8_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod8_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details8} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line8_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up8_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate8_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq8_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod8_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details8} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line8_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up8_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate8_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq8_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity8)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod9_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details9} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line9_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up9_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate9_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq9_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod9_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details9} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line9_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up9_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate9_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq9_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod9_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details9} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line9_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up9_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate9_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq9_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity9)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod10_610&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details10} - 610 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line10_610_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up10_610&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate10_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq10_610&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod10_900&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details10} - 900 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line10_900_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up10_900&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate10_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq10_900&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tub_awt_prod10_1000&quot;,
+              &quot;labelFormat&quot;: &quot;{type_of_tower} - {tub_awt_product_details10} - 1000 GSM (AWT)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;tub_awt_line10_1000_f&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_up10_1000&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_awt_basic_rate10_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_uq10_1000&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_quantity10)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ang_internal_formulas&quot;,
+              &quot;label&quot;: &quot;Internal Formula Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ang_u19&quot;,
+                  &quot;label&quot;: &quot;Cell U19&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(type_of_tower == &apos;Angular&apos; ? (ang_rmc||0) : type_of_tower == &apos;Tubular&apos; ? ang_bom_type : type_of_tower == &apos;Tubular Signalling&apos;? ang_bom_type : 0)&quot;,
+                  &quot;defaultValue&quot;: 0
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_l21&quot;,
+                  &quot;label&quot;: &quot;Cell L21&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(ang_labour ? Number(ang_labour_cost||0) : 0) + (ang_fabrication ? Number(ang_fabrication_cost||0) : 0)&quot;,
+                  &quot;defaultValue&quot;: 0
+                },
+                {
+                  &quot;apiName&quot;: &quot;ang_bom_type&quot;,
+                  &quot;label&quot;: &quot;BOM Type Check&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;tub_material_list == &apos;BOM Availabel&apos; || tub_material_list == &apos;BOM Not Availabel&apos; ? Number(tub_without_bom_value1||0) : 0&quot;,
+                  &quot;defaultValue&quot;: 0
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_LC_percent&quot;,
+                  &quot;label&quot;: &quot;Against LC Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 8
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_VFS_percent&quot;,
+                  &quot;label&quot;: &quot;Against VFS Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 7.9
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u20_610&quot;,
+                  &quot;label&quot;: &quot;Cell U20 - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_zinc_value_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u20_900&quot;,
+                  &quot;label&quot;: &quot;Cell U20 - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_zinc_value_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u20_1000&quot;,
+                  &quot;label&quot;: &quot;Cell U20 - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_zinc_value_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_610&quot;,
+                  &quot;label&quot;: &quot;Cell U23 - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_610||0)+Number(ang_l21||0))*(Number(ang_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_900&quot;,
+                  &quot;label&quot;: &quot;Cell U23 - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_900||0)+Number(ang_l21||0))*(Number(ang_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_1000&quot;,
+                  &quot;label&quot;: &quot;Cell U23 - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_1000||0)+Number(ang_l21||0))*(Number(ang_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_610&quot;,
+                  &quot;label&quot;: &quot;Cell X30 - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_610) * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_610) + Number(ang_l21||0) + Number(tub_u23_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_900&quot;,
+                  &quot;label&quot;: &quot;Cell X30 - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_900) * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_900) + Number(ang_l21||0) + Number(tub_u23_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_1000&quot;,
+                  &quot;label&quot;: &quot;Cell X30 - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_1000) * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_1000) + Number(ang_l21||0) + Number(tub_u23_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_610&quot;,
+                  &quot;label&quot;: &quot;Cell W23 - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_610) + (Number(ang_u19||0) + Number(tub_u20_610||0)+ Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_900&quot;,
+                  &quot;label&quot;: &quot;Cell W23 - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_900) + (Number(ang_u19||0) + Number(tub_u20_900||0) + Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_1000&quot;,
+                  &quot;label&quot;: &quot;Cell W23 - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_1000) + (Number(ang_u19||0) + Number(tub_u20_1000||0)+ Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_awt_610&quot;,
+                  &quot;label&quot;: &quot;Cell U23 (AWT) - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_610||0)+Number(ang_l21||0))*(Number(ang_margin_awt)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_awt_900&quot;,
+                  &quot;label&quot;: &quot;Cell U23 (AWT) - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_900||0)+Number(ang_l21||0))*(Number(ang_margin_awt)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_u23_awt_1000&quot;,
+                  &quot;label&quot;: &quot;Cell U23 (AWT) - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Number(ang_u19||0)+Number(tub_u20_1000||0)+Number(ang_l21||0))*(Number(ang_margin_awt)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_awt_610&quot;,
+                  &quot;label&quot;: &quot;Cell X30 (AWT) - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_610) * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_610) + Number(ang_l21||0) + Number(tub_u23_awt_610||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_awt_900&quot;,
+                  &quot;label&quot;: &quot;Cell X30 (AWT) - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_900) *(ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_900) + Number(ang_l21||0) + Number(tub_u23_awt_900||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_x30_awt_1000&quot;,
+                  &quot;label&quot;: &quot;Cell X30 (AWT) - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(Number((ang_u19 + tub_u20_1000) * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_bank_int_rate||0) : 0)/100 * (ang_select_payment_terms==&apos;Against LC Before Dispatch&apos; || ang_select_payment_terms==&apos;Against VFS&apos; ? (ang_payment_terms_days||0) : 0))/365) + (ang_u19 + tub_u20_1000) + Number(ang_l21||0) + Number(tub_u23_awt_1000||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_awt_610&quot;,
+                  &quot;label&quot;: &quot;Cell W23 (AWT) - GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_awt_610) + (Number(ang_u19||0) + Number(tub_u20_610||0)+ Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_awt_900&quot;,
+                  &quot;label&quot;: &quot;Cell W23 (AWT) - GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_awt_900) + (Number(ang_u19||0) + Number(tub_u20_900||0) + Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_w23_awt_1000&quot;,
+                  &quot;label&quot;: &quot;Cell W23 (AWT) - GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(tub_u23_awt_1000) + (Number(ang_u19||0) + Number(tub_u20_1000||0)+ Number(ang_l21||0))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line1_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 1 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details1 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line1_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 1 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details1 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line1_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 1 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details1 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line2_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 2 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details2 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line2_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 2 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details2 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line2_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 2 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details2 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line3_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 3 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details3 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line3_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 3 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details3 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line3_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 3 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details3 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line4_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 4 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details4 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line4_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 4 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details4 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line4_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 4 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details4 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line5_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 5 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details5 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line5_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 5 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details5 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line5_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 5 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details5 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line6_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 6 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details6 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line6_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 6 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details6 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line6_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 6 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details6 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line7_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 7 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details7 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line7_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 7 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details7 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line7_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 7 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details7 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line8_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 8 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details8 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line8_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 8 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details8 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line8_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 8 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details8 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line9_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 9 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details9 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line9_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 9 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details9 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line9_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 9 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details9 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line10_610_f&quot;,
+                  &quot;label&quot;: &quot;Row 10 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details10 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line10_900_f&quot;,
+                  &quot;label&quot;: &quot;Row 10 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details10 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_line10_1000_f&quot;,
+                  &quot;label&quot;: &quot;Row 10 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_product_details10 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line1_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 1 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details1 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line1_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 1 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details1 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line1_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 1 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details1 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line2_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 2 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details2 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line2_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 2 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details2 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line2_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 2 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details2 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line3_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 3 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details3 &amp;&amp; ang_gsm_610  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line3_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 3 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details3 &amp;&amp; ang_gsm_900  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line3_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 3 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details3 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line4_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 4 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details4 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line4_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 4 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details4 &amp;&amp; ang_gsm_900  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line4_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 4 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details4 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line5_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 5 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details5 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line5_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 5 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details5 &amp;&amp; ang_gsm_900  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line5_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 5 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details5 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line6_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 6 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details6 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line6_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 6 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details6 &amp;&amp; ang_gsm_900  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line6_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 6 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details6 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line7_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 7 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details7 &amp;&amp; ang_gsm_610  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line7_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 7 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details7 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line7_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 7 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details7 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line8_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 8 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details8 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line8_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 8 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details8 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line8_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 8 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details8 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line9_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 9 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details9 &amp;&amp; ang_gsm_610  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line9_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 9 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details9 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line9_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 9 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details9 &amp;&amp; ang_gsm_1000 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line10_610_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 10 GSM 610 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details10 &amp;&amp; ang_gsm_610 &amp;&amp; ang_margin_awt_checkbox ) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line10_900_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 10 GSM 900 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details10 &amp;&amp; ang_gsm_900 &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_awt_line10_1000_f&quot;,
+                  &quot;label&quot;: &quot;AWT Row 10 GSM 1000 Active&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(tub_awt_product_details10 &amp;&amp; ang_gsm_1000  &amp;&amp; ang_margin_awt_checkbox) ? &apos;true&apos; : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_zinc_value_610&quot;,
+                  &quot;label&quot;: &quot;TOTAL ZINC VALUE GSM 610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Math.round((ang_gsm_610 ? (Number(ang_zinc_value||0)*(Number(ang_zinc_conversion_percent||0)/100)) : 0) * 100) / 100&quot;,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_zinc_value_900&quot;,
+                  &quot;label&quot;: &quot;TOTAL ZINC VALUE GSM 900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Math.round((ang_gsm_900 ? ((Number(ang_zinc_value||0)*(Number(ang_zinc_conversion_percent||0)/100)) + 5000) : 0) * 100) / 100&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false
+                },
+                {
+                  &quot;apiName&quot;: &quot;tub_zinc_value_1000&quot;,
+                  &quot;label&quot;: &quot;TOTAL ZINC VALUE GSM 1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Math.round((ang_gsm_1000 ? ((Number(ang_zinc_value||0)*(Number(ang_zinc_conversion_percent||0)/100)) + 6000) : 0) * 100) / 100&quot;,
+                  &quot;readOnly&quot;: true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

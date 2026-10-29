@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>High_Mast_TP_ED</label>
+    <protected>false</protected>
+    <values>
+        <field>Approver__c</field>
+        <value xsi:type="xsd:string">Utkarsh ED</value>
+    </values>
+    <values>
+        <field>Category__c</field>
+        <value xsi:type="xsd:string">ALL</value>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">High Mast - Department</value>
+    </values>
+    <values>
+        <field>Escalation__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Evaluation_Metric__c</field>
+        <value xsi:type="xsd:string">realization</value>
+    </values>
+    <values>
+        <field>Max_value__c</field>
+        <value xsi:type="xsd:double">1.99</value>
+    </values>
+    <values>
+        <field>Min_value__c</field>
+        <value xsi:type="xsd:double">-999.0</value>
+    </values>
+    <values>
+        <field>Product__c</field>
+        <value xsi:type="xsd:string">Transmission Pole</value>
+    </values>
+    <values>
+        <field>Submitterlevel__c</field>
+        <value xsi:type="xsd:string">ALL</value>
+    </values>
+    <values>
+        <field>sub_component__c</field>
+        <value xsi:type="xsd:string">All</value>
+    </values>
+</CustomMetadata>

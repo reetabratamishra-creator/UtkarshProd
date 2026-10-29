@@ -1,0 +1,314 @@
+<template>
+
+    <div class="dashboard-container">
+
+        <!-- ===================================================== -->
+        <!-- Header -->
+        <!-- ===================================================== -->
+
+        <div class="dashboard-header">
+
+            <div class="header-left">
+
+                <div class="header-icon">
+                    📄
+                </div>
+
+                <div>
+
+                    <h2 class="dashboard-title">
+                        Purchase Order Dashboard
+                    </h2>
+
+                    <p class="dashboard-subtitle">
+                        View uploaded Purchase Orders and monitor review &
+                        approval status
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- Summary Cards -->
+        <!-- ===================================================== -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card total-card">
+
+                <div class="summary-icon">
+                    📁
+                </div>
+
+                <div>
+
+                    <div class="summary-value">
+                        {dashboard.totalFiles}
+                    </div>
+
+                    <div class="summary-label">
+                        Total Files Submitted
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card review-card">
+
+                <div class="summary-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <div class="summary-value">
+                        {dashboard.missingFields}
+                    </div>
+
+                    <div class="summary-label">
+                        Missing Fields
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card approval-card">
+
+                <div class="summary-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <div class="summary-value">
+                        {dashboard.submitForApproval}
+                    </div>
+
+                    <div class="summary-label">
+                        Submit For Approval
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card failed-card">
+
+                <div class="summary-icon">
+                    ❌
+                </div>
+
+                <div>
+
+                    <div class="summary-value">
+                        {dashboard.failed}
+                    </div>
+
+                    <div class="summary-label">
+                        Failed
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- Processed Files -->
+        <!-- ===================================================== -->
+
+        <div class="files-section">
+
+            <div class="results-heading-row">
+
+                <div class="heading-left">
+
+                    <span class="heading-title">
+
+                        Processed Files
+
+                    </span>
+
+                    <span class="results-count">
+
+                        {dashboard.totalFiles}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <template if:true={hasRecords}>
+
+                <div class="results-list">
+
+                    <template
+                        for:each={existingItems}
+                        for:item="item">
+
+                        <div
+                            key={item.Id}
+                            class="result-card">
+
+                            <!-- Top -->
+
+                            <div class="result-top">
+
+                                <div>
+
+                                    <a
+                                        href={item.recordUrl}
+                                        target="_blank"
+                                        class="record-link">
+
+                                        <span class="result-name">
+
+                                            {item.Name}
+
+                                        </span>
+
+                                    </a>
+
+                                    <p class="result-meta">
+
+                                        <template if:true={item.PO_Number__c}>
+
+                                            <span>
+
+                                                {item.PO_Number__c}
+
+                                            </span>
+
+                                            <span class="result-dot">
+
+                                                ·
+
+                                            </span>
+
+                                        </template>
+
+                                        <span>
+
+                                            {item.formattedDate}
+
+                                        </span>
+
+                                    </p>
+
+                                </div>
+
+                                <span
+                                    class={item.badgeClass}>
+
+                                    {item.displayStatus}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- Warning -->
+
+                            <template
+                                if:true={item.showManualReview}>
+
+                                <div class="manual-review-warning">
+
+                                    ⚠ Manual Review Required
+
+                                </div>
+
+                                <div class="button-row">
+
+                                    <lightning-button
+
+                                        label="Review Missing Details"
+
+                                        variant="brand"
+
+                                        icon-name="utility:edit"
+
+                                        data-id={item.Id}
+
+                                        onclick={handleManualReview}>
+
+                                    </lightning-button>
+
+                                </div>
+
+                            </template>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </template>
+
+
+            <!-- Empty State -->
+
+            <template if:false={hasRecords}>
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+
+                        📂
+
+                    </div>
+
+                    <div class="empty-title">
+
+                        No Purchase Orders Found
+
+                    </div>
+
+                    <div class="empty-subtitle">
+
+                        Upload a Purchase Order to begin tracking.
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- Manual Review Modal -->
+    <!-- ===================================================== -->
+
+    <template if:true={showManualReviewModal}>
+
+        <c-po-manual-review
+
+            record-id={selectedRecordId}
+
+            onsuccess={handleReviewSuccess}
+
+            onclose={handleModalClose}>
+
+        </c-po-manual-review>
+
+    </template>
+
+</template>

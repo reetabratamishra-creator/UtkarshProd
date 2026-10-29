@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Departments_Match__c</fullName>
+    <formula>OR(
+    $Profile.Name = &quot;System Administrator&quot;,
+    $Profile.Name = &quot;Utkarsh Admin&quot;,
+
+    AND(
+         Department_NameFormula__c = $User.Department,
+        OR(
+            OwnerId = $User.Id,
+            $Profile.Name = &quot;CRM Head&quot;,
+            $Profile.Name = &quot;Utkarsh HOD&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Departments Match</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

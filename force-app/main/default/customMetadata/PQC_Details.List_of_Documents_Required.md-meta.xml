@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>List of Documents  Required</label>
+    <protected>false</protected>
+    <values>
+        <field>Details_to_Check__c</field>
+        <value xsi:type="xsd:string">• PAN Copy Required or not 
+• Cancelled Cheque copy required or not 
+• EFT Mandate certificate by Bank required or not 
+• GST Required  or not 
+• OEM Authorization Certificate Required or not 
+• Bank Solvency Certificate required or not 
+• Previous Work Order required or not 
+• Test Certificate required or not 
+• Technical Data Sheet required or not 
+• Raw Material Compliance Document required or not 
+• Any Undertaking Required to submit 
+• Any Affidavit Required to submit 
+• OEM Authorization Certificate required or not 
+• BOQ Compliance sheet required or not 
+• MTC Certificate Required or not 
+• Non Black Listing Certificate required or not</value>
+    </values>
+    <values>
+        <field>Domain__c</field>
+        <value xsi:type="xsd:string">Technical</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,112 @@
+<template>
+
+    <!-- Spinner -->
+    <template if:true={isLoading}>
+        <lightning-spinner
+            alternative-text="Loading"
+            size="medium">
+        </lightning-spinner>
+    </template>
+
+   <div class="container">
+
+    <div class="header">
+        Change Department
+    </div>
+
+    <div class="section">
+
+        <!-- ========================= -->
+        <!-- STEP 1 -->
+        <!-- ========================= -->
+
+        <template if:true={showDepartmentStep}>
+
+            <lightning-combobox
+                name="department"
+                label="Department"
+                value={selectedDepartment}
+                placeholder="Select Department"
+                options={departmentOptions}
+                onchange={handleDepartmentChange}>
+            </lightning-combobox>
+
+        </template>
+
+        <!-- ========================= -->
+        <!-- STEP 2 -->
+        <!-- ========================= -->
+
+        <template if:true={showOwnerStep}>
+
+            <lightning-input
+                label="Selected Department"
+                value={selectedDepartment}
+                disabled>
+            </lightning-input>
+
+            <br/>
+
+            <template if:true={hasUsers}>
+
+                <lightning-combobox
+                    name="owner"
+                    label="Department Owner"
+                    value={selectedOwner}
+                    placeholder="Select Owner"
+                    options={ownerOptions}
+                    onchange={handleOwnerChange}>
+                </lightning-combobox>
+
+            </template>
+
+            <template if:false={hasUsers}>
+
+                <div class="warning-box">
+
+                    No active users found for this department.
+
+                </div>
+
+            </template>
+
+        </template>
+
+        <!-- Footer -->
+
+        <div class="footer">
+
+            <template if:true={showDepartmentStep}>
+
+                <lightning-button
+                    variant="brand"
+                    label="Next"
+                    onclick={handleNext}
+                    disabled={disableNext}>
+                </lightning-button>
+
+            </template>
+
+            <template if:true={showOwnerStep}>
+
+                <lightning-button
+                    label="Previous"
+                    onclick={handlePrevious}>
+                </lightning-button>
+
+                <lightning-button
+                    class="slds-m-left_small"
+                    variant="brand"
+                    label="Finish"
+                    onclick={handleFinish}
+                    disabled={disableFinish}>
+                </lightning-button>
+
+            </template>
+        </div> <!-- section -->    
+
+        </div>
+
+    </div>
+
+</template>

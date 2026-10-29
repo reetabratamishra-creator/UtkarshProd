@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Department_Match_without_Owner__c</fullName>
+    <description>This is for visibility of System Admin, Utkarsh Admin, and Same dept CRM Head, HOD</description>
+    <formula>OR(
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;Utkarsh Admin&quot;,
+
+AND(
+Department__c = $User.Department,
+OR(
+$Profile.Name = &quot;Utkarsh HOD&quot;,
+$Profile.Name = &quot;CRM Head&quot;
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Department Match without Owner</label>
+    <type>Checkbox</type>
+</CustomField>

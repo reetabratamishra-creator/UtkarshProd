@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Odometer_Distance__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(
+        ISPICKVAL(Action__c, &quot;OUT&quot;),
+        ISPICKVAL(Punch_Type__c, &quot;Market Visit&quot;),
+        NOT(ISBLANK(Punch_Out_Of__c))
+    ),
+    Extracted_Odometer_Reading__c - Punch_Out_Of__r.Extracted_Odometer_Reading__c,
+    NULL
+)</formula>
+    <label>Odometer Distance</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

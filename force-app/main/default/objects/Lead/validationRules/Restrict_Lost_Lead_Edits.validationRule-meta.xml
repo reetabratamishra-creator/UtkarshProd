@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Lost_Lead_Edits</fullName>
+    <active>true</active>
+    <description>Restricts editing of Lead records once their Status is set to Lost, except for System Administrator and Utkarsh Admin profiles.</description>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    OR(
+        ISPICKVAL(PRIORVALUE(Status), &quot;Lost&quot;),
+        ISPICKVAL(PRIORVALUE(Status), &quot;Qualified&quot;)
+    ),
+    NOT(ISCHANGED(Status)),
+    NOT(ISCHANGED(OwnerId)),
+    NOT(ISCHANGED(Department_Name__c)),
+    NOT(ISCHANGED( InQualificationProcess__c )),
+    $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Utkarsh Admin&quot;
+)</errorConditionFormula>
+    <errorMessage>Lost or Qualified Leads can only be edited by System Administrator and Utkarsh Admin profiles.</errorMessage>
+</ValidationRule>

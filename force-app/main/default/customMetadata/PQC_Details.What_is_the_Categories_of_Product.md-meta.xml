@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>What is the Categories of  Product</label>
+    <protected>false</protected>
+    <values>
+        <field>Details_to_Check__c</field>
+        <value xsi:type="xsd:string">What are the Products required in this Tender ?  (PVC Pipes, SWR Pipes, UPVC 
+Pipes, CPVC Pipes, MDPE, HDPE, PLB Duct, Agri Pipes, Column Pipes, Casing 
+Pipes, PVC Water Tank, Solvent Cement, Steel Tubular Pole, Street Lighting pole, 
+Galvanized Steel Poles, MS Pole, MS Steel Tubular Pole, Swaged type Steel 
+Tubular Pole, IS:2713(PART1,11,&amp;I):1980 TYPE:410 SP,  ISI Certified Tubular 
+Poles, W-Beam Metal Crash Barrier; Thrie Metal Beam Crash Barrier; Guard Rail 
+Reflector, Lighting System, Pole, High Mast, Ilumination, Flag Mast, Stadium Mast, 
+Octagonal Poles, Steel Pipes, ERW Pipes, G.I. Pipes, M.S. Pipes, Steel Tubes)</value>
+    </values>
+    <values>
+        <field>Domain__c</field>
+        <value xsi:type="xsd:string">General</value>
+    </values>
+</CustomMetadata>

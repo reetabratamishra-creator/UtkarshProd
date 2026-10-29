@@ -1,0 +1,53 @@
+<template>
+    <div class="qualified-leads-wrapper">
+        <template if:true={hasLeadAccess}>
+            <div class="ql-section">
+                <div class="ql-section__header">
+                    <div class="ql-section__badge ql-section__badge--lead">
+                        <lightning-icon icon-name="standard:lead" size="x-small" variant="inverse"></lightning-icon>
+                    </div>
+                    <h2 class="ql-section__title">{filterValue} Leads</h2>
+                    <template if:true={hasLeads}>
+                        <span class="ql-section__count">{leadCount}</span>
+                    </template>
+                </div>
+
+                <!-- Loading -->
+                <template if:true={isLeadsLoading}>
+                    <div class="ql-spinner-wrapper">
+                        <lightning-spinner alternative-text="Loading leads..." size="medium"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Loaded with error -->
+                <template if:true={showLeadsError}>
+                    <div class="ql-error">
+                        <lightning-icon icon-name="utility:error" size="x-small" variant="error"></lightning-icon>
+                        <span>{leadsError}</span>
+                    </div>
+                </template>
+
+                <!-- Loaded with data -->
+                <template if:true={showLeadsTable}>
+                    <div class="ql-datatable-wrapper">
+                        <lightning-datatable
+                            key-field="Id"
+                            data={leadsData}
+                            columns={leadsColumns}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+
+                <!-- Loaded, no data, no error -->
+                <template if:true={showLeadsEmpty}>
+                    <div class="ql-empty">
+                        <lightning-icon icon-name="utility:check" size="large" variant="success"></lightning-icon>
+                        <p class="ql-empty__title">No {filterValue} Leads</p>
+                        <p class="ql-empty__msg">There are currently no leads with a {filterValue} status.</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

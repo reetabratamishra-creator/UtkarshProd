@@ -1,0 +1,106 @@
+<template>
+    <div class="slds-scope">
+        <div class={chatIconClass} onclick={toggleChat} title="Open Assistant">
+            <lightning-icon icon-name="utility:chat" variant="inverse" size="medium">
+            </lightning-icon>
+        </div>
+    </div>
+    <template if:true={isOpen}>
+        <section class="premium-chat-container">
+            <header class="chat-header">
+                <div class="header-content">
+                    <span class="status-dot"></span>
+                    <div class="header-text">
+                        <h2>Utkarsh Agent</h2>
+                        <p class="sub-text">Employee Support v1.0</p>
+                    </div>
+                </div>
+                
+                <div style="display:flex; align-items:center;">
+                    <lightning-button-icon icon-name="utility:power" onclick={endChat} title="End Chat" variant="bare-inverse" class="slds-m-right_x-small">
+                    </lightning-button-icon>
+                    
+                    <lightning-button-icon icon-name="utility:minimize_window" onclick={toggleChat} variant="bare-inverse">
+                    </lightning-button-icon>
+                </div>
+            </header>
+            
+            <div class="lang-bar">
+                <button class={engChipClass} onclick={setEnglish}>EN</button>
+                <button class={hinChipClass} onclick={setHindi}>हिन्दी</button>
+                <button class={benChipClass} onclick={setBengali}>বাংলা</button>
+            </div>
+
+            <div class="chat-messages" lwc:ref="msgContainer">
+                <template if:true={isLoading}>
+                    <div class="slds-chat-message" style="width: 100%; text-align: center;">
+                        <div class="slds-chat-message__text slds-p-around_x-small slds-m-vertical_x-small"
+                            style="background-color: #f8f8f8; color: #555; border-radius: 0.5rem; display: inline-block; font-style: italic; border: 1px solid #eee;">
+                            <span>Agent is joining, please wait...</span>
+                            <span class="status-dot slds-m-left_xx-small"
+                                style="display:inline-block; background: #0176d3;"></span>
+                        </div>
+                    </div>
+                </template>
+
+                <template for:each={messages} for:item="msg">
+                    <div key={msg.id}>
+                        <template if:true={msg.isSystem}>
+                            <div class="slds-text-align_center slds-text-color_weak slds-m-vertical_x-small">
+                                {msg.text}
+                            </div>
+                        </template>
+                        <template if:true={msg.isBot}>
+                            <div class="slds-chat-message">
+                                <div class="slds-chat-message__text slds-chat-message__text_inbound slds-p-around_x-small slds-m-vertical_x-small"
+                                    style="background-color: #edf4ff; color: #001e5b; border-radius: 0.5rem; max-width: 80%; align-self: flex-start; font-weight: bold">
+                                    <span>{msg.text}</span>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={msg.isUser}>
+                            <div class="slds-chat-message">
+                                <div class="slds-chat-message__text slds-chat-message__text_outbound slds-p-around_x-small slds-m-vertical_x-small slds-theme_info"
+                                    style="background-color: #005290; color: white; border-radius: 0.5rem; max-width: 80%; align-self: flex-end; font-weight: bold">
+                                    <span>{msg.text}</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <template if:true={isProcessing}>
+                    <div class="slds-chat-message" style="align-self: flex-start; width: 100%;">
+                        <div class="slds-chat-message__text slds-chat-message__text_inbound slds-p-around_x-small slds-m-vertical_x-small"
+                            style="background-color: #f3f3f3; color: #666; border-radius: 0.5rem; max-width: 80%; display: inline-block; font-style: italic;">
+                            <span>{agentLoadingMessage}</span>
+                            <span class="status-dot slds-m-left_xx-small"
+                                style="display:inline-block; background: #999;"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <footer class="chat-footer">
+                <div class={inputWrapperClass}>
+                    <input type="text" placeholder={placeholderText} disabled={isInputDisabled} value={userInput}
+                        oninput={handleInputChange} onkeydown={handleKeyDown} class="custom-input" />
+                    <button class={micClass} onclick={handleListen} disabled={isInputDisabled} title="Voice Input">
+                        <span class="mic-icon-wrapper">
+                            <lightning-icon icon-name="utility:unmuted" size="small" variant="inverse">
+                            </lightning-icon>
+                        </span>
+                    </button>
+                </div>
+                <button class="send-btn" onclick={handleSend} disabled={isInputDisabled}>
+                    <template if:true={isProcessing}>
+                        <span class="spinner"></span>
+                    </template>
+                    <template if:false={isProcessing}>
+                        <lightning-icon icon-name="utility:send" size="xx-small" variant="inverse"></lightning-icon>
+                    </template>
+                </button>
+            </footer>
+        </section>
+    </template>
+</template>

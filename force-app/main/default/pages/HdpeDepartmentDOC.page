@@ -1,0 +1,514 @@
+<apex:page standardController="Quote" extensions="QuoteControllerforHDPE" contentType="application/msword#HDPE-{!referenceNum}.doc" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false">
+<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+      xmlns:w="urn:schemas-microsoft-com:office:word" 
+      xmlns="http://www.w3.org/TR/REC-html40">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style type="text/css">
+            /* Global A4 Size Definition */
+            @page {
+                size: 210mm 297mm;
+                margin: 0mm;
+            }
+
+            /* Word-Specific Page Layout Definitions and Margins */
+            @page CoverPage {
+                size: 210mm 297mm;
+                margin: 0mm;
+                mso-header-margin: 0mm;
+                mso-footer-margin: 0mm;
+            }
+            
+            @page StandardContent {
+                size: 210mm 297mm;
+                /* 20mm top/bottom margins, 10mm left/right margins */
+                margin: 30mm 10mm 30mm 10mm; 
+                mso-header: h1;
+                mso-footer: f1;
+                /* Provide a small margin so Word has space to render repeating headers/footers */
+                mso-header-margin: 0mm;
+                mso-footer-margin: 5mm;
+            }
+
+            @page LastPage {
+                size: 210mm 297mm;
+                margin: 0mm;
+                mso-header-margin: 0mm;
+                mso-footer-margin: 0mm;
+                mso-header: h-blank; /* Forces Word to stop the running header */
+                mso-footer: f-blank; /* Forces Word to stop the running footer */            
+            }
+            
+            /* Class-to-Page Layout Mappings */
+            div.page-cover {
+                page: CoverPage;
+                width: 210mm;
+                height: 297mm;
+                margin: 0mm;
+            }
+            
+            div.document-body-inner {
+                page: StandardContent;
+            }
+
+            /* Wrapper to apply padding strictly to content, not header/footer */
+            .content-wrapper {
+                padding: 2mm 18mm 2mm 18mm; /* Top, Right, Bottom, Left */
+            }
+
+            div.last-page {
+                page: LastPage;
+                width: 210mm;
+                height: 297mm;
+                margin: 0mm;
+            }
+            
+            /* Global Typography Defaults */
+            html, body {
+                font-family: 'Arial', 'Helvetica', sans-serif;
+                font-size: 10pt;
+                line-height: 1.5;
+                color: #222;
+            }
+            
+            /* Page Break Controls for Word Content Flow */
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+            
+            /* Footer Layout Properties */
+            .footer-inner {
+                margin-bottom: 5mm;
+                margin-top: 5mm;
+                font-size: 7pt;
+                color: black;
+                line-height: 1.4;
+                width: 100%;
+            }
+            
+            .factory-details {
+                margin-bottom: 3px;
+            }
+            
+            .social-row {
+                margin-top: 4px;
+                font-size: 7.5pt;
+            }
+            
+            /* Word Field Code Styles for Page Numbering */
+            span.mso-page-number {
+                mso-field-code: "PAGE";
+            }
+            span.mso-total-pages {
+                mso-field-code: "NUMPAGES";
+            }
+            
+            /* Data Tables Layout and Borders */
+            .meta-table {
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border-collapse: collapse;
+            }
+            
+            .meta-table td {
+                vertical-align: top;
+            }
+            
+            .subject-line {
+                font-weight: bold;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align: justify;
+            }
+            
+            .content-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                font-size: 9pt;
+            }
+            
+            .content-table th {
+                background-color: #f4f4f4;
+                border: 1px solid #111;
+                font-weight: bold;
+                padding: 6px;
+                text-align: center;
+            }
+            
+            .content-table td {
+                border: 1px solid #111;
+                padding: 6px;
+                vertical-align: top;
+            }
+            
+            .text-right { text-align: right; }
+            .text-left { text-align: left; }
+            .text-center { text-align: center; }
+            
+            .total-row {
+                font-weight: bold;
+                background-color: #f9f9f9;
+            }
+            
+            .terms-heading {
+                font-size: 11pt;
+                font-weight: bold;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #000;
+                padding-bottom: 2px;
+            }
+            
+            .term-item {
+                margin-bottom: 12px;
+                text-align: justify;
+            }
+            
+            .term-title {
+                font-weight: bold;
+            }
+            
+            .signature-section {
+                margin-top: 30px;
+            }
+        </style>
+    </head>    
+    <body>
+        <div class="page-cover">
+            <div>
+                <img src="{!frontPageBase64}"/>
+            </div>
+        </div>
+        
+        <br clear="all" style="page-break-before:always; mso-break-type:section-break;" />
+        
+            <div class="document-body-inner">
+                <div style="margin-top: 10px;">
+                  <table class="meta-table">
+                        <tr>
+                            <td>
+                                <strong>Ref:-</strong> {!referenceNum}
+                            </td>
+                        </tr>
+                      	<tr>
+                            <td>
+                                <strong>Date:-</strong> {!todayDate}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <p style="width:50%">
+                        To,<br/>
+                        {!accountName}<br/>
+                        Address - {!accAdd}<br/>
+                    </p>
+					<p>
+                        <strong>Kind Attention – {!contactName} </strong>
+                    </p>                    
+                    <div class="subject-line">
+                        Sub: {!subjectLine}".
+                    </div>
+                    <p>
+                        Dear Sir, 
+                    </p>
+                    <p>
+                        We are extremely thankful for giving us an opportunity to submit our quotation for supply of Material.
+                    </p>
+                    <p>
+                        Trust you will find our offer competitive and would favor us with your valued order.
+                    </p>
+                    <p>
+                        Kindly feel free to contact us for any further clarification.
+                    </p>
+                    <p>
+                        UTKARSH INDIA LIMITED is a one point solution provider for Black /G.I. Pipes, Poles, Steel Structure, Metal Beam Crash Barrier, M.S. Wire, Railway Sleepers, CPVC, UPVC, PVC, SWR Pipes &amp; Fittings, HDPE Pipes with 40+ years of experience.
+                    </p>
+                    <p>
+                        Best regards,
+                    </p>
+                    <p>
+                        <Strong>For Utkarsh India Limited</Strong><br/>
+                        <Strong>{!loggedInUser}</Strong><br/>
+                        <Strong>{!LoggedInUserTitle}</Strong><br/>
+                        <Strong>M- {!loggedInUserPhone}</Strong><br/>
+                        <strong>Email - {!loggedInUserEmail}</strong>
+                    </p>
+                    
+                    <br style="page-break-before:always;" />
+                    
+                    <div class="terms-section">
+                    <div class="terms-heading">TERMS &amp; CONDITIONS OF THE CONTRACT</div>
+                    
+                    <div class="term-item"><span class="term-title">1. Item Offered:</span> <strong>“UTKARSH” </strong>brand {!itemOffered}</div>
+                        <div class="term-item"><span class="term-title">2. Material Specification &amp; Price: </span> As per Annexure – 1.</div>
+                        <div class="term-item"><span class="term-title">3. Freight:</span> {!freightBasis}</div>
+                        <div class="term-item"><span class="term-title">4. Packing &amp; Forwarding Charges:</span> {!packingForwarding}</div>
+                        <div class="term-item"><span class="term-title">5. Inspection:</span> {!inspectionTerms}</div>
+                        <div class="term-item"><span class="term-title">6. Loading &amp; Unloading charges:</span> {!loadingCharges}</div>
+                        <div class="term-item">
+                            <span class="term-title">7. Duties &amp; Taxes:</span>
+                            <strong>7.a) GST:</strong> The rates are exclusive of GST @ {!gstPercentage}% or as applicable at the time of dispatch. The Party has to provide the GST No for both the buyer and consignee at the time of placing order.
+                            <strong>7.b) TCS:</strong> As applicable extra @ {!tcsPercentage}%. Any changes in the statutory taxes at the time of dispatch will be charged as per the prevailing rates.
+                        </div>
+                        <div class="term-item"><span class="term-title">8. Payment Terms:</span> {!paymentTerms}</div>
+                        <div class="term-item"><span class="term-title">9. Interest:</span> In case of delay in making payment beyond the agreed period 24% interest per annum will be charged extra apart from other losses, if any.</div>
+                        <div class="term-item"><span class="term-title">10. Ground Rent:</span> Material to be lifted within {!groundRentDays} days from the date of inspection/confirmation for lifting, if not lifted ground rental charges will be applicable @ {!groundRentPercentage}% per day.</div>
+                        <div class="term-item"><span class="term-title">11. Validity:</span> This offer shall remain {!validityTerms} from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.</div>
+                        <div class="term-item"><span class="term-title">12. Delivery period &amp; Terms: </span> {!deliveryPeriod}</div>
+                        <div class="term-item"><span class="term-title">13. Penal interest:</span> In the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @24% per annum quarterly compoundable.</div>
+                        <div class="term-item"><span class="term-title">14. Insurance:</span> {!insuranceTerms}</div>
+                        <div class="term-item"><span class="term-title">15. Service Charges (Erection &amp; other services):</span> Erection &amp; Commissioning is to be done by the buyer, unless otherwise specified/agreed in writing separate service charges will be applicable for any service required for supervision on erection &amp; commissioning. On receipt of buyer’s request, our service charge will be communicated.</div>
+                        <div class="term-item"><span class="term-title">16. Breach &amp; Default:</span> If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in that event the defaulting party shall become liable to compensate the other party by way of damages, however such other party shall become entitled to claim damages provided such claim is duly substantiated with proper evidence.</div>
+                        <div class="term-item"><span class="term-title">17. Late Delivery Charges:</span> Unless prevented by force majeure condition the Supplier shall be liable to deliver the materials within the agreed delivery schedule. However, since the Supplier has agreed to supply the materials at an extremely competitive rates it is being made clear that for the purpose of this contract the Buyer shall not be entitled to impose any late delivery charges for any delay caused in delivery of the materials.</div>
+                        <div class="term-item"><span class="term-title">18. Price variation clause: </span> {!priceVariationClause}</div>
+                        <div class="term-item"><span class="term-title">19. Test Certificate:</span> {!testCertificate}</div>
+                        <div class="term-item"><span class="term-title">20. Short Supply:</span> As and when the materials are delivered at the agreed point of delivery, the Supplier shall not assume any responsibility or obligation to deal with any claims relating to short supply raised by the Buyer.</div>
+                        <div class="term-item"><span class="term-title">21. Warranty:</span> The Supplier’s products are covered by a mechanical guarantee for a period of {!warrantyMonths} months from the date of commissioning or at the latest {!warrantyEndMonth} months from the date of delivery as per the agreed incoterm, unless a longer period has been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.</div>
+                        <div class="term-item"><span class="term-title">22. Custody:</span> Once the materials are arrived at your site the same will remain under your custody for safe and secure storage.</div>
+                        <div class="term-item"><span class="term-title">23. Quality:</span> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer’s destination, by any independent inspection agency and/or surveyor engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports by two different independent agencies both being appointed by the Buyers. If the Buyer fails to substantiate the claim with proper and acceptable explanation in that eventthe Buyer’s claim on quality related issues shall stand set aside and/or determined.</div>
+                        <div class="term-item"><span class="term-title">24. Return of Goods:</span> Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.</div>
+                        <div class="term-item"><span class="term-title">25. Force Majeure:</span> a) In this agreement, “force majeure” means any cause preventing Supplier from performing any or all of its obligations which arises from or is attributable to acts or events beyond the reasonable control of the party so prevented, including, without limitation, strikes, lock-outs or other industrial disputes (whether involving the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or default of suppliers or sub-contractors. (b) If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no liability in respect of the performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is necessary for that party, using all reasonable endeavours, to recommence its affected operations in order for it to perform its obligations. (c) If Supplier is prevented from performance of its obligations for a continuous period in excess of two months, the Buyer and/or the Supplier may terminate this agreement forthwith on service of written notice on the party so prevented, in which case neither party shall have any liability to the other except that rights and liabilities which accrued prior to such termination shall continue to subsist.</div>
+                        <div class="term-item"><span class="term-title">26. Declaration:</span> Estimates given for total cost and material are based on drawing provided by the customer and we are not responsible if any deviation from drawing is found at the actual site.</div>
+                        <div class="term-item"><span class="term-title">27. Arbitration &amp; Jurisdiction:</span> No suit or any proceedings in regard to any matter arising in respect of this contract shall be instituted in any court, save in the High Court, Calcutta, City Civil Court at Calcutta or at the Court of small causes at Calcutta. It is agreed that no other court shall have jurisdiction to entertain any suit or proceedings, even though, part of the cause of action might arise within their jurisdiction.</div>
+                        <div class="term-item"><span class="term-title">28. Miscellaneous:</span> Not withstanding anything otherwise or contrary recorded anywhere within the purchase/supply order arising from this quotation, the terms and conditions of this quotation shall be deemed to be a part of the consequent supply order and/or contract and in the event of any conflict in interpretation of the clauses of this quotation in that event the clauses of the quotation shall prevail over the clauses of the purchase/supply order.</div>
+                        <div class="term-item"><span class="term-title">29. Confidentiality:</span> The terms and conditions described in this contract including its existence shall be confidential information and shall not be disclosed by any party to any third party without the prior written consent of the other party. Each of the Parties agrees, (unless otherwise required by law), that it shall not disclose to any other person the fact that the confidential information has been made available to the other party, that discussions or negotiations are taking place concerning the said enquiry/tender proceedings between the Parties, or any of the terms, conditions or other facts with respect thereto (including the status thereof).</div>
+                        
+                        <apex:repeat value="{!tables}" var="tbl">
+                        <div class="page-break" style="margin-bottom: 25px;">
+                            <p><strong>Annexure - 1 ({!tbl.tableName})</strong></p>
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">Sl. no</th>
+                                        <th style="width: 50%;">PARTICULAR</th>
+                                        <th style="width: 12%;">UOM</th>
+                                        <th style="width: 10%;">QTY</th>
+                                        <th style="width: 11%;">RATE/MTR or PCS</th>
+                                        <th style="width: 12%;">BASIC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!tbl.lineItems}" var="item">
+                                        <tr>
+                                            <td class="text-center">{!item['SlNo']}</td>
+                                            <td class="text-left">{!item['description']}</td>
+                                            <td class="text-center">{!item['uom']}</td>
+                                            <td class="text-center">{!item['quantity']}</td>
+                                            <td class="text-center">{!item['rate']}</td>
+                                            <td class="text-center">{!item['total_price']}</td>
+                                        </tr>
+                                    </apex:repeat>
+                                    
+                                    <tr class="total-row">
+                                        <td colspan="5" class="text-right">Total Basic Amount</td>
+                                        <td class="text-right">{!tbl.tableSubTotal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" class="text-right">GST ({!tbl.gst}%)</td>
+                                        <td class="text-right">{!tbl.gstAmount}</td>
+                                    </tr>
+                                    <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(tbl.transportationCharge)) && tbl.transportationCharge > 0}">
+                                        <tr style="color: #444; font-weight: bold;">
+                                            <td colspan="5" class="text-right">Transportation charge:</td>
+                                            <td class="text-right">{!tbl.transportationCharge}</td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                    <tr style="font-weight: bold; background-color: #f1f4f7;">
+                                        <td colspan="5" class="text-right">Total Amount (with GST)</td>
+                                        <td class="text-right" style="color: #002d62;">
+                                            <apex:outputText value="{0, number, #,##0.00}">
+                                                <apex:param value="{!tbl.tableSubTotal + tbl.gstAmount + tbl.transportationCharge}"/>
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                    <apex:outputPanel layout="none" rendered="{!standard == 'PLB Duct'}">
+                                        <tr>
+                                            <td colspan="6" style="font-weight: bold; text-align: center; padding: 5px;">
+                                                <apex:outputText value="{!plbDuctTransportText}"/>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!standard == 'IS 4984'}">
+                                        <tr>
+                                            <td colspan="6" style="font-weight: bold; text-align: center; padding: 5px;">
+                                                <apex:outputText value="{!is4984TransportText}"/>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!standard == 'MDPE Pipe'}">
+                                        <tr>
+                                            <td colspan="6" style="font-weight: bold; text-align: center; padding: 5px;">
+                                                <apex:outputText value="{!mdpeTransportText}"/>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                </tbody>
+                            </table>
+                        </div>                        
+                    </apex:repeat>
+                    
+                    <apex:outputPanel rendered="{!standard == 'Pipe & Duct' && NOT(ISNULL(unifiedRows)) && NOT(unifiedRows.empty)}">
+                        <div class="page-break" style="margin-bottom: 25px;">
+                            <h3 class="terms-heading" style="margin-top:15px;">Annexure - 1 ({!blockBTableName})</h3>
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 7%;" class="text-center">Sl. no</th>
+                                        <th style="width: 48%;">PARTICULAR</th>
+                                        <th style="width: 8%;" class="text-center">UOM</th>
+                                        <th style="width: 11%;" class="text-right">QTY</th>
+                                        <th style="width: 13%;" class="text-right">RATE/MTR or PCS</th>
+                                        <th style="width: 13%;" class="text-right">BASIC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!unifiedRows}" var="row">
+                                        <tr>
+                                            <td class="text-center">{!row.slNo}</td>
+                                            <td class="text-left" style="font-weight: 500;">{!row.particular}</td>
+                                            <td class="text-center">{!row.uom}</td>
+                                            <td class="text-right">
+                                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row.qty}"/></apex:outputText>
+                                            </td>
+                                            <td class="text-right">
+                                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row.rate}"/></apex:outputText>
+                                            </td>
+                                            <td class="text-right">
+                                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row.basic}"/></apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    
+                                    <tr style="font-weight: bold; background-color: #fafafa;">
+                                        <td colspan="5" class="text-right">Total Basic Amount:</td>
+                                        <td class="text-right">
+                                            <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!blockBBasicTotal}"/></apex:outputText>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr style="font-weight: bold; color: #444;">
+                                        <td colspan="5" class="text-right">GST ({!blockBGstPercent}%):</td>
+                                        <td class="text-right">
+                                            <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!blockBGstAmount}"/></apex:outputText>
+                                        </td>
+                                    </tr>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(blockBTransportationCharge)) && blockBTransportationCharge > 0}">
+                                        <tr style="color: #444; font-weight: bold;">
+                                            <td colspan="5" class="text-right">Transportation charge:</td>
+                                            <td class="text-right">
+                                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!blockBTransportationCharge}"/></apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                    
+                                    <tr style="font-weight: bold; background-color: #f1f4f7;">
+                                        <td colspan="5" class="text-right">Total Amount (with GST):</td>
+                                        <td class="text-right" style="color: #002d62;">
+                                            <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!blockBFinalAmount}"/></apex:outputText>
+                                        </td>
+                                    </tr>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!showPipeTable || showDuctTable}">
+                                        <tr>
+                                            <td colspan="6" style="font-weight: bold; text-align: center; padding: 5px; font-size: 8.5pt; color: #444;">
+                                                <apex:outputText value="[Pipe] {!pipeDuctPipeTransportText} " rendered="{!NOT(ISBLANK(pipeDuctPipeTransportText))}"/>
+                                                <apex:outputText value=" | " rendered="{!NOT(ISBLANK(pipeDuctPipeTransportText)) && NOT(ISBLANK(pipeDuctDuctTransportText))}"/>
+                                                <apex:outputText value="[Duct] {!pipeDuctDuctTransportText}" rendered="{!NOT(ISBLANK(pipeDuctDuctTransportText))}"/>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+              
+                    <p>The total quote value is of Rs. <strong>{!totalAmount}</strong> ({!totalAmountInWords})</p>
+                </div>
+                    
+                    <div class="signature-section avoid-break">
+                        <strong>
+                         <p>Our Bank Detail is as mention below: </p>
+                        <p>
+                            Company Name: Utkarsh India Ltd<br/>
+                            RTGS Code: SBIN0007502<br/>
+                            C.C A/C No: 30546455614<br/>
+                            Bank Name: STATE BANK OF INDIA<br/>
+                            Bank Address: COMMERCIAL BRANCH PARK STREET 700016<br/>
+                        </p>
+                        </strong>
+                    </div>
+                </div>
+                
+            </div>
+            
+        <br clear="all" style="page-break-before:always; mso-break-type:section-break;" />
+        
+        <div class="last-page">
+            <img src="{!lastPageBase64}" style="width: 210mm; height: 297mm; display: block; margin: 0; padding: 0;" alt="Last Page Image" />
+        </div>
+        
+            <div style="margin-left: 900in; margin-bottom:10in;">
+                <div style="mso-element:header" id="h1">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td width="70%" style="padding: 15px; vertical-align: middle; text-align: left">
+                            <div style="font-size: 20px; font-weight: bold; text-align: left">Utkarsh India Limited</div>
+                            <div style="border-top: 2px solid #d4e157; margin: 5px 0;"></div>
+                            <div style="font-size: 10px; text-align: left">
+                                Corporate Office: Arrjavv Square, 95A Elliot Road, 4th Floor, Kolkata 700016<br/>
+                                P- 033 2264 6666/2265 8888 | E- <a href="mailto:info@utkarshindia.in">info@utkarshindia.in</a> | W-<a href="http://www.utkarshindia.in" target="_blank">www.utkarshindia.in</a>
+                            </div>
+                        </td>
+                        
+                        <td width="30%" style="text-align: right;">
+                            <img src="{!logoBase64}" alt="Logo" style="width: 150px; background-color: white;" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+            <div style="mso-element:footer" id="f1">
+                <div class="footer-inner" style="margin-bottom: 5mm; margin-top: 5mm; font-size: 7pt; color: black; line-height: 1.4; width: 100%;">
+                    <table width="100%" style="border-collapse: collapse; border: none; font-size: 7pt; color: black;">
+                        <tr>
+                            <td width="30%" style="text-align: left; vertical-align: bottom; border: none; padding: 0;">
+                                Page <span class="mso-page-number"></span> of <span class="mso-total-pages"></span>
+                            </td>
+                            
+                            <td width="70%" style="text-align: right; vertical-align: bottom; border: none; padding: 0;">
+                                <div class="factory-details">
+                                    F1: Nh6, Vill-Jangalpur, Po: Andul Mouri, Howrah 711302, P:033 2669 0833/1151,1571, F: +9103326693856. F2:NH2, Durgapur Expressway,<br/>
+                                    PO: Gurap, Hoogly 712303, P:03213 253996
+                                </div>
+                                <div class="factory-details">
+                                    CIN: U51109 WB1995PLC070893
+                                </div>
+                                <div class="social-row">
+                                    We are on: <strong>Facebook | Instagram | LinkedIn | YouTube</strong>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+                <div style="mso-element:header" id="h-blank">
+                    <p style="margin: 0; padding: 0; font-size: 1px;">&nbsp;</p>
+                </div>
+                <div style="mso-element:footer" id="f-blank">
+                    <p style="margin: 0; padding: 0; font-size: 1px;">&nbsp;</p>
+                </div>
+            </div>
+            
+               
+    </body>
+</html>
+</apex:page>

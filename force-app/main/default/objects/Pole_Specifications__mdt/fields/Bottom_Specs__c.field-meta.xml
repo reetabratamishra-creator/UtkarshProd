@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bottom_Specs__c</fullName>
+    <description>The physical dimensions and specifications (Outer Diameter x Thickness x Length) for the bottom section of the pole</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The physical dimensions and specifications (Outer Diameter x Thickness x Length) for the bottom section of the pole</inlineHelpText>
+    <label>Bottom Specs</label>
+    <length>32768</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

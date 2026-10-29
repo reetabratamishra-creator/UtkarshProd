@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Railway</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Railway</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;common_base_rate&quot;,&quot;defaultValue&quot;:76},{&quot;apiName&quot;:&quot;zinc_regular_delta&quot;,&quot;defaultValue&quot;:0},{&quot;apiName&quot;:&quot;zinc_medium_55_delta&quot;,&quot;defaultValue&quot;:2},{&quot;apiName&quot;:&quot;zinc_average_delta&quot;,&quot;defaultValue&quot;:4},{&quot;apiName&quot;:&quot;zinc_minimum_delta&quot;,&quot;defaultValue&quot;:6},{&quot;apiName&quot;:&quot;railway_graded_delta1_8&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;railway_graded_delta2&quot;,&quot;defaultValue&quot;:5},{&quot;apiName&quot;:&quot;railway_nongraded_delta1_8&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;railway_nongraded_delta2&quot;,&quot;defaultValue&quot;:5},{&quot;apiName&quot;:&quot;con_zinc_reg&quot;,&quot;defaultValue&quot;:40},{&quot;apiName&quot;:&quot;con_zinc_medium_55&quot;,&quot;defaultValue&quot;:55},{&quot;apiName&quot;:&quot;con_zinc_avg_77&quot;,&quot;defaultValue&quot;:65},{&quot;apiName&quot;:&quot;con_zinc_min_77&quot;,&quot;defaultValue&quot;:77}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:type="xsd:string">{&quot;PICKLIST_OPTIONS&quot;:{&quot;beamOptions&quot;:[&quot;2&quot;],&quot;postThicknessOptions&quot;:[&quot;3.8&quot;,&quot;3.9&quot;,&quot;4&quot;],&quot;postHeightOptions&quot;:[&quot;2100&quot;,&quot;2400&quot;,&quot;2700&quot;],&quot;zincOptions&quot;:[&quot;Regular&quot;,&quot;Average 77 microns over Crash Tested Rates&quot;,&quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;],&quot;transOptions&quot;:[&quot;Ex-works&quot;,&quot;F.O.R (Freight on Road)&quot;],&quot;removePostOptions&quot;:[&quot;8&quot;,&quot;9&quot;]},&quot;BASE_RATES&quot;:{&quot;Graded&quot;:79,&quot;Non-Graded&quot;:76}}</value>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

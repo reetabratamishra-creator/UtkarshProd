@@ -1,0 +1,125 @@
+<template>
+    <lightning-card title="Customer Journey" icon-name="standard:opportunity">
+
+        <template lwc:if={saving}>
+            <lightning-spinner alternative-text="Working" size="small"></lightning-spinner>
+        </template>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+            <!-- ============ STEP 1: choose journey ============ -->
+            <template lwc:if={showJourneyStep}>
+                <template lwc:if={currentJourneyLabel}>
+                    <p class="slds-text-color_weak slds-m-bottom_small">
+                        Current journey: <strong>{currentJourneyLabel}</strong>
+                    </p>
+                </template>
+
+                <lightning-combobox
+                    label="Customer Journey"
+                    value={selectedJourney}
+                    options={journeyOptions}
+                    onchange={handleJourneyChange}
+                    required>
+                </lightning-combobox>
+
+                <!-- Sub Stage: appears after a Customer Journey is chosen; mandatory while the field is blank (req 9) -->
+                <template lwc:if={showSubStage}>
+                    <lightning-combobox
+                        label="Sub Stage"
+                        value={selectedSubStage}
+                        options={subStageOptions}
+                        onchange={handleSubStageChange}
+                        required
+                        class="slds-m-top_small">
+                    </lightning-combobox>
+                </template>
+
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Cancel" onclick={closeAction}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Next" onclick={handleNext}
+                        disabled={nextDisabled}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ STEP 2a: dealer details (to Refer to Dealer) ============ -->
+            <template lwc:if={showDealerStep}>
+                <p class="slds-m-bottom_small">
+                    Referring to a dealer. Stage will be set to <strong>Negotiation</strong>.
+                </p>
+
+                <lightning-record-picker
+                    label="Dealer"
+                    placeholder="Search dealers..."
+                    object-api-name="Account"
+                    value={dealerId}
+                    filter={dealerFilter}
+                    onchange={handleDealerChange}>
+                </lightning-record-picker>
+                <p class="slds-text-color_weak slds-text-body_small slds-m-top_xx-small">
+                    {dealerHelpText}
+                </p>
+                <template lwc:if={dealerError}>
+                    <p class="slds-text-color_error slds-text-body_small slds-m-top_xx-small">
+                        Dealer is required.
+                    </p>
+                </template>
+
+                <template lwc:if={valuesFromQuote}>
+                    <p class="slds-text-color_weak slds-text-body_small slds-m-top_small">
+                        Expected Deal Value and Closure Date were prefilled from the approved quotation. You can edit them if needed.
+                    </p>
+                </template>
+
+                <lightning-input type="number" formatter="currency" label="Expected Deal Value"
+                    value={amount} onchange={handleAmountChange} required
+                    class="slds-m-top_x-small"></lightning-input>
+                <lightning-input type="date" label="Closure Date"
+                    value={closeDate} onchange={handleCloseDateChange} required></lightning-input>
+
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Back" onclick={backToJourney}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save" onclick={saveDealer}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ STEP 2b: confirm to Direct Business ============ -->
+            <template lwc:if={showConfirmDirectStep}>
+                <p class="slds-m-bottom_small">
+                    Moving to Direct Business. The opportunity will be set to <strong>{directTargetStage}</strong> ({quotePresenceText}).
+                </p>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Back" onclick={backToJourney}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Confirm" onclick={confirmDirect}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ STEP 3: follow-up task ============ -->
+            <template lwc:if={showFollowUpStep}>
+                <p class="slds-m-bottom_small">
+                    Journey updated and open tasks were closed. Schedule the follow-up task.
+                </p>
+                <lightning-combobox label="Task Type" value={taskType}
+                    options={taskTypeOptions} onchange={handleTaskTypeChange} required></lightning-combobox>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input type="date" label="Date" value={followUpDate}
+                            onchange={handleFollowUpDateChange} required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="time" label="Time" value={followUpTime}
+                            onchange={handleFollowUpTimeChange} required></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button variant="brand" label="Create Task" onclick={saveFollowUp}
+                        disabled={followUpInvalid}></lightning-button>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

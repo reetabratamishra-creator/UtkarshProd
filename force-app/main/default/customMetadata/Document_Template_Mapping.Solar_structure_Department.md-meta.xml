@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Solar structure Department</label>
+    <protected>false</protected>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Solar Structure - Department</value>
+    </values>
+    <values>
+        <field>Excel_VF_Page__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>PDF_VF_Page__c</field>
+        <value xsi:type="xsd:string">/apex/SolarStructureQuotePDF</value>
+    </values>
+    <values>
+        <field>Template_Type__c</field>
+        <value xsi:type="xsd:string">Solar Structure - Finish Thickness</value>
+    </values>
+    <values>
+        <field>Word_VF_Page__c</field>
+        <value xsi:type="xsd:string">/apex/SolarStructureQuoteWord</value>
+    </values>
+    <values>
+        <field>offer_document__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

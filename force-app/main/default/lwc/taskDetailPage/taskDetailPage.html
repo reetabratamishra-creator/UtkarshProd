@@ -1,0 +1,120 @@
+<template>
+
+    <template for:each={sections} for:item="section">
+
+        <div key={section.sectionName} class="section-container">
+
+            <!-- HEADER -->
+            <div class="section-header"
+                 data-section={section.sectionName}
+                 onclick={toggleSection}>
+
+                <lightning-icon icon-name={section.iconName} size="xx-small"></lightning-icon>
+
+                <span class="section-title">
+                    {section.sectionName}
+                </span>
+
+            </div>
+
+            <!-- BODY -->
+            <template lwc:if={section.isExpanded}>
+
+                <template for:each={section.rows} for:item="row">
+
+                    <div key={row.key} class="slds-grid slds-gutters section-body">
+
+                        <!-- LEFT -->
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <template lwc:if={row.leftField}>
+
+                                <div class="field-container">
+
+                                    <div class="field-label">
+                                        {row.leftField.label}
+                                    </div>
+
+                                    <template lwc:if={row.leftField.isLookup}>
+                                         <div class="field-inline">
+                                            <a href={row.leftField.recordUrl}>
+                                                {row.leftField.value}
+                                            </a>
+
+                                            <template lwc:if={row.leftField.subValue}>
+                                                <lightning-formatted-date-time
+                                                    value={row.leftField.subValue}
+                                                    year="numeric"
+                                                    month="2-digit"
+                                                    day="2-digit"
+                                                    hour="numeric"
+                                                    minute="2-digit">
+                                                </lightning-formatted-date-time>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template lwc:else>
+                                        <div class="field-value">
+                                            {row.leftField.value}
+                                        </div>
+                                    </template>
+
+                                </div>
+
+                            </template>
+
+                        </div>
+
+                        <!-- RIGHT -->
+                        <div class="slds-col slds-size_1-of-2">
+
+                            <template lwc:if={row.rightField}>
+
+                                <div class="field-container">
+
+                                    <div class="field-label">
+                                        {row.rightField.label}
+                                    </div>
+
+                                    <template lwc:if={row.rightField.isLookup}>
+                                       <div class="field-inline">
+                                            <a href={row.rightField.recordUrl}>
+                                                {row.rightField.value}
+                                            </a>
+
+                                            <template lwc:if={row.rightField.subValue}>
+                                                <lightning-formatted-date-time
+                                                    value={row.rightField.subValue}
+                                                    year="numeric"
+                                                    month="2-digit"
+                                                    day="2-digit"
+                                                    hour="numeric"
+                                                    minute="2-digit">
+                                                </lightning-formatted-date-time>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template lwc:else>
+                                        <div class="field-value">
+                                            {row.rightField.value}
+                                        </div>
+                                    </template>
+                                </div>
+
+                            </template>
+
+                        </div>
+
+                    </div>
+
+                </template>
+
+            </template>
+
+        </div>
+
+    </template>
+
+</template>

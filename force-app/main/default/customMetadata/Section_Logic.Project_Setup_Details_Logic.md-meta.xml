@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Project Setup Details Logic</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Project_Setup_Details_For_Steel_Tubular</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;incoterms&quot;,
+      &quot;label&quot;: &quot;Incoterms&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;formula&quot;: &quot;(d3_trans || d2_trans || d1_trans  || c3_trans || c2_trans || c1_trans) ? &apos;Freight&apos;: &apos;Ex-works&apos;&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;final_for&quot;,
+      &quot;label&quot;: &quot;FOR&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;formula&quot;: &quot;(d3_for || d2_for || d1_for || c3_for || c2_for || c1_for)&quot;,
+      &quot;options&quot;: [
+        &quot;Lump sum&quot;,
+        &quot;Per pcs&quot;
+      ],
+      &quot;controllingField&quot;: &quot;incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;transportation&quot;,
+      &quot;label&quot;: &quot;Final Charges&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;formula&quot;: &quot;(d3_transportation || d3_lump_sum || d2_transportation || d2_lump_sum || d1_transportation || d1_lump_sum || c3_for_lump || c3_for_transp || c2_for_transp || c1_for_transp || c2_for_lump || c1_for_lump) &quot;,
+      &quot;controllingField&quot;: &quot;final_for&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Per pcs&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lumpsum&quot;,
+      &quot;label&quot;: &quot;Final Charges&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;formula&quot;: &quot;(d3_lump_sum || d2_lump_sum || d1_lump_sum ) &quot;,
+      &quot;controllingField&quot;: &quot;final_for&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Lump sum&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;customer_address_folder&quot;,
+      &quot;label&quot;: &quot;Customer Address&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Freight&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;CUSTOMER ADDRESS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;billing_address&quot;,
+              &quot;label&quot;: &quot;Billing Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ba_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingStreet@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingCity@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_zip_code&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingPostalCode@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingState@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingCountry@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Phone@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_email&quot;,
+                  &quot;label&quot;: &quot;EMAIL&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Email__c@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_website&quot;,
+                  &quot;label&quot;: &quot;WEBSITE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Website@@&quot;,
+                  &quot;colSpan&quot;: 12
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;terms_and_conditions_folder&quot;,
+      &quot;label&quot;: &quot;Terms &amp; Conditions&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;tc_details&quot;,
+              &quot;label&quot;: &quot;Terms &amp; Condition Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_pct&quot;,
+                  &quot;label&quot;: &quot;Payment Terms (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 30,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_validity_days&quot;,
+                  &quot;label&quot;: &quot;Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 7,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_consignment_start&quot;,
+                  &quot;label&quot;: &quot;Consignment Start Date&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 30,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_consignment_end&quot;,
+                  &quot;label&quot;: &quot;Consignment End Date&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 40,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_gst&quot;,
+                  &quot;label&quot;: &quot;GST&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;inclusive&quot;,
+                    &quot;exclusive&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;inclusive&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_price_variation&quot;,
+                  &quot;label&quot;: &quot;Price variation&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_budgetary&quot;,
+                  &quot;label&quot;: &quot;Budgetary&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;payment_terms_section&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_lc_buyer_interest_days&quot;,
+                  &quot;label&quot;: &quot;(I) USANCE INTEREST IN BUYER SCOPE(IN NUMBER OF DAYS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_lc_seller_interest_days&quot;,
+                  &quot;label&quot;: &quot;(II) USANCE INTEREST IN SELLER SCOPE(IN NUMBER OF DAYS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_lc_interest_days&quot;,
+                  &quot;label&quot;: &quot;NO. OF LC INTEREST DAYS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_vfs_seller_interest&quot;,
+                  &quot;label&quot;: &quot;INTEREST COMPONENT ON VFS FOR SELLER&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_vfs_interest_days&quot;,
+                  &quot;label&quot;: &quot;NO. OF VFS INTEREST DAYS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_open_credit_days&quot;,
+                  &quot;label&quot;: &quot;NO. OF OPEN CREDIT DAYS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  &quot;_lineItemAdjustments&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;final_for&quot;,
+      &quot;conditionValue&quot;: &quot;Per pcs&quot;,
+      &quot;chargeField&quot;: &quot;transportation&quot;,
+      &quot;applyGST&quot;: true,
+      &quot;divideByQuantity&quot;: true,
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;Designation&quot;,
+        &quot;Customizedd&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    }
+  ],
+  &quot;_newLineItemGenerators&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;final_for&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum&quot;,
+      &quot;chargeField&quot;: &quot;lumpsum&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Transportation Charges (Lump Sum)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

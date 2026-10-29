@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reassaign_Reason__c</fullName>
+    <label>Reassaign Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Interested in other Utkarsh Projects</fullName>
+                <default>false</default>
+                <label>Interested in other Utkarsh Projects</label>
+            </value>
+            <value>
+                <fullName>Due to Week Off</fullName>
+                <default>false</default>
+                <label>Due to Week Off</label>
+            </value>
+            <value>
+                <fullName>Looking For other User</fullName>
+                <default>false</default>
+                <label>Looking For other User</label>
+            </value>
+            <value>
+                <fullName>Duplicate lead with the same user</fullName>
+                <default>false</default>
+                <label>Duplicate lead with the same user</label>
+            </value>
+            <value>
+                <fullName>Unwell/Early Leave</fullName>
+                <default>false</default>
+                <label>Unwell/Early Leave</label>
+            </value>
+            <value>
+                <fullName>Due to technical Issue (Reassign Done)</fullName>
+                <default>false</default>
+                <label>Due to technical Issue (Reassign Done)</label>
+            </value>
+            <value>
+                <fullName>Owner Change Request Due as per management</fullName>
+                <default>false</default>
+                <label>Owner Change Request Due as per management</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

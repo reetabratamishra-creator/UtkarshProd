@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Qualified_Mandatory_fields</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status),
+    ISPICKVAL(Status, &quot;Qualified&quot;),
+    OR(
+        ISBLANK(City),
+        ISBLANK(State),
+        ISBLANK(Country),
+        ISBLANK(Company),
+        ISPICKVAL(Customer_Category__c, &quot;&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>City, State, Country, Company, Customer Category is mandatory to Qualify a Lead</errorMessage>
+</ValidationRule>

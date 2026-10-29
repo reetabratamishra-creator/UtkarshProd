@@ -1,0 +1,115 @@
+<template>
+    <lightning-card title="My Expenses" icon-name="standard:expense_report">
+        <div slot="actions">
+            <lightning-button
+                label="New Expense"
+                onclick={handleNew}
+                variant="brand"
+                icon-name="utility:add"
+                class="slds-m-right_x-small">
+            </lightning-button>
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                onclick={handleRefresh}
+                variant="border-filled">
+            </lightning-button-icon>
+        </div>
+
+        <!-- Filters -->
+        <div class="slds-p-horizontal_medium slds-p-bottom_small">
+            <div class="slds-grid slds-gutters slds-wrap">
+                <!-- Search -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                    <lightning-input
+                        type="search"
+                        label="Search"
+                        placeholder="Search by expense number or purpose..."
+                        value={searchKey}
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </div>
+
+                <!-- Status Filter -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                    <lightning-combobox
+                        label="Filter by Status"
+                        value={statusFilter}
+                        placeholder="Select Status"
+                        options={statusOptions}
+                        onchange={handleStatusFilter}>
+                    </lightning-combobox>
+                </div>
+
+                <!-- Summary -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                    <div class="slds-p-top_large">
+                        <span class="slds-text-body_regular slds-text-color_weak">
+                            {recordCount} expense(s) | Total: 
+                        </span>
+                        <lightning-formatted-number
+                            value={totalAmount}
+                            format-style="currency"
+                            currency-code="INR"
+                            minimum-fraction-digits="2"
+                            class="slds-text-heading_small">
+                        </lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <template if:true={hasExpenses}>
+            <div class="slds-p-horizontal_medium">
+                <lightning-datatable
+                    key-field="Id"
+                    data={filteredExpenses}
+                    columns={columns}
+                    sort-direction={sortDirection}
+                    sorted-by={sortBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column
+                    show-row-number-column>
+                </lightning-datatable>
+            </div>
+        </template>
+
+        <!-- Empty State -->
+        <template if:false={hasExpenses}>
+            <div class="slds-p-around_medium">
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-align_center">
+                        <h3 class="slds-text-heading_medium">No Expenses Found</h3>
+                        <p class="slds-text-body_regular slds-m-top_small">
+                            <template if:true={searchKey}>
+                                No expenses match your search criteria. Try different filters.
+                            </template>
+                            <template if:false={searchKey}>
+                                Get started by creating your first expense report.
+                            </template>
+                        </p>
+                        <lightning-button
+                            label="New Expense"
+                            onclick={handleNew}
+                            variant="brand"
+                            icon-name="utility:add"
+                            class="slds-m-top_medium">
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Error State -->
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>Error loading expenses. Please try again or contact your administrator.</h2>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

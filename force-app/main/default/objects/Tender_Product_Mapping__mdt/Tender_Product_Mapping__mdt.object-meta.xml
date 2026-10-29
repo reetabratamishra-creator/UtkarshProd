@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Tender Product mapping for ( Tender Endpoint  &amp; Result Endpoint ) &amp; Owner Assignment</description>
+    <label>Tender Product Mapping</label>
+    <pluralLabel>Tender Product Mappings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

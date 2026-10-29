@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>cb PT 250626</label>
+    <protected>false</protected>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Journey_Name__c</field>
+        <value xsi:type="xsd:string">cb_PT_250626</value>
+    </values>
+    <values>
+        <field>Payload_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;journeyname&quot;:&quot;cb_PT_250626&quot;,&quot;journeypayload&quot;:{&quot;nodes&quot;:{&quot;1&quot;:{&quot;templateType&quot;:&quot;WHATSAPP&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;crashbarrier_pt_250626_1&quot;,&quot;headerFormat&quot;:&quot;DOCUMENT&quot;,&quot;headerVariables&quot;:[{&quot;index&quot;:1,&quot;type&quot;:&quot;static&quot;,&quot;value&quot;:&quot;https://portal.bluewavesmedia.in/WhatsAppMedia/Template/Document/Utkarsh/crash_barrier(2).pdf&quot;,&quot;format&quot;:&quot;document&quot;}],&quot;bodyVariables&quot;:[],&quot;buttonVariables&quot;:[],&quot;carouselCards&quot;:[],&quot;limitedTimeOffer&quot;:null}},&quot;2&quot;:{&quot;templateType&quot;:&quot;RCSMESSAGE&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;cb_pt_250626_1&quot;,&quot;headerData&quot;:{},&quot;bodyData&quot;:{},&quot;footerData&quot;:{},&quot;cardData&quot;:[]}}}}}</value>
+    </values>
+    <values>
+        <field>Sort_Order__c</field>
+        <value xsi:type="xsd:double">17.0</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Standard Pole</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Standard Pole</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;galvanized_price&quot;,&quot;defaultValue&quot;:&quot;83&quot;},{&quot;apiName&quot;:&quot;mild_steel_price&quot;,&quot;defaultValue&quot;:&quot;63&quot;},{&quot;apiName&quot;:&quot;base_plate_price&quot;,&quot;defaultValue&quot;:&quot;63&quot;},{&quot;apiName&quot;:&quot;sister_plate_price&quot;,&quot;defaultValue&quot;:&quot;63&quot;},{&quot;apiName&quot;:&quot;cast_iron_price&quot;,&quot;defaultValue&quot;:&quot;800&quot;},{&quot;apiName&quot;:&quot;commercial_price&quot;,&quot;defaultValue&quot;:&quot;400&quot;},{&quot;apiName&quot;:&quot;foundation_bolt_price&quot;,&quot;defaultValue&quot;:&quot;100&quot;},{&quot;apiName&quot;:&quot;cable_entry_pipe_price&quot;,&quot;defaultValue&quot;:&quot;83&quot;}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

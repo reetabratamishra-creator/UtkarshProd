@@ -1,0 +1,236 @@
+<template>
+    <div class="page-container">
+        <div class="card-wrapper">
+            <lightning-card title="Lead CSV Import" icon-name="standard:lead">
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+                    <!-- 1. Lead Source -->
+                    <div class="upload-section slds-m-bottom_medium">
+                        <lightning-combobox
+                            name="leadSource"
+                            label="Lead Source"
+                            value={selectedLeadSource}
+                            placeholder="-- Select Lead Source --"
+                            options={leadSourceOptions}
+                            onchange={handleLeadSourceChange}
+                            required
+                            disabled={showResultSummary}
+                        ></lightning-combobox>
+                    </div>
+
+                    <!-- 2. CSV Upload -->
+                    <template if:false={showResultSummary}>
+                        <div class="upload-section slds-m-bottom_medium">
+                            <label class="slds-form-element__label" for="csv-upload">
+                                Upload Lead CSV <abbr class="slds-required" title="required">*</abbr>
+                            </label>
+                            <template if:false={hasCsvFile}>
+                                <input
+                                    type="file"
+                                    id="csv-upload"
+                                    disabled={showResultSummary}
+                                    data-id="csv-file-input"
+                                    accept=".csv"
+                                    onchange={handleCsvFileChange}
+                                    class="slds-input"
+                                />
+                            </template>
+                            <template if:true={hasCsvFile}>
+                                <div class="slds-grid slds-grid_align-spread slds-box slds-box_x-small slds-theme_shade">
+                                    <span class="slds-truncate" title={csvFileName}>
+                                        <lightning-icon icon-name="doctype:csv" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        {csvFileName}
+                                    </span>
+                                    <template if:false={showResultSummary}>
+                                        <lightning-button-icon
+                                            icon-name="utility:close"
+                                            alternative-text="Remove file"
+                                            title="Remove file"
+                                            onclick={handleRemoveCsvFile}
+                                        ></lightning-button-icon>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- 3. Preview Datatable -->
+                    <template if:true={showPreview}>
+                        <div class="upload-section slds-m-bottom_medium">
+                            <h3 class="slds-text-heading_small slds-m-bottom_x-small">Preview (edit any value before inserting)</h3>
+                            <div class="preview-box">
+                                <lightning-datatable
+                                    key-field="rowKey"
+                                    data={previewData}
+                                    columns={columns}
+                                    draft-values={draftValues}
+                                    errors={datatableErrors}
+                                    onsave={handleSave}
+                                    hide-checkbox-column
+                                ></lightning-datatable>
+                            </div>
+                        </div>
+
+                        <!-- 4. Supporting file upload -->
+                        <template if:true={isFileSectionVisible}>
+                            <div class="upload-section slds-m-bottom_medium">
+                                <label class="slds-form-element__label" for="support-upload">
+                                    Supporting Document <abbr class="slds-required" title="required">*</abbr>
+                                </label>
+                                <template if:false={supportingFileName}>
+                                    <input
+                                        type="file"
+                                        id="support-upload"
+                                        disabled={showResultSummary}
+                                        onchange={handleSupportingFileChange}
+                                        class="slds-input"
+                                    />
+                                </template>
+                                <template if:true={supportingFileName}>
+                                    <div class="slds-grid slds-grid_align-spread slds-box slds-box_x-small slds-theme_shade">
+                                        <span class="slds-truncate" title={supportingFileName}>
+                                            <lightning-icon icon-name="doctype:attachment" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                            {supportingFileName}
+                                        </span>
+                                        <template if:false={showResultSummary}>
+                                            <lightning-button-icon
+                                                icon-name="utility:close"
+                                                alternative-text="Remove file"
+                                                title="Remove file"
+                                                onclick={handleRemoveSupportingFile}
+                                            ></lightning-button-icon>
+                                        </template>
+                                    </div>
+                                </template>
+                                <div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
+                                    This file will be attached to every Lead created in this batch.
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- 5. Action Buttons -->
+                        <template if:false={showResultSummary}>
+                            <div class="action-buttons">
+                                    <lightning-button
+                                        variant="brand"
+                                        label="Insert"
+                                        onclick={handleInsert}
+                                        disabled={isInsertDisabled}
+                                    ></lightning-button>
+                                
+                                    <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+                                
+                                <template if:true={isProcessing}>
+                                    <div class="slds-col slds-align-middle">
+                                        <lightning-spinner alternative-text="Processing" size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+
+                    <!-- 6. Result Summary -->
+                    <template if:true={showResultSummary}>
+                        <div class="slds-box slds-m-top_medium" role="status">
+                            <h3 class="slds-text-heading_small slds-m-bottom_small">Import Summary</h3>
+                            <!-- <p>Total rows processed: <strong>{resultSummary.totalProcessed}</strong></p>
+                            <p>Successfully inserted: <strong>{resultSummary.successCount}</strong></p>
+                            <p>Failed: <strong>{resultSummary.failCount}</strong></p> -->
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+
+                                    <div class="summary-card">
+
+                                        <div class="summary-title">
+                                            Total
+                                        </div>
+
+                                        <div class="summary-value">
+                                            {resultSummary.totalProcessed}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="slds-col">
+
+                                    <div class="summary-card success">
+
+                                        <div class="summary-title">
+                                            Success
+                                        </div>
+
+                                        <div class="summary-value">
+                                            {resultSummary.successCount}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="slds-col">
+
+                                    <div class="summary-card failure">
+
+                                        <div class="summary-title">
+                                            Failed
+                                        </div>
+
+                                        <div class="summary-value">
+                                            {resultSummary.failCount}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <template if:true={resultSummary.hasFailures}>
+                                <div class="slds-m-top_small">
+                                    <p class="slds-text-color_error slds-m-bottom_x-small">Some rows could not be inserted:</p>
+                                    <ul class="slds-list_dotted">
+                                        <template for:each={resultSummary.errors} for:item="err">
+                                            <li key={err.rowKey}>{err.message}</li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+
+                            <div class="slds-m-top_medium">
+                                <lightning-button variant="brand" label="Finish" onclick={handleFinish}></lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+
+        <!-- Error Modal -->
+        <template if:true={showErrorModal}>
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close"
+                            onclick={handleCloseErrorModal}
+                        >
+                            <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium">CSV Validation Error</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>{errorModalMessage}</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Close" onclick={handleCloseErrorModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

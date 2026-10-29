@@ -1,0 +1,198 @@
+<apex:page standardController="Quote"
+    extensions="CostingExportController"
+    renderAs="pdf"
+    showHeader="false"
+    sidebar="false"
+    applyBodyTag="false">
+
+    <head>
+        <style>
+
+            @page {
+                size: A4;
+                margin: 40mm 8mm 16mm 8mm;
+
+                @top-center {
+                    content: element(header);
+                }
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #000000;
+                background: #ffffff;
+            }
+
+            /* Repeating PDF header */
+            .image-container {
+                position: running(header);
+                width: 200%;
+                height: 30mm;
+                display: block;
+            }
+
+            .pdf-header {
+                width: 100%;
+                height: 30mm;
+                display: block;
+            }
+
+            .report-title {
+                width: 100%;
+                text-align: center;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 30px;
+            }
+
+            .cost-table-wrapper {
+                width: 100%;
+                margin-bottom: 180px;
+            }
+
+            .cost-table-wrapper:last-child {
+                page-break-after: auto;
+            }
+
+            .cost-table {
+                width: 100%;
+                border-collapse: collapse;
+                border: 1px solid #999999;
+            }
+
+            .cost-table .table-title-row td {
+                background-color: #ffffff;
+                text-align: center;
+                font-size: 12px;
+                font-weight: bold;
+                color: #000000;
+                padding: 10px 8px;
+                border: 1px solid #999999;
+            }
+
+            .cost-table .table-header-row td {
+                background-color: #A9A9A9;
+                color: #000000;
+                font-weight: bold;
+                font-size: 11px;
+                text-align: center;
+                padding: 8px 10px;
+                border: 1px solid #999999;
+            }
+
+            .cost-table .data-row td {
+                background-color: #ffffff;
+                color: #000000;
+                font-size: 11px;
+                text-align: center;
+                padding: 7px 10px;
+                border: 1px solid #999999;
+            }
+
+            .cost-table .spacer-row td {
+                padding: 6px;
+                border: 1px solid #999999;
+                background-color: #ffffff;
+            }
+
+            .footer-note {
+                font-weight: bold;
+                font-size: 11px;
+                margin-top: 12px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Repeating header -->
+        <div class="image-container">
+            <img src="{!$Resource.UtkarshHeader}"
+                 alt="Utkarsh header"
+                 class="pdf-header"/>
+        </div>
+
+        <!-- Report title -->
+        <div class="report-title">
+            COST FACTOR - Transmission Tower &amp; Substation
+        </div>
+
+        <!-- Tables -->
+        <apex:repeat value="{!priceTables}" var="pt">
+
+            <div class="cost-table-wrapper">
+
+                <table class="cost-table">
+
+                    <tr class="table-title-row">
+                        <td colspan="2">
+                            {!pt.title}
+                        </td>
+                    </tr>
+
+                    <tr class="table-header-row">
+                        <td style="width:65%;">
+                            Product Details
+                        </td>
+                        <td style="width:35%;">
+                            Rate / ton
+                        </td>
+                    </tr>
+
+                    <apex:repeat value="{!pt.rows}" var="row">
+
+                        <apex:outputPanel layout="none"
+                            rendered="{!row.isSpacer}">
+
+                            <tr class="spacer-row">
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </apex:outputPanel>
+
+                        <apex:outputPanel layout="none"
+                            rendered="{!!row.isSpacer}">
+
+                            <tr class="data-row">
+
+                                <td>
+                                    <apex:outputText value="{!row.label}"/>
+                                </td>
+
+                                <td>
+                                    <apex:outputText value="{!row.value}"/>
+
+                                    <apex:outputText value="%"
+                                        rendered="{!row.label == 'Margin'}"/>
+
+                                </td>
+
+                            </tr>
+
+                        </apex:outputPanel>
+
+                    </apex:repeat>
+
+                    <tr>
+                        <td colspan="2" class="footer-note">
+                            {!pt.footerNote}
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </apex:repeat>
+
+    </body>
+</apex:page>

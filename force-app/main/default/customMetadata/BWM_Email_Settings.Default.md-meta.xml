@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Default</label>
+    <protected>false</protected>
+    <values>
+        <field>API_App_Key__c</field>
+        <value xsi:type="xsd:string">9cbcbf4af6fb3a971fb081f0efe263a5-40a447ee-9d83-4281-8737-8dc0400fe0a5</value>
+    </values>
+    <values>
+        <field>API_Key_Header__c</field>
+        <value xsi:type="xsd:string">Authorization</value>
+    </values>
+    <values>
+        <field>Central_Sender_Email__c</field>
+        <value xsi:type="xsd:string">noreply@utkarshindialimited.in</value>
+    </values>
+    <values>
+        <field>Corporate_Brochure_File_Title__c</field>
+        <value xsi:type="xsd:string">Corporate Brochure</value>
+    </values>
+    <values>
+        <field>Corporate_Brochure_Public_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C20000055MJZ&amp;d=%2Fa%2FC2000000udWf%2FYmAdI.bfzJU.9mx8iHzY33edWD72ND_8HI3x2IPUNPE&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Corporate_Brochure_Static_Resource__c</field>
+        <value xsi:type="xsd:string">Corporate_Brochure_2026_pdf</value>
+    </values>
+    <values>
+        <field>Endpoint_Path__c</field>
+        <value xsi:type="xsd:string">/email/4/messages</value>
+    </values>
+    <values>
+        <field>Is_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

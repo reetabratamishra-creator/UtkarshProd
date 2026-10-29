@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Source__c</fullName>
+    <description>Not to be used</description>
+    <label>Opportunity Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CRM RESOURCE</fullName>
+                <default>false</default>
+                <label>CRM RESOURCE</label>
+            </value>
+            <value>
+                <fullName>EMAIL CAMPAIGNING</fullName>
+                <default>false</default>
+                <label>EMAIL CAMPAIGNING</label>
+            </value>
+            <value>
+                <fullName>EVENT ACTIVATION</fullName>
+                <default>false</default>
+                <label>EVENT ACTIVATION</label>
+            </value>
+            <value>
+                <fullName>FACEBOOK</fullName>
+                <default>false</default>
+                <label>FACEBOOK</label>
+            </value>
+            <value>
+                <fullName>FB LEAD ADS</fullName>
+                <default>false</default>
+                <label>FB LEAD ADS</label>
+            </value>
+            <value>
+                <fullName>INBOUND EMAIL</fullName>
+                <default>false</default>
+                <label>INBOUND EMAIL</label>
+            </value>
+            <value>
+                <fullName>INBOUND PHONE CALL</fullName>
+                <default>false</default>
+                <label>INBOUND PHONE CALL</label>
+            </value>
+            <value>
+                <fullName>INDIAMART</fullName>
+                <default>false</default>
+                <label>INDIAMART</label>
+            </value>
+            <value>
+                <fullName>OFFLINE CRM</fullName>
+                <default>false</default>
+                <label>OFFLINE CRM</label>
+            </value>
+            <value>
+                <fullName>ONLINE CAMPAIGNING</fullName>
+                <default>false</default>
+                <label>ONLINE CAMPAIGNING</label>
+            </value>
+            <value>
+                <fullName>OUTBOUND PHONE CALL</fullName>
+                <default>false</default>
+                <label>OUTBOUND PHONE CALL</label>
+            </value>
+            <value>
+                <fullName>Offline Marketing</fullName>
+                <default>false</default>
+                <label>Offline Marketing</label>
+            </value>
+            <value>
+                <fullName>PAY PER CLICK ADS</fullName>
+                <default>false</default>
+                <label>PAY PER CLICK ADS</label>
+            </value>
+            <value>
+                <fullName>TENDER</fullName>
+                <default>false</default>
+                <label>TENDER</label>
+            </value>
+            <value>
+                <fullName>WEBSITE BOT CHAT</fullName>
+                <default>false</default>
+                <label>WEBSITE BOT CHAT</label>
+            </value>
+            <value>
+                <fullName>WHATSAPP CAMPAIGNING</fullName>
+                <default>false</default>
+                <label>WHATSAPP CAMPAIGNING</label>
+            </value>
+            <value>
+                <fullName>Website</fullName>
+                <default>false</default>
+                <label>Website</label>
+            </value>
+            <value>
+                <fullName>INDIAMART V2</fullName>
+                <default>false</default>
+                <label>INDIAMART V2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

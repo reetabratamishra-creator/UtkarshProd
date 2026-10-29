@@ -1,0 +1,1147 @@
+<template>
+   <div class="app-container">
+
+      <!-- APPLY progress overlay. The save runs as a chain now, so the mask stays
+           up for the whole thing and names the step in flight. The mask blurs and
+           locks the page underneath. Deepanjan (4th August 2026) -->
+      <template lwc:if={isApplying}>
+         <div class="apply-progress-mask">
+            <div class="apply-progress-card">
+               <div class="apply-progress-head">
+                  <span class="apply-step-label">{applyStepLabel}</span>
+                  <span class="apply-progress-pct">{applyProgress}%</span>
+               </div>
+               <div class="apply-progress-track">
+                  <div class="apply-progress-fill" style={applyBarStyle}></div>
+               </div>
+            </div>
+         </div>
+      </template>
+      <div class="main-layout">
+         <nav class="side-nav">
+            <div class="nav-top">
+               <div class={generateQuoteClass} data-id="GENERATE_QUOTE" onclick={handleNavClick}>
+                  <lightning-icon icon-name="utility:form" size="medium" variant="inverse"></lightning-icon>
+                  <span>GENERATE QUOTE</span>
+               </div>
+               <!-- <div class={customerDetailsClass} data-id="CUSTOMER_DETAILS" onclick={handleNavClick}>
+                  <lightning-icon icon-name="utility:user" size="medium" variant="inverse"></lightning-icon>
+                  <span>ACCOUNT DETAILS</span>
+               </div> -->
+               <div class={quotesClass} data-id="QUOTES" onclick={handleNavClick}>
+                  <lightning-icon icon-name="utility:quote" size="medium" variant="inverse"></lightning-icon>
+                  <span>QUOTES</span>
+               </div>
+               <template lwc:if={canViewRates}>
+                   <div class={ratesClass} data-id="RATES" onclick={handleNavClick} style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer;">
+                      <lightning-icon icon-name="utility:moneybag" size="medium" variant="inverse" style="margin-bottom: 4px;"></lightning-icon>
+                      <span style="color: white; font-weight: 700; font-size: 11px;">RATES</span>
+                   </div>
+               </template>
+               <template if:true={hasApprovalAccess}>
+              <div class={pendingApprovalsClass} data-id="PENDING_APPROVALS" onclick={handleNavClick} style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer; padding-top: 15px;">
+                  <lightning-icon icon-name="utility:task" size="medium" variant="inverse" style="margin-bottom: 4px;"></lightning-icon>
+                  <span style="color: white; font-weight: 700; font-size: 11px;">PENDING<br/>APPROVALS</span>
+
+                  <!-- Red dot: sits on the tab while this user still has quotes
+                       waiting on their approve/reject, and disappears the moment
+                       the last one is actioned. Styled inline so it needs no CSS
+                       file change. Deepanjan (6th August 2026) -->
+                  <template if:true={hasPendingApprovals}>
+                     <span title="You have quotes awaiting your approval"
+                           style="position: absolute; top: 8px; right: 10px; width: 10px; height: 10px; border-radius: 50%; background: #ea001e; box-shadow: 0 0 0 2px rgba(255,255,255,0.9);"></span>
+                  </template>
+               </div>
+               </template>
+            </div>
+         </nav>
+         <template lwc:if={isGenerateQuoteVisible}>
+   <div class="resizable-container">
+      <div class="template-sidebar" style={templateSidebarStyle}>
+         <div class="template-header-blue">
+            <lightning-icon icon-name="utility:chevronleft" size="x-small" variant="inverse"
+               class="back-icon" onclick={handleBack}></lightning-icon>
+            <h2>{sidebarTitle}</h2>
+         </div>
+         <div class="template-content">
+            <template lwc:if={showSelectionScreen}>
+               <div class="combobox-container">
+                  <lightning-combobox name="guidedSellingTemplate" label="SELECT A QUOTE TEMPLATE"
+                     value={selectedPicklistValue} placeholder="Select Specific Quote Template"
+                     options={quotePicklistOptions} onchange={handlePicklistChange}
+                     disabled={isReadOnlyMode}>
+                  </lightning-combobox>
+               </div>
+            </template>
+            <template lwc:if={showSelectionScreen}>
+               <template lwc:if={selectedPicklistValue}>
+                  <template if:false={isReadOnlyMode}>
+                     <button class="apply-btn" onclick={handleCreateClick}>CREATE</button>
+                  </template>
+               </template>
+            </template>
+           
+
+            <template lwc:else>
+               <div class="accordion-wrapper">
+                  <lightning-accordion allow-multiple-sections-open
+                     active-section-name={activeSections}>
+                     <template for:each={accordionSections} for:item="section">
+                        <template lwc:if={section.isVisible}>
+                           <lightning-accordion-section key={section.id} name={section.name}
+                              label={section.label} class="custom-accordion">
+                              <div class="config-grid">
+                                 <template lwc:if={section.fields.length}>
+                                    <template for:each={section.fields} for:item="field">
+                                       <template lwc:if={field.isVisible}>
+                                          <div class={field.rowClass} key={field.id}>
+                                             <div class="config-cell index-cell">
+                                                {field.sequence}
+                                             </div>
+                                             <div class="config-cell label-cell">
+                                                {field.label}
+                                              <template lwc:if={field.isPebComponent}>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_small">
+                                                      
+                                                      <span class="slds-m-right_small" style="font-weight: bold; font-size: 14px; color: #16325c;">
+                                                            Peb Cost Estimator
+                                                      </span>
+
+                                                      
+                                                      
+                                                   </div>
+                                              </template>
+                                              <!-- 👉 DOMESTIC STEEL PIPE CONFIG — label cell -->
+                                              <template lwc:if={field.isDomesticComponent}>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_small">
+                                                      <span class="slds-m-right_small" style="font-weight: bold; font-size: 14px; color: #16325c;">
+                                                            Domestic Pipe Config
+                                                      </span>
+                                                </div>
+                                              </template>
+                                              <!-- 👉 SOLAR STRUCTURE CONFIG — label cell -->
+                                              <template lwc:if={field.isSolarComponent}>
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_small">
+                                                      <span class="slds-m-right_small" style="font-weight: bold; font-size: 14px; color: #16325c;">
+                                                            Solar Structure Config
+                                                      </span>
+                                                </div>
+                                              </template>
+                                             </div>
+                                             <div class="config-cell input-cell">
+                                                <template lwc:if={field.isPicklist}>
+                                                   <lightning-combobox
+                                                      class="borderless-combobox"
+                                                      variant="label-hidden"
+                                                      options={field.options}
+                                                      value={field.value}
+                                                      data-name={field.apiName}
+                                                      data-section={section.id}
+                                                      required={field.isRequired}
+                                                      onchange={handleFieldValueChange}
+                                                      disabled={isReadOnlyMode}
+                                                      placeholder=" ">
+                                                   </lightning-combobox>
+                                                </template>
+                                                <template lwc:if={field.isNumber}>
+                                                   <lightning-input type="number"
+                                                      variant="label-hidden"
+                                                      value={field.value}
+                                                      data-name={field.apiName}
+                                                      data-section={section.id}
+                                                      required={field.isRequired}
+                                                      onchange={handleFieldValueChange}
+                                                      disabled={isReadOnlyMode}
+                                                      class="borderless-input">
+                                                   </lightning-input>
+                                                </template>
+                                                <template lwc:if={field.isText}>
+                                                   <lightning-input type="text"
+                                                      variant="label-hidden"
+                                                      value={field.value}
+                                                      data-name={field.apiName}
+                                                      data-section={section.id}
+                                                      required={field.isRequired}
+                                                      onchange={handleFieldValueChange}
+                                                      disabled={isReadOnlyMode}
+                                                      class="borderless-input">
+                                                   </lightning-input>
+                                                </template>
+                                                <template lwc:if={field.isPebComponent}>
+                                                   <div class="estimator-icon-wrapper"
+                                                         title={pebFolderTitle}
+                                                         onclick={handlePebFolderClick}
+                                                         style={pebFolderCursorStyle}>
+                                                      <lightning-icon icon-name={pebFolderIconName} size="small" class="folder-icon-blue"></lightning-icon>
+                                                   </div>
+                                                </template>
+                                                <!-- 👉 SOLAR STRUCTURE CONFIG — button cell -->
+                                                <template lwc:if={field.isSolarComponent}>
+                                                   <div class="estimator-icon-wrapper" title="Open Solar Structure Configuration" onclick={openSolarStructureModal} style="cursor: pointer;">
+                                                      <lightning-icon icon-name="utility:open_folder" size="small" class="folder-icon-blue"></lightning-icon>
+                                                   </div>
+                                                </template>
+                                                <template lwc:if={field.hasFolderIcon}>
+                                                   <div class="estimator-icon-wrapper"
+                                                      title="Open Configuration"
+                                                      data-name={field.apiName}
+                                                      data-section={section.id}
+                                                      onclick={handleFolderClick}>
+                                                      <lightning-icon
+                                                         icon-name={field.iconName}
+                                                         size="small"
+                                                         class={field.iconClass}></lightning-icon>
+                                                   </div>
+                                                   <!-- calling modal here when clicking on file button -->
+                                                   <div>
+                                                      <c-weight-estimator-modal
+                                                         is-read-only={isReadOnlyMode}
+                                                         onmodalclose={handleCancel}
+                                                         onapplyvalues={handleModalApply}>
+                                                      </c-weight-estimator-modal>
+                                                   </div>
+                                                </template>
+                                             </div>
+                                          </div>
+                                       </template>
+                                    </template>
+                                 </template>
+                                 <template lwc:else>
+                                    <div class="section-body"
+                                       style="padding: 15px; color: #5c7b96;">No fields
+                                       configured for this section.
+                                    </div>
+                                 </template>
+                              </div>
+                           </lightning-accordion-section>
+                        </template>
+                     </template>
+                  </lightning-accordion>
+               </div>
+            </template>
+         </div>
+         <div class="config-footer">
+            <template lwc:if={showSelectionScreen}></template>
+            <template lwc:else>
+               <!-- Expiration Date sits outside the metadata-driven accordion, so it is
+                    common to every department without touching a single Section Logic
+                    record. Deepanjan (2nd August 2026) -->
+               <div class="footer-inner">
+                  <div class="expiry-field">
+                     <lightning-input
+                        type="date"
+                        label="Expiration Date"
+                        required
+                        value={expirationDate}
+                        onchange={handleExpirationDateChange}
+                        disabled={isReadOnlyMode}
+                        min={expirationMinDate}
+                        class="expiry-input">
+                     </lightning-input>
+                  </div>
+                  <template if:false={isReadOnlyMode}>
+                     <button class="apply-btn" onclick={handleApplyParent}>APPLY</button>
+                  </template>
+               </div>
+            </template>
+         </div>
+      </div>
+      <div class="resize-handle" onmousedown={startResize} ondblclick={resetWidth}
+         title="Drag to resize | Double-click to reset">
+      </div>
+      <div class="content-area" style={contentAreaStyle}>
+         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-bottom: 8px; padding-right: 15px; width: 100%;">
+            <!-- RE-OPEN safety net (Deepanjan, 20th July 2026): the main button
+                 below sits inside the isQuoteSaved gate, and that flag drops to
+                 false on several paths - hiding the button on Approved quotes.
+                 This copy keys off the quote LIST status alone and renders ONLY
+                 when the main one cannot, so exactly one is ever visible. -->
+            <template lwc:if={showReopenFallback}>
+               <button 
+                  onclick={handleReopenForEdit} 
+                  disabled={currentQuoteHasRevision}
+                  title={reopenBlockTitle}
+                  class="reopen-edit-btn"
+                  style="border: 1.5px solid #0176d3; color: #0176d3; background-color: white; border-radius: 20px; padding: 4px 16px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background-color 0.2s; white-space: nowrap;">
+               RE-OPEN FOR EDIT
+               </button>
+            </template>
+            <template lwc:if={isQuoteSaved}>
+               <template if:true={canEditQuote}>
+               <!-- QUOTE REVISION (Deepanjan, 19th July 2026): linear chain - a quote
+                    that already has a newer revision cannot be re-opened again. -->
+               <button 
+                  onclick={handleReopenForEdit} 
+                  disabled={currentQuoteHasRevision}
+                  title={reopenBlockTitle}
+                  class="reopen-edit-btn"
+                  style="border: 1.5px solid #0176d3; color: #0176d3; background-color: white; border-radius: 20px; padding: 4px 16px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background-color 0.2s; white-space: nowrap;"
+                  onmouseover={handleButtonHover}
+                  onmouseout={handleButtonOut}>
+               RE-OPEN FOR EDIT
+               </button>
+               </template>
+               
+               <template if:false={isQuoteApproved}>
+                  <template if:false={isQuoteInReview}>
+                     
+                     <!-- 👉 IF APPROVALS ARE TURNED ON FOR THIS DEPARTMENT -->
+                     <template lwc:if={isApprovalRoutingActive}>
+                         <template lwc:if={isAwaitingDueDate}>
+                            <div style="display: flex; align-items: flex-end; gap: 10px;">
+                               <lightning-input type="date" label="Approval Due Date" value={approvalDueDate} onchange={handleDueDateChange} required style="margin-bottom: -4px;"></lightning-input>
+                               <lightning-button label="Confirm" variant="brand" onclick={finalSubmitForApproval}></lightning-button>
+                            </div>
+                         </template>
+                         
+                         <template lwc:else>
+                            <div style="position: relative; display: inline-block;">
+                               <button 
+                                  onclick={toggleSubmitPopover} 
+                                  style="border: 1.5px solid #0176d3; color: #0176d3; background-color: white; border-radius: 20px; padding: 4px 16px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background-color 0.2s; white-space: nowrap;"
+                                  onmouseover={handleButtonHover}
+                                  onmouseout={handleButtonOut}>
+                               SUBMIT FOR APPROVAL
+                               </button>
+                               
+                               <!-- Popover logic remains exactly the same -->
+                               <template lwc:if={isSubmitPopoverOpen}>
+                                  <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 12px; width: 280px; background: white; border: 1px solid #d4dad6; border-top: 3px solid #0176d3; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 4px; z-index: 9999; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+                                     <div style="position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 10px; height: 10px; background: #0176d3;"></div>
+                                     <textarea oninput={handleApprovalMessageChange} placeholder="Enter submit message..." style="width: 100%; height: 70px; border: none; resize: none; outline: none; font-size: 14px; font-style: italic; color: #3e3e3c;"></textarea>
+                                     <button disabled={isSubmitDisabled} onclick={confirmSubmitForApproval} style={submitPopoverButtonStyle} onmouseover={handleButtonHover} onmouseout={handleButtonOut}>SUBMIT</button>
+                                  </div>
+                               </template>
+                            </div>
+                         </template>
+                     </template>
+
+                     <!-- 👉 IF APPROVALS ARE TURNED OFF FOR THIS DEPARTMENT -->
+                     <template lwc:else>
+                         <lightning-button 
+                             label="Self Approve" 
+                             onclick={handleSelfApprove} 
+                             variant="success" 
+                             class="slds-m-left_x-small">
+                         </lightning-button>
+                     </template>
+
+                  </template>
+               </template>
+
+               <!-- Generate Offer Document available BEFORE approval too. Same toggle/handler
+                    as the post-approval button; that one is unchanged. Reetabrata (13th July 2026) -->
+               <template lwc:if={showGenerateOfferButtonPreApproval}>  <!-- Reetabrata (13th July 2026) -->
+                  <lightning-button
+                     label={toggleButtonLabel}
+                     variant="brand"
+                     onclick={handleToggleExcelGenerator}
+                     class="slds-m-left_x-small">
+                  </lightning-button>
+               </template>
+
+               <!-- Cost Sheet: traceable XLSX of all formulas + values for this quote. Reetabrata (13th July 2026) -->
+<template lwc:if={showCostSheetButton}>
+   <c-cost-sheet-generator
+      record-id={quoteId}
+      template-name={selectedPicklistValue}
+      department-name={selectedPicklistValue}
+      oncostsheettoast={handleCostSheetToast}>
+   </c-cost-sheet-generator>
+</template>
+
+               <div class="slds-m-top_medium">
+                  <template if:true={showFinalizeQuoteButton}>
+                        <lightning-button 
+                           label="Finalize Quote" 
+                           variant="brand" 
+                           icon-name="utility:check"
+                           onclick={handleFinalizeQuote}
+                           class="slds-m-left_x-small">
+                        </lightning-button>
+                        <template if:true={Loading}>
+                           <div class="full-page-spinner-mask">
+                                 <lightning-spinner 
+                                    alternative-text="Finalizing quote and generating documents..." 
+                                    size="large"
+                                    variant="brand">
+                                 </lightning-spinner>
+                           </div>
+                        </template>
+                  </template>
+
+                  <template if:true={isQuoteAlreadyFinalized}>
+                        <div class="slds-box slds-theme_success slds-theme_alert-texture slds-m-left_x-small" role="alert">
+                           <span class="slds-text-heading_small">Quote has been finalized</span>
+                        </div>
+                        
+                  </template>
+                                          <!-- QUOTE CLONE - Deepanjan (7th September 2026): offered only once the
+                             quote is Approved AND finalized (16th September 2026); opens the
+                             opportunity picker modal below. -->
+                        <template if:true={showCloneQuoteButton}>
+                           <div class="clone-quote-action slds-m-top_x-small slds-m-left_x-small">
+                              <lightning-button
+                                 label="Clone this Quote"
+                                 icon-name="utility:copy"
+                                 variant="neutral"
+                                 onclick={handleOpenCloneModal}>
+                              </lightning-button>
+                           </div>
+                        </template>
+               </div>
+               
+               <template if:true={isQuoteApproved}>
+                  <lightning-button 
+                     label={toggleButtonLabel}
+                     variant="brand"
+                     onclick={handleToggleExcelGenerator}>
+                  </lightning-button>
+               </template>
+               
+            </template>
+         </div>
+         <template lwc:if={isExcelViewActive}>
+            <div class="slds-m-top_large slds-box slds-theme_default">
+                <c-quote-excel-generator record-id={quoteId} allow-download={canDownloadOffer}></c-quote-excel-generator>
+            </div>
+         </template>
+         <template lwc:else>
+            <div class="single-quote-action-bar">
+               <template lwc:if={isCurrentQuoteOwner}>
+                  <template lwc:if={isQuoteApproved}>
+                     <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px 16px; background-color: #eef4fb; border-radius: 4px;"
+                        onmouseenter={handleApproverHoverEnter}
+                        onmouseleave={handleApproverHoverLeave}>
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: default;">
+                           <span style="font-size: 11px; font-weight: bold; color: #080707; margin-bottom: 4px; text-transform: uppercase;">
+                           APPROVED BY
+                           </span>
+                           <div style="display: flex; align-items: center; gap: 8px; font-weight: bold; font-size: 14px; color: #080707;">
+                              <lightning-icon icon-name="standard:avatar" size="small"></lightning-icon>
+                              <span>{approverName}</span>
+                           </div>
+                        </div>
+                        <template lwc:if={isApproverHovered}>
+                           <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 380px; background: white; border: 1px solid #0070d2; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16); border-radius: 4px; margin-top: 5px; font-weight: normal; color: #080707; text-align: left;">
+                              <div style="display: flex; align-items: center; padding: 8px 12px; background-color: #f3f3f3; cursor: pointer;" onclick={toggleHoverDropdown}>
+                                 <lightning-icon icon-name={hoverDropdownIcon} size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                 <span style="font-size: 13px;">
+                                 Approval Submitted on <strong>{formattedSubmissionDate}</strong> was <strong style="color: #0070d2;">APPROVED</strong>
+                                 </span>
+                              </div>
+                              <template lwc:if={isHoverDropdownExpanded}>
+                                 <div style="background-color: white; border-top: 1px solid #dddbda; font-size: 13px; color: #080707;">
+                                    <div style="display: flex; align-items: center; padding: 10px 12px; border-bottom: 1px solid #dddbda;">
+                                       <div style="width: 25%; font-weight: bold;">Submitter</div>
+                                       <div style="width: 45%; display: flex; align-items: center; gap: 8px;">
+                                          <lightning-icon icon-name="standard:avatar" size="small"></lightning-icon>
+                                          <span>{submitterName}</span>
+                                       </div>
+                                       <div style="width: 30%; color: #3e3e3c;">{formattedSubmissionDate}</div>
+                                    </div>
+                                   
+                                 </div>
+                              </template>
+                           </div>
+                        </template>
+                     </div>
+                  </template>
+               
+                  
+               </template>
+
+               <!-- HOD sees this when escalation is required -->
+               <template if:true={showEscalateButton}>
+                  <lightning-button 
+                     label="Approve and pass to next apporver" 
+                     onclick={handleEscalateQuote} 
+                     variant="brand" 
+                     class="slds-m-left_x-small">
+                  </lightning-button>
+
+                  <lightning-button 
+                     label="Reject" 
+                     onclick={handleRejectQuote} 
+                     variant="destructive" 
+                     class="slds-m-left_x-small">
+                  </lightning-button>
+               </template>
+
+               <template if:true={showApproveButton}>
+                 <lightning-button 
+                     label="Approve" 
+                     onclick={handleApproveQuote} 
+                     variant="success" 
+                     class="slds-m-left_x-small">
+                  </lightning-button>
+
+                  <lightning-button 
+                     label="Reject" 
+                     onclick={handleRejectQuote} 
+                     variant="destructive" 
+                     class="slds-m-left_x-small">
+                  </lightning-button>
+               </template>
+            </div>
+            <div class="centered-text">
+               <template lwc:if={isQuoteScreenHidden}>
+                  <div class="quote-card">
+                     <div class="card-row top-row">
+                        <div class="field-block">
+                           <!-- QUOTE REVISION (Deepanjan, 19th July 2026): on a revision the
+                                family root's number sits small above this quote's OWN number -
+                                lineage on top, identity below. Absent on the original (R0). -->
+                           <template lwc:if={isRevisionChild}>
+                              <div class="parent-quote-line">{originalQuoteNumber}</div>
+                              <div class="parent-quote-caption">ORIGINAL QUOTE</div>
+                           </template>
+                           <div class="field-value">{quoteNumber}</div>
+                           <div class="field-label">QUOTE NAME</div>
+                        </div>
+                        <!-- Current revision, shown right after QUOTE NAME per Deepanjan
+                             (17th July 2026). revisionLabel now reads Revision_No__c off
+                             the LDS getRecord wire, so it refreshes by itself the moment
+                             the reopen bump saves. R0 = original, R1/R2... after each
+                             Approved|Rejected -> Draft reopen. -->
+                        <div class="field-block no-border">
+                           <div class="field-value">{revisionLabel}</div>
+                           <div class="field-label">REVISION</div>
+                        </div>
+                     </div>
+                     <!-- Hidden per Deepanjan (17th July 2026): only QUOTE NAME stays on the card.
+                     <div class="card-row bottom-row">
+                        <div class="field-block">
+                           <div class="field-value">{currency}</div>
+                           <div class="field-label">CURRENCY</div>
+                        </div>
+                        <div class="field-block">
+                           <div class="field-value">{durationInWeeks}</div>
+                           <div class="field-label">DURATION IN WEEKS</div>
+                        </div>
+                        <div class="field-block">
+                           <div class="field-value">{avgRate}</div>
+                           <div class="field-label">AVG RATE</div>
+                        </div>
+                     </div>
+                     -->
+                  </div>
+                  <!-- Hidden per Deepanjan (17th July 2026): price summary card removed from the UI.
+<div class="quote-card">
+                     <div class="card-row top-row">
+                        <div class="field-block">
+                           <div class="field-value">{listPrice}</div>
+                           <div class="field-label">LIST PRICE</div>
+                        </div>
+                        <div class="field-block">
+                           <div class="field-value">{discount}</div>
+                           <div class="field-label">DISCOUNT</div>
+                        </div>
+                        <div class="field-block no-border">
+                           <div class="field-value">{netPrice}</div>
+                           <div class="field-label">NET PRICE</div>
+                        </div>
+                     </div>
+                     <div class="card-row bottom-row">
+                        <div class="field-block">
+                           <div class="field-value">{expenses}</div>
+                           <div class="field-label">EXPENSES</div>
+                        </div>
+                        <div class="field-block">
+                           <div class="field-value">{margin}</div>
+                           <div class="field-label">MARGIN</div>
+                        </div>
+                        <div class="field-block no-border">
+                           <div class="field-value">{cost}</div>
+                           <div class="field-label">COST</div>
+                        </div>
+                     </div>
+                  -->
+               </template>
+            </div>
+            <!-- Table Section -->
+            <div class="table-wrapper" style="display: flex;">
+               <div class="fixed-col" style="width: 320px; flex-shrink: 0; border-right: 2px solid #e5e7eb; z-index: 10; background: white;">
+                  <div class="col-header" style="min-height: 40px; display: flex; align-items: center;font-weight: bold;">NAME</div>
+                  <template for:each={rows} for:item="row">
+                     <div key={row.id} class="col-cell" 
+                        style="font-weight: bold; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; min-height: 50px; display: flex; align-items: center; padding-right: 8px;" 
+                        title={row.name}>
+                        {row.name}
+                     </div>
+                  </template>
+               </div>
+               <!-- Abhishek saxena -->
+               <template lwc:if={isDomesticOrExport}>
+                  <div class="scrollable-cols" style="overflow-x: auto; width: 100%;">
+                     <div class="scroll-header-row" style="min-height: 40px; display: flex; align-items: center; width: max-content;">
+                        <div class="col-header" style="min-width: 150px; padding: 0 8px;font-weight: bold;">Pipe / Designation</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">Size (NB)</div>
+                        <div class="col-header" style="min-width: 180px; padding: 0 8px;font-weight: bold;">Wall Thickness (mm)/Class</div>
+                        <div class="col-header" style="min-width: 250px; padding: 0 8px;font-weight: bold;">Standard (Specification &amp; Grade)</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">End Finish</div>
+                        <div class="col-header" style="min-width: 100px; padding: 0 8px;font-weight: bold;">Quantity</div>
+                        <div class="col-header" style="min-width: 100px; padding: 0 8px;font-weight: bold;">UOM</div>
+                         <div class="col-header" style="min-width: 130px; padding: 0 8px;font-weight: bold;">Rate (Rs./Kg)</div>
+                        <div class="col-header" style="min-width: 100px; padding: 0 8px;font-weight: bold;">GST @18%</div>
+                        <div class="col-header" style="min-width: 130px; padding: 0 8px;font-weight: bold;">Price (Per UOM)</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">Total Price</div>
+                     </div>
+                     <template for:each={rows} for:item="row">
+                        <div key={row.id} class="scroll-data-row" style="min-height: 50px; display: flex; align-items: center; width: max-content; border-bottom: 1px solid #e5e7eb;">
+                           <div class="col-cell" style="min-width: 150px; padding: 0 8px;font-weight: bold;">{row.designation}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.size_nb}</div>
+                           <div class="col-cell" style="min-width: 180px; padding: 0 8px;font-weight: bold;">{row.pipe_class}</div>
+                           <div class="col-cell" style="min-width: 250px; padding: 0 8px;font-weight: bold;">{row.standard_spec_grade}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.end_finish}</div>
+                           <div class="col-cell" style="min-width: 100px; padding: 0 8px;font-weight: bold;">{row.quantity}</div>
+                           <div class="col-cell" style="min-width: 100px; padding: 0 8px;font-weight: bold;">{row.uom}</div>
+                           <div class="col-cell" style="min-width: 130px; padding: 0 8px;font-weight: bold;">{row.rate}</div>
+                           <div class="col-cell" style="min-width: 100px; padding: 0 8px;font-weight: bold;">{row.gst}</div>
+                           <div class="col-cell" style="min-width: 130px; padding: 0 8px;font-weight: bold;">{row.price_per_uom}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.total_price}</div>
+                        </div>
+                     </template>
+                  </div>
+               </template>
+               <template lwc:else>
+                  <div class="scrollable-cols" style="overflow-x: auto;">
+                     <div class="scroll-header-row" style="min-height: 40px; display: flex; align-items: center; width: max-content;">
+                        <!-- Wrap headers in conditional template -->
+                        <template lwc:if={showStandardColumns}>
+                        <!-- Hidden per Deepanjan (17th July 2026): <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">BILLABLE</div> -->
+                        <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">QUANTITY</div>
+                        <!-- Hidden per Deepanjan (17th July 2026): <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">UOM</div> -->
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">UNIT COST</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">UNIT PRICE</div>
+                        <div class="col-header" style="min-width: 130px; padding: 0 8px;font-weight: bold;">UNIT LIST PRICE</div>
+                        <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">EXPENSES</div>
+                        <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">DISCOUNT</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">NET PRICE</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">LIST PRICE</div>
+                        <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">COST</div>
+                        <div class="col-header" style="min-width: 110px; padding: 0 8px;font-weight: bold;">MARGIN</div>
+                        <!-- Hidden per Deepanjan (17th July 2026): <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">START DATE</div> -->
+                        <!-- Hidden per Deepanjan (17th July 2026): <div class="col-header" style="min-width: 120px; padding: 0 8px;font-weight: bold;">END DATE</div> -->
+                        <!-- Hidden per Deepanjan (17th July 2026): <div class="col-header" style="min-width: 100px; padding: 0 8px;font-weight: bold;">WEEKS</div> -->
+                         </template>
+                     </div>
+                     <template for:each={rows} for:item="row">
+                        <div key={row.id} class="scroll-data-row" style="min-height: 50px; display: flex; align-items: center; width: max-content; border-bottom: 1px solid #e5e7eb;">
+                           <!-- Wrap data cells in conditional template -->
+                           <template lwc:if={showStandardColumns}>
+                           <!-- <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.billable}</div> -->
+                           <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.quantity}</div>
+                           <!-- <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.uom}</div> -->
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.unitCost}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.unitPrice}</div>
+                           <div class="col-cell" style="min-width: 130px; padding: 0 8px;font-weight: bold;">{row.unitListPrice}</div>
+                           <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.expenses}</div>
+                           <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.discount}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.netPrice}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.listPrice}</div>
+                           <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.cost}</div>
+                           <div class="col-cell" style="min-width: 110px; padding: 0 8px;font-weight: bold;">{row.margin}</div>
+                           <!-- <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.startDate}</div> -->
+                           <!-- <div class="col-cell" style="min-width: 120px; padding: 0 8px;font-weight: bold;">{row.endDate}</div> -->
+                           <!-- <div class="col-cell" style="min-width: 100px; padding: 0 8px;font-weight: bold;">{row.weeks}</div> -->
+                            </template>
+                        </div>
+                     </template>
+                  </div>
+               </template>
+               <!-- End -->
+            </div>
+         </template>
+         <!--Abhishek saxena 06-05-2026-->
+         <!-- End -->    
+      </div>
+   </div>
+</template>
+         
+
+         <template lwc:elseif={isCustomerDetailsVisible}>
+            <div class="content-area-full">
+               <div class="static-message-box">
+                  <h1>Account Information</h1>
+                  <p>Coming Soon.</p>
+               </div>
+            </div>
+         </template>
+         <template lwc:elseif={isQuotesVisible}>
+            <div class="content-area-full">
+               <div class="quotes-container">
+                  <div class="quotes-header">
+                     <div class="header-left">
+                        <h1>Quotes</h1>
+                        <span class="quote-badge" lwc:if={hasQuotes}>{quotesCount} Quotes Found</span>
+                     </div>
+                     <div class="header-actions">
+                        <button class="refresh-btn" onclick={refreshQuotes}>
+                           <lightning-icon icon-name="utility:refresh" size="xx-small"
+                              class="refresh-icon"></lightning-icon>
+                           <span>Refresh</span>
+                        </button>
+                     </div>
+                  </div>
+                  <template lwc:if={Loading}>
+                     <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>{initializationStage}</p>
+                     </div>
+                  </template>
+                  <template lwc:elseif={quotesError}>
+                     <div class="error-state">
+                        <lightning-icon icon-name="utility:error" size="medium"
+                           variant="error"></lightning-icon>
+                        <p>{quotesError}</p>
+                        <button class="retry-btn" onclick={retryLoading}>Retry</button>
+                     </div>
+                  </template>
+                  <template lwc:else>
+                     <div class="quotes-datatable">
+                        <div class="table-header">
+                           <div class="header-cell cell-name">Quote Name</div>
+                           <div class="header-cell cell-number">Number</div>
+                           <div class="header-cell cell-status">Status</div>
+                           <div class="header-cell cell-amount">Amount</div>
+                           <div class="header-cell cell-date">Created</div>
+                           <div class="header-cell cell-expiry">Expiry</div>
+                           <div class="header-cell cell-approver">Approver</div>
+                           <div class="header-cell cell-actions">Actions</div>
+                        </div>
+                        <div class="table-body">
+                           <!-- QUOTE REVISION (Deepanjan, 19th July 2026): one MAIN row per
+                                family = its LATEST revision (Rn badge + versions chip); the
+                                chevron expands the older versions as indented view-only rows.
+                                Quotes without revisions render exactly as before. -->
+                           <template for:each={familyQuotes} for:item="quote">
+                              <div key={quote.Id}>
+                              <div class="table-row">
+                                 <div class="row-cell cell-name" title={quote.Name}>
+                                    <template lwc:if={quote.hasOlder}>
+                                       <button class="family-chevron" data-root={quote.rootId} onclick={toggleFamily} title="Show previous versions">
+                                          <lightning-icon icon-name={quote.chevronIcon} size="xx-small"></lightning-icon>
+                                       </button>
+                                    </template>
+                                    <span>{quote.Name}</span>
+                                    <template lwc:if={quote.revBadge}>
+                                       <span class="rev-badge">{quote.revBadge}</span>
+                                    </template>
+                                    <template lwc:if={quote.latestTag}>
+                                       <span class="latest-tag">{quote.latestTag}</span>
+                                    </template>
+                                    <template lwc:if={quote.versionChip}>
+                                       <span class="version-chip">{quote.versionChip}</span>
+                                    </template>
+                                 </div>
+                                 <div class="row-cell cell-number" title={quote.QuoteNumber}>
+                                    {quote.QuoteNumber}
+                                 </div>
+                                 <div class="row-cell cell-status">
+                                    <span class="status-badge"
+                                       style={quote.statusStyle}>{quote.Status}</span>
+                                    <!-- Why it was rejected, right beside the badge.
+                                         Deepanjan (7th August 2026) -->
+                                    <template lwc:if={quote.hasRejectionReason}>
+                                       <lightning-helptext
+                                          icon-name="utility:info_alt"
+                                          icon-variant="error"
+                                          content={quote.rejectionTooltip}
+                                          class="slds-m-left_xx-small">
+                                       </lightning-helptext>
+                                    </template>
+                                 </div>
+                                 <div class="row-cell cell-amount">{quote.formattedAmount}</div>
+                                 <div class="row-cell cell-date">{quote.formattedDate}</div>
+                                 <div class="row-cell cell-expiry">
+                                    <span lwc:if={quote.ExpirationDate}>{quote.formattedExpiryDate}</span>
+                                    <span lwc:else>—</span>
+                                 </div>
+                                  <div class="row-cell cell-approver" title={quote.approverName}>{quote.approverName}</div>
+                                 <div class="row-cell cell-actions">
+                                    <div class="action-buttons">
+                                       <button class="action-btn view-btn" data-id={quote.Id}
+                                          onclick={viewQuote}>
+                                          <lightning-icon icon-name="utility:preview"
+                                             size="xx-small"></lightning-icon>
+                                       </button>
+                                       <!-- <button class="action-btn edit-btn" data-id={quote.Id}
+                                          onclick={editQuote}>
+                                          <lightning-icon icon-name="utility:edit"
+                                              size="xx-small"></lightning-icon>
+                                          </button> -->
+                                      <!-- <template lwc:if={quote.isOwner}>
+                                          <button class="action-btn submit-btn" data-id={quote.Id} 
+                                             onclick={submitForApproval} title="Submit for Approval">
+                                             <lightning-icon icon-name="utility:approval" size="xx-small"></lightning-icon>
+                                          </button>
+                                       </template>-->
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <!-- older versions: view-only rows (Export stays available after
+                                   opening one - the generator works on whichever quote is
+                                   selected). Deepanjan (19th July 2026) -->
+                              <template lwc:if={quote.isExpanded}>
+                                 <template for:each={quote.olderVersions} for:item="ver">
+                                    <div class="table-row version-subrow" key={ver.Id}>
+                                       <div class="row-cell cell-name" title={ver.Name}>
+                                          <span class="subrow-connector">└</span>
+                                          <span class="rev-badge rev-badge-old">{ver.revLabel}</span>
+                                          <template lwc:if={ver.originalTag}>
+                                             <span class="original-tag">{ver.originalTag}</span>
+                                          </template>
+                                          <span class="subrow-name">{ver.Name}</span>
+                                       </div>
+                                       <div class="row-cell cell-number">{ver.QuoteNumber}</div>
+                                       <div class="row-cell cell-status">
+                                          <span class="status-badge" style={ver.statusStyle}>{ver.Status}</span>
+                                          <template lwc:if={ver.hasRejectionReason}>
+                                             <lightning-helptext
+                                                icon-name="utility:info_alt"
+                                                icon-variant="error"
+                                                content={ver.rejectionTooltip}
+                                                class="slds-m-left_xx-small">
+                                             </lightning-helptext>
+                                          </template>
+                                       </div>
+                                       <div class="row-cell cell-amount">{ver.formattedAmount}</div>
+                                       <div class="row-cell cell-date">{ver.formattedDate}</div>
+                                       <div class="row-cell cell-expiry">
+                                          <span lwc:if={ver.ExpirationDate}>{ver.formattedExpiryDate}</span>
+                                          <span lwc:else>—</span>
+                                       </div>
+                                        <div class="row-cell cell-approver" title={ver.approverName}>{ver.approverName}</div>
+                                       <div class="row-cell cell-actions">
+                                          <div class="action-buttons">
+                                             <button class="action-btn view-btn" data-id={ver.Id}
+                                                onclick={viewQuote} title="View this version (read-only)">
+                                                <lightning-icon icon-name="utility:preview"
+                                                   size="xx-small"></lightning-icon>
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </template>
+                              </template>
+                              </div>
+                           </template>
+                        </div>
+                        <div class="table-footer">
+                           <div class="footer-right">
+                              <span class="total-amount">Total: {totalQuotesAmount}</span>
+                           </div>
+                        </div>
+                     </div>
+                  </template>
+               </div>
+               
+            </div>
+            
+         </template>
+        <template lwc:elseif={isRatesVisible}>
+            <div class="content-area-full" style="display: block; background: #f3f3f3; height: 100%; width: 100%; overflow: auto; padding: 20px; text-align: left;">
+               
+               <div style="background: white; border: 1px solid #c9c9c9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 20px; min-height: 100%;">
+                  
+                  <c-quote-rate-card></c-quote-rate-card>
+                  
+               </div>
+               
+            </div>
+         </template>
+       <template lwc:elseif={isPendingApprovalsVisible}>
+            <div class="content-area-full" style="display: block; background: #f3f3f3; height: 100%; width: 100%; overflow: auto; padding: 20px; text-align: left;">
+               <div style="background: white; border: 1px solid #c9c9c9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 20px; min-height: 100%;">
+                  
+                 <c-pending-approvals-list 
+                     pending-quotes={pendingApprovalQuotes} 
+                     onreviewquote={handleChildReviewQuote}>
+                  </c-pending-approvals-list>
+
+               </div>
+            </div>
+         </template>
+      </div>
+   </div>
+<!-- 👉 DOMESTIC STEEL PIPE MODAL -->
+   <template lwc:if={isSteelPipeModalOpen}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large steel-host-modal">
+         <div class="slds-modal__container" style="max-width: 95%; width: 95%;">
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeSteelPipeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 class="slds-text-heading_medium slds-hyphenate">Domestic Steel Pipe Configuration</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="min-height: 50vh;">
+               <c-steel-pipe-domestic-config 
+                   saved-pipes={domesticPipes}
+                   is-read-only={isReadOnlyMode}
+                   show-rate-in-doc={showRateInDocDomestic}
+                   onclosemodal={closeSteelPipeModal}
+                   onsaveconfig={handleSteelPipeSave}>
+               </c-steel-pipe-domestic-config>
+            </div>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+
+<!-- 👉 EXPORT STEEL PIPE MODAL -->
+<template lwc:if={isExportSteelPipeModalOpen}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large steel-host-modal">
+         <div class="slds-modal__container" style="max-width: 95%; width: 95%;">
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeExportSteelPipeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 class="slds-text-heading_medium slds-hyphenate">Export Steel Pipe Configuration</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="min-height: 50vh;">
+               <c-steel-pipe-export-config 
+                   saved-pipes={exportPipes}
+                   is-read-only={isReadOnlyMode}
+                   onclosemodal={closeExportSteelPipeModal}
+                   onsaveconfig={handleExportSteelPipeSave}>
+               </c-steel-pipe-export-config> 
+            </div>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+
+<!-- 👉 SOLAR STRUCTURE MODAL -->
+   <template lwc:if={isSolarStructureModalOpen}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large solar-host-modal">
+         <div class="slds-modal__container" style="max-width: 95%; width: 95%;">
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeSolarStructureModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 class="slds-text-heading_medium slds-hyphenate">Solar Structure Configuration</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="min-height: 50vh;">
+               <c-solar-structure-config 
+                   uom={solarStructureUom}
+                   saved-data={solarStructureData}
+                   is-read-only={isReadOnlyMode}
+                   onclose={closeSolarStructureModal}
+                   onsave={handleSolarStructureSave}>
+               </c-solar-structure-config>
+            </div>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+<!-- PEB PRICE CALCULATOR MODAL -->
+
+ <template lwc:if={isPebModalOpen}>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large peb-host-modal">
+        <div class="slds-modal__container" style="max-width: 98%; width: 98%;">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closePebModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close"
+                                    variant="inverse" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate">PEB Price Configuration</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="min-height: 60vh;">
+                <c-peb-price-calculator
+                    record-id={recordId}
+                    is-child-mode="true"
+                    saved-payload={pebSavedPayload}
+                    onsaveconfig={handlePebSave}>
+                </c-peb-price-calculator>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+<!-- PEB QFR MODAL -->
+<template if:true={isPebQFRModalOpen}>
+    <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large peb-host-modal">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" 
+                        title="Close" 
+                        onclick={closePebQFRModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small"></lightning-icon>
+                </button>
+                <h2 class="slds-modal__title slds-hyphenate">PEB Quote Request Form (QRF)</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="min-height: 400px;">
+                <c-peb-qfr-modal 
+                    quote-id={quoteId} 
+                    saved-data={pebQFRSavedData}
+                    is-read-only={isReadOnlyMode}
+                    onsaveqfr={handlePebQFRSave}>
+                </c-peb-qfr-modal>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+
+<!-- ══════════ REJECTION REASON — Deepanjan (6th August 2026) ══════════
+     Both Reject buttons open this instead of rejecting straight away. The
+     Reject button here stays disabled until a reason has been typed, so the
+     reason can never be blank, and it is saved to Quote.Rejection_Reason__c. -->
+<template if:true={showRejectModal}>
+   <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="reject-modal-heading"
+            class="slds-modal slds-fade-in-open slds-modal_small">
+      <div class="slds-modal__container">
+         <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close" onclick={closeRejectModal}>
+               <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+               <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="reject-modal-heading" class="slds-modal__title slds-hyphenate">Reject Quote</h2>
+         </header>
+
+         <div class="slds-modal__content slds-p-around_medium">
+            <lightning-textarea
+               label="Rejection Reason"
+               name="rejectionReason"
+               value={rejectionReason}
+               onchange={handleRejectionReasonChange}
+               required
+               max-length="32000"
+               placeholder="Explain why this quote is being rejected. This is sent to the person who submitted it.">
+            </lightning-textarea>
+         </div>
+
+         <footer class="slds-modal__footer">
+            <lightning-button label="Cancel" onclick={closeRejectModal}></lightning-button>
+            <lightning-button label="Reject Quote"
+                              variant="destructive"
+                              disabled={isRejectConfirmDisabled}
+                              onclick={confirmRejectQuote}
+                              class="slds-m-left_x-small">
+            </lightning-button>
+         </footer>
+      </div>
+   </section>
+   <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+<!-- ═══════════ QUOTE CLONE modal - Deepanjan (7th September 2026) ═══════════
+     Pick the target opportunity (current one pre-selected; search lists the
+     running user's own OPEN opportunities), then Create. The selected state is
+     the stock SLDS lookup look (entity icon + name in the input + clear icon),
+     not a free pill. clone-quote-modal is the marker class the mobile CSS hangs
+     off (full-screen sheet, above the mobile sidebar). -->
+<template if:true={showCloneModal}>
+   <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="clone-quote-heading"
+            class="slds-modal slds-fade-in-open slds-modal_small clone-quote-modal">
+      <div class="slds-modal__container">
+         <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close" onclick={closeCloneModal} disabled={cloneCreating}>
+               <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+               <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="clone-quote-heading" class="slds-modal__title slds-hyphenate">Clone this Quote</h2>
+         </header>
+
+         <div class="slds-modal__content slds-p-around_medium clone-quote-body">
+            <div class="slds-form-element">
+               <label class="slds-form-element__label">
+                  <abbr class="slds-required" title="required">*</abbr> Opportunity
+               </label>
+               <div class="slds-form-element__control">
+
+                  <!-- Selected: standard lookup look -->
+                  <template if:true={cloneSelectedOpp}>
+                     <div class="slds-combobox_container slds-has-selection">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                           <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                              <span class="slds-icon_container slds-combobox__input-entity-icon clone-quote-entity-icon">
+                                 <lightning-icon icon-name="standard:opportunity" size="x-small" alternative-text="Opportunity"></lightning-icon>
+                              </span>
+                              <input type="text" readonly aria-label="Selected opportunity"
+                                     class="slds-input slds-combobox__input slds-combobox__input-value"
+                                     value={cloneSelectedOpp.name} />
+                              <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                      title="Clear" onclick={handleCloneClearOpp} disabled={cloneCreating}>
+                                 <lightning-icon icon-name="utility:close" size="x-small" alternative-text="Clear"></lightning-icon>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="slds-form-element__help slds-text-color_weak clone-quote-meta">{cloneSelectedOppMeta}</div>
+                  </template>
+
+                  <!-- Searching: stock lookup with a dropdown of results -->
+                  <template if:false={cloneSelectedOpp}>
+                     <div class="slds-combobox_container">
+                        <div class={cloneComboboxClass}>
+                           <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                              <input type="search" autocomplete="off" aria-label="Search opportunities"
+                                     class="slds-input slds-combobox__input"
+                                     placeholder="Search opportunities..."
+                                     value={cloneSearchTerm}
+                                     oninput={handleCloneSearchChange} />
+                              <span class="slds-icon_container slds-input__icon slds-input__icon_right">
+                                 <lightning-icon icon-name="utility:search" size="x-small" alternative-text="Search"></lightning-icon>
+                              </span>
+                           </div>
+                           <template if:true={showCloneDropdown}>
+                              <div class="slds-dropdown slds-dropdown_length-7 slds-dropdown_fluid clone-quote-results" role="listbox">
+                                 <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template if:true={cloneSearching}>
+                                       <li role="presentation" class="slds-listbox__item">
+                                          <div class="slds-listbox__option slds-listbox__option_plain slds-text-color_weak">Searching...</div>
+                                       </li>
+                                    </template>
+                                    <template for:each={cloneOppOptions} for:item="opp">
+                                       <li key={opp.id} role="presentation" class="slds-listbox__item">
+                                          <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                               role="option" tabindex="0" data-id={opp.id} onclick={handleClonePickOpp}>
+                                             <span class="slds-media__figure slds-listbox__option-icon">
+                                                <lightning-icon icon-name="standard:opportunity" size="small" alternative-text="Opportunity"></lightning-icon>
+                                             </span>
+                                             <span class="slds-media__body">
+                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{opp.name}</span>
+                                                <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{opp.accountName} &middot; {opp.stageName}</span>
+                                             </span>
+                                          </div>
+                                       </li>
+                                    </template>
+                                    <template if:true={showCloneNoResults}>
+                                       <li role="presentation" class="slds-listbox__item">
+                                          <div class="slds-listbox__option slds-listbox__option_plain slds-text-color_weak">No matching open opportunity found.</div>
+                                       </li>
+                                    </template>
+                                 </ul>
+                              </div>
+                           </template>
+                        </div>
+                     </div>
+                  </template>
+
+               </div>
+            </div>
+         </div>
+
+         <footer class="slds-modal__footer clone-quote-footer">
+            <lightning-button label="Cancel" onclick={closeCloneModal} disabled={cloneCreating}></lightning-button>
+            <lightning-button label="Create" variant="brand" class="slds-m-left_x-small"
+                              onclick={handleCloneCreate} disabled={isCloneCreateDisabled}></lightning-button>
+         </footer>
+      </div>
+   </section>
+   <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+</template> <!-- Final closing tag of the file -->

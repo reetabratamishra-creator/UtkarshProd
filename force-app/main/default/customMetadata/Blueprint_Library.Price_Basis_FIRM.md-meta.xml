@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Price Basis FIRM</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;firm_material_list&quot;: [
+    {
+      &quot;apiName&quot;: &quot;firm_material_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;number_of_materials&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;material_list_type&quot;,
+          &quot;label&quot;: &quot;MATERIAL TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;repeatable&quot;: false,
+          &quot;options&quot;: [
+            &quot;RSJ / BFB MAST&quot;,
+            &quot;B-SERIES MAST&quot;,
+            &quot;TTC&quot;,
+            &quot;BRIDGE MAST&quot;,
+            &quot;O, N &amp; R TYPE PORTAL&quot;,
+            &quot;SPS&quot;,
+            &quot;EMERGENCY MAST&quot;,
+            &quot;TSS&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;subtype_qty&quot;,
+          &quot;label&quot;: &quot;SUB-MATERIAL TYPES&quot;,
+          &quot;type&quot;: &quot;subtype_qty_grid&quot;,
+          &quot;controllingField&quot;: &quot;material_list_type&quot;,
+          &quot;required&quot;: false,
+          &quot;colSpan&quot;: 12
+        },
+        {
+          &quot;apiName&quot;: &quot;total_weight_mt&quot;,
+          &quot;label&quot;: &quot;Total Weight (MT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;quantity_mt&quot;,
+          &quot;label&quot;: &quot;QUANTITY (PC)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true,
+          &quot;unit&quot;: &quot;(PC)&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;unit_rate&quot;,
+          &quot;label&quot;: &quot;UNIT RATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;repeatable&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;added_up&quot;,
+          &quot;label&quot;: &quot;ADDED UP&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        }
+      ]
+    }
+  ],
+  &quot;SpecialSection&quot;: [
+    {
+      &quot;apiName&quot;: &quot;ss_material_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;number_of_special_materials&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;ss_material_name&quot;,
+          &quot;label&quot;: &quot;Material&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;colSpan&quot;: &quot;3&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_weight_mt&quot;,
+          &quot;label&quot;: &quot;Weight (MT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MT&quot;,
+          &quot;colSpan&quot;: &quot;2&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_quantity_pc&quot;,
+          &quot;label&quot;: &quot;QUANTITY (Pc)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true,
+          &quot;unit&quot;: &quot;Pc&quot;,
+          &quot;colSpan&quot;: &quot;2&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_total_weight_mt&quot;,
+          &quot;label&quot;: &quot;Total Weight (MT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MT&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(ss_weight_mt * ss_quantity_pc)&quot;,
+          &quot;colSpan&quot;: &quot;2&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_unit_rate&quot;,
+          &quot;label&quot;: &quot;UNIT RATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: &quot;3&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT Cost&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;colSpan&quot;: &quot;3&quot;,
+          &quot;formula&quot;: &quot;ss_unit_rate || 0&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;ss_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT Price&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;colSpan&quot;: &quot;3&quot;,
+          &quot;formula&quot;: &quot;ss_unit_rate || 0&quot;
+        }
+      ]
+    }
+  ],
+  &quot;firm_material_price_summary&quot;: [
+    {
+      &quot;apiName&quot;: &quot;firm_price_summary_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;number_of_materials&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;material_summary_label&quot;,
+          &quot;label&quot;: &quot;MATERIAL&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;material_list_type&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isUnitPrice&quot;: true,
+          &quot;formula&quot;: &quot;cost_price &gt; 0 ? cost_price : \&quot;\&quot;&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;cost_price&quot;,
+          &quot;label&quot;: &quot;COST PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isUnitCost&quot;: true,
+          &quot;formula&quot;: &quot;unit_rate &gt; 0 ? unit_rate - discount + added_up : \&quot;\&quot;&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;summary_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isQuantity&quot;: true,
+          &quot;formula&quot;: &quot;quantity_mt&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;summary_weight&quot;,
+          &quot;label&quot;: &quot;TOTAL WEIGHT (MT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;total_weight_mt&quot;
+        }
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,88 @@
+<apex:page controller="TenderAISummaryViewController2" showHeader="false" sidebar="false" standardStylesheets="true" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; }
+        .doc-wrapper { max-width: 850px; margin: 20px auto; background:#fff; border:1px solid #ccc; box-shadow:0 0 6px rgba(0,0,0,0.15); }
+        .doc-header { background:#1a3c6e; color:#fff; padding:18px 24px; }
+        .doc-header h1 { margin:0; font-size:20px; }
+        .doc-header p { margin:4px 0 0; font-size:13px; color:#dbe4f0; }
+        .doc-meta { padding:14px 24px; border-bottom:2px solid #1a3c6e; background:#f8f9fb; font-size:13px; }
+        .doc-meta span { display:inline-block; margin-right:24px; }
+        .section { padding:0 24px; }
+        .section-title { background:#1a3c6e; color:#fff; padding:8px 12px; font-size:14px; font-weight:bold; margin-top:18px; }
+        table.field-table { width:100%; border-collapse: collapse; margin-bottom:6px; }
+        table.field-table tr { border-bottom:1px solid #e2e2e2; }
+        table.field-table td { padding:8px 12px; font-size:13px; vertical-align:top; }
+        table.field-table td.label { width:35%; font-weight:bold; color:#333; background:#fafafa; }
+        table.field-table td.value { width:65%; color:#222; }
+        .alert-box { margin:16px 24px; padding:12px; border-radius:4px; font-size:13px; }
+        .alert-error { color:#a94442; background:#f2dede; border:1px solid #ebccd1; }
+        .print-bar { padding:12px 24px; text-align:right; }
+        .print-bar button { background:#1a3c6e; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; font-size:13px; }
+        pre.raw { white-space:pre-wrap; word-break:break-word; font-size:12px; padding:12px; background:#fafafa; border:1px solid #eee; }
+        @media print {
+            .print-bar { display:none; }
+            body { background:#fff; }
+            .doc-wrapper { border:none; box-shadow:none; margin:0; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-wrapper">
+
+    <div class="doc-header">
+        <h1>Tender AI Summary Report</h1>
+        <p>Generated from stored AI analysis</p>
+    </div>
+
+    <apex:outputPanel rendered="{!tender != null}">
+        <div class="doc-meta">
+            <span><b>Tender:</b> {!tender.Name}</span>
+            <span><b>External Tender Id:</b> {!tender.External_Tender_Id__c}</span>
+            <span><b>Status:</b> {!tender.Tender_AI_Summary_status__c}</span>
+        </div>
+    </apex:outputPanel>
+
+    <div class="print-bar">
+        <button onclick="window.print();">Print / Save as PDF</button>
+    </div>
+
+    <apex:outputPanel rendered="{!parseFailed}">
+        <div class="alert-box alert-error">
+            <apex:outputText value="{!parseErrorMessage}" escape="false"/>
+        </div>
+    </apex:outputPanel>
+
+<apex:outputPanel rendered="{!!parseFailed}">
+
+    <div class="section">
+
+        <table class="field-table">
+
+            <apex:repeat value="{!rows}" var="row">
+
+                <tr>
+
+                    <td class="label">
+                        {!row.label}
+                    </td>
+
+                    <td class="value">
+                        <apex:outputText value="{!row.value}" escape="false"/>
+                    </td>
+
+                </tr>
+
+            </apex:repeat>
+
+        </table>
+
+    </div>
+
+</apex:outputPanel>
+
+</div>
+</body>
+</html>
+</apex:page>

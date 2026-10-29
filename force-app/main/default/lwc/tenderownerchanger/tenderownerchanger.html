@@ -1,0 +1,74 @@
+<template>
+
+    <!-- Spinner -->
+    <template if:true={isLoading}>
+        <lightning-spinner
+            alternative-text="Loading"
+            size="medium">
+        </lightning-spinner>
+    </template>
+
+    <div class="container">
+
+        <div class="header">
+            Change Owner
+        </div>
+
+        <div class="section">
+
+            <template if:false={hasLoadError}>
+
+                <lightning-input
+                    label="Department"
+                    value={department}
+                    disabled>
+                </lightning-input>
+
+                <br/>
+
+                <template if:true={hasUsers}>
+
+                    <lightning-combobox
+                        name="owner"
+                        label="Owner"
+                        value={selectedOwner}
+                        placeholder="Select Owner"
+                        options={ownerOptions}
+                        onchange={handleOwnerChange}>
+                    </lightning-combobox>
+
+                </template>
+
+                <template if:false={hasUsers}>
+
+                    <div class="warning-box">
+                        No active users found for this department.
+                    </div>
+
+                </template>
+
+            </template>
+
+            <!-- Footer -->
+            <div class="footer">
+
+                <lightning-button
+                    label="Cancel"
+                    onclick={handleCancel}>
+                </lightning-button>
+
+                <lightning-button
+                    class="slds-m-left_small"
+                    variant="brand"
+                    label="Save"
+                    onclick={handleSave}
+                    disabled={disableSave}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

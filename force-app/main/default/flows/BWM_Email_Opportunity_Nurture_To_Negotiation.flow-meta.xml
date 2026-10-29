@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Negotiation_Quotation_Email</name>
+        <label>Send Negotiation Quotation Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>BWM_SendEmailInvocable</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Send_Negotiation_Quotation_Message</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>triggerPoint</name>
+            <value>
+                <stringValue>Email_Opportunity_Stage_Nurture_To_Negotiation</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>BWM_SendEmailInvocable</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Negotiation_Quotation_Message</name>
+        <label>Send Negotiation Quotation Message</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>BWM_SendMessageInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>triggerPoint</name>
+            <value>
+                <stringValue>Opportunity_Stage_Nurture_To_Negotiation</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>BWM_SendMessageInvocable</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>BWM Email Opportunity Nurture To Negotiation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>BWM Email Opportunity Nurture To Negotiation</label>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Negotiation_Quotation_Email</targetReference>
+        </connector>
+        <filterFormula>AND(
+  ISCHANGED({!$Record.StageName}),
+  ISPICKVAL({!$Record.StageName}, &quot;Negotiation&quot;),
+  ISPICKVAL({!$Record__Prior.StageName}, &quot;Nurture&quot;)
+)</filterFormula>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

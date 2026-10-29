@@ -1,0 +1,278 @@
+.custom-table-wrapper {
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0 1rem;
+    background: #ffffff;
+}
+
+.table-scroll-inner {
+    min-width: 780px;
+    width: 100%;
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: minmax(150px, 1.2fr) minmax(140px, 1.1fr) minmax(110px, 0.9fr) minmax(200px, 2fr) minmax(120px, 0.9fr);
+    column-gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+}
+
+.table-header {
+    background: #f3f2f2;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #514f4d;
+    border-bottom: 1px solid #dddbda;
+}
+
+.th {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease;
+}
+
+.th:hover {
+    color: #0176d3;
+}
+
+.table-row {
+    border-top: 1px solid #f0f0f0;
+    transition: background 0.15s ease;
+}
+
+.table-row:first-of-type {
+    border-top: none;
+}
+
+.table-row:hover {
+    background: #fafaf9;
+}
+
+.th, .td {
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.35;
+}
+
+.td {
+    font-size: 0.8125rem;
+    color: #3e3e3c;
+}
+
+.expense-link-wrap {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.expense-link {
+    font-weight: 600;
+}
+
+.edit-badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    background: #fde9e9;
+    color: #ba0517;
+    white-space: nowrap;
+}
+
+/* Action column (extreme right) */
+.th-action {
+    cursor: default;
+}
+
+.th-action:hover {
+    color: #514f4d;
+}
+
+.rejected-summary {
+    color: #ba0517;
+    font-weight: 600;
+}
+
+.remark-text {
+    white-space: pre-line;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.status-pending {
+    background: #fef2cd;
+    color: #a66e00;
+}
+
+.status-approved {
+    background: #e3f8e6;
+    color: #2e844a;
+}
+
+.status-rejected {
+    background: #fde9e9;
+    color: #ba0517;
+}
+
+.status-neutral {
+    background: #f3f2f2;
+    color: #514f4d;
+}
+
+/* Pagination */
+.pagination-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.75rem 1rem 0;
+}
+
+.pagination-info {
+    font-size: 0.8125rem;
+    color: #706e6b;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pagination-page {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #3e3e3c;
+    white-space: nowrap;
+}
+
+/* Mobile: collapse grid into stacked cards */
+@media (max-width: 48em) {
+    .custom-table-wrapper {
+        border: none;
+        margin: 0;
+        padding: 0 0.5rem;
+        overflow-x: visible;
+        background: transparent;
+    }
+
+    .table-scroll-inner {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .table-row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-width: 0;
+        border: 1px solid #dddbda;
+        border-radius: 0.5rem;
+        margin-bottom: 0.875rem;
+        padding: 0.875rem 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        gap: 0;
+    }
+
+    .table-row:first-of-type {
+        border-top: 1px solid #dddbda;
+    }
+
+    .table-row:hover {
+        background: #ffffff;
+    }
+
+    .td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.45rem 0;
+        border-bottom: 1px solid #f3f2f2;
+        font-size: 0.8125rem;
+        text-align: right;
+    }
+
+    .td:last-child {
+        border-bottom: none;
+    }
+
+    .td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #706e6b;
+        text-align: left;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+
+    .expense-link-wrap {
+        justify-content: flex-end;
+    }
+
+    /* Larger touch target for the expense number on phones */
+    .expense-link {
+        display: inline-block;
+        padding: 0.35rem 0;
+        font-size: 0.875rem;
+    }
+
+    /* Long remarks read better stacked below the label */
+    .td-remark {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .td-remark::before {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Action line only on rejected cards; separator moves from Remark to Action */
+    .td-remark {
+        border-bottom: none;
+    }
+
+    .td-action {
+        border-top: 1px solid #f3f2f2;
+    }
+
+    .td-action-empty {
+        display: none;
+    }
+
+    .pagination-bar {
+        flex-direction: column;
+        margin: 0.25rem 0.5rem 0;
+    }
+
+    .pagination-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

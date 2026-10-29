@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Controls the layout of the Quote Configurator screen. Allows administrators to dynamically add, reorder, or hide specific configuration sections (like Weight Estimator) for different Quote Templates.</description>
+    <label>Accordion Section</label>
+    <pluralLabel>Accordion Sections</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

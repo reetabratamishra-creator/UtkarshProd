@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Weight Estimator - Pcs</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+    &quot;hdg_mms_structure&quot;: [
+        {
+            &quot;apiName&quot;: &quot;seg1_pole_grid&quot;,
+            &quot;type&quot;: &quot;column-repeater&quot;,
+            &quot;countApiName&quot;: &quot;s1_no_of_items&quot;,
+            &quot;maxColumns&quot;: 10,
+            &quot;fields&quot;: [
+                {
+                    &quot;apiName&quot;: &quot;s1_material&quot;,
+                    &quot;label&quot;: &quot;MATERIAL&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;required&quot;: true,
+                    &quot;options&quot;: [
+                        &quot;HDG MMS/Carport Structure&quot;,
+                        &quot;Piers for Tracker&quot;,
+                        &quot;RSJ&quot;
+                    ],
+                    &quot;defaultValue&quot;: &quot;HDG MMS/Carport Structure&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_material_grade&quot;,
+                    &quot;label&quot;: &quot;MATERIAL GRADE&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;required&quot;: true,
+                    &quot;options&quot;: [
+                        &quot;E250&quot;,
+                        &quot;E350&quot;,
+                        &quot;E350.&quot;,
+                        &quot;Special Grade&quot;,
+                        &quot;E250.&quot;
+                    ],
+                    &quot;controllingField&quot;: &quot;s1_material&quot;,
+                    &quot;dependentOptionsMap&quot;: {
+                        &quot;HDG MMS/Carport Structure&quot;: [
+                            &quot;E250&quot;,
+                            &quot;E350&quot;
+                        ],
+                        &quot;Black Metal&quot;: [
+                            &quot;E250&quot;,
+                            &quot;E350&quot;
+                        ],
+                        &quot;Galvalume&quot;: [
+                            &quot;AZ150 GSM (350 MPA)&quot;,
+                            &quot;AZ200 GSM (550 MPA)&quot;
+                        ],
+                        &quot;Piers for Tracker&quot;: [
+                            &quot;E350.&quot;,
+                            &quot;Special Grade&quot;
+                        ],
+                        &quot;RSJ&quot;: [
+                            &quot;E250.&quot;
+                        ]
+                    }
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_steel_rate&quot;,
+                    &quot;label&quot;: &quot;STEEL RATE&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;readOnly&quot;: true,
+                    &quot;formula&quot;: &quot;(s1_material_grade==&apos;E350&apos;)?61000:(s1_material_grade==&apos;E250&apos;)?58000:(s1_material_grade==&apos;AZ150 GSM (350 MPA)&apos;)?78000:(s1_material_grade==&apos;AZ200 GSM (550 MPA)&apos;)?81000:(s1_material_grade==&apos;E350.&apos;)?60000:(s1_material_grade==&apos;Special Grade&apos;)?63000:(s1_material_grade==&apos;E250.&apos;)?52000:0&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_materialDesc&quot;,
+                    &quot;label&quot;: &quot;MATERIAL DESCRIPTION&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;unit&quot;: &quot;MM&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_thickness&quot;,
+                    &quot;label&quot;: &quot;THICKNESS&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;unit&quot;: &quot;MM&quot;,
+                    &quot;defaultValue&quot;: &quot;&quot;,
+                    &quot;options&quot;: [
+                        &quot;2&quot;,
+                        &quot;2.5&quot;,
+                        &quot;3&quot;,
+                        &quot;5&quot;
+                    ],
+                    &quot;controllingField&quot;: &quot;s1_material_grade&quot;,
+                    &quot;dependentOptionsMap&quot;: {
+                        &quot;E250&quot;: [
+                            &quot;2&quot;,
+                            &quot;2.5&quot;,
+                            &quot;3&quot;
+                        ],
+                        &quot;E350&quot;: [
+                            &quot;2&quot;,
+                            &quot;2.5&quot;,
+                            &quot;3&quot;
+                        ],
+                        &quot;E350.&quot;: [
+                            &quot;5&quot;
+                        ],
+                        &quot;Special Grade&quot;: [
+                            &quot;5&quot;
+                        ]
+                    }
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_micron_thickness&quot;,
+                    &quot;label&quot;: &quot;MICRON THICKNESS&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;unit&quot;: &quot;µm&quot;,
+                    &quot;defaultValue&quot;: &quot;&quot;,
+                    &quot;options&quot;: [
+                        &quot;60&quot;,
+                        &quot;70&quot;,
+                        &quot;80&quot;,
+                        &quot;90&quot;,
+                        &quot;100&quot;,
+                        &quot;110&quot;
+                    ]
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_zincper_zincper&quot;,
+                    &quot;label&quot;: &quot;ZINC %&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;unit&quot;: &quot;%&quot;,
+                    &quot;readOnly&quot;: true,
+                    &quot;formula&quot;: &quot;(s1_material==&apos;RSJ&apos;)?&apos;4.5&apos;:((s1_thickness==2)?((((255/s1_thickness)*(7.093*s1_micron_thickness)/1000000*1.105757)*100).toFixed(2)):((s1_material==&apos;Piers for Tracker&apos;)?&apos;5&apos;:((((255/s1_thickness)*(7.093*s1_micron_thickness)/1000000*1.303)*100).toFixed(2))))&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_total_weight&quot;,
+                    &quot;label&quot;: &quot;TOTAL WEIGHT (MT)&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;unit&quot;: &quot;mt&quot;,
+                    &quot;required&quot;: true
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_freight&quot;,
+                    &quot;label&quot;: &quot;FREIGHT&quot;,
+                    &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_quote_value&quot;,
+                    &quot;label&quot;: &quot;QUOTE VALUE&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;formula&quot;: &quot;(s1_material_grade==&apos;E250&apos;?(((s1_steel_rate*(s1_material==&apos;Piers for Tracker&apos;?1.01:1.005))+(2000+(340000*(s1_zincper_zincper/100)*1.05))+(2000+1000+s1_freight)+(1500+(s1_thickness==2?0:500))+2500)-(s1_discount!=null?s1_discount:0)-3000):(((s1_steel_rate*(s1_material==&apos;Piers for Tracker&apos;?1.01:1.005))+(2000+(340000*(s1_zincper_zincper/100)*1.05))+(2000+1000+s1_freight)+(1500+(s1_thickness==2?0:500))+2500)-(s1_discount!=null?s1_discount:0)))&quot;,
+                    &quot;readOnly&quot;: true
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_discount&quot;,
+                    &quot;label&quot;: &quot;DISCOUNT&quot;,
+                    &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_quantity&quot;,
+                    &quot;label&quot;: &quot;QUANTITY&quot;,
+                    &quot;type&quot;: &quot;number&quot;
+                }
+            ]
+        }
+    ],
+    &quot;lp_s1_foundation&quot;: [
+        {
+            &quot;apiName&quot;: &quot;seg1_foundation_grid&quot;,
+            &quot;type&quot;: &quot;column-repeater&quot;,
+            &quot;countApiName&quot;: &quot;s1_no_of_items&quot;,
+            &quot;maxColumns&quot;: 10,
+            &quot;fields&quot;: [
+                {
+                    &quot;apiName&quot;: &quot;s2_material&quot;,
+                    &quot;label&quot;: &quot;MATERIAL&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;required&quot;: true,
+                    &quot;options&quot;: [
+                        &quot;Black Metal&quot;,
+                        &quot;Galvalume&quot;
+                    ]
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_material_grade&quot;,
+                    &quot;label&quot;: &quot;GRADE&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;required&quot;: true,
+                    &quot;options&quot;: [
+                        &quot;E250&quot;,
+                        &quot;E350&quot;,
+                        &quot;AZ150 GSM (350 MPA)&quot;,
+                        &quot;AZ200 GSM (550 MPA)&quot;
+                    ],
+                    &quot;controllingField&quot;: &quot;s2_material&quot;,
+                    &quot;dependentOptionsMap&quot;: {
+                        &quot;Black Metal&quot;: [
+                            &quot;E250&quot;,
+                            &quot;E350&quot;
+                        ],
+                        &quot;Galvalume&quot;: [
+                            &quot;AZ150 GSM (350 MPA)&quot;,
+                            &quot;AZ200 GSM (550 MPA)&quot;
+                        ]
+                    }
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_steel_rate&quot;,
+                    &quot;label&quot;: &quot;STEEL RATE&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;readOnly&quot;: true,
+                    &quot;formula&quot;: &quot;(s2_material_grade==&apos;E350&apos;)?61000:(s2_material_grade==&apos;E250&apos;)?58000:(s2_material_grade==&apos;AZ150 GSM (350 MPA)&apos;)?78000:(s2_material_grade==&apos;AZ200 GSM (550 MPA)&apos;)?81000:(s2_material_grade==&apos;E350.&apos;)?60000:(s2_material_grade==&apos;Special Grade&apos;)?63000:(s2_material_grade==&apos;E250.&apos;)?52000:0&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_materialDesc&quot;,
+                    &quot;label&quot;: &quot;MATERIAL DESCRIPTION&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;uni&quot;: &quot;mm&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_thickness&quot;,
+                    &quot;label&quot;: &quot;THICKNESS&quot;,
+                    &quot;type&quot;: &quot;picklist&quot;,
+                    &quot;defaultValue&quot;: &quot;&quot;,
+                    &quot;options&quot;: [
+                        &quot;0.9&quot;,
+                        &quot;1.0&quot;,
+                        &quot;1.2&quot;,
+                        &quot;1.5&quot;,
+                        &quot;1.6&quot;,
+                        &quot;2.0&quot;,
+                        &quot;2&quot;,
+                        &quot;2.5&quot;,
+                        &quot;3&quot;
+                    ]
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_unit_weight&quot;,
+                    &quot;label&quot;: &quot;UNIT WEIGHT (MT)&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;unit&quot;: &quot;MT&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_total_weight&quot;,
+                    &quot;label&quot;: &quot;TOTAL WEIGHT (MT)&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;unit&quot;: &quot;mt&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_freight&quot;,
+                    &quot;label&quot;: &quot;FREIGHT&quot;,
+                    &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;apiName&quot;: &quot;s2_quote_value&quot;,
+                    &quot;label&quot;: &quot;QUOTE VALUE&quot;,
+                    &quot;type&quot;: &quot;number&quot;,
+                    &quot;formula&quot;: &quot;(((s2_steel_rate*1.005)+(3000+s2_freight)+(1000+500+(s2_material==&apos;Black Metal&apos;?500:0))+2500)+((s2_material!=&apos;Black Metal&apos;&amp;&amp;s2_thickness&gt;1.1)?3000:0))&quot;,
+                    &quot;readOnly&quot;: true
+                },
+                {
+                    &quot;apiName&quot;: &quot;s1_discount&quot;,
+                    &quot;label&quot;: &quot;DISCOUNT&quot;,
+                    &quot;type&quot;: &quot;number&quot;
+                }
+            ]
+        }
+    ]
+}</value>
+    </values>
+</CustomMetadata>

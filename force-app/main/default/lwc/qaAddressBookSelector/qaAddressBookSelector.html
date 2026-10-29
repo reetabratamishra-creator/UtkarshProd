@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Select Address Book" icon-name="standard:address">
+
+        <template lwc:if={hasRecords}>
+            <div class="slds-p-around_medium">
+                <p class="slds-m-bottom_medium">
+                    Select an existing Address Book to use for this Opportunity and Contact.
+                </p>
+
+                <lightning-datatable
+                    key-field="Id"
+                    data={addresses}
+                    columns={columns}
+                    selected-rows={selectedRows}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </div>
+        </template>
+
+        <template lwc:if={noRecords}>
+            <div class="slds-p-around_medium slds-text-color_weak">
+                No Address Books were found for this Account.
+                <br/>
+                A new Address Book will automatically be created from the Lead Address.
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

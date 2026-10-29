@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tender_Compact_Layout</fullName>
+    <fields>Opportunity_Name_formula__c</fields>
+    <fields>Expected_Closure_Date_formula__c</fields>
+    <fields>Amount</fields>
+    <fields>Opportunity_Owner_formula__c</fields>
+    <fields>AccountId</fields>
+    <label>Tender Compact Layout</label>
+</CompactLayout>

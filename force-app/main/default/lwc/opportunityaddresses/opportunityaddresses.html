@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title={cardTitle} icon-name="standard:address">
+        <div class="slds-var-p-horizontal_small">
+            <template if:true={hasAddresses}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={addresses}
+                    columns={columns}
+                    hide-checkbox-column
+                    show-row-number-column="false">
+                </lightning-datatable>
+            </template>
+            <template if:false={hasAddresses}>
+                <template if:true={error}>
+                    <p class="slds-text-color_error">Error loading addresses: {error}</p>
+                </template>
+                <template if:false={error}>
+                    <p class="slds-text-color_weak slds-var-p-vertical_small">No address book records found.</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

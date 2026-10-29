@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Destination_Tier__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  OR(
+    CONTAINS(UPPER(Destination_City__c), &quot;DELHI&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;KOLKATA&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;MUMBAI&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;CHENNAI&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;BENGALURU&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;BANGALORE&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;HYDERABAD&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;AHMEDABAD&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;GUWAHATI&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;PUNE&quot;),
+    CONTAINS(UPPER(Destination_City__c), &quot;CHANDIGARH&quot;)
+  ),
+  &quot;Tier 1&quot;,
+  &quot;Tier 2&quot;
+)</formula>
+    <label>Destination Tier</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

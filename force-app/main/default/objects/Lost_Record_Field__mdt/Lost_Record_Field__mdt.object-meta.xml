@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Defines the fields to display in the Lost Records LWC datatables for Lead and Opportunity objects.</description>
+    <label>Lost Record Field</label>
+    <pluralLabel>Lost Record Fields</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

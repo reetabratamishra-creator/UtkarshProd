@@ -1,0 +1,210 @@
+.section-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #032d60;
+    background: #eef2f8;
+    border-left: 3px solid #0176d3;
+    padding: 0.35rem 0.6rem;
+    margin: 0.9rem 0 0.4rem 0;
+    border-radius: 3px;
+}
+
+.peb-table {
+    font-size: 0.8rem;
+}
+
+.peb-table th {
+    background: #f3f6fb;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.peb-table td,
+.peb-table th {
+    padding: 0.25rem 0.4rem;
+    vertical-align: middle;
+}
+
+.peb-table .ctr {
+    text-align: center;
+}
+
+.peb-table .rgt {
+    text-align: right;
+}
+
+.peb-table tr.subtotal td {
+    background: #f2f2f2;
+    font-weight: 700;
+}
+
+/* Keep numeric inputs compact inside the grid */
+.peb-table lightning-input,
+.peb-table lightning-combobox {
+    --slds-c-input-spacing-horizontal-start: 0.25rem;
+}
+
+.peb-banner {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 0.82rem;
+}
+
+.peb-banner_success {
+    background: #edf7f0;
+    border: 1px solid #91db8b;
+    color: #2e5c2e;
+}
+
+.peb-banner_warning {
+    background: #fef6e6;
+    border: 1px solid #f5c98a;
+    color: #8a5340;
+}
+
+.totals-box {
+    max-width: 34rem;
+    margin-left: auto;
+}
+
+.tot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.35rem;
+    border-bottom: 1px solid #eef1f6;
+}
+
+.tot-row.strong {
+    font-weight: 700;
+    background: #f7f9fc;
+}
+
+.tot-row.grand {
+    font-weight: 700;
+    font-size: 1.05rem;
+    background: #fff4d6;
+    border-radius: 3px;
+    margin-top: 0.25rem;
+}
+
+.margin-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.margin-input {
+    width: 5rem;
+}
+/* PAYMENT TERMS box - Deepanjan (31st July 2026).
+   Sits in the space to the left of the totals box on the Summary row. */
+.summary-grid {
+    align-items: flex-start;
+}
+
+.terms-box {
+    max-width: 34rem;
+    border-top: 3px solid #0176d3;
+}
+
+.terms-box__header {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #032d60;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid #eef1f6;
+}
+
+.terms-field {
+    margin-bottom: 0.65rem;
+}
+
+.terms-field:last-child {
+    margin-bottom: 0;
+}
+
+.terms-hint {
+    font-size: 0.68rem;
+    color: #706e6b;
+    font-style: italic;
+    line-height: 1.25;
+    margin-top: 0.1rem;
+}
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE — PEB Price Calculator. Deepanjan (27th August 2026)
+
+   The modal shell is handled by the .peb-host-modal block in
+   createQuote.css; this component is a plain lightning-card, so this
+   sheet only fixes what happens INSIDE it. It applies equally when the
+   calculator is opened standalone from the Opportunity tab.
+
+   Every declaration below was applied live in the browser console at
+   360px and confirmed before being written here.
+
+   The seven rate tables run 2 to 9 columns wide and already sit inside
+   .slds-scrollable_x wrappers. Rather than crushing the columns they are
+   left to pan: nowrap headings set each column's minimum, and the
+   numeric inputs get a floor so they cannot collapse. Without this the
+   Description column was cut off on the left and Rate / Cost on the
+   right.
+
+   The footer row is separate: Close / Apply to Quote / Download PDF were
+   being squeezed into ovals with the labels broken across three lines,
+   so the row wraps and each button takes a full line.
+
+   Everything is inside @media (max-width: 600px).
+   Desktop untouched. Append-only; nothing above this line is changed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+    /* ── Tables pan instead of crushing ──────────────────────────────── */
+    .slds-scrollable_x {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .peb-table {
+        font-size: 0.72rem;
+    }
+
+    /* Headings on one line set the column minimum, so the table grows
+       wider and pans rather than wrapping into a tall mess */
+    .peb-table th {
+        white-space: nowrap;
+    }
+
+    /* Numeric cells must not collapse to a couple of characters */
+    .peb-table lightning-input,
+    .peb-table lightning-combobox {
+        min-width: 4.75rem;
+    }
+
+    /* ── Footer row: one full-width button per line ──────────────────── */
+    .slds-grid_align-end {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    /* beats .slds-grow-none (flex: none) on specificity */
+    .slds-grid_align-end > .slds-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .slds-grid_align-end lightning-button {
+        display: block;
+        width: 100%;
+    }
+
+    /* reaches the inner button under synthetic shadow; a no-op under
+       native shadow, where the button keeps its natural width */
+    .slds-grid_align-end lightning-button .slds-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

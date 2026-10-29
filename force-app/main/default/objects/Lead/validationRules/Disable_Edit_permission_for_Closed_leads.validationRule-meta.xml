@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disable_Edit_permission_for_Closed_leads</fullName>
+    <active>false</active>
+    <description>This rule does allow to edit leads once the lead is either qualified or lost.</description>
+    <errorConditionFormula>AND(
+    OR(
+        ISPICKVAL(PRIORVALUE(Status), &quot;Lost&quot;),
+        ISPICKVAL(PRIORVALUE(Status), &quot;Qualified&quot;)
+    ),
+    NOT(
+        OR(
+            $Profile.Name = &quot;System Administrator&quot;,
+            $Profile.Name = &quot;Utkarsh Admin&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>You are not allowed to edit closed leads. Please contact system adminstrator for further help.</errorMessage>
+</ValidationRule>

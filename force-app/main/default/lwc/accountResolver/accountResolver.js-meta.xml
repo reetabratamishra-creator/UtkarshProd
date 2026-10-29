@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Account Resolver</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="companyName" type="String" label="Company / Enquirer Name" role="inputOnly"/>
+            <property name="phone"       type="String" label="Phone"                   role="inputOnly"/>
+            <property name="email"       type="String" label="Email"                   role="inputOnly"/>
+
+            <property name="selectedMode"        type="String"  label="Selected Mode"         role="outputOnly"/>
+            <property name="selectedAccountId"   type="String"  label="Selected Account Id"   role="outputOnly"/>
+            <property name="isExistingAccount"   type="Boolean" label="Is Existing Account"   role="outputOnly"/>
+            <property name="resolvedAccountName" type="String"  label="Resolved Account Name" role="outputOnly"/>
+            <property name="selectedAddressBookId" type="String" label="Selected Address Book Id" role="outputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

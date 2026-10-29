@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Raise Internal Ticket</masterLabel>
+    <description>Raises an internal ticket against a module from the Internal Ticket Matrix.</description>
+    <targets>
+        <!-- Required for the component to appear in the Lightning Web Component
+             picker when creating an action. Without it the picker stays empty. -->
+        <target>lightning__RecordAction</target>
+        <!-- Standalone: reachable at /lightning/cmp/c__internalTicketForm -->
+        <target>lightning__UrlAddressable</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordAction">
+            <actionType>ScreenAction</actionType>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

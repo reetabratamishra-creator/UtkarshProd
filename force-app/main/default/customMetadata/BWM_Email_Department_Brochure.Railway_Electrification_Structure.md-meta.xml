@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Railway Electrification Structure</label>
+    <protected>false</protected>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">Railway Electrification Structures</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Railway Electrification Structure</value>
+    </values>
+    <values>
+        <field>File_Name__c</field>
+        <value xsi:type="xsd:string">Railway_Electrification_Structures.pdf</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide CORE-approved electrification structures for railway OHE systems, built for strength, durability, and reliable performance.
+Types: RSJ Masts | BFB Masts | B-Series Masts | TTC Masts | Portals | ERC, SPS &amp; OHE Structures etc.</value>
+    </values>
+    <values>
+        <field>Public_Download_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C20000055MD7&amp;d=%2Fa%2FC2000000udWa%2FfNqS5dCGak5a68YL7q_t0Z6VdOBAgtANtJorY2O.k40&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Railway_Electrification_Structures_pdf</value>
+    </values>
+</CustomMetadata>

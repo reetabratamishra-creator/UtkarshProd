@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Departments__c</fullName>
+    <label>Departments</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Crash_Barrier_Department</fullName>
+                <default>false</default>
+                <label>Crash Barrier - Department</label>
+            </value>
+            <value>
+                <fullName>High_Mast_Department</fullName>
+                <default>false</default>
+                <label>High Mast - Department</label>
+            </value>
+            <value>
+                <fullName>Solar_Structure_Department</fullName>
+                <default>false</default>
+                <label>Solar Structure - Department</label>
+            </value>
+            <value>
+                <fullName>Steel_Pipes_Department</fullName>
+                <default>false</default>
+                <label>Steel Pipes - Department</label>
+            </value>
+            <value>
+                <fullName>Steel_Tubular_Pole_Department</fullName>
+                <default>false</default>
+                <label>Steel Tubular Pole - Department</label>
+            </value>
+            <value>
+                <fullName>Transmission_Tower_Department</fullName>
+                <default>false</default>
+                <label>Transmission Tower - Department</label>
+            </value>
+            <value>
+                <fullName>Core_Department</fullName>
+                <default>false</default>
+                <label>Core - Department</label>
+            </value>
+            <value>
+                <fullName>HDPE_Pipe_Department</fullName>
+                <default>false</default>
+                <label>HDPE Pipe - Department</label>
+            </value>
+            <value>
+                <fullName>Telecom_Tower_Department</fullName>
+                <default>false</default>
+                <label>Telecom Tower - Department</label>
+            </value>
+            <value>
+                <fullName>PEB</fullName>
+                <default>false</default>
+                <label>PEB - Department</label>
+            </value>
+            <value>
+                <fullName>PVC</fullName>
+                <default>false</default>
+                <label>PVC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,1618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Crash Tested</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Crash Tested</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+   &quot;fields&quot;:[
+      {
+         &quot;apiName&quot;:&quot;Crash_Tested_folder&quot;,
+         &quot;label&quot;:&quot;Crash Tested&quot;,
+         &quot;type&quot;:&quot;folder&quot;,
+         &quot;iconColor&quot;:&quot;blue&quot;,
+         &quot;controllingField&quot;:&quot;MBCB_Type&quot;,
+         &quot;controllingValues&quot;:[
+            &quot;Crash Tested&quot;
+         ],
+         &quot;modalConfigsByValue&quot;:{
+            &quot;default&quot;:{
+               &quot;title&quot;:&quot;Crash Tested Details&quot;,
+               &quot;modalFields&quot;:[
+                  {
+                     &quot;id&quot;:&quot;crash_section&quot;,
+                     &quot;label&quot;:&quot;General Details - Crash Type&quot;,
+                     &quot;expanded&quot;:true,
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;Crash_Tested&quot;,
+                           &quot;label&quot;:&quot;Crash Tested&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;W-Beam&quot;,
+                              &quot;Thrie-Beam&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;add_natrax&quot;,
+                           &quot;label&quot;:&quot;Configure Natrax?&quot;,
+                           &quot;colSpan&quot;:4,
+                           &quot;type&quot;:&quot;checkbox&quot;,
+                           &quot;controllingField&quot;:&quot;Crash_Tested&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;W-Beam&quot;,
+                              &quot;Thrie-Beam&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;add_alka&quot;,
+                           &quot;label&quot;:&quot;Configure Alka?&quot;,
+                           &quot;type&quot;:&quot;checkbox&quot;,
+                           &quot;colSpan&quot;:4,
+                           &quot;controllingField&quot;:&quot;Crash_Tested&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;W-Beam&quot;,
+                              &quot;Thrie-Beam&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;add_transpolis&quot;,
+                           &quot;label&quot;:&quot;Configure Transpolis?&quot;,
+                           &quot;type&quot;:&quot;checkbox&quot;,
+                           &quot;colSpan&quot;:4,
+                           &quot;controllingField&quot;:&quot;Crash_Tested&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;W-Beam&quot;
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     &quot;id&quot;:&quot;W-Beam_natrax_section&quot;,
+                     &quot;label&quot;:&quot;W-Beam Type (Natrax)&quot;,
+                     &quot;expanded&quot;:false,
+                     &quot;controllingField&quot;:&quot;Crash_Tested, add_natrax&quot;,
+                     &quot;controllingOperator&quot;:&quot;AND&quot;,
+                     &quot;controllingValues&quot;:[
+                        &quot;W-Beam&quot;,
+                        true,
+                        &quot;true&quot;
+                     ],
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_quantity_rm&quot;,
+                           &quot;label&quot;:&quot;QUANTITY (RM)&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;isQuantity&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_trans_in_offer&quot;,
+                           &quot;label&quot;:&quot;Trans.in offer?&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;pushToParentApiName&quot;:&quot;freight_incoterms&quot;,
+                           &quot;options&quot;:[
+                              &quot;Ex-works&quot;,
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_types_offer&quot;,
+                           &quot;label&quot;:&quot;types of freight&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;Transportation KG&quot;,
+                              &quot;Full Vehicle Freight&quot;
+                           ],
+                           &quot;controllingField&quot;:&quot;wb_natrax_trans_in_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_KG&quot;,
+                           &quot;label&quot;:&quot;Transportation KG&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;controllingField&quot;:&quot;wb_natrax_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Transportation KG&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_fvf&quot;,
+                           &quot;label&quot;:&quot;Full Vehicle Freight&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;min&quot;: 1,
+                           &quot;controllingField&quot;:&quot;wb_natrax_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Full Vehicle Freight&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_margin&quot;,
+                           &quot;label&quot;:&quot;MARGIN&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;defaultValue&quot;:&quot;4&quot;,
+                           &quot;isMargin&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_hardware_sub&quot;,
+                           &quot;label&quot;:&quot;Hardware &amp; Coating Details&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_beam_thickness&quot;,
+                                 &quot;label&quot;:&quot;BEAM THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.8&quot;,
+                                    &quot;2.9&quot;,
+                                    &quot;3&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_post_thickness&quot;,
+                                 &quot;label&quot;:&quot;POST THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;4.8&quot;,
+                                    &quot;4.9&quot;,
+                                    &quot;5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_spacer_thickness&quot;,
+                                 &quot;label&quot;:&quot;SPACER THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;4.8&quot;,
+                                    &quot;4.9&quot;,
+                                    &quot;5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_post_height&quot;,
+                                 &quot;label&quot;:&quot;POST HEIGHT&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;1800&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_spacer_length&quot;,
+                                 &quot;label&quot;:&quot;SPACER LENGTH&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;360&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_nuts_bolts&quot;,
+                                 &quot;label&quot;:&quot;NUTS &amp; BOLTS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Gr 4.6/4.8&quot;,
+                                    &quot;Gr 8.8&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Gr 4.6/4.8&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_zinc_coating&quot;,
+                                 &quot;label&quot;:&quot;ZINC COATING&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Regular&quot;,
+                                    &quot;Medium 55 micron&quot;,
+                                    &quot;Average 77 micron&quot;,
+                                    &quot;Minimum 77 micron&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Average 77 micron&quot;
+                              }
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_natrax_pricing_sub&quot;,
+                           &quot;label&quot;:&quot;Weight &amp; Pricing Calculations&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_uom&quot;,
+                                 &quot;label&quot;:&quot;UOM&quot;,
+                                 &quot;type&quot;:&quot;text&quot;,
+                                 &quot;defaultValue&quot;:&quot;RM&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUOM&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_weight&quot;,
+                                 &quot;label&quot;:&quot;Weight&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_natrax_total_wt || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_calculated_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;RATE/RM&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;wb_natrax_unit_price&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_zn_consumption&quot;,
+                                 &quot;label&quot;:&quot;Zn Consumption&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_natrax_zinc_coating == &apos;Regular&apos; ? (con_zinc_reg||0) : wb_natrax_zinc_coating == &apos;Medium 55 micron&apos;? (con_zinc_medium_55 || 0) : wb_natrax_zinc_coating == &apos;Average 77 micron&apos; ? (con_zinc_avg_77 || 0) : wb_natrax_zinc_coating == &apos;Minimum 77 micron&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;common_base_rate&quot;,
+                                 &quot;label&quot;:&quot;Base Rate (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;Natrax Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;zinc_regular_delta&quot;,
+                                 &quot;label&quot;:&quot;Regular (Zinc Coating)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;zinc_medium_55_delta&quot;,
+                                 &quot;label&quot;:&quot;Medium 55 micron (Zinc Coating)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;zinc_average_delta&quot;,
+                                 &quot;label&quot;:&quot;Average 77 micron (Zinc Coating)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;zinc_minimum_delta&quot;,
+                                 &quot;label&quot;:&quot;Minimum 77 micron (Zinc Coating)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;con_zinc_reg&quot;,
+                                 &quot;label&quot;:&quot;Zinc Consumption Regular&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;con_zinc_medium_55&quot;,
+                                 &quot;label&quot;:&quot;Zinc Consumption Medium 55 micron&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;con_zinc_avg_77&quot;,
+                                 &quot;label&quot;:&quot;Zinc Consumption Average 77 micron&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;con_zinc_min_77&quot;,
+                                 &quot;label&quot;:&quot;Zinc Consumption Minimum 77 micron&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_blk_wt_post&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(((wb_natrax_post_thickness || 0)/1000) * ((wb_natrax_post_height || 0)/1000) * 0.28) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_finish_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((wb_natrax_post_height || 0)/1000) * 0.28 * ((wb_natrax_zn_consumption || 0) / 1000)) * 2) + (wb_natrax_blk_wt_post || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_total_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_natrax_finish_wt_post || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_blk_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(((wb_natrax_spacer_length || 0)/1000) * ((wb_natrax_spacer_thickness || 0)/1000) * 0.28) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_finish_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((wb_natrax_spacer_length || 0)/1000) * 0.28 * ((wb_natrax_zn_consumption || 0) / 1000)) * 2) + (wb_natrax_blk_wt_spacer || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_total_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_natrax_finish_wt_spacer || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_blk_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;4.318 * 0.465 * ((wb_natrax_beam_thickness || 0)/1000) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_finish_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(4.318 * 0.465 * ((wb_natrax_zn_consumption || 0) / 1000) * 2) + (wb_natrax_blk_wt_beam || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_total_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_natrax_finish_wt_beam || 0) * 250) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_total_wt&quot;,
+                                 &quot;label&quot;:&quot;Total wt/mtr&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_natrax_total_wt_beam || 0) + (wb_natrax_total_wt_spacer || 0) + (wb_natrax_total_wt_post || 0) + 0.49&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_Zinc_Delta&quot;,
+                                 &quot;label&quot;:&quot;Zinc delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_natrax_zinc_coating == &apos;Regular&apos; ? Number(zinc_regular_delta || 0) : wb_natrax_zinc_coating == &apos;Medium 55 micron&apos; ? Number(zinc_medium_55_delta || 0): wb_natrax_zinc_coating == &apos;Average 77 micron&apos; ? Number(zinc_average_delta || 0) : wb_natrax_zinc_coating == &apos;Minimum 77 micron&apos; ? Number(zinc_minimum_delta || 0) : 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_NB_Delta&quot;,
+                                 &quot;label&quot;:&quot;N&amp;B delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;( wb_natrax_nuts_bolts == &apos;Gr 4.6/4.8&apos; ? 0 : 1) &quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_unit_cost&quot;,
+                                 &quot;label&quot;:&quot;Unit Cost For Natrax&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitCost&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_natrax_Zinc_Delta || 0) + (wb_natrax_NB_Delta || 0) + (wb_natrax_rate_rm || 0)) * (wb_natrax_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_unit_price&quot;,
+                                 &quot;label&quot;:&quot;Unit Price For Natrax&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_natrax_Zinc_Delta || 0) + (wb_natrax_KG || 0) + (wb_natrax_margin || 0) + (wb_natrax_NB_Delta || 0) + (wb_natrax_rate_rm || 0)) * (wb_natrax_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_natrax_list_price&quot;,
+                                 &quot;label&quot;:&quot;List Price For Natrax&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isListPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_natrax_rate_rm || 0) + (wb_natrax_Zinc_Delta || 0) + (wb_natrax_NB_Delta || 0) + 4) * (wb_natrax_total_wt || 0))&quot;
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     &quot;id&quot;:&quot;W-Beam_alka_section&quot;,
+                     &quot;label&quot;:&quot;W-Beam Type (Alka)&quot;,
+                     &quot;expanded&quot;:false,
+                     &quot;controllingField&quot;:&quot;Crash_Tested, add_alka&quot;,
+                     &quot;controllingOperator&quot;:&quot;AND&quot;,
+                     &quot;controllingValues&quot;:[
+                        &quot;W-Beam&quot;,
+                        true,
+                        &quot;true&quot;
+                     ],
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_quantity_rm&quot;,
+                           &quot;label&quot;:&quot;QUANTITY (RM)&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;isQuantity&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_trans_in_offer&quot;,
+                           &quot;label&quot;:&quot;Trans.in offer?&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;pushToParentApiName&quot;:&quot;freight_incoterms&quot;,
+                           &quot;options&quot;:[
+                              &quot;Ex-works&quot;,
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_types_offer&quot;,
+                           &quot;label&quot;:&quot;types of freight&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;Transportation KG&quot;,
+                              &quot;Full Vehicle Freight&quot;
+                           ],
+                           &quot;controllingField&quot;:&quot;wb_alka_trans_in_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_KG&quot;,
+                           &quot;label&quot;:&quot;Transportation KG&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;controllingField&quot;:&quot;wb_alka_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Transportation KG&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_fvf&quot;,
+                           &quot;label&quot;:&quot;Full Vehicle Freight&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;min&quot;: 1,
+                           &quot;controllingField&quot;:&quot;wb_alka_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Full Vehicle Freight&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_margin&quot;,
+                           &quot;label&quot;:&quot;MARGIN&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;defaultValue&quot;:&quot;4&quot;,
+                           &quot;isMargin&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_hardware_sub&quot;,
+                           &quot;label&quot;:&quot;Hardware &amp; Coating Details&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_beam_thickness&quot;,
+                                 &quot;label&quot;:&quot;BEAM THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.3&quot;,
+                                    &quot;2.4&quot;,
+                                    &quot;2.5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_centre_to_centre&quot;,
+                                 &quot;label&quot;:&quot;CENTRE TO CENTRE&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.0&quot;,
+                                    &quot;4.0&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;2.0&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_post_thickness&quot;,
+                                 &quot;label&quot;:&quot;POST THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;controllingField&quot;:&quot;wb_alka_centre_to_centre&quot;,
+                                 &quot;dependentOptionsMap&quot;:{
+                                    &quot;2.0&quot;:[
+                                       &quot;3.8&quot;,
+                                       &quot;3.9&quot;,
+                                       &quot;4.0&quot;
+                                    ],
+                                    &quot;4.0&quot;:[
+                                       &quot;4.7&quot;,
+                                       &quot;4.8&quot;,
+                                       &quot;4.9&quot;,
+                                       &quot;5.0&quot;
+                                    ]
+                                 }
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_post_height&quot;,
+                                 &quot;label&quot;:&quot;POST HEIGHT&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;1500&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_nuts_bolts&quot;,
+                                 &quot;label&quot;:&quot;NUTS &amp; BOLTS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;defaultValue&quot;:&quot;Gr 4.6/4.8&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Gr 4.6/4.8&quot;,
+                                    &quot;Gr 8.8&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_zinc_coating&quot;,
+                                 &quot;label&quot;:&quot;ZINC COATING&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Regular&quot;,
+                                    &quot;Medium 55 micron&quot;,
+                                    &quot;Average 77 micron&quot;,
+                                    &quot;Minimum 77 micron&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Average 77 micron&quot;
+                              }
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_alka_pricing_sub&quot;,
+                           &quot;label&quot;:&quot;Weight &amp; Pricing Calculations&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_uom&quot;,
+                                 &quot;label&quot;:&quot;UOM&quot;,
+                                 &quot;type&quot;:&quot;text&quot;,
+                                 &quot;defaultValue&quot;:&quot;RM&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUOM&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_Alka_weight&quot;,
+                                 &quot;label&quot;:&quot;Weight&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_Alka_total_wt || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;RATE/RM&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;wb_alka_unit_price&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_zn_consumption&quot;,
+                                 &quot;label&quot;:&quot;Zn Consumption&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_alka_zinc_coating == &apos;Regular&apos; ? (con_zinc_reg || 0) : wb_alka_zinc_coating == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : wb_alka_zinc_coating == &apos;Average 77 micron&apos; ? (con_zinc_avg_77 || 0) : wb_alka_zinc_coating == &apos;Minimum 77 micron&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_2cc_rate&quot;,
+                                 &quot;label&quot;:&quot;Alka 2.0 c/c Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_4cc_rate&quot;,
+                                 &quot;label&quot;:&quot;Alka 4.0 c/c Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_blk_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((Number(wb_alka_beam_thickness || 0) / 1000) * 4.318 * 0.465 * 7850)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_finish_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(4.318 * 0.465 * (Number(wb_alka_zn_consumption || 0) / 1000) * 2) + Number(wb_alka_blk_wt_beam || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_total_wt_Beam&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_alka_finish_wt_beam * 250)/1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_blk_wt_post&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_alka_post_thickness &gt; 0 &amp;&amp; wb_alka_post_height &gt; 0) ? ( (wb_alka_centre_to_centre == 2 || wb_alka_centre_to_centre == &apos;2.0&apos;) ? ((((wb_alka_post_thickness || 0) / 1000) * ((wb_alka_post_height || 0) / 1000) * 0.274 * 7850) + 0.2) : (wb_alka_centre_to_centre == 4 || wb_alka_centre_to_centre == &apos;4.0&apos;) ? ((((wb_alka_post_thickness || 0) / 1000) * ((wb_alka_post_height || 0) / 1000) * 0.274 * 7850) + 0.4) : 0 ) : 0&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_finish_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((wb_alka_post_height || 0)/1000) * 0.274 * ((wb_alka_zn_consumption || 0) / 1000)) * 2) + (wb_alka_blk_wt_post || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_total_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(Number(wb_alka_finish_wt_post || 0) * (wb_alka_centre_to_centre == 2 || wb_alka_centre_to_centre == &apos;2.0&apos; ? 500 : wb_alka_centre_to_centre == 4 || wb_alka_centre_to_centre == &apos;4.0&apos; ? 250 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_blk_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;0.176939&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_finish_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(0.115 * 0.040 * (Number(wb_alka_zn_consumption || 0) / 1000) * 2) + Number(wb_alka_blk_wt_washer || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_total_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(Number(wb_alka_finish_wt_washer || 0) * (wb_alka_centre_to_centre == 2 || wb_alka_centre_to_centre == &apos;2.0&apos; ? 500 : wb_alka_centre_to_centre == 4 || wb_alka_centre_to_centre == &apos;4.0&apos; ? 250 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_total_wt_bhb&quot;,
+                                 &quot;label&quot;:&quot;Total wt (BHB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(0.14 * (wb_alka_centre_to_centre == 2 || wb_alka_centre_to_centre == &apos;2.0&apos; ? 2500 : wb_alka_centre_to_centre == 4 || wb_alka_centre_to_centre == &apos;4.0&apos; ? 2250 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_Alka_total_wt&quot;,
+                                 &quot;label&quot;:&quot;Total wt/mtr&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.round(((wb_alka_total_wt_bhb || 0) + (wb_alka_total_wt_washer || 0) + (wb_alka_total_wt_post || 0) + (wb_alka_total_wt_Beam || 0)) * 100) / 100&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_Zinc_Delta&quot;,
+                                 &quot;label&quot;:&quot;Zinc delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_alka_zinc_coating == &apos;Regular&apos; ? Number(zinc_regular_delta || 0) : wb_alka_zinc_coating == &apos;Medium 55 micron&apos; ? Number(zinc_medium_55_delta || 0) : wb_alka_zinc_coating == &apos;Average 77 micron&apos; ? Number(zinc_average_delta || 0) : wb_alka_zinc_coating == &apos;Minimum 77 micron&apos; ? Number(zinc_minimum_delta || 0) : 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_NB_Delta&quot;,
+                                 &quot;label&quot;:&quot;N&amp;B delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;( wb_alka_nuts_bolts == &apos;Gr 4.6/4.8&apos; ? 0 : 1) &quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_unit_cost&quot;,
+                                 &quot;label&quot;:&quot;Unit Cost For Alka&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitCost&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_alka_Zinc_Delta || 0) + (wb_alka_NB_Delta || 0) + (wb_alka_centre_to_centre == &apos;2.0&apos; ? (wb_alka_2cc_rate || 0) : (wb_alka_4cc_rate || 0))) * (wb_Alka_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_unit_price&quot;,
+                                 &quot;label&quot;:&quot;Unit Price For Alka&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_alka_Zinc_Delta || 0) + (wb_alka_KG || 0) + (wb_alka_margin || 0) + (wb_alka_NB_Delta || 0) + (wb_alka_centre_to_centre == &apos;2.0&apos; ? (wb_alka_2cc_rate || 0) : (wb_alka_4cc_rate || 0))) * (wb_Alka_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_alka_list_price&quot;,
+                                 &quot;label&quot;:&quot;List Price For Alka&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isListPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_alka_Zinc_Delta || 0) + (wb_alka_NB_Delta || 0) + (wb_alka_centre_to_centre == &apos;2.0&apos; ? (wb_alka_2cc_rate || 0) : (wb_alka_4cc_rate || 0)) + 4) * (wb_Alka_total_wt || 0))&quot;
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     &quot;id&quot;:&quot;W-Beam_transpolis_section&quot;,
+                     &quot;label&quot;:&quot;W-Beam Type (Transpolis)&quot;,
+                     &quot;expanded&quot;:false,
+                     &quot;controllingField&quot;:&quot;Crash_Tested, add_transpolis&quot;,
+                     &quot;controllingOperator&quot;:&quot;AND&quot;,
+                     &quot;controllingValues&quot;:[
+                        &quot;W-Beam&quot;,
+                        true,
+                        &quot;true&quot;
+                     ],
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_quantity_rm&quot;,
+                           &quot;label&quot;:&quot;QUANTITY (RM)&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;isQuantity&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_trans_in_offer&quot;,
+                           &quot;label&quot;:&quot;Trans.in offer?&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;pushToParentApiName&quot;:&quot;freight_incoterms&quot;,
+                           &quot;options&quot;:[
+                              &quot;Ex-works&quot;,
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_types_offer&quot;,
+                           &quot;label&quot;:&quot;types of freight&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;Transportation KG&quot;,
+                              &quot;Full Vehicle Freight&quot;
+                           ],
+                           &quot;controllingField&quot;:&quot;wb_trans_trans_in_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_KG&quot;,
+                           &quot;label&quot;:&quot;Transportation KG&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;controllingField&quot;:&quot;wb_trans_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Transportation KG&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_fvf&quot;,
+                           &quot;label&quot;:&quot;Full Vehicle Freight&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;min&quot;: 1,
+                           &quot;controllingField&quot;:&quot;wb_trans_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Full Vehicle Freight&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_margin&quot;,
+                           &quot;label&quot;:&quot;MARGIN&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;defaultValue&quot;:&quot;4&quot;,
+                           &quot;isMargin&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_hardware_sub&quot;,
+                           &quot;label&quot;:&quot;Hardware &amp; Coating Details&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_beam_thickness&quot;,
+                                 &quot;label&quot;:&quot;BEAM THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.3&quot;,
+                                    &quot;2.4&quot;,
+                                    &quot;2.5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_post_height&quot;,
+                                 &quot;label&quot;:&quot;POST HEIGHT&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;1400&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_post_thickness&quot;,
+                                 &quot;label&quot;:&quot;POST THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;3.6&quot;,
+                                    &quot;3.8&quot;,
+                                    &quot;3.9&quot;,
+                                    &quot;4.0&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_nuts_bolts&quot;,
+                                 &quot;label&quot;:&quot;NUTS &amp; BOLTS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Gr 4.6/4.8&quot;,
+                                    &quot;Gr 8.8&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Gr 4.6/4.8&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_zinc_coating&quot;,
+                                 &quot;label&quot;:&quot;ZINC COATING&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Regular&quot;,
+                                    &quot;Medium 55 micron&quot;,
+                                    &quot;Average 77 micron&quot;,
+                                    &quot;Minimum 77 micron&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Average 77 micron&quot;
+                              }
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;wb_trans_pricing_sub&quot;,
+                           &quot;label&quot;:&quot;Weight &amp; Pricing Calculations&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_uom&quot;,
+                                 &quot;label&quot;:&quot;UOM&quot;,
+                                 &quot;type&quot;:&quot;text&quot;,
+                                 &quot;defaultValue&quot;:&quot;RM&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUOM&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_weight&quot;,
+                                 &quot;label&quot;:&quot;Weight&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_total_wt || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_calculated_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;RATE/RM&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;wb_trans_unit_price&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_zn_consumption&quot;,
+                                 &quot;label&quot;:&quot;Zn Consumption&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_zinc_coating == &apos;Regular&apos; ? (con_zinc_reg || 0) : wb_trans_zinc_coating == &apos;Medium 55 micron&apos;? (con_zinc_medium_55 || 0) : wb_trans_zinc_coating == &apos;Average 77 micron&apos; ? (con_zinc_avg_77 || 0) : wb_trans_zinc_coating == &apos;Minimum 77 micron&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;Transpolis Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_blk_wt_post&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_post_height &gt; 0) ? ((0.004 * (Number(wb_trans_post_height || 0) / 1000) * 0.265 * 7850) + 0.4) : 0&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_finish_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((wb_trans_post_height || 0)/1000) * 0.265 * ((wb_trans_zn_consumption || 0) / 1000)) * 2) + (wb_trans_blk_wt_post || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_total_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_trans_finish_wt_post || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_blk_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;4.318 * 0.465 * ((wb_trans_beam_thickness || 0)/1000) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_finish_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(4.318 * 0.465 * ((wb_trans_zn_consumption || 0) / 1000) * 2) + (wb_trans_blk_wt_beam || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_total_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_trans_finish_wt_beam || 0) * 250) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_finish_wt_Reinf&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Reinforcement)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(0.3 * 0.176 * ((wb_trans_zn_consumption || 0) / 1000) * 2) + 1.65792&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_total_wt_Reinf&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Reinforcement)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((wb_trans_finish_wt_Reinf || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_total_wt&quot;,
+                                 &quot;label&quot;:&quot;Total wt/mtr&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_total_wt_beam || 0) + (wb_trans_total_wt_post || 0) + (wb_trans_total_wt_Reinf || 0) +0.35&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_Zinc_Delta&quot;,
+                                 &quot;label&quot;:&quot;Zinc delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_zinc_coating == &apos;Regular&apos; ? Number(zinc_regular_delta || 0) : wb_trans_zinc_coating == &apos;Medium 55 micron&apos; ? Number(zinc_medium_55_delta || 0) : wb_trans_zinc_coating == &apos;Average 77 micron&apos; ? Number(zinc_average_delta || 0) : wb_trans_zinc_coating == &apos;Minimum 77 micron&apos; ? Number(zinc_minimum_delta || 0) : 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_NB_Delta&quot;,
+                                 &quot;label&quot;:&quot;N&amp;B delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(wb_trans_nuts_bolts == &apos;Gr 4.6/4.8&apos; ? 0 : 1)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_unit_cost&quot;,
+                                 &quot;label&quot;:&quot;Unit Cost For Transpolis&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitCost&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_trans_Zinc_Delta || 0) + (wb_trans_NB_Delta || 0) + (wb_trans_rate_rm || 0)) * (wb_trans_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_unit_price&quot;,
+                                 &quot;label&quot;:&quot;Unit Price For Transpolis&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_trans_Zinc_Delta || 0) + (wb_trans_KG || 0) + (wb_trans_margin || 0) + (wb_trans_NB_Delta || 0) + (wb_trans_rate_rm || 0)) * (wb_trans_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;wb_trans_list_price&quot;,
+                                 &quot;label&quot;:&quot;List Price For Transpolis&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isListPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (wb_trans_rate_rm || 0) + (wb_trans_Zinc_Delta || 0) + (wb_trans_NB_Delta || 0) + 4) * (wb_trans_total_wt || 0))&quot;
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     &quot;id&quot;:&quot;Thrie-Beam_natrax_section&quot;,
+                     &quot;label&quot;:&quot;Thrie-Beam Type (Natrax)&quot;,
+                     &quot;expanded&quot;:false,
+                     &quot;controllingField&quot;:&quot;Crash_Tested, add_natrax&quot;,
+                     &quot;controllingOperator&quot;:&quot;AND&quot;,
+                     &quot;controllingValues&quot;:[
+                        &quot;Thrie-Beam&quot;,
+                        true,
+                        &quot;true&quot;
+                     ],
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_quantity_rm&quot;,
+                           &quot;label&quot;:&quot;QUANTITY (RM)&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;isQuantity&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_trans_in_offer&quot;,
+                           &quot;label&quot;:&quot;Trans.in offer?&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;pushToParentApiName&quot;:&quot;freight_incoterms&quot;,
+                           &quot;options&quot;:[
+                              &quot;Ex-works&quot;,
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_types_offer&quot;,
+                           &quot;label&quot;:&quot;types of freight&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;Transportation KG&quot;,
+                              &quot;Full Vehicle Freight&quot;
+                           ],
+                           &quot;controllingField&quot;:&quot;tb_natrax_trans_in_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_KG&quot;,
+                           &quot;label&quot;:&quot;Transportation KG&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;controllingField&quot;:&quot;tb_natrax_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Transportation KG&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_fvf&quot;,
+                           &quot;label&quot;:&quot;Full Vehicle Freight&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;min&quot;: 1,
+                           &quot;controllingField&quot;:&quot;tb_natrax_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Full Vehicle Freight&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_margin&quot;,
+                           &quot;label&quot;:&quot;MARGIN&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;defaultValue&quot;:&quot;4&quot;,
+                           &quot;isMargin&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_hardware_sub&quot;,
+                           &quot;label&quot;:&quot;Hardware &amp; Coating Details&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_beam_thickness&quot;,
+                                 &quot;label&quot;:&quot;BEAM THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.8&quot;,
+                                    &quot;2.9&quot;,
+                                    &quot;3&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_post_thickness&quot;,
+                                 &quot;label&quot;:&quot;POST THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;4.8&quot;,
+                                    &quot;4.9&quot;,
+                                    &quot;5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_spacer_thickness&quot;,
+                                 &quot;label&quot;:&quot;SPACER THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;4.8&quot;,
+                                    &quot;4.9&quot;,
+                                    &quot;5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_post_height&quot;,
+                                 &quot;label&quot;:&quot;POST HEIGHT&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;2100&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_spacer_length&quot;,
+                                 &quot;label&quot;:&quot;SPACER LENGTH&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;550&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_nuts_bolts&quot;,
+                                 &quot;label&quot;:&quot;NUTS &amp; BOLTS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Gr 4.6/4.8&quot;,
+                                    &quot;Gr 8.8&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Gr 4.6/4.8&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_zinc_coating&quot;,
+                                 &quot;label&quot;:&quot;ZINC COATING&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Regular&quot;,
+                                    &quot;Medium 55 micron&quot;,
+                                    &quot;Average 77 micron&quot;,
+                                    &quot;Minimum 77 micron&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Average 77 micron&quot;
+                              }
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_natrax_pricing_sub&quot;,
+                           &quot;label&quot;:&quot;Weight &amp; Pricing Calculations&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_uom&quot;,
+                                 &quot;label&quot;:&quot;UOM&quot;,
+                                 &quot;type&quot;:&quot;text&quot;,
+                                 &quot;defaultValue&quot;:&quot;RM&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUOM&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_weight&quot;,
+                                 &quot;label&quot;:&quot;Weight&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_natrax_total_wt || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_calculated_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;RATE/RM&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;tb_natrax_unit_price&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_zn_consumption&quot;,
+                                 &quot;label&quot;:&quot;Zn Consumption&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_natrax_zinc_coating == &apos;Regular&apos; ? (con_zinc_reg || 0) : tb_natrax_zinc_coating == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : tb_natrax_zinc_coating == &apos;Average 77 micron&apos; ? (con_zinc_avg_77 || 0) : tb_natrax_zinc_coating == &apos;Minimum 77 micron&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;Natrax Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_blk_wt_post&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(((tb_natrax_post_thickness || 0)/1000) * ((tb_natrax_post_height || 0)/1000) * 0.28) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_finish_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((tb_natrax_post_height || 0)/1000) * 0.28 * ((tb_natrax_zn_consumption || 0) / 1000)) * 2) + (tb_natrax_blk_wt_post || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_total_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((tb_natrax_finish_wt_post || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_blk_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(((tb_natrax_spacer_thickness || 0)/1000) * ((tb_natrax_spacer_length || 0)/1000) * 0.28) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_finish_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((tb_natrax_spacer_length || 0)/1000) * 0.28 * ((tb_natrax_zn_consumption || 0) / 1000)) * 2) + (tb_natrax_blk_wt_spacer || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_total_wt_spacer&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Spacer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((tb_natrax_finish_wt_spacer || 0) * 500) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_blk_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;4.318 * 0.725 * ((tb_natrax_beam_thickness || 0)/1000) * 7850&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_finish_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(4.318 * 0.725 * ((tb_natrax_zn_consumption || 0) / 1000) * 2) + (tb_natrax_blk_wt_beam || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_total_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((tb_natrax_finish_wt_beam || 0) * 250) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_total_wt&quot;,
+                                 &quot;label&quot;:&quot;Total wt/mtr&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_natrax_total_wt_beam || 0) + (tb_natrax_total_wt_spacer || 0) + (tb_natrax_total_wt_post || 0) + 0.70&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_Zinc_Delta&quot;,
+                                 &quot;label&quot;:&quot;Zinc delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_natrax_zinc_coating == &apos;Regular&apos; ? Number(zinc_regular_delta || 0) : tb_natrax_zinc_coating == &apos;Medium 55 micron&apos; ? Number(zinc_medium_55_delta || 0) : tb_natrax_zinc_coating == &apos;Average 77 micron&apos; ? Number(zinc_average_delta || 0) : tb_natrax_zinc_coating == &apos;Minimum 77 micron&apos; ? Number(zinc_minimum_delta || 0) : 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_NB_Delta&quot;,
+                                 &quot;label&quot;:&quot;N&amp;B delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;( tb_natrax_nuts_bolts == &apos;Gr 4.6/4.8&apos; ? 0 : 1) &quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_unit_cost&quot;,
+                                 &quot;label&quot;:&quot;Unit Cost For Natrax (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitCost&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_natrax_Zinc_Delta || 0) + (tb_natrax_NB_Delta || 0) + (tb_natrax_rate_rm || 0)) * (tb_natrax_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_unit_price&quot;,
+                                 &quot;label&quot;:&quot;Unit Price For Natrax (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_natrax_Zinc_Delta || 0) + (tb_natrax_KG || 0) + (tb_natrax_margin || 0) + (tb_natrax_NB_Delta || 0) + (tb_natrax_rate_rm || 0)) * (tb_natrax_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_natrax_list_price&quot;,
+                                 &quot;label&quot;:&quot;List Price For Natrax (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isListPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_natrax_rate_rm || 0) + (tb_natrax_Zinc_Delta || 0) + (tb_natrax_NB_Delta || 0) + 4) * (tb_natrax_total_wt || 0))&quot;
+                              }
+                           ]
+                        }
+                     ]
+                  },
+                  {
+                     &quot;id&quot;:&quot;Thrie-Beam_alka_section&quot;,
+                     &quot;label&quot;:&quot;Thrie-Beam Type (Alka)&quot;,
+                     &quot;expanded&quot;:false,
+                     &quot;controllingField&quot;:&quot;Crash_Tested, add_alka&quot;,
+                     &quot;controllingOperator&quot;:&quot;AND&quot;,
+                     &quot;controllingValues&quot;:[
+                        &quot;Thrie-Beam&quot;,
+                        true,
+                        &quot;true&quot;
+                     ],
+                     &quot;fields&quot;:[
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_quantity_rm&quot;,
+                           &quot;label&quot;:&quot;QUANTITY (RM)&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;isQuantity&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_trans_in_offer&quot;,
+                           &quot;label&quot;:&quot;Trans.in offer?&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;pushToParentApiName&quot;:&quot;freight_incoterms&quot;,
+                           &quot;options&quot;:[
+                              &quot;Ex-works&quot;,
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_types_offer&quot;,
+                           &quot;label&quot;:&quot;types of freight&quot;,
+                           &quot;type&quot;:&quot;picklist&quot;,
+                           &quot;options&quot;:[
+                              &quot;Transportation KG&quot;,
+                              &quot;Full Vehicle Freight&quot;
+                           ],
+                           &quot;controllingField&quot;:&quot;tb_alka_trans_in_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;F.O.R (Freight on Road)&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_KG&quot;,
+                           &quot;label&quot;:&quot;Transportation KG&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;controllingField&quot;:&quot;tb_alka_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Transportation KG&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_fvf&quot;,
+                           &quot;label&quot;:&quot;Full Vehicle Freight&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;min&quot;: 1,
+                           &quot;controllingField&quot;:&quot;tb_alka_types_offer&quot;,
+                           &quot;controllingValues&quot;:[
+                              &quot;Full Vehicle Freight&quot;
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_margin&quot;,
+                           &quot;label&quot;:&quot;MARGIN&quot;,
+                           &quot;type&quot;:&quot;number&quot;,
+                           &quot;defaultValue&quot;:&quot;4&quot;,
+                           &quot;isMargin&quot;:true
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_hardware_sub&quot;,
+                           &quot;label&quot;:&quot;Hardware &amp; Coating Details&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_beam_thickness&quot;,
+                                 &quot;label&quot;:&quot;BEAM THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.3&quot;,
+                                    &quot;2.4&quot;,
+                                    &quot;2.5&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_centre_to_centre&quot;,
+                                 &quot;label&quot;:&quot;CENTRE TO CENTRE&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;2.0&quot;,
+                                    &quot;2.66&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;2.0&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_post_thickness&quot;,
+                                 &quot;label&quot;:&quot;POST THICKNESS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;controllingField&quot;:&quot;tb_alka_centre_to_centre&quot;,
+                                 &quot;dependentOptionsMap&quot;:{
+                                    &quot;2.0&quot;:[
+                                       &quot;3.6&quot;,
+                                       &quot;3.8&quot;,
+                                       &quot;3.9&quot;,
+                                       &quot;4.0&quot;
+                                    ],
+                                    &quot;2.66&quot;:[
+                                       &quot;3.6&quot;,
+                                       &quot;3.8&quot;,
+                                       &quot;3.9&quot;,
+                                       &quot;4.0&quot;
+                                    ]
+                                 }
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_post_height&quot;,
+                                 &quot;label&quot;:&quot;POST HEIGHT&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;defaultValue&quot;:&quot;1500&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_nuts_bolts&quot;,
+                                 &quot;label&quot;:&quot;NUTS &amp; BOLTS&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;defaultValue&quot;:&quot;Gr 4.6/4.8&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Gr 4.6/4.8&quot;,
+                                    &quot;Gr 8.8&quot;
+                                 ]
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_zinc_coating&quot;,
+                                 &quot;label&quot;:&quot;ZINC COATING&quot;,
+                                 &quot;type&quot;:&quot;picklist&quot;,
+                                 &quot;options&quot;:[
+                                    &quot;Regular&quot;,
+                                    &quot;Medium 55 micron&quot;,
+                                    &quot;Average 77 micron&quot;,
+                                    &quot;Minimum 77 micron&quot;
+                                 ],
+                                 &quot;defaultValue&quot;:&quot;Average 77 micron&quot;
+                              }
+                           ]
+                        },
+                        {
+                           &quot;apiName&quot;:&quot;tb_alka_pricing_sub&quot;,
+                           &quot;label&quot;:&quot;Weight &amp; Pricing Calculations&quot;,
+                           &quot;type&quot;:&quot;sub-section&quot;,
+                           &quot;expanded&quot;:false,
+                           &quot;fields&quot;:[
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_uom&quot;,
+                                 &quot;label&quot;:&quot;UOM&quot;,
+                                 &quot;type&quot;:&quot;text&quot;,
+                                 &quot;defaultValue&quot;:&quot;RM&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUOM&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_Alka_weight&quot;,
+                                 &quot;label&quot;:&quot;Weight&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_Alka_total_wt || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_rate_rm&quot;,
+                                 &quot;label&quot;:&quot;RATE/RM&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;tb_alka_unit_price&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_zn_consumption&quot;,
+                                 &quot;label&quot;:&quot;Zn Consumption&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_alka_zinc_coating == &apos;Regular&apos; ? (con_zinc_reg || 0) : tb_alka_zinc_coating == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : tb_alka_zinc_coating == &apos;Average 77 micron&apos; ? (con_zinc_avg_77 || 0) : tb_alka_zinc_coating == &apos;Minimum 77 micron&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_2cc_rate&quot;,
+                                 &quot;label&quot;:&quot;Alka 2.0 c/c Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_266cc_rate&quot;,
+                                 &quot;label&quot;:&quot;Alka 2.66 c/c Delta (From DB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_blk_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((Number(tb_alka_beam_thickness || 0) / 1000) * 4.318 * 0.725 * 7850)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_finish_wt_beam&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(4.318 * 0.725 * (Number(tb_alka_zn_consumption || 0) / 1000) * 2) + Number(tb_alka_blk_wt_beam || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_total_wt_Beam&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Beam)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_alka_finish_wt_beam * 250)/1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_blk_wt_post&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_alka_post_thickness &gt; 0 &amp;&amp; tb_alka_post_height &gt; 0) ? ( (tb_alka_centre_to_centre == 2 || tb_alka_centre_to_centre == &apos;2.0&apos;) ? ((((tb_alka_post_thickness || 0) / 1000) * ((tb_alka_post_height || 0) / 1000) * 0.274 * 7850) + 0.2) : (tb_alka_centre_to_centre == 2.66 || tb_alka_centre_to_centre == &apos;2.66&apos;) ? ((((tb_alka_post_thickness || 0) / 1000) * ((tb_alka_post_height || 0) / 1000) * 0.274 * 7850) + 0.8) : 0 ) : 0&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_finish_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;((((tb_alka_post_height || 0)/1000) * 0.274 * ((tb_alka_zn_consumption || 0) / 1000)) * 2) + (tb_alka_blk_wt_post || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_total_wt_post&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Post)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(Number(tb_alka_finish_wt_post || 0) * (tb_alka_centre_to_centre == 2 || tb_alka_centre_to_centre == &apos;2.0&apos; ? 500 : tb_alka_centre_to_centre == 2.66 || tb_alka_centre_to_centre == &apos;2.66&apos; ? 375 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_blk_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;BLK WT (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;0.176939&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_finish_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;Finish wt (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(0.115 * 0.040 * (Number(tb_alka_zn_consumption || 0) / 1000) * 2) + Number(tb_alka_blk_wt_washer || 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_total_wt_washer&quot;,
+                                 &quot;label&quot;:&quot;Total wt (Washer)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(Number(tb_alka_finish_wt_washer || 0) * (tb_alka_centre_to_centre == 2 || tb_alka_centre_to_centre == &apos;2.0&apos; ? 500 : tb_alka_centre_to_centre == 2.66 || tb_alka_centre_to_centre == &apos;2.66&apos; ? 700 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_total_wt_bhb&quot;,
+                                 &quot;label&quot;:&quot;Total wt (BHB)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(0.14 * (tb_alka_centre_to_centre == 2.0 || tb_alka_centre_to_centre == &apos;2.0&apos; ? 4000 : tb_alka_centre_to_centre == 2.66 || tb_alka_centre_to_centre == &apos;2.66&apos;  ? 3700 : 0)) / 1000&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_Alka_total_wt&quot;,
+                                 &quot;label&quot;:&quot;Total wt/mtr&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.round(((tb_alka_total_wt_bhb || 0) + (tb_alka_total_wt_washer || 0) + (tb_alka_total_wt_post || 0) + (tb_alka_total_wt_Beam || 0)) * 100) / 100&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_Zinc_Delta&quot;,
+                                 &quot;label&quot;:&quot;Zinc delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;(tb_alka_zinc_coating == &apos;Regular&apos; ? Number(zinc_regular_delta || 0) : tb_alka_zinc_coating == &apos;Medium 55 micron&apos; ? Number(zinc_medium_55_delta || 0) : tb_alka_zinc_coating == &apos;Average 77 micron&apos; ? Number(zinc_average_delta || 0) : tb_alka_zinc_coating == &apos;Minimum 77 micron&apos; ? Number(zinc_minimum_delta || 0) : 0)&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_NB_Delta&quot;,
+                                 &quot;label&quot;:&quot;N&amp;B delta&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;formula&quot;:&quot;( tb_alka_nuts_bolts == &apos;Gr 4.6/4.8&apos; ? 0 : 1) &quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_unit_cost&quot;,
+                                 &quot;label&quot;:&quot;Unit Cost For Alka (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitCost&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_alka_Zinc_Delta || 0) + (tb_alka_NB_Delta || 0) + (tb_alka_centre_to_centre == &apos;2.0&apos; ? (tb_alka_2cc_rate || 0) : (tb_alka_266cc_rate || 0))) * (tb_Alka_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_unit_price&quot;,
+                                 &quot;label&quot;:&quot;Unit Price For Alka (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isUnitPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_alka_Zinc_Delta || 0) + (tb_alka_KG || 0) + (tb_alka_margin || 0) + (tb_alka_NB_Delta || 0) + (tb_alka_centre_to_centre == &apos;2.0&apos; ? (tb_alka_2cc_rate || 0) : (tb_alka_266cc_rate || 0))) * (tb_Alka_total_wt || 0))&quot;
+                              },
+                              {
+                                 &quot;apiName&quot;:&quot;tb_alka_list_price&quot;,
+                                 &quot;label&quot;:&quot;List Price For Alka (Thrie)&quot;,
+                                 &quot;type&quot;:&quot;number&quot;,
+                                 &quot;readOnly&quot;:true,
+                                 &quot;isListPrice&quot;:true,
+                                 &quot;formula&quot;:&quot;Math.ceil(((common_base_rate || 0) + (tb_alka_Zinc_Delta || 0) + (tb_alka_NB_Delta || 0) + (tb_alka_centre_to_centre == &apos;2.0&apos; ? (tb_alka_2cc_rate || 0) : (tb_alka_266cc_rate || 0)) + 4) * (tb_Alka_total_wt || 0))&quot;
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}</value>
+    </values>
+</CustomMetadata>

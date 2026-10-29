@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Steel Tubular Poles</label>
+    <protected>false</protected>
+    <values>
+        <field>MergeProduct__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Owner_ID__c</field>
+        <value xsi:type="xsd:string">005C20000088G38IAE</value>
+    </values>
+    <values>
+        <field>Real_Product_Name__c</field>
+        <value xsi:type="xsd:string">Steel Tubular Poles</value>
+    </values>
+    <values>
+        <field>Result_Product_Name__c</field>
+        <value xsi:type="xsd:string">steel tubular pole - competitor analytics service</value>
+    </values>
+    <values>
+        <field>Tender_Product_Name__c</field>
+        <value xsi:type="xsd:string">Steel Tubular Pole</value>
+    </values>
+</CustomMetadata>

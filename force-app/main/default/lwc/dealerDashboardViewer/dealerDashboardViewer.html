@@ -1,0 +1,51 @@
+<template>
+    <div class="dealer-dashboard-wrapper">
+        <div class="dd-section">
+            <div class="dd-section__header">
+                <div class="dd-section__badge">
+                    <lightning-icon icon-name="standard:opportunity" size="small" variant="inverse"></lightning-icon>
+                </div>
+                <h2 class="dd-section__title">Refer to Dealer Opportunities</h2>
+                <template if:true={hasRecords}>
+                    <span class="dd-section__count">{recordCount}</span>
+                </template>
+            </div>
+
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="dd-spinner-wrapper">
+                    <lightning-spinner alternative-text="Loading opportunities..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error State -->
+            <template if:true={showError}>
+                <div class="dd-error">
+                    <lightning-icon icon-name="utility:error" size="x-small" variant="error"></lightning-icon>
+                    <span>{errorMessage}</span>
+                </div>
+            </template>
+
+            <!-- Table Datatable -->
+            <template if:true={showTable}>
+                <div class="dd-datatable-wrapper">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={recordsData}
+                        columns={recordsColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <template if:true={showEmpty}>
+                <div class="dd-empty">
+                    <lightning-icon icon-name="utility:check" size="large" variant="success"></lightning-icon>
+                    <p class="dd-empty__title">No Refer to Dealer Opportunities</p>
+                    <p class="dd-empty__msg">There are currently no opportunities with a Customer Journey set to Refer to Dealer.</p>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

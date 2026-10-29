@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lost_Reason__c</fullName>
+    <label>Lost Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Future Prospect</fullName>
+                <default>false</default>
+                <label>Future Prospect</label>
+            </value>
+            <value>
+                <fullName>Not responding</fullName>
+                <default>false</default>
+                <label>Not responding</label>
+            </value>
+            <value>
+                <fullName>Minimum Quantity not met</fullName>
+                <default>false</default>
+                <label>Minimum Quantity not met</label>
+            </value>
+            <value>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+                <label>Existing Customer</label>
+            </value>
+            <value>
+                <fullName>Internal Problem</fullName>
+                <default>false</default>
+                <label>Internal Problem</label>
+            </value>
+            <value>
+                <fullName>Purchased from Other Brands</fullName>
+                <default>false</default>
+                <label>Purchased from Other Brands</label>
+            </value>
+            <value>
+                <fullName>Rate Issue</fullName>
+                <default>false</default>
+                <label>Rate Issue</label>
+            </value>
+            <value>
+                <fullName>Tender lost</fullName>
+                <default>false</default>
+                <label>Tender lost</label>
+            </value>
+            <value>
+                <fullName>Customer details not received</fullName>
+                <default>false</default>
+                <label>Customer details not received</label>
+            </value>
+            <value>
+                <fullName>Price Enquiry</fullName>
+                <default>false</default>
+                <label>Price Enquiry</label>
+            </value>
+            <value>
+                <fullName>Out of Service Area</fullName>
+                <default>false</default>
+                <label>Out of Service Area</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>No Decision / Non-Responsive</fullName>
+                <default>false</default>
+                <label>No Decision / Non-Responsive</label>
+            </value>
+            <value>
+                <fullName>No Budget / Lost Funding</fullName>
+                <default>false</default>
+                <label>No Budget / Lost Funding</label>
+            </value>
+            <value>
+                <fullName>Lost to Competitor</fullName>
+                <default>false</default>
+                <label>Lost to Competitor</label>
+            </value>
+            <value>
+                <fullName>Freight Issue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Freight Issue</label>
+            </value>
+            <value>
+                <fullName>Not Responding After Negotiation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not Responding After Negotiation</label>
+            </value>
+            <value>
+                <fullName>Technical Details Not received</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Technical Details Not received</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

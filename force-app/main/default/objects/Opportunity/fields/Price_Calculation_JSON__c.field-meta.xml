@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_Calculation_JSON__c</fullName>
+    <description>Serialized JSON state of the PEB Price Calculation generated from the uploaded Estimation.pdf. Written by the PEB Price Calculator LWC and read by the PDF renderer.</description>
+    <label>Price Calculation JSON</label>
+    <length>131072</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

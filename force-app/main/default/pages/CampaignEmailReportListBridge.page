@@ -1,0 +1,12 @@
+<apex:page standardController="Campaign"
+  recordSetVar="campaigns"
+  extensions="CampaignEmailReportListBridgeController"
+  action="{!redirectToLwc}"
+  showHeader="true"
+  sidebar="false"
+>
+  <apex:pageMessages />
+  <apex:outputPanel layout="block" style="padding: 1.5rem; font-family: Arial, sans-serif;">
+    <p>Loading email campaign report...</p>
+  </apex:outputPanel>
+</apex:page>

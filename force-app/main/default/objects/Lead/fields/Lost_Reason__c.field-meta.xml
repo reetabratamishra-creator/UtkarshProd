@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lost_Reason__c</fullName>
+    <label>Lost Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fake Enquiry</fullName>
+                <default>false</default>
+                <label>Fake Enquiry</label>
+            </value>
+            <value>
+                <fullName>Duplicate Lead</fullName>
+                <default>false</default>
+                <label>Duplicate Lead</label>
+            </value>
+            <value>
+                <fullName>Invalid Number</fullName>
+                <default>false</default>
+                <label>Invalid Number</label>
+            </value>
+            <value>
+                <fullName>Customer Details Not Received</fullName>
+                <default>false</default>
+                <label>Customer Details Not Received</label>
+            </value>
+            <value>
+                <fullName>Not Looking for This Product</fullName>
+                <default>false</default>
+                <label>Not Looking for This Product</label>
+            </value>
+            <value>
+                <fullName>Out of Service Area</fullName>
+                <default>false</default>
+                <label>Out of Service Area</label>
+            </value>
+            <value>
+                <fullName>Minimum Quantity Not Met</fullName>
+                <default>false</default>
+                <label>Minimum Quantity Not Met</label>
+            </value>
+            <value>
+                <fullName>Existing Customer</fullName>
+                <default>false</default>
+                <label>Existing Customer</label>
+            </value>
+            <value>
+                <fullName>Price Enquiry</fullName>
+                <default>false</default>
+                <label>Price Enquiry</label>
+            </value>
+            <value>
+                <fullName>Purchase from Other Brand</fullName>
+                <default>false</default>
+                <label>Purchase from Other Brand</label>
+            </value>
+            <value>
+                <fullName>Internal Problem</fullName>
+                <default>false</default>
+                <label>Internal Problem</label>
+            </value>
+            <value>
+                <fullName>Future Prospect</fullName>
+                <default>false</default>
+                <label>Future Prospect</label>
+            </value>
+            <value>
+                <fullName>Not Responding</fullName>
+                <default>false</default>
+                <label>Not Responding</label>
+            </value>
+            <value>
+                <fullName>Out of Product Range</fullName>
+                <default>false</default>
+                <label>Out of Product Range</label>
+            </value>
+            <value>
+                <fullName>Make Not Approved</fullName>
+                <default>false</default>
+                <label>Make Not Approved</label>
+            </value>
+            <value>
+                <fullName>Not Approved</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not Approved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

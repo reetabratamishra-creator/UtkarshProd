@@ -1,0 +1,18 @@
+<template>
+    <template if:true={hasRecords}>
+        <div class="results-container">
+            <template for:each={records} for:item="rec" for:index="idx">
+                <div key={rec.recordId} class="result-card">
+                    <div class="result-index">{idx}</div>
+                    <div class="result-details">
+                        <div class="result-name">{rec.recordName}</div>
+                        <div class="result-type">{rec.objectType}</div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:false={hasRecords}>
+        <p class="no-results">No matching records found.</p>
+    </template>
+</template>

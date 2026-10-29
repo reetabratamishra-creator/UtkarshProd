@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Stores dynamic pricing rates, base amounts, and add-on costs for various product departments (e.g., Transmission Pole, Lighting Mast). This metadata feeds the JavaScript Math Engine in the Quoting UI to calculate Unit Prices and Costs.</description>
+    <label>Price Calculator</label>
+    <pluralLabel>Price Calculator</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

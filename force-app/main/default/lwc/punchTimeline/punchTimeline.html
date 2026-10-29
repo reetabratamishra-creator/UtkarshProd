@@ -1,0 +1,1033 @@
+<template>
+    <div class="pt-wrapper">
+
+        <div class="pt-header">
+            <div class="pt-title">
+                <lightning-icon icon-name="utility:trail" size="small" class="pt-icon"></lightning-icon>
+                <span>Today's Activity</span>
+            </div>
+            <!-- Add Button relocated to header for cleaner UI -->
+            <template if:true={isMarketVisitActive}>
+                <button class="pt-add-btn" type="button" onclick={openModal} title="Add Activity">
+                    <lightning-icon icon-name="utility:add" size="x-small" variant="blue"></lightning-icon>
+                </button>
+            </template>
+        </div>
+
+        <!-- Scheduled Visits Collapsible Card -->
+        <div class="pt-scheduled-card">
+            <div class="pt-scheduled-header" onclick={toggleScheduledVisits}>
+                <div class="pt-scheduled-title">
+                    <lightning-icon icon-name="utility:event" size="small" class="pt-scheduled-icon"></lightning-icon>
+                    <span>Scheduled Visits ({scheduledVisitsCount})</span>
+                </div>
+                <lightning-icon 
+                    icon-name={toggleIconName} 
+                    size="x-small" 
+                    class="pt-toggle-icon">
+                </lightning-icon>
+            </div>
+            
+            <template if:false={isScheduledCollapsed}>
+                <div class="pt-scheduled-body animate-fade-in">
+                    <!-- Date Selector with Arrows (Top Right) -->
+                    <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1rem; padding: 0 0.5rem;">
+                        <div style="display: flex; align-items: center; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 2px;">
+                            <button 
+                                type="button" 
+                                onclick={handlePrevDay} 
+                                style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; transition: background 0.2s;"
+                                class="pt-date-arrow-btn">
+                                <lightning-icon icon-name="utility:chevronleft" size="xx-small" class="pt-arrow-icon"></lightning-icon>
+                            </button>
+                            <span onclick={handleResetToToday} style="font-size: 0.8rem; font-weight: 700; color: #1a1a2e; margin: 0 0.75rem; min-width: 90px; text-align: center; user-select: none; cursor: pointer;" title="Reset to Today">
+                                {selectedVisitDateDisplay}
+                            </span>
+                            <button 
+                                type="button" 
+                                onclick={handleNextDay} 
+                                style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: 6px; transition: background 0.2s;"
+                                class="pt-date-arrow-btn">
+                                <lightning-icon icon-name="utility:chevronright" size="xx-small" class="pt-arrow-icon"></lightning-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <template if:true={isDateLoading}>
+                        <!-- Premium Skeleton Shimmer Loader -->
+                        <div class="pt-skeleton-list">
+                            <div class="pt-skeleton-item shimmer"></div>
+                            <div class="pt-skeleton-item shimmer" style="width: 85%;"></div>
+                            <div class="pt-skeleton-item shimmer" style="width: 70%;"></div>
+                        </div>
+                    </template>
+
+                    <template if:false={isDateLoading}>
+                        <template if:true={hasScheduledVisits}>
+                            <div class="pt-scheduled-list">
+                                <template for:each={filteredScheduledVisits} for:item="visit">
+                                    <div key={visit.id} class="pt-scheduled-item animate-fade-in">
+                                        <div class="pt-scheduled-item-header">
+                                            <span class="pt-visit-subject">{visit.displayPurpose}</span>
+                                            <span class="pt-visit-date">
+                                                <lightning-icon icon-name="utility:date_input" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                {visit.formattedDate}
+                                            </span>
+                                        </div>
+                                        <div class="pt-scheduled-item-content">
+                                            <div class="pt-scheduled-item-details">
+                                                <div class="pt-scheduled-client-row">
+                                                    <template if:true={visit.clientName}>
+                                                        <span class="pt-scheduled-client-name">
+                                                            <lightning-icon icon-name="utility:company" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                            {visit.clientName}
+                                                        </span>
+                                                    </template>
+                                                    <template if:true={visit.customerType}>
+                                                        <span class="pt-sub-badge slds-m-left_xx-small">{visit.customerType}</span>
+                                                    </template>
+                                                </div>
+                                                <template if:true={visit.description}>
+                                                    <p class="pt-visit-desc"><strong>Notes:</strong> {visit.description}</p>
+                                                </template>
+                                            </div>
+                                            <div class="pt-scheduled-actions">
+                                                <template if:true={isMarketVisitActive}>
+                                                    <button class="pt-btn-scheduled-checkin" data-id={visit.id} onclick={handleScheduledCheckIn} title="Check-In to this scheduled visit">
+                                                        Check-In
+                                                    </button>
+                                                </template>
+                                                <button class="pt-btn-scheduled-reschedule" data-id={visit.id} onclick={handleRescheduleClick} title="Reschedule this visit">
+                                                    Reschedule
+                                                </button>
+                                                <button class="pt-btn-scheduled-cancel" data-id={visit.id} onclick={handleCancelClick} title="Cancel this visit">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <!-- Cancelled Visits Section -->
+                        <template if:true={hasCancelledVisits}>
+                            <div class="pt-cancelled-section">
+                                <div class="pt-cancelled-section-header">
+                                    <div class="pt-cancelled-section-title">
+                                        <lightning-icon icon-name="utility:clear" size="xx-small" class="pt-cancelled-header-icon"></lightning-icon>
+                                        <span>Cancelled Visits ({cancelledVisitsCount})</span>
+                                    </div>
+                                </div>
+                                <div class="pt-scheduled-list pt-cancelled-list">
+                                    <template for:each={filteredCancelledVisits} for:item="visit">
+                                        <div key={visit.id} class="pt-scheduled-item pt-cancelled-item animate-fade-in">
+                                            <div class="pt-scheduled-item-header">
+                                                <div style="display: flex; align-items: center; gap: 6px;">
+                                                    <span class="pt-visit-subject">{visit.displayPurpose}</span>
+                                                    <span class="pt-cancelled-pill">Cancelled</span>
+                                                </div>
+                                                <span class="pt-visit-date">
+                                                    <lightning-icon icon-name="utility:date_input" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                    {visit.formattedDate}
+                                                </span>
+                                            </div>
+                                            <div class="pt-scheduled-item-content">
+                                                <div class="pt-scheduled-item-details">
+                                                    <div class="pt-scheduled-client-row">
+                                                        <template if:true={visit.clientName}>
+                                                            <span class="pt-scheduled-client-name">
+                                                                <lightning-icon icon-name="utility:company" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                                {visit.clientName}
+                                                            </span>
+                                                        </template>
+                                                        <template if:true={visit.customerType}>
+                                                            <span class="pt-sub-badge slds-m-left_xx-small">{visit.customerType}</span>
+                                                        </template>
+                                                    </div>
+                                                    <template if:true={visit.description}>
+                                                        <p class="pt-visit-desc"><strong>Notes:</strong> {visit.description}</p>
+                                                    </template>
+                                                    <template if:true={visit.cancelReason}>
+                                                        <p class="pt-visit-desc pt-cancel-reason-desc"><strong>Reason:</strong> {visit.cancelReason}</p>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:false={hasAnyVisits}>
+                            <div class="pt-scheduled-empty">
+                                <p>No scheduled visits found.</p>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+        <!-- No punch / no timeline -->
+        <template if:false={hasItems}>
+            <div class="pt-empty-state">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading timeline..." size="small"></lightning-spinner>
+                    <p>Loading timeline...</p>
+                </template>
+                <template if:false={isLoading}>
+                    <lightning-icon icon-name="utility:info_alt" size="medium" class="pt-empty-icon"></lightning-icon>
+                    <p>No activity logged yet for today.</p>
+                </template>
+            </div>
+        </template>
+
+        <!-- Timeline -->
+        <template if:true={hasItems}>
+            <div class="pt-timeline">
+                <template for:each={formattedItems} for:item="item">
+                    <div key={item.id} class="pt-item animate-fade-in">
+                        <div class="pt-marker">
+                            <template if:false={item.isCheckout}>
+                                <div class="pt-dot"></div>
+                            </template>
+                            <template if:true={item.isCheckout}>
+                                <div class="pt-dot-checkout"></div>
+                            </template>
+                            <template if:true={item.nodeDistance}>
+                                <span class="dot-distance-val">{item.nodeDistance}</span>
+                            </template>
+                            <div class="pt-line"></div>
+                        </div>
+                        <div class="pt-content">
+                            <!-- Card Summary (Click to Toggle) -->
+                            <div class="pt-card-summary" onclick={toggleItem} data-id={item.id} title="Click to toggle details">
+                                <!-- Card Header -->
+                                <div class="pt-card-header">
+                                    <div class="pt-badge-time-wrapper">
+                                        <template if:false={item.isCheckout}>
+                                            <span class="pt-badge pt-badge-checkin">IN PROGRESS</span>
+                                        </template>
+                                        <template if:true={item.isCheckout}>
+                                            <span class="pt-badge pt-badge-checkout">CHECKED OUT</span>
+                                        </template>
+                                        <span class="pt-time-header">
+                                            <lightning-icon icon-name="utility:clock" size="xx-small" class="pt-icon-gray"></lightning-icon>
+                                            Check-In: {item.time}
+                                        </span>
+                                    </div>
+                                    <lightning-icon 
+                                        icon-name={item.toggleIcon} 
+                                        size="x-small" 
+                                        class="pt-card-toggle-icon">
+                                    </lightning-icon>
+                                </div>
+
+                                <!-- Client Info -->
+                                <div class="pt-client-info">
+                                    <h3 class="pt-client-name">
+                                        <lightning-icon icon-name="utility:company" size="x-small" class="pt-icon-brand"></lightning-icon>
+                                        {item.clientName}
+                                    </h3>
+                                    <template if:true={item.visitType}>
+                                        <span class="pt-sub-badge">{item.visitType}</span>
+                                    </template>
+                                    <template if:true={item.customerType}>
+                                        <span class="pt-sub-badge">{item.customerType}</span>
+                                    </template>
+                                </div>
+
+                                <div class="pt-visit-quick-meta">
+                                    <template if:true={item.checkInShort}>
+                                        <div class="pt-quick-chip">
+                                            <span class="pt-quick-lbl">In</span>
+                                            <span class="pt-quick-val">{item.checkInShort}</span>
+                                        </div>
+                                    </template>
+                                    <template if:true={item.checkOutShort}>
+                                        <div class="pt-quick-chip">
+                                            <span class="pt-quick-lbl">Out</span>
+                                            <span class="pt-quick-val">{item.checkOutShort}</span>
+                                        </div>
+                                    </template>
+                                    <template if:true={item.visitDuration}>
+                                        <div class="pt-quick-chip pt-quick-duration">
+                                            <span class="pt-quick-lbl">Duration</span>
+                                            <span class="pt-quick-val">{item.visitDuration}</span>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <!-- Reason for Visit -->
+                                <div class="pt-detail-row">
+                                    <span class="pt-detail-label">Reason for Visit:</span>
+                                    <span class="pt-detail-value">{item.description}</span>
+                                </div>
+                            </div>
+
+                            <!-- Collapsible Details Section -->
+                            <template if:false={item.isCollapsed}>
+                                <div class="pt-card-details-collapsible animate-fade-in">
+                                    <!-- If checked out, show Checkout Details -->
+                                    <template if:true={item.isCheckout}>
+                                        <div class="pt-checkout-section animate-fade-in">
+                                            <div class="pt-checkout-header-title">Checkout Summary</div>
+                                            
+                                            <template if:true={item.checkoutTime}>
+                                                <div class="pt-detail-row pt-checkout-time-row">
+                                                    <span class="pt-detail-label">Checked Out At:</span>
+                                                    <span class="pt-detail-value">{item.checkoutTime}</span>
+                                                </div>
+                                            </template>
+
+                                            <template if:true={item.visitDuration}>
+                                                <div class="pt-detail-row">
+                                                    <span class="pt-detail-label">Duration:</span>
+                                                    <span class="pt-detail-value">{item.visitDuration}</span>
+                                                </div>
+                                            </template>
+
+                                            <template if:true={item.mom}>
+                                                <div class="pt-detail-row">
+                                                    <span class="pt-detail-label">MOM Notes:</span>
+                                                    <span class="pt-detail-value pt-mom-text">{item.mom}</span>
+                                                </div>
+                                            </template>
+
+                                            <div class="pt-checkout-grid">
+                                                <template if:true={item.visitOutcome}>
+                                                    <div class="pt-grid-item">
+                                                        <span class="pt-detail-label">Outcome:</span>
+                                                        <span class="pt-detail-value">{item.visitOutcome}</span>
+                                                    </div>
+                                                </template>
+                                                <template if:true={item.nextAction}>
+                                                    <div class="pt-grid-item">
+                                                        <span class="pt-detail-label">Next Action:</span>
+                                                        <span class="pt-detail-value">{item.nextAction}</span>
+                                                    </div>
+                                                </template>
+                                                <template if:true={item.followUpDate}>
+                                                    <div class="pt-grid-item">
+                                                        <span class="pt-detail-label">Follow-up:</span>
+                                                        <span class="pt-detail-value">{item.followUpDate}</span>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+                                            <!-- Geofence warning if more than 300m outside -->
+                                            <template if:true={item.is100mOutside}>
+                                                <div class="pt-warning-banner animate-fade-in">
+                                                    <div class="pt-warning-header">
+                                                        <lightning-icon icon-name="utility:warning" size="xx-small" variant="warning" class="slds-m-right_xx-small"></lightning-icon>
+                                                        <strong>Outside Boundary (&gt;300m)</strong>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Attached Media Section -->
+                                    <template if:true={item.files}>
+                                        <template if:true={item.files.length}>
+                                            <div class="pt-attachment-section">
+                                                <span class="pt-attachment-label">Captured Media & Files</span>
+                                                <div class="pt-attachment-list">
+                                                    <template for:each={item.files} for:item="file">
+                                                        <!-- Image Thumbnail -->
+                                                        <template if:true={file.isImage}>
+                                                            <div key={file.id} class="pt-image-thumbnail-wrapper hover-lift" onclick={openImagePreview} data-url={file.url}>
+                                                                <img src={file.url} alt={file.title} class="pt-image-thumbnail"/>
+                                                                <div class="pt-thumbnail-overlay">
+                                                                    <lightning-icon icon-name="utility:preview" size="xx-small" class="pt-icon-white"></lightning-icon>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+
+                                                        <!-- Document Link -->
+                                                        <template if:false={file.isImage}>
+                                                            <a key={file.id} href={file.url} target="_blank" class="pt-document-link hover-lift">
+                                                                <lightning-icon icon-name="doctype:attachment" size="xx-small" class="pt-doc-icon"></lightning-icon>
+                                                                <span class="pt-doc-title" title={file.title}>{file.title}</span>
+                                                            </a>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+
+                                    <!-- Checkout Button (if active Check-In) -->
+                                    <template if:false={item.isCheckout}>
+                                        <div class="pt-btn-container slds-m-top_small">
+                                            <button class="pt-btn pt-btn-checkout" data-id={item.id} onclick={checkoutHandler}>
+                                                <lightning-icon icon-name="utility:logout" size="xx-small" variant="inverse" class="slds-m-right_xx-small"></lightning-icon>
+                                                Checkout Visit
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Glassmorphic Modal -->
+        <template if:true={showModal}>
+            <section class="pt-backdrop">
+                <div class="pt-modal animate-pop-in">
+                    <div class="pt-modal-header">
+                        <h2>Log Visit Activity</h2>
+                        <button class="pt-close-btn" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                        </button>
+                    </div>
+
+                    <div class="pt-modal-body">
+                        
+
+
+                        <template if:true={isMarketVisit}>
+                            <div class="pt-field-group">
+                                <lightning-radio-group name="enquiryPath"
+                                    label="Enquiry Association Type"
+                                    options={enquiryPathOptions}
+                                    value={selectedEnquiryPath}
+                                    type="radio"
+                                    onchange={handleEnquiryPathChange}
+                                    class="pt-radio-row"
+                                    required>
+                                </lightning-radio-group>
+                            </div>
+
+                            <!-- 2. Associated Opportunities Path -->
+                            <template if:true={isOppsPath}>
+                                <div class="pt-field-group slds-is-relative">
+                                    <lightning-input
+                                        type="search"
+                                        label="Select Opportunity"
+                                        value={oppSearchKey}
+                                        placeholder="Search and Select Opportunity..."
+                                        onchange={handleOppSearchKeyChange}
+                                        onfocus={handleOppSearchFocus}
+                                        onblur={handleOppSearchBlur}
+                                        required>
+                                    </lightning-input>
+                                    
+                                    <template if:true={showOppDropdown}>
+                                        <div class="pt-custom-dropdown">
+                                            <ul class="pt-dropdown-list">
+                                                <template for:each={opportunityOptions} for:item="opt">
+                                                    <li key={opt.value} 
+                                                        data-value={opt.value} 
+                                                        data-label={opt.label}
+                                                        onmousedown={handleOppDropdownSelect} 
+                                                        class="pt-dropdown-item">
+                                                        {opt.label}
+                                                    </li>
+                                                </template>
+                                                <template if:true={isOppOptionsEmpty}>
+                                                    <li class="pt-dropdown-item pt-dropdown-empty">No opportunities found</li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="pt-field-group">
+                                    <template if:true={associatedAccountName}>
+                                        <div class="pt-associated-account-box">
+                                            <div class="pt-highlight-label">Associated Account</div>
+                                            <div class="pt-highlight-value">
+                                                <lightning-icon icon-name="standard:account" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                                <span>{associatedAccountName}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <lightning-radio-group name="tagVisitOption"
+                                            label="Tag Visit with"
+                                            options={tagVisitOptions}
+                                            value={selectedTagVisitOption}
+                                            type="radio"
+                                            onchange={handleTagVisitOptionChange}
+                                            class="pt-radio-row"
+                                            required>
+                                        </lightning-radio-group>
+                                    </template>
+
+                                    <template if:true={isSiteTagOptionSelected}>
+                                        <template if:true={hasEligibleSites}>
+                                            <lightning-combobox
+                                                label="Select Site"
+                                                value={selectedSiteId}
+                                                options={eligibleSiteOptions}
+                                                onchange={handleSiteChange}
+                                                required>
+                                            </lightning-combobox>
+                                        </template>
+                                        
+                                        <template if:true={showNewSiteInput}>
+                                            <lightning-input
+                                                type="text"
+                                                label="New Site Name"
+                                                value={newSiteName}
+                                                onchange={handleNewSiteNameChange}
+                                                required>
+                                            </lightning-input>
+                                        </template>
+                                    </template>
+                                    
+                                    <template if:true={isAccountTagOptionSelected}>
+                                        <div class="pt-info-box" style="margin-top: 10px; font-weight: 500; font-size: 13px; color: #0070d2; background: #f4f6f9; padding: 8px 12px; border-left: 4px solid #0070d2; border-radius: 4px;">
+                                            <p>{addressBookStatusMessage}</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- 3. No Existing Enquiry Path (New Enquiry) -->
+                            <template if:true={isNoEnquiryPath}>
+                                <template if:true={hasScheduledLead}>
+                                    <div class="pt-field-group">
+                                        <div class="pt-associated-account-box">
+                                            <div class="pt-highlight-label">Associated Lead</div>
+                                            <div class="pt-highlight-value">
+                                                <lightning-icon icon-name="standard:lead" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                                <span>{scheduledLeadName}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <div class="pt-field-group" style="margin-bottom: 12px; border-bottom: 1px dashed #dddbda; padding-bottom: 12px;">
+                                    <lightning-input
+                                        type="toggle"
+                                        label="Create New Account"
+                                        checked={createNewAccount}
+                                        onchange={handleCreateNewAccountToggle}
+                                        message-toggle-active="Yes"
+                                        message-toggle-inactive="No">
+                                    </lightning-input>
+                                </div>
+
+                                <template if:true={createNewAccount}>
+                                    <div class="pt-field-group">
+                                        <h5 style="text-align: center; font-weight: bold;">New Account Details</h5>
+                                        <lightning-input
+                                            type="text"
+                                            label="Account Name"
+                                            value={newAccountName}
+                                            onchange={handleNewAccountNameChange}
+                                            required>
+                                        </lightning-input>
+                                        <lightning-input
+                                            type="tel"
+                                            label="Account Phone"
+                                            value={newAccountPhone}
+                                            onchange={handleNewAccountPhoneChange}>
+                                        </lightning-input>
+                                        <lightning-input
+                                            type="email"
+                                            label="Account Email"
+                                            value={newAccountEmail}
+                                            onchange={handleNewAccountEmailChange}>
+                                        </lightning-input>
+                                    </div>
+                                </template>
+
+                                <template if:false={createNewAccount}>
+                                    <div class="pt-field-group slds-is-relative">
+                                        <lightning-input
+                                            type="search"
+                                            label="Select Account"
+                                            value={accSearchKey}
+                                            placeholder="Search and Select Account by Name or Phone..."
+                                            onchange={handleAccSearchKeyChange}
+                                            onfocus={handleAccSearchFocus}
+                                            onblur={handleAccSearchBlur}
+                                            required={isAccountSelectionRequired}>
+                                        </lightning-input>
+                                        
+                                        <template if:true={showAccDropdown}>
+                                            <div class="pt-custom-dropdown">
+                                                <ul class="pt-dropdown-list">
+                                                    <template for:each={accountSearchOptions} for:item="opt">
+                                                        <li key={opt.value} 
+                                                            data-value={opt.value} 
+                                                            data-label={opt.label}
+                                                            onmousedown={handleAccDropdownSelect} 
+                                                            class="pt-dropdown-item">
+                                                            {opt.label}
+                                                        </li>
+                                                    </template>
+                                                    <template if:true={isAccOptionsEmpty}>
+                                                        <li class="pt-dropdown-item pt-dropdown-empty">No accounts found</li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </div>
+
+                                    <template if:true={associatedAccountId}>
+                                        <div class="pt-field-group">
+                                            <lightning-radio-group name="tagVisitOption"
+                                                label="Tag Visit with"
+                                                options={tagVisitOptions}
+                                                value={selectedTagVisitOption}
+                                                type="radio"
+                                                onchange={handleTagVisitOptionChange}
+                                                class="pt-radio-row"
+                                                required>
+                                            </lightning-radio-group>
+
+                                            <template if:true={isAccountTagOptionSelected}>
+                                                <div class="pt-info-box" style="margin-top: 10px; font-weight: 500; font-size: 13px; color: #0070d2; background: #f4f6f9; padding: 8px 12px; border-left: 4px solid #0070d2; border-radius: 4px;">
+                                                    <p>{addressBookStatusMessage}</p>
+                                                </div>
+                                            </template>
+
+                                            <template if:true={isSiteTagOptionSelected}>
+                                                <template if:true={hasEligibleSites}>
+                                                    <lightning-combobox
+                                                        label="Select Site"
+                                                        value={selectedSiteId}
+                                                        options={eligibleSiteOptions}
+                                                        onchange={handleSiteChange}
+                                                        required>
+                                                    </lightning-combobox>
+                                                </template>
+                                                
+                                                <template if:true={showNewSiteInput}>
+                                                    <lightning-input
+                                                        type="text"
+                                                        label="New Site Name"
+                                                        value={newSiteName}
+                                                        onchange={handleNewSiteNameChange}
+                                                        required>
+                                                    </lightning-input>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </template>
+
+                            <!-- Reason for Visit -->
+                            <div class="pt-field-group">
+                                <lightning-combobox
+                                    name="reason"
+                                    label="Reason for Visit"
+                                    value={reasonForVisitValue}
+                                    placeholder="Select Reason"
+                                    options={reasonForVisitOptions}
+                                    onchange={handleVisitReasonChange}
+                                    required>
+                                </lightning-combobox>
+                            </div>
+
+                            <!-- Visit Type -->
+                            <div class="pt-field-group">
+                                <lightning-radio-group name="visitType"
+                                    label="Visit Type"
+                                    options={visitTypeOptions}
+                                    value={visitTypeValue}
+                                    type="radio"
+                                    onchange={handleVisitTypeChange}
+                                    class="pt-radio-row">
+                                </lightning-radio-group>
+                            </div>
+                        </template>
+
+                        <!-- Selfie Capture Area -->
+                        <div class="up-section up-capture-section">
+                            <div class="up-camera-area">
+                                <div class="up-sub-label">Selfie Verification (Identity)</div>
+                                
+                                <template if:true={isIOS}>
+                                    <!-- iOS Native File Capture Flow -->
+                                    <input type="file" accept="image/*" capture="user" class="up-selfie-file-input" style="display:none;" onchange={handleSelfieFileChange} />
+                                    
+                                    <template if:false={selfiePreview}>
+                                        <div class="up-viewfinder-placeholder animate-fade-in">
+                                            <lightning-icon icon-name="utility:user" size="large"></lightning-icon>
+                                            <p>Camera is closed</p>
+                                            <button class="up-btn-primary up-btn-camera-action" onclick={triggerSelfieCapture}>Open Camera</button>
+                                        </div>
+                                    </template>
+                                    
+                                    <template if:true={selfiePreview}>
+                                        <div class="up-preview-strip animate-fade-in">
+                                            <img src={selfiePreview} class="up-preview-img" alt="Selfie Captured" />
+                                            <span class="up-preview-check">✓ Selfie Done</span>
+                                        </div>
+                                    </template>
+                                    
+                                    <div class="up-camera-actions">
+                                        <template if:true={selfiePreview}>
+                                            <button class="up-btn-retake" onclick={retakeSelfie}>
+                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                Retake
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <template if:false={isIOS}>
+                                    <!-- Android/Desktop Live Video Flow -->
+                                    <template if:false={selfiePreview}>
+                                        <template if:true={isSelfieCameraOpen}>
+                                            <div class="up-viewfinder animate-fade-in">
+                                                <video autoplay playsinline muted webkit-playsinline class="up-video up-video-selfie-checkin"></video>
+                                                <div class="up-viewfinder-corners"></div>
+                                            </div>
+                                        </template>
+                                        <template if:false={isSelfieCameraOpen}>
+                                            <div class="up-viewfinder-placeholder animate-fade-in">
+                                                <lightning-icon icon-name="utility:user" size="large"></lightning-icon>
+                                                <p>Selfie camera is closed</p>
+                                                <button class="up-btn-primary up-btn-camera-action" onclick={openSelfieCameraCheckin}>Open Camera</button>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    
+                                    <template if:true={selfiePreview}>
+                                        <div class="up-preview-strip animate-fade-in">
+                                            <img src={selfiePreview} class="up-preview-img" alt="Selfie Captured" />
+                                            <span class="up-preview-check">✓ Selfie Done</span>
+                                        </div>
+                                    </template>
+                                    
+                                    <div class="up-camera-actions">
+                                        <template if:false={selfiePreview}>
+                                            <template if:true={isSelfieCameraOpen}>
+                                                <button class="up-btn-capture" onclick={captureSelfieCheckin} title="Capture Selfie">
+                                                    <div class="up-btn-capture-ring"></div>
+                                                </button>
+                                                <button class="up-btn-retake" onclick={closeSelfieCamera} title="Close Camera" style="margin-left: 10px;">
+                                                    <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                    Close
+                                                </button>
+                                            </template>
+                                        </template>
+                                        <template if:true={selfiePreview}>
+                                            <button class="up-btn-retake" onclick={retakeSelfie}>
+                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                Retake
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-modal-footer">
+                        <button class="pt-btn pt-btn-cancel" onclick={closeModal} disabled={saving}>Cancel</button>
+                        <button class="pt-btn pt-btn-save" onclick={addEntry} disabled={saving}>
+                            <template if:true={saving}>Saving...</template>
+                            <template if:false={saving}>Save Entry</template>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <!-- Checkout Modal -->
+        <template if:true={checkedOutModal}>
+            <section class="pt-backdrop">
+                <div class="pt-modal animate-pop-in">
+                    <div class="pt-modal-header">
+                        <h2>Log Check-Out / Create Task</h2>
+                        <button class="pt-close-btn" onclick={closeCheckedOutModal}>
+                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                        </button>
+                    </div>
+
+                    <div class="pt-modal-body">
+                        <div class="pt-field-group">
+                            <lightning-input
+                                type="text"
+                                label="Customer Name"
+                                value={customerName}
+                                read-only="true">
+                            </lightning-input>
+                            <template if:true={isCustomerCategoryLocked}>
+                                <lightning-input
+                                    type="text"
+                                    label="Customer Category"
+                                    value={customerCategory}
+                                    read-only="true">
+                                </lightning-input>
+                            </template>
+                            <template if:false={isCustomerCategoryLocked}>
+                                <lightning-combobox
+                                    name="customerCategory"
+                                    label="Customer Category"
+                                    value={customerCategory}
+                                    placeholder="Select Customer Category"
+                                    options={customerCategoryOptions}
+                                    onchange={handleCustomerCategoryChange}
+                                    required>
+                                </lightning-combobox>
+                            </template>
+                        </div>
+
+                        <div class="pt-field-group">
+                            <lightning-combobox
+                                name="visitOutcome"
+                                label="Visit Outcome"
+                                value={visitOutcomeValue}
+                                placeholder="Select Visit Outcome"
+                                options={visitOutcomeOptions}
+                                onchange={handleVisitOutcomeChange}
+                                required>
+                            </lightning-combobox>
+                            <br>
+                            <template if:true={hasNextActionOptions}>
+                                <lightning-combobox
+                                    name="nextAction"
+                                    label="Next Action"
+                                    value={nextActionValue}
+                                    placeholder="Select Next Action"
+                                    options={nextActionOptions}
+                                    onchange={handleNextActionChange}
+                                    required>
+                                </lightning-combobox>
+                                <br>
+                            </template>
+                            <lightning-input
+                                type="date"
+                                label="Next Follow Up Date"
+                                value={followUpDate}
+                                min={followUpDateMin}
+                                onchange={handleFollowUpDateChange}
+                                required>
+                            </lightning-input>
+                            <br>
+                            <lightning-combobox
+                                name="followUpType"
+                                label="Create Follow Up as"
+                                value={followUpTypeValue}
+                                placeholder="Select Type"
+                                options={followUpTypeOptions}
+                                onchange={handleFollowUpTypeChange}
+                                required>
+                            </lightning-combobox>
+                            <br>
+                            <lightning-input
+                                type="text"
+                                label="MOM"
+                                value={momValue}
+                                onchange={handleMOMChange}
+                                required>
+                            </lightning-input>
+                            
+                            <template if:true={is100mOutside}>
+                                <br>
+                                <lightning-input
+                                    type="text"
+                                    label="Justification"
+                                    value={justificationValue}
+                                    onchange={handleJustificationChange}
+                                    field-level-help="Please provide a reason if you are outside the 300m geofence."
+                                    required>
+                                </lightning-input>
+                            </template>
+
+                            <br>
+                            <lightning-input 
+                                type="file" 
+                                label="Upload File"
+                                accept=".pdf,.xls,.xlsx,.doc,.docx,.png,.jpg,.jpeg"
+                                onchange={handleFileChange}>
+                            </lightning-input>
+                            <template if:true={hasCheckoutFile}>
+                                <div class="pt-file-attached">
+                                    <lightning-icon icon-name="utility:success" size="xx-small" variant="success"></lightning-icon>
+                                    <span class="pt-file-attached-name" title={checkoutFileName}>{checkoutFileName}</span>
+                                    <button type="button" class="pt-file-remove" onclick={clearCheckoutFile}>Remove</button>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- POC / Contact Selection Section -->
+                        <div class="pt-field-group pt-client-box">
+                            <h5 style="text-align: center; font-weight: bold; margin-bottom: 10px;">Contact (POC) Details</h5>
+                            
+                            <template if:true={hasExistingContacts}>
+                                <lightning-combobox
+                                    label="Select Contact"
+                                    value={selectedContactId}
+                                    options={existingContactOptions}
+                                    onchange={handleContactSelectionChange}
+                                    required>
+                                </lightning-combobox>
+                            </template>
+
+                            <template if:true={showNewContactForm}>
+                                <div style="margin-top: 10px; border-top: 1px dashed #dddbda; padding-top: 10px;">
+                                    <p style="font-weight: 500; font-size: 12px; color: #c23934; margin-bottom: 5px;">* Create New Contact</p>
+                                    <lightning-input
+                                        type="text"
+                                        label="First Name"
+                                        value={newContactFirstName}
+                                        onchange={handleContactFirstNameChange}
+                                        required>
+                                    </lightning-input>
+                                    <lightning-input
+                                        type="text"
+                                        label="Last Name"
+                                        value={newContactLastName}
+                                        onchange={handleContactLastNameChange}
+                                        required>
+                                    </lightning-input>
+                                    <lightning-input
+                                        type="phone"
+                                        label="Phone"
+                                        value={newContactPhone}
+                                        onchange={handleContactPhoneChange}
+                                        required>
+                                    </lightning-input>
+                                    <lightning-input
+                                        type="email"
+                                        label="Email"
+                                        value={newContactEmail}
+                                        onchange={handleContactEmailChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+
+
+                        <!-- Post-Checkout Disposition -->
+                        <div class="pt-field-group">
+                            <lightning-combobox
+                                name="disposition"
+                                label="Post-Checkout Disposition"
+                                value={postDispositionValue}
+                                placeholder="Select Disposition"
+                                options={postDispositionOptions}
+                                onchange={handleDispositionChange}
+                                required>
+                            </lightning-combobox>
+                            
+                            <template if:true={isLeadLost}>
+                                <br>
+                                <lightning-combobox
+                                    name="lostReason"
+                                    label="Lost Reason"
+                                    value={lostReasonValue}
+                                    placeholder="Select Lost Reason"
+                                    options={lostReasonOptions}
+                                    onchange={handleLostReasonChange}
+                                    required>
+                                </lightning-combobox>
+                            </template>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="pt-modal-footer">
+                        <button class="pt-btn pt-btn-cancel" onclick={closeCheckedOutModal} disabled={savingCheckedOut}>Cancel</button>
+                        <button class="pt-btn pt-btn-save" onclick={updateTaskHandler} disabled={savingCheckedOut}>
+                            <template if:true={savingCheckedOut}>Saving...</template>
+                            <template if:false={savingCheckedOut}>Save Entry</template>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <!-- Reschedule / Cancel Modal -->
+        <template if:true={showScheduleActionModal}>
+            <section class="pt-backdrop pt-schedule-action-modal">
+                <div class="pt-modal animate-pop-in">
+                    <div class="pt-modal-header">
+                        <h2>{scheduleActionType} Scheduled Visit</h2>
+                        <button class="pt-close-btn" onclick={closeScheduleActionModal}>
+                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                        </button>
+                    </div>
+
+                    <div class="pt-modal-body">
+                        <!-- Reason Selection -->
+                        <div class="pt-field-group">
+                            <lightning-combobox
+                                name="scheduleReason"
+                                label="Reason"
+                                value={selectedReasonOption}
+                                placeholder="Select Reason"
+                                options={scheduleReasonOptions}
+                                onchange={handleReasonOptionChange}
+                                required>
+                            </lightning-combobox>
+                        </div>
+
+                        <!-- Custom Reason Text (Shown when 'Other' selected) -->
+                        <template if:true={isOtherReasonSelected}>
+                            <div class="pt-field-group animate-fade-in" style="margin-top: 10px;">
+                                <lightning-textarea
+                                    label="Custom Reason Details"
+                                    value={customReasonText}
+                                    onchange={handleCustomReasonChange}
+                                    required>
+                                </lightning-textarea>
+                            </div>
+                        </template>
+
+                        <!-- Next Date & Time inputs -->
+                        <div class="pt-field-group" style="margin-top: 15px;">
+                            <lightning-input
+                                type="date"
+                                label="Next Schedule Date"
+                                value={scheduleActionDate}
+                                onchange={handleScheduleActionDateChange}
+                                required={isRescheduleType}>
+                            </lightning-input>
+                        </div>
+
+                        <!-- <div class="pt-field-group" style="margin-top: 10px;">
+                            <lightning-input
+                                type="time"
+                                label="Next Schedule Time"
+                                value={scheduleActionTime}
+                                onchange={handleScheduleActionTimeChange}>
+                            </lightning-input>
+                        </div> -->
+                    </div>
+
+                    <div class="pt-modal-footer">
+                        <button class="pt-btn pt-btn-cancel" onclick={closeScheduleActionModal} disabled={savingScheduleAction}>Cancel</button>
+                        <button class="pt-btn pt-btn-save" onclick={handleScheduleActionSubmit} disabled={savingScheduleAction}>
+                            <template if:true={savingScheduleAction}>Saving...</template>
+                            <template if:false={savingScheduleAction}>Submit</template>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <!-- Shared Canvas for Capturing Photos -->
+        <canvas style="display:none;"></canvas>
+
+        <!-- Zoomable Image Preview Modal Overlay -->
+        <template if:true={showImageModal}>
+            <section class="pt-image-backdrop animate-fade-in" onclick={closeImagePreview}>
+                <div class="pt-image-modal" onclick={stopBubble}>
+                    <div class="pt-image-modal-header">
+                        <h2>Image Preview</h2>
+                        <button class="pt-image-close-btn" onclick={closeImagePreview}>&times;</button>
+                    </div>
+                    <div class="pt-image-modal-body">
+                        <img src={modalImageUrl} alt="Full screen preview" class="pt-image-full" />
+                    </div>
+                </div>
+            </section>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,40 @@
+/* The action modal supplies its own chrome, so no border or max-width here. */
+.case-form {
+    background: var(--lwc-colorBackgroundAlt, #ffffff);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+
+.case-form h2 {
+    color: var(--lwc-colorTextWeak, #5c5c5c);
+    letter-spacing: 0.0625rem;
+}
+
+.case-form footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--lwc-colorBackgroundAlt, #ffffff);
+    border-bottom-left-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    border-bottom-right-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+}
+
+.read-only-value {
+    min-height: 1.875rem;
+    padding-top: 0.25rem;
+    color: var(--lwc-colorTextDefault, #181818);
+    word-break: break-word;
+}
+
+.new-contact {
+    background: var(--lwc-colorBackground, #f3f3f3);
+    border-color: var(--lwc-colorBorder, #e5e5e5);
+}
+
+.contact-table {
+    min-height: 3rem;
+    max-height: 18rem;
+    overflow-y: auto;
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+}

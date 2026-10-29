@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exotel_CTI__Device_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Field to Identify type of device</description>
+    <inlineHelpText>Type of Device</inlineHelpText>
+    <label>Device Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PSTN</fullName>
+                <default>true</default>
+                <label>PSTN</label>
+            </value>
+            <value>
+                <fullName>IP</fullName>
+                <default>false</default>
+                <label>IP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,133 @@
+<!-- QuoteOfferOpen - Deepanjan (22nd September 2026)
+     Desktop Export opens THIS page in the new tab instead of the department document
+     page. It loads the SAME department VF page (same document, same render) and saves
+     it under the Quote Reference name the LWC passes in fn
+     (UIL/CB/26-27/00008106 -> UIL_CB_26-27_00008106.pdf / .doc / .xls).
+       PDF        : shown in the browser's own PDF viewer; Download / Print on the top bar.
+       Word/Excel : downloaded straight away under the new name (as the old page did).
+     Common to every department - no department page or controller is touched. No fn,
+     or anything unexpected -> the department page itself opens, i.e. the old behaviour.
+     Params: id = Quote Id, page = bare VF page name, type = pdf | word | excel, fn = file name. -->
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" cache="false">
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Offer Document</title>
+<style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #525659;
+                 font-family: Arial, Helvetica, sans-serif; }
+    #top { position: fixed; top: 0; left: 0; right: 0; height: 48px; box-sizing: border-box;
+           display: flex; align-items: center; gap: 10px; padding: 0 16px;
+           background: #323639; color: #fff; z-index: 2; }
+    #name { flex: 1; min-width: 0; font-size: 14px; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis; }
+    .btn { border: 0; border-radius: 4px; padding: 8px 14px; font-size: 13px;
+           font-weight: bold; cursor: pointer; background: #0176d3; color: #fff; }
+    .btn.sec { background: #5f6368; }
+    .btn:disabled { opacity: .5; cursor: default; }
+    #doc { position: fixed; top: 48px; left: 0; width: 100%; height: calc(100% - 48px);
+           border: 0; display: none; }
+    #msg { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; display: flex;
+           align-items: center; justify-content: center; text-align: center; padding: 0 16px;
+           color: #e8eaed; font-size: 14px; }
+    @media (max-width: 480px) {
+        #top { padding: 0 10px; gap: 6px; }
+        .btn { padding: 7px 10px; }
+        #name { font-size: 12px; }
+    }
+</style>
+</head>
+<body>
+<div id="top">
+    <span id="name">Loading...</span>
+    <button class="btn sec" id="print" disabled="disabled">Print</button>
+    <button class="btn" id="download" disabled="disabled">Download</button>
+</div>
+<div id="msg">Preparing document...</div>
+<iframe id="doc" title="Offer document"></iframe>
+<script>
+(function () {
+    var quoteId  = "{!JSENCODE($CurrentPage.parameters.id)}";
+    var pageName = "{!JSENCODE($CurrentPage.parameters.page)}";
+    var docType  = ("{!JSENCODE($CurrentPage.parameters.type)}" || 'pdf').toLowerCase();
+    var fileName = "{!JSENCODE($CurrentPage.parameters.fn)}".replace(/[^A-Za-z0-9_\-]/g, '_').slice(0, 150);
+    var nameEl = document.getElementById('name');
+    var msg    = document.getElementById('msg');
+    var frame  = document.getElementById('doc');
+    var dlBtn  = document.getElementById('download');
+    var prBtn  = document.getElementById('print');
+
+    // Strict: a Salesforce Id and a bare page name only - nothing else is fetched.
+    if (!/^[a-zA-Z0-9]{15,18}$/.test(quoteId) || !/^[A-Za-z0-9_]+$/.test(pageName)) {
+        nameEl.textContent = '';
+        msg.textContent = 'Invalid document link.';
+        return;
+    }
+    if (['pdf', 'word', 'excel'].indexOf(docType) === -1) { docType = 'pdf'; }
+
+    var src = '/apex/' + pageName + '?id=' + encodeURIComponent(quoteId);
+    if (!fileName) { window.location.replace(src); return; }   // no name -> old behaviour
+    document.title = fileName;
+
+    function save(url, name) {
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    fetch(src, { credentials: 'same-origin' })
+        .then(function (r) {
+            if (!r.ok) { throw new Error('HTTP ' + r.status); }
+            var ctype = r.headers.get('Content-Type') || '';
+            var disp  = r.headers.get('Content-Disposition') || '';
+            return r.blob().then(function (b) { return { blob: b, ctype: ctype, disp: disp }; });
+        })
+        .then(function (res) {
+            if (docType === 'pdf') {
+                if (res.ctype.indexOf('pdf') === -1) { throw new Error('Not a PDF'); }
+                var pdfUrl = URL.createObjectURL(new Blob([res.blob], { type: 'application/pdf' }));
+                var pdfName = fileName + '.pdf';
+                nameEl.textContent = pdfName;
+                // toolbar=0 hides the viewer's own download icon, which cannot take a name
+                frame.src = pdfUrl + '#toolbar=0';
+                frame.style.display = 'block';
+                msg.style.display = 'none';
+                dlBtn.disabled = false;
+                dlBtn.onclick = function () { save(pdfUrl, pdfName); };
+                prBtn.disabled = false;
+                prBtn.onclick = function () {
+                    try { frame.contentWindow.focus(); frame.contentWindow.print(); }
+                    catch (e) { window.open(pdfUrl, '_blank'); }
+                };
+                return;
+            }
+            // Word / Excel: keep the extension the page itself uses, else doc / xls
+            var m = /filename\*?=(?:UTF-8'')?"?([^";]+)"?/i.exec(res.disp);
+            var hdrName = m ? m[1] : '';
+            var ext = hdrName.indexOf('.') > -1 ? hdrName.split('.').pop().toLowerCase() : '';
+            if (!/^[a-z0-9]{2,5}$/.test(ext)) { ext = (docType === 'word') ? 'doc' : 'xls'; }
+            var fileUrl = URL.createObjectURL(res.blob);
+            var fullName = fileName + '.' + ext;
+            nameEl.textContent = fullName;
+            prBtn.style.display = 'none';
+            msg.textContent = 'Download started. You can close this tab.';
+            dlBtn.textContent = 'Download again';
+            dlBtn.disabled = false;
+            dlBtn.onclick = function () { save(fileUrl, fullName); };
+            save(fileUrl, fullName);
+        })
+        .catch(function (e) {
+            console.error(e);
+            // anything unexpected: open the department page itself (the old behaviour)
+            window.location.replace(src);
+        });
+})();
+</script>
+</body>
+</html>
+</apex:page>

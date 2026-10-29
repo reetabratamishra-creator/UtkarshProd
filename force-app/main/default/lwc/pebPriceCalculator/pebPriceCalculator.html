@@ -1,0 +1,646 @@
+<template>
+    <lightning-card icon-name="standard:product_item" title="PEB Price Calculator">
+
+        <!-- ============ LANDING ============ -->
+        <template lwc:if={loading}>
+            <div class="slds-p-around_large slds-align_absolute-center">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:if={showLanding}>
+            <div class="slds-p-around_medium">
+                <p class="slds-text-body_regular slds-m-bottom_small">
+                    Generate a Price Calculation from the <strong>Design Estimation.pdf</strong> uploaded to this
+                    Opportunity. The section values are read from the estimation and mapped to the raw-material line
+                    items; you can then adjust weights, add accessories &amp; buyouts, select conversion costs and apply a margin.
+                </p>
+                <lightning-button
+                    variant="brand"
+                    label="Start Price Calculation"
+                    icon-name="utility:calculator"
+                    onclick={handleStart}>
+                </lightning-button>
+            </div>
+        </template>
+
+        <!-- ============ CALCULATOR ============ -->
+        <template lwc:if={showCalculator}>
+            <div class="slds-p-horizontal_small slds-p-bottom_medium">
+
+                <!-- source banner -->
+                <div class={bannerClass} role="status">
+                    <lightning-icon icon-name={bannerIcon} size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                    <span>{bannerMessage}</span>
+                </div>
+
+                <!-- Reading the attached estimation (auto) -->
+                <template lwc:if={showEstimationLoading}>
+                    <div class="slds-box slds-box_x-small slds-m-bottom_small">
+                        <p class="slds-text-body_small slds-m-bottom_x-small">
+                            Reading the estimation and pre-filling section weights…
+                        </p>
+                        <lightning-progress-bar value={readProgress} size="large"></lightning-progress-bar>
+                    </div>
+                </template>
+
+                <!-- Manual reader: only shown if the attached file could not be auto-read -->
+                <template lwc:if={showEstimationFallback}>
+                    <div class="slds-box slds-box_x-small slds-m-bottom_small">
+                        <p class="slds-text-body_small slds-m-bottom_xx-small">
+                            Couldn't read a Design Estimation PDF from this Opportunity automatically.
+                            If you have the file, pick it here to read it in your browser and pre-fill
+                            the Section A weights (each value stays editable — please verify before calculating).
+                        </p>
+                        <input type="file" accept=".pdf" onchange={handleEstimationRead} />
+                    </div>
+                </template>
+
+                <!-- ---------- SECTION A ---------- -->
+                <div class="section-title">A &nbsp; Raw Materials (from Estimation)</div>
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="ctr" style="width:3rem">Sl.</th>
+                                <th>Description</th>
+                                <th class="ctr" style="width:5rem">Unit</th>
+                                <th class="ctr" style="width:9rem">Total Weight (Kg)</th>
+                                <th class="ctr" style="width:8rem">Additional Weight</th>
+                                <th style="width:12rem">Reason</th>
+                                <th class="ctr" style="width:9rem">Total Calc. Weight</th>
+                                <th class="ctr" style="width:5rem">Rate</th>
+                                <th class="rgt" style="width:8rem">Cost (Rs.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={sectionA} for:item="row">
+                                <tr key={row.key}>
+                                    <td class="ctr">{row.slNo}</td>
+                                    <td>{row.description}</td>
+                                    <td class="ctr">{row.unit}</td>
+                                    <td>
+                                        <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                            value={row.totalWeight} data-key={row.key} data-field="totalWeight"
+                                            onchange={handleSectionAChange}></lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                            value={row.additionalWeight} data-key={row.key} data-field="additionalWeight"
+                                            onchange={handleSectionAChange}></lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="text" variant="label-hidden"
+                                            value={row.reason} data-key={row.key} data-field="reason"
+                                            required={row.reasonRequired}
+                                            message-when-value-missing="Reason is required when additional weight is added"
+                                            placeholder="Required if add. weight &gt; 0"
+                                            onchange={handleSectionAChange}></lightning-input>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.totalCalcWeight}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.rate}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.cost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr class="subtotal">
+                                <td colspan="6" class="rgt">Sub Total of A</td>
+                                <td class="rgt">
+                                    <lightning-formatted-number value={totals.sectionATotalWeight}
+                                        maximum-fraction-digits="2"></lightning-formatted-number>
+                                </td>
+                                <td></td>
+                                <td class="rgt">
+                                    <lightning-formatted-number value={totals.sectionATotalCost}
+                                        maximum-fraction-digits="0"></lightning-formatted-number>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ---------- ACCESSORIES ---------- -->
+                <div class="section-title">B1 &nbsp; Accessories</div>
+                <div class="slds-grid slds-grid_vertical-align-end slds-gutters_x-small slds-m-bottom_x-small">
+                    <div class="slds-col" style="max-width:22rem">
+                        <lightning-combobox label="Add accessory" variant="label-hidden"
+                            placeholder="Select accessory..." options={accessoryTypeOptions}
+                            value={selectedAccessoryType} onchange={handleAccessoryTypeChange}></lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button label="Add" icon-name="utility:add" onclick={handleAddAccessory}></lightning-button>
+                    </div>
+                </div>
+                <template lwc:if={hasAccessories}>
+                    <div class="slds-scrollable_x">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th>Description</th>
+                                    <th class="ctr" style="width:7rem">Unit</th>
+                                    <th class="ctr" style="width:7rem">Qty</th>
+                                    <th class="ctr" style="width:7rem">Unit Wt.</th>
+                                    <th class="rgt" style="width:8rem">Total Weight</th>
+                                    <th class="rgt" style="width:6rem">Rate</th>
+                                    <th class="rgt" style="width:8rem">Cost (Rs.)</th>
+                                    <th style="width:3rem"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={accessories} for:item="row">
+                                    <tr key={row.rowId}>
+                                        <td>{row.description}</td>
+                                        <td class="ctr">{row.unit}</td>
+                                        <td>
+                                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                value={row.qty} data-id={row.rowId} data-field="qty"
+                                                onchange={handleAccessoryChange}></lightning-input>
+                                        </td>
+                                        <td>
+                                            <template lwc:if={row.fixedUnitWt}>
+                                                <lightning-formatted-number value={row.unitWt}
+                                                    maximum-fraction-digits="2"></lightning-formatted-number>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                    value={row.unitWt} data-id={row.rowId} data-field="unitWt"
+                                                    onchange={handleAccessoryChange}></lightning-input>
+                                            </template>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.totalWeight}
+                                                maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.rate} maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.cost}
+                                                maximum-fraction-digits="0"></lightning-formatted-number>
+                                        </td>
+                                        <td class="ctr">
+                                            <lightning-button-icon icon-name="utility:delete" variant="border-filled"
+                                                alternative-text="Remove" data-id={row.rowId}
+                                                onclick={handleRemoveAccessory}></lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr class="subtotal">
+                                    <td colspan="4" class="rgt">Sub Total of Accessories</td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.accessoriesTotalWeight}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.accessoriesTotalCost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- ---------- BUYOUTS ---------- -->
+                <div class="section-title">B2 &nbsp; Buyouts</div>
+                <div class="slds-grid slds-grid_vertical-align-end slds-gutters_x-small slds-m-bottom_x-small">
+                    <div class="slds-col" style="max-width:22rem">
+                        <lightning-combobox label="Add buyout" variant="label-hidden"
+                            placeholder="Select buyout..." options={buyoutTypeOptions}
+                            value={selectedBuyoutType} onchange={handleBuyoutTypeChange}></lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button label="Add" icon-name="utility:add" onclick={handleAddBuyout}></lightning-button>
+                    </div>
+                </div>
+                <template lwc:if={hasBuyouts}>
+                    <div class="slds-scrollable_x">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th>Description</th>
+                                    <th class="ctr" style="width:7rem">Unit</th>
+                                    <th class="ctr" style="width:7rem">Qty</th>
+                                    <th class="ctr" style="width:7rem">Unit Wt.</th>
+                                    <th class="rgt" style="width:8rem">Total Weight</th>
+                                    <th class="rgt" style="width:7rem">Rate</th>
+                                    <th class="rgt" style="width:8rem">Cost (Rs.)</th>
+                                    <th style="width:3rem"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={buyouts} for:item="row">
+                                    <tr key={row.rowId}>
+                                        <td>{row.description}</td>
+                                        <td class="ctr">{row.unit}</td>
+                                        <td>
+                                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                value={row.qty} data-id={row.rowId} data-field="qty"
+                                                onchange={handleBuyoutChange}></lightning-input>
+                                        </td>
+                                        <td class="ctr">
+                                            <lightning-formatted-number value={row.unitWt} maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.totalWeight}
+                                                maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.rate} maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.cost}
+                                                maximum-fraction-digits="0"></lightning-formatted-number>
+                                        </td>
+                                        <td class="ctr">
+                                            <lightning-button-icon icon-name="utility:delete" variant="border-filled"
+                                                alternative-text="Remove" data-id={row.rowId}
+                                                onclick={handleRemoveBuyout}></lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr class="subtotal">
+                                    <td colspan="4" class="rgt">Sub Total of Buyouts</td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.buyoutsTotalWeight}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.buyoutsTotalCost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- ---------- SPECIAL ITEMS (from the Note section) ---------- -->
+                <div class="section-title">B3 &nbsp; Special Items (from Note)</div>
+                <p class="slds-text-body_small slds-m-bottom_x-small">
+                    Description, unit and weight are read from the <strong>Note</strong> section of the estimation.
+                    Enter the <strong>Rate</strong> for each item manually.
+                </p>
+                <div class="slds-grid slds-m-bottom_x-small">
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button label="Add special item" icon-name="utility:add"
+                            onclick={handleAddSpecialItem}></lightning-button>
+                    </div>
+                </div>
+                <template lwc:if={hasSpecialItems}>
+                    <div class="slds-scrollable_x">
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th>Description</th>
+                                    <th class="ctr" style="width:7rem">Unit</th>
+                                    <th class="ctr" style="width:7rem">Quantity</th>
+                                    <th class="ctr" style="width:7rem">Unit Wt</th>
+                                    <th class="rgt" style="width:8rem">Total Wt</th>
+                                    <th class="ctr" style="width:8rem">Rate</th>
+                                    <th class="rgt" style="width:9rem">Cost (Rs.)</th>
+                                    <th style="width:3rem"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={specialItems} for:item="row">
+                                    <tr key={row.rowId}>
+                                        <td>
+                                            <lightning-input type="text" variant="label-hidden"
+                                                value={row.description} data-id={row.rowId} data-field="description"
+                                                placeholder="Description from the Note section"
+                                                onchange={handleSpecialChange}></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox variant="label-hidden" options={unitOptions}
+                                                value={row.unit} data-id={row.rowId} data-field="unit"
+                                                onchange={handleSpecialChange}></lightning-combobox>
+                                        </td>
+                                        <td>
+                                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                value={row.qty} data-id={row.rowId} data-field="qty"
+                                                onchange={handleSpecialChange}></lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                value={row.unitWt} data-id={row.rowId} data-field="unitWt"
+                                                placeholder="Unit Wt"
+                                                onchange={handleSpecialChange}></lightning-input>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.totalWeight}
+                                                maximum-fraction-digits="2"></lightning-formatted-number>
+                                        </td>
+                                        <td>
+                                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                                value={row.rate} data-id={row.rowId} data-field="rate"
+                                                placeholder="Enter rate"
+                                                onchange={handleSpecialChange}></lightning-input>
+                                        </td>
+                                        <td class="rgt">
+                                            <lightning-formatted-number value={row.cost}
+                                                maximum-fraction-digits="0"></lightning-formatted-number>
+                                        </td>
+                                        <td class="ctr">
+                                            <lightning-button-icon icon-name="utility:delete" variant="border-filled"
+                                                alternative-text="Remove" data-id={row.rowId}
+                                                onclick={handleRemoveSpecialItem}></lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr class="subtotal">
+                                    <td colspan="4" class="rgt">Sub Total of Special Items</td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.specialItemsTotalWeight}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={totals.specialItemsTotalCost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- ---------- CONVERSION COST ---------- -->
+                <div class="section-title">C &nbsp; Conversion Cost</div>
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="ctr" style="width:4rem">Include</th>
+                                <th>Description</th>
+                                <th class="ctr" style="width:5rem">Unit</th>
+                                <th class="rgt" style="width:9rem">Weight</th>
+                                <th class="rgt" style="width:6rem">Rate</th>
+                                <th class="rgt" style="width:9rem">Cost (Rs.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={conversion} for:item="row">
+                                <tr key={row.key}>
+                                    <td class="ctr">
+                                        <lightning-input type="checkbox" variant="label-hidden"
+                                            checked={row.selected} data-key={row.key}
+                                            onchange={handleConversionToggle}></lightning-input>
+                                    </td>
+                                    <td>{row.description}</td>
+                                    <td class="ctr">{row.unit}</td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.weight}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.rate}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.cost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr class="subtotal">
+                                <td colspan="5" class="rgt">Sub Total of C</td>
+                                <td class="rgt">
+                                    <lightning-formatted-number value={totals.conversionTotalCost}
+                                        maximum-fraction-digits="0"></lightning-formatted-number>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ---------- OTHER COST ---------- -->
+                <div class="section-title">D &nbsp; Other Cost</div>
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th>Description</th>
+                                <th class="ctr" style="width:8rem">Unit</th>
+                                <th class="ctr" style="width:8rem">Qty</th>
+                                <th class="ctr" style="width:8rem">Rate</th>
+                                <th class="rgt" style="width:9rem">Cost (Rs.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={otherCost} for:item="row">
+                                <tr key={row.key}>
+                                    <td>{row.description}</td>
+                                    <td>
+                                        <lightning-combobox variant="label-hidden" options={unitOptions}
+                                            value={row.unit} data-key={row.key} data-field="unit"
+                                            onchange={handleOtherChange}></lightning-combobox>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                            value={row.qty} data-key={row.key} data-field="qty"
+                                            onchange={handleOtherChange}></lightning-input>
+                                    </td>
+                                    <td>
+                                        <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                            value={row.rate} data-key={row.key} data-field="rate"
+                                            onchange={handleOtherChange}></lightning-input>
+                                    </td>
+                                    <td class="rgt">
+                                        <lightning-formatted-number value={row.cost}
+                                            maximum-fraction-digits="0"></lightning-formatted-number>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr class="subtotal">
+                                <td colspan="4" class="rgt">Sub Total of D</td>
+                                <td class="rgt">
+                                    <lightning-formatted-number value={totals.otherCostTotal}
+                                        maximum-fraction-digits="0"></lightning-formatted-number>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ---------- VARIABLE COST ---------- -->
+                <div class="section-title">E &nbsp; Variable Cost (direct)</div>
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer peb-table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th>Description</th>
+                                <th class="rgt" style="width:12rem">Cost (Rs.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={variableCost} for:item="row">
+                                <tr key={row.key}>
+                                    <td>{row.description}</td>
+                                    <td>
+                                        <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                            value={row.cost} data-key={row.key}
+                                            onchange={handleVariableChange}></lightning-input>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr class="subtotal">
+                                <td class="rgt">Total Variable Cost</td>
+                                <td class="rgt">
+                                    <lightning-formatted-number value={totals.variableCostTotal}
+                                        maximum-fraction-digits="0"></lightning-formatted-number>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ---------- TOTALS ---------- -->
+                <div class="section-title">Summary</div>
+                <!-- Deepanjan (31st July 2026): the Summary row is now a two-column
+                     grid - Payment Terms on the left, the untouched totals box on
+                     the right. On a narrow screen the columns stack. -->
+                <div class="slds-grid slds-wrap slds-gutters_small summary-grid">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <div class="slds-box slds-box_x-small terms-box">
+                    <div class="terms-box__header">Payment Terms</div>
+                    <div class="terms-field">
+                        <lightning-input type="text" label="Consignment Period"
+                            placeholder="e.g. 10-12 weeks" value={consignmentPeriod}
+                            data-field="consignmentPeriod"
+                            onchange={handlePaymentTermChange}></lightning-input>
+                        <p class="terms-hint">Prints after &ldquo;entire consignment within a period of&rdquo;</p>
+                    </div>
+                    <!--
+                    <div class="terms-field">
+                        <lightning-input type="text" label="Erection Period"
+                            placeholder="e.g. 6 weeks" value={erectionPeriod}
+                            data-field="erectionPeriod"
+                            onchange={handlePaymentTermChange}></lightning-input>
+                        <p class="terms-hint">Prints after &ldquo;erection shall be completed within another additional period of&rdquo;</p>
+                    </div>-->
+                    <div class="terms-field">
+                        <lightning-input type="number" label="Validity (days)"
+                            placeholder="e.g. 10" value={offerValidity}
+                            min="1" max="15" step="1" data-field="offerValidity"
+                            message-when-range-overflow="Validity cannot be more than 15 days"
+                            onchange={handlePaymentTermChange}></lightning-input>
+                        <p class="terms-hint">Prints after &ldquo;This offer shall remain valid for a period of&rdquo;</p>
+                    </div>
+                </div>
+                <div class="slds-box slds-box_x-small terms-box slds-m-top_small">
+                    <div class="terms-box__header">Transportation</div>
+                    <div class="terms-field">
+                        <lightning-combobox label="Delivery Term"
+                            options={deliveryTermOptions} value={deliveryTerm}
+                            onchange={handleDeliveryTermChange}></lightning-combobox>
+                    </div>
+                    <div class="terms-field">
+                        <lightning-input type="number" label="Transportation Rate" min="0" step="any"
+                            value={transportationValue} disabled={isExWorks}
+                            onchange={handleTransportationValueChange}></lightning-input>
+                        <p class="terms-hint">Counted in the cost totals only when Delivery Term is FOR</p>
+                    </div>
+                </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <div class="slds-box slds-box_x-small totals-box">
+                    <div class="tot-row">
+                        <span>Total Direct Cost (A + B + C + D)</span>
+                        <lightning-formatted-number value={totals.totalDirectCost} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                     <div class="tot-row strong">
+                    <span>Total Project Cost (incl. Variable Cost)</span>
+                    <lightning-formatted-number value={totals.totalProjectCost} maximum-fraction-digits="0"></lightning-formatted-number>
+                </div>
+                
+                
+                
+                <div class="tot-row">
+                    <span class="margin-label">
+                            Margin
+                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                class="margin-input" value={marginPercent} onchange={handleMarginChange}></lightning-input>
+                            %
+                        </span>
+                        <lightning-formatted-number value={totals.marginRs} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                    <div class="tot-row strong">
+                        <span>Total Price (Project Cost + Margin)</span>
+                        <lightning-formatted-number value={totals.totalWithMargin} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                    <div class="tot-row">
+                        <span>Total Weight (Kg)</span>
+                        <lightning-formatted-number value={totals.totalWeightAll} maximum-fraction-digits="2"></lightning-formatted-number>
+                    </div>
+                    <div class="tot-row">
+                        <span>Benchmark Threshold Price (₹{benchmarkRate}/Kg)</span>
+                        <lightning-formatted-number value={totals.totalPriceCalc} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                    <div class="tot-row">
+                        <span class="margin-label">
+                            GST
+                            <lightning-input type="number" variant="label-hidden" min="0" step="any"
+                                class="margin-input" value={gstPercent} onchange={handleGstChange}></lightning-input>
+                            %
+                        </span>
+                        <lightning-formatted-number value={totals.gstRs} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                    <div class="tot-row grand">
+                        <span>Total Quote Price (incl. GST)</span>
+                        <lightning-formatted-number value={totals.grandTotal} maximum-fraction-digits="0"></lightning-formatted-number>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+                <!-- ---------- ACTIONS ---------- -->
+                <div class="slds-m-top_medium slds-grid slds-gutters_x-small slds-grid_align-end">
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button label="Close" onclick={handleClose} disabled={saving}></lightning-button>
+                    </div>
+                    <!---->
+                   <!-- 
+                        <div class="slds-col slds-grow-none">
+                            <lightning-button label="Save" icon-name="utility:save" onclick={handleSave}
+                                disabled={saving}></lightning-button>
+                        </div> 
+                        -->
+                    <!-- NEW: only visible when opened from CreateQuote -->
+                    <template lwc:if={isChildMode}>
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button variant="brand" label="Apply to Quote" icon-name="utility:check"
+                            onclick={handleApplyToQuote} disabled={saving}></lightning-button>
+                    </div>
+                </template>
+                    <div class="slds-col slds-grow-none">
+                        <lightning-button variant="brand" label="Download PDF" icon-name="utility:download"
+                            onclick={handleDownloadPdf} disabled={saving}></lightning-button>
+                    </div>
+                </div>
+
+                <template lwc:if={saving}>
+                    <div class="slds-is-relative slds-p-around_medium">
+                        <lightning-spinner alternative-text="Saving" size="small"></lightning-spinner>
+                    </div>
+                </template>
+
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Source_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(
+    TEXT( Opportunity_Source__c ),
+
+    &quot;FACEBOOK&quot;, &quot;DIGITAL&quot;,
+    &quot;FB LEAD ADS&quot;, &quot;DIGITAL&quot;,
+    &quot;INBOUND EMAIL&quot;, &quot;DIGITAL&quot;,
+    &quot;INBOUND PHONE CALL&quot;, &quot;DIGITAL&quot;,
+    &quot;INDIAMART&quot;, &quot;DIGITAL&quot;,
+    &quot;INDIAMART V2&quot;, &quot;DIGITAL&quot;,
+    &quot;ONLINE CAMPAIGNING&quot;, &quot;DIGITAL&quot;,
+    &quot;PAY PER CLICK ADS&quot;, &quot;DIGITAL&quot;,
+    &quot;WEBSITE&quot;, &quot;DIGITAL&quot;,
+    &quot;WEBSITE BOT CHAT&quot;, &quot;DIGITAL&quot;,
+    &quot;WHATSAPP CAMPAIGNING&quot;, &quot;REMARKETING&quot;,
+    &quot;EMAIL CAMPAIGNING&quot;, &quot;REMARKETING&quot;,
+    &quot;OUTBOUND PHONE CALL&quot;, &quot;REACTIVATION&quot;,
+    &quot;EVENT ACTIVATION&quot;, &quot;EVENT&quot;,
+    &quot;OFFLINE CRM&quot;, &quot;OTHER&quot;,
+    &quot;TENDER&quot;, &quot;OTHER&quot;,
+    &quot;PROJECTS&quot;, &quot;PROJECTS&quot;,
+    &quot;Offline Marketing&quot;, &quot;From Offline sales&quot;,
+    &quot;CRM RESOURCE&quot;,
+        CASE(
+            TEXT( Previous_Source__c ),
+
+            &quot;FACEBOOK&quot;, &quot;DIGITAL&quot;,
+            &quot;FB LEAD ADS&quot;, &quot;DIGITAL&quot;,
+            &quot;INBOUND EMAIL&quot;, &quot;DIGITAL&quot;,
+            &quot;INBOUND PHONE CALL&quot;, &quot;DIGITAL&quot;,
+            &quot;INDIAMART&quot;, &quot;DIGITAL&quot;,
+            &quot;INDIAMART V2&quot;, &quot;DIGITAL&quot;,
+            &quot;ONLINE CAMPAIGNING&quot;, &quot;DIGITAL&quot;,
+            &quot;PAY PER CLICK ADS&quot;, &quot;DIGITAL&quot;,
+            &quot;WEBSITE&quot;, &quot;DIGITAL&quot;,
+            &quot;WEBSITE BOT CHAT&quot;, &quot;DIGITAL&quot;,
+            &quot;WHATSAPP CAMPAIGNING&quot;, &quot;REMARKETING&quot;,
+            &quot;EMAIL CAMPAIGNING&quot;, &quot;REMARKETING&quot;,
+            &quot;OUTBOUND PHONE CALL&quot;, &quot;REACTIVATION&quot;,
+            &quot;EVENT ACTIVATION&quot;, &quot;EVENT&quot;,
+            &quot;OFFLINE CRM&quot;, &quot;OTHER&quot;,
+            &quot;TENDER&quot;, &quot;OTHER&quot;,
+            &quot;PROJECTS&quot;, &quot;PROJECTS&quot;,
+            &quot;Offline Marketing&quot;, &quot;From Offline sales&quot;,
+            &quot;OTHER&quot;
+        ),
+
+    &quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Opportunity Source Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,59 @@
+<template>
+    <lightning-card>
+        <div class="bcl-card">
+            <div class="bcl-accent-bar"></div>
+
+            <div class="bcl-header">
+                <p class="bcl-eyebrow">Bidder Contact Lookup</p>
+                <h2 class="bcl-title">Fetch Contact Details</h2>
+            </div>
+
+            <div class="bcl-body">
+                <div class="bcl-record-chip">
+                    <span class="bcl-record-label">Record</span>
+                    <span class="bcl-record-id">{recordId}</span>
+                </div>
+
+                <div class="bcl-status-zone">
+                    <template if:true={loading}>
+                        <div class="bcl-status-icon bcl-status-icon_pending">
+                            <span class="bcl-ring"></span>
+                            <span class="bcl-ring bcl-ring_delay"></span>
+                        </div>
+                        <p class="bcl-status-text bcl-status-text_pending">
+                            Calling the contact details API&hellip;
+                        </p>
+                    </template>
+
+                    <template if:false={loading}>
+                        <div class={statusPanelClass}>
+                            <div class={statusIconClass}>
+                                <template if:true={isSuccess}>
+                                    <svg viewBox="0 0 52 52" class="bcl-icon-svg">
+                                        <circle cx="26" cy="26" r="24" class="bcl-icon-ring"/>
+                                        <path class="bcl-icon-check" fill="none" d="M14 27l7 7 17-17"/>
+                                    </svg>
+                                </template>
+                                <template if:false={isSuccess}>
+                                    <svg viewBox="0 0 52 52" class="bcl-icon-svg">
+                                        <circle cx="26" cy="26" r="24" class="bcl-icon-ring"/>
+                                        <line class="bcl-icon-cross" x1="17" y1="17" x2="35" y2="35"/>
+                                        <line class="bcl-icon-cross" x1="35" y1="17" x2="17" y2="35"/>
+                                    </svg>
+                                </template>
+                            </div>
+                            <div class="bcl-status-copy">
+                                <p class="bcl-status-label">{statusLabel}</p>
+                                <p class="bcl-status-text">{resultMessage}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="bcl-footer" slot="footer">
+                <button class="bcl-close-btn" onclick={handleClose}>Close</button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,511 @@
+<apex:page standardController="Quote"
+           extensions="QuoteExportController"
+           contentType="application/msword#Solar-{!referenceNum}.doc"
+           applyBodyTag="false"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false">
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+            /* Global A4 Size Definition */
+            @page {
+                size: 210mm 297mm;
+                margin: 0mm;
+            }
+
+            /* Word-Specific Page Layout Definitions and Margins */
+            @page CoverPage {
+                size: 210mm 297mm;
+                margin: 0mm;
+                mso-header-margin: 0mm;
+                mso-footer-margin: 0mm;
+            }
+            
+            @page StandardContent {
+                size: 210mm 297mm;
+                /* 20mm top/bottom margins, 10mm left/right margins */
+                margin: 20mm 10mm 20mm 10mm; 
+                mso-header: h1;
+                mso-footer: f1;
+                /* Provide a small margin so Word has space to render repeating headers/footers */
+                mso-header-margin: 0mm;
+                mso-footer-margin: 5mm;
+            }
+
+            @page LastPage {
+                size: 210mm 297mm;
+                margin: 0mm;
+                mso-header-margin: 0mm;
+                mso-footer-margin: 0mm;
+                mso-header: h-blank; /* Forces Word to stop the running header */
+                mso-footer: f-blank; /* Forces Word to stop the running footer */            
+            }
+            
+            /* Class-to-Page Layout Mappings */
+            div.page-cover {
+                page: CoverPage;
+                width: 210mm;
+                height: 297mm;
+                margin: 0mm;
+            }
+            
+            div.document-body {
+                page: StandardContent;
+            }
+
+            /* Wrapper to apply padding strictly to content, not header/footer */
+            .content-wrapper {
+                padding: 2mm 18mm 2mm 18mm; /* Top, Right, Bottom, Left */
+            }
+
+            div.last-page {
+                page: LastPage;
+                width: 210mm;
+                height: 297mm;
+                margin: 0mm;
+            }
+            
+            /* Global Typography Defaults */
+            html, body {
+                font-family: 'Arial', 'Helvetica', sans-serif;
+                font-size: 10pt;
+                line-height: 1.5;
+                color: #222;
+            }
+            
+            /* Page Break Controls for Word Content Flow */
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+            
+            /* Footer Layout Properties */
+            .footer-inner {
+                margin-bottom: 5mm;
+                margin-top: 5mm;
+                font-size: 7pt;
+                color: black;
+                line-height: 1.4;
+                width: 100%;
+            }
+            
+            .factory-details {
+                margin-bottom: 3px;
+            }
+            
+            .social-row {
+                margin-top: 4px;
+                font-size: 7.5pt;
+            }
+            
+            /* Word Field Code Styles for Page Numbering */
+            span.mso-page-number {
+                mso-field-code: "PAGE";
+            }
+            span.mso-total-pages {
+                mso-field-code: "NUMPAGES";
+            }
+            
+            /* Data Tables Layout and Borders */
+            .meta-table {
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border-collapse: collapse;
+            }
+            
+            .meta-table td {
+                vertical-align: top;
+            }
+            
+            .subject-line {
+                font-weight: bold;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align: justify;
+            }
+            
+            .content-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 9pt;
+            }
+            
+            .content-table th {
+                background-color: #f4f4f4;
+                border: 1px solid #111;
+                font-weight: bold;
+                padding: 6px;
+                text-align: center;
+            }
+            
+            .content-table td {
+                border: 1px solid #111;
+                padding: 6px;
+                vertical-align: top;
+            }
+            
+            .text-right { text-align: right; }
+            .text-left { text-align: left; }
+            .text-center { text-align: center; }
+            
+            .total-row {
+                font-weight: bold;
+                background-color: #f9f9f9;
+            }
+            
+            .terms-heading {
+                font-size: 11pt;
+                font-weight: bold;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #000;
+                padding-bottom: 2px;
+            }
+            
+            .term-item {
+                margin-bottom: 12px;
+                text-align: justify;
+            }
+            
+            .term-title {
+                font-weight: bold;
+            }
+            
+            .signature-section {
+                margin-top: 30px;
+            }
+        </style>
+</head>
+    <div style="mso-element:header" id="h1">
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    
+                    
+                    <td width="30%" style="text-align: right;">
+                        <img src="{!logoBase64}" alt="Logo"  width="650"  />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div style="mso-element:footer" id="f1">
+            <div class="footer-inner" style="margin-bottom: 5mm; margin-top: 5mm; font-size: 7pt; color: black; line-height: 1.4; width: 100%;">
+                <table width="100%" style="border-collapse: collapse; border: none; font-size: 7pt; color: black;">
+                    <tr>
+                        <td width="30%" style="text-align: left; vertical-align: bottom; border: none; padding: 0;">
+                            Page <span class="mso-page-number"></span> of <span class="mso-total-pages"></span>
+                        </td>
+                        
+                        <td width="70%" style="text-align: right; vertical-align: bottom; border: none; padding: 0;">
+                            <div class="factory-details">
+                                F1: Nh6, Vill-Jangalpur, Po: Andul Mouri, Howrah 711302, P:033 2669 0833/1151,1571, F: +9103326693856. F2:NH2, Durgapur Expressway,<br/>
+                                PO: Gurap, Hoogly 712303, P:03213 253996
+                            </div>
+                            <div class="factory-details">
+                                CIN: U51109 WB1995PLC070893
+                            </div>
+                            <div class="social-row">
+                                We are on: <strong>Facebook | Instagram | LinkedIn | YouTube</strong>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div style="mso-element:header" id="h-blank">
+            <p style="margin: 0; padding: 0; font-size: 1px;">&nbsp;</p>
+        </div>
+        <div style="mso-element:footer" id="f-blank">
+            <p style="margin: 0; padding: 0; font-size: 1px;">&nbsp;</p>
+        </div>
+<body>
+   
+        
+       
+
+<div class="document-body">
+<div class="content-wrapper">
+
+<!-- ══════════════════════════════════════════════════
+     LETTER HEADER
+     ══════════════════════════════════════════════════ -->
+<table class="meta-table">
+    <tr>
+        <td style="width:12%;"><b>Ref:</b> -</td>
+        <td style="width:38%;">UIL/SOLAR/{!quoteRecord.QuoteNumber}</td>
+        <td style="width:12%;"><b>Date</b> -</td>
+        <td>
+            <apex:outputText value="{0,date,dd.MM.yyyy}">
+                <apex:param value="{!TODAY()}"/>
+            </apex:outputText>
+        </td>
+    </tr>
+</table>
+
+<p style="margin:10pt 0 2pt 0;"><b>To,</b></p>
+<p style="margin:0 0 2pt 0;"><b>{!contactName}</b></p>
+<p style="margin:0 0 14pt 0;">
+    <b>{!accountName}</b>
+    <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(quoteRecord.BillingStreet))}">
+        <br/>{!quoteRecord.BillingStreet}
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingCity))}">, {!quoteRecord.BillingCity}</apex:outputText>
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingState))}">, {!quoteRecord.BillingState}</apex:outputText>
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingPostalCode))}"> - {!quoteRecord.BillingPostalCode}</apex:outputText>
+    </apex:outputPanel>
+</p>
+
+<p style="margin-bottom:10pt;">Dear Sir/Madam,</p>
+<p style="margin-bottom:8pt;"><b>Sub: RFQ for Supply of "MMS" {!quoteRecord.Opportunity.Name}.</b></p>
+<p style="margin-bottom:6pt;">
+    We refer to your enquiry for Manufacturing, Galvanizing and Supply for
+    <b>Module Mounting Structures for {!quoteRecord.Opportunity.Name}.</b>
+    We note your requirement in this {!quoteRecord.Opportunity.Name} and considering our
+    manufacturing capacity we are confident that we can supply the structure material.
+</p>
+<p style="margin-bottom:14pt;">
+    We are pleased to submit herewith our offer for Manufacturing, and Supply of
+    <b>{!quoteRecord.Opportunity.Name}</b>.
+</p>
+<p>Details of our proposal are as under:</p>
+
+<!-- ══════════════════════════════════════════════════
+     A. PRICES
+     ══════════════════════════════════════════════════ -->
+<p style="margin:10pt 0 4pt 0;"><b><u>A. PRICES:</u></b></p>
+<p style="margin-bottom:8pt;">
+    a. Please refer to our below price Offer for the subject enquiry for
+    <b><apex:outputText value="{!jsonData['incoterms']}"/> {!quoteRecord.Opportunity.Name}</b>, India:
+</p>
+
+<apex:outputPanel layout="none" rendered="{!LOWER(unitOfMeasurement) != 'pcs'}">
+            <table class="word-table" border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 10px; font-size: 9pt;">
+                <thead>
+                    <tr>
+                        <th bgcolor="#f2f2f2" style="width: 6%; text-align: center;">SL NO.</th>
+                        <th bgcolor="#f2f2f2" style="width: 38%; text-align: left;">DESCRIPTION</th>
+                        <th bgcolor="#f2f2f2" style="width: 8%; text-align: center;">UNIT</th>
+                        <th bgcolor="#f2f2f2" style="width: 12%; text-align: center;">QTY (MT)</th>
+                        <th bgcolor="#f2f2f2" style="width: 16%; text-align: center;">Basic Price (per MT)<br/>Ex-Works</th>
+                        <th bgcolor="#f2f2f2" style="width: 20%; text-align: center;">TOTAL AMOUNT<br/>(INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable var="index" value="{!1}"/>
+                    <apex:repeat value="{!solarItems}" var="item">
+                        <tr>
+                            <td style="text-align: center;">{!index}</td>
+                            <td style="text-align: left; line-height: 1.5;">
+                                <b>{!item.material}</b><br/>
+                                <span style="font-size: 8pt; color: #333;">
+                                    Grade: {!item.grade} | Thk: {!item.thickness}mm 
+                                    <apex:outputPanel layout="none" rendered="{!item.micron != null && item.micron != '-'}">
+                                        | Micron: {!item.micron}µ
+                                    </apex:outputPanel>
+                                </span>
+                            </td>
+                            <td style="text-align: center;">MT</td>
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0, number, #,##0.000}">
+                                    <apex:param value="{!item.weight}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0, number, #,##0.00}">
+                                    <apex:param value="{!item.rate}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 8px;">
+                                <apex:outputText value="{0, number, #,##0.00}">
+                                    <apex:param value="{!item.amount}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <apex:variable var="index" value="{!index + 1}"/>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!LOWER(unitOfMeasurement) == 'pcs'}">
+            <table class="word-table" border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 10px; font-size: 9pt;">
+                <thead>
+                    <tr>
+                        <th bgcolor="#f2f2f2" style="width: 5%; text-align: center;">Sr. No</th>
+                        <th bgcolor="#f2f2f2" style="width: 22%; text-align: left;">Material</th>
+                        <th bgcolor="#f2f2f2" style="width: 9%; text-align: center;">Thickness</th>
+                        <th bgcolor="#f2f2f2" style="width: 14%; text-align: center;">Coating/Grade</th>
+                        <th bgcolor="#f2f2f2" style="width: 10%; text-align: center;">Unit Weight<br/>(MT)</th>
+                        <th bgcolor="#f2f2f2" style="width: 11%; text-align: center;">Price FOR<br/>Per MT (INR)</th>
+                        <th bgcolor="#f2f2f2" style="width: 7%; text-align: center;">Total<br/>Qty</th>
+                        <th bgcolor="#f2f2f2" style="width: 10%; text-align: center;">Per Pcs Price<br/>(INR)</th>
+                        <th bgcolor="#f2f2f2" style="width: 12%; text-align: center;">Total Price FOR<br/>(INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable var="index" value="{!1}"/>
+                    <apex:repeat value="{!solarItems}" var="item">
+                        <tr>
+                            <td style="text-align: center;">{!index}</td>
+                            
+                            <td style="text-align: left; font-weight: bold;">
+                                {!item.material}
+                            </td>
+                            
+                            <td style="text-align: center;">
+                                {!item.thickness}<apex:outputText rendered="{!item.thickness != null && item.thickness != '-'}"> mm</apex:outputText>
+                            </td>
+                            
+                            <td style="text-align: center;">
+                                {!item.grade}
+                                <apex:outputPanel layout="none" rendered="{!item.micron != null && item.micron != '-'}">
+                                    <br/><span style="font-size: 8pt;">Avg.{!item.micron}µ</span>
+                                </apex:outputPanel>
+                            </td>
+                            
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0, number, #,##0.000}">
+                                    <apex:param value="{!item.unitWeight}" />
+                                </apex:outputText>
+                            </td>
+                            
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0, number, #,##0.00}">
+                                    <apex:param value="{!item.unitCost}" />
+                                </apex:outputText>
+                            </td>
+                            
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0, number, #,##0}">
+                                    <apex:param value="{!item.quantity}" />
+                                </apex:outputText>
+                            </td>
+                            
+                            <td style="text-align: right; padding-right: 4px; font-weight: bold;">
+                                <apex:outputText value="{0, number, #,##0.00}">
+                                    <apex:param value="{!(item.unitWeight * item.unitCost) / 1000}" />
+                                </apex:outputText>
+                            </td>
+
+                            <td style="text-align: right; padding-right: 4px; font-weight: bold;">
+                                <apex:outputText value="{0, number, #,##0.00}">
+                                    <apex:param value="{!((item.unitWeight * item.unitCost) / 1000) * item.quantity}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <apex:variable var="index" value="{!index + 1}"/>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </apex:outputPanel>
+
+<!-- ══════════════════════════════════════════════════
+     B. SUPPLY TECHNICAL PARTICULARS
+     ══════════════════════════════════════════════════ -->
+<p style="margin:14pt 0 6pt 0;"><b><u>B. SUPPLY TECHNICAL PARTICULARS:</u></b></p>
+<p>We shall manufacture Piers as per drawings and technical specifications shared by <b>{!accountName}.</b></p>
+<ul style="margin: 6pt 0 6pt 20pt;">
+    <li>Bolts/Nuts: Not in our scope</li>
+    <li>Galvanizing: &nbsp;All steels shall be hot dipped galvanized and shall conform to ASTM A 123 or
+        equivalent standard of IS 2629, IS 4759, IS 2633, IS 6745 with average coating weight of 1,000µ Micron.</li>
+</ul>
+
+<!-- ══════════════════════════════════════════════════
+     GENERAL TERMS & CONDITIONS
+     ══════════════════════════════════════════════════ -->
+<p style="margin:14pt 0 8pt 0;"><b><u>GENERAL TERMS &amp; CONDITIONS:</u></b></p>
+<div class="tc-section">
+<ol>
+    <li><b>Buyer:</b> Buyer shall mean {!accountName}.</li>
+    <li><b>Supplier:</b> Supplier shall mean Utkarsh India Limited having its office at 95A, Elliot Road, Arrjavv Square, Kolkata.</li>
+   <li><b>Payment Terms:</b><ol type="a"><li>{!dynamicPaymentTerms}</li></ol></li>
+    <li><b>Scope of Work:</b> Manufacturing, Galvanizing and Supply of HDG.</li>
+    <li><b>Exclusions:</b> Above prices are exclusive of the followings:
+        <ul style="margin:4pt 0 0 16pt;">
+            <li>Welded item Anti-Fall Brackets</li><li>Grid Mesh</li><li>Helicopter Platform</li>
+            <li>Earthing Material</li><li>Number Plate, Danger Plate, Phase Plate and Arial Plate</li>
+        </ul>
+    </li>
+    <li><b>Delivery:</b><ol><li>45-60 Days from the Commencement Date.</li>
+        <li>Deliveries shall be made lot wise as per the number of Manufacturing Clearances issued with mutual agreement.</li></ol></li>
+    <li><b>Commencement Date:</b> Date of receipt of the following, whichever is later:
+        <ol><li>Purchase Order</li><li>Advance payment</li><li>Operative Letter of Credit</li>
+        <li>Detailed Approved Structural Drawings, Shop Sketch Drawings</li><li>Final Manufacturing clearance</li></ol></li>
+    <li><b>Packing &amp; Forwarding:</b>
+        <ol><li>The prices quoted for supply of the materials are inclusive of standard packing and forwarding charges.</li>
+        <li>Any type of special packing and forwarding charges shall be extra as applicable and same has to be borne by the Buyer.</li>
+        <li>The special type of packing if any required has to be intimated to the supplier before the finalization of the Order.</li></ol></li>
+    <li><b>Price Basis:</b>
+        <ol><li>Firm on <apex:outputText value="{!jsonData['incoterms']}"/> , .</li>
+        <li>This offer is based on the assumption that full quantity clearance will be given with Purchase Order.</li>
+        <li>The prices will be subject to revision with any change in the MFC issuance</li>
+        <li>Prices shall be inclusive of Freight up to site and has the validity for entire Project including transit insurance. Applicable GST will be extra as applicable.</li>
+        <li>(Incoterm - <apex:outputText value="{!jsonData['incoterms']}"/>{!quoteRecord.Opportunity.Name})</li></ol></li>
+    <li><b>Inspection:</b>
+        <ol><li>We have not considered any third-party inspection fees. However, we will provide necessary facilities to carryout routine Inspection as per our standard procedure at our works by your authorized representatives.</li>
+        <li>Any travelling, lodging, boarding expenses of the representatives shall be borne by the Buyer.</li>
+        <li>The raw material testing is conducted at UIL's in house laboratory.</li>
+        <li>Any testing required at a 3rd party laboratory shall be conducted at extra charge.</li>
+        <li>Any requirement of third party inspection of testing shall be at Buyer's scope.</li>
+        <li>If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection, the Supplier shall at the cost of the Buyer conduct such third party pre-delivery inspection at the Supplier's factory and such inspection for all practical purposes shall be deemed to have been conducted at the behest of the Buyer.</li></ol></li>
+    <li><b>Drawing:</b> It shall always at the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions' specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products based on the drawings.</li>
+    <li><b>Warranty:</b> We shall warrant the goods against defective material/ workmanship error for a period of 12 months from the date of dispatch. The warranty set forth here shall not apply to
+        <ol type="a"><li>The normal wear and tear of the material.</li>
+        <li>The deterioration of the material due to negligence or incorrect installation/ operation/ storage which is not in conformity with the technical specification/ requirement.</li>
+        <li>Defects resulting from modifications or repairs performed by Client/ Customer or third parties.</li>
+        <li>Misuse, fault or negligence of or by Client/ Customer.</li>
+        <li>Accident, disaster or event of Force Majeure.</li>
+        <li>Use of the goods in a manner for which they were not designed.</li></ol>
+        <p style="margin-top:4pt;">The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Return of Goods: After obtaining satisfactory inspection clearance certificate, once the goods are dispatched, the Buyer will not be entitled to return the same by raising any technical issues or defects.</p></li>
+    <li><b>Quality:</b> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer's destination, the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports. If the Buyer fails to substantiate the claim, the Buyer's claim on quality related issues shall stand set aside.</li>
+    <li><b>Validity:</b> This Offer shall remain valid for a period of <apex:outputText value="{!jsonData['tc_offer_validity']}"/> from the date of issuance of this Offer, unless the same is revalidated in writing.</li>
+    <li><b>Penal interest:</b> In the event if the Buyer fails to make payment of the invoices raised within seven days, the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.</li>
+    <li><b>Breach &amp; Default:</b> If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in that event the defaulting party shall become liable to compensate the other party by way of damages, provided such claim is duly substantiated with proper evidence.</li>
+    <li><b>Lifting of Materials:</b> If for any reason, the Buyer fails to take delivery within two/three days from the date of being notified that the materials are lying ready, the Supplier shall become entitled to impose storing charges at the rate of 5.00% of the total contract value for every week's delay.</li>
+    <li><b>Late Delivery Charges:</b> Unless prevented by force majeure condition, the Supplier shall be liable to deliver within the agreed delivery schedule. However, since the Supplier has agreed to supply at an extremely competitive price, the Buyer shall not be entitled to impose any late delivery charges for any delay.</li>
+    <li><b>Shortages:</b> The Supplier will take full care to dispatch material in correct quantum. The Buyer should instruct transporter to acknowledge receipt of goods as per packing list before shipment. If the Buyer chooses not to depute any representative for verification of the packing list at the factory, the Buyer shall not be liable to raise claims of short supply after successful shipment.</li>
+    <li><b>Force Majeure:</b> Neither Party will be liable for any failure to perform its obligations hereunder, other than payment obligations, due to unforeseen circumstances or causes beyond the Party's reasonable control, including acts of God, war, riot, embargoes, acts of civil or military authorities, terrorism, fire, flood, earthquake, accident, strikes, failure of communications or electrical lines. In an event of force majeure, either Party's time for delivery will be extended for a period equal to the duration of the delay. Not withstanding anything to the contrary herein, if an event of force majeure can reasonably be expected to prevent the affected Party from performing for a period of at least three (3) months, then the other Party may terminate this Agreement upon not less than fifteen days written notice.</li>
+    <li><b>Confidentiality:</b>
+        <ol type="A"><li>During the term of this Agreement, each party may communicate information which it considers to be confidential. All Confidential Information shall be specifically designated as confidential including trade secrets, know-how, inventions, technical data, business or financial information, and customer and supplier information.</li>
+        <li>The receiving party shall maintain all Confidential Information in strict confidence and use it solely for the purposes of this Agreement.</li>
+        <li>Exceptions apply when information was in the public domain, independently developed, or required to be disclosed by law.</li>
+        <li>These obligations shall remain in effect for five (5) years after termination of this Agreement.</li></ol></li>
+    <li><b>Governing Law, Arbitration and Jurisdiction:</b> The Courts at Kolkata shall have exclusive jurisdiction over all unresolved disputes. Both parties will make all efforts to amicably settle such disputes. If efforts at amicable settlement fail, all disputes will be finally decided in accordance with the Arbitration and Conciliation Act 1996. The arbitration proceedings shall be held at KOLKATA, India and conducted in English language.</li>
+    <li><b>Miscellaneous:</b> The Company would issue various work orders from time to time. The present Agreement contains the general terms and conditions which would govern and administer the work orders. Any specific terms in work orders shall prevail; however, in any conflict with this Agreement, the present agreement shall prevail over the work order.</li>
+</ol>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     CLOSING
+     ══════════════════════════════════════════════════ -->
+<p style="margin-top:18pt;">
+    We hope, you will find our offer competitive Techno-commercially and we trust our offer meets your requirements.<br/>
+    We look forward to receiving your valued order which shall receive our best attention.
+</p>
+<p style="margin-top:14pt;">
+    Thanking you,<br/>
+    Yours truly,<br/>
+    <b>{!loggedInUser}</b><br/>
+    <b>UTKARSH INDIA LIMITED</b>
+</p>
+
+</div><!-- end content-wrapper -->
+</div><!-- end document-body -->
+
+
+
+
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>offer_document__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>checkbox which is used to determine which document needs to be shown under Final Quote Document ID</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>offer document</label>
+    <type>Checkbox</type>
+</CustomField>

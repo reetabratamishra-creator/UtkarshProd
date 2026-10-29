@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Solar Structure - Department</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Solar Structure - Department</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;hdg_steel_rate&quot;,&quot;label&quot;:&quot;STEEL RATE&quot;,&quot;type&quot;:&quot;number&quot;,&quot;isCalculated&quot;:true,&quot;readOnly&quot;:true,&quot;formula&quot;:&quot;(hdg_material == &apos;HDG MMS/Carport Structure&apos; &amp;&amp; hdg_material_grade == &apos;E350&apos;) ? 61000 : (hdg_material == &apos;HDG MMS/Carport Structure&apos; &amp;&amp; hdg_material_grade == &apos;E250&apos;) ? 58000 : (hdg_material == &apos;Piers for Tracker&apos; &amp;&amp; hdg_material_grade == &apos;E350&apos;) ? 60000 : (hdg_material == &apos;Piers for Tracker&apos; &amp;&amp; hdg_material_grade == &apos;Special Grade&apos;) ? 63000 : (hdg_material == &apos;RSJ&apos; &amp;&amp; hdg_material_grade == &apos;E250&apos;) ? 52000 : 0&quot;,&quot;ignoreFormulaIfProvided&quot;:true},{&quot;apiName&quot;:&quot;galv_steel_rate&quot;,&quot;label&quot;:&quot;STEEL RATE&quot;,&quot;type&quot;:&quot;number&quot;,&quot;isCalculated&quot;:true,&quot;readOnly&quot;:true,&quot;formula&quot;:&quot;(galv_material == &apos;Galvalume Structure&apos; &amp;&amp; galv_material_grade == &apos;AZ150 GSM (350 MPA)&apos;) ? 78000 : (galv_material == &apos;Galvalume Structure&apos; &amp;&amp; galv_material_grade == &apos;AZ200 GSM (550 MPA)&apos;) ? 81000 : (galv_material == &apos;Black Metal&apos; &amp;&amp; galv_material_grade == &apos;E350&apos;) ? 61000 : (galv_material == &apos;Black Metal&apos; &amp;&amp; galv_material_grade == &apos;E250&apos;) ? 58000 : 0&quot;,&quot;ignoreFormulaIfProvided&quot;:true},{&quot;apiName&quot;:&quot;hdg_zinc_rate&quot;,&quot;label&quot;:&quot;ZINC RATE&quot;,&quot;type&quot;:&quot;number&quot;,&quot;isCalculated&quot;:true,&quot;readOnly&quot;:true,&quot;formula&quot;:&quot;350000&quot;,&quot;ignoreFormulaIfProvided&quot;:true},{&quot;apiName&quot;:&quot;rate_pcs&quot;,&quot;label&quot;:&quot;RATE (Rs./MTR)&quot;,&quot;type&quot;:&quot;number&quot;,&quot;BASE_RATES&quot;:{&quot;HDG MMS Structure&quot;:56000,&quot;HDG MMS Structure|E250&quot;:0,&quot;HDG MMS Structure|E350&quot;:3000,&quot;HDG MMS Structure|E450&quot;:4000,&quot;HDG MMS Structure|E550&quot;:5000,&quot;Carport Structure&quot;:60000,&quot;Carport Structure|E250&quot;:0,&quot;Carport Structure|E350&quot;:3000,&quot;Carport Structure|E450&quot;:4000,&quot;Carport Structure|E550&quot;:5000,&quot;Piers (W-Beam) for Tracker&quot;:56000,&quot;Piers (W-Beam) for Tracker|E350&quot;:0,&quot;Piers (W-Beam) for Tracker|E450&quot;:3000,&quot;Piers (W-Beam) for Tracker|E550&quot;:4000,&quot;I-BEAM&quot;:56000,&quot;I-BEAM|E350&quot;:0,&quot;I-BEAM|E450&quot;:3000,&quot;I-BEAM|E550&quot;:4000,&quot;RSJ&quot;:51000,&quot;RSJ|E350&quot;:0,&quot;RSJ|E450&quot;:3000,&quot;RSJ|E550&quot;:4000,&quot;Black Metal&quot;:56000,&quot;Black Metal|E250&quot;:0,&quot;Black Metal|E350&quot;:2500,&quot;Black Metal|E450&quot;:4000,&quot;Black Metal|E550&quot;:7000,&quot;Galvalume Structure&quot;:73000,&quot;Galvalume Structure|YSD 350&quot;:73000,&quot;Galvalume Structure|YSD 350|AZ150&quot;:0,&quot;Galvalume Structure|YSD 350|AZ200&quot;:3000,&quot;Galvalume Structure|YSD 350|AZ250&quot;:4000,&quot;Galvalume Structure|YSD 350|AZ300&quot;:5000,&quot;Galvalume Structure|YSD 550&quot;:73000,&quot;Galvalume Structure|YSD 550|AZ150&quot;:0,&quot;Galvalume Structure|YSD 550|AZ200&quot;:3000,&quot;Galvalume Structure|YSD 550|AZ250&quot;:4000,&quot;Galvalume Structure|YSD 550|AZ300&quot;:5000,&quot;H-Beam&quot;:56000,&quot;H-Beam|E350&quot;:0,&quot;H-Beam|E450&quot;:3000,&quot;H-Beam|E550&quot;:4000,&quot;W-Beam&quot;:56000,&quot;W-Beam|E350&quot;:0,&quot;W-Beam|E450&quot;:3000,&quot;W-Beam|E550&quot;:4000,&quot;HBM&quot;:0,&quot;WBM&quot;:0,&quot;I-Beam (Black)&quot;:56000,&quot;I-Beam (Black)|E350&quot;:0,&quot;I-Beam (Black)|E450&quot;:3000,&quot;I-Beam (Black)|E550&quot;:4000,&quot;W-Beam (Black)&quot;:56000,&quot;W-Beam (Black)|E350&quot;:0,&quot;W-Beam (Black)|E450&quot;:3000,&quot;W-Beam (Black)|E550&quot;:4000,&quot;H-Beam (Black)&quot;:56000,&quot;H-Beam (Black)|E350&quot;:0,&quot;H-Beam (Black)|E450&quot;:3000,&quot;H-Beam (Black)|E550&quot;:4000,&quot;Piers for Tracker (Black)&quot;:56000,&quot;Piers for Tracker (Black)|E350&quot;:0,&quot;Piers for Tracker (Black)|E450&quot;:3000,&quot;Piers for Tracker (Black)|E550&quot;:4000,&quot;Zinc Labour&quot;:0,&quot;Labour Contractor&quot;:0,&quot;Consumables&quot;:0,&quot;Finance Cost&quot;:0,&quot;Equity Cost&quot;:0,&quot;Overheads&quot;:0}},{&quot;apiName&quot;:&quot;rate_wt&quot;,&quot;label&quot;:&quot;RATE (Rs./MTR)&quot;,&quot;type&quot;:&quot;number&quot;,&quot;BASE_RATES&quot;:{&quot;HDG MMS Structure&quot;:56000,&quot;HDG MMS Structure|E250&quot;:0,&quot;HDG MMS Structure|E350&quot;:3000,&quot;HDG MMS Structure|E450&quot;:4000,&quot;HDG MMS Structure|E550&quot;:5000,&quot;Carport Structure&quot;:60000,&quot;Carport Structure|E250&quot;:0,&quot;Carport Structure|E350&quot;:3000,&quot;Carport Structure|E450&quot;:4000,&quot;Carport Structure|E550&quot;:5000,&quot;Piers (W-Beam) for Tracker&quot;:56000,&quot;Piers (W-Beam) for Tracker|E350&quot;:0,&quot;Piers (W-Beam) for Tracker|E450&quot;:3000,&quot;Piers (W-Beam) for Tracker|E550&quot;:4000,&quot;I-BEAM&quot;:56000,&quot;I-BEAM|E350&quot;:0,&quot;I-BEAM|E450&quot;:3000,&quot;I-BEAM|E550&quot;:4000,&quot;RSJ&quot;:51000,&quot;RSJ|E350&quot;:0,&quot;RSJ|E450&quot;:3000,&quot;RSJ|E550&quot;:4000,&quot;Black Metal&quot;:56000,&quot;Black Metal|E250&quot;:0,&quot;Black Metal|E350&quot;:2500,&quot;Black Metal|E450&quot;:4000,&quot;Black Metal|E550&quot;:7000,&quot;Galvalume Structure&quot;:73000,&quot;Galvalume Structure|YSD 350&quot;:73000,&quot;Galvalume Structure|YSD 350|AZ150&quot;:0,&quot;Galvalume Structure|YSD 350|AZ200&quot;:3000,&quot;Galvalume Structure|YSD 350|AZ250&quot;:4000,&quot;Galvalume Structure|YSD 350|AZ300&quot;:5000,&quot;Galvalume Structure|YSD 550&quot;:73000,&quot;Galvalume Structure|YSD 550|AZ150&quot;:0,&quot;Galvalume Structure|YSD 550|AZ200&quot;:3000,&quot;Galvalume Structure|YSD 550|AZ250&quot;:4000,&quot;Galvalume Structure|YSD 550|AZ300&quot;:5000,&quot;H-Beam&quot;:56000,&quot;H-Beam|E350&quot;:0,&quot;H-Beam|E450&quot;:3000,&quot;H-Beam|E550&quot;:4000,&quot;W-Beam&quot;:55000,&quot;W-Beam|E350&quot;:0,&quot;W-Beam|E450&quot;:3000,&quot;W-Beam|E550&quot;:4000,&quot;HBM&quot;:0,&quot;WBM&quot;:0,&quot;I-Beam (Black)&quot;:56000,&quot;I-Beam (Black)|E350&quot;:0,&quot;I-Beam (Black)|E450&quot;:3000,&quot;I-Beam (Black)|E550&quot;:4000,&quot;W-Beam (Black)&quot;:56000,&quot;W-Beam (Black)|E350&quot;:0,&quot;W-Beam (Black)|E450&quot;:3000,&quot;W-Beam (Black)|E550&quot;:4000,&quot;H-Beam (Black)&quot;:56000,&quot;H-Beam (Black)|E350&quot;:0,&quot;H-Beam (Black)|E450&quot;:3000,&quot;H-Beam (Black)|E550&quot;:4000,&quot;Piers for Tracker (Black)&quot;:56000,&quot;Piers for Tracker (Black)|E350&quot;:0,&quot;Piers for Tracker (Black)|E450&quot;:3000,&quot;Piers for Tracker (Black)|E550&quot;:4000,&quot;Zinc Labour&quot;:0,&quot;Labour Contractor&quot;:0,&quot;Consumables&quot;:0,&quot;Finance Cost&quot;:0,&quot;Equity Cost&quot;:0,&quot;Overheads&quot;:0}}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

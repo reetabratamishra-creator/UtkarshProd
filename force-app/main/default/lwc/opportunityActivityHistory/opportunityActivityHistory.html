@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Task & Event Field History" icon-name="standard:history">
+        <div class="slds-m-around_medium">
+            <template if:true={hasRecords}>
+                <lightning-datatable
+                    key-field="id"
+                    data={historyData}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <template if:false={hasRecords}>
+                <p class="slds-align_absolute-center">
+                    No activity history found for this opportunity.
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

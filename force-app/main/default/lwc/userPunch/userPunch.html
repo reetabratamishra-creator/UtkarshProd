@@ -1,0 +1,1010 @@
+<template>
+    <div class="up-wrapper">
+
+        <!-- ── Main Content Grid (Desktop: 2-col, Mobile: stacked) ── -->
+        <div class="up-grid">
+
+            <!-- ═══ Left Column: Punch Controls ═══ -->
+            <div class="up-panel up-panel-main">
+
+                <!-- Profile Header -->
+                <div class="up-profile" style="position: relative;">
+                    <div class="up-avatar-ring">
+                        <div class="up-avatar-inner">
+                            <lightning-icon icon-name="standard:user" size="large"></lightning-icon>
+                        </div>
+                        <div class={statusRingClass}></div>
+                    </div>
+                    <div class="up-profile-text">
+                        <h1 class="up-name">{employeeName}</h1>
+                        <div class={statusBadgeClass}>
+                            <span class="up-status-dot"></span>
+                            {statusLabel}
+                        </div>
+                    </div>
+                    
+                    <template if:true={isPunchedIn}>
+                        <button class="up-gps-info-btn" onclick={openActivationModal} title="GPS Settings">
+                            <lightning-icon icon-name="utility:info" size="x-small" variant="brand"></lightning-icon>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #1a1a2e; margin-left: 0.25rem;">GPS</span>
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Loading spinner -->
+                <template if:true={loading}>
+                    <div class="up-loading">
+                        <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+                        <p>Loading your punch status…</p>
+                    </div>
+                </template>
+
+                <!-- Error -->
+                <template if:true={error}>
+                    <div class="up-error">
+                        <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
+                        <span>{error}</span>
+                    </div>
+                </template>
+
+                <!-- State loaded -->
+                <template if:true={stateLoaded}>
+
+                    <!-- Stats Row -->
+                    <div class="up-stats-row">
+                        <div class="up-stat-card">
+                            <div class="up-stat-icon">
+                                <lightning-icon icon-name="utility:clock" size="x-small"></lightning-icon>
+                            </div>
+                            <div class="up-stat-body">
+                                <span class="up-stat-label">Last Punch</span>
+                                <span class="up-stat-value">
+                                    <template if:true={lastPunchDisplay}>{lastPunchDisplay}</template>
+                                    <template if:false={lastPunchDisplay}>No punches yet</template>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="up-stat-card">
+                            <div class="up-stat-icon up-stat-icon-battery">
+                                <lightning-icon icon-name="utility:battery_charging" size="x-small"></lightning-icon>
+                            </div>
+                            <div class="up-stat-body">
+                                <span class="up-stat-label">Battery</span>
+                                <span class="up-stat-value">
+                                    <template if:true={lastBatteryDisplay}>{lastBatteryDisplay}%</template>
+                                    <template if:false={lastBatteryDisplay}>—</template>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="up-stat-card">
+                            <div class="up-stat-icon up-stat-icon-loc">
+                                <lightning-icon icon-name="utility:checkin" size="x-small"></lightning-icon>
+                            </div>
+                            <div class="up-stat-body">
+                                <span class="up-stat-label">Location</span>
+                                <span class="up-stat-value">
+                                    <template if:true={lastLocationDisplay}>{lastLocationDisplay}</template>
+                                    <template if:false={lastLocationDisplay}>—</template>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- WFH / WFO Request Section -->
+                    <template if:false={isPunchedIn}>
+                        <template if:true={showTodayApprovalBanner}>
+                            <div class="up-section up-wfh-request-section up-wfh-approved-banner">
+                                <div class="up-wfh-ready-msg">
+                                    <lightning-icon icon-name="utility:success" size="xx-small" class="slds-m-right_x-small"></lightning-icon>
+                                    {todayApprovalMessage}
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={showWFHRequestForm}>
+                            <div class="up-section up-wfh-request-section">
+                                <button
+                                    type="button"
+                                    class={wfhRequestCollapseHeaderClass}
+                                    onclick={toggleWfhRequestSection}
+                                    aria-expanded={isWfhRequestExpanded}>
+                                    <span class="up-wfh-collapse-title">
+                                        <lightning-icon icon-name="utility:home" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        Request WFH / WFO
+                                    </span>
+                                    <lightning-icon icon-name={wfhRequestChevronIcon} size="x-small" class="up-wfh-collapse-chevron"></lightning-icon>
+                                </button>
+
+                                <template if:true={isWfhRequestExpanded}>
+                                    <div class="up-wfh-collapse-body">
+                                        <div class="slds-m-bottom_small">
+                                            <label class="up-wfh-field-label">Choose a category</label>
+                                            <div class="up-toggle-group">
+                                                <button type="button" class={wfoReqToggleClass} onclick={setWfoRequest}>
+                                                    <lightning-icon icon-name="utility:company" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                    WFO
+                                                </button>
+                                                <button type="button" class={wfhReqToggleClass} onclick={setWfhRequest}>
+                                                    <lightning-icon icon-name="utility:home" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                    WFH
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="up-section-header">
+                                            <lightning-icon icon-name="utility:clock" size="x-small" variant="warning"></lightning-icon>
+                                            <span>Select Date and Time for {selectedValue}</span>
+                                        </div>
+                                        <div class="up-wfh-req-grid">
+                                            <div class="up-wfh-req-field">
+                                                <lightning-input type="date" label="Select a Date" value={varReqDate} onchange={handleReqDateChange}></lightning-input>
+                                            </div>
+                                            <div class="up-wfh-req-field">
+                                                <lightning-input type="time" label="Start Time" value={wfhReqStart} onchange={handleWfhReqStartChange}></lightning-input>
+                                            </div>
+                                            <div class="up-wfh-req-field">
+                                                <lightning-input type="time" label="End Time" value={wfhReqEnd} onchange={handleWfhReqEndChange}></lightning-input>
+                                            </div>
+                                        </div>
+                                        <div class="up-wfh-req-field up-wfh-note-field">
+                                            <lightning-textarea
+                                                label="Reason / Note"
+                                                value={requestNote}
+                                                onchange={handleRequestNoteChange}
+                                                required
+                                                placeholder="Please provide a reason for WFH/WFO request...">
+                                            </lightning-textarea>
+                                        </div>
+                                        <button type="button" class="up-btn-primary up-btn-wfh-req" onclick={handleWfhRequestSubmit} disabled={isSubmittingReq}>
+                                            <template if:true={isSubmittingReq}>
+                                                <lightning-spinner size="small" alternative-text="Submitting..."></lightning-spinner>
+                                            </template>
+                                            <span>Submit {selectedValue} Request</span>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+
+                    <!-- WFH Flow (Removed Daily Activity Note block) -->
+
+                    <!-- Market Visit Flow -->
+                    <template if:true={showTopMarketVisitFlow}>
+                        <div class="up-section up-section-fade">
+                            <div class="up-section-header">
+                                <lightning-icon icon-name="utility:travel_and_places" size="x-small"></lightning-icon>
+                                <span>Transportation</span>
+                            </div>
+                            <div class="up-toggle-group slds-m-bottom_small">
+                                <button class={publicTransportClass} onclick={selectPublicTransport}>
+                                    <lightning-icon icon-name="utility:bus" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                    Public
+                                </button>
+                                <button class={privateVehicleClass} onclick={selectPrivateVehicle}>
+                                    <lightning-icon icon-name="utility:car" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                    Private
+                                </button>
+                            </div>
+
+                            <template if:true={isPrivateVehicle}>
+                                <div class="up-sub-section">
+                                    <span class="up-sub-label">Vehicle Type:</span>
+                                    <div class="up-toggle-group slds-m-bottom_small">
+                                        <button class={twoWheelerClass} onclick={selectTwoWheeler}>Two-Wheeler</button>
+                                        <button class={fourWheelerClass} onclick={selectFourWheeler}>Four-Wheeler</button>
+                                    </div>
+                                </div>
+
+                                <div class="up-odometer-grid">
+                                    <div class="up-odometer-field">
+                                        <label>Extracted Reading</label>
+                                        <input type="text" value={extractedOdometer} readonly class="up-readonly-input" />
+                                    </div>
+                                    <div class="up-odometer-field">
+                                        <label>Manual Entry</label>
+                                        <lightning-input
+                                            type="text"
+                                            pattern="[0-9]*"
+                                            maxlength="7"
+                                            variant="label-hidden"
+                                            value={odometerReading}
+                                            onchange={handleOdometerChange}
+                                            class="up-number-input">
+                                        </lightning-input>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- Captured Images / Viewfinders -->
+                    <div class="up-section up-capture-section">
+                        <div class="up-section-header">
+                            <lightning-icon icon-name="utility:photo" size="x-small"></lightning-icon>
+                            <span>Verification {captureStepLabel}</span>
+                        </div>
+                        
+                        <div class={captureGridClass}>
+                            <!-- Selfie Capture (Always required) -->
+                            <div class="up-camera-area">
+                                <div class="up-sub-label">Step 1: Selfie (Identity)</div>
+                                
+                                <template if:true={isIOS}>
+                                    <!-- iOS Native File Capture Flow -->
+                                    <input type="file" accept="image/*" capture="user" class="up-selfie-file-input" style="display:none;" onchange={handleSelfieFileChange} />
+                                    
+                                    <template if:false={selfiePreview}>
+                                        <div class="up-viewfinder-placeholder animate-fade-in">
+                                            <lightning-icon icon-name="utility:user" size="large"></lightning-icon>
+                                            <p>Camera is closed</p>
+                                            <button class="up-btn-primary up-btn-camera-action" onclick={triggerSelfieCapture}>Open Camera</button>
+                                        </div>
+                                    </template>
+                                    
+                                    <template if:true={selfiePreview}>
+                                        <div class="up-preview-strip animate-fade-in">
+                                            <img src={selfiePreview} class="up-preview-img" alt="Selfie Captured" />
+                                            <span class="up-preview-check">✓ Selfie Done</span>
+                                        </div>
+                                    </template>
+                                    
+                                    <div class="up-camera-actions">
+                                        <template if:true={selfiePreview}>
+                                            <button class="up-btn-retake" onclick={retakeSelfie}>
+                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                Retake
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <template if:false={isIOS}>
+                                    <!-- Android/Desktop Live Video Flow -->
+                                    <template if:false={selfiePreview}>
+                                        <template if:true={isSelfieCameraOpen}>
+                                            <div class="up-viewfinder animate-fade-in">
+                                                <video autoplay playsinline muted webkit-playsinline class="up-video up-video-selfie"></video>
+                                                <div class="up-viewfinder-corners"></div>
+                                            </div>
+                                        </template>
+                                        <template if:false={isSelfieCameraOpen}>
+                                            <div class="up-viewfinder-placeholder animate-fade-in">
+                                                <lightning-icon icon-name="utility:user" size="large"></lightning-icon>
+                                                <p>Selfie camera is closed</p>
+                                                <button class="up-btn-primary up-btn-camera-action" onclick={openSelfieCamera}>Open Camera</button>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template if:true={selfiePreview}>
+                                        <div class="up-preview-strip animate-fade-in">
+                                            <img src={selfiePreview} class="up-preview-img" alt="Selfie Captured" />
+                                            <span class="up-preview-check">✓ Selfie Done</span>
+                                        </div>
+                                    </template>
+                                    
+                                    <div class="up-camera-actions">
+                                        <template if:false={selfiePreview}>
+                                            <template if:true={isSelfieCameraOpen}>
+                                                <button class="up-btn-capture" onclick={captureSelfie} title="Capture Selfie">
+                                                    <div class="up-btn-capture-ring"></div>
+                                                </button>
+                                                <button class="up-btn-retake" onclick={closeSelfieCamera} title="Close Camera" style="margin-left: 10px;">
+                                                    <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                    Close
+                                                </button>
+                                            </template>
+                                        </template>
+                                        <template if:true={selfiePreview}>
+                                            <button class="up-btn-retake" onclick={retakeSelfie}>
+                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                Retake
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Odometer Capture (Conditionally required) -->
+                            <template if:true={showTopOdometerCapture}>
+                                <div class="up-camera-area up-section-fade">
+                                    <div class="up-sub-label">Step 2: Odometer (Vehicle)</div>
+                                    <template if:true={selfiePreview}>
+                                        
+                                        <template if:true={isIOS}>
+                                            <!-- iOS Native File Capture Flow -->
+                                            <input type="file" accept="image/*" capture="environment" class="up-odo-file-input" style="display:none;" onchange={handleOdoFileChange} />
+                                            
+                                            <template if:false={odometerPreview}>
+                                                <div class="up-viewfinder-placeholder animate-fade-in">
+                                                    <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                    <p>Odometer camera is closed</p>
+                                                    <button class="up-btn-primary up-btn-camera-action" onclick={triggerOdoCapture}>Open Camera</button>
+                                                </div>
+                                            </template>
+                                            
+                                            <template if:true={odometerPreview}>
+                                                <div class="up-preview-strip animate-fade-in">
+                                                    <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" />
+                                                    <span class="up-preview-check">✓ Odometer Done</span>
+                                                </div>
+                                            </template>
+                                            
+                                            <div class="up-camera-actions">
+                                                <template if:true={odometerPreview}>
+                                                    <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                        <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                        Retake
+                                                    </button>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        
+                                        <template if:false={isIOS}>
+                                            <!-- Android/Desktop Live Video Flow -->
+                                            <template if:false={odometerPreview}>
+                                                <template if:true={isOdoCameraOpen}>
+                                                    <div class="up-viewfinder animate-fade-in">
+                                                        <video autoplay playsinline muted webkit-playsinline class="up-video up-video-odometer"></video>
+                                                        <div class="up-viewfinder-corners"></div>
+                                                    </div>
+                                                </template>
+                                                <template if:false={isOdoCameraOpen}>
+                                                    <div class="up-viewfinder-placeholder animate-fade-in">
+                                                        <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                        <p>Odometer camera is closed</p>
+                                                        <button class="up-btn-primary up-btn-camera-action" onclick={openOdoCamera}>Open Camera</button>
+                                                    </div>
+                                                </template>
+                                            </template>
+                                            <template if:true={odometerPreview}>
+                                                <div class="up-preview-strip animate-fade-in">
+                                                    <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" />
+                                                    <span class="up-preview-check">✓ Odometer Done</span>
+                                                </div>
+                                            </template>
+                                            
+                                            <div class="up-camera-actions">
+                                                <template if:false={odometerPreview}>
+                                                    <template if:true={isOdoCameraOpen}>
+                                                        <button class="up-btn-capture" onclick={captureOdometer} title="Capture Odometer">
+                                                            <div class="up-btn-capture-ring"></div>
+                                                        </button>
+                                                        <button class="up-btn-retake" onclick={closeOdoCamera} title="Close Camera" style="margin-left: 10px;">
+                                                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                            Close
+                                                        </button>
+                                                    </template>
+                                                </template>
+                                                <template if:true={odometerPreview}>
+                                                    <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                        <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                        Retake
+                                                    </button>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        
+                                    </template>
+                                    
+                                    <template if:false={selfiePreview}>
+                                        <div class="up-viewfinder-placeholder" style="height: 150px; color: rgba(0,0,0,0.4);">
+                                            Complete Step 1 to unlock Odometer Capture
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Image Modal -->
+                    <template if:true={showImageModal}>
+                        <section class="up-image-backdrop" onclick={closeImageModal}>
+                            <div class="up-image-modal" onclick={closeImageModal}>
+                                <div class="up-image-header">
+                                    <h2>Last Odometer Reading</h2>
+                                    <button class="up-close-btn" onclick={closeImageModal} title="Close">
+                                        <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+                                    </button>
+                                </div>
+                                <img src={lastOdometerUrl} alt="Full Size Odometer" class="up-full-image" />
+                            </div>
+                        </section>
+                    </template>
+
+                    <!-- Active Mode Category Toggle (only after Day In) -->
+                    <template if:true={isPunchedIn}>
+                    <div class="up-section up-mode-select-section" style="margin-top: 1.25rem;">
+                            
+                            <!-- Case 1: In an Active Mode (when editing mode is false and lastPunchType is set) -->
+                            <template if:false={isEditingMode}>
+                                <div class="up-section-header">
+                                    <lightning-icon icon-name="utility:setup" size="x-small"></lightning-icon>
+                                    <span>Active Mode: {lastPunchType}</span>
+                                </div>
+                                <div class="up-mode-details-card" style="background: rgba(0,0,0,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                                    <template if:true={isMarketVisitActiveMode}>
+                                        <p style="margin-bottom: 0.5rem; font-weight: 700; color: #1a1a2e;">Transportation: <span style="font-weight: 500; color: #4b5563;">{lastTransportType}</span></p>
+                                        <template if:true={isPrivateVehicleActiveMode}>
+                                            <p style="margin-bottom: 0.5rem; font-weight: 700; color: #1a1a2e;">Vehicle Type: <span style="font-weight: 500; color: #4b5563;">{lastVehicleType}</span></p>
+                                            
+                                            <!-- Ask for Ending Odometer reading -->
+                                            <div class="up-odometer-grid" style="margin-top: 1rem;">
+                                                <div class="up-odometer-field">
+                                                    <label>Extracted End Reading</label>
+                                                    <input type="text" value={extractedOdometer} readonly class="up-readonly-input" />
+                                                </div>
+                                                <div class="up-odometer-field">
+                                                    <label>Manual End Entry</label>
+                                                    <lightning-input
+                                                        type="text"
+                                                        pattern="[0-9]*"
+                                                        maxlength="7"
+                                                        variant="label-hidden"
+                                                        value={odometerReading}
+                                                        onchange={handleOdometerChange}
+                                                        class="up-number-input">
+                                                    </lightning-input>
+                                                </div>
+                                            </div>
+
+                                            <!-- Odometer Viewfinder / Camera Capture -->
+                                            <div class="up-camera-area" style="margin-top: 1rem;">
+                                                <div class="up-sub-label">Capture End Odometer (Vehicle Mileage)</div>
+                                                
+                                                <template if:true={isIOS}>
+                                                    <input type="file" accept="image/*" capture="environment" class="up-odo-file-input" style="display:none;" onchange={handleOdoFileChange} />
+                                                    <template if:false={odometerPreview}>
+                                                        <div class="up-viewfinder-placeholder">
+                                                            <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                            <p>Camera is closed</p>
+                                                            <button class="up-btn-primary up-btn-camera-action" onclick={triggerOdoCapture}>Open Camera</button>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={odometerPreview}>
+                                                        <div class="up-preview-strip">
+                                                            <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" />
+                                                            <span class="up-preview-check">✓ Odometer Captured</span>
+                                                        </div>
+                                                    </template>
+                                                    <div class="up-camera-actions">
+                                                        <template if:true={odometerPreview}>
+                                                            <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                                Retake
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </template>
+
+                                                <template if:false={isIOS}>
+                                                    <div class="up-viewfinder-placeholder" style="overflow: hidden; height: 160px;">
+                                                        <template if:false={odometerPreview}>
+                                                            <template if:false={isOdoCameraOpen}>
+                                                                <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                                <p>Camera is closed</p>
+                                                                <button class="up-btn-primary up-btn-camera-action" onclick={openOdoCamera}>Open Camera</button>
+                                                            </template>
+                                                            <template if:true={isOdoCameraOpen}>
+                                                                <video autoplay playsinline muted class="up-video up-video-odometer" style="height: 100%; object-fit: cover;"></video>
+                                                                <canvas class="up-canvas" style="display:none;"></canvas>
+                                                            </template>
+                                                        </template>
+                                                        <template if:true={odometerPreview}>
+                                                            <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" style="height: 100%; object-fit: cover;" />
+                                                        </template>
+                                                    </div>
+                                                    <div class="up-camera-actions">
+                                                        <template if:false={odometerPreview}>
+                                                            <template if:true={isOdoCameraOpen}>
+                                                                <button class="up-btn-primary up-btn-camera-action" onclick={captureOdometer}>Capture Photo</button>
+                                                                <button class="up-btn-retake" onclick={closeOdoCamera} title="Close Camera" style="margin-left: 10px;">
+                                                                    <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                                    Close
+                                                                </button>
+                                                            </template>
+                                                        </template>
+                                                        <template if:true={odometerPreview}>
+                                                            <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                                <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                                Retake
+                                                            </button>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template if:false={isMarketVisitActiveMode}>
+                                        <p style="color: #4b5563; font-weight: 500;">You are currently active in {lastPunchType} mode.</p>
+                                    </template>
+                                </div>
+                                <div class="up-button-group" style="width: 100%;">
+                                    <button class="up-btn-primary up-punch-out" style="width: 100%; margin: 0;" onclick={handleEndActiveMode} disabled={isUpdatingMode}>
+                                        <template if:true={isUpdatingMode}>
+                                            <lightning-spinner size="small" alternative-text="Ending..."></lightning-spinner>
+                                        </template>
+                                        <span>{endActiveModeButtonLabel}</span>
+                                    </button>
+                                </div>
+                            </template>
+
+                            <!-- Case 2: In Selection/Editing state -->
+                            <template if:true={isEditingMode}>
+                                <div class="up-section-header">
+                                    <lightning-icon icon-name="utility:setup" size="x-small"></lightning-icon>
+                                    <span>Select Mode of Work</span>
+                                </div>
+                                <div class="up-toggle-group">
+                                    <template if:true={isWFOApprovedForToggle}>
+                                        <button class={wfoClass} onclick={selectWFO}>
+                                            <lightning-icon icon-name="utility:company" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                            WFO
+                                        </button>
+                                    </template>
+                                    <template if:true={isWFHApprovedForToggle}>
+                                        <button class={wfhClass} onclick={selectWFH}>
+                                            <lightning-icon icon-name="utility:home" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                            WFH
+                                        </button>
+                                    </template>
+                                    <button class={marketVisitClass} onclick={selectMarketVisit}>
+                                        <lightning-icon icon-name="utility:travel_and_places" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        Market Visit
+                                    </button>
+                                </div>
+
+                                <!-- Market Visit Details selection if Market Visit is selected -->
+                                <template if:true={isMarketVisit}>
+                                    <div class="up-sub-section" style="margin-top: 1rem;">
+                                        <span class="up-sub-label">Transportation:</span>
+                                        <div class="up-toggle-group">
+                                            <button class={publicTransportClass} onclick={selectPublicTransport}>
+                                                <lightning-icon icon-name="utility:bus" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                Public
+                                            </button>
+                                            <button class={privateVehicleClass} onclick={selectPrivateVehicle}>
+                                                <lightning-icon icon-name="utility:car" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                                Private
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <template if:true={isPrivateVehicle}>
+                                        <div class="up-sub-section" style="margin-top: 1rem;">
+                                            <span class="up-sub-label">Vehicle Type:</span>
+                                            <div class="up-toggle-group">
+                                                <button class={twoWheelerClass} onclick={selectTwoWheeler}>Two-Wheeler</button>
+                                                <button class={fourWheelerClass} onclick={selectFourWheeler}>Four-Wheeler</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="up-odometer-grid" style="margin-top: 1rem;">
+                                            <div class="up-odometer-field">
+                                                <label>Extracted Start Reading</label>
+                                                <input type="text" value={extractedOdometer} readonly class="up-readonly-input" />
+                                            </div>
+                                            <div class="up-odometer-field">
+                                                <label>Manual Start Entry</label>
+                                                <lightning-input
+                                                    type="text"
+                                                    pattern="[0-9]*"
+                                                    maxlength="7"
+                                                    variant="label-hidden"
+                                                    value={odometerReading}
+                                                    onchange={handleOdometerChange}
+                                                    class="up-number-input">
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+
+                                        <!-- Odometer Viewfinder / Camera Capture -->
+                                        <div class="up-camera-area" style="margin-top: 1rem;">
+                                            <div class="up-sub-label">Capture Start Odometer (Vehicle Mileage)</div>
+                                            
+                                            <template if:true={isIOS}>
+                                                <input type="file" accept="image/*" capture="environment" class="up-odo-file-input" style="display:none;" onchange={handleOdoFileChange} />
+                                                <template if:false={odometerPreview}>
+                                                    <div class="up-viewfinder-placeholder">
+                                                        <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                        <p>Camera is closed</p>
+                                                        <button class="up-btn-primary up-btn-camera-action" onclick={triggerOdoCapture}>Open Camera</button>
+                                                    </div>
+                                                </template>
+                                                <template if:true={odometerPreview}>
+                                                    <div class="up-preview-strip">
+                                                        <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" />
+                                                        <span class="up-preview-check">✓ Odometer Captured</span>
+                                                    </div>
+                                                </template>
+                                                <div class="up-camera-actions">
+                                                    <template if:true={odometerPreview}>
+                                                        <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                            <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                            Retake
+                                                        </button>
+                                                    </template>
+                                                </div>
+                                            </template>
+
+                                            <template if:false={isIOS}>
+                                                <div class="up-viewfinder-placeholder" style="overflow: hidden; height: 160px;">
+                                                    <template if:false={odometerPreview}>
+                                                        <template if:false={isOdoCameraOpen}>
+                                                            <lightning-icon icon-name="utility:preview" size="large"></lightning-icon>
+                                                            <p>Camera is closed</p>
+                                                            <button class="up-btn-primary up-btn-camera-action" onclick={openOdoCamera}>Open Camera</button>
+                                                        </template>
+                                                        <template if:true={isOdoCameraOpen}>
+                                                            <video autoplay playsinline muted class="up-video up-video-odometer" style="height: 100%; object-fit: cover;"></video>
+                                                            <canvas class="up-canvas" style="display:none;"></canvas>
+                                                        </template>
+                                                    </template>
+                                                    <template if:true={odometerPreview}>
+                                                        <img src={odometerPreview} class="up-preview-img" alt="Odometer Captured" style="height: 100%; object-fit: cover;" />
+                                                    </template>
+                                                </div>
+                                                <div class="up-camera-actions">
+                                                    <template if:false={odometerPreview}>
+                                                        <template if:true={isOdoCameraOpen}>
+                                                            <button class="up-btn-primary up-btn-camera-action" onclick={captureOdometer}>Capture Photo</button>
+                                                            <button class="up-btn-retake" onclick={closeOdoCamera} title="Close Camera" style="margin-left: 10px;">
+                                                                <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                                Close
+                                                            </button>
+                                                        </template>
+                                                    </template>
+                                                    <template if:true={odometerPreview}>
+                                                        <button class="up-btn-retake" onclick={retakeOdometer}>
+                                                            <lightning-icon icon-name="utility:refresh" size="x-small"></lightning-icon>
+                                                            Retake
+                                                        </button>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+
+                                <!-- Start Mode Button -->
+                                <div class="up-button-group" style="display: flex; gap: 10px; margin-top: 1rem; margin-bottom: 1.25rem; width: 100%;">
+                                    <button class="up-btn-primary up-btn-wfh-req" style="flex: 1; margin: 0;" onclick={handleUpdateActiveMode} disabled={isUpdatingMode}>
+                                        <template if:true={isUpdatingMode}>
+                                            <lightning-spinner size="small" alternative-text="Updating..."></lightning-spinner>
+                                        </template>
+                                        <span>{activeModeButtonLabel}</span>
+                                    </button>
+                                    <template if:true={lastPunchType}>
+                                        <button class="up-btn-secondary" style="flex: 1; margin: 0;" onclick={handleDiscardActiveMode}>
+                                            Discard
+                                        </button>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- Punch Button -->
+                    <div class="up-punch-section">
+                        <button
+                            class={punchBtnClass}
+                            onclick={handlePunch}
+                            disabled={isPunching}>
+                            <template if:true={isPunching}>
+                                <lightning-spinner size="small" alternative-text="Processing..."></lightning-spinner>
+                            </template>
+                            <template if:false={isPunching}>
+                                <lightning-icon
+                                    icon-name={punchBtnIcon}
+                                    size="small"
+                                    class="up-punch-icon">
+                                </lightning-icon>
+                            </template>
+                            <span>{buttonLabel}</span>
+                        </button>
+
+                        <template if:true={isPunching}>
+                            <div class="up-gps-note">
+                                <lightning-icon icon-name="utility:location" size="x-small"></lightning-icon>
+                                Getting your location…
+                            </div>
+                        </template>
+                    </div>
+
+                </template>
+            </div>
+
+            <!-- ═══ Right Column: Timeline & Requests ═══ -->
+            <div class="up-grid-column-right">
+                <template if:true={userId}>
+                    <div class="up-panel up-panel-timeline" style="margin-bottom: 1.25rem;">
+                        <c-punch-timeline record-id={userId} active-punch-type={lastPunchType} oncheckin={handleClientActivityChange} oncheckout={handleClientActivityChange}></c-punch-timeline>
+                    </div>
+                </template>
+
+                <!-- WFH & WFO Requests List Panel -->
+                <div class="up-panel up-panel-wfh-list">
+                    <div class="up-section-header" style="margin-bottom: 1rem; display: flex; align-items: center;">
+                        <lightning-icon icon-name="utility:work_order_type" size="small" class="up-wfh-header-icon"></lightning-icon>
+                        <span class="up-wfh-list-title" style="font-weight: 700; font-size: 1.1rem; margin-left: 0.5rem; color: #1a1a2e;">My WFH & WFO Requests</span>
+                    </div>
+                    
+                    <div class="up-wfh-list-container">
+                        <template if:true={hasWfhRequests}>
+                            <div class="up-wfh-cards-list">
+                                <template for:each={wfhRequests} for:item="req">
+                                    <div key={req.requestId} class="up-wfh-card animate-fade-in">
+                                        <div class={req.typeBorderClass}></div>
+                                        <div class="up-wfh-card-body">
+                                            <div class="up-wfh-card-header">
+                                                <span class={req.typeBadgeClass}>{req.type}</span>
+                                                <span class={req.statusBadgeClass}>{req.status}</span>
+                                            </div>
+                                            <div class="up-wfh-card-details">
+                                                <div class="up-wfh-detail-row">
+                                                    <lightning-icon icon-name="utility:date_time" size="xx-small" class="up-wfh-detail-icon"></lightning-icon>
+                                                    <span class="up-wfh-detail-text">{req.formattedDate}</span>
+                                                </div>
+                                                <div class="up-wfh-detail-row">
+                                                    <lightning-icon icon-name="utility:clock" size="xx-small" class="up-wfh-detail-icon"></lightning-icon>
+                                                    <span class="up-wfh-detail-text">{req.startTime} - {req.endTime}</span>
+                                                </div>
+                                                <template if:true={req.hasApprover}>
+                                                    <div class="up-wfh-detail-row">
+                                                        <lightning-icon icon-name="utility:user" size="xx-small" class="up-wfh-detail-icon"></lightning-icon>
+                                                        <span class="up-wfh-detail-text">HOD: {req.approverName}</span>
+                                                    </div>
+                                                </template>
+                                                <template if:true={req.hasRemarks}>
+                                                    <div class="up-wfh-remarks">
+                                                        <span class="up-wfh-remarks-label">HOD Remarks</span>
+                                                        <span class="up-wfh-remarks-text">{req.remarks}</span>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        <template if:false={hasWfhRequests}>
+                            <div class="up-wfh-empty-state">
+                                <lightning-icon icon-name="utility:info" size="medium" class="up-wfh-empty-icon"></lightning-icon>
+                                <p class="up-wfh-empty-text">No WFH or WFO requests yet.</p>
+                                <p class="up-wfh-empty-hint">Use Request WFH / WFO on the left to submit one.</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Shared Canvas for Capturing Photos -->
+        <canvas class="up-canvas" style="display:none;"></canvas>
+    </div>
+
+    <!-- GPS Logger Activation Modal -->
+    <template if:true={showActivationModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container" style="max-width: 460px;">
+                <header class="slds-modal__header" style="background: #1a1a2e; color: white; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom: none; padding: 1.5rem; position: relative;">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeActivationModal} style="position: absolute; right: 1rem; top: 1.25rem; color: white; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                        <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium" style="font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02rem;">GPS Activation</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_large" style="text-align: center; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; background: #ffffff; padding: 2rem 1.5rem;">
+                    
+                    <!-- Pulse Radar / Verified Green core -->
+                    <div class="pt-radar-container">
+                        <template if:false={dataVerified}>
+                            <div class="pt-radar-circle"></div>
+                            <div class="pt-radar-circle-2"></div>
+                            <div class="pt-radar-core" style="background: #3b82f6;">
+                                <lightning-icon icon-name="utility:location" size="small" class="white-icon"></lightning-icon>
+                            </div>
+                        </template>
+                        <template if:true={dataVerified}>
+                            <div class="pt-radar-core" style="background: #10b981;">
+                                <lightning-icon icon-name="utility:check" size="small" class="white-icon"></lightning-icon>
+                            </div>
+                        </template>
+                    </div>
+
+                    <p style="font-size: 1.15rem; color: #1e293b; font-weight: 800; margin-top: 0.5rem;">
+                        GPS Tracking Status
+                    </p>
+
+                    <!-- Simplified Prompt Screen -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.25rem; margin-top: 1.25rem; text-align: center;">
+                        <p style="color: #475569; font-size: 0.88rem; font-weight: 500; margin-bottom: 1rem; line-height: 1.5;">
+                            Please start the GPS Logger application on your phone to transmit tracking data. Once the logger is active, click <strong>Refresh Status</strong> below.
+                        </p>
+                        
+                        <!-- Collapsible Instructions Toggle button -->
+                        <button class="up-btn-secondary" style="width: auto; padding: 0.4rem 1rem; font-size: 0.78rem; border-radius: 10px; margin: 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 700; height: 32px;" onclick={toggleSetupInstructions}>
+                            <lightning-icon icon-name="utility:info" size="xx-small" class="pt-arrow-icon"></lightning-icon>
+                            <span>{setupInstructionsButtonLabel}</span>
+                        </button>
+                    </div>
+
+                    <!-- Step 1 & Step 2 Setup Instructions (Rendered only when showSetupInstructions is true) -->
+                    <template if:true={showSetupInstructions}>
+                        <div class="animate-fade-in" style="margin-top: 1rem; text-align: left; display: flex; flex-direction: column; gap: 1rem;">
+                            <!-- Step 1: Install GPS Logger -->
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.25rem;">
+                                <p style="font-weight: 800; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.25rem;">
+                                    Step 1: Install GPS Logger
+                                </p>
+                                <p style="color: #64748b; font-size: 0.8rem; margin-bottom: 1rem;">
+                                    Select your platform and install the tracking application.
+                                </p>
+
+                                <!-- OS Selection Tabs -->
+                                <div style="display: flex; background: #e2e8f0; padding: 3px; border-radius: 10px; margin-bottom: 1rem; width: fit-content;">
+                                    <button class={androidTabClass} onclick={selectAndroidTab}>Android</button>
+                                    <button class={iosTabClass} onclick={selectIosTab}>iOS</button>
+                                </div>
+
+                                <!-- Tab contents -->
+                                <div style="text-align: center;">
+                                    <template if:true={isAndroidTabActive}>
+                                        <a href="https://drive.google.com/uc?export=download&id=1932xXnJEdeqIjwbJIxppsLgo1g80s6LS" 
+                                           target="_blank" 
+                                           class="up-btn-primary" 
+                                           style="background: #1a1a2e; color: white; border-radius: 12px; padding: 0.5rem 1.5rem; font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; width: auto; gap: 8px;">
+                                            <lightning-icon icon-name="utility:download" size="x-small" variant="inverse"></lightning-icon>
+                                            Download APK
+                                        </a>
+                                    </template>
+                                    
+                                    <template if:true={isIosTabActive}>
+                                        <a href="https://apps.apple.com/us/app/overland-gps-tracker/id1292426766" 
+                                           target="_blank" 
+                                           class="up-btn-primary" 
+                                           style="background: #1a1a2e; color: white; border-radius: 12px; padding: 0.5rem 1.5rem; font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; width: auto; gap: 8px;">
+                                            <lightning-icon icon-name="utility:new_window" size="x-small" variant="inverse"></lightning-icon>
+                                            Open App Store
+                                        </a>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Configure & Activate -->
+                            <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 1.25rem;">
+                                <p style="font-weight: 800; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.25rem;">
+                                    Step 2: Configure Settings
+                                </p>
+                                <p style="color: #64748b; font-size: 0.8rem; margin-bottom: 0.75rem; line-height: 1.45;">
+                                    {step2Instruction}
+                                </p>
+                                
+                                <div class="activation-url-box" style="margin-top: 0.75rem; margin-bottom: 0.75rem; font-size: 0.75rem;">
+                                    {activationUrl}
+                                </div>
+
+                                <div style="text-align: center; margin-top: 0.75rem;">
+                                    <button class="up-btn-secondary" style="width: auto; padding: 0.4rem 1.25rem; font-size: 0.8rem; border-radius: 10px;" onclick={handleCopyUrl}>
+                                        <lightning-icon icon-name="utility:copy" size="xx-small" class="pt-arrow-icon" style="margin-right: 4px;"></lightning-icon>
+                                        Copy URL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Status Display -->
+                    <div style="display: flex; justify-content: center; margin-top: 0.5rem;">
+                        <template if:true={dataVerified}>
+                            <div class="verification-card status-verified animate-fade-in">
+                                <lightning-icon icon-name="utility:check" size="xx-small" variant="success"></lightning-icon>
+                                <span>Tracking Verified! Data is arriving.</span>
+                            </div>
+                        </template>
+                        <template if:false={dataVerified}>
+                            <div class="verification-card status-awaiting">
+                                <lightning-icon icon-name="utility:spinner" size="xx-small" variant="error" class="slds-m-right_xx-small"></lightning-icon>
+                                <span>Awaiting data from GPS Logger...</span>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Footer Action Row -->
+                    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 1rem; width: 100%;">
+                        <button class="up-btn-secondary" style="flex: 1; padding: 0.75rem 1.25rem; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onclick={checkDataArrival} disabled={isCheckingData}>
+                            <template if:true={isCheckingData}>
+                                <lightning-spinner size="small" alternative-text="Refreshing..."></lightning-spinner>
+                            </template>
+                            <lightning-icon icon-name="utility:refresh" size="x-small" class="pt-arrow-icon"></lightning-icon>
+                            Refresh Status
+                        </button>
+                        <button class="up-btn-primary" style="flex: 1; background: #1a1a2e; color: white; padding: 0.75rem 1.25rem; border-radius: 12px; margin: 0; box-shadow: 0 4px 12px rgba(26,26,46,0.15);" onclick={closeActivationModal} disabled={doneButtonDisabled}>
+                            Finish Setup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px);"></div>
+    </template>
+
+    <!-- Day Activity Log (End WFH / WFO) -->
+    <template if:true={showDayActivityModal}>
+        <section class="up-dal-backdrop" role="dialog" aria-modal="true">
+            <div class="up-dal-modal up-dal-pop-in">
+                <div class="up-dal-header">
+                    <h2>{dayActivityTitle}</h2>
+                    <button class="up-dal-close-btn" onclick={closeDayActivityModal} disabled={isSubmittingDayActivity} title="Close">
+                        <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+                <div class="up-dal-body">
+                    <div class="up-dal-field">
+                        <lightning-input
+                            type="number"
+                            min="0"
+                            step="1"
+                            label="No of Phone Calls"
+                            value={dayActivityPhoneCalls}
+                            onchange={handleDayActivityPhoneCallsChange}
+                            required>
+                        </lightning-input>
+                    </div>
+                    <div class="up-dal-field">
+                        <lightning-input
+                            type="number"
+                            min="0"
+                            step="1"
+                            label="No of Emails"
+                            value={dayActivityEmails}
+                            onchange={handleDayActivityEmailsChange}
+                            required>
+                        </lightning-input>
+                    </div>
+                    <div class="up-dal-field">
+                        <lightning-input
+                            type="number"
+                            min="0"
+                            step="1"
+                            label="No of Offer sent to Customer"
+                            value={dayActivityOffersSent}
+                            onchange={handleDayActivityOffersChange}
+                            required>
+                        </lightning-input>
+                    </div>
+                    <div class="up-dal-field">
+                        <lightning-input
+                            type="number"
+                            min="0"
+                            step="1"
+                            label="No of Meetings"
+                            value={dayActivityMeetings}
+                            onchange={handleDayActivityMeetingsChange}
+                            required>
+                        </lightning-input>
+                    </div>
+                    <div class="up-dal-field">
+                        <lightning-textarea
+                            label="Open Notes"
+                            value={dayActivityOpenNotes}
+                            onchange={handleDayActivityNotesChange}
+                            placeholder="Optional notes...">
+                        </lightning-textarea>
+                    </div>
+                </div>
+                <div class="up-dal-footer">
+                    <button class="up-dal-btn up-dal-btn-cancel" onclick={closeDayActivityModal} disabled={isSubmittingDayActivity}>Cancel</button>
+                    <button class="up-dal-btn up-dal-btn-save" onclick={submitDayActivityLog} disabled={isSubmittingDayActivity}>
+                        <template if:true={isSubmittingDayActivity}>Submitting...</template>
+                        <template if:false={isSubmittingDayActivity}>Submit</template>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

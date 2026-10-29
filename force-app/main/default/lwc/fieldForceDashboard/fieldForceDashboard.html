@@ -1,0 +1,1347 @@
+<template>
+    <div class="dashboard-wrapper">
+        <!-- Top Header & Selector Bar -->
+        <header class="dashboard-header animate-fade-in">
+            <div class="header-left">
+                <template if:true={isSingleView}>
+                    <template if:true={showSidebar}>
+                        <lightning-button
+                            label="Back"
+                            icon-name="utility:chevronleft"
+                            onclick={handleBackToList}
+                            title="Back to Summary List"
+                            class="back-btn">
+                        </lightning-button>
+                    </template>
+                </template>
+                <lightning-icon icon-name="standard:location" alternative-text="Dashboard" class="header-icon"></lightning-icon>
+                <div>
+                    <h1 class="dashboard-title">Field Force Dashboard</h1>
+                    <p class="dashboard-subtitle">
+                        <template if:true={isSingleView}>Daily activity details and route tracking</template>
+                        <template if:false={isSingleView}>Team overview and status summaries</template>
+                    </p>
+                </div>
+            </div>
+
+            <div class="header-right selectors">
+                <template if:true={isTrackingTab}>
+                    <lightning-input
+                        type="date"
+                        name="statusDate"
+                        label="Select Date"
+                        value={selectedDate}
+                        onchange={handleDateChange}
+                        class="selector-input date-select"
+                        variant="label-hidden">
+                    </lightning-input>
+                </template>
+
+                <lightning-button-icon
+                    icon-name="utility:refresh"
+                    variant="border-filled"
+                    onclick={handleRefresh}
+                    alternative-text="Refresh data"
+                    title="Refresh data"
+                    class="refresh-btn">
+                </lightning-button-icon>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <template if:true={isLoading}>
+                <div class="spinner-overlay">
+                    <lightning-spinner alternative-text="Fetching dashboard details..." size="medium" variant="brand"></lightning-spinner>
+                    <p class="spinner-text">Retrieving daily track logs...</p>
+                </div>
+            </template>
+
+            <lightning-tabset active-tab-value={activeTab} variant="scoped" class="dashboard-tabs animate-fade-in">
+                <!-- 0. REALTIME OVERVIEW -->
+                <lightning-tab label="Overview" value="overview" onactive={handleOverviewTabActive}>
+                    <template if:false={isSingleView}>
+                        <div class="overview-layout animate-fade-in">
+                            <!-- Top row: Gauge + KPIs -->
+                            <div class="overview-top-row">
+                                <div class="overview-gauge-card glass-card">
+                                    <div class="overview-card-header">
+                                        <h2 class="overview-card-title">Real Time Status</h2>
+                                    </div>
+                                    <div class="rt-gauge-wrap">
+                                        <div class="rt-gauge" style={gaugeCssVars}>
+                                            <div class="rt-gauge-arc"></div>
+                                            <div class="rt-gauge-center">
+                                                <span class="rt-gauge-total">{totalCount}</span>
+                                                <span class="rt-gauge-label">All Employees</span>
+                                            </div>
+                                        </div>
+                                        <div class="rt-gauge-legend">
+                                            <div class="rt-legend-item">
+                                                <span class="rt-dot rt-dot-in"></span>
+                                                <span class="rt-legend-text">Punched In</span>
+                                                <strong class="rt-legend-count">{punchedInCount}</strong>
+                                            </div>
+                                            <div class="rt-legend-item">
+                                                <span class="rt-dot rt-dot-out"></span>
+                                                <span class="rt-legend-text">Punched Out</span>
+                                                <strong class="rt-legend-count">{punchedOutCount}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="overview-kpi-stack">
+                                    <div class="overview-mini-kpi glass-card">
+                                        <span class="overview-mini-label">Punched In (Inactive)</span>
+                                        <span class="overview-mini-value overview-mini-warn">{punchedInInactiveCount}</span>
+                                        <span class="overview-mini-hint">GPS offline while on duty</span>
+                                    </div>
+                                    <div class="overview-mini-kpi glass-card">
+                                        <span class="overview-mini-label">Staffing Strength</span>
+                                        <span class="overview-mini-value overview-mini-brand">{staffingStrengthLabel}</span>
+                                        <span class="overview-mini-hint">{punchedInPercentLabel} currently punched in</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Employee table -->
+                            <div class="overview-employees-card glass-card">
+                                <div class="overview-emp-toolbar">
+                                    <h2 class="overview-card-title">{overviewEmployeeCountLabel}</h2>
+                                    <div class="overview-emp-controls">
+                                        <lightning-input
+                                            type="search"
+                                            variant="label-hidden"
+                                            placeholder="Search employees..."
+                                            value={overviewSearchTerm}
+                                            onchange={handleOverviewSearchChange}
+                                            class="overview-search">
+                                        </lightning-input>
+                                        <div class="filter-scroll">
+                                            <div class="status-filters">
+                                                <button class={overviewAllFilterClass} data-status="ALL" onclick={handleOverviewStatusFilterChange}>All</button>
+                                                <button class={overviewInFilterClass} data-status="IN" onclick={handleOverviewStatusFilterChange}>In ({punchedInCount})</button>
+                                                <button class={overviewOutFilterClass} data-status="OUT" onclick={handleOverviewStatusFilterChange}>Out ({punchedOutCount})</button>
+                                                <button class={overviewInactiveFilterClass} data-status="INACTIVE" onclick={handleOverviewStatusFilterChange}>Inactive ({punchedInInactiveCount})</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <template if:true={hasOverviewEmployees}>
+                                    <div class="overview-table-wrap desktop-only-table">
+                                        <table class="overview-emp-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee</th>
+                                                    <th>Attendance</th>
+                                                    <th>Last Location</th>
+                                                    <th>Hours</th>
+                                                    <th>GPS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={overviewFilteredEmployees} for:item="usr">
+                                                    <tr key={usr.userId} class={usr.overviewRowClass} data-id={usr.userId} onclick={handleUserCardClick}>
+                                                        <td>
+                                                            <div class="overview-emp-cell">
+                                                                <span class="overview-avatar">{usr.initials}</span>
+                                                                <div class="overview-emp-meta">
+                                                                    <span class="overview-emp-name">{usr.userName}</span>
+                                                                    <span class="overview-emp-sub">{usr.userPhone}</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="overview-att-cell">
+                                                                <span class={usr.badgeClass}>{usr.attendanceStatus}</span>
+                                                                <span class="overview-att-meta">{usr.attendanceMeta}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="overview-location">{usr.lastLocationDisplay}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="overview-hours">{usr.totalHours}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="overview-gps">{usr.gpsStatus}</span>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="mobile-only-cards">
+                                        <div class="mobile-card-list">
+                                            <template for:each={overviewFilteredEmployees} for:item="usr">
+                                                <div key={usr.userId} class="mobile-data-card overview-mobile-card" data-id={usr.userId} onclick={handleUserCardClick}>
+                                                    <div class={usr.accentClass}></div>
+                                                    <div class="overview-mobile-body">
+                                                        <div class="overview-mobile-header">
+                                                            <div class="overview-emp-cell">
+                                                                <span class="overview-avatar">{usr.initials}</span>
+                                                                <div class="overview-emp-meta">
+                                                                    <span class="overview-emp-name">{usr.userName}</span>
+                                                                    <span class="overview-emp-sub">{usr.userPhone}</span>
+                                                                </div>
+                                                            </div>
+                                                            <span class={usr.badgeClass}>{usr.attendanceStatus}</span>
+                                                        </div>
+                                                        <div class="mobile-card-meta">
+                                                            <div class="mobile-meta-item">
+                                                                <span class="mobile-meta-label">Punch</span>
+                                                                <span class="mobile-meta-value">{usr.attendanceMeta}</span>
+                                                            </div>
+                                                            <div class="mobile-meta-item">
+                                                                <span class="mobile-meta-label">Hours</span>
+                                                                <span class="mobile-meta-value">{usr.totalHours}</span>
+                                                            </div>
+                                                            <div class="mobile-meta-item">
+                                                                <span class="mobile-meta-label">GPS</span>
+                                                                <span class="mobile-meta-value">{usr.gpsStatus}</span>
+                                                            </div>
+                                                            <div class="mobile-meta-item full-width">
+                                                                <span class="mobile-meta-label">Last Location</span>
+                                                                <span class="mobile-meta-value">{usr.lastLocationDisplay}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <template if:false={hasOverviewEmployees}>
+                                    <div class="overview-empty">
+                                        <lightning-icon icon-name="utility:people" size="medium" class="overview-empty-icon"></lightning-icon>
+                                        <p>No employees match the current filters.</p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </lightning-tab>
+
+                <!-- 1. ACTIVITY TRACKING -->
+                <lightning-tab label="Tracking" value="tracking" onactive={handleTrackingTabActive}>
+                    <template if:false={isSingleView}>
+                        <template if:true={showSidebar}>
+                            <div class="filter-bar glass-card animate-fade-in">
+                                <div class="filter-search-wrapper">
+                                    <lightning-input
+                                        type="search"
+                                        variant="label-hidden"
+                                        placeholder="Search representative name..."
+                                        value={searchTerm}
+                                        onchange={handleSearchTermChange}
+                                        class="search-input">
+                                    </lightning-input>
+                                </div>
+
+                                <div class="filter-scroll">
+                                    <div class="status-filters">
+                                        <button class={allFilterClass} data-status="ALL" onclick={handleStatusFilterChange}>
+                                            All ({totalCount})
+                                        </button>
+                                        <button class={activeFilterClass} data-status="ACTIVE" onclick={handleStatusFilterChange}>
+                                            Active ({activeCount})
+                                        </button>
+                                        <button class={offlineFilterClass} data-status="OFFLINE" onclick={handleStatusFilterChange}>
+                                            Offline ({offlineCount})
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div class="list-grid">
+                            <template for:each={filteredListSummaryData} for:item="usr">
+                                <div key={usr.userId} class="user-summary-card glass-card hover-lift" data-id={usr.userId} onclick={handleUserCardClick}>
+                                    <div class={usr.accentClass}></div>
+
+                                    <div class="card-header">
+                                        <div class="user-info">
+                                            <h3 class="user-name">{usr.userName}</h3>
+                                            <p class="user-phone">{usr.userPhone}</p>
+                                        </div>
+                                        <span class={usr.badgeClass}>{usr.attendanceStatus}</span>
+                                    </div>
+
+                                    <div class="card-stats">
+                                        <div class="card-stat-item">
+                                            <span class="stat-lbl">Punch In/Out</span>
+                                            <span class="stat-val">{usr.punchInTime} - {usr.punchOutTime}</span>
+                                        </div>
+                                        <div class="card-stat-item">
+                                            <span class="stat-lbl">Active Hours</span>
+                                            <span class="stat-val">{usr.totalHours}</span>
+                                        </div>
+                                        <div class="card-stat-item">
+                                            <span class="stat-lbl">Visits</span>
+                                            <span class="stat-val">{usr.visitsCount} visits</span>
+                                        </div>
+                                        <div class="card-stat-item">
+                                            <span class="stat-lbl">Distance</span>
+                                            <span class="stat-val">{usr.distanceKm} km</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <span class="device-status">
+                                            <lightning-icon icon-name="utility:wifi" size="xx-small" class="footer-icon"></lightning-icon>
+                                            GPS: {usr.gpsStatus} | Batt: {usr.batteryLevel}
+                                        </span>
+                                        <button class="view-trail-btn" data-id={usr.userId} onclick={handleViewTrailClick}>
+                                            View Trail →
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </lightning-tab>
+
+                <!-- 2. WFH & WFO REQUESTS -->
+                <lightning-tab label="Requests" value="requests" onactive={handleWfhTabActive}>
+                    <div class="slds-m-top_medium glass-card animate-fade-in requests-panel">
+                        <div class="section-title-bar">
+                            <lightning-icon icon-name="utility:work_order_type" size="small" class="section-icon"></lightning-icon>
+                            <h2>All Department WFH & WFO Requests</h2>
+                        </div>
+
+                        <template if:true={hasTeamRequests}>
+                            <!-- Desktop table -->
+                            <div class="requests-table-container desktop-only-table">
+                                <table class="requests-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Representative Name</th>
+                                            <th>Type</th>
+                                            <th>Request Date</th>
+                                            <th>Timing</th>
+                                            <th>Reason</th>
+                                            <th>HOD Remarks</th>
+                                            <th>Status / Actions</th>
+                                            <th class="req-view-col">View Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={teamWfhRequests} for:item="req">
+                                            <tr key={req.requestId}>
+                                                <td class="req-user-name">{req.userName}</td>
+                                                <td>
+                                                    <span class={req.typeBadgeClass}>{req.type}</span>
+                                                </td>
+                                                <td class="req-date-cell">{req.formattedDate}</td>
+                                                <td class="req-time-cell">{req.startTime} - {req.endTime}</td>
+                                                <td>
+                                                    <template if:true={req.hasRequestNote}>
+                                                        <span class="req-remarks-text">{req.requestNote}</span>
+                                                    </template>
+                                                    <template if:false={req.hasRequestNote}>
+                                                        <span class="req-remarks-empty">—</span>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <template if:true={req.isPending}>
+                                                        <lightning-input
+                                                            type="text"
+                                                            placeholder="HOD remarks..."
+                                                            data-id={req.requestId}
+                                                            onchange={handleDashboardRemarksChange}
+                                                            variant="label-hidden"
+                                                            class="table-remarks-input">
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template if:false={req.isPending}>
+                                                        <template if:true={req.hasRemarks}>
+                                                            <span class="req-remarks-text">{req.remarks}</span>
+                                                        </template>
+                                                        <template if:false={req.hasRemarks}>
+                                                            <span class="req-remarks-empty">—</span>
+                                                        </template>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <template if:true={req.isPending}>
+                                                        <div class="table-action-row">
+                                                            <lightning-button-icon icon-name="utility:check" variant="border-filled" data-id={req.requestId} onclick={handleApproveWFH} title="Approve" size="small"></lightning-button-icon>
+                                                            <lightning-button-icon icon-name="utility:close" variant="border-filled" data-id={req.requestId} onclick={handleRejectWFH} title="Reject" size="small"></lightning-button-icon>
+                                                        </div>
+                                                    </template>
+                                                    <template if:false={req.isPending}>
+                                                        <span class={req.statusBadgeClass}>{req.status}</span>
+                                                    </template>
+                                                </td>
+                                                <td class="req-view-col">
+                                                    <template if:true={req.isCompleted}>
+                                                        <lightning-button-icon icon-name="utility:preview" variant="border-filled" data-id={req.requestId} onclick={handleViewActivityDetails} title="View Details" alternative-text="View Details" size="small"></lightning-button-icon>
+                                                    </template>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Mobile cards -->
+                            <div class="mobile-only-cards">
+                                <div class="mobile-card-list req-mobile-card-list">
+                                    <template for:each={teamWfhRequests} for:item="req">
+                                        <div key={req.requestId} class="mobile-data-card">
+                                            <div class={req.typeBorderClass}></div>
+                                            <div class="wfh-card-content">
+                                                <div class="wfh-card-header">
+                                                    <span class="mobile-card-title req-card-title">{req.userName}</span>
+                                                    <div class="table-action-row req-card-actions">
+                                                        <template if:true={req.isCompleted}>
+                                                            <lightning-button-icon icon-name="utility:preview" variant="border-filled" data-id={req.requestId} onclick={handleViewActivityDetailsMobile} title="View Details" alternative-text="View Details"></lightning-button-icon>
+                                                        </template>
+                                                        <span class={req.statusBadgeClass}>{req.status}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="mobile-card-meta">
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Type</span>
+                                                        <span class={req.typeBadgeClass}>{req.type}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Date</span>
+                                                        <span class="mobile-meta-value">{req.formattedDate}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item full-width">
+                                                        <span class="mobile-meta-label">Timing</span>
+                                                        <span class="mobile-meta-value">{req.startTime} - {req.endTime}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item full-width">
+                                                        <span class="mobile-meta-label">Reason</span>
+                                                        <template if:true={req.hasRequestNote}>
+                                                            <span class="mobile-meta-value req-remarks-text">{req.requestNote}</span>
+                                                        </template>
+                                                        <template if:false={req.hasRequestNote}>
+                                                            <span class="mobile-meta-value req-remarks-empty">—</span>
+                                                        </template>
+                                                    </div>
+                                                    <template if:true={req.hasApprover}>
+                                                        <div class="mobile-meta-item full-width">
+                                                            <span class="mobile-meta-label">HOD</span>
+                                                            <span class="mobile-meta-value">{req.approverName}</span>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={req.hasRemarks}>
+                                                        <div class="mobile-meta-item full-width">
+                                                            <span class="mobile-meta-label">HOD Remarks</span>
+                                                            <span class="mobile-meta-value req-remarks-text">{req.remarks}</span>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <template if:true={req.isPending}>
+                                                    <div class="wfh-card-remarks-actions">
+                                                        <lightning-input
+                                                            type="text"
+                                                            placeholder="Remarks (Optional)..."
+                                                            data-id={req.requestId}
+                                                            onchange={handleDashboardRemarksChange}
+                                                            variant="label-hidden"
+                                                            class="card-remarks-input">
+                                                        </lightning-input>
+                                                        <div class="wfh-action-row">
+                                                            <lightning-button label="Approve" variant="success" size="stretch" data-id={req.requestId} onclick={handleApproveWFH} class="wfh-action-btn"></lightning-button>
+                                                            <lightning-button label="Reject" variant="destructive" size="stretch" data-id={req.requestId} onclick={handleRejectWFH} class="wfh-action-btn"></lightning-button>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <!-- Day Activity Log: opens over the tapped card (mobile) -->
+                                    <template if:true={showActivityOverlay}>
+                                        <div class="activity-overlay-backdrop" onclick={closeActivityOverlay}></div>
+                                        <div class="activity-overlay-panel" style={activityOverlayStyle} onclick={stopBubble}>
+                                            <header class="modal-header">
+                                                <h2>{activityModalTitle}</h2>
+                                                <button class="modal-close-btn" onclick={closeActivityOverlay}>&times;</button>
+                                            </header>
+                                            <div class="activity-modal-body">
+                                                <div class="activity-modal-subtitle">
+                                                    <span class={activityDetails.typeBadgeClass}>{activityDetails.type}</span>
+                                                    <span class="mobile-meta-value">{activityDetails.formattedDate}</span>
+                                                </div>
+                                                <div class="mobile-card-meta">
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">No. of Emails</span>
+                                                        <span class="mobile-meta-value">{activityDetails.emailsDisplay}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">No. of Meetings</span>
+                                                        <span class="mobile-meta-value">{activityDetails.meetingsDisplay}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">No. of Offers Sent</span>
+                                                        <span class="mobile-meta-value">{activityDetails.offersDisplay}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">No. of Phone Calls</span>
+                                                        <span class="mobile-meta-value">{activityDetails.callsDisplay}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="wfh-remarks-display">
+                                                    <span class="wfh-remarks-label">Open Notes</span>
+                                                    <template if:true={activityDetails.hasOpenNotes}>
+                                                        <span class="wfh-remarks-text">{activityDetails.openNotes}</span>
+                                                    </template>
+                                                    <template if:false={activityDetails.hasOpenNotes}>
+                                                        <span class="wfh-remarks-text req-remarks-empty">—</span>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:false={hasTeamRequests}>
+                            <div class="requests-table-container">
+                                <div class="wfh-empty-state wfh-empty-lg">
+                                    <lightning-icon icon-name="utility:info" size="medium" class="wfh-empty-icon"></lightning-icon>
+                                    <p class="wfh-empty-text">No department requests found.</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-tab>
+
+                <!-- 3. ANALYTICS & REPORTS -->
+                <lightning-tab label="Analytics" value="analytics" onactive={handleAnalyticsTabActive}>
+                    <div class="slds-m-top_medium glass-card animate-fade-in analytics-card">
+                        <div class="analytics-header">
+                            <div class="analytics-title-group">
+                                <lightning-icon icon-name="utility:metrics" size="small" class="section-icon"></lightning-icon>
+                                <h2>Performance & Activity Analytics</h2>
+                            </div>
+                            <div class="analytics-filters">
+                                <div class="filter-scroll">
+                                    <div class="status-filters">
+                                        <button class={dailyPillClass} data-mode="DAILY" onclick={handleAnalyticsModeChange}>Today</button>
+                                        <button class={weeklyPillClass} data-mode="WEEKLY" onclick={handleAnalyticsModeChange}>This Week</button>
+                                        <button class={monthlyPillClass} data-mode="MONTHLY" onclick={handleAnalyticsModeChange}>This Month</button>
+                                        <button class={customPillClass} data-mode="CUSTOM" onclick={handleAnalyticsModeChange}>Custom</button>
+                                    </div>
+                                </div>
+                                <template if:true={showCustomDateRange}>
+                                    <div class="custom-date-inputs animate-fade-in">
+                                        <lightning-input type="date" label="Start Date" value={analyticsStartDate} onchange={handleAnalyticsStartDateChange} variant="label-hidden" class="date-picker-inline"></lightning-input>
+                                        <span class="date-range-to">to</span>
+                                        <lightning-input type="date" label="End Date" value={analyticsEndDate} onchange={handleAnalyticsEndDateChange} variant="label-hidden" class="date-picker-inline"></lightning-input>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <template if:true={isAnalyticsLoading}>
+                            <div class="analytics-spinner-container">
+                                <lightning-spinner alternative-text="Compiling activity summaries..." size="medium" variant="brand"></lightning-spinner>
+                                <p class="analytics-spinner-text">Compiling activity summaries & travel distances...</p>
+                            </div>
+                        </template>
+
+                        <template if:false={isAnalyticsLoading}>
+                            <div class="analytics-kpi-grid">
+                                <div class="analytics-kpi-card visits-kpi">
+                                    <div class="kpi-icon-container">
+                                        <lightning-icon icon-name="utility:user" size="small" class="icon-white"></lightning-icon>
+                                    </div>
+                                    <div class="kpi-info">
+                                        <span class="kpi-label">Total Visits</span>
+                                        <span class="kpi-value">{analyticsTotalVisits}</span>
+                                        <span class="kpi-subtext">Completed: {analyticsCompletedVisits}</span>
+                                    </div>
+                                </div>
+                                <div class="analytics-kpi-card duration-kpi">
+                                    <div class="kpi-icon-container">
+                                        <lightning-icon icon-name="utility:clock" size="small" class="icon-white"></lightning-icon>
+                                    </div>
+                                    <div class="kpi-info">
+                                        <span class="kpi-label">Total Hours</span>
+                                        <span class="kpi-value">{analyticsTotalHours}</span>
+                                        <span class="kpi-subtext">Accumulated shift time</span>
+                                    </div>
+                                </div>
+                                <div class="analytics-kpi-card distance-kpi">
+                                    <div class="kpi-icon-container">
+                                        <lightning-icon icon-name="utility:tracker" size="small" class="icon-white"></lightning-icon>
+                                    </div>
+                                    <div class="kpi-info">
+                                        <span class="kpi-label">Total Distance</span>
+                                        <span class="kpi-value">{analyticsTotalDistance} km</span>
+                                        <span class="kpi-subtext">Accumulated travel</span>
+                                    </div>
+                                </div>
+                                <div class="analytics-kpi-card attendance-kpi">
+                                    <div class="kpi-icon-container">
+                                        <lightning-icon icon-name="utility:event" size="small" class="icon-white"></lightning-icon>
+                                    </div>
+                                    <div class="kpi-info">
+                                        <span class="kpi-label">Present Days</span>
+                                        <span class="kpi-value">{analyticsTotalPresentDays}</span>
+                                        <span class="kpi-subtext">Total active days</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Desktop analytics table -->
+                            <div class="requests-table-container desktop-only-table">
+                                <table class="requests-table analytics-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Representative Name</th>
+                                            <th>Total/Present Days</th>
+                                            <th>Absent Days</th>
+                                            <th>Total Visits</th>
+                                            <th>Completed Visits</th>
+                                            <th>Avg. Visits / Day</th>
+                                            <th>Total Distance</th>
+                                            <th>Total Hours</th>
+                                            <th>Avg. Hours / Day</th>
+                                            <th>Outcomes Breakdown</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={analyticsData} for:item="row">
+                                            <tr key={row.userId}>
+                                                <td class="req-user-name">{row.userName}</td>
+                                                <td>{row.attendanceDays} days / {row.presentDays} active</td>
+                                                <td>{row.absentDays} days</td>
+                                                <td>{row.totalVisits}</td>
+                                                <td>{row.completedVisits}</td>
+                                                <td>{row.avgVisitsFormatted}</td>
+                                                <td>{row.totalDistanceFormatted}</td>
+                                                <td>{row.totalWorkingHoursFormatted}</td>
+                                                <td>{row.avgHoursFormatted}</td>
+                                                <td class="outcome-cell" title={row.outcomeFormatted}>{row.outcomeFormatted}</td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Mobile analytics cards -->
+                            <div class="mobile-only-cards">
+                                <div class="mobile-card-list">
+                                    <template for:each={analyticsData} for:item="row">
+                                        <div key={row.userId} class="mobile-data-card">
+                                            <div class="wfh-border-wfh"></div>
+                                            <div class="wfh-card-content">
+                                                <h3 class="mobile-card-title">{row.userName}</h3>
+                                                <div class="mobile-card-meta">
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Attendance</span>
+                                                        <span class="mobile-meta-value">{row.attendanceDays} / {row.presentDays} active</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Absent</span>
+                                                        <span class="mobile-meta-value">{row.absentDays} days</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Visits</span>
+                                                        <span class="mobile-meta-value">{row.completedVisits} / {row.totalVisits}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Avg Visits/Day</span>
+                                                        <span class="mobile-meta-value">{row.avgVisitsFormatted}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Distance</span>
+                                                        <span class="mobile-meta-value">{row.totalDistanceFormatted}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Hours</span>
+                                                        <span class="mobile-meta-value">{row.totalWorkingHoursFormatted}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item">
+                                                        <span class="mobile-meta-label">Avg Hours/Day</span>
+                                                        <span class="mobile-meta-value">{row.avgHoursFormatted}</span>
+                                                    </div>
+                                                    <div class="mobile-meta-item full-width">
+                                                        <span class="mobile-meta-label">Outcomes</span>
+                                                        <span class="mobile-meta-value">{row.outcomeFormatted}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+
+            <!-- SINGLE USER DETAIL VIEW -->
+            <template if:true={isTrackingTab}>
+                <template if:true={isSingleView}>
+                    <div class={detailsLayoutClass}>
+                        <template if:true={showSidebar}>
+                            <aside class="sidebar-list-container glass-card animate-fade-in">
+                                <h3 class="sidebar-title">Team List</h3>
+                                <div class="sidebar-scrollable">
+                                    <template for:each={filteredListSummaryData} for:item="usr">
+                                        <div key={usr.userId}
+                                             class={usr.sidebarClass}
+                                             data-id={usr.userId}
+                                             onclick={handleSidebarSelect}>
+                                            <div class="sidebar-user-header">
+                                                <span class="sidebar-user-name">{usr.userName}</span>
+                                                <span class={usr.dotClass}></span>
+                                            </div>
+                                            <div class="sidebar-user-desc">
+                                                <span>{usr.attendanceStatus} | {usr.totalHours}</span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </aside>
+                        </template>
+
+                        <div class="details-main-panel">
+                            <div class="stats-grid animate-fade-in">
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper attendance-icon">
+                                        <lightning-icon icon-name="utility:event" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Shift Status</span>
+                                        <div class="stat-value-group">
+                                            <span class={attendanceBadgeClass}>{attendanceStatusLabel}</span>
+                                        </div>
+                                        <span class="stat-desc">
+                                            <template if:true={hasPunchedIn}>
+                                                In: {summary.punchInTime}
+                                                <template if:true={summary.punchOutTime}> | Out: {summary.punchOutTime}</template>
+                                            </template>
+                                            <template if:false={hasPunchedIn}>No punch recorded today</template>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper duration-icon">
+                                        <lightning-icon icon-name="utility:clock" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Working Hours</span>
+                                        <span class="stat-value">{workingHoursLabel}</span>
+                                        <span class="stat-desc">Total shift elapsed time</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper distance-icon">
+                                        <lightning-icon icon-name="utility:routing_offline" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Distance Traveled</span>
+                                        <span class="stat-value">{totalDistanceLabel}</span>
+                                        <span class="stat-desc">Odometer/GPS tracked path</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper odometer-icon">
+                                        <lightning-icon icon-name="utility:dashboard" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Odometer Distance</span>
+                                        <span class="stat-value">{odometerDistanceLabel}</span>
+                                        <span class="stat-desc">Market Visit distance</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper distance-icon">
+                                        <lightning-icon
+                                            icon-name="utility:change_request"
+                                            size="small"
+                                            class="stat-icon">
+                                        </lightning-icon>
+                                    </div>
+
+                                    <div class="stat-details">
+                                        <span class="stat-label">Distance Deviation</span>
+                                        <span class="stat-value">{distanceDeviationLabel}</span>
+                                        <span class="stat-desc">Odometer vs GPS distance</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper distance-icon">
+                                        <lightning-icon
+                                            icon-name="utility:percent"
+                                            size="small"
+                                            class="stat-icon">
+                                        </lightning-icon>
+                                    </div>
+
+                                    <div class="stat-details">
+                                        <span class="stat-label">Deviation %</span>
+                                        <span class="stat-value">{distanceDeviationPercentLabel}</span>
+                                        <span class="stat-desc">Difference vs GPS distance</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper visits-icon">
+                                        <lightning-icon icon-name="utility:people" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Customer Visits</span>
+                                        <span class="stat-value">{summary.totalVisits}</span>
+                                        <span class="stat-desc">Checked-in meetings logged</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-card hover-lift">
+                                    <div class="stat-icon-wrapper device-icon">
+                                        <lightning-icon icon-name="utility:phone_portrait" size="small" class="stat-icon"></lightning-icon>
+                                    </div>
+                                    <div class="stat-details">
+                                        <span class="stat-label">Device & GPS</span>
+                                        <div class="stat-value-group">
+                                            <span class="stat-value">{batteryPercentLabel}</span>
+                                            <span class={gpsBadgeClass}>{gpsStatusLabel}</span>
+                                        </div>
+                                        <span class="stat-desc">Battery level & GPS state</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <template if:false={hasActivity}>
+                                <div class="empty-state-container glass-card animate-fade-in">
+                                    <lightning-icon icon-name="utility:description" size="large" class="empty-icon"></lightning-icon>
+                                    <h2>No Activity Logged</h2>
+                                    <p>There are no punches, client check-ins, or tracking history recorded for this representative on the selected date.</p>
+                                </div>
+
+                                <div class="dashboard-wfh-section glass-card animate-fade-in slds-m-top_large">
+                                    <div class="section-title-bar">
+                                        <lightning-icon icon-name="utility:work_order_type" size="small" class="section-icon"></lightning-icon>
+                                        <h2>WFH & WFO Requests (Self / Rep)</h2>
+                                    </div>
+                                    <div class="dashboard-wfh-container">
+                                        <template if:true={hasSelfWfhRequests}>
+                                            <div class="dashboard-wfh-grid">
+                                                <template for:each={selfWfhRequests} for:item="req">
+                                                    <div key={req.requestId} class="dashboard-wfh-card">
+                                                        <div class={req.typeBorderClass}></div>
+                                                        <div class="wfh-card-content">
+                                                            <div class="wfh-card-header">
+                                                                <span class={req.typeBadgeClass}>{req.type}</span>
+                                                                <span class={req.statusBadgeClass}>{req.status}</span>
+                                                            </div>
+                                                            <div class="wfh-card-body">
+                                                                <div class="wfh-detail">
+                                                                    <lightning-icon icon-name="utility:date_time" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                    <span>{req.formattedDate}</span>
+                                                                </div>
+                                                                <div class="wfh-detail wfh-detail-spaced">
+                                                                    <lightning-icon icon-name="utility:clock" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                    <span>{req.startTime} - {req.endTime}</span>
+                                                                </div>
+                                                                <template if:true={req.hasRequestNote}>
+                                                                    <div class="wfh-remarks-display">
+                                                                        <span class="wfh-remarks-label">Reason</span>
+                                                                        <span class="wfh-remarks-text">{req.requestNote}</span>
+                                                                    </div>
+                                                                </template>
+                                                                <template if:true={req.hasApprover}>
+                                                                    <div class="wfh-detail">
+                                                                        <lightning-icon icon-name="utility:user" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                        <span>HOD: {req.approverName}</span>
+                                                                    </div>
+                                                                </template>
+                                                                <template if:true={req.hasRemarks}>
+                                                                    <div class="wfh-remarks-display">
+                                                                        <span class="wfh-remarks-label">HOD Remarks</span>
+                                                                        <span class="wfh-remarks-text">{req.remarks}</span>
+                                                                    </div>
+                                                                </template>
+                                                                <template if:true={req.isPending}>
+                                                                    <div class="wfh-card-remarks-actions">
+                                                                        <lightning-input
+                                                                            type="text"
+                                                                            placeholder="Remarks (Optional)..."
+                                                                            data-id={req.requestId}
+                                                                            onchange={handleDashboardRemarksChange}
+                                                                            variant="label-hidden"
+                                                                            class="card-remarks-input">
+                                                                        </lightning-input>
+                                                                        <div class="wfh-action-row">
+                                                                            <lightning-button label="Approve" variant="success" size="stretch" data-id={req.requestId} onclick={handleApproveWFH} class="wfh-action-btn"></lightning-button>
+                                                                            <lightning-button label="Reject" variant="destructive" size="stretch" data-id={req.requestId} onclick={handleRejectWFH} class="wfh-action-btn"></lightning-button>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+                                        <template if:false={hasSelfWfhRequests}>
+                                            <div class="wfh-empty-state">
+                                                <lightning-icon icon-name="utility:info" size="medium" class="wfh-empty-icon"></lightning-icon>
+                                                <p class="wfh-empty-text">No WFH or WFO requests found.</p>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <template if:true={hasActivity}>
+                                <div class="main-layout animate-fade-in">
+                                    <div class="main-layout-left">
+                                        <div class="map-container glass-card">
+                                            <div class="section-title-bar">
+                                                <lightning-icon icon-name="utility:map" size="small" class="section-icon"></lightning-icon>
+                                                <h2>Journey Route Map</h2>
+                                            </div>
+                                            <template if:true={hasMapMarkers}>
+                                                <div class="map-wrapper">
+                                                    <iframe src={mapUrl} class="map-iframe" lwc:dom="manual"></iframe>
+                                                </div>
+                                            </template>
+                                            <template if:false={hasMapMarkers}>
+                                                <div class="no-map-state">
+                                                    <lightning-icon icon-name="utility:warning" size="medium"></lightning-icon>
+                                                    <p>No GPS coordinates captured to map for this date.</p>
+                                                </div>
+                                            </template>
+                                        </div>
+
+                                        <div class="dashboard-wfh-section glass-card animate-fade-in">
+                                            <div class="section-title-bar">
+                                                <lightning-icon icon-name="utility:work_order_type" size="small" class="section-icon"></lightning-icon>
+                                                <h2>WFH & WFO Requests (Self / Rep)</h2>
+                                            </div>
+                                            <div class="dashboard-wfh-container">
+                                                <template if:true={hasSelfWfhRequests}>
+                                                    <div class="dashboard-wfh-grid">
+                                                        <template for:each={selfWfhRequests} for:item="req">
+                                                            <div key={req.requestId} class="dashboard-wfh-card">
+                                                                <div class={req.typeBorderClass}></div>
+                                                                <div class="wfh-card-content">
+                                                                    <div class="wfh-card-header">
+                                                                        <span class={req.typeBadgeClass}>{req.type}</span>
+                                                                        <span class={req.statusBadgeClass}>{req.status}</span>
+                                                                    </div>
+                                                                    <div class="wfh-card-body">
+                                                                        <div class="wfh-detail">
+                                                                            <lightning-icon icon-name="utility:date_time" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                            <span>{req.formattedDate}</span>
+                                                                        </div>
+                                                                        <div class="wfh-detail wfh-detail-spaced">
+                                                                            <lightning-icon icon-name="utility:clock" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                            <span>{req.startTime} - {req.endTime}</span>
+                                                                        </div>
+                                                                        <template if:true={req.hasRequestNote}>
+                                                                            <div class="wfh-remarks-display">
+                                                                                <span class="wfh-remarks-label">Reason</span>
+                                                                                <span class="wfh-remarks-text">{req.requestNote}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={req.hasApprover}>
+                                                                            <div class="wfh-detail">
+                                                                                <lightning-icon icon-name="utility:user" size="xx-small" class="wfh-icon"></lightning-icon>
+                                                                                <span>HOD: {req.approverName}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={req.hasRemarks}>
+                                                                            <div class="wfh-remarks-display">
+                                                                                <span class="wfh-remarks-label">HOD Remarks</span>
+                                                                                <span class="wfh-remarks-text">{req.remarks}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={req.isPending}>
+                                                                            <div class="wfh-card-remarks-actions">
+                                                                                <lightning-input
+                                                                                    type="text"
+                                                                                    placeholder="Remarks (Optional)..."
+                                                                                    data-id={req.requestId}
+                                                                                    onchange={handleDashboardRemarksChange}
+                                                                                    variant="label-hidden"
+                                                                                    class="card-remarks-input">
+                                                                                </lightning-input>
+                                                                                <div class="wfh-action-row">
+                                                                                    <lightning-button label="Approve" variant="success" size="stretch" data-id={req.requestId} onclick={handleApproveWFH} class="wfh-action-btn"></lightning-button>
+                                                                                    <lightning-button label="Reject" variant="destructive" size="stretch" data-id={req.requestId} onclick={handleRejectWFH} class="wfh-action-btn"></lightning-button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </template>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                                <template if:false={hasSelfWfhRequests}>
+                                                    <div class="wfh-empty-state">
+                                                        <lightning-icon icon-name="utility:info" size="medium" class="wfh-empty-icon"></lightning-icon>
+                                                        <p class="wfh-empty-text">No WFH or WFO requests found.</p>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-container glass-card">
+                                        <div class="section-title-bar">
+                                            <lightning-icon icon-name="utility:clock" size="small" class="section-icon"></lightning-icon>
+                                            <h2>Daily Timeline Activity</h2>
+                                        </div>
+
+                                        <div class="timeline-track">
+                                            <template for:each={timelineData} for:item="item">
+                                                <div key={item.id} class="timeline-node animate-fade-in">
+                                                    <div class="node-marker">
+                                                        <div class={item.markerDotClass}></div>
+                                                        <span class="dot-distance-val">{item.nodeDistance}</span>
+                                                        <div class="node-line"></div>
+                                                    </div>
+                                                    <div class="node-card glass-card hover-lift pt-content">
+                                                        <div class="pt-card-summary" onclick={handleToggleExpand} data-id={item.id} title="Click to toggle details">
+                                                            <div class="pt-card-header">
+                                                                <div class="pt-badge-time-wrapper">
+                                                                    <span class={item.dynamicBadgeClass}>{item.dynamicBadgeLabel}</span>
+                                                                    <span class="pt-time-header">
+                                                                        <lightning-icon icon-name="utility:clock" size="xx-small" class="pt-icon-gray"></lightning-icon>
+                                                                        {item.timeHeaderLabel}: {item.timeLabel}
+                                                                    </span>
+                                                                </div>
+                                                                <lightning-icon
+                                                                    icon-name={item.toggleIconName}
+                                                                    size="x-small"
+                                                                    class="pt-card-toggle-icon">
+                                                                </lightning-icon>
+                                                            </div>
+
+                                                            <template if:true={item.clientName}>
+                                                                <div class="pt-client-info">
+                                                                    <h3 class="pt-client-name">
+                                                                        <lightning-icon icon-name="utility:company" size="x-small" class="pt-icon-brand"></lightning-icon>
+                                                                        {item.clientName}
+                                                                    </h3>
+                                                                    <template if:true={item.visitType}>
+                                                                        <span class="pt-sub-badge">{item.visitType}</span>
+                                                                    </template>
+                                                                    <template if:true={item.visitCategory}>
+                                                                        <span class="pt-sub-badge">{item.visitCategory}</span>
+                                                                    </template>
+                                                                </div>
+                                                            </template>
+
+                                                            <template if:false={item.clientName}>
+                                                                <h3 class="node-title">{item.title}</h3>
+                                                            </template>
+
+                                                            <template if:true={item.isVisitType}>
+                                                                <div class="pt-visit-quick-meta">
+                                                                    <template if:true={item.checkInTime}>
+                                                                        <div class="pt-quick-chip">
+                                                                            <span class="pt-quick-lbl">In</span>
+                                                                            <span class="pt-quick-val">{item.checkInTime}</span>
+                                                                        </div>
+                                                                    </template>
+                                                                    <template if:true={item.checkOutTime}>
+                                                                        <div class="pt-quick-chip">
+                                                                            <span class="pt-quick-lbl">Out</span>
+                                                                            <span class="pt-quick-val">{item.checkOutTime}</span>
+                                                                        </div>
+                                                                    </template>
+                                                                    <template if:true={item.visitDuration}>
+                                                                        <div class="pt-quick-chip pt-quick-duration">
+                                                                            <span class="pt-quick-lbl">Duration</span>
+                                                                            <span class="pt-quick-val">{item.visitDuration}</span>
+                                                                        </div>
+                                                                    </template>
+                                                                </div>
+                                                            </template>
+
+                                                            <template if:true={item.reasonForVisit}>
+                                                                <div class="pt-detail-row">
+                                                                    <span class="pt-detail-label">Reason for Visit:</span>
+                                                                    <span class="pt-detail-value">{item.reasonForVisit}</span>
+                                                                </div>
+                                                            </template>
+                                                            <template if:false={item.reasonForVisit}>
+                                                                <p class="node-description">{item.description}</p>
+                                                            </template>
+                                                        </div>
+
+                                                        <template if:true={item.isExpanded}>
+                                                            <div class="pt-card-details-collapsible animate-fade-in">
+                                                                <template if:true={item.isVisitType}>
+                                                                    <div class="pt-checkout-section animate-fade-in">
+                                                                        <div class="pt-checkout-header-title">Visit Summary</div>
+
+                                                                        <template if:true={item.checkInTime}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Checked In At:</span>
+                                                                                <span class="pt-detail-value">{item.checkInTime}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.isCheckout}>
+                                                                            <template if:true={item.checkOutTime}>
+                                                                                <div class="pt-detail-row pt-checkout-time-row">
+                                                                                    <span class="pt-detail-label">Checked Out At:</span>
+                                                                                    <span class="pt-detail-value">{item.checkOutTime}</span>
+                                                                                </div>
+                                                                            </template>
+                                                                        </template>
+
+                                                                        <template if:true={item.visitDuration}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Duration:</span>
+                                                                                <span class="pt-detail-value">{item.visitDuration}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.visitDistance}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Visit Distance:</span>
+                                                                                <span class="pt-detail-value">{item.visitDistance}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.visitType}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Visit Type:</span>
+                                                                                <span class="pt-detail-value">{item.visitType}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.visitCategory}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Category:</span>
+                                                                                <span class="pt-detail-value">{item.visitCategory}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.isCheckout}>
+                                                                            <template if:true={item.mom}>
+                                                                                <div class="pt-detail-row">
+                                                                                    <span class="pt-detail-label">MOM Notes:</span>
+                                                                                    <span class="pt-detail-value pt-mom-text">{item.mom}</span>
+                                                                                </div>
+                                                                            </template>
+
+                                                                            <div class="pt-checkout-grid">
+                                                                                <template if:true={item.visitOutcome}>
+                                                                                    <div class="pt-grid-item">
+                                                                                        <span class="pt-detail-label">Outcome:</span>
+                                                                                        <span class="pt-detail-value">{item.visitOutcome}</span>
+                                                                                    </div>
+                                                                                </template>
+                                                                                <template if:true={item.nextAction}>
+                                                                                    <div class="pt-grid-item">
+                                                                                        <span class="pt-detail-label">Next Action:</span>
+                                                                                        <span class="pt-detail-value">{item.nextAction}</span>
+                                                                                    </div>
+                                                                                </template>
+                                                                                <template if:true={item.followUpDate}>
+                                                                                    <div class="pt-grid-item">
+                                                                                        <span class="pt-detail-label">Follow-up:</span>
+                                                                                        <span class="pt-detail-value">{item.followUpDate}</span>
+                                                                                    </div>
+                                                                                </template>
+                                                                            </div>
+
+                                                                            <template if:true={item.is100mOutside}>
+                                                                                <div class="pt-warning-banner animate-fade-in">
+                                                                                    <div class="pt-warning-header">
+                                                                                        <lightning-icon icon-name="utility:warning" size="xx-small" variant="warning" class="slds-m-right_xx-small"></lightning-icon>
+                                                                                        <strong>Outside Boundary (&gt;300m)</strong>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </template>
+                                                                        </template>
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={item.isPunchType}>
+                                                                    <div class="pt-checkout-section animate-fade-in">
+                                                                        <div class="pt-checkout-header-title">Punch Summary</div>
+
+                                                                        <template if:true={item.punchTypeOfRecord}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Punch Mode:</span>
+                                                                                <span class="pt-detail-value">{item.punchTypeOfRecord}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.timeLabel}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Time:</span>
+                                                                                <span class="pt-detail-value">{item.timeLabel}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={item.description}>
+                                                                            <div class="pt-detail-row">
+                                                                                <span class="pt-detail-label">Details:</span>
+                                                                                <span class="pt-detail-value">{item.description}</span>
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <div class="pt-checkout-grid">
+                                                                            <template if:true={item.transportType}>
+                                                                                <div class="pt-grid-item">
+                                                                                    <span class="pt-detail-label">Transport:</span>
+                                                                                    <span class="pt-detail-value">{item.transportType}</span>
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={item.vehicleType}>
+                                                                                <div class="pt-grid-item">
+                                                                                    <span class="pt-detail-label">Vehicle:</span>
+                                                                                    <span class="pt-detail-value">{item.vehicleType}</span>
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={item.odometer}>
+                                                                                <div class="pt-grid-item">
+                                                                                    <span class="pt-detail-label">Odometer:</span>
+                                                                                    <span class="pt-detail-value">{item.odometer} km</span>
+                                                                                </div>
+                                                                            </template>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={item.address}>
+                                                                    <div class="node-meta-row address-meta">
+                                                                        <lightning-icon icon-name="utility:location" size="xx-small" class="meta-icon"></lightning-icon>
+                                                                        <span>{item.address}</span>
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={item.hasTransitMeta}>
+                                                                    <div class="node-meta-grid">
+                                                                        <template if:true={item.odometer}>
+                                                                            <div class="node-meta-row">
+                                                                                <lightning-icon icon-name="utility:rating" size="xx-small" class="meta-icon"></lightning-icon>
+                                                                                <span>Odometer: <strong>{item.odometer} km</strong></span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={item.transportType}>
+                                                                            <div class="node-meta-row">
+                                                                                <lightning-icon icon-name="utility:travel_and_transit" size="xx-small" class="meta-icon"></lightning-icon>
+                                                                                <span>Transit: {item.transportType} ({item.vehicleType})</span>
+                                                                            </div>
+                                                                        </template>
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={item.files}>
+                                                                    <template if:true={item.files.length}>
+                                                                        <div class="pt-attachment-section">
+                                                                            <span class="pt-attachment-label">Captured Media & Files</span>
+                                                                            <div class="pt-attachment-list">
+                                                                                <template for:each={item.files} for:item="file">
+                                                                                    <template if:true={file.isImage}>
+                                                                                        <div key={file.id} class="pt-image-thumbnail-wrapper hover-lift" onclick={openImagePreview} data-url={file.url}>
+                                                                                            <img src={file.url} alt={file.title} class="pt-image-thumbnail"/>
+                                                                                            <div class="pt-thumbnail-overlay">
+                                                                                                <lightning-icon icon-name="utility:preview" size="xx-small" class="pt-icon-white"></lightning-icon>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </template>
+
+                                                                                    <template if:false={file.isImage}>
+                                                                                        <a key={file.id} href={file.url} target="_blank" class="pt-document-link hover-lift">
+                                                                                            <lightning-icon icon-name="doctype:attachment" size="xx-small" class="pt-doc-icon"></lightning-icon>
+                                                                                            <span class="pt-doc-title" title={file.title}>{file.title}</span>
+                                                                                        </a>
+                                                                                    </template>
+                                                                                </template>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+
+    <template if:true={showImageModal}>
+        <section class="modal-backdrop animate-fade-in" onclick={closeImagePreview}>
+            <div class="modal-content" onclick={stopBubble}>
+                <header class="modal-header">
+                    <h2>Image Preview</h2>
+                    <button class="modal-close-btn" onclick={closeImagePreview}>&times;</button>
+                </header>
+                <div class="modal-body">
+                    <img src={modalImageUrl} alt="Full screen preview" class="modal-full-img" />
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template if:true={showActivityModal}>
+        <section class="modal-backdrop animate-fade-in" onclick={closeActivityDetails}>
+            <div class="modal-content activity-modal-content" onclick={stopBubble}>
+                <header class="modal-header">
+                    <h2>{activityModalTitle}</h2>
+                    <button class="modal-close-btn" onclick={closeActivityDetails}>&times;</button>
+                </header>
+                <div class="activity-modal-body">
+                    <div class="activity-modal-subtitle">
+                        <span class={activityDetails.typeBadgeClass}>{activityDetails.type}</span>
+                        <span class="mobile-meta-value">{activityDetails.formattedDate}</span>
+                    </div>
+                    <div class="mobile-card-meta">
+                        <div class="mobile-meta-item">
+                            <span class="mobile-meta-label">No. of Emails</span>
+                            <span class="mobile-meta-value">{activityDetails.emailsDisplay}</span>
+                        </div>
+                        <div class="mobile-meta-item">
+                            <span class="mobile-meta-label">No. of Meetings</span>
+                            <span class="mobile-meta-value">{activityDetails.meetingsDisplay}</span>
+                        </div>
+                        <div class="mobile-meta-item">
+                            <span class="mobile-meta-label">No. of Offers Sent</span>
+                            <span class="mobile-meta-value">{activityDetails.offersDisplay}</span>
+                        </div>
+                        <div class="mobile-meta-item">
+                            <span class="mobile-meta-label">No. of Phone Calls</span>
+                            <span class="mobile-meta-value">{activityDetails.callsDisplay}</span>
+                        </div>
+                    </div>
+                    <div class="wfh-remarks-display">
+                        <span class="wfh-remarks-label">Open Notes</span>
+                        <template if:true={activityDetails.hasOpenNotes}>
+                            <span class="wfh-remarks-text">{activityDetails.openNotes}</span>
+                        </template>
+                        <template if:false={activityDetails.hasOpenNotes}>
+                            <span class="wfh-remarks-text req-remarks-empty">—</span>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

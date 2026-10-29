@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Solar Structure</label>
+    <protected>false</protected>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">Utkarsh_Solar_Brochure</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Solar Structure</value>
+    </values>
+    <values>
+        <field>File_Name__c</field>
+        <value xsi:type="xsd:string">Utkarsh_Solar_Brochure.pdf</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide Durable steel structures for solar farms, rooftops, and commercial solar projects, designed for strength, corrosion resistance, and long-term reliability.
+Types: Ground-Mounted Fixed Tilt Systems | Rooftop Solar Structures | Solar Carports | Solar Panel Stands |H-Beam etc.</value>
+    </values>
+    <values>
+        <field>Public_Download_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C20000055M6f&amp;d=%2Fa%2FC2000000udWb%2FLc9eAMYgldwNqD3V8pK.EnFdbrRVnrwsEbrw8At7e.g&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Utkarsh_Solar_Brochure_pdf</value>
+    </values>
+</CustomMetadata>

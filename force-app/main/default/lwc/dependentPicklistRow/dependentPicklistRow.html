@@ -1,0 +1,51 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure slds-line-height_reset">
+                    <lightning-icon
+                        icon-name="standard:product"
+                        alternative-text="Add Product"
+                        size="small">
+                    </lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>Add Product</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox
+                        label="Product Category"
+                        value={selectedProdCat}
+                        options={prodCatOptions}
+                        onchange={handleProdCatChange}
+                        placeholder="Select Product Category">
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox
+                        label="UOM"
+                        value={selectedUOM}
+                        options={uomOptions}
+                        onchange={handleUOMChange}
+                        placeholder="Select UOM">
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input
+                        type="number"
+                        label="Quantity"
+                        value={quantity}
+                        onchange={handleQuantityChange}
+                        min="0">
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

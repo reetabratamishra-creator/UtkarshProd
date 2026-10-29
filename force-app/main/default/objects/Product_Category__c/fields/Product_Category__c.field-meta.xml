@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Category__c</fullName>
+    <label>Product Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Department_Name__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>High Mast</fullName>
+                <default>false</default>
+                <label>High Mast</label>
+            </value>
+            <value>
+                <fullName>Flag Mast</fullName>
+                <default>false</default>
+                <label>Flag Mast</label>
+            </value>
+            <value>
+                <fullName>Signage Mast</fullName>
+                <default>false</default>
+                <label>Signage Mast</label>
+            </value>
+            <value>
+                <fullName>Stadium Mast</fullName>
+                <default>false</default>
+                <label>Stadium Mast</label>
+            </value>
+            <value>
+                <fullName>CCTV Mast</fullName>
+                <default>false</default>
+                <label>CCTV Mast</label>
+            </value>
+            <value>
+                <fullName>Solar Mast</fullName>
+                <default>false</default>
+                <label>Solar Mast</label>
+            </value>
+            <value>
+                <fullName>Octagonal Pole</fullName>
+                <default>false</default>
+                <label>Octagonal Pole</label>
+            </value>
+            <value>
+                <fullName>CCTV Pole</fullName>
+                <default>false</default>
+                <label>CCTV Pole</label>
+            </value>
+            <value>
+                <fullName>High Mast Lighting Towers</fullName>
+                <default>false</default>
+                <label>High Mast Lighting Towers</label>
+            </value>
+            <value>
+                <fullName>Solar Pole</fullName>
+                <default>false</default>
+                <label>Solar Pole</label>
+            </value>
+            <value>
+                <fullName>Lighting Pole</fullName>
+                <default>false</default>
+                <label>Lighting Pole</label>
+            </value>
+            <value>
+                <fullName>Conical Pole</fullName>
+                <default>false</default>
+                <label>Conical Pole</label>
+            </value>
+            <value>
+                <fullName>Polygonal Pole</fullName>
+                <default>false</default>
+                <label>Polygonal Pole</label>
+            </value>
+            <value>
+                <fullName>Gantry Pole</fullName>
+                <default>false</default>
+                <label>Gantry Pole</label>
+            </value>
+            <value>
+                <fullName>LCLM (Lightning Conductor Lightning Mast)</fullName>
+                <default>false</default>
+                <label>LCLM (Lightning Conductor Lightning Mast)</label>
+            </value>
+            <value>
+                <fullName>Gantry Mast</fullName>
+                <default>false</default>
+                <label>Gantry Mast</label>
+            </value>
+            <value>
+                <fullName>Traffic Pole</fullName>
+                <default>false</default>
+                <label>Traffic Pole</label>
+            </value>
+            <value>
+                <fullName>Steel Tubular Poles</fullName>
+                <default>false</default>
+                <label>Steel Tubular Poles</label>
+            </value>
+            <value>
+                <fullName>Swaged Steel Tubular Pole</fullName>
+                <default>false</default>
+                <label>Swaged Steel Tubular Pole</label>
+            </value>
+            <value>
+                <fullName>Street Lighting Pole</fullName>
+                <default>false</default>
+                <label>Street Lighting Pole</label>
+            </value>
+            <value>
+                <fullName>Street Light Pole</fullName>
+                <default>false</default>
+                <label>Street Light Pole</label>
+            </value>
+            <value>
+                <fullName>Distribution Poles</fullName>
+                <default>false</default>
+                <label>Distribution Poles</label>
+            </value>
+            <value>
+                <fullName>Utility Poles</fullName>
+                <default>false</default>
+                <label>Utility Poles</label>
+            </value>
+            <value>
+                <fullName>Via-duct Pole</fullName>
+                <default>false</default>
+                <label>Via-duct Pole</label>
+            </value>
+            <value>
+                <fullName>Cantilever Pole</fullName>
+                <default>false</default>
+                <label>Cantilever Pole</label>
+            </value>
+            <value>
+                <fullName>Swan Neck Pole</fullName>
+                <default>false</default>
+                <label>Swan Neck Pole</label>
+            </value>
+            <value>
+                <fullName>W Beam</fullName>
+                <default>false</default>
+                <label>W Beam</label>
+            </value>
+            <value>
+                <fullName>Thrie Beam</fullName>
+                <default>false</default>
+                <label>Thrie Beam</label>
+            </value>
+            <value>
+                <fullName>Noise Barrier</fullName>
+                <default>false</default>
+                <label>Noise Barrier</label>
+            </value>
+            <value>
+                <fullName>Bollard Structure</fullName>
+                <default>false</default>
+                <label>Bollard Structure</label>
+            </value>
+            <value>
+                <fullName>Pedestrian Guardrail (PGR)</fullName>
+                <default>false</default>
+                <label>Pedestrian Guardrail (PGR)</label>
+            </value>
+            <value>
+                <fullName>Railway Crash Barrier</fullName>
+                <default>false</default>
+                <label>Railway Crash Barrier</label>
+            </value>
+            <value>
+                <fullName>Roller Crash Barrier</fullName>
+                <default>false</default>
+                <label>Roller Crash Barrier</label>
+            </value>
+            <value>
+                <fullName>Fish Tail</fullName>
+                <default>false</default>
+                <label>Fish Tail</label>
+            </value>
+            <value>
+                <fullName>End Connector / End Shoe Connector / Terminal Connector</fullName>
+                <default>false</default>
+                <label>End Connector / End Shoe Connector / Terminal Connector</label>
+            </value>
+            <value>
+                <fullName>Bull Nose</fullName>
+                <default>false</default>
+                <label>Bull Nose</label>
+            </value>
+            <value>
+                <fullName>Buffer End Return</fullName>
+                <default>false</default>
+                <label>Buffer End Return</label>
+            </value>
+            <value>
+                <fullName>U Bend Shoulder</fullName>
+                <default>false</default>
+                <label>U Bend Shoulder</label>
+            </value>
+            <value>
+                <fullName>NJB Connector</fullName>
+                <default>false</default>
+                <label>NJB Connector</label>
+            </value>
+            <value>
+                <fullName>Melt</fullName>
+                <default>false</default>
+                <label>Melt</label>
+            </value>
+            <value>
+                <fullName>TT</fullName>
+                <default>false</default>
+                <label>TT</label>
+            </value>
+            <value>
+                <fullName>End Beam</fullName>
+                <default>false</default>
+                <label>End Beam</label>
+            </value>
+            <value>
+                <fullName>MS Pipes</fullName>
+                <default>false</default>
+                <label>MS Pipes</label>
+            </value>
+            <value>
+                <fullName>GI Pipes</fullName>
+                <default>false</default>
+                <label>GI Pipes</label>
+            </value>
+            <value>
+                <fullName>ERW Hollow Section Pipes</fullName>
+                <default>false</default>
+                <label>ERW Hollow Section Pipes</label>
+            </value>
+            <value>
+                <fullName>Square Pipes</fullName>
+                <default>false</default>
+                <label>Square Pipes</label>
+            </value>
+            <value>
+                <fullName>Round Pipe</fullName>
+                <default>false</default>
+                <label>Round Pipe</label>
+            </value>
+            <value>
+                <fullName>Rectangular Pipe</fullName>
+                <default>false</default>
+                <label>Rectangular Pipe</label>
+            </value>
+            <value>
+                <fullName>Lancing Pipe</fullName>
+                <default>false</default>
+                <label>Lancing Pipe</label>
+            </value>
+            <value>
+                <fullName>UPVC Pipes &amp; Fittings</fullName>
+                <default>false</default>
+                <label>UPVC Pipes &amp; Fittings</label>
+            </value>
+            <value>
+                <fullName>CPVC Pipes &amp; Fittings</fullName>
+                <default>false</default>
+                <label>CPVC Pipes &amp; Fittings</label>
+            </value>
+            <value>
+                <fullName>SWR Pipes &amp; Fittings</fullName>
+                <default>false</default>
+                <label>SWR Pipes &amp; Fittings</label>
+            </value>
+            <value>
+                <fullName>PVC Casing Pipes</fullName>
+                <default>false</default>
+                <label>PVC Casing Pipes</label>
+            </value>
+            <value>
+                <fullName>Column Riser Pipes</fullName>
+                <default>false</default>
+                <label>Column Riser Pipes</label>
+            </value>
+            <value>
+                <fullName>Agriculture Pipes &amp; Fittings</fullName>
+                <default>false</default>
+                <label>Agriculture Pipes &amp; Fittings</label>
+            </value>
+            <value>
+                <fullName>Garden Pipes</fullName>
+                <default>false</default>
+                <label>Garden Pipes</label>
+            </value>
+            <value>
+                <fullName>Water Tanks</fullName>
+                <default>false</default>
+                <label>Water Tanks</label>
+            </value>
+            <value>
+                <fullName>Mix Product</fullName>
+                <default>false</default>
+                <label>Mix Product</label>
+            </value>
+            <value>
+                <fullName>Borewell Pipes</fullName>
+                <default>false</default>
+                <label>Borewell Pipes</label>
+            </value>
+            <value>
+                <fullName>PVC RDS</fullName>
+                <default>false</default>
+                <label>PVC RDS</label>
+            </value>
+            <value>
+                <fullName>PVC RDS Filter</fullName>
+                <default>false</default>
+                <label>PVC RDS Filter</label>
+            </value>
+            <value>
+                <fullName>PVC RDS Strainer</fullName>
+                <default>false</default>
+                <label>PVC RDS Strainer</label>
+            </value>
+            <value>
+                <fullName>PVC Ribbed Filter</fullName>
+                <default>false</default>
+                <label>PVC Ribbed Filter</label>
+            </value>
+            <value>
+                <fullName>PVC Slotted Strainer</fullName>
+                <default>false</default>
+                <label>PVC Slotted Strainer</label>
+            </value>
+            <value>
+                <fullName>PVC Slotted Filter</fullName>
+                <default>false</default>
+                <label>PVC Slotted Filter</label>
+            </value>
+            <value>
+                <fullName>PVC Slotted RDS</fullName>
+                <default>false</default>
+                <label>PVC Slotted RDS</label>
+            </value>
+            <value>
+                <fullName>PVC RMS</fullName>
+                <default>false</default>
+                <label>PVC RMS</label>
+            </value>
+            <value>
+                <fullName>PVC RMS Filter</fullName>
+                <default>false</default>
+                <label>PVC RMS Filter</label>
+            </value>
+            <value>
+                <fullName>PVC RMS Strainer</fullName>
+                <default>false</default>
+                <label>PVC RMS Strainer</label>
+            </value>
+            <value>
+                <fullName>PVC Slotted RMS</fullName>
+                <default>false</default>
+                <label>PVC Slotted RMS</label>
+            </value>
+            <value>
+                <fullName>PVC Slotted</fullName>
+                <default>false</default>
+                <label>PVC Slotted</label>
+            </value>
+            <value>
+                <fullName>HDPE Pipes &amp; Fittings</fullName>
+                <default>false</default>
+                <label>HDPE Pipes &amp; Fittings</label>
+            </value>
+            <value>
+                <fullName>HDPE PLB Duct</fullName>
+                <default>false</default>
+                <label>HDPE PLB Duct</label>
+            </value>
+            <value>
+                <fullName>MDPE</fullName>
+                <default>false</default>
+                <label>MDPE</label>
+            </value>
+            <value>
+                <fullName>SPRINKLER PIPES</fullName>
+                <default>false</default>
+                <label>SPRINKLER PIPES</label>
+            </value>
+            <value>
+                <fullName>Transmission Tower</fullName>
+                <default>false</default>
+                <label>Transmission Tower</label>
+            </value>
+            <value>
+                <fullName>Telecom Tower</fullName>
+                <default>false</default>
+                <label>Telecom Tower</label>
+            </value>
+            <value>
+                <fullName>Substation Structure</fullName>
+                <default>false</default>
+                <label>Substation Structure</label>
+            </value>
+            <value>
+                <fullName>Transmission Monopoles</fullName>
+                <default>false</default>
+                <label>Transmission Monopoles</label>
+            </value>
+            <value>
+                <fullName>Transmission Power Distribution Poles</fullName>
+                <default>false</default>
+                <label>Transmission Power Distribution Poles</label>
+            </value>
+            <value>
+                <fullName>Transmission Line Tower</fullName>
+                <default>false</default>
+                <label>Transmission Line Tower</label>
+            </value>
+            <value>
+                <fullName>Lattice Tower</fullName>
+                <default>false</default>
+                <label>Lattice Tower</label>
+            </value>
+            <value>
+                <fullName>Suspension Tower</fullName>
+                <default>false</default>
+                <label>Suspension Tower</label>
+            </value>
+            <value>
+                <fullName>Dead-end Tower</fullName>
+                <default>false</default>
+                <label>Dead-end Tower</label>
+            </value>
+            <value>
+                <fullName>Kavach Tower</fullName>
+                <default>false</default>
+                <label>Kavach Tower</label>
+            </value>
+            <value>
+                <fullName>Gantry Structure</fullName>
+                <default>false</default>
+                <label>Gantry Structure</label>
+            </value>
+            <value>
+                <fullName>Equipment Supply Tower</fullName>
+                <default>false</default>
+                <label>Equipment Supply Tower</label>
+            </value>
+            <value>
+                <fullName>Pre-engineered Building</fullName>
+                <default>false</default>
+                <label>Pre-engineered Building</label>
+            </value>
+            <value>
+                <fullName>COLOUR COATED SHEET</fullName>
+                <default>false</default>
+                <label>COLOUR COATED SHEET</label>
+            </value>
+            <value>
+                <fullName>DECK SHEET</fullName>
+                <default>false</default>
+                <label>DECK SHEET</label>
+            </value>
+            <value>
+                <fullName>Ground Mounted Fixed Tilt Structure</fullName>
+                <default>false</default>
+                <label>Ground Mounted Fixed Tilt Structure</label>
+            </value>
+            <value>
+                <fullName>Fixed Roof Mounting Structure</fullName>
+                <default>false</default>
+                <label>Fixed Roof Mounting Structure</label>
+            </value>
+            <value>
+                <fullName>Rooftop Module Mounting Structure</fullName>
+                <default>false</default>
+                <label>Rooftop Module Mounting Structure</label>
+            </value>
+            <value>
+                <fullName>Tracking System Mounting Structure</fullName>
+                <default>false</default>
+                <label>Tracking System Mounting Structure</label>
+            </value>
+            <value>
+                <fullName>Torque Tube Tracker</fullName>
+                <default>false</default>
+                <label>Torque Tube Tracker</label>
+            </value>
+            <value>
+                <fullName>Piers Tracker</fullName>
+                <default>false</default>
+                <label>Piers Tracker</label>
+            </value>
+            <value>
+                <fullName>Kusum Project Solar Structure</fullName>
+                <default>false</default>
+                <label>Kusum Project Solar Structure</label>
+            </value>
+            <value>
+                <fullName>Ballast Structure</fullName>
+                <default>false</default>
+                <label>Ballast Structure</label>
+            </value>
+            <value>
+                <fullName>RSJ Pole</fullName>
+                <default>false</default>
+                <label>RSJ Pole</label>
+            </value>
+            <value>
+                <fullName>Solar Panel Carport</fullName>
+                <default>false</default>
+                <label>Solar Panel Carport</label>
+            </value>
+            <value>
+                <fullName>Overhead Electrification Structure</fullName>
+                <default>false</default>
+                <label>Overhead Electrification Structure</label>
+            </value>
+            <value>
+                <fullName>OHE Structure</fullName>
+                <default>false</default>
+                <label>OHE Structure</label>
+            </value>
+            <value>
+                <fullName>OHE MAST</fullName>
+                <default>false</default>
+                <label>OHE MAST</label>
+            </value>
+            <value>
+                <fullName>RAILWAY ELECTRIFICATION MAST</fullName>
+                <default>false</default>
+                <label>RAILWAY ELECTRIFICATION MAST</label>
+            </value>
+            <value>
+                <fullName>Railway Tower</fullName>
+                <default>false</default>
+                <label>Railway Tower</label>
+            </value>
+            <value>
+                <fullName>BFB (Broad Flanged Beam)</fullName>
+                <default>false</default>
+                <label>BFB (Broad Flanged Beam)</label>
+            </value>
+            <value>
+                <fullName>RSJ (Rolled Steel Joist)</fullName>
+                <default>false</default>
+                <label>RSJ (Rolled Steel Joist)</label>
+            </value>
+            <value>
+                <fullName>Elastic Rail Clip</fullName>
+                <default>false</default>
+                <label>Elastic Rail Clip</label>
+            </value>
+            <value>
+                <fullName>H-BEAM SLEEPER</fullName>
+                <default>false</default>
+                <label>H-BEAM SLEEPER</label>
+            </value>
+            <value>
+                <fullName>RAILWAY SLEEPER</fullName>
+                <default>false</default>
+                <label>RAILWAY SLEEPER</label>
+            </value>
+            <value>
+                <fullName>CHANNEL SLEEPER</fullName>
+                <default>false</default>
+                <label>CHANNEL SLEEPER</label>
+            </value>
+            <value>
+                <fullName>H-BEAM CHANNEL SLEEPER</fullName>
+                <default>false</default>
+                <label>H-BEAM CHANNEL SLEEPER</label>
+            </value>
+            <value>
+                <fullName>Portals</fullName>
+                <default>false</default>
+                <label>Portals</label>
+            </value>
+            <value>
+                <fullName>OHE SPS (Small Parts Steel)</fullName>
+                <default>false</default>
+                <label>OHE SPS (Small Parts Steel)</label>
+            </value>
+            <value>
+                <fullName>TTC (Two Track Cantilever)</fullName>
+                <default>false</default>
+                <label>TTC (Two Track Cantilever)</label>
+            </value>
+            <value>
+                <fullName>SSP (Sub-sectioning and Paralleling Post)</fullName>
+                <default>false</default>
+                <label>SSP (Sub-sectioning and Paralleling Post)</label>
+            </value>
+            <value>
+                <fullName>TSS (Traction Sub Station Structure)</fullName>
+                <default>false</default>
+                <label>TSS (Traction Sub Station Structure)</label>
+            </value>
+            <value>
+                <fullName>solar tubes</fullName>
+                <default>false</default>
+                <label>Solar Tubes</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>High Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Flag Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Signage Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Stadium Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>CCTV Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Solar Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Octagonal Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>CCTV Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>High Mast Lighting Towers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Solar Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Lighting Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Conical Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Polygonal Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Gantry Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>LCLM (Lightning Conductor Lightning Mast)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>High Mast &amp; Polygonal</controllingFieldValue>
+            <valueName>Gantry Mast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>MS Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>GI Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>ERW Hollow Section Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>Square Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>Round Pipe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>Rectangular Pipe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Pipes</controllingFieldValue>
+            <valueName>Lancing Pipe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>W Beam</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Thrie Beam</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Noise Barrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Bollard Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Pedestrian Guardrail (PGR)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Railway Crash Barrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Roller Crash Barrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Fish Tail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>End Connector / End Shoe Connector / Terminal Connector</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Bull Nose</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Buffer End Return</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>U Bend Shoulder</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>NJB Connector</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>Melt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>TT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Crash Barrier</controllingFieldValue>
+            <valueName>End Beam</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Traffic Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Steel Tubular Poles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Swaged Steel Tubular Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Street Lighting Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Street Light Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Distribution Poles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Utility Poles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Via-duct Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Cantilever Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Steel Tubular Poles</controllingFieldValue>
+            <valueName>Swan Neck Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>UPVC Pipes &amp; Fittings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>CPVC Pipes &amp; Fittings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>SWR Pipes &amp; Fittings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Casing Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Column Riser Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Agriculture Pipes &amp; Fittings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Garden Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Water Tanks</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Mix Product</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>Borewell Pipes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RDS Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RDS Strainer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Ribbed Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Slotted Strainer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Slotted Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Slotted RDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RMS Filter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC RMS Strainer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Slotted RMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Polymer</controllingFieldValue>
+            <valueName>PVC Slotted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HDPE</controllingFieldValue>
+            <valueName>HDPE Pipes &amp; Fittings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HDPE</controllingFieldValue>
+            <valueName>HDPE PLB Duct</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HDPE</controllingFieldValue>
+            <valueName>MDPE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HDPE</controllingFieldValue>
+            <valueName>SPRINKLER PIPES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Transmission Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Telecom Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Substation Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Transmission Monopoles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Transmission Power Distribution Poles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Transmission Line Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Lattice Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Suspension Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Dead-end Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Kavach Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Gantry Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Transmission &amp; Telecom Tower</controllingFieldValue>
+            <valueName>Equipment Supply Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pre Engineering Building</controllingFieldValue>
+            <valueName>Pre-engineered Building</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pre Engineering Building</controllingFieldValue>
+            <valueName>COLOUR COATED SHEET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pre Engineering Building</controllingFieldValue>
+            <valueName>DECK SHEET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Ground Mounted Fixed Tilt Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Fixed Roof Mounting Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Rooftop Module Mounting Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Tracking System Mounting Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Torque Tube Tracker</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Piers Tracker</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Kusum Project Solar Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Ballast Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>RSJ Pole</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>Solar Panel Carport</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Solar Structure</controllingFieldValue>
+            <valueName>solar tubes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>Overhead Electrification Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>OHE Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>OHE MAST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>RAILWAY ELECTRIFICATION MAST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>Railway Tower</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>BFB (Broad Flanged Beam)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>RSJ (Rolled Steel Joist)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>Elastic Rail Clip</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>H-BEAM SLEEPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>RAILWAY SLEEPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>CHANNEL SLEEPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>H-BEAM CHANNEL SLEEPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>Portals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>OHE SPS (Small Parts Steel)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>TTC (Two Track Cantilever)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>SSP (Sub-sectioning and Paralleling Post)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Railway Electrification Structure</controllingFieldValue>
+            <valueName>TSS (Traction Sub Station Structure)</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

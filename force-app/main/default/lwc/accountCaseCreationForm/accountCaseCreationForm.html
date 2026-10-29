@@ -1,0 +1,319 @@
+<template>
+    <div class="case-form slds-is-relative">
+
+        <template lwc:if={isSaving}>
+            <lightning-spinner alternative-text="Saving the case" size="medium"></lightning-spinner>
+        </template>
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-media slds-media_center slds-p-bottom_medium slds-border_bottom">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:case" size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-text-heading_medium">Register a complaint</h1>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        The case opens against this account and is assigned to the department handler you pick.
+                    </p>
+                </div>
+            </div>
+
+            <template lwc:if={hasPicklistIssues}>
+                <div class="slds-notify slds-notify_alert slds-alert_warning slds-m-top_medium" role="alert">
+                    <lightning-icon icon-name="utility:warning" size="x-small"
+                        class="slds-m-right_x-small"></lightning-icon>
+                    <div>
+                        <p>Some picklists could not be loaded fully:</p>
+                        <ul class="slds-list_dotted">
+                            <template for:each={picklistIssues} for:item="issue">
+                                <li key={issue}>{issue}</li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ---------------- Customer ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Customer</h2>
+
+            <span class="slds-form-element__label">Account Name</span>
+            <div class="slds-form-element__static read-only-value">
+                {accountNameDisplay}
+            </div>
+
+            <!-- Contacts -->
+            <div class="slds-grid slds-grid_vertical-align-end slds-p-top_medium">
+                <div class="slds-col slds-grow">
+                    <span class="slds-form-element__label">Contacts on this case</span>
+                    <p class="slds-text-body_small slds-text-color_weak">{contactSummary}</p>
+                </div>
+                <div class="slds-col slds-no-flex">
+                    <lightning-button
+                        label="New Contact"
+                        icon-name="utility:add"
+                        disabled={canAddContactDisabled}
+                        onclick={handleToggleNewContact}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <div class="contact-table slds-m-top_x-small slds-is-relative">
+                <template lwc:if={isLoadingContacts}>
+                    <lightning-spinner alternative-text="Loading contacts" size="small"></lightning-spinner>
+                </template>
+                <template lwc:if={hasContacts}>
+                    <!--
+                      No hide-checkbox-column attribute: any string value, including
+                      "false", is truthy and hides the checkboxes. Omitting it leaves
+                      multi-select on, which is the default.
+                    -->
+                    <lightning-datatable
+                        key-field="value"
+                        data={contacts}
+                        columns={contactColumns}
+                        selected-rows={selectedContactIds}
+                        onrowselection={handleContactSelection}
+                        column-widths-mode="auto">
+                    </lightning-datatable>
+                </template>
+                <template lwc:else>
+                    <div class="slds-box slds-box_x-small slds-text-align_center slds-text-color_weak">
+                        {contactEmptyMessage}
+                    </div>
+                </template>
+            </div>
+
+            <template lwc:if={showNewContact}>
+                <div class="new-contact slds-box slds-box_x-small slds-m-top_x-small slds-is-relative">
+                    <template lwc:if={isSavingContact}>
+                        <lightning-spinner alternative-text="Saving the contact" size="small"></lightning-spinner>
+                    </template>
+                    <p class="slds-text-title_caps slds-p-bottom_x-small">New contact on this account</p>
+                    <div class="slds-grid slds-wrap slds-gutters_small">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <lightning-input
+                                label="First Name"
+                                value={newContact.firstName}
+                                data-field="firstName"
+                                onchange={handleNewContactChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <lightning-input
+                                label="Last Name"
+                                required
+                                value={newContact.lastName}
+                                data-field="lastName"
+                                onchange={handleNewContactChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-top_x-small">
+                            <lightning-input
+                                type="tel"
+                                label="Business Phone"
+                                value={newContact.phone}
+                                data-field="phone"
+                                onchange={handleNewContactChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-top_x-small">
+                            <lightning-input
+                                type="email"
+                                label="Email"
+                                value={newContact.email}
+                                data-field="email"
+                                onchange={handleNewContactChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-p-top_small slds-text-align_right">
+                        <lightning-button
+                            label="Discard"
+                            class="slds-m-right_x-small"
+                            onclick={handleToggleNewContact}>
+                        </lightning-button>
+                        <lightning-button
+                            variant="brand"
+                            label="Save Contact"
+                            disabled={isSaveContactDisabled}
+                            onclick={handleSaveContact}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ---------------- Complaint ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Complaint</h2>
+
+            <div class="slds-grid slds-wrap slds-gutters_small">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-combobox
+                        label="Department"
+                        required
+                        value={form.department}
+                        options={departmentOptions}
+                        onchange={handleDepartmentChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-combobox
+                        label="Sub Department"
+                        required
+                        placeholder={subDepartmentPlaceholder}
+                        value={form.subDepartment}
+                        options={subDepartmentOptions}
+                        disabled={isSubDepartmentDisabled}
+                        data-field="subDepartment"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-combobox
+                        label="Assign To"
+                        required
+                        placeholder={assigneePlaceholder}
+                        value={form.assignedToId}
+                        options={userOptions}
+                        disabled={isAssigneeDisabled}
+                        data-field="assignedToId"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-top_small">
+                    <lightning-combobox
+                        label="Source of Complaint"
+                        required
+                        value={form.origin}
+                        options={originOptions}
+                        data-field="origin"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-top_small">
+                    <lightning-combobox
+                        label="Category of Complaint"
+                        required
+                        value={form.caseType}
+                        options={typeOptions}
+                        onchange={handleTypeChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-top_small">
+                    <lightning-combobox
+                        label="Sub Category"
+                        required
+                        placeholder={subCategoryPlaceholder}
+                        value={form.subCategory}
+                        options={subCategoryOptions}
+                        disabled={isSubCategoryDisabled}
+                        data-field="subCategory"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-p-top_small">
+                    <lightning-combobox
+                        label="Priority"
+                        required
+                        value={form.priority}
+                        options={priorityOptions}
+                        data-field="priority"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <div class="slds-p-top_small">
+                <lightning-input
+                    label="Subject"
+                    required
+                    max-length="255"
+                    value={form.subject}
+                    data-field="subject"
+                    onchange={handleFieldChange}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-p-top_small">
+                <lightning-textarea
+                    label="Description"
+                    required
+                    placeholder="What went wrong, and when?"
+                    value={form.description}
+                    data-field="description"
+                    onchange={handleFieldChange}>
+                </lightning-textarea>
+            </div>
+
+            <div class="slds-p-top_small">
+                <lightning-textarea
+                    label="Internal Comments"
+                    placeholder="Notes for the handling team - not sent to the customer"
+                    value={form.comments}
+                    data-field="comments"
+                    onchange={handleFieldChange}>
+                </lightning-textarea>
+            </div>
+
+            <!-- ---------------- Attachments ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Attachments</h2>
+
+            <!--
+              No accept attribute, so every file type is allowed, video included.
+              record-id points at the running user because the case does not exist yet:
+              the file uploads immediately and is relinked to the case on save.
+            -->
+            <lightning-file-upload
+                label="Add files"
+                name="caseFiles"
+                record-id={stagingRecordId}
+                multiple
+                onuploadfinished={handleUploadFinished}>
+            </lightning-file-upload>
+            <p class="slds-text-body_small slds-text-color_weak slds-p-top_xx-small">
+                Any file type, up to {maxFileSizeLabel} each. Files move onto the case when you create it.
+            </p>
+
+            <template lwc:if={hasFiles}>
+                <ul class="slds-listbox slds-listbox_horizontal slds-p-top_x-small">
+                    <template for:each={stagedFiles} for:item="file">
+                        <li key={file.documentId} class="slds-listbox-item">
+                            <lightning-pill
+                                label={file.name}
+                                name={file.documentId}
+                                onremove={handleRemoveFile}>
+                                <lightning-icon icon-name="doctype:attachment"
+                                    alternative-text="File" size="x-small"></lightning-icon>
+                            </lightning-pill>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-p-top_medium">
+                    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                        <lightning-icon icon-name="utility:error" variant="inverse" size="x-small"
+                            class="slds-m-right_x-small"></lightning-icon>
+                        <span>{errorMessage}</span>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- ---------------- Footer ---------------- -->
+        <footer class="slds-border_top slds-p-around_small slds-text-align_right">
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-m-right_x-small">
+            </lightning-button>
+            <lightning-button
+                variant="brand"
+                label="Create Case"
+                disabled={isSaving}
+                onclick={handleSave}>
+            </lightning-button>
+        </footer>
+    </div>
+</template>

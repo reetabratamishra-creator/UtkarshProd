@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nurture_Escalation_60_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is helps for the Nurture for 60 hours.</description>
+    <label>Nurture Escalation 60 Sent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

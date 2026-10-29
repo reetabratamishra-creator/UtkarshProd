@@ -1,0 +1,24 @@
+.punch-header {
+    padding: 0.6rem;
+    background: #f4f6f9;
+    border-radius: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.task-card {
+    padding: 0.6rem;
+    border: 1px solid #d8dde6;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
+    background: white;
+}
+
+.task-time {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.task-desc {
+    font-size: 0.85rem;
+    font-weight: 500;
+}

@@ -1,0 +1,22 @@
+<template>
+
+  <div class="related-list-header">
+    {cardTitle}
+</div>
+
+<lightning-card variant="Narrow">
+
+    <template if:true={hasRecords}>
+        <div class="table-container">
+            <lightning-datatable
+                key-field="Id"
+                data={contacts}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+    </template>
+
+</lightning-card>
+
+</template>

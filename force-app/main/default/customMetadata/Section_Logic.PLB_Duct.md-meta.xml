@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PLB Duct</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Select_Standard</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">PLB Duct</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;plb_duct_folder&quot;,
+      &quot;label&quot;: &quot;PLB Duct Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;Standard&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;PLB Duct&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;PLB Duct&quot;: {
+          &quot;title&quot;: &quot;GENERAL DETAILS - PLB Duct&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;setup_section&quot;,
+              &quot;label&quot;: &quot;Step 1: Configuration Setup&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pipe_count&quot;,
+                  &quot;label&quot;: &quot;Number of Line items&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;Inspection_Commission&quot;,
+                  &quot;label&quot;: &quot;Inspection &amp; Commission %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;Interest_Charges_on_Payment_type&quot;,
+                  &quot;label&quot;: &quot;No of Days for Payment&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;Interest_Charges_on_Payment&quot;,
+                  &quot;label&quot;: &quot;Interest charges % per Annum&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;Type_of_transportation&quot;,
+                  &quot;label&quot;: &quot;Type of Transaportation&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;,
+                    &quot;Ex-works&quot;
+                  ],
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms_hdpe&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;Type_of_FOR&quot;,
+                  &quot;label&quot;: &quot;F.O.R (Freight on Road)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Per Meter&quot;,
+                    &quot;Lump Sum&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;Type_of_transportation&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;LumpSum_Amount&quot;,
+                  &quot;label&quot;: &quot;Lump Sum&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;Type_of_FOR&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump Sum&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;PE_G_and_PR_Selection_1&quot;,
+              &quot;label&quot;: &quot;Step 2: Pipe Data Entry&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;pipe_count&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;vertical_pipe_grid&quot;,
+                  &quot;type&quot;: &quot;column-repeater&quot;,
+                  &quot;countApiName&quot;: &quot;pipe_count&quot;,
+                  &quot;maxColumns&quot;: 10,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;Diameter_Size&quot;,
+                      &quot;label&quot;: &quot;Outer/Inner Diameter Size (mm)&quot;,
+                      &quot;required&quot;: true,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;25/20&quot;,
+                        &quot;25/21&quot;,
+                        &quot;25/22&quot;,
+                        &quot;32/25&quot;,
+                        &quot;32/26&quot;,
+                        &quot;32/27&quot;,
+                        &quot;40/33 TEC Spec&quot;,
+                        &quot;40/33&quot;,
+                        &quot;50/42&quot;,
+                        &quot;63/50&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;unit_of_messurment&quot;,
+                      &quot;label&quot;: &quot;UOM&quot;,
+                      &quot;required&quot;: true,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;mtr&quot;,
+                        &quot;Km&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;BOQ_Quantity&quot;,
+                      &quot;label&quot;: &quot;BOQ QTY&quot;,
+                      &quot;required&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;len_of_coil_pipe&quot;,
+                      &quot;label&quot;: &quot;Length of Coil (mtr)&quot;,
+                      &quot;required&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;No_of_Coil_Pipe&quot;,
+                      &quot;label&quot;: &quot;No. of Coil&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.ceil(unit_of_messurment == &apos;mtr&apos; ? (BOQ_Quantity / len_of_coil_pipe) : unit_of_messurment == &apos;Km&apos; ? ((BOQ_Quantity * 1000) / len_of_coil_pipe): 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Weight_mtrs&quot;,
+                      &quot;label&quot;: &quot;Weight/mtrs&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;lookupWeight&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;controllingFields&quot;: [
+                        &quot;Diameter_Size&quot;
+                      ],
+                      &quot;weightMap&quot;: {
+                        &quot;40/33 TEC Spec&quot;: 0.385,
+                        &quot;40/33&quot;: 0.375,
+                        &quot;50/42&quot;: 0.555,
+                        &quot;32/25&quot;: 0.301,
+                        &quot;32/26&quot;: 0.262,
+                        &quot;25/21&quot;: 0.139,
+                        &quot;25/22&quot;: 0.106,
+                        &quot;25/20&quot;: 0.17,
+                        &quot;32/27&quot;: 0.222,
+                        &quot;63/50&quot;: 1.107
+                      }
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;final_quantity&quot;,
+                      &quot;label&quot;: &quot;Final Quantity&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isQuantity&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(unit_of_messurment == &apos;mtr&apos; ? (BOQ_Quantity) : unit_of_messurment == &apos;Km&apos; ? (BOQ_Quantity * 1000): 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Req_Raw_Material_in_MT&quot;,
+                      &quot;label&quot;: &quot;Req. Raw Material in MT&quot;,
+                      &quot;required&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;formula&quot;: &quot;(((final_quantity * Weight_mtrs) / 1000).toFixed(2))&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Realization_raw_material_conversion_cost_Kg&quot;,
+                      &quot;label&quot;: &quot;Realization raw material+ conversion cost/ Kg&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isBasePrice&quot;: true,
+                      &quot;colSpan&quot;: 6,
+                      &quot;formula&quot;: &quot;Realization_raw_material_conversion_cost_Kg ? Realization_raw_material_conversion_cost_Kg : plb_duct_b_rate&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Basic_Price_mtrs&quot;,
+                      &quot;label&quot;: &quot;Basic Price/mtrs&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;((Weight_mtrs*Realization_raw_material_conversion_cost_Kg).toFixed(2))&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;inspectionAndCommission_Charges&quot;,
+                      &quot;label&quot;: &quot;Inspection &amp; Commission Rate/Mtr&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;formula&quot;: &quot;((Basic_Price_mtrs * Inspection_Commission)/100).toFixed(2)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Fittings_Charges&quot;,
+                      &quot;label&quot;: &quot;Pulling Rope / Mtr&quot;,
+                      &quot;type&quot;: &quot;number&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Freight_including_Unloading_mtrs&quot;,
+                      &quot;label&quot;: &quot;Freight Charges/Mtr&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;disableControllingField&quot;: &quot;Type_of_FOR&quot;,
+                      &quot;disableControllingValues&quot;: [
+                        &quot;Per Meter&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Interest_Charges&quot;,
+                      &quot;label&quot;: &quot;Interest Charges/Mtr&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(((Basic_Price_mtrs+Fittings_Charges+Freight_including_Unloading_mtrs+((Basic_Price_mtrs*Inspection_Commission)/100))*(1+GST/100))*Interest_Charges_on_Payment*(Interest_Charges_on_Payment_type/365)/100).toFixed(2)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;FOR_Price&quot;,
+                      &quot;label&quot;: &quot;F.O.R. Price including Inspection, Interest Charges, BG / meter&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isListPrice&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((Basic_Price_mtrs+Fittings_Charges+Freight_including_Unloading_mtrs+((Basic_Price_mtrs*Inspection_Commission)/100))+ Interest_Charges).toFixed(2)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;GST&quot;,
+                      &quot;label&quot;: &quot;GST  %&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;plb_duct_gst&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Total_Per_Mtr&quot;,
+                      &quot;label&quot;: &quot;Total Per Mtr&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((FOR_Price + (FOR_Price*GST)/100).toFixed(4))&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;Total_Amount&quot;,
+                      &quot;label&quot;: &quot;Total Amount&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((FOR_Price * final_quantity) * (1 + GST / 100)).toFixed(2)&quot;
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

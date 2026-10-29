@@ -1,0 +1,103 @@
+<template>
+    <lightning-card title="Account Check" icon-name="standard:account">
+        <div class="slds-var-p-horizontal_medium slds-var-p-bottom_medium">
+
+            <!-- Exact matches on Phone / Email__c / Name -->
+            <template lwc:if={hasMatches}>
+                <div class="slds-box slds-box_xx-small slds-theme_warning slds-var-m-bottom_small">
+                    <lightning-icon icon-name="utility:warning" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                    <strong>{matchCount}</strong> existing account(s) match the phone, email or name provided.
+                </div>
+
+                <template for:each={decoratedMatches} for:item="acc">
+                    <div key={acc.Id} class={acc.rowClass}>
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-col slds-size_9-of-12">
+                                <div class="slds-text-heading_small">{acc.Name}</div>
+                                <div class="slds-text-body_small slds-text-color_weak">
+                                    <template lwc:if={acc.Phone}>{acc.Phone} &nbsp;&middot;&nbsp;</template>
+                                    <template lwc:if={acc.Email__c}>{acc.Email__c} &nbsp;&middot;&nbsp;</template>
+                                    <template lwc:if={acc.BillingCity}>{acc.BillingCity} &nbsp;&middot;&nbsp;</template>
+                                    <template lwc:if={acc.ownerName}>Owner: {acc.ownerName}</template>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-12 slds-text-align_right">
+                                <lightning-button
+                                    label={acc.buttonLabel}
+                                    variant={acc.buttonVariant}
+                                    data-id={acc.Id}
+                                    onclick={handleMatchSelect}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <template lwc:if={matchError}>
+                <div class="slds-text-color_error slds-var-m-bottom_small">{matchError}</div>
+            </template>
+
+            <!-- Search / free text -->
+            <div class="slds-form-element slds-var-m-top_medium">
+                <div class="slds-form-element__control">
+                    <div class={comboboxClass}>
+                        <div class="slds-combobox__form-element" role="none">
+                            <lightning-input
+                                type="search"
+                                label={label}
+                                value={searchTerm}
+                                required={required}
+                                autocomplete="off"
+                                placeholder="Search existing accounts or type a new name…"
+                                onchange={handleSearchChange}
+                                onblur={handleBlur}>
+                            </lightning-input>
+                        </div>
+
+                        <div lwc:if={showDropdown} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template for:each={searchResults} for:item="opt">
+                                    <li key={opt.Id} role="presentation" class="slds-listbox__item">
+                                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                             role="option"
+                                             data-id={opt.Id}
+                                             data-name={opt.Name}
+                                             onmousedown={handleOptionSelect}>
+                                            <span class="slds-media__figure slds-listbox__option-icon">
+                                                <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                                            </span>
+                                            <span class="slds-media__body">
+                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{opt.Name}</span>
+                                                <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">
+                                                    {opt.Phone} {opt.BillingCity}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-var-m-top_x-small">
+                <template lwc:if={isSearching}>
+                    <lightning-spinner alternative-text="Searching" size="small" variant="brand"></lightning-spinner>
+                </template>
+
+                <template lwc:if={isSelected}>
+                    <lightning-badge label="Existing account selected"></lightning-badge>
+                    <lightning-button variant="base" label="Clear selection" onclick={handleClear}
+                                      class="slds-var-m-left_small"></lightning-button>
+                </template>
+                <template lwc:else>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        No account selected — the typed name will be used to create a new account.
+                    </p>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,66 @@
+.full-width-input {
+    width: 100%;
+}
+
+td lightning-input, td lightning-combobox {
+    margin: 0;
+}
+
+.static-text {
+    padding: 0.25rem 0;
+    line-height: 1.5;
+    color: #3e3e3c; 
+}
+
+.multi-field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sub-field-input {
+    width: 100%;
+}
+
+.slds-truncate {
+    white-space: normal; 
+    word-wrap: break-word;
+}
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE — PEB QFR form table. Deepanjan (27th August 2026)
+
+   The modal shell is handled by the .peb-host-modal block in
+   createQuote.css; this component is a plain lightning-card.
+
+   Measured live in the console at 360px:
+
+       before   wrapper 323 / scroll 421     table 421
+       after    wrapper 339 / scroll 640     table 640
+
+   i.e. the table now overflows its .slds-scrollable_x wrapper and pans
+   inside it, instead of being cut off at the modal edge. The 5/35/30/30 %
+   column proportions are left alone — 40rem simply gives them room
+   (about 2 / 14 / 12 / 12 rem).
+
+   Everything is inside @media (max-width: 600px).
+   Desktop untouched. Append-only; nothing above this line is changed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+    /* the card margin eats width that the table needs */
+    .slds-m-around_medium {
+        margin: 0.5rem !important;
+    }
+
+    .slds-scrollable_x {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .slds-table {
+        min-width: 40rem;
+        width: auto;
+    }
+}

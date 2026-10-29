@@ -1,0 +1,1880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Product Type Detail Model Substation</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Tower_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Substation</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tower_folder&quot;,
+      &quot;label&quot;: &quot;Price Model - Substation&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;type_of_product&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Substation&quot;: {
+          &quot;title&quot;: &quot;PRICE MODEL - SUBSTATION&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;pvs_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Substation&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_price_model&quot;,
+                  &quot;label&quot;: &quot;PRICE MODEL&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;Price Variation&quot;,
+                    &quot;Firm&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_price_module&quot;,
+                  &quot;label&quot;: &quot;PRICE MODULE&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;IEEMA&quot;,
+                    &quot;PGCIL&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_price_variable_month&quot;,
+                  &quot;label&quot;: &quot;PRICE VARIATION (MONTH)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;January&quot;,
+                    &quot;February&quot;,
+                    &quot;March&quot;,
+                    &quot;April&quot;,
+                    &quot;May&quot;,
+                    &quot;June&quot;,
+                    &quot;July&quot;,
+                    &quot;August&quot;,
+                    &quot;September&quot;,
+                    &quot;October&quot;,
+                    &quot;November&quot;,
+                    &quot;December&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_price_variable_year&quot;,
+                  &quot;label&quot;: &quot;PRICE VARIABLE (YEAR)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;2016&quot;,
+                    &quot;2017&quot;,
+                    &quot;2018&quot;,
+                    &quot;2019&quot;,
+                    &quot;2020&quot;,
+                    &quot;2021&quot;,
+                    &quot;2022&quot;,
+                    &quot;2023&quot;,
+                    &quot;2024&quot;,
+                    &quot;2025&quot;,
+                    &quot;2026&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_substation_type&quot;,
+              &quot;label&quot;: &quot;Substation Type&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_gantry_structure&quot;,
+                  &quot;label&quot;: &quot;Gantry structure&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_equipment_structure&quot;,
+                  &quot;label&quot;: &quot;Equipment structure&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_composite_structure&quot;,
+                  &quot;label&quot;: &quot;Composite Structure&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv&quot;,
+              &quot;label&quot;: &quot;PV - Pricing Model (Substation)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Price Variation&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_part_a&quot;,
+                  &quot;label&quot;: &quot;PART A&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_blooms&quot;,
+                  &quot;label&quot;: &quot;Blooms&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_billets&quot;,
+                  &quot;label&quot;: &quot;Billets&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvs_price_module&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;IEEMA&quot;
+                  ],
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_avg_of_blooms&quot;,
+                  &quot;label&quot;: &quot;Average of Blooms &amp; Billets&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;labelsByController&quot;: {
+                    &quot;controllingApi&quot;: &quot;pvs_price_module&quot;,
+                    &quot;map&quot;: {
+                      &quot;IEEMA&quot;: &quot;Average of Blooms &amp; Billets&quot;,
+                      &quot;PGCIL&quot;: &quot;Average of Blooms&quot;
+                    },
+                    &quot;default&quot;: &quot;Average of Blooms &amp; Billets&quot;
+                  },
+                  &quot;formula&quot;: &quot;pvs_price_module == &apos;IEEMA&apos; ? Math.round(((Number(pvs_pv_blooms || 0) + Number(pvs_pv_billets || 0)) / 2) * 100) / 100 : (pvs_price_module == &apos;PGCIL&apos; ? Math.round(Number(pvs_pv_blooms || 0) * 100) / 100 : &apos;&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_conversion_to_angle&quot;,
+                  &quot;label&quot;: &quot;Conversion to Angles&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;8500&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_rm_cost&quot;,
+                  &quot;label&quot;: &quot;RM Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_pv_conversion_to_angle || 0) + Number(pvs_pv_avg_of_blooms || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_part_b_overheads&quot;,
+                  &quot;label&quot;: &quot;PART B - OVERHEADS&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_cost_of_production&quot;,
+                  &quot;label&quot;: &quot;Cost of production&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_base_Cost_of_Production||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_interest_component_on_product_cycle&quot;,
+                  &quot;label&quot;: &quot;Interest Component on product cycle &amp; Inventory Carrying Cost and Working capital&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_int_carrying_cost||0)+Number(pvs_int_comp_working_capital||0)&quot;,
+                  &quot;min&quot;: 2000,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_value_as_per_ieema&quot;,
+                  &quot;label&quot;: &quot;Zinc Value as per IEEMA&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;labelsByController&quot;: {
+                    &quot;controllingApi&quot;: &quot;pvs_price_module&quot;,
+                    &quot;map&quot;: {
+                      &quot;IEEMA&quot;: &quot;Zinc Value as per IEEMA&quot;,
+                      &quot;PGCIL&quot;: &quot;Zinc Value as per Index&quot;
+                    },
+                    &quot;default&quot;: &quot;Zinc Value as per IEEMA&quot;
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_consumption_percent&quot;,
+                  &quot;label&quot;: &quot;Zinc Consumption (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_base_zcp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;sp_4&quot;,
+                  &quot;label&quot;: &quot;Add on Amount in Zinc value&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(pvs_pv_610_gsm ? 0 : 0) + (pvs_pv_900_gsm ? 5000 : 0) + (pvs_pv_1000_gsm ? 6000 : 0)&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Price Variation&quot;
+              ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_value&quot;,
+                  &quot;label&quot;: &quot;Zinc Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;formula&quot;: &quot;Math.round(((((pvs_pv_610_gsm || pvs_pv_900_gsm || pvs_pv_1000_gsm) ? ((Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0) / 100)) : 0) + (pvs_pv_900_gsm ? 5000 : 0) + (pvs_pv_1000_gsm ? 6000 : 0)) * 100)) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_610_gsm_label&quot;,
+                  &quot;label&quot;: &quot;610 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_610_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_900_gsm_label&quot;,
+                  &quot;label&quot;: &quot;900 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_900_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_1000_gsm_label&quot;,
+                  &quot;label&quot;: &quot;1000 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_1000_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_scrap&quot;,
+                  &quot;label&quot;: &quot;Scrap (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_base_sp||0)&quot;,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_scrap_value&quot;,
+                  &quot;label&quot;: &quot;Scrap Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;127.5&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round(((Number(pvs_pv_conversion_to_angle || 0) + Number(pvs_pv_avg_of_blooms || 0)) * (Number(pvs_pv_scrap || 0) / 100)) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_proto&quot;,
+                  &quot;label&quot;: &quot;Proto (if required)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_proto_required&quot;,
+                  &quot;label&quot;: &quot;Proto Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;value/ton&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_pv_proto&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvs_pv_proto==&apos;YES&apos;?Number(pvs_proto_value||0):0&quot;,
+                  &quot;min&quot;: 800,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_pat&quot;,
+                  &quot;label&quot;: &quot;Proto Assembly Testing (Not included in Price)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_pat_price&quot;,
+                  &quot;label&quot;: &quot;Price for Proto Assembly&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_pv_pat&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_part_c&quot;,
+                  &quot;label&quot;: &quot;PART - c&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_interest_component&quot;,
+                  &quot;label&quot;: &quot;Interest Component (as per respective payment terms)?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_payment_terms&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvs_pv_interest_component&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_market_price&quot;,
+                  &quot;label&quot;: &quot;Market Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;17500&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round((Number(pvs_pv_avg_of_blooms || 0) + Number(pvs_pv_conversion_to_angle || 0) + Number(pvs_base_Cost_of_Production||0) + (Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0) / 100)) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_prevailing_rate_of_bank_interest&quot;,
+                  &quot;label&quot;: &quot;Prevailing rate of Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;,
+                  &quot;controllingField&quot;: &quot;pvs_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos; ? (Number(pvs_pv_no_of_days||0)&lt;=90 ? Number(pvs_int_LC||0) : 8.5) : pvs_pv_payment_terms==&apos;Against VFS&apos; ? Number(pvs_int_VFS||0) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_terms_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_no_of_days&quot;,
+                  &quot;label&quot;: &quot;No Of Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_part_d&quot;,
+                  &quot;label&quot;: &quot;PART - D&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_margin&quot;,
+                  &quot;label&quot;: &quot;Margin&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isMargin&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_additional_pricing&quot;,
+                  &quot;label&quot;: &quot;ADDITIONAL PRICING (HT SECTIONS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;value/ton&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;3000&quot;,
+                  &quot;min&quot;: 3000,
+                  &quot;required&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm&quot;,
+              &quot;label&quot;: &quot;FIRM - Pricing Model (Substation)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Firm&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_part_a&quot;,
+                  &quot;label&quot;: &quot;PART A&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_angles&quot;,
+                  &quot;label&quot;: &quot;Angles&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;55000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_price&quot;,
+                  &quot;label&quot;: &quot;Zinc Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;375000&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_consumption_percent&quot;,
+                  &quot;label&quot;: &quot;Zinc Consumption (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_base_zcp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_consumption_addOnAmount&quot;,
+                  &quot;label&quot;: &quot;Add on Amount in Zinc value&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(pvs_firm_610_gsm ? 0 : 0) + (pvs_firm_900_gsm ? 4000 : 0) + (pvs_firm_1000_gsm ? 6000 : 0)&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_price_model&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Firm&quot;
+              ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_value&quot;,
+                  &quot;label&quot;: &quot;Zinc Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;14850&quot;,
+                  &quot;formula&quot;: &quot;Math.round(((((pvs_firm_610_gsm || pvs_firm_900_gsm || pvs_firm_1000_gsm) ? (Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0) / 100)) : 0) + (pvs_firm_900_gsm ? 4000 : 0) + (pvs_firm_1000_gsm ? 6000 : 0)) * 100)) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_cost_of_production&quot;,
+                  &quot;label&quot;: &quot;Cost of production&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_base_Cost_of_Production||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_610_gsm_label&quot;,
+                  &quot;label&quot;: &quot;610 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_610_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_900_gsm_label&quot;,
+                  &quot;label&quot;: &quot;900 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_900_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_1000_gsm_label&quot;,
+                  &quot;label&quot;: &quot;1000 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_1000_gsm&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_part_b&quot;,
+                  &quot;label&quot;: &quot;PART B&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_scrap_value&quot;,
+                  &quot;label&quot;: &quot;Scrap Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;870&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round((Number(pvs_firm_angles || 0) * Number(pvs_firm_scrap_percent||0) / 100) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_interest_component_on_product_cycle&quot;,
+                  &quot;label&quot;: &quot;Interest Component on product cycle &amp; Inventory Carrying Cost and Working capital&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvs_int_carrying_cost||0)+Number(pvs_int_comp_working_capital||0)&quot;,
+                  &quot;min&quot;: 2000,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_proto&quot;,
+                  &quot;label&quot;: &quot;Proto (if required)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_proto_required&quot;,
+                  &quot;label&quot;: &quot;Proto Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_firm_proto&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvs_firm_proto==&apos;YES&apos;?Number(pvs_proto_value||0):0&quot;,
+                  &quot;min&quot;: 800,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_pat&quot;,
+                  &quot;label&quot;: &quot;Proto Assembly Testing (Not included in Price)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_pat_price&quot;,
+                  &quot;label&quot;: &quot;Price for Proto Assembly&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvs_firm_pat&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_part_c&quot;,
+                  &quot;label&quot;: &quot;PART - c&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_interest_component&quot;,
+                  &quot;label&quot;: &quot;Interest Component (as per respective payment terms)?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_payment_terms&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvs_firm_interest_component&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_market_price&quot;,
+                  &quot;label&quot;: &quot;Market Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;17500&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round((Number(pvs_firm_angles || 0) + Number(pvs_firm_cost_of_production || 0) + (Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0) / 100))) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_prevailing_rate_of_bank_interest&quot;,
+                  &quot;label&quot;: &quot;Prevailing rate of Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;,
+                  &quot;controllingField&quot;: &quot;pvs_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos; ? (Number(pvs_firm_no_of_days||0)&lt;=90 ? Number(pvs_int_LC||0) : 8.5) : pvs_firm_payment_terms==&apos;Against VFS&apos; ? Number(pvs_int_VFS||0) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_terms_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;controllingField&quot;: &quot;pvs_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_no_of_days&quot;,
+                  &quot;label&quot;: &quot;No Of Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;pvs_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_part_d&quot;,
+                  &quot;label&quot;: &quot;PART - D&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_margin&quot;,
+                  &quot;label&quot;: &quot;Margin&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isMargin&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_additional_pricing&quot;,
+                  &quot;label&quot;: &quot;ADDITIONAL PRICING (HT SECTIONS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;value/ton&quot;,
+                  &quot;defaultValue&quot;: &quot;3000&quot;,
+                  &quot;min&quot;: 3000,
+                  &quot;required&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ms610&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE27||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE27||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ht610&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE27||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE27||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ms900&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE70||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE70||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ht900&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE70||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE70||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ms1000&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE113||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE113||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_gantry_ht1000&quot;,
+              &quot;label&quot;: &quot;PV-Gantry Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_gantry_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE113||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE113||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ms610&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE41||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE41||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ht610&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE41||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE41||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ms900&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE84||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE84||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ht900&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE84||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE84||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ms1000&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE127||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE127||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_equipment_ht1000&quot;,
+              &quot;label&quot;: &quot;PV-Equipment Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_equipment_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE127||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE127||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ms610&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE55||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE55||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ht610&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE55||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE55||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ms900&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE98||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE98||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ht900&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE98||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE98||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ms1000&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE141||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE141||0) * (1 + Number(pvs_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_pv_composite_ht1000&quot;,
+              &quot;label&quot;: &quot;PV-Composite Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_composite_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AE141||0) * (1 + Number(pvs_pv_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AE141||0) * (1 + Number(pvs_pv_margin||0)/100))) + Number(pvs_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ms610&quot;,
+              &quot;label&quot;: &quot;FIRM-Gantry Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM27||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM27||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ht610&quot;,
+              &quot;label&quot;: &quot;Firm-Gantry Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM27||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM27||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ms900&quot;,
+              &quot;label&quot;: &quot;FIRM-Gantry Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM70||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM70||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ht900&quot;,
+              &quot;label&quot;: &quot;FIRM-Gantry Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM70||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM70||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ms1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Gantry Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM113||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM113||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_gantry_ht1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Gantry Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_gantry_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_gantry_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM113||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM113||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ms610&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM41||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM41||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ht610&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM41||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM41||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ms900&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM84||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM84||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ht900&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM84||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM84||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ms1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM127||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM127||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_equipment_ht1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Equipment Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_equipment_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_equipment_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM127||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM127||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ms610&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ms610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM55||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM55||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ht610&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ht610_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM55||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM55||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ms900&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ms900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM98||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM98||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ht900&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ht900_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM98||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM98||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ms1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ms1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM141||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM141||0) * (1 + Number(pvs_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_firm_composite_ht1000&quot;,
+              &quot;label&quot;: &quot;FIRM-Composite Structure-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvs_composite_structure,pvs_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_composite_ht1000_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(AM141||0) * (1 + Number(pvs_firm_margin||0)/100)) + Number(pvs_C19||0) : Math.round(Number(AM141||0) * (1 + Number(pvs_firm_margin||0)/100))) + Number(pvs_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_formula_block&quot;,
+              &quot;label&quot;: &quot;Internal Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_base_Cost_of_Production&quot;,
+                  &quot;label&quot;: &quot;Consumer Price Index&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;9000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_gantary_st&quot;,
+                  &quot;label&quot;: &quot;Gantary Structure&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_equipment_st&quot;,
+                  &quot;label&quot;: &quot;Equipment Structure&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;10000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_composite_st&quot;,
+                  &quot;label&quot;: &quot;Composite Structure&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;7000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_int_carrying_cost&quot;,
+                  &quot;label&quot;: &quot;Inventory Carrying Cost&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_int_comp_working_capital&quot;,
+                  &quot;label&quot;: &quot;Interest component on working capital&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_int_LC&quot;,
+                  &quot;label&quot;: &quot;Prevalling Interest LC&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_int_VFS&quot;,
+                  &quot;label&quot;: &quot;Prevalling Interest VFS&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;7.90&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_base_zcp&quot;,
+                  &quot;label&quot;: &quot;Base Zinc Consumption (%)&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;4.5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_base_sp&quot;,
+                  &quot;label&quot;: &quot;Base Scrap (%)&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1.5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_scrap_percent&quot;,
+                  &quot;label&quot;: &quot;FIRM Scrap %&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Number(pvs_base_sp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_proto_value&quot;,
+                  &quot;label&quot;: &quot;Proto Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;800&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_CPI&quot;,
+                  &quot;label&quot;: &quot;Consumer Price Index&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_G61&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;pvs_price_model==&apos;Price Variation&apos; ? ((pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_pv_payment_terms==&apos;Against VFS&apos;) ? Number(pvs_pv_no_of_days||0) : 0 ) : pvs_price_model==&apos;Firm&apos; ? ((pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_firm_payment_terms==&apos;Against VFS&apos;) ? Number(pvs_firm_no_of_days||0) : 0 ) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_G60&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;pvs_price_model==&apos;Price Variation&apos; ? ((pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_pv_payment_terms==&apos;Against VFS&apos;) ? Number(pvs_pv_prevailing_rate_of_bank_interest||0)/100 : 0 ) : pvs_price_model==&apos;Firm&apos; ? ((pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_firm_payment_terms==&apos;Against VFS&apos;) ? Number(pvs_firm_prevailing_rate_of_bank_interest||0)/100 : 0 ) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_value_610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_pv_610_gsm ? ((Number(pvs_pv_zinc_value_as_per_ieema||0) * Number(pvs_pv_zinc_consumption_percent||0))/100) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_value_900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_pv_900_gsm ? ((Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0)/ 100) + 5000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_zinc_value_1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_pv_1000_gsm ? ((Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0)/100) + 6000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_value_610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_firm_610_gsm ? (Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0) / 100)) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_value_900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_firm_900_gsm ? ((Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0) / 100)) + 4000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_zinc_value_1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvs_firm_1000_gsm ? ((Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0) / 100)) + 6000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_cost_of_production_gantry&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;13000&quot;,
+                  &quot;formula&quot;: &quot;pvs_gantry_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_gantary_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_cost_of_production_equipment&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;19000&quot;,
+                  &quot;formula&quot;: &quot;pvs_equipment_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_equipment_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_cost_of_production_composite&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;17000&quot;,
+                  &quot;formula&quot;: &quot;pvs_composite_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_composite_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_cost_of_production_gantry&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;13000&quot;,
+                  &quot;formula&quot;: &quot;pvs_gantry_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_gantary_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_cost_of_production_equipment&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;19000&quot;,
+                  &quot;formula&quot;: &quot;pvs_equipment_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_equipment_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_firm_cost_of_production_composite&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;17000&quot;,
+                  &quot;formula&quot;: &quot;pvs_composite_structure ? (Number(pvs_base_Cost_of_Production||0) + Number(pvs_composite_st||0)) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_BJ34&quot;,
+                  &quot;label&quot;: &quot;Substation Price Variation Bank interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(typeof pvs_pv_payment_terms!==&apos;undefined&apos;&amp;&amp;pvs_pv_payment_terms!==null?(pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(pvs_G60||0)*(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0)/100)+Number(pvs_base_Cost_of_Production||0))*Number(pvs_G61||0)/365):pvs_pv_payment_terms==&apos;Against VFS&apos;?Math.round((Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(Number(pvs_pv_zinc_value_as_per_ieema || 0) * Number(pvs_pv_zinc_consumption_percent || 0)/100)+Number(pvs_base_Cost_of_Production||0))*Number(pvs_G60||0)*Number(pvs_G61||0)/365):0):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_BT29&quot;,
+                  &quot;label&quot;: &quot;Substation FIRM Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(typeof pvs_firm_payment_terms!==&apos;undefined&apos;&amp;&amp;pvs_firm_payment_terms!==null?(pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(pvs_G60||0)*(Number(pvs_firm_angles||0)+(Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0)/100))+Number(pvs_base_Cost_of_Production||0))*Number(pvs_G61||0)/365):pvs_firm_payment_terms==&apos;Against VFS&apos;?Math.round((Number(pvs_firm_angles||0)+(Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0)/100))+Number(pvs_base_Cost_of_Production||0))*Number(pvs_G60||0)*Number(pvs_G61||0)/365):0):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_C19&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(typeof tower_project_for_transportation_addition!==&apos;undefined&apos;&amp;&amp;tower_project_for_transportation_addition!==null?(tower_project_for_transportation_addition==&apos;YES&apos;?0:(Number(mgl_minimum_guranteed_freight_1||0)+Number(mgl_minimum_guranteed_freight_2||0)+Number(mgl_minimum_guranteed_freight_3||0)+Number(mgl_minimum_guranteed_freight_4||0)+Number(mgl_minimum_guranteed_freight_5||0)+Number(mgl_minimum_guranteed_freight_6||0)+Number(mgl_minimum_guranteed_freight_7||0)+Number(mgl_minimum_guranteed_freight_8||0)+Number(mgl_minimum_guranteed_freight_9||0)+Number(mgl_minimum_guranteed_freight_10||0)+Number(rpt_rate_per_ton_1||0)+Number(rpt_rate_per_ton_2||0)+Number(rpt_rate_per_ton_3||0)+Number(rpt_rate_per_ton_4||0)+Number(rpt_rate_per_ton_5||0)+Number(rpt_rate_per_ton_6||0)+Number(rpt_rate_per_ton_7||0)+Number(rpt_rate_per_ton_8||0)+Number(rpt_rate_per_ton_9||0)+Number(rpt_rate_per_ton_10||0))):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE27&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm ? Number(pvs_pv_zinc_value_610||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+ Number(pvs_base_Cost_of_Production||0) +Number(pvs_pv_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE70&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm ? Number(pvs_pv_zinc_value_900||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE113&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm ? Number(pvs_pv_zinc_value_1000 || 0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE41&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm ? Number(pvs_pv_zinc_value_610||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_equipment_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE84&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm ? Number(pvs_pv_zinc_value_900||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_equipment_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE127&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm ? Number(pvs_pv_zinc_value_1000||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_equipment_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE55&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm ? Number(pvs_pv_zinc_value_610||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_composite_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE98&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm ? Number(pvs_pv_zinc_value_900||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_composite_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AE141&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm ? Number(pvs_pv_zinc_value_1000||0) : 0)+Number(pvs_pv_scrap_value||0)+Number(pvs_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0) + Number(pvs_composite_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM27&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_firm_angles||0)+(pvs_firm_610_gsm ? Number(pvs_firm_zinc_value_610||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM70&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_firm_angles||0)+(pvs_firm_900_gsm ? Number(pvs_firm_zinc_value_900||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM113&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_gantry_structure ? Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm ? Number(pvs_firm_zinc_value_1000||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_gantary_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM41&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_firm_angles||0)+(pvs_firm_610_gsm ? Number(pvs_firm_zinc_value_610||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_equipment_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM84&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_firm_angles||0)+(pvs_firm_900_gsm ? Number(pvs_firm_zinc_value_900||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_equipment_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM127&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_equipment_structure ? Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm ? Number(pvs_firm_zinc_value_1000||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_equipment_st||0)  : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM55&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_firm_angles||0)+(pvs_firm_610_gsm ? Number(pvs_firm_zinc_value_610||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_composite_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM98&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_firm_angles||0)+(pvs_firm_900_gsm ? Number(pvs_firm_zinc_value_900||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_composite_st||0) : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;AM141&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(pvs_composite_structure ? Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm ? Number(pvs_firm_zinc_value_1000||0) : 0)+Number(pvs_firm_scrap_value||0)+Number(pvs_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0) + Number(pvs_composite_st||0) : 0)&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

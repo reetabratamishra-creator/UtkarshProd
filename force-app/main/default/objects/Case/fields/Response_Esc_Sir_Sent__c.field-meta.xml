@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Response_Esc_Sir_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tracks whether the Case 1st-response SLA CRM Head and ED Sir escalation email has been sent.</description>
+    <label>Response Esc Sir Sent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>We need to add a List View based on the Status field. Statuses (Closed Rejected and Closed Accepted) should be visible only to Utkarsh Admin users. Since there is no separate Admin role, a Public Group should be created and assigned accordingly.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <name>All Utkarsh Admin</name>
+</Group>

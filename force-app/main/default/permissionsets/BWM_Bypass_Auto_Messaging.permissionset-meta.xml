@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>BWM_Bypass_Auto_Messaging</name>
+    </customPermissions>
+    <description>Assign to the user doing a Lead or Opportunity data upload so no automatic email, WhatsApp, RCS, or SMS is queued for the uploaded records. Remove after the upload.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>BWM Bypass Auto Messaging (Data Upload)</label>
+</PermissionSet>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>High Mast Polygonal</label>
+    <protected>false</protected>
+    <values>
+        <field>Brochure_File_Name__c</field>
+        <value xsi:type="xsd:string">High_mast_brochure.pdf</value>
+    </values>
+    <values>
+        <field>Brochure_URL__c</field>
+        <value xsi:type="xsd:string">https://portal.bluewavesmedia.in/WhatsAppMedia/Template/Document/Utkarsh/high_mast_brochure(2).pdf</value>
+    </values>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">HIGH MAST BROCHURE</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">High Mast &amp; Polygonal</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide durable high-intensity lighting solutions for highways, ports, stadiums, railway yards, and industrial areas. Types: Industrial High Mast | Flag Mast | Stadium &amp; Sports Lighting Masts etc.</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">High_mast_brochure_pdf</value>
+    </values>
+    <values>
+        <field>WhatsApp_Document_Id__c</field>
+        <value xsi:type="xsd:string">1562803358542830</value>
+    </values>
+</CustomMetadata>

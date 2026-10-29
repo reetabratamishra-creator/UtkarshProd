@@ -1,0 +1,3649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>KIT Code Details LCLM</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">KIT_Code_Details_LCLM</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">KIT_Code_Details_Blue_Print</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">default</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+&quot;fields&quot;: [
+{
+&quot;apiName&quot;: &quot;lm_kit_code_folder&quot;,
+&quot;label&quot;: &quot;HM Items&quot;,
+&quot;type&quot;: &quot;folder&quot;,
+&quot;iconColor&quot;: &quot;blue&quot;,
+&quot;modalConfigsByValue&quot;: {
+&quot;default&quot;: {
+&quot;title&quot;: &quot;HM ITEMS&quot;,
+&quot;lineTemplateFields&quot;: [
+{
+  &quot;apiName&quot;: &quot;hr_realization&quot;,
+  &quot;label&quot;: &quot;REALIZATION&quot;,
+  &quot;type&quot;: &quot;header&quot;,
+  &quot;colSpan&quot;: 3
+},
+{
+  &quot;apiName&quot;: &quot;KIT_realization&quot;,
+  &quot;label&quot;: &quot;&quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;colSpan&quot;: 3,
+  &quot;required&quot;: true,
+  &quot;defaultValue&quot;: 5,
+  &quot;unit&quot;: &quot;%&quot;,
+  &quot;isRealization&quot;: true,
+  &quot;mapFrom&quot;: &quot;lm_realization_on_segment_price || mrl_realization&quot;
+},
+{
+  &quot;apiName&quot;: &quot;extraLength&quot;,
+  &quot;label&quot;: &quot;&quot;,
+  &quot;type&quot;: &quot;header&quot;,
+  &quot;colSpan&quot;: 6
+},
+{
+  &quot;apiName&quot;: &quot;lm_qty_of_hm&quot;,
+  &quot;label&quot;: &quot;QTY. OF HM&quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;formula&quot;: &quot;r1_lm_quantity || r2_lm_quantity || r3_lm_quantity || r4_lm_quantity || r5_lm_quantity || r6_lm_quantity || r7_lm_quantity || r8_lm_quantity || r9_lm_quantity || r10_lm_quantity || mrl_quantity || 0&quot;,
+  &quot;colSpan&quot;: 1,
+  &quot;readOnly&quot;: true
+},
+{
+  &quot;apiName&quot;: &quot;lm_mast_height&quot;,
+  &quot;label&quot;: &quot;MAST HEIGHT&quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;colSpan&quot;: 1
+},
+{
+  &quot;apiName&quot;: &quot;lm_ring_dia&quot;,
+  &quot;label&quot;: &quot;Ring Dia&quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;readOnly&quot;: true,
+  &quot;colSpan&quot;: 1
+},
+{
+  &quot;apiName&quot;: &quot;lm_no_of_luminaries&quot;,
+  &quot;label&quot;: &quot;NO. OF LUMINARIES&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;4&quot;,
+    &quot;6&quot;,
+    &quot;7&quot;,
+    &quot;8&quot;,
+    &quot;9&quot;,
+    &quot;10&quot;,
+    &quot;12&quot;,
+    &quot;14&quot;,
+    &quot;16&quot;,
+    &quot;18&quot;,
+    &quot;20&quot;,
+    &quot;24&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_luminaries&quot;,
+  &quot;label&quot;: &quot;TYPE OF LUMINARIES&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;Symmetric&quot;,
+    &quot;Asymmetric&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_welded_arm&quot;,
+  &quot;label&quot;: &quot;TYPE OF WELDED ARM&quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;required&quot;: true,
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_cg_box_per_lum&quot;,
+  &quot;label&quot;: &quot;CG BOX / LUM&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;1&quot;,
+    &quot;2&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_suspension_system&quot;,
+  &quot;label&quot;: &quot;SUSPN SYSM (NO. OF POINT)&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;2= 2 suspension type&quot;,
+    &quot;3= 3 suspension type&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_cable_type&quot;,
+  &quot;label&quot;: &quot;CABLE TYPE&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;colSpan&quot;: 2,
+  &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;&gt;=1&quot;
+  ],
+  &quot;controllingFields&quot;: [
+    &quot;no_of_segment_select&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;T=2.5 Sq.mm 5 Core&quot;,
+    &quot;F=4 Sq.mm 5 Core&quot;,
+    &quot;S=6 Sq.mm 5 Core&quot;,
+    &quot;H=2.5 Sq.mm 8 Core&quot;,
+    &quot;X=NA&quot;
+  ],
+  &quot;dependentOptionsMap&quot;: {
+    &quot;1&quot;: [
+      &quot;T=2.5 Sq.mm 5 Core&quot;,
+      &quot;F=4 Sq.mm 5 Core&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;2&quot;: [
+      &quot;T=2.5 Sq.mm 5 Core&quot;,
+      &quot;F=4 Sq.mm 5 Core&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;3&quot;: [
+      &quot;T=2.5 Sq.mm 5 Core&quot;,
+      &quot;F=4 Sq.mm 5 Core&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;4&quot;: [
+      &quot;T=2.5 Sq.mm 5 Core&quot;,
+      &quot;F=4 Sq.mm 5 Core&quot;,
+      &quot;S=6 Sq.mm 5 Core&quot;,
+      &quot;H=2.5 Sq.mm 8 Core&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;5&quot;: [
+      &quot;T=2.5 Sq.mm 5 Core&quot;,
+      &quot;F=4 Sq.mm 5 Core&quot;,
+      &quot;S=6 Sq.mm 5 Core&quot;,
+      &quot;H=2.5 Sq.mm 8 Core&quot;,
+      &quot;X=NA&quot;
+    ]
+  }
+},
+{
+  &quot;apiName&quot;: &quot;lm_no_of_cable&quot;,
+  &quot;label&quot;: &quot;NO OF CABLE&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;0=NA&quot;,
+    &quot;1=Single cable&quot;,
+    &quot;2=Double cable&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_l_ring_tier&quot;,
+  &quot;label&quot;: &quot;1 TIER OR 2 TIER L- RING&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;1-Single tire&quot;,
+    &quot;2-Two tire&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_ring_vw&quot;,
+  &quot;label&quot;: &quot;TYPE OF RING V/W&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;options&quot;: [
+    &quot;W= Fixed Type&quot;,
+    &quot;V= Detachable Type&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_winch&quot;,
+  &quot;label&quot;: &quot;TYPE OF WINCH&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;colSpan&quot;: 2,
+  &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;&gt;=1&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;A=500KG&quot;,
+    &quot;B=750KG&quot;,
+    &quot;C=750KG DGDD&quot;,
+    &quot;D=1500KG DGDD&quot;,
+    &quot;E=1000KG SGDD&quot;,
+    &quot;X=NA&quot;
+  ],
+  &quot;dependentOptionsMap&quot;: {
+    &quot;1&quot;: [
+      &quot;A=500KG&quot;,
+      &quot;E=350KG&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;2&quot;: [
+      &quot;A=350KG&quot;,
+      &quot;B=500KG&quot;,
+      &quot;C=750KG &quot;,
+      &quot;D=600KG DGDD&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;3&quot;: [
+      &quot;A=500KG&quot;,
+      &quot;B=750KG&quot;,
+      &quot;C=750KG DGDD&quot;,
+      &quot;D=1500KG DGDD&quot;,
+      &quot;E=1000KG SGDD&quot;,
+      &quot;F=600KG SGDD&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;4&quot;: [
+      &quot;A=500KG&quot;,
+      &quot;B=750KG&quot;,
+      &quot;C=750KG DGDD&quot;,
+      &quot;D=1500KG DGDD&quot;,
+      &quot;E=1000KG SGDD&quot;,
+      &quot;F=600KG SGDD&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;5&quot;: [
+      &quot;A=500KG&quot;,
+      &quot;B=750KG&quot;,
+      &quot;C=750KG DGDD&quot;,
+      &quot;D=1500KG DGDD&quot;,
+      &quot;E=1000KG SGDD&quot;,
+      &quot;F=600KG SGDD&quot;,
+      &quot;X=NA&quot;
+    ]
+  }
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_power_tool&quot;,
+  &quot;label&quot;: &quot;TYPE OF POWER TOOL&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;colSpan&quot;: 2,
+  &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;&gt;=1&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;Q=Motor,3PH,1.5HP&quot;,
+    &quot;G=Motor,3PH,1.0HP&quot;,
+    &quot;H=3PH, 3.0 HP Motor&quot;,
+    &quot;I=FLP Motor, 2HP&quot;,
+    &quot;X=NA&quot;
+  ],
+  &quot;dependentOptionsMap&quot;: {
+    &quot;1&quot;: [
+      &quot;Q=Motor,3PH,1.5HP&quot;,
+      &quot;G=Motor,3PH,1.0HP&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;2&quot;: [
+      &quot;Q=Motor,3PH,1.5HP&quot;,
+      &quot;G=Motor,3PH,1.0HP&quot;,
+      &quot;I=Motor, 2HP&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;3&quot;: [
+      &quot;Q=Motor,3PH,1.5HP&quot;,
+      &quot;G=Motor,2.0HP&quot;,
+      &quot;H=3PH, 3.0 HP Motor&quot;,
+      &quot;I=FLP Motor, 2HP&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;4&quot;: [
+      &quot;Q=Motor,3PH,1.5HP&quot;,
+      &quot;G=Motor,2.0HP&quot;,
+      &quot;H=3PH, 3.0 HP Motor&quot;,
+      &quot;I=FLP Motor, 2HP&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;5&quot;: [
+      &quot;Q=Motor,3PH,1.5HP&quot;,
+      &quot;G=Motor,2.0HP&quot;,
+      &quot;H=3PH, 3.0 HP Motor&quot;,
+      &quot;I=FLP Motor, 2HP&quot;,
+      &quot;X=NA&quot;
+    ]
+  }
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_wire_rope&quot;,
+  &quot;label&quot;: &quot;TYPE OF WIRE ROPE&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;required&quot;: true,
+  &quot;colSpan&quot;: 2,
+  &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;&gt;=1&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;5=5mm dia&quot;,
+    &quot;6=6mm dia&quot;,
+    &quot;8=8mm dia&quot;,
+    &quot;X=NA&quot;
+  ],
+  &quot;dependentOptionsMap&quot;: {
+    &quot;1&quot;: [
+      &quot;5=5mm dia&quot;,
+      &quot;6=6mm dia&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;2&quot;: [
+      &quot;5=5mm dia&quot;,
+      &quot;6=6mm dia&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;3&quot;: [
+      &quot;6=6mm dia&quot;,
+      &quot;8=8mm dia&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;4&quot;: [
+      &quot;6=6mm dia&quot;,
+      &quot;8=8mm dia&quot;,
+      &quot;X=NA&quot;
+    ],
+    &quot;5&quot;: [
+      &quot;6=6mm dia&quot;,
+      &quot;8=8mm dia&quot;,
+      &quot;X=NA&quot;
+    ]
+  }
+},
+{
+  &quot;apiName&quot;: &quot;lm_optional_electrical_items&quot;,
+  &quot;label&quot;: &quot;OPTIONAL ELECTRICAL ITEMS&quot;,
+  &quot;type&quot;: &quot;checkbox&quot;,
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_type_of_aol&quot;,
+  &quot;label&quot;: &quot;Type of AOL&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;controllingField&quot;: &quot;lm_optional_electrical_items&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;true&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;S=Single Dome, GLS Type&quot;,
+    &quot;D=Double Dome, GLS Type&quot;,
+    &quot;K=Double Dome, LED Type&quot;,
+    &quot;L=Single Dome, LED Type&quot;,
+    &quot;X= NA&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_no_of_aviation_light&quot;,
+  &quot;label&quot;: &quot;No. of Aviation Light&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;controllingField&quot;: &quot;lm_optional_electrical_items&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;true&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;1=One AOL&quot;,
+    &quot;2=Two AOL&quot;,
+    &quot;X=NA&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;lm_feeder_piller_control&quot;,
+  &quot;label&quot;: &quot;Feeder Piller / Control&quot;,
+  &quot;type&quot;: &quot;picklist&quot;,
+  &quot;controllingField&quot;: &quot;lm_optional_electrical_items&quot;,
+  &quot;controllingValues&quot;: [
+    &quot;true&quot;
+  ],
+  &quot;options&quot;: [
+    &quot;0=No fidder piller needed&quot;,
+    &quot;1=One fidder piller needed&quot;,
+    &quot;2=Single Door Small Feeder Piller&quot;,
+    &quot;X=Neither fidder piller nor control piller&quot;
+  ],
+  &quot;colSpan&quot;: 2
+},
+{
+  &quot;apiName&quot;: &quot;hr_bom_details&quot;,
+  &quot;label&quot;: &quot;BOM ITEM DETAILS&quot;,
+  &quot;type&quot;: &quot;header&quot;,
+  &quot;colSpan&quot;: 12
+},
+{
+  &quot;apiName&quot;: &quot;no_of_segment_select&quot;,
+  &quot;label&quot;: &quot;No of Segment Select &quot;,
+  &quot;type&quot;: &quot;number&quot;,
+  &quot;colSpan&quot;: 1,
+  &quot;isVisible&quot;: false,
+  &quot;required&quot;: true
+},
+{
+&quot;apiName&quot;: &quot;lm_high_mast_winch_qty_consumed&quot;,
+&quot;label&quot;: &quot;High Mast Winch - Qty Consumed&quot;,
+&quot;type&quot;: &quot;number&quot;,
+&quot;unit&quot;: &quot;Nos.&quot;,
+&quot;colSpan&quot;: 2,
+&quot;readOnly&quot;: true,
+&quot;isVisible&quot;: false,
+&quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+&quot;controllingValues&quot;: [
+&quot;1&quot;
+],
+&quot;formula&quot;: &quot;((lm_type_of_winch.startsWith(&apos;X&apos;) ? 0 : 1)) * (lm_qty_of_hm || 0)&quot;
+},
+{
+&quot;apiName&quot;: &quot;lm_high_mast_winch&quot;,
+&quot;label&quot;: &quot;High Mast Winch&quot;,
+&quot;type&quot;: &quot;number&quot;,
+&quot;unit&quot;: &quot;Nos.&quot;,
+&quot;colSpan&quot;: 2,
+&quot;readOnly&quot;: true,
+&quot;isVisible&quot;: false,
+&quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+&quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_high_mast_winch_qty_consumed * (lm_type_of_winch.startsWith(&apos;A&apos;) ? 6700 : (lm_type_of_winch.startsWith(&apos;E&apos;) ? 5500 : 0)) * 0.1) + (lm_high_mast_winch_qty_consumed * (lm_type_of_winch.startsWith(&apos;A&apos;) ? 6700 : (lm_type_of_winch.startsWith(&apos;E&apos;) ? 5500 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_40t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (40 Teeth) - Winch - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_winch.startsWith(&apos;X&apos;) ? 0 : 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_40t&quot;,
+    &quot;label&quot;: &quot;Sprocket (40 Teeth) - Winch&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_sprocket_40t_qty_consumed * 225 * .50) + (lm_sprocket_40t_qty_consumed * 225)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_rope_drum_20_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Rope Drum 20mtr - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_winch || &apos;&apos;).startsWith(&apos;A&apos;) ? 2 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;B&apos;) ? 0 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;C&apos;) ? 2 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;D&apos;) ? 0 :(lm_type_of_winch || &apos;&apos;).startsWith(&apos;E&apos;) ? 0 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_rope_drum_20&quot;,
+    &quot;label&quot;: &quot;Rope Drum 20mtr&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_rope_drum_20_qty_consumed * 410 * .35) + (lm_rope_drum_20_qty_consumed * 410)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_power_tool_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_power_tool.startsWith(&apos;X&apos;) ? 0 : 1))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_power_tool&quot;,
+    &quot;label&quot;: &quot;Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_power_tool_qty_consumed * (lm_type_of_power_tool.startsWith(&apos;Q&apos;) ? 7000 : (lm_type_of_power_tool.startsWith(&apos;G&apos;) ? 5250 : 0)) * 0.1) + (lm_power_tool_qty_consumed * (lm_type_of_power_tool.startsWith(&apos;Q&apos;) ? 7000 : (lm_type_of_power_tool.startsWith(&apos;G&apos;) ? 5250 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_15t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (15 Teeth) - Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_power_tool.startsWith(&apos;H&apos;) || lm_type_of_power_tool.startsWith(&apos;G&apos;) || lm_type_of_power_tool.startsWith(&apos;I&apos;)) ? 1 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_15t&quot;,
+    &quot;label&quot;: &quot;Sprocket (15 Teeth) - Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_sprocket_15t_qty_consumed * 110 * .50) + (lm_sprocket_15t_qty_consumed * 110)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_20t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (20 Teeth) - Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_power_tool.startsWith(&apos;Q&apos;) ? 1 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_sprocket_20t&quot;,
+    &quot;label&quot;: &quot;Sprocket (20 Teeth) - Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_sprocket_20t_qty_consumed * 120 * .35) + (lm_sprocket_20t_qty_consumed * 120)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_simplex_chain_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Simplex Chain, 1/2\&quot; - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_power_tool.startsWith(&apos;X&apos;) ? 0 : 4)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_simplex_chain&quot;,
+    &quot;label&quot;: &quot;Simplex Chain, 1/2\&quot;&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_simplex_chain_qty_consumed * 103 * .35) + (lm_simplex_chain_qty_consumed * 103)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_torque_limiter_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Torque Limiter - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_power_tool.startsWith(&apos;Q&apos;) || lm_type_of_power_tool.startsWith(&apos;I&apos;)) ? 1 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_torque_limiter&quot;,
+    &quot;label&quot;: &quot;Torque Limiter&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_torque_limiter_qty_consumed * 430 * .35) + (lm_torque_limiter_qty_consumed * 430)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_trailing_cable_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Trailing Cable - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : ((lm_mast_height / 10) + 1.5) * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_trailing_cable&quot;,
+    &quot;label&quot;: &quot;Trailing Cable&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_trailing_cable_qty_consumed * (lm_cable_type.startsWith(&apos;T&apos;) ? 236 : (lm_cable_type.startsWith(&apos;F&apos;) ? 350 : 0)) * 0.1) + (lm_trailing_cable_qty_consumed * (lm_cable_type.startsWith(&apos;T&apos;) ? 236 : (lm_cable_type.startsWith(&apos;F&apos;) ? 350 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_wire_rope_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Wire Rope - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_wire_rope.startsWith(&apos;X&apos;) ? 0 : ((lm_mast_height / 10) + 1) * parseInt(lm_suspension_system) + 2 * ((lm_mast_height / 10) + 1) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_wire_rope&quot;,
+    &quot;label&quot;: &quot;SS Wire Rope&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_wire_rope_qty_consumed * (lm_type_of_wire_rope.startsWith(&apos;5&apos;) ? 51 : (lm_type_of_wire_rope.startsWith(&apos;6&apos;) ? 67 : 0)) * 0.1) + (lm_ss_wire_rope_qty_consumed * (lm_type_of_wire_rope.startsWith(&apos;5&apos;) ? 51 : (lm_type_of_wire_rope.startsWith(&apos;6&apos;) ? 67 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_doc_clamp_6mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Doc Clamp 6mm with Nut - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 26 : 8)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_doc_clamp_6mm&quot;,
+    &quot;label&quot;: &quot;Doc Clamp 6mm with Nut&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_doc_clamp_6mm_qty_consumed * 32 * .50) + (lm_doc_clamp_6mm_qty_consumed * 32)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_aluminium_ferrul_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Aluminium Ferrule 6mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_suspension_system) == 3 ? 8 : 2) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_aluminium_ferrul&quot;,
+    &quot;label&quot;: &quot;Aluminium Ferrule 6mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_aluminium_ferrul_qty_consumed * 6 * .50) + (lm_aluminium_ferrul_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_thimble_6mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Thimble 6mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 8 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_thimble_6mm&quot;,
+    &quot;label&quot;: &quot;SS Thimble 6mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_thimble_6mm_qty_consumed * 16 * .50) + (lm_ss_thimble_6mm_qty_consumed * 16)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_al_cable_wire_clamp_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Al Cable &amp; Wire Clamp - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_al_cable_wire_clamp&quot;,
+    &quot;label&quot;: &quot;Al Cable &amp; Wire Clamp&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_al_cable_wire_clamp_qty_consumed * 25 * .50) + (lm_al_cable_wire_clamp_qty_consumed * 25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_al_cable_clamp_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Al Cable Clamp - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_al_cable_clamp&quot;,
+    &quot;label&quot;: &quot;Al Cable Clamp&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_al_cable_clamp_qty_consumed * 23 * .50) + (lm_al_cable_clamp_qty_consumed * 23)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_no_of_luminaries) + 1 + 5)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m12x40_qty_consumed * 12.4 * .50) + (lm_ss_bolt_m12x40_qty_consumed * 12.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m12_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M12 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_no_of_luminaries) + 1 + 5 ) + 15 + (parseInt(lm_suspension_system) == 3 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m12&quot;,
+    &quot;label&quot;: &quot;SS Nut M12&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_nut_m12_qty_consumed * 4.9 * .50) + (lm_ss_nut_m12_qty_consumed * 4.9)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m12_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M12 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_no_of_luminaries) + 1+ 10) + 15 + (parseInt(lm_suspension_system) == 3 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m12&quot;,
+    &quot;label&quot;: &quot;SS Washers M12&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_washers_m12_qty_consumed * 2.1 * .50) + (lm_ss_washers_m12_qty_consumed * 2.1)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x60_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x60 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(15) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x60&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x60&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m12x60_qty_consumed * 15.4 * .50) + (lm_ss_bolt_m12x60_qty_consumed * 15.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m10x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M10x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(8 +8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m10x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M10x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m10x40_qty_consumed * 9.2 * .50) + (lm_ss_bolt_m10x40_qty_consumed * 9.2)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m10_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M10 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(8 + 8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m10&quot;,
+    &quot;label&quot;: &quot;SS Nut M10&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_nut_m10_qty_consumed * 2.9 * .50) + (lm_ss_nut_m10_qty_consumed * 2.9)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m10_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M10 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(8 +8 +8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m10&quot;,
+    &quot;label&quot;: &quot;SS Washers M10&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_washers_m10_qty_consumed * 1.40 * .50) + (lm_ss_washers_m10_qty_consumed * 1.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_screw_m6x30_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Screw M6x30 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_screw_m6x30&quot;,
+    &quot;label&quot;: &quot;SS Screw M6x30&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_screw_m6x30_qty_consumed * 3.60 * .50) + (lm_ss_screw_m6x30_qty_consumed * 3.60)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m6_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M6 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m6&quot;,
+    &quot;label&quot;: &quot;SS Nut M6&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_nut_m6_qty_consumed * 0.75 * .50) + (lm_ss_nut_m6_qty_consumed * 0.75)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m6_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M6 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m6&quot;,
+    &quot;label&quot;: &quot;SS Washers M6&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_washers_m6_qty_consumed * .35 * .50) + (lm_ss_washers_m6_qty_consumed * .35)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_allen_bolt_m6x30_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Allen Bolt M6x30 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(2) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_allen_bolt_m6x30&quot;,
+    &quot;label&quot;: &quot;SS Allen Bolt M6x30&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_allen_bolt_m6x30_qty_consumed * 2.75 * .50) + (lm_ss_allen_bolt_m6x30_qty_consumed * 2.75)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ms_hinge_roller_qty_consumed&quot;,
+    &quot;label&quot;: &quot;MS Hinge Roller M15x60 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Set&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(2) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ms_hinge_roller&quot;,
+    &quot;label&quot;: &quot;MS Hinge Roller M15x60&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Set&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ms_hinge_roller_qty_consumed * 16 * .50) + (lm_ms_hinge_roller_qty_consumed * 16)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x85_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x85 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 1 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m12x85&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x85&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m12x85_qty_consumed * 20.4 * .50) + (lm_ss_bolt_m12x85_qty_consumed * 20.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m8x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((8+4+2+1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m8x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m8x40_qty_consumed * 4.70 * .50) + (lm_ss_bolt_m8x40_qty_consumed * 4.70)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m8x75_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x75 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_bolt_m8x75&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x75&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_bolt_m8x75_qty_consumed * 8.3 * .50) + (lm_ss_bolt_m8x75_qty_consumed * 8.3)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m8_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M8 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((8+4+2+1) + (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m8&quot;,
+    &quot;label&quot;: &quot;SS Nut M8&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_nut_m8_qty_consumed * 1.40 * .50) + (lm_ss_nut_m8_qty_consumed * 1.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m8_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M8 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((8+4+2+1) + (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m8&quot;,
+    &quot;label&quot;: &quot;SS Washers M8&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_washers_m8_qty_consumed * 0.65 * .50) + (lm_ss_washers_m8_qty_consumed * 0.65)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_split_pin_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Split Pin - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(( ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 10 || (lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 8) ? 6 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 4) ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 5 ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 3) ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 2) ? 2 : 0))))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_split_pin&quot;,
+    &quot;label&quot;: &quot;Split Pin&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_split_pin_qty_consumed * 3.25 * .50) + (lm_split_pin_qty_consumed * 3.25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m5_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M5 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;( (( ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 10 || (lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 8) ? 6 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 4) ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 5 ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 3) ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 2) ? 2 : 0))))))) * 2 + (( ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 10 || (lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 8) ? 6 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 4) ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 5 ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 3) ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 2) ? 2 : 0))))))) ) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_nut_m5&quot;,
+    &quot;label&quot;: &quot;SS Nut M5&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_nut_m5_qty_consumed * 0.45 * .50) + (lm_ss_nut_m5_qty_consumed * 0.45)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m5_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M5 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;( (( ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 10 || (lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 8) ? 6 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 4) ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 5 ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 3) ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 2) ? 2 : 0))))))) * 2 + (( ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 10 || (lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 8) ? 6 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 4) ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))) == 5 ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 3) ? 3 : ((parseInt(lm_suspension_system) * parseInt(lm_no_of_cable) == 2) ? 2 : 0))))))) ) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_washers_m5&quot;,
+    &quot;label&quot;: &quot;SS Washers M5&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_washers_m5_qty_consumed * 0.40 * .50) + (lm_ss_washers_m5_qty_consumed * 0.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_die_cast_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Die Cast Al &amp; Cable Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_die_cast_pulley&quot;,
+    &quot;label&quot;: &quot;Die Cast Al &amp; Cable Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_die_cast_pulley_qty_consumed * 155 * .50) + (lm_die_cast_pulley_qty_consumed * 155)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_solid_rope_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Solid Rope Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : (lm_mast_height &lt; 250 ? parseInt(lm_no_of_cable) : 2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_solid_rope_pulley&quot;,
+    &quot;label&quot;: &quot;Solid Rope Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_solid_rope_pulley_qty_consumed * 135 * .50) + (lm_solid_rope_pulley_qty_consumed * 135)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_solid_cable_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Solid Cable Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : (lm_mast_height &lt; 250 ? parseInt(lm_no_of_cable) : 2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_solid_cable_pulley&quot;,
+    &quot;label&quot;: &quot;Solid Cable Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_solid_cable_pulley_qty_consumed * 220 * .50) + (lm_solid_cable_pulley_qty_consumed * 220)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_axle_5_8x95_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Axle 5/8 x95 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3)))))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_axle_5_8x95&quot;,
+    &quot;label&quot;: &quot;SS Axle 5/8 x95&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_axle_5_8x95_qty_consumed * 49 * .50) + (lm_ss_axle_5_8x95_qty_consumed * 49)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_stud_pin_m5x95_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Stud Pin M5x95 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3)))))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_stud_pin_m5x95&quot;,
+    &quot;label&quot;: &quot;SS Stud Pin M5x95&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_stud_pin_m5x95_qty_consumed * 6 * .50) + (lm_ss_stud_pin_m5x95_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_spacer_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Spacer - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3))))))) * 3)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_spacer&quot;,
+    &quot;label&quot;: &quot;SS Spacer&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_spacer_qty_consumed * 6.5 * .50) + (lm_ss_spacer_qty_consumed * 6.5)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_pin_m5x50_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Pin M5x50 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3)))))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_ss_pin_m5x50&quot;,
+    &quot;label&quot;: &quot;SS Pin M5x50&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_ss_pin_m5x50_qty_consumed * 2.8 * .50) + (lm_ss_pin_m5x50_qty_consumed * 2.8)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_terminal_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Terminal - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(parseInt(lm_no_of_cable)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_terminal&quot;,
+    &quot;label&quot;: &quot;Terminal&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_terminal_qty_consumed * 76 * .50) + (lm_terminal_qty_consumed * 76)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pg_gland_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PG Gland - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((6 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pg_gland&quot;,
+    &quot;label&quot;: &quot;PG Gland&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_pg_gland_qty_consumed * 4 * .50) + (lm_pg_gland_qty_consumed * 4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_junction_box_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Junction Box - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_junction_box&quot;,
+    &quot;label&quot;: &quot;Junction Box&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_junction_box_qty_consumed * 310 * .50) + (lm_junction_box_qty_consumed * 310)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_aol_qty_consumed&quot;,
+    &quot;label&quot;: &quot;AOL - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_optional_electrical_items ? (lm_no_of_aviation_light.startsWith(&apos;1&apos;) ? 1 : (lm_no_of_aviation_light.startsWith(&apos;2&apos;) ? 2 : 0)) : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_aol&quot;,
+    &quot;label&quot;: &quot;AOL&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_aol_qty_consumed * (lm_type_of_aol.startsWith(&apos;S&apos;) ? 865 : (lm_type_of_aol.startsWith(&apos;D&apos;) ? 1580 : (lm_type_of_aol.startsWith(&apos;L&apos;) ? 1500 : (lm_type_of_aol.startsWith(&apos;K&apos;) ? 3000 : 0)))) * .35) + (lm_aol_qty_consumed * (lm_type_of_aol.startsWith(&apos;S&apos;) ? 865 : (lm_type_of_aol.startsWith(&apos;D&apos;) ? 1580 : (lm_type_of_aol.startsWith(&apos;L&apos;) ? 1500 : (lm_type_of_aol.startsWith(&apos;K&apos;) ? 3000 : 0)))))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_allen_key_4mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Allen Key 4mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_allen_key_4mm&quot;,
+    &quot;label&quot;: &quot;Allen Key 4mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_allen_key_4mm_qty_consumed * 5 * .50) + (lm_allen_key_4mm_qty_consumed * 5)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_allen_key_5mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Allen Key 5mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_allen_key_5mm&quot;,
+    &quot;label&quot;: &quot;Allen Key 5mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_allen_key_5mm_qty_consumed * 6 * .50) + (lm_allen_key_5mm_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_control_panel_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Control Panel - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_optional_electrical_items ? (lm_feeder_piller_control.startsWith(&apos;0&apos;) ? 1 : 0): 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_control_panel&quot;,
+    &quot;label&quot;: &quot;Control Panel&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_control_panel_qty_consumed * 2400 * .35) + (lm_control_panel_qty_consumed * 2400)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_feeder_pillar_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Feeder Pillar - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_optional_electrical_items ? (lm_feeder_piller_control.startsWith(&apos;1&apos;) ? 1 : (lm_feeder_piller_control.startsWith(&apos;2&apos;) ? 1 : 0)) : 0) * lm_qty_of_hm&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_feeder_pillar&quot;,
+    &quot;label&quot;: &quot;Feeder Pillar&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_feeder_pillar_qty_consumed * (parseInt(lm_feeder_piller_control) == 1 ? 14500 : (parseInt(lm_feeder_piller_control) == 2 ? 11500 : 0)) * 0.35) + (lm_feeder_pillar_qty_consumed * (parseInt(lm_feeder_piller_control) == 1 ? 14500 : (parseInt(lm_feeder_piller_control) == 2 ? 11500 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pvc_c_channel_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PVC C Channel - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_qty_of_hm + 1.5)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pvc_c_channel&quot;,
+    &quot;label&quot;: &quot;PVC C Channel&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_pvc_c_channel_qty_consumed * 70 * .35) + (lm_pvc_c_channel_qty_consumed * 70)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_gear_oil_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Gear Oil - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Lit&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(0.5) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_gear_oil&quot;,
+    &quot;label&quot;: &quot;Gear Oil&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Lit&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_gear_oil_qty_consumed * 105 * .35) + (lm_gear_oil_qty_consumed * 105)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pvc_bottle_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PVC Bottle - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_pvc_bottle&quot;,
+    &quot;label&quot;: &quot;PVC Bottle&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_pvc_bottle_qty_consumed * 105 * .35) + (lm_pvc_bottle_qty_consumed * 105)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_plastic_drum_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Plastic Drum with Cover &amp; Lock - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_plastic_drum&quot;,
+    &quot;label&quot;: &quot;Plastic Drum with Cover &amp; Lock&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_plastic_drum_qty_consumed * 350 * .35) + (lm_plastic_drum_qty_consumed * 350)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_wooven_cloth_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Woven Cloth (Packing) - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height / 10) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_wooven_cloth&quot;,
+    &quot;label&quot;: &quot;Woven Cloth (Packing)&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_wooven_cloth_qty_consumed * 25 * .35) + (lm_wooven_cloth_qty_consumed * 25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_kit_base_price&quot;,
+    &quot;label&quot;: &quot;COST / SET&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;isBasePrice&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_high_mast_winch||0)+(lm_sprocket_40t||0)+(lm_rope_drum_20 || 0)+(lm_power_tool||0)+(lm_sprocket_15t||0)+(lm_sprocket_20t||0)+(lm_simplex_chain||0)+(lm_torque_limiter||0)+(lm_trailing_cable||0)+(lm_ss_wire_rope||0)+(lm_doc_clamp_6mm||0)+(lm_aluminium_ferrul||0)+(lm_ss_thimble_6mm||0)+(lm_al_cable_wire_clamp||0)+(lm_al_cable_clamp||0)+(lm_ss_bolt_m12x40||0)+(lm_ss_bolt_m12x60||0)+(lm_ss_bolt_m12x85||0)+(lm_ss_nut_m12||0)+(lm_ss_washers_m12||0)+(lm_ss_bolt_m10x40||0)+(lm_ss_nut_m10||0)+(lm_ss_washers_m10||0)+(lm_ss_bolt_m8x40||0)+(lm_ss_bolt_m8x75||0)+(lm_ss_nut_m8||0)+(lm_ss_washers_m8||0)+(lm_ss_screw_m6x30||0)+(lm_ss_nut_m6||0)+(lm_ss_washers_m6||0)+(lm_ss_allen_bolt_m6x30||0)+(lm_ss_nut_m5||0)+(lm_ss_washers_m5||0)+(lm_ms_hinge_roller||0)+(lm_split_pin||0)+(lm_die_cast_pulley||0)+(lm_solid_rope_pulley||0)+(lm_solid_cable_pulley||0)+(lm_ss_axle_5_8x95||0)+(lm_ss_stud_pin_m5x95||0)+(lm_ss_spacer||0)+(lm_ss_pin_m5x50||0)+(lm_terminal||0)+(lm_pg_gland||0)+(lm_junction_box||0)+(lm_aol||0)+(lm_allen_key_4mm||0)+(lm_allen_key_5mm||0)+(lm_control_panel||0)+(lm_feeder_pillar||0)+(lm_pvc_c_channel||0)+(lm_gear_oil||0)+(lm_pvc_bottle||0)+(lm_plastic_drum||0)+(lm_wooven_cloth||0)) / (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_kit_unit_price&quot;,
+    &quot;label&quot;: &quot;UNIT PRICE&quot;,
+    &quot;isUnitPrice&quot;: true,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot; ((lm_kit_base_price || 0) * (1 + (KIT_realization || 0) / 100))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_kit_unit_cost&quot;,
+    &quot;label&quot;: &quot;UNIT COST&quot;,
+    &quot;isUnitCost&quot;: true,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_kit_base_price || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_high_mast_winch_qty_consumed&quot;,
+    &quot;label&quot;: &quot;High Mast Winch - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_winch || &apos;&apos;).startsWith(&apos;X&apos;) ? 0 : 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_high_mast_winch&quot;,
+    &quot;label&quot;: &quot;High Mast Winch&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_high_mast_winch_qty_consumed * ((lm_type_of_winch || &apos;&apos;).startsWith(&apos;B&apos;) ? 6700 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;C&apos;) ? 8400 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;A&apos;) ? 5500 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;D&apos;) ? 13450 : 0) * 0.1) + (lm_2_high_mast_winch_qty_consumed * ((lm_type_of_winch || &apos;&apos;).startsWith(&apos;B&apos;) ? 6700 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;C&apos;) ? 8400 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;A&apos;) ? 5500 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;D&apos;) ? 13450 : 0))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_40t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (40 Teeth) - Winch - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_winch.startsWith(&apos;X&apos;) ? 0 : 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_40t&quot;,
+    &quot;label&quot;: &quot;Sprocket (40 Teeth) - Winch&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_sprocket_40t_qty_consumed * 225 * .50) + (lm_2_sprocket_40t_qty_consumed * 225)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_rope_drum_30_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Rope Drum 30mtr - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_winch || &apos;&apos;).startsWith(&apos;A&apos;) ? 0 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;B&apos;) ? 0 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;C&apos;) ? 2 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;D&apos;) ? 2 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_rope_drum_30&quot;,
+    &quot;label&quot;: &quot;Rope Drum 30mtr&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_rope_drum_30_qty_consumed * 595 * .35) + (lm_2_rope_drum_30_qty_consumed * 595)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_rope_drum_20_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Rope Drum 20mtr - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_winch || &apos;&apos;).startsWith(&apos;A&apos;) ? 0 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;B&apos;) ? 2 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;C&apos;) ? 0 : (lm_type_of_winch || &apos;&apos;).startsWith(&apos;D&apos;) ? 0 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_rope_drum_20&quot;,
+    &quot;label&quot;: &quot;Rope Drum 20mtr&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_rope_drum_20_qty_consumed * 410 * .35) + (lm_2_rope_drum_20_qty_consumed * 410)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_power_tool_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;X&apos;) ? 0 : 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_power_tool&quot;,
+    &quot;label&quot;: &quot;Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_power_tool_qty_consumed * ((lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;G&apos;) ? 5500 : (lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;I&apos;) ? 7850 : (lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;Q&apos;) ? 7100 : 0) * 0.1) + (lm_2_power_tool_qty_consumed * ((lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;G&apos;) ? 5500 : (lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;I&apos;) ? 7850 : (lm_type_of_power_tool || &apos;&apos;).startsWith(&apos;Q&apos;) ? 7100 : 0))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_15t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (15 Teeth) - Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_type_of_power_tool.startsWith(&apos;H&apos;) || lm_type_of_power_tool.startsWith(&apos;G&apos;)) ? 1 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_15t&quot;,
+    &quot;label&quot;: &quot;Sprocket (15 Teeth) - Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_sprocket_15t_qty_consumed * 110 * .50) + (lm_2_sprocket_15t_qty_consumed * 110)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_20t_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Sprocket (20 Teeth) - Power Tool - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_power_tool ? 0 : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_sprocket_20t&quot;,
+    &quot;label&quot;: &quot;Sprocket (20 Teeth) - Power Tool&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_sprocket_20t_qty_consumed * 120 * .35) + (lm_2_sprocket_20t_qty_consumed * 120)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_simplex_chain_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Simplex Chain, 1/2\&quot; - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_power_tool.startsWith(&apos;X&apos;) ? 0 : 4)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_simplex_chain&quot;,
+    &quot;label&quot;: &quot;Simplex Chain, 1/2\&quot;&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_simplex_chain_qty_consumed * 103 * .35) + (lm_2_simplex_chain_qty_consumed * 103)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_torque_limiter_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Torque Limiter - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;1 * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_torque_limiter&quot;,
+    &quot;label&quot;: &quot;Torque Limiter&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_torque_limiter_qty_consumed * 430 * .35) + (lm_2_torque_limiter_qty_consumed * 430)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_trailing_cable_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Trailing Cable - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : ((lm_mast_height / 10) + 1.5) * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_trailing_cable&quot;,
+    &quot;label&quot;: &quot;Trailing Cable&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_trailing_cable_qty_consumed * (lm_cable_type.startsWith(&apos;T&apos;) ? 236 : (lm_cable_type.startsWith(&apos;F&apos;) ? 350 : 0)) * 0.1) + (lm_2_trailing_cable_qty_consumed * (lm_cable_type.startsWith(&apos;T&apos;) ? 236 : (lm_cable_type.startsWith(&apos;F&apos;) ? 350 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_wire_rope_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Wire Rope - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_type_of_wire_rope.startsWith(&apos;X&apos;) ? 0 : ((lm_mast_height / 10) + 1) * parseInt(lm_suspension_system) + 2 * ((lm_mast_height / 10) + 1) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_wire_rope&quot;,
+    &quot;label&quot;: &quot;SS Wire Rope&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_wire_rope_qty_consumed * (lm_type_of_wire_rope.startsWith(&apos;5&apos;) ? 51 : (lm_type_of_wire_rope.startsWith(&apos;6&apos;) ? 67 : 0)) * 0.1) + (lm_2_ss_wire_rope_qty_consumed * (lm_type_of_wire_rope.startsWith(&apos;5&apos;) ? 51 : (lm_type_of_wire_rope.startsWith(&apos;6&apos;) ? 67 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_doc_clamp_6mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Doc Clamp 6mm with Nut - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 26 : 8)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_doc_clamp_6mm&quot;,
+    &quot;label&quot;: &quot;Doc Clamp 6mm with Nut&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_doc_clamp_6mm_qty_consumed * 32 * .50) + (lm_2_doc_clamp_6mm_qty_consumed * 32)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_aluminium_ferrul_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Aluminium Ferrule 6mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_suspension_system) == 3 ? 8 : 2) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_aluminium_ferrul&quot;,
+    &quot;label&quot;: &quot;Aluminium Ferrule 6mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_aluminium_ferrul_qty_consumed * 6 * .50) + (lm_2_aluminium_ferrul_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_thimble_6mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Thimble 6mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 8 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_thimble_6mm&quot;,
+    &quot;label&quot;: &quot;SS Thimble 6mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_thimble_6mm_qty_consumed * 16 * .50) + (lm_2_ss_thimble_6mm_qty_consumed * 16)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_al_cable_wire_clamp_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Al Cable &amp; Wire Clamp - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_al_cable_wire_clamp&quot;,
+    &quot;label&quot;: &quot;Al Cable &amp; Wire Clamp&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_al_cable_wire_clamp_qty_consumed * 25 * .50) + (lm_2_al_cable_wire_clamp_qty_consumed * 25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_al_cable_clamp_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Al Cable Clamp - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_al_cable_clamp&quot;,
+    &quot;label&quot;: &quot;Al Cable Clamp&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_al_cable_clamp_qty_consumed * 23 * .50) + (lm_2_al_cable_clamp_qty_consumed * 23)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_no_of_luminaries) + 1 + 5)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m12x40_qty_consumed * 12.4 * .50) + (lm_2_ss_bolt_m12x40_qty_consumed * 12.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m12_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M12 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_no_of_luminaries) + 1 + 5) + 15 + (parseInt(lm_suspension_system) == 3 ? 3 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m12&quot;,
+    &quot;label&quot;: &quot;SS Nut M12&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_nut_m12_qty_consumed * 4.9 * .50) + (lm_2_ss_nut_m12_qty_consumed * 4.9)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m12_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M12 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((parseInt(lm_no_of_luminaries) + 1 + 10) + 15 + (parseInt(lm_suspension_system) == 3 ? 3 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m12&quot;,
+    &quot;label&quot;: &quot;SS Washers M12&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_washers_m12_qty_consumed * 2.1 * .50) + (lm_2_ss_washers_m12_qty_consumed * 2.1)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x60_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x60 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(15) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x60&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x60&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m12x60_qty_consumed * 15.4 * .50) + (lm_2_ss_bolt_m12x60_qty_consumed * 15.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m10x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M10x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(8 + 8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m10x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M10x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m10x40_qty_consumed * 9.2 * .50) + (lm_2_ss_bolt_m10x40_qty_consumed * 9.2)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m10_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M10 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(8 + 8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m10&quot;,
+    &quot;label&quot;: &quot;SS Nut M10&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_nut_m10_qty_consumed * 2.9 * .50) + (lm_2_ss_nut_m10_qty_consumed * 2.9)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m10_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M10 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(8+ 8 + 8) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m10&quot;,
+    &quot;label&quot;: &quot;SS Washers M10&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_washers_m10_qty_consumed * 1.40 * .50) + (lm_2_ss_washers_m10_qty_consumed * 1.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_screw_m6x30_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Screw M6x30 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_screw_m6x30&quot;,
+    &quot;label&quot;: &quot;SS Screw M6x30&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_screw_m6x30_qty_consumed * 3.60 * .50) + (lm_2_ss_screw_m6x30_qty_consumed * 3.60)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m6_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M6 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m6&quot;,
+    &quot;label&quot;: &quot;SS Nut M6&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_nut_m6_qty_consumed * 0.75 * .50) + (lm_2_ss_nut_m6_qty_consumed * 0.75)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m6_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M6 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((3 * (parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m6&quot;,
+    &quot;label&quot;: &quot;SS Washers M6&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_washers_m6_qty_consumed * .35 * .50) + (lm_2_ss_washers_m6_qty_consumed * .35)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_allen_bolt_m6x30_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Allen Bolt M6x30 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(2) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_allen_bolt_m6x30&quot;,
+    &quot;label&quot;: &quot;SS Allen Bolt M6x30&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_allen_bolt_m6x30_qty_consumed * 2.75 * .50) + (lm_2_ss_allen_bolt_m6x30_qty_consumed * 2.75)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ms_hinge_roller_qty_consumed&quot;,
+    &quot;label&quot;: &quot;MS Hinge Roller M15x60 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Set&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(2) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ms_hinge_roller&quot;,
+    &quot;label&quot;: &quot;MS Hinge Roller M15x60&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Set&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ms_hinge_roller_qty_consumed * 16 * .50) + (lm_2_ms_hinge_roller_qty_consumed * 16)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x85_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x85 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_suspension_system) == 3 ? 3 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m12x85&quot;,
+    &quot;label&quot;: &quot;SS Bolt M12x85&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m12x85_qty_consumed * 20.4 * .50) + (lm_2_ss_bolt_m12x85_qty_consumed * 20.4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m8x40_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x40 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((8+4+2+1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m8x40&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x40&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m8x40_qty_consumed * 4.70 * .50) + (lm_2_ss_bolt_m8x40_qty_consumed * 4.70)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m8x75_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x75 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((2 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_bolt_m8x75&quot;,
+    &quot;label&quot;: &quot;SS Bolt M8x75&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_bolt_m8x75_qty_consumed * 8.3 * .50) + (lm_2_ss_bolt_m8x75_qty_consumed * 8.3)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m8_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M8 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((8+4+2+1) + (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m8&quot;,
+    &quot;label&quot;: &quot;SS Nut M8&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_nut_m8_qty_consumed * 1.40 * .50) + (lm_2_ss_nut_m8_qty_consumed * 1.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m8_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M8 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((8+4+2+1) + (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m8&quot;,
+    &quot;label&quot;: &quot;SS Washers M8&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_washers_m8_qty_consumed * 0.65 * .50) + (lm_2_ss_washers_m8_qty_consumed * 0.65)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_split_pin_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Split Pin - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : (2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_split_pin&quot;,
+    &quot;label&quot;: &quot;Split Pin&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_split_pin_qty_consumed * 3.25 * .500) + (lm_2_split_pin_qty_consumed * 3.25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m5_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Nut M5 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : (2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_nut_m5&quot;,
+    &quot;label&quot;: &quot;SS Nut M5&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_nut_m5_qty_consumed * 0.45 * .50) + (lm_2_ss_nut_m5_qty_consumed * 0.45)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m5_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Washers M5 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : (2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_washers_m5&quot;,
+    &quot;label&quot;: &quot;SS Washers M5&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_washers_m5_qty_consumed * 0.40 * .50) + (lm_2_ss_washers_m5_qty_consumed * 0.40)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_die_cast_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Die Cast Al &amp; Cable Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_die_cast_pulley&quot;,
+    &quot;label&quot;: &quot;Die Cast Al &amp; Cable Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_die_cast_pulley_qty_consumed * 155 * .50) + (lm_2_die_cast_pulley_qty_consumed * 155)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_solid_rope_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Solid Rope Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : (lm_mast_height &lt; 250 ? parseInt(lm_no_of_cable) : 2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_solid_rope_pulley&quot;,
+    &quot;label&quot;: &quot;Solid Rope Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_solid_rope_pulley_qty_consumed * 135 * .50) + (lm_2_solid_rope_pulley_qty_consumed * 135)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_solid_cable_pulley_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Solid Cable Pulley - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_cable_type.startsWith(&apos;X&apos;) ? 0 : (lm_mast_height &lt; 250 ? parseInt(lm_no_of_cable) : 2 * parseInt(lm_no_of_cable)))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_solid_cable_pulley&quot;,
+    &quot;label&quot;: &quot;Solid Cable Pulley&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_solid_cable_pulley_qty_consumed * 220 * .50) + (lm_2_solid_cable_pulley_qty_consumed * 220)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_axle_5_8x95_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Axle 5/8 x95 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3)))))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_axle_5_8x95&quot;,
+    &quot;label&quot;: &quot;SS Axle 5/8 x95&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_axle_5_8x95_qty_consumed * 49 * .50) + (lm_2_ss_axle_5_8x95_qty_consumed * 49)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_stud_pin_m5x95_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Stud Pin M5x95 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : (2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_stud_pin_m5x95&quot;,
+    &quot;label&quot;: &quot;SS Stud Pin M5x95&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_stud_pin_m5x95_qty_consumed * 6 * .50) + (lm_2_ss_stud_pin_m5x95_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_spacer_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Spacer - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 10 ? 6 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 8 ? 6 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 4 ? 4 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 3 ? 2 : ((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable)) : 2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) - (2 * parseInt(lm_no_of_cable))) == 5 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 3 ? 3 : (parseInt(lm_no_of_cable) * parseInt(lm_suspension_system) == 2 ? 2 : 3))))))) * 3)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_spacer&quot;,
+    &quot;label&quot;: &quot;SS Spacer&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_spacer_qty_consumed * 6.5 * .50) + (lm_2_ss_spacer_qty_consumed * 6.5)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_pin_m5x50_qty_consumed&quot;,
+    &quot;label&quot;: &quot;SS Pin M5x50 - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_mast_height &lt; 250 ? (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system)) : (2 * (parseInt(lm_no_of_cable) + parseInt(lm_suspension_system))))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_ss_pin_m5x50&quot;,
+    &quot;label&quot;: &quot;SS Pin M5x50&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_ss_pin_m5x50_qty_consumed * 2.8 * .50) + (lm_2_ss_pin_m5x50_qty_consumed * 2.8)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_terminal_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Terminal - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(parseInt(lm_no_of_cable)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_terminal&quot;,
+    &quot;label&quot;: &quot;Terminal&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_terminal_qty_consumed * 76 * .50) + (lm_2_terminal_qty_consumed * 76)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pg_gland_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PG Gland - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((6 * parseInt(lm_no_of_cable))) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pg_gland&quot;,
+    &quot;label&quot;: &quot;PG Gland&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_pg_gland_qty_consumed * 4 * .50) + (lm_2_pg_gland_qty_consumed * 4)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_junction_box_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Junction Box - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((parseInt(lm_no_of_cable) &lt;= 1 ? 1 : 2)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_junction_box&quot;,
+    &quot;label&quot;: &quot;Junction Box&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_junction_box_qty_consumed * 310 * .50) + (lm_2_junction_box_qty_consumed * 310)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_aol_qty_consumed&quot;,
+    &quot;label&quot;: &quot;AOL - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_optional_electrical_items ? (lm_no_of_aviation_light.startsWith(&apos;1&apos;) ? 1 : (lm_no_of_aviation_light.startsWith(&apos;2&apos;) ? 2 : 0)) : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_aol&quot;,
+    &quot;label&quot;: &quot;AOL&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_aol_qty_consumed * (lm_type_of_aol.startsWith(&apos;S&apos;) ? 865 : (lm_type_of_aol.startsWith(&apos;D&apos;) ? 1580 : (lm_type_of_aol.startsWith(&apos;L&apos;) ? 1500 : (lm_type_of_aol.startsWith(&apos;K&apos;) ? 3000 : 0)))) * .35) + (lm_2_aol_qty_consumed * (lm_type_of_aol.startsWith(&apos;S&apos;) ? 865 : (lm_type_of_aol.startsWith(&apos;D&apos;) ? 1580 : (lm_type_of_aol.startsWith(&apos;L&apos;) ? 1500 : (lm_type_of_aol.startsWith(&apos;K&apos;) ? 3000 : 0)))))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_allen_key_4mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Allen Key 4mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_allen_key_4mm&quot;,
+    &quot;label&quot;: &quot;Allen Key 4mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_allen_key_4mm_qty_consumed * 5 * .50) + (lm_2_allen_key_4mm_qty_consumed * 5)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_allen_key_5mm_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Allen Key 5mm - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_allen_key_5mm&quot;,
+    &quot;label&quot;: &quot;Allen Key 5mm&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_allen_key_5mm_qty_consumed * 6 * .50) + (lm_2_allen_key_5mm_qty_consumed * 6)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_control_panel_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Control Panel - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_optional_electrical_items ? (lm_feeder_piller_control.startsWith(&apos;0&apos;) ? 1: 0 ) : 0)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_control_panel&quot;,
+    &quot;label&quot;: &quot;Control Panel&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_control_panel_qty_consumed * 2400 * .35) + (lm_2_control_panel_qty_consumed * 2400)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_feeder_pillar_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Feeder Pillar - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_optional_electrical_items ? (lm_feeder_piller_control.startsWith(&apos;1&apos;) ? 1 : (lm_feeder_piller_control.startsWith(&apos;2&apos;) ? 1 : 0)) : 0) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_feeder_pillar&quot;,
+    &quot;label&quot;: &quot;Feeder Pillar&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_feeder_pillar_qty_consumed * (parseInt(lm_feeder_piller_control) == 1 ? 14500 : (parseInt(lm_feeder_piller_control) == 2 ? 11500 : 0)) * 0.35) + (lm_2_feeder_pillar_qty_consumed * (parseInt(lm_feeder_piller_control) == 1 ? 14500 : (parseInt(lm_feeder_piller_control) == 2 ? 11500 : 0)))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pvc_c_channel_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PVC C Channel - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_qty_of_hm + 1.5)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pvc_c_channel&quot;,
+    &quot;label&quot;: &quot;PVC C Channel&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_pvc_c_channel_qty_consumed * 70 * .35) + (lm_2_pvc_c_channel_qty_consumed * 70)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_gear_oil_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Gear Oil - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Lit&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(0.5) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_gear_oil&quot;,
+    &quot;label&quot;: &quot;Gear Oil&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Lit&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_gear_oil_qty_consumed * 105 * .35) + (lm_2_gear_oil_qty_consumed * 105)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pvc_bottle_qty_consumed&quot;,
+    &quot;label&quot;: &quot;PVC Bottle - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_pvc_bottle&quot;,
+    &quot;label&quot;: &quot;PVC Bottle&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_pvc_bottle_qty_consumed * 105 * .35) + (lm_2_pvc_bottle_qty_consumed * 105)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_plastic_drum_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Plastic Drum with Cover &amp; Lock - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(1) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_plastic_drum&quot;,
+    &quot;label&quot;: &quot;Plastic Drum with Cover &amp; Lock&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Nos.&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_plastic_drum_qty_consumed * 375 * .35) + (lm_2_plastic_drum_qty_consumed * 375)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_wooven_cloth_qty_consumed&quot;,
+    &quot;label&quot;: &quot;Woven Cloth (Packing) - Qty Consumed&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(((lm_mast_height / 10) + 1)) * (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_wooven_cloth&quot;,
+    &quot;label&quot;: &quot;Woven Cloth (Packing)&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;unit&quot;: &quot;Meter&quot;,
+    &quot;colSpan&quot;: 2,
+    &quot;readOnly&quot;: true,
+    &quot;isVisible&quot;: false,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_wooven_cloth_qty_consumed * 25 * .35) + (lm_2_wooven_cloth_qty_consumed * 25)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_kit_base_price&quot;,
+    &quot;label&quot;: &quot;COST / SET&quot;,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;isBasePrice&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_2_high_mast_winch||0)+(lm_2_sprocket_40t||0)+(lm_2_rope_drum_30 ||0)+(lm_2_rope_drum_20 || 0)+(lm_2_power_tool||0)+(lm_2_sprocket_15t||0)+(lm_2_sprocket_20t||0)+(lm_2_simplex_chain||0)+(lm_2_torque_limiter||0)+(lm_2_trailing_cable||0)+(lm_2_ss_wire_rope||0)+(lm_2_doc_clamp_6mm||0)+(lm_2_aluminium_ferrul||0)+(lm_2_ss_thimble_6mm||0)+(lm_2_al_cable_wire_clamp||0)+(lm_2_al_cable_clamp||0)+(lm_2_ss_bolt_m12x40||0)+(lm_2_ss_bolt_m12x60||0)+(lm_2_ss_bolt_m12x85||0)+(lm_2_ss_nut_m12||0)+(lm_2_ss_washers_m12||0)+(lm_2_ss_bolt_m10x40||0)+(lm_2_ss_nut_m10||0)+(lm_2_ss_washers_m10||0)+(lm_2_ss_bolt_m8x40||0)+(lm_2_ss_bolt_m8x75||0)+(lm_2_ss_nut_m8||0)+(lm_2_ss_washers_m8||0)+(lm_2_ss_screw_m6x30||0)+(lm_2_ss_nut_m6||0)+(lm_2_ss_washers_m6||0)+(lm_2_ss_allen_bolt_m6x30||0)+(lm_2_ss_nut_m5||0)+(lm_2_ss_washers_m5||0)+(lm_2_ms_hinge_roller||0)+(lm_2_split_pin||0)+(lm_2_die_cast_pulley||0)+(lm_2_solid_rope_pulley||0)+(lm_2_solid_cable_pulley||0)+(lm_2_ss_axle_5_8x95||0)+(lm_2_ss_stud_pin_m5x95||0)+(lm_2_ss_spacer||0)+(lm_2_ss_pin_m5x50||0)+(lm_2_terminal||0)+(lm_2_pg_gland||0)+(lm_2_junction_box||0)+(lm_2_aol||0)+(lm_2_allen_key_4mm||0)+(lm_2_allen_key_5mm||0)+(lm_2_control_panel||0)+(lm_2_feeder_pillar||0)+(lm_2_pvc_c_channel||0)+(lm_2_gear_oil||0)+(lm_2_pvc_bottle||0)+(lm_2_plastic_drum||0)+(lm_2_wooven_cloth||0)) / (lm_qty_of_hm || 0)&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_kit_unit_price&quot;,
+    &quot;label&quot;: &quot;UNIT PRICE&quot;,
+    &quot;isUnitPrice&quot;: true,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;((lm_2_kit_base_price || 0) * (1 + (KIT_realization || 0) / 100))&quot;
+  },
+  {
+    &quot;apiName&quot;: &quot;lm_2_kit_unit_cost&quot;,
+    &quot;label&quot;: &quot;UNIT COST&quot;,
+    &quot;isUnitCost&quot;: true,
+    &quot;type&quot;: &quot;number&quot;,
+    &quot;readOnly&quot;: true,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;controllingValues&quot;: [
+      &quot;2&quot;
+    ],
+    &quot;formula&quot;: &quot;(lm_2_kit_base_price || 0)&quot;
+  },
+  {
+    &quot;id&quot;: &quot;lm_3_copy_data&quot;,
+    &quot;label&quot;: &quot;&quot;,
+    &quot;controllingField&quot;: &quot;no_of_segment_select&quot;,
+    &quot;expanded&quot;: true,
+    &quot;controllingValues&quot;: [
+      &quot;3&quot;,
+      &quot;4&quot;,
+      &quot;5&quot;
+    ],
+    &quot;cloneFrom&quot;: &quot;lm-3-kit-segment&quot;
+  }
+],
+&quot;modalFields&quot;: []
+}
+}
+}
+]
+}</value>
+    </values>
+</CustomMetadata>

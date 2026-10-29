@@ -1,0 +1,103 @@
+<!-- QuoteOfferPreview - Deepanjan (18th September 2026)
+     Common offer PREVIEW for every department. The LWC iframes THIS page instead of the
+     PDF page itself; this page fetches the mapped PDF VF page and paints every page onto
+     <canvas> with pdf.js running in a real Web Worker (no LWS here). The browser never
+     holds a PDF: no viewer toolbar, no download, no save-as, no print.
+     Params: id = Quote Id, page = bare VF page name (e.g. HMScopeSingle). -->
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" cache="false">
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Offer Preview</title>
+<style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: auto; background: #f3f3f3;
+                 -webkit-user-select: none; user-select: none; }
+    #pages { padding: 8px; }
+    #pages canvas { display: block; margin: 0 auto 12px; max-width: 100%; height: auto;
+                    background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+    #bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; width: 0;
+           background: #0176d3; transition: width .2s; z-index: 2; }
+    #msg { position: fixed; top: 40%; left: 0; right: 0; text-align: center;
+           font: 14px/1.4 Arial, Helvetica, sans-serif; color: #3e3e3c; }
+    @media print { html, body { display: none !important; } }
+</style>
+</head>
+<body oncontextmenu="return false;">
+<div id="bar"></div>
+<div id="msg">Rendering preview...</div>
+<div id="pages"></div>
+<script src="{!URLFOR($Resource.newpdfjs, 'pdf.min.js')}"></script>
+<script>
+(function () {
+    var quoteId  = "{!JSENCODE($CurrentPage.parameters.id)}";
+    var pageName = "{!JSENCODE($CurrentPage.parameters.page)}";
+    var bar  = document.getElementById('bar');
+    var msg  = document.getElementById('msg');
+    var host = document.getElementById('pages');
+
+    function fail(t) { msg.style.display = 'block'; msg.textContent = t; bar.style.width = '0'; }
+
+    // Strict: a Salesforce Id and a bare page name only - nothing else is fetched.
+    if (!/^[a-zA-Z0-9]{15,18}$/.test(quoteId) || !/^[A-Za-z0-9_]+$/.test(pageName)) {
+        fail('Invalid preview request.');
+        return;
+    }
+    if (!window.pdfjsLib) { fail('Preview engine did not load.'); return; }
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "{!URLFOR($Resource.newpdfjs, 'pdf.worker.min.js')}";
+
+    var url = '/apex/' + pageName + '?id=' + encodeURIComponent(quoteId);
+    bar.style.width = '10%';
+
+    var task = pdfjsLib.getDocument({ url: url, withCredentials: true });
+    task.onProgress = function (p) {
+        if (p && p.total) { bar.style.width = (10 + 50 * p.loaded / p.total) + '%'; }
+    };
+
+    task.promise.then(function (pdf) {
+        bar.style.width = '65%';
+        var width = Math.max(300, host.clientWidth - 16);
+        var dpr   = Math.min(window.devicePixelRatio || 1, 2);
+        var n = pdf.numPages, done = 0;
+
+        function renderPage(i) {
+            if (i > n) {
+                bar.style.width = '100%';
+                setTimeout(function () { bar.style.display = 'none'; }, 300);
+                return;
+            }
+            pdf.getPage(i).then(function (page) {
+                var base  = page.getViewport({ scale: 1 });
+                var scale = Math.min(width / base.width, 1.5);
+                var vp    = page.getViewport({ scale: scale });
+                var c = document.createElement('canvas');
+                c.width  = Math.floor(vp.width  * dpr);
+                c.height = Math.floor(vp.height * dpr);
+                c.style.width  = Math.floor(vp.width)  + 'px';
+                c.style.height = Math.floor(vp.height) + 'px';
+                host.appendChild(c);
+                var ctx = c.getContext('2d');
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                return page.render({ canvasContext: ctx, viewport: vp }).promise;
+            }).then(function () {
+                if (i === 1) { msg.style.display = 'none'; }
+                done++;
+                bar.style.width = (65 + 35 * done / n) + '%';
+                setTimeout(function () { renderPage(i + 1); }, 0);
+            }).catch(function (e) {
+                console.error(e);
+                fail('Could not render page ' + i + '.');
+            });
+        }
+        renderPage(1);
+    }).catch(function (e) {
+        console.error(e);
+        fail('Could not load the preview.');
+    });
+})();
+</script>
+</body>
+</html>
+</apex:page>

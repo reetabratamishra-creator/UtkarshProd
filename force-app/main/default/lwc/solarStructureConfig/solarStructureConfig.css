@@ -1,0 +1,312 @@
+/*
+ * Solar Structure Config — Deepanjan (1st August 2026)
+ * Responsive restyle. The markup keeps its SLDS grid classes; this sheet makes
+ * the modal fill whatever device it is on, tightens the cards, and gives the
+ * whole thing one consistent visual language on desktop and phone.
+ */
+
+/* ── Modal shell: full usable width on every device ─────────────────────── */
+.solar-modal .slds-modal__container {
+    width: 96vw;
+    max-width: 96vw;
+    margin: 0 auto;
+}
+
+.solar-modal .slds-modal__content {
+    height: 74vh;
+    overflow-y: auto;
+    background: #f4f6f9;
+}
+
+.solar-modal .slds-modal__header {
+    background: linear-gradient(135deg, #0b5cab 0%, #1589ee 100%);
+    border-radius: 0.5rem 0.5rem 0 0;
+    border-bottom: 0;
+}
+
+.solar-modal .slds-modal__header h2 {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.solar-modal .slds-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+/* ── Section headings ───────────────────────────────────────────────────── */
+.section-heading {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.section-heading.hdg  { color: #ff8c00; }
+.section-heading.galv { color: #54698d; }
+
+/* ── Item cards ─────────────────────────────────────────────────────────── */
+.item-card {
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.15s ease;
+    padding: 0.75rem 1rem 1rem;
+}
+
+.item-card:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.item-card.hdg  { border-left: 4px solid #ff8c00; }
+.item-card.galv { border-left: 4px solid #54698d; }
+
+.item-card .item-title {
+    font-weight: 700;
+    color: #54698d;
+}
+
+/* ── Highlight boxes ────────────────────────────────────────────────────── */
+.final-value-box {
+    background: #eef4ed;
+    border: 1px solid #c1d9c1;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    height: 100%;
+}
+
+.min-micron-box {
+    background: #fff7e6;
+    border: 1px solid #f5c98a;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.custom-rate-box {
+    background: #eef4fb;
+    border: 1px solid #9fc7ea;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* ── Internal costing panel ─────────────────────────────────────────────── */
+.costing-panel {
+    background-color: #fafaf9;
+    border-top: 1px dashed #d8dde6;
+    border-radius: 0 0 0.375rem 0.375rem;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+}
+
+.costing-panel .costing-title {
+    color: #c23934;
+    font-weight: 700;
+}
+
+/* ── Scrollbar (kept from the original sheet) ───────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ── Phones and small tablets ───────────────────────────────────────────── */
+@media (max-width: 48em) {
+
+    /* Fill the phone edge to edge and use its full height */
+    .solar-modal .slds-modal__container {
+        width: 100vw;
+        max-width: 100vw;
+        margin: 0;
+    }
+
+    .solar-modal .slds-modal__content {
+        height: calc(100dvh - 8.5rem); /* header + footer allowance */
+        padding: 0.5rem;
+    }
+
+    .item-card {
+        padding: 0.5rem 0.625rem 0.75rem;
+    }
+
+    /* The count input + costing toggle row stacks under the heading */
+    .section-toolbar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .section-toolbar .count-input {
+        width: 7rem;
+    }
+
+    /* Footer buttons become full-width tap targets */
+    .solar-modal .slds-modal__footer {
+        flex-direction: column-reverse;
+    }
+
+    .solar-modal .slds-modal__footer .slds-button {
+        width: 100%;
+        margin: 0;
+        padding: 0.65rem 0;
+        font-size: 1rem;
+    }
+}
+
+/* Comfortable input sizing on touch devices */
+@media (pointer: coarse) {
+    .solar-modal lightning-input,
+    .solar-modal lightning-combobox {
+        --slds-c-input-sizing-min-height: 2.6rem;
+    }
+}
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE v2 — appended block. Deepanjan (22nd August 2026)
+
+   The 48em block above only resizes the dialog. On the Salesforce mobile
+   app that is not enough: the SLDS modal stays a floating dialog, the
+   app's own layers sit above/around it and the close (X) lands off-screen
+   once the container is pinned to the top. Same disease weightEstimatorModal
+   had — same proven cure (its MOBILE v1–v7 blocks): a hard full-screen
+   takeover with the mega z-index / dvh / internal-scroll recipe, here
+   mapped onto the slds-modal classes.
+
+   Everything lives inside @media (max-width: 600px).
+   Desktop and tablet untouched. Additions only — nothing above removed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+    /* The host must not become a containing block for the fixed modal */
+    :host {
+        display: block !important;
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* Backdrop: covers the whole screen, locks the page behind */
+    .slds-backdrop {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        z-index: 9999998 !important;
+        overscroll-behavior: none !important;
+        touch-action: none !important;   /* stops iOS scroll bleeding */
+    }
+
+    /* Modal shell: pinned to the exact screen bounds */
+    .solar-modal.slds-modal {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        z-index: 9999999 !important;     /* beats the app's utility layers */
+        transform: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Container becomes the full-screen flex column */
+    .solar-modal .slds-modal__container {
+        position: relative !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: #f4f6f9 !important;
+        overscroll-behavior: none !important;
+    }
+
+    /* Header: fixed height, edge to edge, title readable */
+    .solar-modal .slds-modal__header {
+        position: relative !important;
+        flex-shrink: 0 !important;
+        border-radius: 0 !important;
+        padding: 0.85rem 2.75rem 0.85rem 1rem !important;
+    }
+
+    .solar-modal .slds-modal__header h2 {
+        font-size: 1rem;
+        line-height: 1.3;
+        text-align: left;
+    }
+
+    /* SLDS parks the X at top:-2.5rem — off-screen once the container is
+       pinned to the top. Bring it inside the header, vertically centred. */
+    .solar-modal .slds-modal__close {
+        position: absolute !important;
+        top: 50% !important;
+        right: 0.5rem !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+    }
+
+    /* Body scrolls internally — overrides the 48em height calc above */
+    .solar-modal .slds-modal__content {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;        /* CRITICAL: stops flex stretching */
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important;
+        padding: 0.5rem 0.5rem 1rem !important;
+    }
+
+    /* Footer pinned at the bottom, safe-area aware; the 48em block above
+       already makes the buttons full-width tap targets */
+    .solar-modal .slds-modal__footer {
+        flex-shrink: 0 !important;
+        border-radius: 0 !important;
+        padding-bottom: max(0.75rem, env(safe-area-inset-bottom)) !important;
+    }
+
+    /* ── Layout inside the body ──────────────────────────────────────── */
+
+    /* Section header rows (heading + count input + costing toggle) wrap
+       instead of squeezing into one line; also lets the Item-N / mode-
+       toggle rows breathe. Harmless where content already fits. */
+    .slds-grid_align-spread {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    /* The toolbar drops to its own full line under the heading */
+    .section-toolbar {
+        flex: 1 1 100%;
+        justify-content: space-between;
+    }
+
+    /* The markup carries inline style="width:150px", which beats a plain
+       class — hence the !important here */
+    .section-toolbar .count-input {
+        width: 9.5rem !important;
+    }
+
+    /* Setup checkboxes stack — their long labels need the full width */
+    .slds-size_1-of-2 {
+        width: 100%;
+    }
+}

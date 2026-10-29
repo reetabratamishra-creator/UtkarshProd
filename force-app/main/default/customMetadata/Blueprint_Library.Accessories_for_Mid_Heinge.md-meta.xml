@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Accessories for Mid Heinge</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;op_mhp_accessories&quot;: [
+    {
+      &quot;apiName&quot;: &quot;mhp_accessories_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;mhp_accessories_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;mhp_acc_accessory&quot;,
+          &quot;label&quot;: &quot;ACCESSORY&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;WINCH&quot;,
+            &quot;WIRE ROPE WITH FASTENERS&quot;,
+            &quot;LOCK &amp; MANUAL HANDLE&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;mhp_acc_weight&quot;,
+          &quot;label&quot;: &quot;WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;kg&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;mhp_acc_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;mhp_acc_total_weight&quot;,
+          &quot;label&quot;: &quot;TOTAL WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;unit&quot;: &quot;kg&quot;,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;(mhp_acc_weight || 0 ) * (mhp_acc_quantity || 0) &quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;mhp_acc_rate&quot;,
+          &quot;label&quot;: &quot;UNIT RATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;op_mhp_acc_unit_price&quot;,
+          &quot;label&quot;: &quot;ACCESSORY UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;((mhp_acc_rate || 0) * (mhp_acc_total_weight || 0) )/ (mhp_acc_quantity|| 1)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;op_mhp_acc_unit_cost&quot;,
+          &quot;label&quot;: &quot;ACCESSORY UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(op_mhp_acc_unit_price || 0)&quot;
+        }
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Product Type Details solar DEP PCS</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Structure_Type_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">Weight_Estimator_Pcs</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Pcs</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;solar_structure_folder&quot;,
+      &quot;label&quot;: &quot;Solar Structure Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;orange&quot;,
+      &quot;controllingField&quot;: &quot;unit_of_measurement&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;SOLAR STRUCTURE &quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;ss_setup_section&quot;,
+              &quot;label&quot;: &quot;Select Structure Types&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;include_hdg_mms&quot;,
+                  &quot;label&quot;: &quot;HDG/MMS Structure &amp; Piers for Tracker&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: false
+                },
+                {
+                  &quot;apiName&quot;: &quot;include_galv_black&quot;,
+                  &quot;label&quot;: &quot;Galvalume &amp; Black Structure&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: false
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ss_hdg_section&quot;,
+              &quot;label&quot;: &quot;HDG/MMS Structure&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;include_hdg_mms&quot;,
+              &quot;controllingValues&quot;: [
+                true,
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;hdg_count&quot;,
+                  &quot;label&quot;: &quot;Number of items:&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;hdg_grid&quot;,
+                  &quot;type&quot;: &quot;column-repeater&quot;,
+                  &quot;countApiName&quot;: &quot;hdg_count&quot;,
+                  &quot;maxColumns&quot;: 10,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;hdg_material&quot;,
+                      &quot;label&quot;: &quot;MATERIAL&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;HDG MMS/Carport Structure&quot;,
+                        &quot;RSJ&quot;,
+                        &quot;Piers for Tracker&quot;
+                      ],
+                      &quot;defaultValue&quot;: &quot;HDG MMS/Carport Structure&quot;,
+                      &quot;isFirstField&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_material_grade&quot;,
+                      &quot;label&quot;: &quot;MATERIAL GRADE&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;E350&quot;,
+                        &quot;E250&quot;,
+                        &quot;Special Grade&quot;
+                      ],
+                      &quot;controllingField&quot;: &quot;hdg_material&quot;,
+                      &quot;controllingValues&quot;: [&quot;*&quot;],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;HDG MMS/Carport Structure&quot;: [
+                          &quot;E350&quot;,
+                          &quot;E250&quot;
+                        ],
+                        &quot;Piers for Tracker&quot;: [
+                          &quot;E350&quot;,
+                          &quot;Special Grade&quot;
+                        ],
+                        &quot;RSJ&quot;: [
+                          &quot;E250.&quot;
+                        ]
+                      },
+                      &quot;defaultValue&quot;: &quot;E350&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_material_description&quot;,
+                      &quot;label&quot;: &quot;MATERIAL DESCRIPTION&quot;,
+                      &quot;type&quot;: &quot;text&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_thickness&quot;,
+                      &quot;label&quot;: &quot;THICKNESS (mm)&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;-&quot;,
+                        &quot;2&quot;,
+                        &quot;2.5&quot;,
+                        &quot;3&quot;,
+						&quot;4&quot;
+                      ],
+                      &quot;defaultValue&quot;: &quot;-&quot;,
+                      &quot;disableControllingField&quot;: &quot;hdg_material&quot;,
+                      &quot;disableControllingValues&quot;: [
+                        &quot;HDG MMS/Carport Structure&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_micron_thickness&quot;,
+                      &quot;label&quot;: &quot;MICRON THICKNESS&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;-&quot;,
+                        &quot;60&quot;,
+                        &quot;70&quot;,
+                        &quot;80&quot;,
+                        &quot;90&quot;,
+                        &quot;100&quot;,
+                        &quot;110&quot;,
+                        &quot;120&quot;,
+                        &quot;130&quot;,
+                        &quot;140&quot;,
+                        &quot;150&quot;
+                      ]
+                    },
+					{
+                      &quot;apiName&quot;: &quot;hdg_location&quot;,
+                      &quot;label&quot;: &quot;LOCATION&quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;disableControllingField&quot;: &quot;hdg_material&quot;,
+                      &quot;disableControllingValues&quot;: [
+                        &quot;Piers for Tracker&quot;
+                      ]
+                     
+                    },
+                     {
+                      &quot;apiName&quot;: &quot;hdg_unit_weight&quot;,
+                      &quot;label&quot;: &quot;UNIT WEIGHT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.001&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_freight&quot;,
+                      &quot;label&quot;: &quot;FREIGHT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_discount&quot;,
+                      &quot;label&quot;: &quot;DISCOUNT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+					  &quot;isDiscount&quot;: true
+                    },
+					{
+                      &quot;apiName&quot;: &quot;hdg_Quantity&quot;,
+                      &quot;label&quot;: &quot;QUANTITY&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+					  &quot;isQuantity&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_steel_rate_pcs&quot;,
+                      &quot;label&quot;: &quot;STEEL RATE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;0&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_zinc_rate&quot;,
+                      &quot;label&quot;: &quot;ZINC RATE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;0&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_total_steel_rate&quot;,
+                      &quot;label&quot;: &quot;Total STEEL RATE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((hdg_material == &apos;Piers for Tracker&apos; ? 0.01 : 0.005) + 1) * (Number(hdg_steel_rate_pcs) || 0)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                     {
+                      &quot;apiName&quot;: &quot;hdg_zinc_percent&quot;,
+                      &quot;label&quot;: &quot;ZINC RATIO (Decimal)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.0000001&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((hdg_material == &apos;RSJ&apos;) ? 0.045 : (hdg_material == &apos;Piers for Tracker&apos;) ? 0.05 : ((255 / (Number(hdg_thickness) || 1)) * (7.093 * (Number(hdg_micron_thickness) || 0)) / 1000000 * (Number(hdg_thickness) == 2.5 ? 1.4 : Number(hdg_thickness) == 3.0 ? 1.5 : Number(hdg_thickness) == 4.0 ? 1.4 : 1.303)) * 100)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_Gi_COST_percent&quot;,
+                      &quot;label&quot;: &quot;Gi Cost Total&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(((Number(hdg_zinc_rate) || 0) * ((hdg_material == &apos;RSJ&apos;) ? 0.045 : (hdg_material == &apos;Piers for Tracker&apos;) ? 0.05 : ((255 / (Number(hdg_thickness) || 1)) * (7.093 * (Number(hdg_micron_thickness) || 0)) / 1000000 * (Number(hdg_thickness) == 2.5 ? 1.4 : Number(hdg_thickness) == 3.0 ? 1.5 : Number(hdg_thickness) == 4.0 ? 1.4 : 1.303)))) + 2000)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_Misc_total_percent&quot;,
+                      &quot;label&quot;: &quot;Misc Total&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(hdg_freight + 3000)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_Other_Cost_total_percent&quot;,
+                      &quot;label&quot;: &quot;Other Cost Total&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(hdg_thickness == &apos;2&apos; ? 1500 : 2000)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_total_Cost&quot;,
+                      &quot;label&quot;: &quot; Total cost&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(300 + hdg_Misc_total_percent + hdg_Gi_COST_percent + hdg_total_steel_rate)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_contribution&quot;,
+                      &quot;label&quot;: &quot;Contribution&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(Number(hdg_thickness) == 2.0 || Number(hdg_thickness) == 2) ? 1000 : (Number(hdg_thickness) == 2.5) ? 2000 : (Number(hdg_thickness) &gt;= 3.0) ? 3000 : 1000&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_Quote_pcs&quot;,
+                      &quot;label&quot;: &quot;Quote&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(hdg_material == &apos;RSJ&apos;) ? ((73083.2 + (hdg_freight || 0)) - (hdg_discount || 0)) : ((hdg_total_Cost + (hdg_contribution || 0)) - (hdg_discount || 0))&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;hdg_total_quote_value&quot;,
+                      &quot;label&quot;: &quot;TOTAL QUOTE VALUE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.1&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;(hdg_steel_rate_pcs != null &amp;&amp; hdg_steel_rate_pcs !== &apos;&apos;) ? Math.round(((hdg_material_grade == &apos;E250&apos;) ? (hdg_Quote_pcs - 3000) : hdg_Quote_pcs) * 10) / 10 : 0&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ss_galv_section&quot;,
+              &quot;label&quot;: &quot;Galvalume &amp; Black Structure&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;include_galv_black&quot;,
+              &quot;controllingValues&quot;: [
+                true,
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;galv_count&quot;,
+                  &quot;label&quot;: &quot;Number of items:&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;min&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;galv_grid&quot;,
+                  &quot;type&quot;: &quot;column-repeater&quot;,
+                  &quot;countApiName&quot;: &quot;galv_count&quot;,
+                  &quot;maxColumns&quot;: 10,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;galv_material&quot;,
+                      &quot;label&quot;: &quot;MATERIAL&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;Galvalume Structure&quot;,
+                        &quot;Black Metal&quot;
+                      ],
+                      &quot;defaultValue&quot;: &quot;Galvalume Structure&quot;,
+                      &quot;isFirstField&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_material_grade&quot;,
+                      &quot;label&quot;: &quot;MATERIAL GRADE&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;E350&quot;,
+                        &quot;E250&quot;,
+                        &quot;AZ150 GSM (350 MPA)&quot;,
+                        &quot;AZ200 GSM (550 MPA)&quot;
+                      ],
+                      &quot;controllingField&quot;: &quot;galv_material&quot;,
+                      &quot;controllingValues&quot;: [&quot;*&quot;],
+                      &quot;dependentOptionsMap&quot;: {
+                        &quot;Black Metal&quot;: [
+                          &quot;E350&quot;,
+                          &quot;E250&quot;
+                        ],
+                        &quot;Galvalume Structure&quot;: [
+                          &quot;AZ150 GSM - 350 MPA&quot;,
+                          &quot;AZ200 GSM - 550 MPA&quot;
+                        ]
+                      },
+                      &quot;defaultValue&quot;: &quot;AZ150 GSM (350 MPA)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_material_description&quot;,
+                      &quot;label&quot;: &quot;MATERIAL DESCRIPTION&quot;,
+                      &quot;type&quot;: &quot;text&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_thickness&quot;,
+                      &quot;label&quot;: &quot;THICKNESS (mm)&quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;-&quot;,
+                        &quot;0.9&quot;,
+                        &quot;1.0&quot;,
+                        &quot;1.1&quot;,
+                        &quot;1.2&quot;,
+                        &quot;1.3&quot;,
+                        &quot;1.4&quot;,
+                        &quot;1.5&quot;,
+                        &quot;1.6&quot;,
+                        &quot;1.7&quot;,
+                        &quot;1.8&quot;,
+                        &quot;1.9&quot;,
+                        &quot;2.0&quot;,
+                        &quot;2.5&quot;,
+                        &quot;3&quot;
+                      ]
+                    },
+                    
+					{
+                      &quot;apiName&quot;: &quot;galv_unit_weight&quot;,
+                      &quot;label&quot;: &quot;UNIT WEIGHT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.001&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_freight&quot;,
+                      &quot;label&quot;: &quot;FREIGHT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_discount&quot;,
+                      &quot;label&quot;: &quot;DISCOUNT&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+					  &quot;isDiscount&quot;: true
+                    },
+					{
+                      &quot;apiName&quot;: &quot;galv_Quantity&quot;,
+                      &quot;label&quot;: &quot;QUANTITY&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+					  &quot;isQuantity&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_steel_rate_pcs&quot;,
+                      &quot;label&quot;: &quot;STEEL RATE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;0&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_total_steel_rate&quot;,
+                      &quot;label&quot;: &quot;Total STEEL cost&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;1.005 * (Number(galv_steel_rate_pcs) || 0)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_Misc_total_percent&quot;,
+                      &quot;label&quot;: &quot;Misc Total&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((galv_freight || 0) + 3000 +300)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_Other_Cost_total_percent&quot;,
+                      &quot;label&quot;: &quot;Other Cost Total&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(String(galv_material || &apos;&apos;) == &apos;Black Metal&apos; ? 2000 : 1500)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_total_Cost&quot;,
+                      &quot;label&quot;: &quot; Total cost&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;((galv_Misc_total_percent || 0) + (galv_total_steel_rate || 0) + (galv_freight || 0) +300 )&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_Quote_pcs&quot;,
+                      &quot;label&quot;: &quot;Quote&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(((galv_total_Cost || 0) + 1000) - (galv_discount || 0))&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_final_quote_value_black&quot;,
+                      &quot;label&quot;: &quot;Final Quote Value - Black&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(String(galv_material_grade || &apos;&apos;) == &apos;E350&apos;) ? ((galv_Quote_pcs || 0) + 3000) : (galv_Quote_pcs || 0)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_final_quote_value_incl_thickness&quot;,
+                      &quot;label&quot;: &quot;Final Quote Value - incl. thickness&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;(String(galv_material || &apos;&apos;) != &apos;Black Metal&apos; &amp;&amp; (Number(galv_thickness) || 0) &gt; 1.1) ? ((galv_final_quote_value_black || 0) + 3000) : (galv_final_quote_value_black || 0)&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;galv_total_quote_value&quot;,
+                      &quot;label&quot;: &quot;TOTAL QUOTE VALUE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;step&quot;: &quot;0.01&quot;,
+                      &quot;isCalculated&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;((galv_steel_rate_pcs || 0) &gt; 0) ? (((galv_Quote_pcs || 0) + ((String(galv_material || &apos;&apos;) != &apos;Black Metal&apos; &amp;&amp; (Number(galv_thickness) || 0) &gt; 1.1) ? 3000 : 0) + ((String(galv_material_grade || &apos;&apos;) == &apos;E350&apos;) ? 3000 : 0))) : 0&quot;,
+                      &quot;ignoreFormulaIfProvided&quot;: true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

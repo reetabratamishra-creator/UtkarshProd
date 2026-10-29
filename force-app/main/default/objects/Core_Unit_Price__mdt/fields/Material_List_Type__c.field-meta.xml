@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Material_List_Type__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Material List Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>RSJ / BFB MAST</fullName>
+                <default>true</default>
+                <label>RSJ / BFB MAST</label>
+            </value>
+            <value>
+                <fullName>B-Series Mast</fullName>
+                <default>false</default>
+                <label>B-Series Mast</label>
+            </value>
+            <value>
+                <fullName>TTC</fullName>
+                <default>false</default>
+                <label>TTC</label>
+            </value>
+            <value>
+                <fullName>Bridge Mast</fullName>
+                <default>false</default>
+                <label>Bridge Mast</label>
+            </value>
+            <value>
+                <fullName>O, N &amp; R Type Portal</fullName>
+                <default>false</default>
+                <label>O, N &amp; R Type Portal</label>
+            </value>
+            <value>
+                <fullName>SPS</fullName>
+                <default>false</default>
+                <label>SPS</label>
+            </value>
+            <value>
+                <fullName>Emergency Mast</fullName>
+                <default>false</default>
+                <label>Emergency Mast</label>
+            </value>
+            <value>
+                <fullName>TSS</fullName>
+                <default>false</default>
+                <label>TSS</label>
+            </value>
+            <value>
+                <fullName>Special 1</fullName>
+                <default>false</default>
+                <label>Special 1</label>
+            </value>
+            <value>
+                <fullName>Special 2</fullName>
+                <default>false</default>
+                <label>Special 2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

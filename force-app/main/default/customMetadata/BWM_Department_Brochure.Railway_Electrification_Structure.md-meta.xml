@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Railway Electrification Structure</label>
+    <protected>false</protected>
+    <values>
+        <field>Brochure_File_Name__c</field>
+        <value xsi:type="xsd:string">Railway_Electrification_Structures.pdf</value>
+    </values>
+    <values>
+        <field>Brochure_URL__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">Railway Electrification Structures</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Railway Electrification Structure</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide CORE-approved structures for railway OHE systems, designed for strength and reliable performance. Types: RSJ Masts | BFB Masts | B-Series Masts | TTC Masts | Portals | ERC, SPS &amp; OHE Structures.</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Railway_Electrification_Structures_pdf</value>
+    </values>
+    <values>
+        <field>WhatsApp_Document_Id__c</field>
+        <value xsi:type="xsd:string">1562803358542830</value>
+    </values>
+</CustomMetadata>

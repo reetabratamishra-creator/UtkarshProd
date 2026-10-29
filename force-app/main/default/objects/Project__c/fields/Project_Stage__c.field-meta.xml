@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Stage__c</fullName>
+    <label>Project Stage</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pre-Feasibility/DPR</fullName>
+                <default>false</default>
+                <label>Pre-Feasibility/DPR</label>
+            </value>
+            <value>
+                <fullName>Arch/Cons Appt. in Progress</fullName>
+                <default>false</default>
+                <label>Arch/Cons Appt. in Progress</label>
+            </value>
+            <value>
+                <fullName>Arch/Cons Apptd</fullName>
+                <default>false</default>
+                <label>Arch/Cons Apptd</label>
+            </value>
+            <value>
+                <fullName>Design &amp; Specs in Progress</fullName>
+                <default>false</default>
+                <label>Design &amp; Specs in Progress</label>
+            </value>
+            <value>
+                <fullName>Contractor Appt. in Progress</fullName>
+                <default>false</default>
+                <label>Contractor Appt. in Progress</label>
+            </value>
+            <value>
+                <fullName>Contractor Apptd (Pre-Const.)</fullName>
+                <default>false</default>
+                <label>Contractor Apptd (Pre-Const.)</label>
+            </value>
+            <value>
+                <fullName>Const. Progress &lt; 50 %</fullName>
+                <default>false</default>
+                <label>Const. Progress &lt; 50 %</label>
+            </value>
+            <value>
+                <fullName>Const. Progress &gt; 50 %</fullName>
+                <default>false</default>
+                <label>Const. Progress &gt; 50 %</label>
+            </value>
+            <value>
+                <fullName>Closed Lost</fullName>
+                <default>false</default>
+                <label>Closed Lost</label>
+            </value>
+            <value>
+                <fullName>Closed Won</fullName>
+                <default>false</default>
+                <label>Closed Won</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

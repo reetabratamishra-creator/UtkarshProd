@@ -1,0 +1,30 @@
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.result-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    background: #ffffff;
+}
+.result-index {
+    font-weight: 600;
+    color: #0176d3;
+    min-width: 20px;
+}
+.result-name {
+    font-weight: 600;
+}
+.result-type {
+    font-size: 0.8em;
+    color: #706e6b;
+}
+.no-results {
+    color: #706e6b;
+    font-style: italic;
+}

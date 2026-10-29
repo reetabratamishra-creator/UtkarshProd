@@ -1,0 +1,46 @@
+<template>
+    <lightning-card icon-name="standard:file">
+        <div slot="title" class="slds-media slds-media_center">
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    <span>Tender Document Details ({documents.length})</span>
+                </h2>
+                <p class="slds-text-body_small slds-text-color_weak">
+                    {documents.length} items • Updated {lastUpdated}
+                </p>
+            </div>
+        </div>
+
+        <div slot="actions">
+            <lightning-button-icon
+                icon-name="utility:settings"
+                variant="border-filled"
+                alternative-text="Settings"
+                class="slds-m-right_x-small">
+            </lightning-button-icon>
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                variant="border-filled"
+                alternative-text="Refresh"
+                onclick={handleRefresh}>
+            </lightning-button-icon>
+        </div>
+
+        <template if:true={documents.length}>
+            <lightning-datatable
+                key-field="Id"
+                data={documents}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column
+                style="height: 260px; display: block;">
+            </lightning-datatable>
+        </template>
+
+        <template if:false={documents.length}>
+            <div class="slds-p-around_medium slds-text-color_weak">
+                No documents available for this tender.
+            </div>
+        </template>
+    </lightning-card>
+</template>

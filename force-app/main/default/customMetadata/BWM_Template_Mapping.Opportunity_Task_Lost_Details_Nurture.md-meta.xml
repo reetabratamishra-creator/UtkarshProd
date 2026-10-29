@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Opportunity Task Lost Details Nurture</label>
+    <protected>false</protected>
+    <values>
+        <field>Brochure_Attachment_Mode__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department_Mode__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department_Value__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Document_Header_URL__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Include_Brochure_Header__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Journey_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Lead_Source__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Lead_Stage__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Lost_Reason__c</field>
+        <value xsi:type="xsd:string">Customer details not received</value>
+    </values>
+    <values>
+        <field>Object_Type__c</field>
+        <value xsi:type="xsd:string">Opportunity</value>
+    </values>
+    <values>
+        <field>Param1_Field__c</field>
+        <value xsi:type="xsd:string">Name</value>
+    </values>
+    <values>
+        <field>Param2_Field__c</field>
+        <value xsi:type="xsd:string">Account.Name</value>
+    </values>
+    <values>
+        <field>Param3_Field__c</field>
+        <value xsi:type="xsd:string">Department_Name__c</value>
+    </values>
+    <values>
+        <field>Param4_Field__c</field>
+        <value xsi:type="xsd:string">Product_Category__c</value>
+    </values>
+    <values>
+        <field>Param5_Field__c</field>
+        <value xsi:type="xsd:string">Owner.Name</value>
+    </values>
+    <values>
+        <field>Param6_Field__c</field>
+        <value xsi:type="xsd:string">Email__c</value>
+    </values>
+    <values>
+        <field>Param7_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Param8_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Priority__c</field>
+        <value xsi:type="xsd:double">10.0</value>
+    </values>
+    <values>
+        <field>RCS_SMS_Param_Limit__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>RCS_Template_Name__c</field>
+        <value xsi:type="xsd:string">saleforce_Test</value>
+    </values>
+    <values>
+        <field>Recipient_Type__c</field>
+        <value xsi:type="xsd:string">Customer</value>
+    </values>
+    <values>
+        <field>SMS_Template_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SMS_Text_Template__c</field>
+        <value xsi:type="xsd:string">Dear {#var1#}, this is Utkarsh India regarding {#var3#}. {#var5#} will contact you shortly.</value>
+    </values>
+    <values>
+        <field>Trigger_Point__c</field>
+        <value xsi:type="xsd:string">Opportunity_Task_Lost_DetailsNotReceived_Nurture</value>
+    </values>
+    <values>
+        <field>WhatsApp_Header_Format__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>WhatsApp_Header_Value_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>WhatsApp_Template_Name__c</field>
+        <value xsi:type="xsd:string">nurture_details_not_recieve_cont</value>
+    </values>
+</CustomMetadata>

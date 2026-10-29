@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gen_Brochure_Name__c</fullName>
+    <description>Gen email brochure label: Corporate for Enquiry, else department name.</description>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Department_Name__c) = &quot;Enquiry&quot;, &quot;Corporate&quot;, TEXT(Department_Name__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Gen Brochure Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Default</label>
+    <protected>false</protected>
+    <values>
+        <field>API_Bearer_Token__c</field>
+        <value xsi:type="xsd:string">11146f6f-f86b-49eb-86e2-875dd28bb18a</value>
+    </values>
+    <values>
+        <field>API_Key_Header__c</field>
+        <value xsi:type="xsd:string">Authorization</value>
+    </values>
+    <values>
+        <field>Corporate_Brochure_File_Title__c</field>
+        <value xsi:type="xsd:string">Corporate Brochure</value>
+    </values>
+    <values>
+        <field>Corporate_Support_Contact_1_Phone__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Corporate_Support_Contact_2_Phone__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Default_Brochure_Portal_URL__c</field>
+        <value xsi:type="xsd:string">https://portal.bluewavesmedia.in/WhatsAppMedia/Template/Document/Utkarsh/corporate_brochure_2026(13).pdf</value>
+    </values>
+    <values>
+        <field>Default_Brochure_Static_Resource__c</field>
+        <value xsi:type="xsd:string">BWM_Test_Brochure</value>
+    </values>
+    <values>
+        <field>Default_Country_Code__c</field>
+        <value xsi:type="xsd:string">91</value>
+    </values>
+    <values>
+        <field>Default_WhatsApp_Document_Id__c</field>
+        <value xsi:type="xsd:string">1562803358542830</value>
+    </values>
+    <values>
+        <field>Endpoint_Path__c</field>
+        <value xsi:type="xsd:string">/api/v1/send</value>
+    </values>
+    <values>
+        <field>Is_Enabled__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Journey_Success_Code__c</field>
+        <value xsi:type="xsd:string">200</value>
+    </values>
+    <values>
+        <field>RCS_From__c</field>
+        <value xsi:type="xsd:string">WkAXe8h6YrwbQSoo</value>
+    </values>
+    <values>
+        <field>RCS_Success_Code__c</field>
+        <value xsi:type="xsd:string">200</value>
+    </values>
+    <values>
+        <field>SMS_From__c</field>
+        <value xsi:type="xsd:string">UTKRSI</value>
+    </values>
+    <values>
+        <field>SMS_Success_Code__c</field>
+        <value xsi:type="xsd:string">200</value>
+    </values>
+    <values>
+        <field>Webhook_Callback_URL__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.my.salesforce.com/services/apexrest/thirdParty/payload/</value>
+    </values>
+    <values>
+        <field>WhatsApp_From__c</field>
+        <value xsi:type="xsd:string">919830637280</value>
+    </values>
+    <values>
+        <field>WhatsApp_Success_Code__c</field>
+        <value xsi:type="xsd:string">202</value>
+    </values>
+</CustomMetadata>

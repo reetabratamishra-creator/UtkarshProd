@@ -1,0 +1,912 @@
+<template>
+    <lightning-card title="Account Campaign" icon-name="standard:account">
+        <div class="workspace">
+            <aside class="filters">
+                <div class="filters__head">
+                    <span class="filters__title">Filters</span>
+                    <button type="button" class="filters__reset" onclick={handleResetFilters}>Reset</button>
+                </div>
+                <lightning-input type="search" label="Account name" placeholder="Account name" value={searchTerm} onchange={handleSearchChange}></lightning-input>
+                <div class="filter-block">
+                    <lightning-input type="search" label="Phone" value={phoneFilter} onchange={handlePhoneFilterChange}></lightning-input>
+                </div>
+                <div class="filter-block">
+                    <lightning-input type="search" label="Email" value={emailFilter} onchange={handleEmailFilterChange}></lightning-input>
+                </div>
+                <div class="filter-block">
+                    <c-campaign-checkbox-multi-select label="Department" options={departmentOptions} value={selectedDepartments} onchange={handleDepartmentSelection}></c-campaign-checkbox-multi-select>
+                </div>
+                <div class="filter-block">
+                    <lightning-combobox label="Country" value={selectedCountry} options={countryOptions} onchange={handleCountryChange} placeholder="All Countries"></lightning-combobox>
+                </div>
+                <template if:true={showStateFilter}>
+                    <div class="filter-block">
+                        <c-campaign-checkbox-multi-select label="State" options={stateOptions} value={selectedStates} onchange={handleStateSelection}></c-campaign-checkbox-multi-select>
+                    </div>
+                </template>
+                <p class="filters__hint">Click Search to update the results.</p>
+            </aside>
+            <section class="results">
+                <div class="results__head">
+                    <div class="chips">
+                        <template for:each={appliedChips} for:item="chip">
+                            <span key={chip.key} class="chip">
+                                <span class="chip__text">{chip.label}</span>
+                                <button type="button" class="chip__remove" data-key={chip.key} onclick={handleRemoveAppliedChip} title="Remove filter">×<span class="slds-assistive-text">Remove {chip.label}</span></button>
+                            </span>
+                        </template>
+                    </div>
+                    <span class="results__count">{totalRecordCount} accounts</span>
+                </div>
+                <template if:true={filtersAreStale}>
+                    <div class="status-banner status-banner_stale">
+                        <span>{staleFilterMessage}</span>
+                        <lightning-button label="Search" variant="brand" onclick={handleSearch}></lightning-button>
+                    </div>
+                </template>
+                <template if:false={filtersAreStale}>
+                    <div class="status-banner status-banner_fresh">Showing {totalRecordCount} accounts for the filters above.</div>
+                </template>
+                <template if:true={hasSelection}>
+                    <div class="selection-bar">
+                        <span class="selection-bar__count">{selectedRecordCount} selected</span>
+                        <div class="send-actions">
+                            <lightning-button label="Send Campaign Email" icon-name="utility:world" onclick={handleSendBluewaveEmail}></lightning-button>
+                            <lightning-button label="Send WhatsApp Campaign" icon-name="utility:chat" onclick={handleSendCustomerJourney}></lightning-button>
+                            <lightning-button label="Send RCS" icon-name="utility:comments" onclick={handleSendRcs}></lightning-button>
+                            <lightning-button label="Send SMS" icon-name="utility:text" onclick={handleSendSms}></lightning-button>
+                            <lightning-button label="Send Journey" icon-name="utility:trail" onclick={handleSendJourney}></lightning-button>
+                            <button type="button" class="text-action" onclick={handleClearSelection}>Clear selection</button>
+                        </div>
+                    </div>
+                </template>
+                <lightning-datatable key-field="Id" data={accounts} columns={columns} selected-rows={selectedRowIds} onrowselection={handleRowSelection} is-loading={isLoading}></lightning-datatable>
+            </section>
+        </div>
+    </lightning-card>
+
+    <template if:true={isEmailModalOpen}>
+        <div class="journey-modal-overlay email-modal">
+            <div class="journey-modal-overlay__backdrop" onclick={handleCloseEmailModal}></div>
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-modal="true"
+                class="journey-modal-overlay__dialog"
+                onclick={stopModalClick}
+            >
+                <div class="journey-modal__container">
+                    <header class="journey-modal__header email-modal__header">
+                        <div class="journey-modal__header-icon">
+                            <lightning-icon icon-name="utility:email" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="journey-modal__title-wrap">
+                            <h2 class="journey-modal__title">Send Email</h2>
+                            <p class="journey-modal__subtitle">
+                                Pick one Lightning email template to send from noreply@utkarshindialimited.in to each selected account email address.
+                            </p>
+                        </div>
+                        <button
+                            class="slds-button slds-button_icon journey-modal__close"
+                            title="Close"
+                            onclick={handleCloseEmailModal}
+                            disabled={isSendingEmail}
+                        >
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="journey-modal__content">
+                        <div class="journey-summary email-modal__summary">
+                            <div class="journey-summary__icon email-modal__summary-icon">
+                                <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                            </div>
+                            <p class="journey-summary__text">
+                                <span class="journey-summary__count email-modal__summary-count">{selectedAccountCount}</span>
+                                <template if:true={isSingleAccount}> account </template>
+                                <template if:false={isSingleAccount}> accounts </template>
+                                selected for email delivery
+                            </p>
+                        </div>
+
+                        <template if:true={isLoadingEmailTemplates}>
+                            <div class="journey-loading">
+                                <lightning-spinner alternative-text="Loading email templates" size="medium"></lightning-spinner>
+                                <span>Loading Lightning email templates…</span>
+                            </div>
+                        </template>
+
+                        <template if:false={isLoadingEmailTemplates}>
+                            <div class="journey-template-panel">
+                                <div class="journey-search">
+                                    <lightning-input
+                                        type="search"
+                                        label="Search templates"
+                                        placeholder="Search by template name or folder"
+                                        value={emailTemplateSearch}
+                                        onchange={handleEmailTemplateSearch}
+                                        variant="label-hidden"
+                                    ></lightning-input>
+                                </div>
+
+                                <div class="journey-toolbar">
+                                    <span class="journey-toolbar__label">Available templates</span>
+                                    <span class="journey-toolbar__count">
+                                        {filteredEmailTemplateCount} of {totalEmailTemplateCount}
+                                    </span>
+                                </div>
+
+                                <template if:true={hasFilteredEmailTemplates}>
+                                    <div class="template-list" role="listbox" aria-label="Email templates">
+                                        <template for:each={filteredEmailTemplates} for:item="template">
+                                            <button
+                                                key={template.value}
+                                                type="button"
+                                                class={template.cardClass}
+                                                data-id={template.value}
+                                                onclick={handleSelectEmailTemplate}
+                                                role="option"
+                                                aria-selected={template.isSelected}
+                                            >
+                                                <span class="template-card__indicator"></span>
+                                                <span class="template-card__body">
+                                                    <span class="template-card__name">{template.label}</span>
+                                                    <span class="template-card__meta">
+                                                        <template if:true={template.folderName}>
+                                                            <span class="template-badge">{template.folderName}</span>
+                                                        </template>
+                                                    </span>
+                                                </span>
+                                                <template if:true={template.isSelected}>
+                                                    <lightning-icon
+                                                        class="template-card__check email-modal__check"
+                                                        icon-name="utility:check"
+                                                        size="x-small"
+                                                        alternative-text="Selected"
+                                                    ></lightning-icon>
+                                                </template>
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <template if:false={hasFilteredEmailTemplates}>
+                                    <div class="journey-empty">
+                                        <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                        <span>No templates match your search.</span>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <template if:true={showSelectedEmailPreview}>
+                                <div class="journey-selected-preview email-modal__preview">
+                                    <div class="journey-selected-preview__label email-modal__preview-label">Selected template</div>
+                                    <div class="journey-selected-preview__name">{selectedEmailTemplateLabel}</div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                    <footer class="journey-modal__footer">
+                        <lightning-button
+                            label="Cancel"
+                            onclick={handleCloseEmailModal}
+                            disabled={isSendingEmail}
+                        ></lightning-button>
+                        <lightning-button
+                            variant="brand"
+                            label="Send Email"
+                            icon-name="utility:send"
+                            onclick={handleConfirmSendEmail}
+                            disabled={isSendDisabled}
+                        ></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template if:true={showBluewaveEmailModal}>
+        <div class="journey-modal-overlay bluewave-modal">
+            <div class="journey-modal-overlay__backdrop" onclick={handleCloseBluewaveEmailModal}></div>
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-modal="true"
+                class="journey-modal-overlay__dialog"
+                onclick={stopModalClick}
+            >
+                <div class="journey-modal__container">
+                    <header class="journey-modal__header bluewave-modal__header">
+                        <div class="journey-modal__header-icon">
+                            <lightning-icon icon-name="utility:world" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="journey-modal__title-wrap">
+                            <h2 class="journey-modal__title">Send Campaign Email</h2>
+                            <p class="journey-modal__subtitle">
+                                Select a Bluewave email template to send to each selected account email address.
+                            </p>
+                        </div>
+                        <button
+                            class="slds-button slds-button_icon journey-modal__close"
+                            title="Close"
+                            onclick={handleCloseBluewaveEmailModal}
+                            disabled={isSendingBluewaveEmail}
+                        >
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="journey-modal__content">
+                        <div class="journey-summary bluewave-modal__summary">
+                            <div class="journey-summary__icon bluewave-modal__summary-icon">
+                                <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                            </div>
+                            <p class="journey-summary__text">
+                                <span class="journey-summary__count bluewave-modal__summary-count">{selectedAccountCount}</span>
+                                <template if:true={isSingleAccount}> account </template>
+                                <template if:false={isSingleAccount}> accounts </template>
+                                selected
+                            </p>
+                        </div>
+
+                        <template if:true={isLoadingBluewaveTemplates}>
+                            <div class="journey-loading">
+                                <lightning-spinner alternative-text="Loading Bluewave email templates" size="medium"></lightning-spinner>
+                                <span>Loading Bluewave email templates…</span>
+                            </div>
+                        </template>
+
+                        <template if:false={isLoadingBluewaveTemplates}>
+                            <template if:true={bluewaveTemplateLoadError}>
+                                <div class="journey-empty">
+                                    <lightning-icon icon-name="utility:error" size="small"></lightning-icon>
+                                    <span>{bluewaveTemplateLoadError}</span>
+                                </div>
+                            </template>
+
+                            <template if:false={bluewaveTemplateLoadError}>
+                                <div class="journey-template-panel">
+                                    <div class="journey-search">
+                                        <lightning-input
+                                            type="search"
+                                            label="Search templates"
+                                            placeholder="Search by template name or ID"
+                                            value={bluewaveTemplateSearch}
+                                            onchange={handleBluewaveTemplateSearch}
+                                            variant="label-hidden"
+                                        ></lightning-input>
+                                    </div>
+
+                                    <div class="journey-toolbar">
+                                        <span class="journey-toolbar__label">Bluewave email templates</span>
+                                        <span class="journey-toolbar__count">
+                                            {filteredBluewaveTemplateCount} of {totalBluewaveTemplateCount}
+                                        </span>
+                                    </div>
+
+                                    <template if:true={hasFilteredBluewaveTemplates}>
+                                        <div class="template-list" role="listbox" aria-label="Bluewave email templates">
+                                            <template for:each={filteredBluewaveTemplates} for:item="template">
+                                                <button
+                                                    key={template.value}
+                                                    type="button"
+                                                    class={template.cardClass}
+                                                    data-id={template.value}
+                                                    onclick={handleSelectBluewaveTemplate}
+                                                    role="option"
+                                                    aria-selected={template.isSelected}
+                                                >
+                                                    <span class="template-card__indicator"></span>
+                                                    <span class="template-card__body">
+                                                        <span class="template-card__name">{template.label}</span>
+                                                        <span class="template-card__meta">
+                                                            <span class="template-badge">ID {template.value}</span>
+                                                            <template if:true={template.updatedAtDisplay}>
+                                                                <span class="template-lang">Updated {template.updatedAtDisplay}</span>
+                                                            </template>
+                                                        </span>
+                                                    </span>
+                                                    <template if:true={template.isSelected}>
+                                                        <lightning-icon
+                                                            class="template-card__check bluewave-modal__check"
+                                                            icon-name="utility:check"
+                                                            size="x-small"
+                                                            alternative-text="Selected"
+                                                        ></lightning-icon>
+                                                    </template>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template if:false={hasFilteredBluewaveTemplates}>
+                                        <div class="journey-empty">
+                                            <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                            <span>No Bluewave templates match your search.</span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <template if:true={showSelectedBluewaveTemplatePreview}>
+                                <div class="journey-selected-preview bluewave-modal__preview">
+                                    <div class="journey-selected-preview__label bluewave-modal__preview-label">Selected template</div>
+                                    <div class="journey-selected-preview__name">{selectedBluewaveTemplateLabel}</div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                    <footer class="journey-modal__footer">
+                        <lightning-button
+                            label="Cancel"
+                            onclick={handleCloseBluewaveEmailModal}
+                            disabled={isSendingBluewaveEmail}
+                        ></lightning-button>
+                        <lightning-button
+                            label="Send Email"
+                            variant="brand"
+                            onclick={handleConfirmSendBluewaveEmail}
+                            disabled={isBluewaveEmailSendDisabled}
+                        ></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template if:true={showCampaignJourneyModal}>
+        <div class="journey-modal-overlay campaign-journey-modal">
+            <div class="journey-modal-overlay__backdrop" onclick={handleCloseCampaignJourneyModal}></div>
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-modal="true"
+                class="journey-modal-overlay__dialog"
+                onclick={stopModalClick}
+            >
+                <div class="journey-modal__container">
+                    <header class="journey-modal__header campaign-journey-modal__header">
+                        <div class="journey-modal__header-icon">
+                            <lightning-icon icon-name="utility:trail" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="journey-modal__title-wrap">
+                            <h2 class="journey-modal__title">Send Journey</h2>
+                            <p class="journey-modal__subtitle">
+                                Pick one Bluewave journey to send WhatsApp, RCS, and SMS together to each selected account phone number.
+                            </p>
+                        </div>
+                        <button
+                            class="slds-button slds-button_icon journey-modal__close"
+                            title="Close"
+                            onclick={handleCloseCampaignJourneyModal}
+                            disabled={isSendingCampaignJourney}
+                        >
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="journey-modal__content">
+                        <div class="journey-summary campaign-journey-modal__summary">
+                            <div class="journey-summary__icon campaign-journey-modal__summary-icon">
+                                <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                            </div>
+                            <p class="journey-summary__text">
+                                <span class="journey-summary__count campaign-journey-modal__summary-count">{selectedAccountCount}</span>
+                                <template if:true={isSingleAccount}> account </template>
+                                <template if:false={isSingleAccount}> accounts </template>
+                                selected for journey delivery
+                            </p>
+                        </div>
+
+                        <template if:true={isLoadingCampaignJourneys}>
+                            <div class="journey-loading">
+                                <lightning-spinner alternative-text="Loading journeys" size="medium"></lightning-spinner>
+                                <span>Loading Bluewave journeys…</span>
+                            </div>
+                        </template>
+
+                        <template if:false={isLoadingCampaignJourneys}>
+                            <div class="journey-template-panel">
+                                <div class="journey-search">
+                                    <lightning-input
+                                        type="search"
+                                        label="Search journeys"
+                                        placeholder="Search by journey name"
+                                        value={campaignJourneySearch}
+                                        onchange={handleCampaignJourneySearch}
+                                        variant="label-hidden"
+                                    ></lightning-input>
+                                </div>
+
+                                <div class="journey-toolbar">
+                                    <span class="journey-toolbar__label">Available journeys</span>
+                                    <span class="journey-toolbar__count">
+                                        {filteredCampaignJourneyCount} of {totalCampaignJourneyCount}
+                                    </span>
+                                </div>
+
+                                <template if:true={hasFilteredCampaignJourneys}>
+                                    <div class="template-list" role="listbox" aria-label="Bluewave journeys">
+                                        <template for:each={filteredCampaignJourneys} for:item="journey">
+                                            <button
+                                                key={journey.value}
+                                                type="button"
+                                                class={journey.cardClass}
+                                                data-name={journey.value}
+                                                onclick={handleSelectCampaignJourney}
+                                                role="option"
+                                                aria-selected={journey.isSelected}
+                                            >
+                                                <span class="template-card__indicator"></span>
+                                                <span class="template-card__body">
+                                                    <span class="template-card__name">{journey.label}</span>
+                                                </span>
+                                                <template if:true={journey.isSelected}>
+                                                    <lightning-icon
+                                                        class="template-card__check campaign-journey-modal__check"
+                                                        icon-name="utility:check"
+                                                        size="x-small"
+                                                        alternative-text="Selected"
+                                                    ></lightning-icon>
+                                                </template>
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <template if:false={hasFilteredCampaignJourneys}>
+                                    <div class="journey-empty">
+                                        <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                        <span>No journeys match your search.</span>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <template if:true={showSelectedCampaignJourneyPreview}>
+                                <div class="journey-selected-preview campaign-journey-modal__preview">
+                                    <div class="journey-selected-preview__label campaign-journey-modal__preview-label">Selected journey</div>
+                                    <div class="journey-selected-preview__name">{selectedCampaignJourneyLabel}</div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                    <footer class="journey-modal__footer">
+                        <lightning-button
+                            label="Cancel"
+                            onclick={handleCloseCampaignJourneyModal}
+                            disabled={isSendingCampaignJourney}
+                        ></lightning-button>
+                        <lightning-button
+                            variant="brand"
+                            label="Send Journey"
+                            icon-name="utility:send"
+                            onclick={handleConfirmSendCampaignJourney}
+                            disabled={isCampaignJourneySendDisabled}
+                        ></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template if:true={showJourneyModal}>
+        <div class={journeyModalOverlayClass}>
+            <div class="journey-modal-overlay__backdrop" onclick={handleCloseJourneyModal}></div>
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-modal="true"
+                class="journey-modal-overlay__dialog"
+                onclick={stopModalClick}
+            >
+                <div class="journey-modal__container">
+                    <header class="journey-modal__header">
+                        <div class="journey-modal__header-icon">
+                            <lightning-icon icon-name="utility:chat" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="journey-modal__title-wrap">
+                            <h2 class="journey-modal__title">{journeyModalTitle}</h2>
+                            <template if:true={isWhatsAppStep}>
+                                <p class="journey-modal__subtitle">
+                                    Step 1: Pick one WhatsApp template to send to the phone number on each selected account.
+                                </p>
+                            </template>
+                            <template if:true={isRcsStep}>
+                                <template if:true={isCampaignModalMode}>
+                                    <p class="journey-modal__subtitle">
+                                        Step 2 (optional): Pick one RCS template, or continue to SMS or send WhatsApp only.
+                                    </p>
+                                </template>
+                                <template if:true={isRcsOnlyModalMode}>
+                                    <p class="journey-modal__subtitle">
+                                        Pick one RCS template to send to the phone number on each selected account.
+                                    </p>
+                                </template>
+                            </template>
+                            <template if:true={isSmsStep}>
+                                <template if:true={isCampaignModalMode}>
+                                    <p class="journey-modal__subtitle">
+                                        Step 3 (optional): Pick one SMS template to send to the account phone number, or skip SMS.
+                                    </p>
+                                </template>
+                                <template if:true={isSmsOnlyModalMode}>
+                                    <p class="journey-modal__subtitle">
+                                        Pick one SMS template to send to the phone number on each selected account.
+                                    </p>
+                                </template>
+                            </template>
+                        </div>
+                        <button
+                            class="slds-button slds-button_icon journey-modal__close"
+                            title="Close"
+                            onclick={handleCloseJourneyModal}
+                            disabled={isSendingWhatsApp}
+                        >
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="journey-modal__content">
+                        <div class="journey-summary">
+                            <div class="journey-summary__icon">
+                                <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                            </div>
+                            <p class="journey-summary__text">
+                                <span class="journey-summary__count">{selectedAccountCount}</span>
+                                <template if:true={isSingleAccount}> account </template>
+                                <template if:false={isSingleAccount}> accounts </template>
+                                <template if:true={isWhatsAppStep}> selected for WhatsApp delivery </template>
+                                <template if:true={isRcsStep}> selected for RCS delivery </template>
+                                <template if:true={isSmsStep}> selected for SMS delivery </template>
+                            </p>
+                        </div>
+
+                        <template if:true={isWhatsAppStep}>
+                            <template if:true={isLoadingWhatsAppTemplates}>
+                                <div class="journey-loading">
+                                    <lightning-spinner alternative-text="Loading WhatsApp templates" size="medium"></lightning-spinner>
+                                    <span>Loading approved WhatsApp templates…</span>
+                                </div>
+                            </template>
+
+                            <template if:false={isLoadingWhatsAppTemplates}>
+                                <div class="journey-template-panel">
+                                    <div class="journey-search">
+                                        <lightning-input
+                                            type="search"
+                                            label="Search templates"
+                                            placeholder="Search by template name or category"
+                                            value={whatsAppTemplateSearch}
+                                            onchange={handleWhatsAppTemplateSearch}
+                                            variant="label-hidden"
+                                        ></lightning-input>
+                                    </div>
+
+                                    <div class="journey-toolbar">
+                                        <span class="journey-toolbar__label">Available templates</span>
+                                        <span class="journey-toolbar__count">
+                                            {filteredWhatsAppTemplateCount} of {totalWhatsAppTemplateCount}
+                                        </span>
+                                    </div>
+
+                                    <template if:true={hasFilteredWhatsAppTemplates}>
+                                        <div class="template-list" role="listbox" aria-label="WhatsApp templates">
+                                            <template for:each={filteredWhatsAppTemplates} for:item="template">
+                                                <button
+                                                    key={template.value}
+                                                    type="button"
+                                                    class={template.cardClass}
+                                                    data-name={template.value}
+                                                    onclick={handleSelectWhatsAppTemplate}
+                                                    role="option"
+                                                    aria-selected={template.isSelected}
+                                                >
+                                                    <span class="template-card__indicator"></span>
+                                                    <span class="template-card__body">
+                                                        <span class="template-card__name">{template.label}</span>
+                                                        <span class="template-card__meta">
+                                                            <template if:true={template.categoryName}>
+                                                                <span class={template.badgeClass}>{template.categoryName}</span>
+                                                            </template>
+                                                            <template if:true={template.language}>
+                                                                <span class="template-lang">{template.language}</span>
+                                                            </template>
+                                                        </span>
+                                                    </span>
+                                                    <template if:true={template.isSelected}>
+                                                        <lightning-icon
+                                                            class="template-card__check"
+                                                            icon-name="utility:check"
+                                                            size="x-small"
+                                                            alternative-text="Selected"
+                                                        ></lightning-icon>
+                                                    </template>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template if:false={hasFilteredWhatsAppTemplates}>
+                                        <div class="journey-empty">
+                                            <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                            <span>No templates match your search.</span>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <template if:true={showSelectedWhatsAppPreview}>
+                                    <div class="journey-selected-preview">
+                                        <div class="journey-selected-preview__label">Selected WhatsApp template</div>
+                                        <div class="journey-selected-preview__name">{selectedWhatsAppTemplateLabel}</div>
+                                    </div>
+                                </template>
+                            </template>
+                        </template>
+
+                        <template if:true={isRcsStep}>
+                            <template if:true={isLoadingRcsTemplates}>
+                                <div class="journey-loading">
+                                    <lightning-spinner alternative-text="Loading RCS templates" size="medium"></lightning-spinner>
+                                    <span>Loading approved RCS templates…</span>
+                                </div>
+                            </template>
+
+                            <template if:false={isLoadingRcsTemplates}>
+                                <div class="journey-template-panel">
+                                    <div class="journey-search">
+                                        <lightning-input
+                                            type="search"
+                                            label="Search templates"
+                                            placeholder="Search by RCS template name"
+                                            value={rcsTemplateSearch}
+                                            onchange={handleRcsTemplateSearch}
+                                            variant="label-hidden"
+                                        ></lightning-input>
+                                    </div>
+
+                                    <div class="journey-toolbar">
+                                        <span class="journey-toolbar__label">Available templates</span>
+                                        <span class="journey-toolbar__count">
+                                            {filteredRcsTemplateCount} of {totalRcsTemplateCount}
+                                        </span>
+                                    </div>
+
+                                    <template if:true={hasFilteredRcsTemplates}>
+                                        <div class="template-list" role="listbox" aria-label="RCS templates">
+                                            <template for:each={filteredRcsTemplates} for:item="template">
+                                                <button
+                                                    key={template.value}
+                                                    type="button"
+                                                    class={template.cardClass}
+                                                    data-name={template.value}
+                                                    onclick={handleSelectRcsTemplate}
+                                                    role="option"
+                                                    aria-selected={template.isSelected}
+                                                >
+                                                    <span class="template-card__indicator"></span>
+                                                    <span class="template-card__body">
+                                                        <span class="template-card__name">{template.label}</span>
+                                                        <template if:true={template.status}>
+                                                            <span class="template-card__meta">
+                                                                <span class="template-badge">{template.status}</span>
+                                                            </span>
+                                                        </template>
+                                                    </span>
+                                                    <template if:true={template.isSelected}>
+                                                        <lightning-icon
+                                                            class="template-card__check"
+                                                            icon-name="utility:check"
+                                                            size="x-small"
+                                                            alternative-text="Selected"
+                                                        ></lightning-icon>
+                                                    </template>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template if:false={hasFilteredRcsTemplates}>
+                                        <div class="journey-empty">
+                                            <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                            <span>No templates match your search.</span>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <template if:true={showSelectedRcsPreview}>
+                                    <div class="journey-selected-preview">
+                                        <div class="journey-selected-preview__label">Selected RCS template</div>
+                                        <div class="journey-selected-preview__name">{selectedRcsTemplateLabel}</div>
+                                    </div>
+                                </template>
+                            </template>
+                        </template>
+
+                        <template if:true={isSmsStep}>
+                            <template if:true={isLoadingSmsTemplates}>
+                                <div class="journey-loading">
+                                    <lightning-spinner alternative-text="Loading SMS templates" size="medium"></lightning-spinner>
+                                    <span>Loading approved SMS templates…</span>
+                                </div>
+                            </template>
+
+                            <template if:false={isLoadingSmsTemplates}>
+                                <div class="journey-template-panel">
+                                    <div class="journey-search">
+                                        <lightning-input
+                                            type="search"
+                                            label="Search templates"
+                                            placeholder="Search by SMS template name"
+                                            value={smsTemplateSearch}
+                                            onchange={handleSmsTemplateSearch}
+                                            variant="label-hidden"
+                                        ></lightning-input>
+                                    </div>
+
+                                    <div class="journey-toolbar">
+                                        <span class="journey-toolbar__label">Available templates</span>
+                                        <span class="journey-toolbar__count">
+                                            {filteredSmsTemplateCount} of {totalSmsTemplateCount}
+                                        </span>
+                                    </div>
+
+                                    <template if:true={hasFilteredSmsTemplates}>
+                                        <div class="template-list" role="listbox" aria-label="SMS templates">
+                                            <template for:each={filteredSmsTemplates} for:item="template">
+                                                <button
+                                                    key={template.value}
+                                                    type="button"
+                                                    class={template.cardClass}
+                                                    data-name={template.value}
+                                                    onclick={handleSelectSmsTemplate}
+                                                    role="option"
+                                                    aria-selected={template.isSelected}
+                                                >
+                                                    <span class="template-card__indicator"></span>
+                                                    <span class="template-card__body">
+                                                        <span class="template-card__name">{template.label}</span>
+                                                        <template if:true={template.status}>
+                                                            <span class="template-card__meta">
+                                                                <span class="template-badge">{template.status}</span>
+                                                            </span>
+                                                        </template>
+                                                    </span>
+                                                    <template if:true={template.isSelected}>
+                                                        <lightning-icon
+                                                            class="template-card__check"
+                                                            icon-name="utility:check"
+                                                            size="x-small"
+                                                            alternative-text="Selected"
+                                                        ></lightning-icon>
+                                                    </template>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <template if:false={hasFilteredSmsTemplates}>
+                                        <div class="journey-empty">
+                                            <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                                            <span>No templates match your search.</span>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <template if:true={showSelectedSmsPreview}>
+                                    <div class="journey-selected-preview">
+                                        <div class="journey-selected-preview__label">Selected SMS template</div>
+                                        <div class="journey-selected-preview__name">{selectedSmsTemplateLabel}</div>
+                                    </div>
+                                </template>
+                            </template>
+                        </template>
+                    </div>
+
+                    <footer class="journey-modal__footer">
+                        <template if:true={isCampaignModalMode}>
+                            <template if:true={isWhatsAppStep}>
+                                <lightning-button
+                                    label="Cancel"
+                                    onclick={handleCloseJourneyModal}
+                                    disabled={isSendingWhatsApp}
+                                ></lightning-button>
+                                <lightning-button
+                                    label="Add RCS (Optional)"
+                                    icon-name="utility:forward"
+                                    onclick={handleGoToRcsStep}
+                                    disabled={isJourneyNextDisabled}
+                                ></lightning-button>
+                                <lightning-button
+                                    variant="brand"
+                                    label="Send WhatsApp"
+                                    icon-name="utility:send"
+                                    onclick={handleConfirmSendMessages}
+                                    disabled={isWhatsAppSendDisabled}
+                                ></lightning-button>
+                            </template>
+                            <template if:true={isRcsStep}>
+                                <lightning-button
+                                    label="Back"
+                                    onclick={handleBackToWhatsAppStep}
+                                    disabled={isSendingWhatsApp}
+                                ></lightning-button>
+                                <lightning-button
+                                    label="Add SMS (Optional)"
+                                    icon-name="utility:forward"
+                                    onclick={handleGoToSmsStep}
+                                    disabled={isJourneySendDisabled}
+                                ></lightning-button>
+                                <lightning-button
+                                    variant="brand"
+                                    label={journeySendButtonLabel}
+                                    icon-name="utility:send"
+                                    onclick={handleConfirmSendMessages}
+                                    disabled={isJourneySendDisabled}
+                                ></lightning-button>
+                            </template>
+                            <template if:true={isSmsStep}>
+                                <lightning-button
+                                    label="Back"
+                                    onclick={handleBackToRcsStep}
+                                    disabled={isSendingWhatsApp}
+                                ></lightning-button>
+                                <lightning-button
+                                    variant="brand"
+                                    label={journeySendButtonLabel}
+                                    icon-name="utility:send"
+                                    onclick={handleConfirmSendMessages}
+                                    disabled={isJourneySendDisabled}
+                                ></lightning-button>
+                            </template>
+                        </template>
+                        <template if:true={isRcsOnlyModalMode}>
+                            <lightning-button
+                                label="Cancel"
+                                onclick={handleCloseJourneyModal}
+                                disabled={isSendingWhatsApp}
+                            ></lightning-button>
+                            <lightning-button
+                                variant="brand"
+                                label="Send RCS"
+                                icon-name="utility:send"
+                                onclick={handleConfirmSendRcsOnly}
+                                disabled={isRcsOnlySendDisabled}
+                            ></lightning-button>
+                        </template>
+                        <template if:true={isSmsOnlyModalMode}>
+                            <lightning-button
+                                label="Cancel"
+                                onclick={handleCloseJourneyModal}
+                                disabled={isSendingWhatsApp}
+                            ></lightning-button>
+                            <lightning-button
+                                variant="brand"
+                                label="Send SMS"
+                                icon-name="utility:send"
+                                onclick={handleConfirmSendSmsOnly}
+                                disabled={isSmsOnlySendDisabled}
+                            ></lightning-button>
+                        </template>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <c-campaign-name-modal
+        is-open={isCampaignNameModalOpen}
+        is-sending={isCampaignNameModalSending}
+        send-button-label={campaignNameSendButtonLabel}
+        collect-schedule={collectJourneySchedule}
+        oncancel={handleCampaignNameModalCancel}
+        onconfirm={handleCampaignNameModalConfirm}
+    ></c-campaign-name-modal>
+
+</template>

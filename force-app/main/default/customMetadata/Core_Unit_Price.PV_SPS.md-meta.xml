@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PV SPS</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_on_Amount__c</field>
+        <value xsi:type="xsd:double">4000.0</value>
+    </values>
+    <values>
+        <field>Add_on_Percentage__c</field>
+        <value xsi:type="xsd:double">5.0</value>
+    </values>
+    <values>
+        <field>Cal_on_Percentage__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Material_List_Type__c</field>
+        <value xsi:type="xsd:string">SPS</value>
+    </values>
+    <values>
+        <field>Price_Basis_Type__c</field>
+        <value xsi:type="xsd:string">Price Variation</value>
+    </values>
+    <values>
+        <field>Unit_Price__c</field>
+        <value xsi:type="xsd:double">32000.0</value>
+    </values>
+    <values>
+        <field>Zinc_Coating_Type__c</field>
+        <value xsi:type="xsd:string">610</value>
+    </values>
+</CustomMetadata>

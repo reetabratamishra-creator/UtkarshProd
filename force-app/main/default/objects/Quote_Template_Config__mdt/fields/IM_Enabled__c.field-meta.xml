@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IM_Enabled__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tick on a department row to expose that department as a product tab inside the International Marketing quote. The department&apos;s own Accordion Section / Section Logic records are reused as-is; nothing is copied.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Checked = this department&apos;s estimator appears as a tab in the International Marketing quote. Leave unchecked for domestic-only departments.</inlineHelpText>
+    <label>Available in International Marketing</label>
+    <type>Checkbox</type>
+</CustomField>

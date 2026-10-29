@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Train_1AC__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates if 1AC train travel is allowed for this level</description>
+    <inlineHelpText>Check if 1AC train class is permitted</inlineHelpText>
+    <label>Train 1AC</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

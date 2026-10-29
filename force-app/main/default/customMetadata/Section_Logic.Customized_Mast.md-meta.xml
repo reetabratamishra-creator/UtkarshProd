@@ -1,0 +1,2244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Customized Mast</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Weight_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">Customized_Mast_FLag_Mast</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Customized Mast</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;mast_customized&quot;,
+      &quot;label&quot;: &quot;Type of Mast - Customized&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;STADIUM MAST&quot;,
+        &quot;FLAG MAST&quot;
+      ],
+      &quot;controllingField&quot;: &quot;type_of_mast&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Customized Mast&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;customized_folder&quot;,
+      &quot;labelFormat&quot;: &quot;{value} - Estimator&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;mast_customized&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;STADIUM MAST&quot;: {
+          &quot;title&quot;: &quot;STADIUM MAST - ESTIMATOR&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;stadium_mast_types&quot;,
+              &quot;label&quot;: &quot;STADIUM MAST TYPES&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;isCheckboxGroup&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;man_riding_lift&quot;,
+                  &quot;label&quot;: &quot;Man Riding Lift&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: false
+                },
+                {
+                  &quot;apiName&quot;: &quot;ladder_with_cage&quot;,
+                  &quot;label&quot;: &quot;Ladder With Cage&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: false
+                },
+                {
+                  &quot;apiName&quot;: &quot;man_riding_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: false
+                },
+                {
+                  &quot;apiName&quot;: &quot;ladder_cage_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: false
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;general_details_man_riding_lift&quot;,
+              &quot;label&quot;: &quot;GENERAL DETAILS - MAN RIDING LIFT&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;man_riding_lift&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mrl_segment_height&quot;,
+                  &quot;label&quot;: &quot;SEGMENT HEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MTRS&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_head_frame_height&quot;,
+                  &quot;label&quot;: &quot;HEAD FRAME HEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MTRS&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_height_of_mast&quot;,
+                  &quot;label&quot;: &quot;HEIGHT OF THE MAST&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;unit&quot;: &quot;MTRS&quot;,
+                  &quot;defaultValue&quot;: 0,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;mrl_segment_height + mrl_head_frame_height&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;label&quot;: &quot;NO OF SEGMENT&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;3 TO 5&quot;,
+                  &quot;options&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_top_dia&quot;,
+                  &quot;label&quot;: &quot;TOP DIA&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bottom_dia&quot;,
+                  &quot;label&quot;: &quot;BOTTOM DIA&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_is_extra_micron&quot;,
+                  &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_extra_micron&quot;,
+                  &quot;label&quot;: &quot;EXTRA MICRON VALUE?&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;mrl_is_extra_micron&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_pu_paint&quot;,
+                  &quot;label&quot;: &quot;PU PAINT&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_pu_paint_note&quot;,
+                  &quot;label&quot;: &quot;Note&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;mrl_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_pu_paint_realization&quot;,
+                  &quot;label&quot;: &quot;Realization %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 5,
+                  &quot;controllingField&quot;: &quot;mrl_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_pu_paint_weight&quot;,
+                  &quot;label&quot;: &quot;Price Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;mrl_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mrl_segment_weight_details&quot;,
+              &quot;label&quot;: &quot;Segment Weight Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;man_riding_lift&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mrl_base_amount&quot;,
+                  &quot;label&quot;: &quot;Base Amount&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_weight&quot;,
+                  &quot;label&quot;: &quot;Weight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_amount_realization&quot;,
+                  &quot;label&quot;: &quot;Amount with Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(mrl_base_amount || 0) + (mrl_realization || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_realization&quot;,
+                  &quot;label&quot;: &quot;Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 10,
+				          &quot;isRealization&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_amount_realization || 0)-(mrl_base_amount || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_hdr_seg_acc&quot;,
+                  &quot;label&quot;: &quot;SEGMENT DETAILS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_no_of_lum&quot;,
+                  &quot;label&quot;: &quot;No. of lum&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_type_of_lum&quot;,
+                  &quot;label&quot;: &quot;Type of Lum.&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;defaultValue&quot;: &quot;Asymmetric&quot;,
+                  &quot;options&quot;: [
+                    &quot;Asymmetric&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_watt&quot;,
+                  &quot;label&quot;: &quot;Watt&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_special_note&quot;,
+                  &quot;label&quot;: &quot;Special Note&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;man_riding_lift_section&quot;,
+              &quot;label&quot;: &quot;Segment Dimension&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mrl_lbl_top&quot;,
+                  &quot;label&quot;: &quot;TOP SEGMENT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_top_segment_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_top_segment_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_lbl_mid2&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 2&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_middle_segment_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_middle_segment_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_lbl_mid3&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 3&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mid3_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mid3_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_lbl_mid4&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 4&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mid4_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mid4_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_lbl_bottom&quot;,
+                  &quot;label&quot;: &quot;BOTTOM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bottom_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bottom_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                 {
+                  &quot;apiName&quot;: &quot;mrl_hdr_base_plate&quot;,
+                  &quot;label&quot;: &quot;BASE PLATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bp_diameter&quot;,
+                  &quot;label&quot;: &quot;DIAMETER&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bp_thickness&quot;,
+                  &quot;label&quot;: &quot;THICKNESS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bp_pcd&quot;,
+                  &quot;label&quot;: &quot;PCD&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_bp_spacer_1&quot;,
+                  &quot;label&quot;: &quot;-&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_weight&quot;,
+                  &quot;label&quot;: &quot;Segment WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isWeightTotal&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_weight || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_total_weight&quot;,
+                  &quot;label&quot;: &quot;Segment TOTAL WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isWeightTotal&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_weight || 0) &quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_base_price&quot;,
+                  &quot;label&quot;: &quot;BASE PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_realization&quot;,
+                  &quot;label&quot;: &quot;REALIZATION&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isRealization&quot;: true,
+                  &quot;formula&quot;: &quot;mrl_realization&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_unit_price&quot;,
+                  &quot;label&quot;: &quot;SEGMENT UNIT PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((((Base_Amount__c + (mrl_realization || 0)) * (mrl_weight || 0)) + (mrl_pu_paint? (mrl_pu_paint_weight || 0) * (1 + (mrl_pu_paint_realization||0)/100) : 0) ))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_man_riding_unit_cost&quot;,
+                  &quot;label&quot;: &quot;SEGMENT UNIT COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((Base_Amount__c || 0) * (mrl_weight || 0) + (mrl_pu_paint? (mrl_pu_paint_weight || 0) * (1 + (mrl_pu_paint_realization||0)/100) : 0) ))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_ghost_quantity_for_top_section&quot;,
+                  &quot;label&quot;: &quot;Line Item Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_quantity || 1)&quot;,
+                  &quot;isVisible&quot;: false
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;accessories_man_riding_lift&quot;,
+              &quot;label&quot;: &quot;FOUNDATION SECTION&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_bolt_label&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION BOLT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_bolt_type&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION BOLT TYPE&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;options&quot;: [
+                    &quot;with Foundation Bolt&quot;,
+                    &quot;without Foundation Bolt&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_amount_realization&quot;,
+                  &quot;label&quot;: &quot;Amount With Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(Base_Amount__c || 0) + (mrl_fb_realization || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_realization&quot;,
+                  &quot;label&quot;: &quot;realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;defaultValue&quot;: 10,
+				          &quot;isRealization&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;:true,
+                  &quot;disableControllingField&quot;: &quot;mrl_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ],
+                  &quot;formula&quot;: &quot;(mrl_fb_amount_realization || 0) - (Base_Amount__c || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_weight&quot;,
+                  &quot;label&quot;: &quot;Weight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;disableControllingField&quot;: &quot;mrl_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_spacer_1&quot;,
+                  &quot;label&quot;: &quot;-&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_diameter&quot;,
+                  &quot;label&quot;: &quot;Diameter&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_length&quot;,
+                  &quot;label&quot;: &quot;Length&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_no_of_bolt&quot;,
+                  &quot;label&quot;: &quot;No. of bolt&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_fb_quantity&quot;,
+                  &quot;label&quot;: &quot;quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;disableControllingField&quot;: &quot;mrl_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_weight&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isWeightTotal&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_foundation_bolt_type==&apos;without Foundation Bolt&apos;) ? &apos;&apos; : (mrl_fb_weight||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;BASE FOUNDATION PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_unit_price&quot;,
+                  &quot;label&quot;: &quot;UNIT FOUNDATION PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((Base_Amount__c + (mrl_fb_realization || 0)) * (mrl_foundation_weight || 0)))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_foundation_unit_cost&quot;,
+                  &quot;label&quot;: &quot;UNIT FOUNDATION COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (mrl_foundation_weight || 0))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mast_accessories_man_riding_lift&quot;,
+              &quot;label&quot;: &quot;MAN RIDING LIFT&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;mrl_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_description&quot;,
+                  &quot;label&quot;: &quot;Description&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_rate&quot;,
+                  &quot;label&quot;: &quot;Rate&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_realization&quot;,
+                  &quot;label&quot;: &quot;Realization %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;defaultValue&quot;: 5,
+				          &quot;isRealization&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_quantity&quot;,
+                  &quot;label&quot;: &quot;quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;readOnly&quot;: false,
+                  &quot;defaultValue&quot;: &quot;1&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES BASE FOUNDATION PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;mrl_mast_acc_rate&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_foundation_unit_price&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES UNIT FOUNDATION PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(mrl_mast_acc_rate || 0) * (1 + (mrl_mast_acc_realization || 0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mrl_mast_acc_foundation_unit_cost&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES UNIT FOUNDATION COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((mrl_mast_acc_rate || 0))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;general_details_ladder_with_cage&quot;,
+              &quot;label&quot;: &quot;GENERAL DETAILS - LADDER WITH CAGE&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;ladder_with_cage&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;lwc_segment_height&quot;,
+                  &quot;label&quot;: &quot;SEGMENT HEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MTRS&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_head_frame_height&quot;,
+                  &quot;label&quot;: &quot;HEAD FRAME HEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MTRS&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_height_of_mast&quot;,
+                  &quot;label&quot;: &quot;HEIGHT OF THE MAST&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;unit&quot;: &quot;MTRS&quot;,
+                  &quot;defaultValue&quot;: 0,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;lwc_segment_height + lwc_head_frame_height&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;label&quot;: &quot;NO. OF SEGMENT&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;3 TO 5&quot;,
+                  &quot;options&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_top_dia&quot;,
+                  &quot;label&quot;: &quot;TOP DIA&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bottom_dia&quot;,
+                  &quot;label&quot;: &quot;BOTTOM DIA&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;unit&quot;: &quot;MM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_is_extra_micron&quot;,
+                  &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_extra_micron&quot;,
+                  &quot;label&quot;: &quot;EXTRA MICRON VALUE?&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;lwc_is_extra_micron&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_pu_paint&quot;,
+                  &quot;label&quot;: &quot;PU PAINT&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_pu_paint_note&quot;,
+                  &quot;label&quot;: &quot;Note&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;lwc_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_pu_paint_realization&quot;,
+                  &quot;label&quot;: &quot;Realization %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;:5,
+                  &quot;controllingField&quot;: &quot;lwc_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_pu_paint_weight&quot;,
+                  &quot;label&quot;: &quot;Price Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;lwc_pu_paint&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;lwc_estimation_label&quot;,
+              &quot;label&quot;: &quot;Segment Weight Details&quot;,
+              &quot;type&quot;: &quot;header&quot;,
+              &quot;readOnly&quot;: true,
+              &quot;controllingField&quot;: &quot;ladder_with_cage&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;lwc_base_amount&quot;,
+                  &quot;label&quot;: &quot;Base Amount&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(Base_Amount__c || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_weight&quot;,
+                  &quot;label&quot;: &quot;Weight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_amount_realization&quot;,
+                  &quot;label&quot;: &quot;Amount With Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(lwc_base_amount || 0) + (lwc_realization || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_realization&quot;,
+                  &quot;label&quot;: &quot;Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;isVisible&quot;: false,
+				  &quot;isRealization&quot;: true,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: 10,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(lwc_amount_realization || 0) - (Base_Amount__c || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_hdr_seg_acc&quot;,
+                  &quot;label&quot;: &quot;SEGMENT DETAILS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_no_of_lum&quot;,
+                  &quot;label&quot;: &quot;No. of lum&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_type_of_lum&quot;,
+                  &quot;label&quot;: &quot;Type of Lum.&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;defaultValue&quot;:&quot;Asymmetric&quot;,
+                  &quot;options&quot;: [
+                    &quot;Asymmetric&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_watt&quot;,
+                  &quot;label&quot;: &quot;Watt&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_special_note&quot;,
+                  &quot;label&quot;: &quot;Special Note&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ladder_with_cage_section&quot;,
+              &quot;label&quot;: &quot;Segment Dimension&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;lwc_lbl_top&quot;,
+                  &quot;label&quot;: &quot;TOP SEGMENT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_top_segment_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_top_segment_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_lbl_mid2&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 2&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_middle_segment_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_middle_segment_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_lbl_mid3&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 3&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_mid3_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_mid3_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_lbl_mid4&quot;,
+                  &quot;label&quot;: &quot;MIDDLE SEGMENT - 4&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_mid4_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_mid4_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_lbl_bottom&quot;,
+                  &quot;label&quot;: &quot;BOTTOM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bottom_length&quot;,
+                  &quot;label&quot;: &quot;Length (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bottom_thickness&quot;,
+                  &quot;label&quot;: &quot;Thickness (MM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                  ]
+                },
+                 {
+                  &quot;apiName&quot;: &quot;lwc_hdr_base_plate&quot;,
+                  &quot;label&quot;: &quot;BASE PLATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bp_diameter&quot;,
+                  &quot;label&quot;: &quot;DIAMETER&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bp_thickness&quot;,
+                  &quot;label&quot;: &quot;THICKNESS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bp_pcd&quot;,
+                  &quot;label&quot;: &quot;PCD&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_bp_spacer_1&quot;,
+                  &quot;label&quot;: &quot;-&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_weight&quot;,
+                  &quot;label&quot;: &quot;Segment WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isWeightTotal&quot;: true,
+                  &quot;formula&quot;: &quot;(lwc_weight || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_base_price&quot;,
+                  &quot;label&quot;: &quot;SEGMENT BASE PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_realization&quot;,
+                  &quot;label&quot;: &quot;REALIZATION&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isRealization&quot;: true,
+                  &quot;formula&quot;: &quot;lwc_realization&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_unit_price&quot;,
+                  &quot;label&quot;: &quot;SEGMENT UNIT PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((((Base_Amount__c + (lwc_realization||0)) * (lwc_ladder_cage_weight || 0)) + (lwc_pu_paint? (lwc_pu_paint_weight || 0) * (1 + (lwc_pu_paint_realization || 0)/100) : 0 )))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_unit_cost&quot;,
+                  &quot;label&quot;: &quot;SEGMENT UNIT COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((Base_Amount__c || 0) * (lwc_ladder_cage_weight || 0) + (lwc_pu_paint? (lwc_pu_paint_weight || 0) * (1 + (lwc_pu_paint_realization || 0)/100) : 0 )))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_ladder_cage_ghost_quantity_for_top_section&quot;,
+                  &quot;label&quot;: &quot;Line Item Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;formula&quot;: &quot;(lwc_quantity || 1)&quot;,
+                  &quot;isVisible&quot;: false
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;accessories_ladder_with_cage&quot;,
+              &quot;label&quot;: &quot;Foundation Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_bolt_label&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION BOLT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_bolt_type&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION BOLT TYPE&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;options&quot;: [
+                    &quot;with Foundation Bolt&quot;,
+                    &quot;without Foundation Bolt&quot;
+                  ],
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_amount_realization&quot;,
+                  &quot;label&quot;: &quot;Amount with Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(Base_Amount__c || 0) + (lwc_fb_realization || 0 )&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_realization&quot;,
+                  &quot;label&quot;: &quot;Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+				  &quot;isRealization&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;defaultValue&quot;: 10,
+                  &quot;colSpan&quot;: 3,
+                  &quot;disableControllingField&quot;: &quot;lwc_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ],
+                  &quot;formula&quot;: &quot;(lwc_fb_amount_realization || 0 ) - (Base_Amount__c || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_weight&quot;,
+                  &quot;label&quot;: &quot;Weight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3,
+                  &quot;disableControllingField&quot;: &quot;lwc_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_spacer_1&quot;,
+                  &quot;label&quot;: &quot;-&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_diameter&quot;,
+                  &quot;label&quot;: &quot;Diameter&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_length&quot;,
+                  &quot;label&quot;: &quot;Length&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_no_of_bolt&quot;,
+                  &quot;label&quot;: &quot;No. of bolt&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_fb_quantity&quot;,
+                  &quot;label&quot;: &quot;quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;disableControllingField&quot;: &quot;lwc_foundation_bolt_type&quot;,
+                  &quot;disableControllingValues&quot;: [
+                    &quot;with Foundation Bolt&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_weight&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isWeightTotal&quot;: true,
+                  &quot;formula&quot;: &quot;(lwc_foundation_bolt_type==&apos;without Foundation Bolt&apos;) ? &apos;&apos; : (lwc_fb_weight||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;BASE FOUNDATION PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_unit_price&quot;,
+                  &quot;label&quot;: &quot;UNIT FOUNDATION PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((Base_Amount__c + (lwc_fb_realization || 0)) * (lwc_foundation_weight || 0)))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_foundation_unit_cost&quot;,
+                  &quot;label&quot;: &quot;UNIT FOUNDATION COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lwc_foundation_weight || 0))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ladder_with_cage&quot;,
+              &quot;label&quot;: &quot;Ladder With Cage&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;lwc_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;lwc_acc_description&quot;,
+                  &quot;label&quot;: &quot;Description&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_acc_weight&quot;,
+                  &quot;label&quot;: &quot;Weight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_base_price&quot;,
+                  &quot;label&quot;: &quot;BASE PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_acc_realization&quot;,
+                  &quot;label&quot;: &quot;REALIZATION&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isRealization&quot;: true,
+                  &quot;formula&quot;: &quot;lwc_fb_realization&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_unit_price&quot;,
+                  &quot;label&quot;: &quot;UNIT PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((Base_Amount__c + (lwc_fb_realization || 0)) * (lwc_acc_weight || 0)))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;lwc_unit_cost&quot;,
+                  &quot;label&quot;: &quot;UNIT COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lwc_acc_weight || 0))&quot;
+                }
+              ]
+            }
+          ]
+        },
+        &quot;FLAG MAST&quot;: {
+          &quot;title&quot;: &quot;FLAG MAST - ESTIMATOR&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;fm_general_details&quot;,
+              &quot;label&quot;: &quot;GENERAL DETAILS&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;fm_h_sl&quot;,
+                  &quot;label&quot;: &quot;SL. NO.&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_h_ht&quot;,
+                  &quot;label&quot;: &quot;HEIGHT OF MAST&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_h_seg&quot;,
+                  &quot;label&quot;: &quot;NO. OF SEGMENT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_h_sd&quot;,
+                  &quot;label&quot;: &quot;NO. OF SIDES&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_rz_amt&quot;,
+                  &quot;label&quot;: &quot;Amount with Realization&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_h_rz&quot;,
+                  &quot;label&quot;: &quot;REALIZATION FOR...&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_h_qt&quot;,
+                  &quot;label&quot;: &quot;QUANTITY&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_mast_grid&quot;,
+                  &quot;type&quot;: &quot;grid-repeater&quot;,
+                  &quot;defaultRows&quot;: 5,
+                  &quot;maxRows&quot;: 10,
+                  &quot;addMoreApiName&quot;: &quot;fm_add_more_rows&quot;,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;fm_sl_no&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;defaultValue&quot;: &quot;{row}&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 1
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_height_of_mast&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;meter&quot;,
+                      &quot;colSpan&quot;: 1
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;1&quot;,
+                        &quot;2&quot;,
+                        &quot;3&quot;,
+                        &quot;4&quot;,
+                        &quot;5&quot;
+                      ],
+                      &quot;unit&quot;: &quot;Number (1-5)&quot;,
+                      &quot;colSpan&quot;: 2
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_no_of_sides&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [
+                        &quot;8&quot;,
+                        &quot;12&quot;,
+                        &quot;16&quot;,
+                        &quot;20&quot;
+                      ],
+                      &quot;unit&quot;: &quot;sides&quot;,
+                      &quot;colSpan&quot;: 2
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_realization_amount&quot;,
+                      &quot;label&quot;: &quot;&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;Value&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;(Base_Amount__c||0) + (fm_est_realization||0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_est_realization&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;defaultValue&quot;: 5,
+					            &quot;isRealization&quot;: true,
+                      &quot;unit&quot;: &quot;Value&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;(fm_realization_amount || 0) - (Base_Amount__c|| 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_est_quantity&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;Value&quot;,
+                      &quot;colSpan&quot;: 2
+                    }
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_add_more_rows&quot;,
+                  &quot;label&quot;: &quot;Add more?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed ?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;NO&quot;,
+                    &quot;YES&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;NO&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_wind_speed_value&quot;,
+                  &quot;label&quot;: &quot;WIND SPEED&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;fm_wind_speed&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;type&quot;: &quot;matrix-accordion-repeater&quot;,
+              &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+              &quot;maxRows&quot;: 10,
+              &quot;replaceTarget&quot;: &quot;fm&quot;,
+              &quot;templates&quot;: [
+                {
+                  &quot;value&quot;: &quot;1&quot;,
+                  &quot;cloneFrom&quot;: &quot;fm_segment_1&quot;,
+                  &quot;label&quot;: &quot;FM - Segment {row}.1&quot;
+                },
+                {
+                  &quot;value&quot;: &quot;2&quot;,
+                  &quot;cloneFrom&quot;: &quot;fm_segment_2&quot;,
+                  &quot;label&quot;: &quot;FM - Segment {row}.2&quot;
+                },
+                {
+                  &quot;value&quot;: &quot;3&quot;,
+                  &quot;cloneFrom&quot;: &quot;fm_segment_3&quot;,
+                  &quot;label&quot;: &quot;FM - Segment {row}.3&quot;
+                },
+                {
+                  &quot;value&quot;: &quot;4&quot;,
+                  &quot;cloneFrom&quot;: &quot;fm_segment_4&quot;,
+                  &quot;label&quot;: &quot;FM - Segment {row}.4&quot;
+                },
+                {
+                  &quot;value&quot;: &quot;5&quot;,
+                  &quot;cloneFrom&quot;: &quot;fm_segment_5&quot;,
+                  &quot;label&quot;: &quot;FM - Segment {row}.5&quot;
+                }
+              ]
+            },
+            {
+              &quot;type&quot;: &quot;accordion-repeater&quot;,
+              &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+              &quot;maxRows&quot;: 10,
+              &quot;cloneFrom&quot;: &quot;fm_overlap_details&quot;,
+              &quot;label&quot;: &quot;Overlap/welding - {row}&quot;,
+              &quot;replaceTarget&quot;: &quot;fm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;2&quot;,
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;fm_base_plate_details&quot;,
+              &quot;label&quot;: &quot;Base Plate Details&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;r1_fm_no_of_segment, r2_fm_no_of_segment, r3_fm_no_of_segment, r4_fm_no_of_segment, r5_fm_no_of_segment, r6_fm_no_of_segment, r7_fm_no_of_segment, r8_fm_no_of_segment, r9_fm_no_of_segment, r10_fm_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;h_bp_sl&quot;,
+                  &quot;label&quot;: &quot;SL. NO.&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_bp_type&quot;,
+                  &quot;label&quot;: &quot;BASE PLATE TYPE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_bp_od&quot;,
+                  &quot;label&quot;: &quot;OD OF BASE PLATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_bp_thk&quot;,
+                  &quot;label&quot;: &quot;THICKNESS OF BASE PLATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_bp_pcd&quot;,
+                  &quot;label&quot;: &quot;P.C.D&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_bp_anch&quot;,
+                  &quot;label&quot;: &quot;ANCHOR PLATE &amp; TEMPLATE THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;bp_grid&quot;,
+                  &quot;type&quot;: &quot;grid-repeater&quot;,
+                  &quot;maxRows&quot;: 10,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;bp_sl_no&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;defaultValue&quot;: &quot;{row}&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 1,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_bp_type&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;required&quot;: true,
+                      &quot;options&quot;: [
+                        &quot;Circular&quot;,
+                        &quot;Square&quot;
+                      ],
+&quot;defaultValue&quot;: &quot;Circular&quot;,
+                      &quot;colSpan&quot;: 3,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_bp_diameter&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_bp_thickness&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_bp_pcd&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_bp_anchor_plate_thickness&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;fm_foundation_bolt_stiffner&quot;,
+              &quot;label&quot;: &quot;Foundation Bolt &amp; Stiffener&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;r1_fm_no_of_segment, r2_fm_no_of_segment, r3_fm_no_of_segment, r4_fm_no_of_segment, r5_fm_no_of_segment, r6_fm_no_of_segment, r7_fm_no_of_segment, r8_fm_no_of_segment, r9_fm_no_of_segment, r10_fm_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;h_fb_sl&quot;,
+                  &quot;label&quot;: &quot;SL. NO.&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_bolt_type&quot;,
+                  &quot;label&quot;: &quot;FOUNDATION BOLT TYPE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_dia&quot;,
+                  &quot;label&quot;: &quot;DIAMETER OF FOUNDATION BOLT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_len&quot;,
+                  &quot;label&quot;: &quot;LENGTH OF BOLT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_nob&quot;,
+                  &quot;label&quot;: &quot;NO. OF BOLT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_non&quot;,
+                  &quot;label&quot;: &quot;NO. OF NUT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;formula&quot;: &quot;(h_fb_nob || 0) * 5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;h_fb_thk&quot;,
+                  &quot;label&quot;: &quot;THICKNESS OF STIFFNER&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;fb_grid&quot;,
+                  &quot;type&quot;: &quot;grid-repeater&quot;,
+                  &quot;maxRows&quot;: 10,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;fb_sl_no&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;text&quot;,
+                      &quot;defaultValue&quot;: &quot;{row}&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 1,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fdn_bolt_type&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;options&quot;: [&quot;With Foundation&quot;, &quot;Without Foundation&quot;],
+                      &quot;colSpan&quot;: 2,
+                      &quot;required&quot;: true,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fb_diameter&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;picklist&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;options&quot;: [
+                        &quot;N.R.&quot;,
+                        &quot;16&quot;,
+                        &quot;20&quot;,
+                        &quot;24&quot;,
+                        &quot;27&quot;,
+                        &quot;30&quot;,
+                        &quot;33&quot;,
+                        &quot;39&quot;,
+                        &quot;45&quot;
+                      ],
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fb_length&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fb_no_of_bolt&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;Nos.&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fb_no_of_nut&quot;,
+                      &quot;label&quot;: &quot;nuts &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;fm_fb_no_of_bolt * 5&quot;,
+                      &quot;unit&quot;: &quot;Nos.&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_fb_stiffner_thickness&quot;,
+                      &quot;label&quot;: &quot; &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;unit&quot;: &quot;mm&quot;,
+                      &quot;colSpan&quot;: 1,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_foundation_weight&quot;,
+                      &quot;label&quot;: &quot;FOUNDATION ACCESSORY WEIGHT (KG)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;isWeightTotal&quot;: true,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ],
+                      &quot;formula&quot;: &quot;fm_fdn_bolt_type == &apos;Without Foundation&apos; ? 0 : (fm_no_of_segment == 1 ? ((((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_length || 0) * 7.85 * (fm_fb_no_of_bolt || 0) / 1000000) + ((fm_fb_length || 0) == 0 ? 0 : (fm_fb_no_of_nut || 0) * (fm_fb_diameter == 16 ? 0.03 : fm_fb_diameter == 20 ? 0.06 : fm_fb_diameter == 24 ? 0.11 : fm_fb_diameter == 27 ? 0.2 : fm_fb_diameter == 30 ? 0.26 : fm_fb_diameter == 33 ? 0.3 : fm_fb_diameter == 36 ? 0.4 : fm_fb_diameter == 39 ? 0.5 : fm_fb_diameter == 42 ? 0.6 : fm_fb_diameter == 45 ? 0.75 : 0)) + ((22/7 * 2 * (Math.pow((fm_bp_diameter || 0), 2) - Math.pow((fm_1_oaf_bottom || 0), 2)) / 4 * (fm_bp_anchor_plate_thickness || 0) * 7.85) / 1000000)) * (1 +(5/100))) : fm_no_of_segment == 2 ? ((((22/7 * 2 * (Math.pow((fm_bp_diameter || 0), 2) - Math.pow((fm_bot2_oaf_bot || 0), 2)) / 4 * (fm_bp_anchor_plate_thickness || 0) * 7.85) / 1000000) + ((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_no_of_bolt || 0) * 7.85 * (fm_fb_length || 0) / 1000000) + ((fm_fb_no_of_bolt || 0) == 0 ? 0 : (fm_fb_no_of_nut || 0) * (fm_fb_diameter == 16 ? 0.03 : fm_fb_diameter == 20 ? 0.06 : fm_fb_diameter == 24 ? 0.11 : fm_fb_diameter == 27 ? 0.2 : fm_fb_diameter == 30 ? 0.26 : fm_fb_diameter == 33 ? 0.3 : fm_fb_diameter == 36 ? 0.4 : fm_fb_diameter == 39 ? 0.5 : fm_fb_diameter == 42 ? 0.6 : fm_fb_diameter == 45 ? 0.75 : 0))) * (1 +(5/100))) : fm_no_of_segment == 3 ? ((((22/7 * 2 * (Math.pow((fm_bp_diameter || 0), 2) - Math.pow((fm_bot3_oaf_bot || 0), 2)) / 4 * (fm_bp_anchor_plate_thickness || 0) * 7.85) / 1000000) + ((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_no_of_bolt || 0) * 7.85 * (fm_fb_length || 0) / 1000000) + ((fm_fb_no_of_bolt || 0) == 0 ? 0 : (fm_fb_no_of_nut || 0) * (fm_fb_diameter == 16 ? 0.03 : fm_fb_diameter == 20 ? 0.06 : fm_fb_diameter == 24 ? 0.11 : fm_fb_diameter == 27 ? 0.2 : fm_fb_diameter == 30 ? 0.26 : fm_fb_diameter == 33 ? 0.3 : fm_fb_diameter == 36 ? 0.4 : fm_fb_diameter == 39 ? 0.5 : fm_fb_diameter == 42 ? 0.6 : fm_fb_diameter == 45 ? 0.75 : 0))) * (1 +(5/100))) : fm_no_of_segment == 4 ? ((((22/7 * 2 * (Math.pow((fm_bp_diameter || 0), 2) - Math.pow((fm_bot4_oaf_bot || 0), 2)) / 4 * (fm_bp_anchor_plate_thickness || 0) * 7.85) / 1000000) + ((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_no_of_bolt || 0) * 7.85 * (fm_fb_length || 0) / 1000000) + ((fm_fb_no_of_bolt || 0) == 0 ? 0 : (fm_fb_no_of_nut || 0) * (fm_fb_diameter == 16 ? 0.03 : fm_fb_diameter == 20 ? 0.06 : fm_fb_diameter == 24 ? 0.11 : fm_fb_diameter == 27 ? 0.2 : fm_fb_diameter == 30 ? 0.26 : fm_fb_diameter == 33 ? 0.3 : fm_fb_diameter == 36 ? 0.4 : fm_fb_diameter == 39 ? 0.5 : fm_fb_diameter == 42 ? 0.6 : fm_fb_diameter == 45 ? 0.75 : 0))) * (1 +(5/100))) : fm_no_of_segment == 5 ? ((((22/7 * 2 * (Math.pow((fm_bp_diameter || 0), 2) - Math.pow((fm_bot5_oaf_bot || 0), 2)) / 4 * (fm_bp_anchor_plate_thickness || 0) * 7.85) / 1000000) + ((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_no_of_bolt || 0) * 7.85 * (fm_fb_length || 0) / 1000000) + ((fm_fb_no_of_bolt || 0) == 0 ? 0 : (fm_fb_no_of_nut || 0) * (fm_fb_diameter == 16 ? 0.03 : fm_fb_diameter == 20 ? 0.06 : fm_fb_diameter == 24 ? 0.11 : fm_fb_diameter == 27 ? 0.2 : fm_fb_diameter == 30 ? 0.26 : fm_fb_diameter == 33 ? 0.3 : fm_fb_diameter == 36 ? 0.4 : fm_fb_diameter == 39 ? 0.5 : fm_fb_diameter == 42 ? 0.6 : fm_fb_diameter == 45 ? 0.75 : 0))) * (1 +(5/100))) : 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_foundation_base_price&quot;,
+                      &quot;label&quot;: &quot;BASE PRICE&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;isBasePrice&quot;: true,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ],
+                      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+                    },
+         {
+          &quot;apiName&quot;: &quot;fm_foundation_realization&quot;,
+          &quot;label&quot;: &quot;REALIZATION&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isRealization&quot;: true,
+          &quot;formula&quot;: &quot;fm_est_realization&quot;,
+          &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+          &quot;controllingValues&quot;: [
+            &quot;*&quot;
+            ]
+        },
+                    {
+                      &quot;apiName&quot;: &quot;fm_foundation_unit_price&quot;,
+                      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ],
+                      &quot;formula&quot;: &quot;((Base_Amount__c || 0) + (fm_est_realization || 0)) * (fm_foundation_weight||0) &quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;fm_foundation_unit_cost&quot;,
+                      &quot;label&quot;: &quot;UNIT COST&quot;,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;controllingField&quot;: &quot;fm_no_of_segment&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;*&quot;
+                      ],
+                      &quot;formula&quot;: &quot;(((Base_Amount__c || 0) * ((22/7 * Math.pow((fm_fb_diameter || 0), 2) / 4) * (fm_fb_length || 0) * 7.85 * (fm_fb_no_of_bolt || 0) / 1000000)))&quot;
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mast_accessories_flag_mast&quot;,
+              &quot;label&quot;: &quot;MAST ACCESSORIES&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;r1_fm_no_of_segment, r2_fm_no_of_segment, r3_fm_no_of_segment, r4_fm_no_of_segment, r5_fm_no_of_segment, r6_fm_no_of_segment, r7_fm_no_of_segment, r8_fm_no_of_segment, r9_fm_no_of_segment, r10_fm_no_of_segment&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;false&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;fm_ma_description&quot;,
+                  &quot;label&quot;: &quot;Description&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_ma_rate&quot;,
+                  &quot;label&quot;: &quot;Rate&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_ma_realization&quot;,
+                  &quot;label&quot;: &quot;Realization (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				  &quot;isRealization&quot;: true,
+                  &quot;defaultValue&quot;: 10,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_ma_special_note&quot;,
+                  &quot;label&quot;: &quot;Special Note&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;label&quot;: &quot;FEEDER PILLAR&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_ma_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_mast_acc_foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES BASE FOUNDATION PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;fm_ma_rate&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_mast_acc_foundation_unit_price&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES UNIT FOUNDATION PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((fm_ma_rate + (fm_ma_realization || 0)))&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_mast_acc_foundation_unit_cost&quot;,
+                  &quot;label&quot;: &quot;MAST ACCESSORIES UNIT FOUNDATION COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((fm_ma_rate || 0))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;feeder_pillar_flag_mast&quot;,
+              &quot;label&quot;: &quot;FEEDER PILLAR&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_rate&quot;,
+                  &quot;label&quot;: &quot;RATE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_realization&quot;,
+                  &quot;label&quot;: &quot;Realization&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				  &quot;isRealization&quot;: true,
+                  &quot;defaultValue&quot;: 10,
+                  &quot;colSpan&quot;: 4,
+                  &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;isQuantity&quot;: true,
+                  &quot;readOnly&quot;: false,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;FEEDER PILLAR BASE FOUNDATION PRICE&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isBasePrice&quot;: true,
+                  &quot;formula&quot;: &quot;fm_fp_rate&quot;,
+                  &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_foundation_unit_price&quot;,
+                  &quot;label&quot;: &quot;FEEDER PILLAR UNIT FOUNDATION PRICE&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((fm_fp_rate + (fm_fp_realization || 0)))&quot;,
+                  &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_fp_foundation_unit_cost&quot;,
+                  &quot;label&quot;: &quot;FEEDER PILLAR UNIT FOUNDATION COST&quot;,
+                  &quot;isUnitCost&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((fm_fp_rate || 0))&quot;,
+                  &quot;controllingField&quot;: &quot;fm_fp_checkbox&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;fm_accessory_costing&quot;,
+              &quot;type&quot;: &quot;accordion-repeater&quot;,
+              &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+              &quot;maxRows&quot;: 10,
+              &quot;cloneFrom&quot;: &quot;fm_accessory_costing&quot;,
+              &quot;label&quot;: &quot;Accessory Costing Format - {row}&quot;,
+              &quot;replaceTarget&quot;: &quot;fm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;1&quot;,
+                &quot;2&quot;,
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;fm_supplementary_costing&quot;,
+              &quot;label&quot;: &quot;Supplementary Costing&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: false,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;fm_sc_description&quot;,
+                  &quot;label&quot;: &quot;Item Description&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_sc_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;fm_sc_amount&quot;,
+                  &quot;label&quot;: &quot;Amount&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;fm_additional_details&quot;,
+              &quot;type&quot;: &quot;accordion-repeater&quot;,
+              &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+              &quot;maxRows&quot;: 10,
+              &quot;cloneFrom&quot;: &quot;fm_additional_details&quot;,
+              &quot;label&quot;: &quot;Additional Details - {row}&quot;,
+              &quot;replaceTarget&quot;: &quot;fm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;1&quot;,
+                &quot;2&quot;,
+                &quot;3&quot;,
+                &quot;4&quot;,
+                &quot;5&quot;
+              ]
+            },
+            {
+                &quot;id&quot;: &quot;fm_micron_pu_paint&quot;,
+                &quot;type&quot;: &quot;accordion-repeater&quot;,
+                &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+                &quot;maxRows&quot;: 10,
+                &quot;cloneFrom&quot;: &quot;fm_micron_pu_paint&quot;,
+                &quot;label&quot;: &quot;Micron &amp; PU Paint - {row}&quot;,
+                &quot;replaceTarget&quot;: &quot;fm&quot;,
+                &quot;controllingValues&quot;: [
+                    &quot;1&quot;,
+                    &quot;2&quot;,
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                ]
+            },
+            {
+                &quot;id&quot;: &quot;fm_special_description&quot;,
+                &quot;type&quot;: &quot;accordion-repeater&quot;,
+                &quot;gridFieldApi&quot;: &quot;fm_no_of_segment&quot;,
+                &quot;maxRows&quot;: 10,
+                &quot;cloneFrom&quot;: &quot;fm_special_description&quot;,
+                &quot;label&quot;: &quot;Special Description - {row}&quot;,
+                &quot;replaceTarget&quot;: &quot;fm&quot;,
+                &quot;controllingValues&quot;: [
+                    &quot;1&quot;,
+                    &quot;2&quot;,
+                    &quot;3&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;
+                ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

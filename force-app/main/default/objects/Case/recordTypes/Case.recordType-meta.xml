@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case</fullName>
+    <active>true</active>
+    <businessProcess>Case</businessProcess>
+    <description>Case record type</description>
+    <label>Case</label>
+    <picklistValues>
+        <picklist>Category_of_the_Complaint__c</picklist>
+        <values>
+            <fullName>Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Department_SF__c</picklist>
+        <values>
+            <fullName>Crash Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Mast %26 Polygonal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polymer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Engineering Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railway Electrification Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Tubular Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission %26 Telecom Tower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Department__c</picklist>
+        <values>
+            <fullName>Crash Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Mast %26 Polygonal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polymer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Engineering Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railway Electrification Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Tubular Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission %26 Telecom Tower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origin</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Person</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WhatsApp</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>Critical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason</picklist>
+        <values>
+            <fullName>Complex functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instructions not clear</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User didn%27t attend training</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Source_of_Complaint__c</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales Person</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WhatsApp</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Category__c</picklist>
+        <values>
+            <fullName>Factory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Department__c</picklist>
+        <values>
+            <fullName>Accounts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logistic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Production</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase Direct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase Indirect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

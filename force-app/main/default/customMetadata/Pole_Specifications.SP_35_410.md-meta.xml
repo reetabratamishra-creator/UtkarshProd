@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>410-SP-35</label>
+    <protected>false</protected>
+    <values>
+        <field>Bottom_Specs__c</field>
+        <value xsi:type="xsd:string">139.7 mm OD x 4.85 mm thk x 5 mtr long</value>
+    </values>
+    <values>
+        <field>Designation__c</field>
+        <value xsi:type="xsd:string">410-SP-35</value>
+    </values>
+    <values>
+        <field>Middle_Specs__c</field>
+        <value xsi:type="xsd:string">114.3 mm OD x 4.50 mm thk x 2.25 mtr long</value>
+    </values>
+    <values>
+        <field>Top_Specs__c</field>
+        <value xsi:type="xsd:string">88.9 mm OD x 3.25 mm thk x 2.25 mtr long</value>
+    </values>
+</CustomMetadata>

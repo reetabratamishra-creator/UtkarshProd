@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Non-Spacer Design</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Non-Spacer Design</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;MBCB_non_spacer_details&quot;,
+      &quot;label&quot;: &quot;Non-Spacer Design Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;MBCB_Type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Non-Spacer Design&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;NON-SPACER DESIGN DETAILS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;ns_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Non-Spacer Design&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ns_type_design&quot;,
+                  &quot;label&quot;: &quot;NON-SPACER DESIGN&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;W - Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ns_w_beam_type&quot;,
+              &quot;label&quot;: &quot;W - Beam Type (Non-Spacer Design)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;W - Beam&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_spacer&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_w_beam_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;null&quot;,
+                    &quot;&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot; (ns_section_total_wt_for_w_beam || 0)&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_rate_rm&quot;,
+                  &quot;label&quot;: &quot;RATE/RM&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(ns_section_total_wt_for_w_beam || 0) * (wb_non_spacer_rate+ (ns_w_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? zinc_minimum_delta : (ns_w_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? zinc_average_delta : ( ns_w_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? zinc_medium_55_delta : (ns_w_beam_section_zinc_coating_input == &apos;Regular&apos; ? zinc_regular_delta : 0)))) + (ns_w_beam_section_margin || 0) + (ns_w_beam_section_trans_KG || 0))&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_quantity&quot;,
+                  &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isQuantity&quot;: true,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_types_offer&quot;,
+                  &quot;label&quot;: &quot;types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Transportation KG&quot;,
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_w_beam_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_margin&quot;,
+                  &quot;label&quot;: &quot;MARGIN&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;defaultValue&quot;: &quot;2&quot;,
+                  &quot;isMargin&quot;: true,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_item&quot;,
+                  &quot;label&quot;: &quot;ITEM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_beam_thickness&quot;,
+                  &quot;label&quot;: &quot;BEAM THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_post_thickness&quot;,
+                  &quot;label&quot;: &quot;POST THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_post_height&quot;,
+                  &quot;label&quot;: &quot;POST HEIGHT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_nuts_bolts&quot;,
+                  &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_centre_to_centre&quot;,
+                  &quot;label&quot;: &quot;CENTRE TO CENTRE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_dimension&quot;,
+                  &quot;label&quot;: &quot;DIMENSION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_beam_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2.2&quot;,
+                    &quot;2.3&quot;,
+                    &quot;2.5&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_post_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_w_beam_section_centre_to_centre_input&quot;,
+                  &quot;options&quot;: [
+                    &quot;3.8&quot;,
+                    &quot;3.9&quot;,
+                    &quot;4&quot;,
+                    &quot;5&quot;,
+                    &quot;4.7&quot;,
+                    &quot;4.8&quot;,
+                    &quot;4.9&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;2&quot;: [
+                      &quot;3.8&quot;,
+                      &quot;3.9&quot;,
+                      &quot;4&quot;
+                    ],
+                    &quot;4&quot;: [
+                      &quot;5&quot;,
+                      &quot;4.7&quot;,
+                      &quot;4.8&quot;,
+                      &quot;4.9&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_post_height_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;defaultValue&quot;: &quot;1500&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_nuts_bolts_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_centre_to_centre_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2&quot;,
+                    &quot;4&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_zinc_coating_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Regular&quot;,
+                    &quot;Medium 55 Micron&quot;,
+                    &quot;Average 77 microns over Crash Tested Rates&quot;,
+                    &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;Regular&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_full_Vehicle_freight&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_w_beam_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_section_trans_KG&quot;,
+                  &quot;label&quot;: &quot;Transportation KG&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;ns_w_beam_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_w_beam_pricing_sub&quot;,
+                  &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                  &quot;type&quot;: &quot;sub-section&quot;,
+                  &quot;expanded&quot;: false,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;W - Beam&quot;
+                  ],
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_weight_calculation&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For W BEAM&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_regular_delta&quot;,
+                      &quot;label&quot;: &quot;Regular (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_medium_55_delta&quot;,
+                      &quot;label&quot;: &quot;Medium 55 (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_average_delta&quot;,
+                      &quot;label&quot;: &quot;Average 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_minimum_delta&quot;,
+                      &quot;label&quot;: &quot;Minimum 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_reg&quot;,
+                      &quot;label&quot;: &quot;Consumption Regular (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_medium_55&quot;,
+                      &quot;label&quot;: &quot;Consumption Medium 55 (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_avg_77&quot;,
+                      &quot;label&quot;: &quot;Consumption Average 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_min_77&quot;,
+                      &quot;label&quot;: &quot;Consumption Minimum 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;common_base_rate&quot;,
+                      &quot;label&quot;: &quot;Base Rate (From DB)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;wb_non_spacer_delta&quot;,
+                      &quot;label&quot;: &quot;(W- beam )Non spacer design delta(From DB)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;wb_non_spacer_rate&quot;,
+                      &quot;label&quot;: &quot;(W- beam )Non spacer design rate&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;wb_non_spacer_delta + common_base_rate&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_blk_wt&quot;,
+                      &quot;label&quot;: &quot;BLK WT For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((4.318 * ((ns_w_beam_section_beam_thickness_input || 0) / 1000) * 0.465 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_zn_consumption&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_w_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_w_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_w_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_w_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_finish_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For W BEAM&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.318 * 0.465 * ((ns_w_beam_section_zn_consumption || 0) / 1000)) * 2) + (ns_w_beam_section_blk_wt || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_total_wt&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_w_beam_section_finish_wt_for_w_beam || 0) * 250) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_weight_calculation_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For C POST&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_blk_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;BLK WT For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((ns_w_beam_section_centre_to_centre_input == &apos;2&apos; ? (((((ns_w_beam_section_post_thickness_input || 0) / 1000) * ((ns_w_beam_section_post_height_input || 0) / 1000) * 0.274) * 7850) + 0.2) : (ns_w_beam_section_centre_to_centre_input == &apos;4&apos; ? (((((ns_w_beam_section_post_thickness_input || 0) / 1000) * ((ns_w_beam_section_post_height_input || 0) / 1000) * 0.274) * 7850) + 0.4) : 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_zn_consumption_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_w_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_w_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_w_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_w_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_finish_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For C POST&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((ns_w_beam_section_post_height_input || 0) / 1000) * 0.274 * ((ns_w_beam_section_zn_consumption_for_c_post || 0) / 1000)) * 2) + (ns_w_beam_section_blk_wt_for_c_post || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_total_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_w_beam_section_finish_wt_for_c_post || 0) * (ns_w_beam_section_centre_to_centre_input == &apos;2&apos; ? 500 : 250)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_weight_calculation_for_washer&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For WASHER&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_blk_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;BLK WT For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.9 / 1000) * (115 / 1000) * (40 / 1000)) * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_zn_consumption_for_washer&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_w_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_w_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_w_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_w_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_finish_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For WASHER&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((0.115 * 0.040 * ((ns_w_beam_section_zn_consumption_for_washer || 0) / 1000)) * 2) + (ns_w_beam_section_blk_wt_for_washer || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_total_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_w_beam_section_finish_wt_for_washer || 0) * (ns_w_beam_section_centre_to_centre_input == &apos;2&apos; ? 500 : 250)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_weight_calculation_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For Button head bolt&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_w_beam_section_total_wt_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For Button head bolt &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_w_beam_section_centre_to_centre_input == &apos;2&apos; ? 2500 : 2250) * 0.14) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_section_total_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot; (ns_w_beam_section_total_wt || 0) + (ns_w_beam_section_total_wt_for_c_post || 0) + (ns_w_beam_section_total_wt_for_washer || 0) + (ns_w_beam_section_total_wt_for_bhb || 0) &quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_section_unit_cost_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Unit Cost For W Beam &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(ns_graded_section_unit_price_w_beam || 0) - ((ns_graded_section_unit_price_w_beam || 0) * (ns_w_beam_section_margin || 0) / 100)&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_graded_section_unit_price_w_beam&quot;,
+                      &quot;label&quot;: &quot;Unit Price For W Beam &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;(Math.ceil(((ns_w_beam_section_rate_rm || 0))/ 5) * 5)&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_graded_section_list_price_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;List Price For W Beam &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isListPrice&quot;: true,
+                      &quot;formula&quot;: &quot;Math.ceil(((75.5 + 2 + (ns_w_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? 4 : (ns_w_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? 2 : 0))) * (ns_w_beam_section_weight || 0)) / 5) * 5&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;W - Beam&quot;
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;ns_thrie_beam_type&quot;,
+              &quot;label&quot;: &quot;T - Thrie Beam (European Design)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Thrie Beam&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_spacer&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_thrie_beam_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;null&quot;,
+                    &quot;&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot; (ns_section_total_wt_for_thrie_beam || 0)&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_rate_rm&quot;,
+                  &quot;label&quot;: &quot;RATE/RM&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(ns_section_total_wt_for_thrie_beam || 0) * (tb_non_spacer_rate + (ns_thrie_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? zinc_minimum_delta : (ns_thrie_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? zinc_average_delta : ( ns_thrie_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? zinc_medium_55_delta : (ns_thrie_beam_section_zinc_coating_input == &apos;Regular&apos; ? zinc_regular_delta : 0)))) + (ns_thrie_beam_section_margin || 0) + (ns_thrie_beam_section_trans_KG || 0))&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_quantity&quot;,
+                  &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isQuantity&quot;: true,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_types_offer&quot;,
+                  &quot;label&quot;: &quot;types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Transportation KG&quot;,
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_thrie_beam_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_margin&quot;,
+                  &quot;label&quot;: &quot;MARGIN&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isMargin&quot;: true,
+                  &quot;defaultValue&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_item&quot;,
+                  &quot;label&quot;: &quot;ITEM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_beam_thickness&quot;,
+                  &quot;label&quot;: &quot;BEAM THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_post_thickness&quot;,
+                  &quot;label&quot;: &quot;POST THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_post_height&quot;,
+                  &quot;label&quot;: &quot;POST HEIGHT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_nuts_bolts&quot;,
+                  &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_centre_to_centre&quot;,
+                  &quot;label&quot;: &quot;CENTRE TO CENTRE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_dimension&quot;,
+                  &quot;label&quot;: &quot;DIMENSION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_beam_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2.2&quot;,
+                    &quot;2.3&quot;,
+                    &quot;2.5&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_post_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;3.6&quot;,
+                    &quot;3.8&quot;,
+                    &quot;3.9&quot;,
+                    &quot;4&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_post_height_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;defaultValue&quot;: &quot;1700&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_nuts_bolts_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_centre_to_centre_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2&quot;,
+                    &quot;2.66&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_zinc_coating_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Regular&quot;,
+                    &quot;Medium 55 Micron&quot;,
+                    &quot;Average 77 microns over Crash Tested Rates&quot;,
+                    &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;Regular&quot;,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_full_Vehicle_freight&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;ns_thrie_beam_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_section_trans_KG&quot;,
+                  &quot;label&quot;: &quot;Transportation KG&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;ns_thrie_beam_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;ns_thrie_beam_pricing_sub&quot;,
+                  &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                  &quot;type&quot;: &quot;sub-section&quot;,
+                  &quot;expanded&quot;: false,
+                  &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Thrie Beam&quot;
+                  ],
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_weight_calculation&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For W BEAM&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;tb_non_spacer_delta&quot;,
+                      &quot;label&quot;: &quot;(T- beam )Non spacer design delta(From DB)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;tb_non_spacer_rate&quot;,
+                      &quot;label&quot;: &quot;(T- beam )Non spacer design rate&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;tb_non_spacer_delta + common_base_rate&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_blk_wt&quot;,
+                      &quot;label&quot;: &quot;BLK WT For Thrie BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((4.318 * ((ns_thrie_beam_section_beam_thickness_input || 0) / 1000) * 0.725 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_zn_consumption&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Thrie BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_thrie_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_thrie_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_thrie_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_thrie_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_finish_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For Thrie BEAM&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.318 * 0.725 * ((ns_thrie_beam_section_zn_consumption || 0) / 1000)) * 2) + (ns_thrie_beam_section_blk_wt || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_total_wt&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For Thrie BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_thrie_beam_section_finish_wt_for_w_beam || 0) * 250) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_weight_calculation_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For C POST&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_blk_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;BLK WT For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((ns_thrie_beam_section_centre_to_centre_input == &apos;2&apos; ? (((((ns_thrie_beam_section_post_thickness_input || 0) / 1000) * ((ns_thrie_beam_section_post_height_input || 0) / 1000) * 0.274) * 7850) + 0.2) : (ns_thrie_beam_section_centre_to_centre_input == &apos;2.66&apos; ? (((((ns_thrie_beam_section_post_thickness_input || 0) / 1000) * ((ns_thrie_beam_section_post_height_input || 0) / 1000) * 0.274) * 7850) + 0.8) : 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_zn_consumption_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_thrie_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_thrie_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_thrie_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_thrie_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_finish_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For C POST&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((ns_thrie_beam_section_post_height_input || 0) / 1000) * 0.274 * ((ns_thrie_beam_section_zn_consumption_for_c_post || 0) / 1000)) * 2) + (ns_thrie_beam_section_blk_wt_for_c_post || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_total_wt_for_c_post&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For C POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_thrie_beam_section_finish_wt_for_c_post || 0) * (ns_thrie_beam_section_centre_to_centre_input == &apos;2.66&apos; ? 375 : 500)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_weight_calculation_for_washer&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For WASHER&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_blk_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;BLK WT For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.9 / 1000) * (115 / 1000) * (40 / 1000)) * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_zn_consumption_for_washer&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((ns_thrie_beam_section_zinc_coating_input == &apos;Regular&apos; ? con_zinc_reg : ns_thrie_beam_section_zinc_coating_input == &apos;Medium 55 Micron&apos; ? con_zinc_medium_55 : ns_thrie_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? con_zinc_avg_77 : ns_thrie_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? con_zinc_min_77 : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_finish_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For WASHER&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((0.115 * 0.040 * ((ns_thrie_beam_section_zn_consumption_for_washer || 0) / 1000)) * 2) + (ns_thrie_beam_section_blk_wt_for_washer || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_total_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_thrie_beam_section_finish_wt_for_washer || 0) * (ns_thrie_beam_section_centre_to_centre_input == &apos;2.66&apos; ? 700 : 500)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_weight_calculation_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For Button head bolt&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_total_wt_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For Button head bolt &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((ns_thrie_beam_section_centre_to_centre_input == &apos;2.66&apos; ? 3700 : 4000) * 0.14) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_section_total_wt_for_thrie_beam&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot; (ns_thrie_beam_section_total_wt || 0) + (ns_thrie_beam_section_total_wt_for_c_post || 0) + (ns_thrie_beam_section_total_wt_for_washer || 0) + (ns_thrie_beam_section_total_wt_for_bhb || 0) &quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_unit_cost&quot;,
+                      &quot;label&quot;: &quot;Unit Cost For Thrie Beam &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(ns_thrie_beam_section_unit_price || 0) - ((ns_thrie_beam_section_unit_price || 0) * (ns_thrie_beam_section_margin || 0) / 100) &quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_unit_price&quot;,
+                      &quot;label&quot;: &quot;Unit Price For Thrie Beam&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;(Math.ceil(((ns_thrie_beam_section_rate_rm || 0))/ 5) * 5)&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;ns_thrie_beam_section_list_price&quot;,
+                      &quot;label&quot;: &quot;List Price For Thrie Beam &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isListPrice&quot;: true,
+                      &quot;formula&quot;: &quot;Math.ceil(((75.5 + 2 + (ns_thrie_beam_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? 4 : (ns_thrie_beam_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? 2 : 0))) * (ns_section_total_wt_for_thrie_beam || 0)) / 5) * 5&quot;,
+                      &quot;controllingField&quot;: &quot;ns_type_design&quot;,
+                      &quot;controllingValues&quot;: [
+                        &quot;Thrie Beam&quot;
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>First_Field_API_Name__c</fullName>
+    <description>The internal identifier for the root picklist field.This must match the &apos;controllingField&apos; references in the child JSON payloads.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>This must match the &apos;controllingField&apos; references in the child JSON payloads.</inlineHelpText>
+    <label>First Field API Name</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

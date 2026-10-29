@@ -1,0 +1,1990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Telecom Tubular Json</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;tubularSignallingEval&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tub_product_details_header&quot;,
+      &quot;label&quot;: &quot;PRODUCT DETAILS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight_header&quot;,
+      &quot;label&quot;: &quot;TOWER WEIGHT-MT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity_header&quot;,
+      &quot;label&quot;: &quot;QTY&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt_header_610&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate_header_610&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value_header_610&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt_header_900&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate_header_900&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value_header_900&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt_header_1000&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate_header_1000&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value_header_1000&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details1) ? Number(tub_rate_per_mt1_610||0) * Number(tub_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details1) ? Number(tub_basic_rate1_610||0) * Number(tub_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details1) ? Number(tub_rate_per_mt1_900||0) * Number(tub_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details1) ? Number(tub_basic_rate1_900||0) * Number(tub_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details1) ? Number(tub_rate_per_mt1_1000||0) * Number(tub_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details1) ? Number(tub_basic_rate1_1000||0) * Number(tub_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details2) ? Number(tub_rate_per_mt2_610||0) * Number(tub_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details2) ? Number(tub_basic_rate2_610||0) * Number(tub_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details2) ? Number(tub_rate_per_mt2_900||0) * Number(tub_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details2) ? Number(tub_basic_rate2_900||0) * Number(tub_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details2) ? Number(tub_rate_per_mt2_1000||0) * Number(tub_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details2) ? Number(tub_basic_rate2_1000||0) * Number(tub_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details3) ? Number(tub_rate_per_mt3_610||0) * Number(tub_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details3) ? Number(tub_basic_rate3_610||0) * Number(tub_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details3) ? Number(tub_rate_per_mt3_900||0) * Number(tub_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details3) ? Number(tub_basic_rate3_900||0) * Number(tub_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details3) ? Number(tub_rate_per_mt3_1000||0) * Number(tub_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details3) ? Number(tub_basic_rate3_1000||0) * Number(tub_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details4) ? Number(tub_rate_per_mt4_610||0) * Number(tub_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details4) ? Number(tub_basic_rate4_610||0) * Number(tub_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details4) ? Number(tub_rate_per_mt4_900||0) * Number(tub_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details4) ? Number(tub_basic_rate4_900||0) * Number(tub_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details4) ? Number(tub_rate_per_mt4_1000||0) * Number(tub_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details4) ? Number(tub_basic_rate4_1000||0) * Number(tub_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details5) ? Number(tub_rate_per_mt5_610||0) * Number(tub_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details5) ? Number(tub_basic_rate5_610||0) * Number(tub_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details5) ? Number(tub_rate_per_mt5_900||0) * Number(tub_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details5) ? Number(tub_basic_rate5_900||0) * Number(tub_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details5) ? Number(tub_rate_per_mt5_1000||0) * Number(tub_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details5) ? Number(tub_basic_rate5_1000||0) * Number(tub_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details6) ? Number(tub_rate_per_mt6_610||0) * Number(tub_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details6) ? Number(tub_basic_rate6_610||0) * Number(tub_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details6) ? Number(tub_rate_per_mt6_900||0) * Number(tub_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details6) ? Number(tub_basic_rate6_900||0) * Number(tub_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details6) ? Number(tub_rate_per_mt6_1000||0) * Number(tub_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details6) ? Number(tub_basic_rate6_1000||0) * Number(tub_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details7) ? Number(tub_rate_per_mt7_610||0) * Number(tub_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details7) ? Number(tub_basic_rate7_610||0) * Number(tub_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details7) ? Number(tub_rate_per_mt7_900||0) * Number(tub_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details7) ? Number(tub_basic_rate7_900||0) * Number(tub_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details7) ? Number(tub_rate_per_mt7_1000||0) * Number(tub_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details7) ? Number(tub_basic_rate7_1000||0) * Number(tub_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details8) ? Number(tub_rate_per_mt8_610||0) * Number(tub_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details8) ? Number(tub_basic_rate8_610||0) * Number(tub_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details8) ? Number(tub_rate_per_mt8_900||0) * Number(tub_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details8) ? Number(tub_basic_rate8_900||0) * Number(tub_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details8) ? Number(tub_rate_per_mt8_1000||0) * Number(tub_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details8) ? Number(tub_basic_rate8_1000||0) * Number(tub_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details9) ? Number(tub_rate_per_mt9_610||0) * Number(tub_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details9) ? Number(tub_basic_rate9_610||0) * Number(tub_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details9) ? Number(tub_rate_per_mt9_900||0) * Number(tub_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details9) ? Number(tub_basic_rate9_900||0) * Number(tub_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details9) ? Number(tub_rate_per_mt9_1000||0) * Number(tub_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details9) ? Number(tub_basic_rate9_1000||0) * Number(tub_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_product_details10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_tower_weight10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_quantity10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_610 : tub_w23_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details10) ? Number(tub_rate_per_mt10_610||0) * Number(tub_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details10) ? Number(tub_basic_rate10_610||0) * Number(tub_quantity10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_900 : tub_w23_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details10) ? Number(tub_rate_per_mt10_900||0) * Number(tub_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_product_details10) ? Number(tub_basic_rate10_900||0) * Number(tub_quantity10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_rate_per_mt10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_1000 : tub_w23_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_basic_rate10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details10) ? Number(tub_rate_per_mt10_1000||0) * Number(tub_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_total_value10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_product_details10) ? Number(tub_basic_rate10_1000||0) * Number(tub_quantity10||0) : &apos;&apos;&quot;
+    }
+  ],
+  &quot;tubularSignallingEvalAWT&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details_header&quot;,
+      &quot;label&quot;: &quot;PRODUCT DETAILS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight_header&quot;,
+      &quot;label&quot;: &quot;TOWER WEIGHT-MT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity_header&quot;,
+      &quot;label&quot;: &quot;QTY&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt_header_610&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate_header_610&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value_header_610&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 610 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt_header_900&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate_header_900&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value_header_900&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 900 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt_header_1000&quot;,
+      &quot;label&quot;: &quot;RATE PER MT - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate_header_1000&quot;,
+      &quot;label&quot;: &quot;BASIC RATE - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value_header_1000&quot;,
+      &quot;label&quot;: &quot;TOTAL VALUE - 1000 GSM&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details1&quot;,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight1||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity1&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity1||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_rate_per_mt1_610||0) * Number(tub_awt_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value1_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_basic_rate1_610||0) * Number(tub_awt_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_rate_per_mt1_900||0) * Number(tub_awt_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value1_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_basic_rate1_900||0) * Number(tub_awt_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details1) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_rate_per_mt1_1000||0) * Number(tub_awt_tower_weight1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value1_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details1) ? Number(tub_awt_basic_rate1_1000||0) * Number(tub_awt_quantity1||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details2&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight2||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity2&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity2||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_rate_per_mt2_610||0) * Number(tub_awt_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value2_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_basic_rate2_610||0) * Number(tub_awt_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_rate_per_mt2_900||0) * Number(tub_awt_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value2_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_basic_rate2_900||0) * Number(tub_awt_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details2) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_rate_per_mt2_1000||0) * Number(tub_awt_tower_weight2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value2_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details2) ? Number(tub_awt_basic_rate2_1000||0) * Number(tub_awt_quantity2||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details3&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight3||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity3&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity3||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_rate_per_mt3_610||0) * Number(tub_awt_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value3_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_basic_rate3_610||0) * Number(tub_awt_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_rate_per_mt3_900||0) * Number(tub_awt_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value3_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_basic_rate3_900||0) * Number(tub_awt_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details3) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_rate_per_mt3_1000||0) * Number(tub_awt_tower_weight3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value3_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details3) ? Number(tub_awt_basic_rate3_1000||0) * Number(tub_awt_quantity3||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details4&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight4||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity4||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_rate_per_mt4_610||0) * Number(tub_awt_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value4_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_basic_rate4_610||0) * Number(tub_awt_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_rate_per_mt4_900||0) * Number(tub_awt_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value4_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_basic_rate4_900||0) * Number(tub_awt_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details4) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_rate_per_mt4_1000||0) * Number(tub_awt_tower_weight4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value4_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details4) ? Number(tub_awt_basic_rate4_1000||0) * Number(tub_awt_quantity4||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details5&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight5||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity5&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity5||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_rate_per_mt5_610||0) * Number(tub_awt_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value5_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_basic_rate5_610||0) * Number(tub_awt_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_rate_per_mt5_900||0) * Number(tub_awt_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value5_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_basic_rate5_900||0) * Number(tub_awt_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details5) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_rate_per_mt5_1000||0) * Number(tub_awt_tower_weight5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value5_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details5) ? Number(tub_awt_basic_rate5_1000||0) * Number(tub_awt_quantity5||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details6&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight6||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity6&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity6||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_rate_per_mt6_610||0) * Number(tub_awt_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value6_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_basic_rate6_610||0) * Number(tub_awt_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_rate_per_mt6_900||0) * Number(tub_awt_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value6_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_basic_rate6_900||0) * Number(tub_awt_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details6) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_rate_per_mt6_1000||0) * Number(tub_awt_tower_weight6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value6_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details6) ? Number(tub_awt_basic_rate6_1000||0) * Number(tub_awt_quantity6||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details7&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight7||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity7&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity7||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_rate_per_mt7_610||0) * Number(tub_awt_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value7_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_basic_rate7_610||0) * Number(tub_awt_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_rate_per_mt7_900||0) * Number(tub_awt_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value7_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_basic_rate7_900||0) * Number(tub_awt_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details7) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_rate_per_mt7_1000||0) * Number(tub_awt_tower_weight7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value7_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details7) ? Number(tub_awt_basic_rate7_1000||0) * Number(tub_awt_quantity7||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details8&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight8||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity8&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity8||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_rate_per_mt8_610||0) * Number(tub_awt_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value8_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_basic_rate8_610||0) * Number(tub_awt_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_rate_per_mt8_900||0) * Number(tub_awt_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value8_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_basic_rate8_900||0) * Number(tub_awt_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details8) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_rate_per_mt8_1000||0) * Number(tub_awt_tower_weight8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value8_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details8) ? Number(tub_awt_basic_rate8_1000||0) * Number(tub_awt_quantity8||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details9&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight9||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity9&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity9||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_rate_per_mt9_610||0) * Number(tub_awt_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value9_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_basic_rate9_610||0) * Number(tub_awt_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_rate_per_mt9_900||0) * Number(tub_awt_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value9_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_basic_rate9_900||0) * Number(tub_awt_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details9) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_rate_per_mt9_1000||0) * Number(tub_awt_tower_weight9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value9_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details9) ? Number(tub_awt_basic_rate9_1000||0) * Number(tub_awt_quantity9||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_product_details10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;tub_product_details10&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_tower_weight10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_tower_weight10||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_quantity10&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;Number(tub_quantity10||0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_610 : tub_w23_awt_610) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_rate_per_mt10_610||0) * Number(tub_awt_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value10_610&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_610 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_basic_rate10_610||0) * Number(tub_awt_quantity10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_900 : tub_w23_awt_900) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_rate_per_mt10_900||0) * Number(tub_awt_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value10_900&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_900 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_basic_rate10_900||0) * Number(tub_awt_quantity10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_rate_per_mt10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details10) ? ((ang_select_payment_terms == &apos;Against VFS&apos; || ang_select_payment_terms == &apos;Against LC Before Dispatch&apos;) ? tub_x30_awt_1000 : tub_w23_awt_1000) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_basic_rate10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_rate_per_mt10_1000||0) * Number(tub_awt_tower_weight10||0) : &apos;&apos;&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;tub_awt_total_value10_1000&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: &quot;1&quot;,
+      &quot;formula&quot;: &quot;(ang_gsm_1000 &amp;&amp; tub_awt_product_details10) ? Number(tub_awt_basic_rate10_1000||0) * Number(tub_awt_quantity10||0) : &apos;&apos;&quot;
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

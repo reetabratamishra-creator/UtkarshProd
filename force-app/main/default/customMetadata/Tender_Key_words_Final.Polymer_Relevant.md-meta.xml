@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Polymer - Relevant</label>
+    <protected>false</protected>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Polymer</value>
+    </values>
+    <values>
+        <field>Is_Excluded__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Is_Relevant__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Matched_Negative_Keywords__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Matched_Positive_Keywords__c</field>
+        <value xsi:type="xsd:string">Supply of Agricultural Pipe
+Supply of UPVC Pipe
+ASTM D1785
+ASTM D2468
+Supply of UPVC Pipe Conforming to IS 4985
+IS 4985
+IS 15778
+IS 14735
+IS 14182
+IS 13592
+IS 12818
+IS 10124
+IS 15328
+PVC Water Tank
+Unplasticized PVC Pipes
+PVC Pipes
+CPVC IS 15778 Pipe Supply
+Unplasticized PVC Pipes for Potable Water Supplies as per IS 4985 (Q3)
+Unplasticized Polyvinyl Chloride (PVC-U) Pipes for Soil and Waste Discharge System as per IS 13592 (Q3)
+Chlorinated Polyvinyl Chloride (CPVC) Pipes For Portable Hot and Cold Water Distribution Supplies (V3) conforming to IS 15778 (Q3)
+Unplasticized Polyvinyl Chloride (PVC-U) Screen and Casing Pipes for Bore / Tubewells (V2) as per IS 12818
+Amrut 2.0
+PM-KUSUM Project
+JJM
+Boring Pipe
+Casing Pipe
+Column Pipe
+Rising Pipe
+Screen Pipe
+Roll Pipe
+Submersible Pipe
+Coil Pipe
+Filter Pipe
+Anaconda Pipe</value>
+    </values>
+    <values>
+        <field>Schema_Prompt__c</field>
+        <value xsi:type="xsd:string">Analyze the tender document and check whether it matches any of the Polymer keywords.
+
+Read the tender document thoroughly and compare its content with the provided &quot;Matched Positive Keywords&quot;. Check whether any of the keywords match the document. If a match is found, classify the tender under the Polymer Department.</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This Public group consists of all the department&apos;s (except Enquiry) CRM Heads and HODs</description>
+    <doesIncludeBosses>false</doesIncludeBosses>
+    <name>Department CRM Heads and HODs</name>
+</Group>

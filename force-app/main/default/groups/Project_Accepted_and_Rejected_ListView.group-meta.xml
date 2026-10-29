@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Who can see Accepted and Rejected Projects Listview</description>
+    <doesIncludeBosses>false</doesIncludeBosses>
+    <name>Project Accepted and Rejected ListView</name>
+</Group>

@@ -1,0 +1,89 @@
+/* Creates a clean, centered box with a soft shadow */
+.main-container {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+}
+
+/* Gives enough bottom space so the dropdown doesn't get cut off or become transparent */
+.form-body {
+    min-height: 120px; 
+}
+/* Card Base Styling */
+.format-card {
+    cursor: pointer;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    background-color: #ffffff;
+    padding: 16px 8px; /* Gives it the nice square shape */
+}
+
+/* Hover Effect */
+.format-card:hover {
+    border-color: #0176d3;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Selected State */
+.format-card.selected-card {
+    border-color: #0176d3;
+    background-color: #f3f9fd; /* Very light blue tint */
+}
+
+/* Label Styling */
+.format-label {
+    font-weight: 600;
+    color: #444444;
+    font-size: 13px;
+}
+
+/* Make label blue when selected */
+.selected-card .format-label {
+    color: #0176d3;
+}
+/* Disabled State */
+.format-card.disabled-card {
+    background-color: #f9f9fa;
+    border-color: #f3f3f3;
+    cursor: not-allowed;
+    opacity: 0.4; /* Fades out the icon and text */
+}
+
+/* Remove hover effects for disabled cards */
+.format-card.disabled-card:hover {
+    border-color: #f3f3f3;
+    box-shadow: none;
+}
+/* Canvas preview: no PDF file in the browser; also refuse to print. Deepanjan (18th September 2026) */
+@media print { :host { display: none !important; } }
+.pdf-pages canvas {
+    display: block;
+    margin: 0 auto 12px;
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+
+/* Full-page mask while the first page renders. Deepanjan (18th September 2026) */
+.preview-mask {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(255, 255, 255, 0.65);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.preview-mask-box {
+    width: 60%;
+    max-width: 480px;
+    min-width: 240px;
+    background: #fff;
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    padding: 20px 24px;
+}

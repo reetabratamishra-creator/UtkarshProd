@@ -1,0 +1,202 @@
+<template>
+    <div class="list-view-page slds-card slds-m-around_none" onclick={handleRootClick}>
+
+        <div class="slds-page-header slds-page-header_joined">
+            <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-start">
+
+                <div class="slds-media slds-media_center">
+                    <!-- <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:case" size="medium"
+                            alternative-text="Case Management"></lightning-icon>
+                    </div> -->
+                    <div class="slds-media__body">
+                        <!-- <p class="slds-text-body_small slds-text-color_weak">Case Management</p> -->
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-dropdown-trigger slds-is-open view-picker" data-popover="views">
+                                <button class="slds-button view-title-btn" onclick={handleToggleViewMenu}
+                                    aria-haspopup="listbox" aria-expanded={viewMenuOpen}>
+                                    <span class="slds-text-heading_medium view-title">{currentView.label}</span>
+                                    <lightning-icon icon-name="utility:down" size="xx-small"
+                                        class="slds-m-left_xx-small"></lightning-icon>
+                                </button>
+
+                                <div class={viewMenuClass}>
+                                    <div class="slds-p-around_x-small">
+                                        <lightning-input type="search" variant="label-hidden"
+                                            placeholder="Search lists..." onchange={handleViewSearch}
+                                            value={viewSearch}></lightning-input>
+                                    </div>
+                                    <p class="slds-text-title slds-p-horizontal_small slds-p-vertical_xx-small">List
+                                        Views</p>
+                                    <ul class="slds-listbox slds-listbox_vertical" role="listbox">
+                                        <template for:each={filteredViews} for:item="v">
+                                            <li key={v.key} class={v.itemClass} role="option" data-key={v.key}
+                                                onclick={handleSelectView}>
+                                                <span class="check-slot">
+                                                    <template lwc:if={v.isSelected}>
+                                                        <lightning-icon icon-name="utility:check"
+                                                            size="xx-small"></lightning-icon>
+                                                    </template>
+                                                </span>
+                                                <span class="slds-truncate">{v.label}</span>
+                                            </li>
+                                        </template>
+                                        <template lwc:if={hasViewMatches}></template>
+                                        <template lwc:else>
+                                            <li class="slds-p-around_small slds-text-color_weak">No lists found</li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <lightning-button-icon class="slds-m-left_x-small" icon-name="utility:pinned"
+                                variant={pinVariant} size="small" alternative-text={pinTitle} title={pinTitle}
+                                onclick={handlePin}></lightning-button-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-no-flex">
+                    <lightning-button-group>
+                        <lightning-button label="Create New Case" onclick={handleCreateNewCase}></lightning-button>
+                        <!--<lightning-button label="Create Internal Ticket"
+                            onclick={handleCreateInternalTicket}>
+                        </lightning-button>-->
+                    </lightning-button-group>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-end slds-m-top_small">
+                <p class="slds-text-body_small slds-text-color_weak">
+                    {itemsLabel} &bull; Sorted by {sortedByLabel} &bull; Filtered by {filteredByLabel} &bull;
+                    {updatedLabel}
+                </p>
+
+                <div class="slds-grid slds-grid_vertical-align-center">
+                    <lightning-input class="js-list-search slds-m-right_x-small search-box" type="search"
+                        variant="label-hidden" placeholder="Search this list..."
+                        onchange={handleSearch}></lightning-input>
+
+                    <!-- 
+                    <lightning-button-group>
+                        <lightning-button-menu icon-name="utility:settings" alternative-text="List View Controls"
+                            menu-alignment="right" onselect={handleGearSelect}>
+                            <lightning-menu-item value="pin" label="Pin this list view"></lightning-menu-item>
+                            <lightning-menu-item value="clear" label="Clear search &amp; filters"></lightning-menu-item>
+                        </lightning-button-menu>
+
+                        <lightning-button-menu icon-name="utility:table" alternative-text="Display as"
+                            menu-alignment="right">
+                            <lightning-menu-item value="table" label="Table" checked></lightning-menu-item>
+                        </lightning-button-menu>
+
+                        <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+                            onclick={handleRefresh}></lightning-button-icon>
+                        <lightning-button-icon icon-name="utility:chart" variant={chartVariant}
+                            alternative-text="Show charts" title="Show charts"
+                            onclick={handleToggleChart}></lightning-button-icon>
+
+                        <div class="filter-anchor" data-popover="filter">
+                            <lightning-button-icon icon-name="utility:filterList" variant={filterButtonVariant}
+                                alternative-text="Filters" title="Filters"
+                                onclick={handleToggleFilter}></lightning-button-icon>
+                            <template lwc:if={showFilter}>
+                                <section class="slds-popover slds-nubbin_top-right filter-panel" role="dialog">
+                                    <div
+                                        class="slds-popover__header slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                        <h2 class="slds-text-heading_small">Filters</h2>
+                                        <lightning-button variant="base" label="Reset All" onclick={handleResetFilters}
+                                            disabled={noActiveFilters}></lightning-button>
+                                    </div>
+                                    <div class="slds-popover__body filter-body">
+                                        <lightning-checkbox-group name="status" label="Status" data-field="statuses"
+                                            options={statusOptions} value={filters.statuses}
+                                            onchange={handleFilterChange}></lightning-checkbox-group>
+                                        <lightning-checkbox-group class="slds-m-top_small" name="priority"
+                                            label="Priority" data-field="priorities" options={priorityOptions}
+                                            value={filters.priorities}
+                                            onchange={handleFilterChange}></lightning-checkbox-group>
+                                        <lightning-checkbox-group class="slds-m-top_small" name="department"
+                                            label="Department" data-field="departments" options={departmentOptions}
+                                            value={filters.departments}
+                                            onchange={handleFilterChange}></lightning-checkbox-group>
+                                    </div>
+                                </section>
+                            </template>
+                        </div>
+                    </lightning-button-group>
+                -->
+                    <lightning-button-group>
+                        <lightning-button-menu icon-name="utility:settings" alternative-text="List View Controls"
+                            menu-alignment="right" onselect={handleGearSelect}>
+                            <lightning-menu-item value="pin" label="Pin this list view"></lightning-menu-item>
+                            <lightning-menu-item value="clear" label="Clear search &amp; filters"></lightning-menu-item>
+                        </lightning-button-menu>
+
+                        <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+                            onclick={handleRefresh}></lightning-button-icon>
+                        <lightning-button-icon icon-name="utility:chart" variant={chartVariant}
+                            alternative-text="Show charts" title="Show charts"
+                            onclick={handleToggleChart}></lightning-button-icon>
+                    </lightning-button-group>
+                </div>
+            </div>
+        </div>
+
+        <template lwc:if={showChart}>
+            <div class="slds-p-around_small slds-border_bottom chart-panel">
+                <p class="slds-text-title slds-m-bottom_x-small">Cases by Status</p>
+                <template lwc:if={hasChartData}>
+                    <template for:each={chartBars} for:item="b">
+                        <div key={b.key} class="slds-grid slds-grid_vertical-align-center slds-m-bottom_xx-small">
+                            <span class="chart-label slds-truncate">{b.label}</span>
+                            <div class="chart-track slds-grow">
+                                <div class="chart-bar" style={b.style}></div>
+                            </div>
+                            <span class="chart-count">{b.total}</span>
+                        </div>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <p class="slds-text-color_weak">No data</p>
+                </template>
+            </div>
+        </template>
+
+        <template lwc:if={errorMessage}>
+            <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                <span class="slds-assistive-text">Error</span>
+                <h2>{errorMessage}</h2>
+            </div>
+        </template>
+
+        <div class="table-wrap">
+            <template lwc:if={showTable}>
+                <lightning-datatable key-field="id" data={rows} columns={columns} show-row-number-column
+                    sorted-by={sortedByColumn} sorted-direction={sortDirection} onsort={handleSort}
+                    enable-infinite-loading={hasMore} is-loading={isLoadingMore} onloadmore={handleLoadMore}>
+                </lightning-datatable>
+            </template>
+
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative loading-holder">
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </div>
+            </template>
+
+            <template lwc:if={isEmpty}>
+                <div class="slds-p-around_large slds-text-align_center">
+                    <h3 class="slds-text-heading_medium">No items to display.</h3>
+                    <p class="slds-text-color_weak slds-m-top_x-small">Try a different list view, search term, or
+                        filter.</p>
+                </div>
+            </template>
+        </div>
+
+        <template lwc:if={limitReached}>
+            <div class="slds-p-around_small slds-text-color_weak slds-text-align_center slds-border_top">
+                Showing the first 2,000 items. Use search or filters to narrow the list.
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,87 @@
+.dealer-dashboard-wrapper {
+    background: #f3f3f3;
+    padding: 1rem;
+    min-height: 80vh;
+}
+
+.dd-section {
+    background: #ffffff;
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.dd-section__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.75rem;
+}
+
+.dd-section__badge {
+    background-color: #fc8f13;
+    padding: 0.4rem;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+}
+
+.dd-section__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a202c;
+    flex-grow: 1;
+}
+
+.dd-section__count {
+    background: #edf2f7;
+    color: #4a5568;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.dd-spinner-wrapper {
+    position: relative;
+    height: 150px;
+}
+
+.dd-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 0.25rem;
+    color: #c53030;
+}
+
+.dd-datatable-wrapper {
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.dd-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.dd-empty__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-top: 0.75rem;
+}
+
+.dd-empty__msg {
+    color: #718096;
+    margin-top: 0.25rem;
+}

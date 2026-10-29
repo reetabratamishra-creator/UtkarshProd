@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomerJourney_Mndt_in_nature_stage</fullName>
+    <active>true</active>
+    <description>Customer Journey is mandatory in Nurture stage. Please choose before changing the stage.</description>
+    <errorConditionFormula>AND(
+    ISCHANGED(StageName),
+    NOT(ISPICKVAL(StageName, &quot;Nurture&quot;)),
+    ISPICKVAL(Customer_Journey__c, &quot;&quot;),
+    RecordType.DeveloperName  = &quot;Master_Opportunity&quot;
+)</errorConditionFormula>
+    <errorDisplayField>Customer_Journey__c</errorDisplayField>
+    <errorMessage>Customer Journey is mandatory in Nurture stage. Please choose before changing the stage.</errorMessage>
+</ValidationRule>

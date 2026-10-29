@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>New Case</masterLabel>
+    <description>Registers a complaint as a Case from the Case list view.</description>
+    <targets>
+        <!-- Option A: reachable at /lightning/cmp/c__caseCreationForm -->
+        <target>lightning__UrlAddressable</target>
+        <!-- Option B: drop it on a Lightning App Page, reachable at /lightning/n/<Tab_API_Name> -->
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+    </targets>
+</LightningComponentBundle>

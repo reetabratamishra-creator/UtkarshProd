@@ -1,0 +1,42 @@
+<template>
+    <div class="hub-container">
+        <div class="object-selector slds-p-horizontal_medium slds-p-top_medium">
+            <template if:true={isLoadingOptions}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+            <template if:false={isLoadingOptions}>
+                <template if:true={hasObjectOptions}>
+                    <lightning-combobox
+                        name="campaignObject"
+                        label="Object"
+                        value={selectedObject}
+                        placeholder="Select object"
+                        options={objectOptions}
+                        onchange={handleObjectChange}
+                    ></lightning-combobox>
+                </template>
+                <template if:false={hasObjectOptions}>
+                    <div class="slds-text-color_error">
+                        You do not have access to any campaign objects.
+                    </div>
+                </template>
+            </template>
+        </div>
+
+        <template if:true={showLeadView}>
+            <c-lead-management-datatable></c-lead-management-datatable>
+        </template>
+        <template if:true={showOpportunityView}>
+            <c-dealer-opportunity-datatable></c-dealer-opportunity-datatable>
+        </template>
+        <template if:true={showAccountView}>
+            <c-account-management-datatable></c-account-management-datatable>
+        </template>
+        <template if:true={showContactView}>
+            <c-contact-management-datatable></c-contact-management-datatable>
+        </template>
+        <template if:true={showOfflineCampaignView}>
+            <c-offline-campaign-management-datatable></c-offline-campaign-management-datatable>
+        </template>
+    </div>
+</template>

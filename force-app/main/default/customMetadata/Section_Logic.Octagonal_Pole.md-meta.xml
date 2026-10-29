@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Octagonal Pole</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Weight_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:type="xsd:string">Octagonal_Pole_Blueprints</value>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Octagonal Pole</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;mast_standard_pole&quot;,
+      &quot;label&quot;: &quot;Type of Pole - Standard&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Standard Lighting Pole&quot;,
+        &quot;Custom Lighting Pole&quot;,
+        &quot;Mid Hinge Pole&quot;
+      ],
+      &quot;controllingField&quot;: &quot;type_of_mast&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Octagonal Pole&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;standard_op_folder_std&quot;,
+      &quot;labelFormat&quot;: &quot;Weight Estimator - {value}&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;mast_standard_pole&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Standard Lighting Pole&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Standard Lighting Pole&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - STANDARD LIGHTNING POLE&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;op_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Segments&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;s1_no_of_items&quot;,
+                  &quot;label&quot;: &quot;No. of Items (Segment 1)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;s2_no_of_items&quot;,
+                  &quot;label&quot;: &quot;No. of Items (Segment 2)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;op_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed ?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;NO&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;op_wind_speed_value&quot;,
+                  &quot;label&quot;: &quot;Value&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;op_wind_speed&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_pole_details&quot;,
+              &quot;label&quot;: &quot;Segment - 1 Pole Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;s1_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s1_pole&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_foundation&quot;,
+              &quot;label&quot;: &quot;Foundation accessories - 1&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s1_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s1_foundation&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_bracket&quot;,
+              &quot;label&quot;: &quot;Bracket Details - 1&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s1_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s1_bracket&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_pole_details&quot;,
+              &quot;label&quot;: &quot;Segment - 2 Pole Details&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s2_pole&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_foundation&quot;,
+              &quot;label&quot;: &quot;Foundation accessories - 2&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s2_foundation&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_bracket&quot;,
+              &quot;label&quot;: &quot;Bracket Details - 2&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_s2_bracket&quot;
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;standard_op_folder_custom&quot;,
+      &quot;labelFormat&quot;: &quot;Weight Estimator - {value}&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;mast_standard_pole&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Custom Lighting Pole&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Custom Lighting Pole&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - CUSTOM LIGHTNING POLE&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;cus_op_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Segments&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;s1_no_of_items_for_cus_op&quot;,
+                  &quot;label&quot;: &quot;No. of Items (Segment 1)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;s2_no_of_items_for_cus_op&quot;,
+                  &quot;label&quot;: &quot;No. of Items (Segment 2)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;for_cus_op_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed ?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;NO&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;for_cus_op_wind_speed_value&quot;,
+                  &quot;label&quot;: &quot;Value&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;for_cus_op_wind_speed&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_pole_details_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Segment - 1 Pole Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;s1_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s1_pole&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_foundation_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Foundation accessories - 1&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s1_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s1_foundation&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_1_bracket_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Bracket Details - 1&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s1_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s1_bracket&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_pole_details_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Segment - 2 Pole Details&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s2_pole&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_foundation_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Foundation accessories - 2&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s2_foundation&quot;
+            },
+            {
+              &quot;id&quot;: &quot;segment_2_bracket_for_cus_op&quot;,
+              &quot;label&quot;: &quot;Bracket Details - 2&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;s2_no_of_items_for_cus_op&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;cus_op_s2_bracket&quot;
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;standard_op_folder_mid_hinge&quot;,
+      &quot;labelFormat&quot;: &quot;Weight Estimator - {value}&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;mast_standard_pole&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Mid Hinge Pole&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Mid Hinge Pole&quot;: {
+          &quot;title&quot;: &quot;WEIGHT ESTIMATOR - MID HINGE POLE&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;mhp_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Mid Hinge Pole&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mhp_no_of_items&quot;,
+                  &quot;label&quot;: &quot;No. of Items&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 1,
+                  &quot;max&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;op_mhp_wind_speed&quot;,
+                  &quot;label&quot;: &quot;Wind Speed ?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;NO&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;op_mhp_wind_speed_value&quot;,
+                  &quot;label&quot;: &quot;Value&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;controllingField&quot;: &quot;op_mhp_wind_speed&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mhp_pole_details&quot;,
+              &quot;label&quot;: &quot;Mid Hinge Pole Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;mhp_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_mhp_pole&quot;
+            },
+            {
+              &quot;id&quot;: &quot;mhp_foundation&quot;,
+              &quot;label&quot;: &quot;Foundation Accessories&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;mhp_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_mhp_foundation&quot;
+            },
+            {
+              &quot;id&quot;: &quot;mhp_bracket&quot;,
+              &quot;label&quot;: &quot;Arm / Bracket Details&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;mhp_no_of_items&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;&gt;=1&quot;
+              ],
+              &quot;cloneFrom&quot;: &quot;op_mhp_bracket&quot;
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Crash Barrier</label>
+    <protected>false</protected>
+    <values>
+        <field>Brochure_File_Name__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Brochure.pdf</value>
+    </values>
+    <values>
+        <field>Brochure_URL__c</field>
+        <value xsi:type="xsd:string">https://portal.bluewavesmedia.in/WhatsAppMedia/Template/Document/Utkarsh/crash_barrier(2).pdf</value>
+    </values>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">Crash Barrier</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Crash Barrier</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide crash-tested galvanised steel barriers designed for safety, durability, and corrosion resistance on highways and bridges &amp; in Railways as well. Types: W-Beam Crash Barriers | Thrie Beam Crash Barriers | Pedestrian Guard Rails | Noise Barriers | |Metal beam Crash barrier etc.</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Brochure_pdf</value>
+    </values>
+    <values>
+        <field>WhatsApp_Document_Id__c</field>
+        <value xsi:type="xsd:string">1562803358542830</value>
+    </values>
+</CustomMetadata>

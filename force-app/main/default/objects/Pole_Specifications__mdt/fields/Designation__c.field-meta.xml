@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Designation__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>The unique identifier or product code for the pole (e.g., 410-SP-01). Used to match the line item to its specific physical dimensions.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The unique identifier or product code for the pole.</inlineHelpText>
+    <label>Designation</label>
+    <length>255</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

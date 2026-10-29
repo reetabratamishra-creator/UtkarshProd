@@ -1,0 +1,71 @@
+.mp-container {
+    padding: 0.75rem;
+}
+
+.mp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.mp-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.mp-status {
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.mp-status-in {
+    background: #16a34a;
+}
+
+.mp-status-out {
+    background: #dc2626;
+}
+
+.mp-info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.mp-label {
+    color: #6b7280;
+}
+
+.mp-value {
+    color: #111827;
+    font-weight: 500;
+}
+
+.mp-button-row {
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: center;
+}
+
+.mp-loading {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.mp-error {
+    font-size: 0.8rem;
+    color: #b91c1c;
+    margin-top: 0.4rem;
+}
+
+.mp-note {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+    text-align: center;
+}

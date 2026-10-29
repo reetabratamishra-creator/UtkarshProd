@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Users with this permission do not queue automatic BWM email or WhatsApp/RCS/SMS sends. Assign only to the user doing a data upload and remove it afterwards.</description>
+    <isLicensed>false</isLicensed>
+    <label>BWM Bypass Auto Messaging</label>
+</CustomPermission>

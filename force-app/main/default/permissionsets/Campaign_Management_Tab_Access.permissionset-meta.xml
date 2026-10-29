@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>CampaignManagementHubController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Grants Campaign Management hub tab access for designated users.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Campaign Management Tab Access</label>
+    <tabSettings>
+        <tab>Campaign_Management</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>

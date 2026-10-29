@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Material__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Material</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Blooms</fullName>
+                <default>true</default>
+                <label>Blooms</label>
+            </value>
+            <value>
+                <fullName>Billets</fullName>
+                <default>false</default>
+                <label>Billets</label>
+            </value>
+            <value>
+                <fullName>Zinc</fullName>
+                <default>false</default>
+                <label>Zinc</label>
+            </value>
+            <value>
+                <fullName>CPI</fullName>
+                <default>false</default>
+                <label>CPI</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

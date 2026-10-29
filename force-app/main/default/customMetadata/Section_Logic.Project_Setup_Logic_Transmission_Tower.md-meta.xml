@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Project Setup Logic Transmission Tower</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Project_Setup_Details_for_transmission</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tower_project_for_type&quot;,
+      &quot;label&quot;: &quot;Freight Cost&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;controllingField&quot;: &quot;Incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;required&quot;: &quot;true&quot;,
+      &quot;options&quot;: [
+        &quot;Minimum Guaranteed Loadability&quot;,
+        &quot;Per Metric Ton&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_project_for_details_1&quot;,
+      &quot;label&quot;: &quot;Freight Cost Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;tower_project_for_type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Per Metric Ton&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;Freight Cost Details&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;per_metric_ton_rate&quot;,
+              &quot;label&quot;: &quot;Per Metric Ton Rate&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_location&quot;,
+                  &quot;label&quot;: &quot;LOCATION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton&quot;,
+                  &quot;label&quot;: &quot;RATE PER TON&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_location_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_rate_per_ton_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems1&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_1}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_1&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice1&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_1 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity1&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems2&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_2}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_2&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice2&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_2 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity2&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems3&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_3}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_3&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice3&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_3 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity3&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems4&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_4}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_4&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice4&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_4 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity4&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems5&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_5}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_5&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice5&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_5 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity5&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems6&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_6}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_6&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice6&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_6 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity6&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems7&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_7}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_7&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice7&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_7 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity7&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems8&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_8}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_8&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice8&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_8 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity8&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems9&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_9}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_9&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice9&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_9 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity9&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rpt_lineitems10&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {rpt_location_10}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;rpt_location_10&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rpt_unitPrice10&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(rpt_rate_per_ton_10 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;rpt_unit_quantity10&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_project_for_details_2&quot;,
+      &quot;label&quot;: &quot;Freight Cost Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;tower_project_for_type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Minimum Guaranteed Loadability&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;F.O.R Details&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;minimum_guaranteed_loadability&quot;,
+              &quot;label&quot;: &quot;Minimum Guranteed Loadability&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_location&quot;,
+                  &quot;label&quot;: &quot;LOCATION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower&quot;,
+                  &quot;label&quot;: &quot;DESCRIPTION OF THE TOWER&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability&quot;,
+                  &quot;label&quot;: &quot;VEHICLE LOADABILITY - MT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight&quot;,
+                  &quot;label&quot;: &quot;MINIMUM GUARANTEED FREIGHT (PER MT)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_location_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_description_of_the_tower_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_vehicle_loadability_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_minimum_guranteed_freight_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems1&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_1}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_1&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost1&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_1 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity1&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems2&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_2}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_2&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost2&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_2 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity2&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems3&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_3}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_3&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost3&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_3 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity3&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems4&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_4}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_4&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost4&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_4 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity4&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems5&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_5}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_5&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost5&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_5 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity5&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems6&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_6}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_6&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost6&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_6 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity6&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems7&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_7}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_7&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost7&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_7 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity7&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems8&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_8}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_8&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost8&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_8 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity8&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems9&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_9}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_9&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost9&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_9 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity9&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;mgl_lineitems10&quot;,
+              &quot;labelFormat&quot;: &quot;{tower_project_for_type} - {mgl_location_10}&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;mgl_location_10&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;mgl_unitcost10&quot;,
+                  &quot;label&quot;: &quot;Unit Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;Number(mgl_minimum_guranteed_freight_10 || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;mgl_unit_quantity10&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_project_for_transportation_addition&quot;,
+      &quot;label&quot;: &quot;Transportation to be added in offer separately?&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;controllingField&quot;: &quot;Incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;required&quot;: &quot;true&quot;,
+      &quot;options&quot;: [
+        &quot;YES&quot;,
+        &quot;NO&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_project_customer_address_override&quot;,
+      &quot;label&quot;: &quot;Customer Address Override&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;Incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;CUSTOMER ADDRESS DETAILS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;shipping_address&quot;,
+              &quot;label&quot;: &quot;Shipping Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;def_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingStreet@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingCity@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_zip&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingPostalCode@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingState@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingCountry@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Phone@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;override_existing_address&quot;,
+                  &quot;label&quot;: &quot;OVERRIDE EXISTING ADDRESS?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;override_shipping_address&quot;,
+              &quot;label&quot;: &quot;Override Shipping Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;override_existing_address&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ba_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@BillingStreet@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@BillingCity@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_zip_code&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@BillingPostalCode@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@BillingState@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@BillingCountry@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;@@Phone@@&quot;,
+                  &quot;colSpan&quot;: 12
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;tower_project_terms_condition&quot;,
+      &quot;label&quot;: &quot;Terms &amp; Condition&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;Incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;tc_details&quot;,
+              &quot;label&quot;: &quot;Terms &amp; Condition Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_details&quot;,
+                  &quot;label&quot;: &quot;Payment Terms&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_delivery&quot;,
+                  &quot;label&quot;: &quot;Delivery Details&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;defaultValue&quot;: &quot;For lots with Proto 125 days and for lots without proto 95 days subject to Plant production schedule.&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_month_days&quot;,
+                  &quot;label&quot;: &quot;Price Validity&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_job_name&quot;,
+                  &quot;label&quot;: &quot;Job Name&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_proto_inclusive&quot;,
+                  &quot;label&quot;: &quot;Proto Inclusive&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;8&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_offer_validity&quot;,
+                  &quot;label&quot;: &quot;Offer Validity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 7,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_ms_steel_grade&quot;,
+                  &quot;label&quot;: &quot;MS Steel Grade&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;IS 2062 Grade E250&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_ht_steel_grade&quot;,
+                  &quot;label&quot;: &quot;HT Steel Grade&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;IS 2062 Grade E350&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_lot_size&quot;,
+                  &quot;label&quot;: &quot;Lot Size&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_lot_size_value&quot;,
+                  &quot;label&quot;: &quot;Lot Size Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;500&quot;,
+                  &quot;controllingField&quot;: &quot;tc_lot_size&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_note&quot;,
+                  &quot;label&quot;: &quot;Note (If required)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

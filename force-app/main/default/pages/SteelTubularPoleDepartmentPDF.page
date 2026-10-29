@@ -1,0 +1,530 @@
+<apex:page standardController="Quote" extensions="QuoteExportControllerForSTP" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false">
+    <head>
+        <style type="text/css">
+            /* 1. Global layout defaults to 0 margin so front cover is instantly full-bleed */
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+            
+            /* 2. Named page definition specifically for your standard document content */
+			@page standard-content {
+                size: A4;
+            	margin: 30mm 0mm 25mm 0mm;
+                @top-left {
+                    content: element(header);
+                }
+                @bottom-left {
+                    content: element(footer);
+                }
+            }
+            
+            /* 3. Named page definition to strip margins back to 0 for the last page */
+            @page final-page {
+                size: A4;
+                margin: 0mm;
+            }
+            
+            /* Structural Container Adjustments */
+            html, body {
+                margin: 0px;
+                padding: 0px;
+                font-family: 'Arial', 'Helvetica', sans-serif;
+                font-size: 10pt;
+                line-height: 1.5;
+                color: #222;
+            }
+            
+            div.page-cover {
+                page-break-after: always;
+                width: 210mm;
+                height: 297mm;
+            	margin: 0mm;
+            }
+            
+            div.document-body {
+                page: standard-content; /* Activates the 25mm 20mm margins and headers/footers */
+            }
+            div.document-body-inner{
+            	padding:2mm 20mm 2mm 20mm;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .avoid-break {
+                page-break-inside: avoid;
+            }
+            
+            /* REDESIGNED HEADER (Inherits background dynamically, structures lime bar and logo container) */
+            div.corporate-header {
+                    position: running(header);
+                    top: 0;
+                    left: 0;
+                    width: 300%;
+                    height: 38mm
+                    color: #FFFFFF;
+                    padding: 0;
+                    margin: 0;
+                }
+            	.header-lime-line{
+            		width: 155%;
+            		border-bottom: 3px solid #99cc33; 
+            	}
+                .header-inner {
+                    padding: 5mm 15mm 0mm 15mm;
+                }
+                .header-left {
+                    float: left;
+                    width: 75%;
+                    margin-top: 4mm;
+                }
+                .company-name {
+                    font-size: 14pt;
+                    font-weight: bold;
+                    color: black;
+                    margin-bottom: 2px;
+            		text-align: right;
+                }
+                .office-details {
+                    font-size: 7.5pt;
+                    color: black;
+                    line-height: 1.4;
+            		text-align: right;
+                }
+                .office-details a {
+                    color: #66b3ff;
+                    text-decoration: none;
+            		text-align: right;
+                }
+                .header-right {
+                    float: right;
+                    width: 20%;
+                    text-align: right;
+            		position: relative;
+            		z-index:999;
+                }
+                .logo-img {
+                    height: 22mm;
+                    width: auto;
+                    display: inline-block;
+                    background-color: #FFFFFF; 
+                    padding: 1px;
+                }
+            
+            /* REDESIGNED FOOTER (Inherits background dynamically, handles centered copy and stacked right elements) */
+            div.corporate-footer {
+                    position: running(footer);
+                    bottom: 0;
+                    left: 0;
+                    width: 300%;
+                    height: 32mm;
+                    color: black;
+                    padding: 0;
+                    margin: 0;
+                }
+                .footer-inner {
+                    padding: 0mm 15mm 0mm 15mm;
+                    font-size: 7pt;
+                    color: black;
+                    line-height: 1.4;
+                    text-align: right;
+                }
+                .factory-details {
+                    margin-bottom: 3px;
+                }
+                .social-row {
+                    margin-top: 4px;
+                    font-size: 7.5pt;
+                }
+            
+            /* Typography and Layout elements */
+            .meta-table {
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .meta-table td {
+                vertical-align: top;
+            }
+            
+            .subject-line {
+                font-weight: bold;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align: justify;
+            }
+            
+            /* Main Content Table styling */
+            .content-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 9pt;
+            }
+            
+            .content-table th {
+                background-color: #f4f4f4;
+                border: 1px solid #111;
+                font-weight: bold;
+                padding: 6px;
+                text-align: center;
+            }
+            
+            .content-table td {
+                border: 1px solid #111;
+                padding: 6px;
+                vertical-align: top;
+            }
+            
+            .text-right {
+                text-align: right;
+            }
+            .text-left{
+            	text-align: left;
+            }
+            .text-center {
+                text-align: center;
+            }
+            
+            .total-row {
+                font-weight: bold;
+                background-color: #f9f9f9;
+            }
+            .description-cell{
+                white-space: pre-line;
+            }
+            
+            .terms-heading {
+                font-size: 11pt;
+                font-weight: bold;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #000;
+                padding-bottom: 2px;
+            }
+            
+            .term-item {
+                margin-bottom: 12px;
+                text-align: justify;
+            }
+            
+            .term-title {
+                font-weight: bold;
+            }
+            
+            .signature-section {
+                margin-top: 30px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="page-cover">
+            <apex:image value="{!$Resource.SteelTubularPoleDepartmentFrontPage}" style="width: 210mm; height: 297mm; display: block;"/>
+        </div>
+        
+        <div class="corporate-header">
+                <div class="header-inner">
+                    <div class="header-left">
+                        <div class="company-name">Utkarsh India Limited</div>
+                        <div class="header-lime-line"></div>
+                        <div class="office-details">
+                            Corporate Office: Arrjavv Square, 95A Elliot Road, 4th Floor, Kolkata 700016, P- 033 2264 6666/2265 8888<br/>
+                            E- <a href="mailto:info@utkarshindia.in">info@utkarshindia.in</a> W- <a href="http://www.utkarshindia.in" target="_blank">www.utkarshindia.in</a>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <img class="logo-img" src="{!($Resource.UtkarshLogo)}" alt="Utkarsh Logo" />
+                    </div>
+                </div>
+            </div>
+        
+        <div class="document-body">
+            <div class="document-body-inner">
+                <div style="margin-top: 10px;">
+                    <table class="meta-table">
+                        <tr>
+                            <td>
+                                <strong>Ref:-</strong> {!referenceNum}
+                            </td>
+                            <td style="text-align: right;">
+                                <strong>Date:-</strong> {!todayDate}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <p>
+                        To,<br/>
+                        <strong>{!contactName}</strong><br />
+                        {!contactNumber}<br/>
+                        {!contactEmail}<br/>
+                    
+                    </p>
+                    
+                    <div class="subject-line">
+                        Sub: <apex:outputPanel rendered="{!isBudgetary}">Budgetary</apex:outputPanel> Offer for Swaged Type Steel Tubular Poles IS-2713 "Bansal Utkarsh Brand".
+                    </div>
+                    
+                    <p>
+                        We feel privileged to have got this opportunity to submit our offer and/or quotation for manufacturing and supply of the product described in the captioned subject, as against your enquiry.
+                    </p>
+                    <p>
+                        We take pride to mention that you have approached one of the leading brands in the country engaged in the manufacturing of the product as described herein and we can assure you that if you decide to accept our offer and place the purchase/supply order in our favour you will always feel proud for having taken the right decision.
+                    </p>
+                    <p>
+                        Our offer and/or quotation for the product as enquired by you is stated hereinafter:
+                    </p>
+                    <apex:repeat value="{!tables}" var="tbl">
+                        <div style="margin-bottom: 25px;">
+                            <p><strong>{!tbl.tableName}</strong></p>
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">Sl. no</th>
+                                        <th style="width: 50%;">Description</th>
+                                        <th style="width: 12%;">Length (mtr)</th>
+                                        <th style="width: 10%;">Quantity (in pcs)</th>
+                                        <th style="width: 11%;">Basic Rate (per pcs) in Rs.</th>
+                                        <th style="width: 12%;">Total Amount in Rs.</th>
+                                    </tr>
+                        		</thead>
+                                <tbody>
+                                    <apex:repeat value="{!tbl.lineItems}" var="item">
+                                        <tr>
+                                            <td class="text-center">{!item['SlNo']}</td>
+                                            <td class="text-left description-cell">
+                                                <apex:outputText value="{!item['description']}" escape="false"/>
+                                            </td>
+                                            <td class="text-center">{!item['length']}</td>
+                                            <td class="text-center">{!item['quantity']}</td>
+                                            <td class="text-center">{!item['rate']}</td>
+                                            <td class="text-center">{!item['total_price']}</td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <tr class="total-row">
+                                        <td colspan="5" class="text-right">TOTAL</td>
+                                        <td class="text-right">{!tbl.tableSubTotal}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(tbl.additionalNote))}">
+                        	<p><strong>Special Note: </strong>{!tbl.additionalNote}</p>
+                    	</apex:outputPanel>
+                    </apex:repeat>
+                    <p>The total quote value is of Rs. <strong>{!totalAmount}</strong> ({!totalAmountInWords})</p>
+                </div>
+                
+                <div class="terms-section">
+                    <div class="terms-heading">TERMS &amp; CONDITIONS OF THE CONTRACT</div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">1. Buyer:</span> Buyer shall mean <strong>{!accountName}</strong>
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">2. Supplier:</span> Supplier shall mean <strong>Utkarsh India Limited</strong> having its office at 95A, Elliot Road, Arrjavv Square, Kolkata 700016.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">3. Rates and Taxes:</span> 
+                        	<apex:outputText rendered="{!gst == 'exclusive'}">
+                                The rates quoted exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes 
+                                shall be chargeable <strong>extra @18%</strong> on the total order value.
+    						</apex:outputText>
+                            <apex:outputText rendered="{!gst == 'inclusive'}">
+                                The rates quoted inclusive of Goods &amp; Service Taxes. <strong>No additional GST</strong> 
+                                shall be charged on the total order value.
+                            </apex:outputText>
+                        	<apex:outputText rendered="{!gst == '' || gst == null}">
+                            </apex:outputText>
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">4. Payment Terms:</span> 
+                        <apex:outputPanel rendered="{!OR(
+                                BEGINS(paymentTermsPicklist,'Against LC Before Dispatch'),
+                                BEGINS(paymentTermsPicklist,'Against VFS'),
+                                BEGINS(paymentTermsPicklist,'Against Open Credit')
+                            )}">
+                        	{!paymentTermsPicklist}
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!OR(
+                                paymentTermsPicklist = 'Before Dispatch'
+                            )}">
+                        	<strong>{!payment_per}%</strong> advance along with Purchase Order and manufacturing clearance and <strong>{!remaining_payment_per}%</strong> balance.
+                        </apex:outputPanel>
+						<apex:outputPanel rendered="{!OR(
+                                paymentTermsPicklist = 'Against PDC'
+                            )}">
+                            Against PDC.
+                        </apex:outputPanel>                        
+                    </div>
+                   
+                    <div class="term-item">
+                        <span class="term-title">5. Delivery Schedule:</span> If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply <strong>order along with manufacturing clearance along with PO.</strong> Subject to normal working condition prevailing, the Supplier shall be liable to deliver the entire consignment within <strong>{!consignmentStart} to {!consignmentEnd}</strong> days from the date of receipt of the supply order lot wise.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">6. Transportation &amp; Freight:</span>
+                        <apex:outputText rendered="{!transportMode == 'Ex-works' || transportMode == ''}">
+                        The rates quoted for the materials and/or goods are on <strong>EX-works basis</strong> are exclusive of any transportation and freight charges.
+                        </apex:outputText>
+                        <apex:outputText rendered="{!transportMode == 'Freight'}">
+                             The rates quoted for the materials and/or goods are on <strong>Freight basis</strong>.
+    					</apex:outputText>
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">7. Inspection:</span> The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognized inspection agency at the Supplier's plant and/or factory or the Buyer may depute its own team at the Supplier's plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier's plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters,<strong> further if inspection by buyer or third party is waived off than in that case waive off details and MDCC has to be assured by buyer to supplier</strong>.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">8. Drawing:</span> It shall always be the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products based on the drawings. Be it noted here that any delay caused due to insufficient improper illegible and/or inadequate drawings and information provided by the Buyer, the Supplier will not be made liable for such delays caused owing to insufficient improper illegible and/or inadequate drawings and designs as provided by the Buyer.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">9. Quality:</span> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer's destination, by any independent inspection agency and/or surveyor engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports by two different independent agencies both being appointed by the Buyers. If the Buyer fails to substantiate the claim with proper and acceptable explanation in that event the Buyer's claim on quality related issues shall stand set aside and/or determined.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">10. Validity:</span> This offer shall remain valid for a period of <strong>{!validityDays} days</strong> from the date of 
+                                                issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the  
+                                               same is revalidated in writing.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">11. Penal interest:</span> In the event if the Buyer fails to make payment of the invoices raised within seven days and/or 
+                                                as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to
+                                                impose penal interest @18% per annum quarterly compoundable.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">12. Breach &amp; Default:</span> : If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in
+                                                that event the defaulting party shall become liable to compensate the other party by way of damages, however
+                                                such other party shall become entitled to claim damages provided such claim is duly substantiated with proper
+                                                evidence.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">13. Lifting of Materials:</span> If for any reason the Buyer fails to take delivery of the materials within seven days from the
+                                                date of being notified that the materials are lying ready for taking delivery and/or dispatch and/or from the date
+                                                of inspection recording acceptance of the materials, whichever is earlier, in that event the Supplier shall become
+                                                entitled to impose storing charges for holding the materials till the time it is dispatched. Such charges shall be
+                                                imposed at the rate of 1.00% of the total contract value for every weeks delay caused in taking delivery of the
+                                                materials.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">14. Late Delivery Charges:</span>  Unless prevented by force majeure condition the Supplier shall be liable to deliver the 
+                                                materials within the agreed delivery schedule. However since the Supplier has agreed to supply the materials 
+                                                at an extremely competitive rates it is being made clear that for the purpose of this contract the Buyer shall 
+                                                not be entitled to impose any late delivery charges for any delay caused in delivery of the materials.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">15. Price variation:</span> The rates as quoted herein by the Supplier is subject to factoring of price variation considering the date and month of issuing of the present quotation as the base month for deliveries proposed for {!priceVariationMonthName} {!priceVariationYear}. For quantities that are proposed to be delivered after {!priceVariationMonthName} {!priceVariationYear} price variation will be applicable as per change of rates between base month and month of dispatch.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">16. Force Majeure:</span> Neither Party will be liable for any failure to perform its obligations hereunder, other than 
+                                                payment obligations, due to unforeseen circumstances or causes beyond the Party’s reasonable control, 
+                                                including, without limitation, acts of God, war, riot, embargoes, acts of civil or military authorities, acts of 
+                                                terrorism or sabotage, electronic viruses, worms or corrupting microcode, fire, flood, earthquake, accident, 
+                                                strikes, radiation, inability to secure transportation, failure of communications or electrical lines, facilities, fuel,
+                                                energy, labour or materials. In an event of force majeure, either Party’s time for delivery or other performance
+                                                will be extended for a period equal to the duration of the delay caused thereby. The Party subject to the force 
+                                                majeure shall (A) give notice of suspension of its obligations as soon as reasonably practicable stating the date 
+                                                and extent of such suspension and the cause thereof, (B) use its best efforts to remedy or remove such force 
+                                                majeure with the least practicable delay, and (C) resume the performance of its obligations as soon as 
+                                                reasonably practicable after the remediation or removal of the cause. Notwithstanding anything to the 
+                                                contrary herein, if an event of force majeure can reasonably be expected to prevent the affected Party from 
+                                                performing its obligations for a period of at least three (3)months, then the other Party may terminate this 
+                                                Agreement upon not less than fifteen days written notice to the affected Party.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">17. Governing LAW, Arbitration and Jurisdiction:</span> The Courts at Kolkata shall have exclusive jurisdiction over all 
+                                                unresolved disputes relating to this Agreement. The Parties expressly consent to this jurisdiction and waive, as 
+                                                well as undertake, that they will not assert any claim, with respect to personal applicability, inconvenience of 
+                                                forum, venue or any other hardship related to jurisdiction.Should there be any dispute or difference of opinion
+                                                regarding this contract, both the parties will make all efforts to amicably settle such disputes. Efforts at 
+                                                reaching an amicable settlement will be deemed to have failed as soon as one of the contractual parties 
+                                                informs the other in writing about such a deadlock. If efforts at amicable settlement fail, all disputes arising out
+                                                of this contract or its validity will be finally decided in accordance with the provisions of the Arbitration and 
+                                                Conciliation Act 1996, as amended from time to time. The arbitration proceedings shall be headed by a sole 
+                                                arbitrator. The decision of the sole arbitrator shall be binding upon the parties. The arbitration proceedings shall be held at KOLKATA, India and conducted in English language.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">18. Miscellaneous:</span>  The Company would issue various work orders from time to time during the tenure of this
+                                                agreement and the present Agreement contains the general terms and conditions of the contract which would
+                                                govern and administer the work order issued by the Company from time to time. Any specific terms and
+                                                conditions not mentioned in this agreement but mentioned in the work order shall prevail and govern the
+                                                contract. Any specific terms and conditions mentioned herein but not mentioned in the work order shall also
+                                                continue to prevail and govern the contract. However, in the event of any conflicting interpretation of any
+                                                clauses of this Agreement with the work order, the present agreement shall prevail over the work order.
+                    </div>
+                    
+                    <div class="term-item">
+                        <span class="term-title">19. Confidentiality: </span>(A) During the term of this Agreement, each party (the “disclosing party”) may communicate 
+                                                to the other party (the “receiving party”) information which it considers to be confidential (“Confidential 
+                                                Information”). All Confidential Information shall be specifically designated as confidential. Such Confidential 
+                                                Information may include, without limitation, trade secrets, know-how, inventions, technical data or 
+                                                specifications, testing methods, business or financial information, research and development activities, 
+                                                product and marketing plans, and customer and supplier information. Confidential Information that is 
+                                                disclosed orally or visually shall be documented in a written notice prepared by the disclosing party and 
+                                                delivered to the receiving party within thirty (30) days of the date of disclosure; such notice shall summarize 
+                                                the Confidential Information disclosed to the receiving party and reference to the time and place of disclosure.
+                                                (B) The receiving party agrees that it shall: (a) maintain all Confidential Information in strict confidence, except 
+                                                that the receiving party may disclose or permit the disclosure of any Confidential Information to its directors, 
+                                                officers, employees, consultants, and advisors who are obligated to maintain the confidential nature of such 
+                                                Confidential Information and who need to know such Confidential Information for the purpose set forth in this 
+                                                Agreement; (b) use all Confidential Information solely for the purpose set forth in this Agreement; and (c) 
+                                                allow its directors, officers, employees, consultants, and advisors to reproduce the Confidential Information 
+                                                only to the extent necessary to effect the purposes set forth in this Agreement, with all such reproductions 
+                                                being considered Confidential Information. (C) The obligations of the receiving party under Clause B above 
+                                                shall not apply to the extent that the receiving party can demonstrate that certain Confidential Information: (a)
+                                                was in the public domain prior to the time of its disclosure under this Agreement; (b) entered the public 
+                                                domain after the time of its disclosure under this Agreement through means other than an unauthorized 
+                                                disclosure resulting from an act or omission by the receiving party; (c) was independently developed or 
+                                                discovered by receiving party without use of the Confidential Information; (d) is or was disclosed to the 
+                                                receiving party at any time, whether prior to or after the time of its disclosure under this Agreement, by a third
+                                                party having no fiduciary relationship with the disclosing party and having no obligation of confidentiality with 
+                                                respect to such Confidential Information; or (e) is required to be disclosed to comply with application laws or 
+                                                regulation, or with a court or administrative order, provided that, the disclosing party receives prior written 
+                                                notice of such disclosure and that the receiving party takes all reasonable and lawful actions to obtain 
+                                                confidential treatment for such disclosure and, if possible, to minimize the extent of such disclosure. (D) The 
+                                                obligations set forth in this Article shall remain in effect for a period of five (5) years after the expiration or the 
+                                                earlier termination of this Agreement.
+                    </div>
+                    
+                    <div class="signature-section avoid-break">
+                        <p>Hope you will find our rates, terms and conditions competitive and thereby proceed to award the contract in our favors.</p>
+                        <p>
+                            Thanking you,<br/><br/>
+                            Yours faithfully,<br/>
+                            <strong>{!loggedInUser}</strong><br/>
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(loggedInUserPhone))}">
+                            	<strong>{!loggedInUserPhone}</strong><br/>
+                            </apex:outputPanel>
+                    
+                            <apex:outputPanel rendered="{!NOT(ISBLANK(loggedInUserEmail))}">
+                                <strong>{!loggedInUserEmail}</strong><br/>
+                            </apex:outputPanel>
+                            Utkarsh India Limited
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>                
+        <div>
+            <apex:image value="{!$Resource.SteelTubularPoleDepartmentLastPage}" style="width: 210mm; height: 297mm; display: block; margin:0mm; padding:0mm;"/>
+        </div>
+    </body>
+</apex:page>

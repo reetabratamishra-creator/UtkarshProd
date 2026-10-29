@@ -1,0 +1,92 @@
+<template>
+    <lightning-card title={recordName} icon-name="standard:task">
+        <template if:true={recordId}>
+            <lightning-record-view-form
+                record-id={recordId}
+                object-api-name="Task_Log__c">
+
+                <lightning-accordion
+                    allow-multiple-sections-open
+                    active-section-name={activeSections}>
+
+                    <!-- Information -->
+                    <lightning-accordion-section
+                        name="Information"
+                        label="Information">
+
+                        <div class="slds-grid slds-wrap slds-p-around_medium">
+
+                            <!-- Left Column -->
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_medium">
+
+                                <lightning-output-field field-name="Name"></lightning-output-field>
+                                <lightning-output-field field-name="Manually_Created__c"></lightning-output-field>
+                                <lightning-output-field field-name="Reason_for_Visit__c"></lightning-output-field>
+                                <lightning-output-field field-name="MOM__c"></lightning-output-field>
+                                <lightning-output-field field-name="Account__c"></lightning-output-field>
+                                <lightning-output-field field-name="Lead__c"></lightning-output-field>
+                                <lightning-output-field field-name="Opportunity__c"></lightning-output-field>
+                                <lightning-output-field field-name="Battery__c"></lightning-output-field>
+                                <lightning-output-field field-name="Longitude__c"></lightning-output-field>
+                                <lightning-output-field field-name="Checked_Out_Longitude__c"></lightning-output-field>
+                                <lightning-output-field field-name="Client_Deatils__c"></lightning-output-field>
+                                <lightning-output-field field-name="is100mOutside__c"></lightning-output-field>
+                                <lightning-output-field field-name="Customer_Type__c"></lightning-output-field>
+                                <lightning-output-field field-name="Schedule_Date__c"></lightning-output-field>
+
+                                <template lwc:if={showRescheduleReason}>
+                                    <lightning-output-field field-name="Reschedule_Reason__c"></lightning-output-field>
+                                </template>
+
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="slds-col slds-size_1-of-2">
+
+                                <lightning-output-field field-name="Owner_formula__c"></lightning-output-field>
+                                <lightning-output-field field-name="Visit_Type__c"></lightning-output-field>
+                                <lightning-output-field field-name="Visit_outcome__c"></lightning-output-field>
+                                <lightning-output-field field-name="Action__c"></lightning-output-field>
+                                <lightning-output-field field-name="Address__c"></lightning-output-field>
+                                <lightning-output-field field-name="Latitude__c"></lightning-output-field>
+                                <lightning-output-field field-name="Checked_Out_Latitude__c"></lightning-output-field>
+                                <lightning-output-field field-name="Is_POC_available__c"></lightning-output-field>
+                                <lightning-output-field field-name="GPS_On__c"></lightning-output-field>
+                                <lightning-output-field field-name="Employee__c"></lightning-output-field>
+                                <lightning-output-field field-name="IsCheckout__c"></lightning-output-field>
+                                <lightning-output-field field-name="Description__c"></lightning-output-field>
+                                <lightning-output-field field-name="Is_schedule__c"></lightning-output-field>
+
+                            </div>
+
+                        </div>
+
+                    </lightning-accordion-section>
+
+                    <!-- System Information -->
+                    <lightning-accordion-section
+                        name="SystemInformation"
+                        label="System Information">
+
+                        <div class="slds-grid slds-wrap slds-p-around_medium">
+
+                            <div class="slds-col slds-size_1-of-2 slds-p-right_medium">
+                                <lightning-output-field field-name="CreatedById"></lightning-output-field>
+                                <lightning-output-field field-name="CreatedDate"></lightning-output-field>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-output-field field-name="LastModifiedById"></lightning-output-field>
+                                <lightning-output-field field-name="LastModifiedDate"></lightning-output-field>
+                            </div>
+
+                        </div>
+
+                    </lightning-accordion-section>
+
+                </lightning-accordion>
+
+            </lightning-record-view-form>
+        </template>
+    </lightning-card>
+</template>

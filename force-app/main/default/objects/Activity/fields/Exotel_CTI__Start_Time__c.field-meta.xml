@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exotel_CTI__Start_Time__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Call Start Time</description>
+    <externalId>false</externalId>
+    <label>Start Time</label>
+    <length>60</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

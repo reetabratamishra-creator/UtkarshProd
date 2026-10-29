@@ -1,0 +1,1791 @@
+/* --- Base Structure --- */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+.single-quote-action-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   
+    margin-bottom: 8px;
+}
+
+.single-quote-action-bar lightning-button {
+    /* Ensures the button doesn't get squished by flexbox */
+    flex-shrink: 0; 
+}
+/* --- Navigation Sidebar (1st column) --- */
+.side-nav {
+    width: 100px;
+    background: #315e86;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    flex-shrink: 0;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 600px) {
+    .side-nav { width: 70px; }
+    .nav-item span { display: none; }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 5px;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.nav-item:hover { background-color: #3d6a95; }
+.nav-item.active { background-color: #4976a2; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+
+/* --- Container for resizable columns --- */
+.resizable-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-color: #f4f6f9;
+}
+
+/* --- Template Selection Sidebar (2nd column) --- */
+.template-sidebar {
+    border-right: 1px solid #d8d8d8;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.03);
+    height: 100%;
+    overflow: hidden;
+    transition: none;
+    position: relative;
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .template-sidebar {
+        width: 100% !important;
+        min-width: auto;
+        position: absolute;
+        left: 70px;
+        right: 0;
+        z-index: 5;
+    }
+    .resize-handle { display: none; }
+}
+
+.template-header-blue {
+    background: #26557c;
+    color: #ffffff;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #1e4564;
+    flex-shrink: 0;
+}
+
+.template-header-blue h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.back-icon { cursor: pointer; padding: 5px; border-radius: 3px; transition: background-color 0.2s; }
+.back-icon:hover { background-color: rgba(255,255,255,0.2); }
+
+.template-content { padding: 20px; flex: 1; overflow-y: auto; }
+
+/* --- Resize Handle --- */
+.resize-handle {
+    width: 8px;
+    background-color: transparent;
+    cursor: col-resize;
+    position: relative;
+    z-index: 100;
+    transition: background-color 0.2s;
+}
+
+.resize-handle:hover, .resize-handle:active { background-color: #26557c; }
+
+.resize-handle::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 30px;
+    background-color: #d8d8d8;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+}
+
+.resize-handle:hover::after, .resize-handle:active::after { background-color: #ffffff; }
+
+/* --- Content Area for resizable view (3rd column) --- */
+.content-area {
+    flex: 1;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 0px;
+    background-color: #f4f6f9;
+    overflow-y: auto;
+    transition: none;
+    min-width: 300px;
+    flex-direction: column;
+    margin-top: 3px;
+}
+
+/* --- Full width content area for other tabs --- */
+.content-area-full {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f6f9;
+    min-width: 300px;
+    overflow-y: auto;
+}
+
+/* --- Centered Text in Generate Quote view --- */
+.centered-text { width: 100%; }
+.centered-text p {
+    font-size: 18px;
+    color: #5c7b96;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: inline-block;
+    border-top: 3px solid #26557c;
+}
+
+/* --- Static Message Box for Customer/Quotes tabs --- */
+.static-message-box {
+    background: #ffffff;
+    padding: 40px 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    border-top: 4px solid #26557c;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.static-message-box h1 { font-size: 24px; font-weight: bold; color: #26557c; margin-bottom: 15px; }
+.static-message-box p { font-size: 16px; color: #5c7b96; line-height: 1.5; }
+
+/* --- Configuration Footer & Buttons --- */
+.config-footer {
+    padding: 20px;
+    border-top: 1px solid #d8d8d8;
+    background: #f8fbfe;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.apply-btn {
+    background: white;
+    border: 2px solid #26557c;
+    color: #26557c;
+    padding: 10px 60px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.apply-btn:hover { background: #26557c; color: white; box-shadow: 0 2px 8px rgba(38,85,124,0.3); }
+
+/* ── Expiration Date — common footer field. Deepanjan (2nd August 2026) ──
+   Desktop keeps the date and APPLY side by side; a phone stacks them and
+   lets both fill the width. */
+.footer-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.expiry-field {
+    min-width: 190px;
+    max-width: 240px;
+    text-align: left;
+}
+
+.expiry-input {
+    --slds-c-input-color-border: #d8d8d8;
+    --slds-c-input-color-border-focus: #26557c;
+    --slds-c-input-radius-border: 4px;
+}
+
+@media (max-width: 600px) {
+    .config-footer { padding: 14px 12px; }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .expiry-field { max-width: none; min-width: 0; }
+
+    .apply-btn {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 15px;
+    }
+
+    /* Comfortable tap target on touch */
+    .expiry-input { --slds-c-input-sizing-min-height: 2.6rem; }
+}
+
+/* --- Combobox & Accordion Styling --- */
+.combobox-container { padding: 10px 0; }
+lightning-combobox {
+    --slds-c-input-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    --slds-c-input-color-border: #d8d8d8;
+    --slds-c-input-color-border-focus: #26557c;
+    --slds-c-input-radius-border: 4px;
+}
+
+.accordion-wrapper { padding: 10px 0; }
+.section-body { padding: 15px; background-color: #f8fbfe; border-radius: 4px; color: #5c7b96; font-size: 14px; }
+
+/* --- Scrollbar Styling (Optional) --- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+/* Quotes Container */
+.quotes-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Quotes Header */
+.quotes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: #26557c;
+    color: white;
+}
+
+.quotes-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quote-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.refresh-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+/* Loading State */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #26557c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.error-state p {
+    color: #c23934;
+    margin: 16px 0;
+}
+
+.retry-btn {
+    background: white;
+    border: 1px solid #c23934;
+    color: #c23934;
+    padding: 8px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.empty-state h2 {
+    color: #26557c;
+    font-size: 20px;
+    margin: 0 0 8px 0;
+}
+
+.empty-state p {
+    color: #5c7b96;
+    margin: 0 0 20px 0;
+}
+
+.create-quote-btn {
+    background: #26557c;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Datatable Styles - Fixed Alignment */
+.quotes-datatable {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+}
+
+.table-header {
+    display: flex;
+    background: #f1f5f9;
+    padding: 12px 20px;
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    color: #26557c;
+    font-size: 13px;
+}
+
+.table-body {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 280px);
+}
+
+.table-row {
+    display: flex;
+    padding: 12px 20px;
+    border-bottom: 1px solid #edf2f7;
+    background: white;
+}
+
+/* Column Widths - Fixed */
+.header-cell, .row-cell {
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cell-name {
+    flex: 2;
+    min-width: 200px;
+}
+
+.cell-number {
+    flex: 1.5;
+    min-width: 100px;
+}
+
+.cell-status {
+    flex: 1;
+    min-width: 80px;
+}
+
+.cell-amount {
+    flex: 1;
+    min-width: 100px;
+    justify-content: flex-end;
+}
+
+.cell-date {
+    flex: 1.2;
+    min-width: 100px;
+}
+
+.cell-expiry {
+    flex: 1.2;
+    min-width: 100px;
+}
+
+.cell-actions {
+    min-width: 80px;
+    justify-content: center;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    background: #f0f2f5;
+}
+
+/* Table Footer */
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #f8fafc;
+    border-top: 2px solid #e2e8f0;
+    font-size: 14px;
+}
+
+.footer-right .total-amount {
+    font-weight: 700;
+    color: #0f3b5e;
+    background: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+/* Scrollbar */
+.table-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+/* ========================================================
+   Weight Estimator Grid Layout (Strict Table/Grid Look)
+   ======================================================== */
+   
+.config-grid {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    /* Pulls the grid out to touch the absolute edges of the accordion */
+    margin-left: -1rem; 
+    margin-right: -1rem;
+    /* Top and bottom boundaries for the whole table */
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background: #ffffff;
+}
+
+.config-row {
+    display: grid;
+    /* Adjust columns to match your screenshot: Narrow Index, Wide Label, Wide Input */
+    grid-template-columns: 80px 1.5fr 1fr;
+    border-bottom: 1px solid #d8d8d8;
+    border-left: 3px solid transparent; /* Prevents shifting when red line is added */
+    min-height: 52px;
+    transition: background-color 0.2s ease;
+}
+
+/* 👉 NEW: The Salesforce Red Line for Required Fields */
+.required-row {
+    border-left: 3px solid #ea001e; 
+}
+
+/* Remove bottom border from the very last row so it doesn't double-up with the grid's bottom border */
+.config-row:last-child {
+    border-bottom: none;
+}
+
+.config-row:hover { 
+    background-color: #f8fbfe; 
+}
+
+.config-cell {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #16325c;
+}
+
+/* 1st Column: Sequence Number */
+.index-cell {
+    justify-content: center;
+    font-weight: 600;
+    border-right: 1px solid #d8d8d8; /* Creates the vertical divider line */
+}
+
+/* 2nd Column: Label */
+.label-cell {
+    font-weight: 600;
+    border-right: 1px solid #d8d8d8; /* Creates the vertical divider line */
+}
+
+/* 3rd Column: Input / Folder */
+.input-cell {
+    justify-content: flex-end; /* Aligns dropdowns/folders to the right like your screenshot */
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%;
+}
+
+.borderless-combobox {
+    width: 100%;
+    max-width: 250px;
+    --slds-c-input-color-border: transparent;
+    --slds-c-input-color-border-focus: transparent;
+    --slds-c-input-shadow-focus: none;
+    --slds-c-input-color-background: transparent;
+    --slds-c-input-color-background-focus: transparent;
+    --slds-c-input-text-align: right;
+}
+
+.custom-accordion {
+    --slds-c-accordion-heading-font-weight: 700;
+    --slds-c-accordion-color-border: transparent;
+}
+
+/* UI Logic for the Estimator Folder Icons */
+/* Styling for the folder icons */
+.estimator-icon-wrapper {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    width: 100%;
+    padding-right: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.estimator-icon-wrapper:hover {
+    transform: scale(1.1); /* Adds a slight zoom effect when hovered so users know it's clickable */
+}
+
+/* Ensure color applies directly to the icon fill */
+.folder-icon-red {
+    --sds-c-icon-color-foreground-default: #e23b27; 
+}
+
+.folder-icon-blue {
+    --sds-c-icon-color-foreground-default: #005fb2; 
+}
+
+
+/* ── Cards wrapper ── */
+.centered-text {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    align-items: stretch;
+    height: fit-content;
+}
+
+.quote-card {
+    flex: 1;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+/* ── Rows ── */
+.card-row {
+    display: flex;
+    align-items: flex-end;
+    padding: 12px 16px 8px 16px;
+}
+
+.top-row {
+    border-bottom: 1px solid #dddbda;
+}
+
+.bottom-row {
+    gap: 0;
+}
+
+/* ── Individual field blocks ── */
+.field-block {
+    flex: 1;
+    min-width: 0;
+    padding-right: 16px;
+    border-right: 1px solid #dddbda;
+    margin-right: 16px;
+}
+
+.bottom-row .field-block:last-child,
+.top-row .field-block:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+/* ── Field value (the actual data) ── */
+.field-value {
+    font-size: 9px;
+    color: #3e3e3c;
+    line-height: 1.4;
+    min-height: 20px;
+}
+
+/* ── Field label ── */
+.field-label {
+    font-size: 8px;
+    font-weight: 700;
+    color: #0176d3;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .centered-text {
+        flex-direction: column;
+    }
+}
+
+
+/* ── Table Wrapper ── */
+.table-wrapper {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background-color: #ffffff;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+/* ── Fixed NAME column ── */
+.fixed-col {
+    flex-shrink: 0;
+    width: 240px;
+    border-right: 1px solid #dddbda;
+    background-color: #ffffff;
+    z-index: 1;
+    overflow-y: scroll;
+}
+
+/* ── Scrollable columns ── */
+.scrollable-cols {
+    flex: 1;
+    overflow-x: auto;
+    min-width: 0;
+}
+
+/* ── Header rows ── */
+.scroll-header-row {
+    display: flex;
+    flex-direction: row;
+}
+
+/* ── Data rows ── */
+.scroll-data-row {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #dddbda;
+}
+
+/* ── Column header ── */
+.col-header {
+    flex: 0 0 130px;
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #3e3e3c;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-right: 1px solid #dddbda;
+     white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    background-color: #ffffff;
+}
+
+.fixed-col .col-header {
+    flex: 1;
+    border-right: none;
+}
+
+/* ── Data cells ── */
+.col-cell {
+    flex: 0 0 130px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #3e3e3c;
+    border-right: 1px solid #dddbda;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-height: 36px;
+}
+
+.fixed-col .col-cell {
+    flex: 1;
+    border-right: none;
+}
+
+/* ── Last column no right border ── */
+.scroll-header-row .col-header:last-child,
+.scroll-data-row .col-cell:last-child {
+    border-right: none;
+}
+/* ============================================================
+   MOBILE VIEW OVERRIDES (max-width: 600px)
+   Desktop/Laptop/Tablet styles remain UNCHANGED above.
+   No functionality affected — visual/layout only.
+   ============================================================ */
+@media (max-width: 600px) {
+
+    /* --- App shell --- */
+    .app-container {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* --- Side nav becomes a bottom/top bar --- */
+    .side-nav {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        order: 0;
+    }
+
+    .nav-top {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .nav-item {
+        flex: 1;
+        padding: 10px 4px;
+        font-size: 9px;
+    }
+
+    .nav-item span {
+        display: block;
+        margin-top: 4px;
+    }
+
+    /* --- Resizable container stacks vertically --- */
+    .resizable-container {
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* --- Template sidebar full width, normal flow (overrides earlier absolute rule) --- */
+    .template-sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        height: auto !important;
+        flex-shrink: 0;
+        box-shadow: none;
+        border-right: none;
+        border-bottom: 1px solid #d8d8d8;
+        z-index: 99999 !important;
+    }
+
+    .resize-handle {
+        display: none;
+    }
+
+    .template-header-blue {
+        padding: 12px;
+    }
+
+    .template-header-blue h2 {
+        font-size: 14px;
+    }
+
+    .template-content {
+        padding: 12px;
+    }
+
+    /* --- Content area stacks below, full width --- */
+    .content-area,
+    .content-area-full {
+        width: 100%;
+        min-width: 0;
+        flex: 1;
+        padding: 10px;
+        overflow-y: visible;
+    }
+
+    .centered-text p {
+        padding: 16px 18px;
+        font-size: 15px;
+    }
+
+    .static-message-box {
+        padding: 24px 16px;
+        max-width: 100%;
+    }
+
+    .static-message-box h1 {
+        font-size: 19px;
+    }
+
+    .static-message-box p {
+        font-size: 14px;
+    }
+
+    /* --- Config grid (Generate Quote accordion fields) --- */
+    .config-grid {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .config-row {
+        grid-template-columns: 36px 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .index-cell {
+        grid-row: 1 / 3;
+        border-right: 1px solid #d8d8d8;
+        font-size: 11px;
+    }
+
+    .label-cell {
+        border-right: none;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .input-cell {
+        padding: 6px 10px 10px;
+        justify-content: flex-start;
+    }
+
+    .borderless-combobox {
+        max-width: 100%;
+        --slds-c-input-text-align: left;
+    }
+
+    .estimator-icon-wrapper {
+        justify-content: flex-start;
+        padding-right: 0;
+    }
+
+    /* --- Quote summary cards stack vertically --- */
+    .centered-text {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .card-row {
+        flex-wrap: wrap;
+        padding: 10px 12px 6px;
+    }
+
+    .field-block {
+        flex: 1 1 33%;
+        min-width: 90px;
+        margin-bottom: 8px;
+    }
+
+    /* --- Table wrapper: keep horizontal scroll, shrink fixed column --- */
+    .table-wrapper {
+        margin-top: 8px;
+    }
+
+    .fixed-col {
+        width: 140px !important;
+        flex-shrink: 0;
+    }
+
+    .col-header,
+    .col-cell {
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+
+    .fixed-col .col-cell,
+    .fixed-col .col-header {
+        font-size: 11px;
+    }
+
+    /* --- Quotes list view --- */
+    .quotes-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+
+    .quotes-header h1 {
+        font-size: 19px;
+    }
+
+    .header-left {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .table-header,
+    .table-row {
+        padding: 10px 12px;
+    }
+
+    .table-body {
+        max-height: calc(100vh - 320px);
+    }
+
+    .cell-name { min-width: 120px; }
+    .cell-number { min-width: 78px; }
+    .cell-status { min-width: 84px; }
+    .cell-amount { min-width: 80px; }
+    .cell-date,
+    .cell-expiry { min-width: 80px; }
+
+    .header-cell,
+    .row-cell {
+        font-size: 12px;
+    }
+
+    .table-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    /* --- Buttons & inline action bars wrap nicely --- */
+    .apply-btn {
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+    .config-footer {
+        padding: 12px;
+    }
+    
+    /* CSS for Finalize Quote Spinner */
+    .full-page-spinner-mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* High z-index ensures it sits completely over everything on the page layout */
+        z-index: 9999; 
+        /* Semi-transparent dark overlay to visually indicate screen is locked */
+        background-color: rgba(255, 255, 255, 0.65);
+        /* Blocks pointer execution/clicking on inputs underneath */
+        pointer-events: auto; 
+    }
+}
+/* ================================================================
+   MOBILE FIX — content-area inline width. Reetabrata (17th July 2026)
+
+   The desktop resizer writes an INLINE style on .content-area:
+       style="width: calc(100% - <sidebarPx>px)"
+   On a ~400px phone that leaves ~50px, and the quote summary cards
+   (QUOTE NAME / CUSTOMER / DUE DATE / line items...) render inside
+   that sliver with their labels clipped to "QU / CU / DU".
+   The earlier mobile block already sets width:100% but WITHOUT
+   !important, and only !important can beat an inline style.
+   ================================================================ */
+@media (max-width: 600px) {
+    .content-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+/* ================================================================
+   MOBILE FIX — template-selection combobox breathing room.
+   Reetabrata (17th July 2026)
+
+   On the phone the "SELECT A QUOTE TEMPLATE" dropdown opens inside
+   .template-content, whose desktop rule is overflow-y:auto, and the
+   whole sidebar sits inside the scrolling .resizable-container - so
+   the open list gets clipped to a sliver and only the first value
+   is visible (screenshot: just "Core - Department" showing).
+
+   Two-part fix, mobile only:
+   1) overflow released on the selection screen containers so the
+      list is not clipped by them;
+   2) real vertical space is reserved under the combobox WHILE IT IS
+      FOCUSED (:focus-within = dropdown open) so the list always has
+      room inside whatever ancestor still scrolls. Closed state only
+      keeps a small constant gap, so the CREATE button does not sit
+      in the middle of a void after a value is picked.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    /* constant gap under the picklist (the asked-for spacing) */
+    .combobox-container {
+        padding-bottom: 28px;
+    }
+
+    /* while the picklist is open, reserve room for the whole list */
+    .combobox-container:focus-within {
+        padding-bottom: 320px;
+    }
+
+    /* do not clip the open dropdown */
+    .template-content {
+        overflow: visible !important;
+    }
+    .template-sidebar {
+        overflow: visible !important;
+    }
+}
+
+/* ================================================================
+   Quote card: QUOTE NAME + REVISION values bold and larger.
+   Deepanjan (17th July 2026)
+
+   .field-value was 9px / normal weight - the quote number read as a
+   caption rather than the headline of the card. Scoped to .quote-card
+   so nothing else that may use .field-value later is affected, and
+   appended at the end so it wins over the base rule on equal
+   specificity. Applies on desktop AND mobile (no media query), which
+   is what the card needs in both.
+   ================================================================ */
+.quote-card .field-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #181818;
+    line-height: 1.3;
+    min-height: 24px;
+}
+
+/* the small blue caption under it, nudged up so the pair stays balanced */
+.quote-card .field-label {
+    font-size: 10px;
+}
+
+/* ================================================================
+   MOBILE — quote card re-proportioned for its NEW field set.
+   Deepanjan (17th July 2026)
+
+   The generic mobile rule (.field-block { flex: 1 1 33% }) was sized
+   for the old three-block rows (Currency / Duration / Avg Rate).
+   Those rows are gone; the only live row is QUOTE NAME + REVISION.
+   Under 1-1-33% both blocks split the card 50/50, wasting half the
+   width on "R1" and squeezing the bold 16px quote number. Here the
+   quote number takes all free width and the revision shrinks to its
+   content, pinned on the same line (min-width: 0 defuses the 90px
+   floor that could otherwise wrap it). Selector specificity
+   (.top-row .field-block, two classes) outranks the generic rule, so
+   this wins regardless of order; kept at the end anyway per the
+   append-only convention.
+   ================================================================ */
+@media (max-width: 600px) {
+
+    .top-row .field-block {
+        flex: 1 1 auto;
+        margin-bottom: 0;
+    }
+
+    .top-row .field-block:last-child {
+        flex: 0 0 auto;
+        min-width: 0;
+        text-align: right;
+    }
+
+    /* one row, no wrap: only two compact blocks live here now */
+    .top-row {
+        flex-wrap: nowrap;
+        align-items: baseline;
+    }
+}
+/* ================================================================
+   QUOTE REVISION UI — Deepanjan (19th July 2026)
+   Family rows in the Quotes tab (latest revision as the main row,
+   older versions indented beneath a chevron) + the lineage lines on
+   the quote card + the blocked RE-OPEN button state.
+   Appended at the end per the append-only convention.
+   ================================================================ */
+
+/* chevron that expands a family's older versions */
+.family-chevron {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    line-height: 1;
+}
+.family-chevron:hover { background: #eef4fb; border-radius: 4px; }
+
+/* Rn badge next to the quote name */
+.rev-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: #0176d3;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    vertical-align: middle;
+}
+.rev-badge-old {
+    background: #f3f3f3;
+    color: #514f4d;
+    border: 1px solid #dddbda;
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+/* "N versions" chip on the main row */
+.version-chip {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: #eef4fb;
+    color: #0b5cab;
+    border: 1px solid #c5dcf5;
+    font-size: 10px;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* indented, muted rows for the older versions */
+.version-subrow {
+    background: #fafbfc;
+    border-left: 3px solid #c5dcf5;
+}
+.version-subrow .row-cell { color: #514f4d; font-size: 12.5px; }
+.version-subrow .cell-name { padding-left: 34px; }
+.subrow-connector { color: #9aa4ae; margin-right: 6px; font-size: 12px; }
+.subrow-name { font-style: normal; }
+
+/* quote card: family root shown small above this quote's own number */
+.parent-quote-line {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b6b6b;
+    line-height: 1.2;
+}
+.parent-quote-caption {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #9aa4ae;
+    margin-bottom: 6px;
+}
+
+/* linear-chain guard: RE-OPEN disabled once a newer revision exists */
+.reopen-edit-btn:disabled {
+    border-color: #c9c9c9 !important;
+    color: #b0adab !important;
+    cursor: not-allowed !important;
+    background-color: #f3f3f3 !important;
+}
+
+/* ── QUOTE REVISION UI, mobile polish — Deepanjan (19th July 2026) ──
+   Sub-rows reuse the same .row-cell / .cell-* classes as the main rows,
+   so they inherit every existing mobile min-width automatically; this
+   block only makes the new controls finger-friendly. */
+@media (max-width: 600px) {
+
+    /* a 2px-padding chevron is untappable on a phone */
+    .family-chevron {
+        padding: 8px 10px;
+        margin-right: 2px;
+    }
+
+    .rev-badge, .version-chip {
+        font-size: 9px;
+        padding: 1px 6px;
+        margin-left: 5px;
+    }
+
+    /* 34px indent + 120px min-width is too greedy on a narrow screen */
+    .version-subrow .cell-name { padding-left: 18px; }
+
+    .parent-quote-line { font-size: 10px; }
+}
+/* ── REVISION THREAD VIEW — Deepanjan (20th July 2026) ──────────────
+   Families now render OPEN by default as a top-down thread: the head
+   row wears an Rn badge + LATEST tag, older versions hang beneath it
+   on the rail, and the R0 row is tagged ORIGINAL. */
+
+.latest-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #bfe3c8;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+
+.original-tag {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background: #fff4e5;
+    color: #8a5300;
+    border: 1px solid #f0d9b5;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+
+/* stronger family rail so the thread reads as one unit at a glance */
+.version-subrow {
+    border-left: 3px solid #0176d3;
+}
+
+@media (max-width: 600px) {
+    .latest-tag, .original-tag { font-size: 9px; padding: 1px 6px; }
+    /* old badge + name shouldn't crowd on a narrow row. Deepanjan (20th July 2026) */
+    .rev-badge-old { margin-right: 5px; }
+    .subrow-name { font-size: 12px; }
+    /* keep the R0 tag from doubling the left gap on phones */
+    .original-tag { margin-left: 0; }
+}
+
+/* ── MOBILE: let the Quote Name wrap instead of truncating — Deepanjan (20th July 2026)
+   On the phone the columns are cramped and "High Mast - Depa…" / "Core - Dep…" get
+   ellipsis-clipped. Desktop keeps single-line ellipsis (its table is wide enough);
+   only on mobile does the name cell wrap to as many lines as it needs. Scoped to
+   .cell-name so numbers/dates/status stay on one line. ── */
+@media (max-width: 600px) {
+    .cell-name,
+    .version-subrow .cell-name {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        word-break: break-word;
+        line-height: 1.25;
+    }
+    /* rows grow to fit the wrapped name instead of a fixed height */
+    .table-row {
+        height: auto;
+        min-height: 44px;
+        align-items: center;     /* every cell vertically centred against the tall name */
+    }
+    /* the other cells must NOT wrap and must sit centred on their own row,
+       otherwise a 2-line name pushes Number/Status out of alignment. Deepanjan (20th July 2026) */
+    .cell-number,
+    .cell-status,
+    .cell-amount,
+    .cell-date,
+    .cell-expiry {
+        white-space: nowrap;
+        align-self: center;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* APPLY progress overlay. Its own mask rather than .full-page-spinner-mask, so
+   the finalize spinner keeps behaving exactly as it always has. The whole screen
+   is blurred and every pointer event lands here, so nothing underneath can be
+   clicked, typed into or scrolled while the save chain runs. The translucent
+   background is the fallback for any browser without backdrop-filter - it still
+   masks the page even if the blur is ignored. Deepanjan (4th August 2026) */
+.apply-progress-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
+    cursor: progress;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* The card itself, centred inside .apply-progress-mask above.
+   Deepanjan (4th August 2026) */
+.apply-progress-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22rem;
+    max-width: 80vw;
+    padding: 1.25rem 1.5rem;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+    z-index: 10000;
+}
+
+.apply-progress-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+}
+
+.apply-step-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #16325c;
+}
+
+.apply-progress-pct {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #5a6b82;
+}
+
+.apply-progress-track {
+    height: 0.5rem;
+    background: #e5e9f0;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.apply-progress-fill {
+    height: 100%;
+    background: #0176d3;
+    border-radius: 0.25rem;
+    transition: width 0.25s ease;
+}
+.row-cell.cell-status {
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+}
+
+.cell-status lightning-helptext {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+    line-height: 0;
+    flex: 0 0 auto;
+}
+
+@media (max-width: 600px) {
+    .row-cell.cell-status {
+        min-width: 112px;
+        overflow: visible;
+    }
+    .cell-status lightning-helptext .slds-popover {
+        max-width: 220px;
+        white-space: normal;
+    }
+}
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE — SOLAR CONFIG HOST MODAL. Deepanjan (22nd August 2026)
+
+   Symptom: on the phone the Solar Structure config modal came up UNDER the
+   department page — the blue "… - Department" bar and the section list sat
+   on top of it.
+
+   Two causes, both in this parent component, so the child's own stylesheet
+   (solarStructureConfig.css) could never reach them across the shadow
+   boundary:
+
+   1. STACKING — createQuote wraps <c-solar-structure-config> in its own
+      SLDS modal shell, and stock .slds-modal is only z-index 9001. The
+      mobile .template-sidebar rule above is z-index 99999 !important, so
+      the sidebar wins and paints over the whole nested modal. The child's
+      9999999 cannot help: it is trapped inside the wrapper's stacking
+      context.
+
+   2. TRANSFORM — SLDS puts transform: translate(0,0) on
+      .slds-modal__container. Any transform other than none makes that box
+      the containing block for fixed descendants, so the child's
+      position: fixed / inset: 0 resolved against the 95%-wide wrapper box
+      instead of the viewport — full-screen, but in the wrong place.
+
+   Scoped to .solar-host-modal, a marker class added to the solar wrapper
+   <section> only. Steel Pipe, Export Steel Pipe, PEB and QFR modals are
+   NOT touched. Everything is inside @media (max-width: 600px); desktop and
+   tablet are unaffected. Additions only — nothing above removed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+    /* 1. Lift the wrapper above .template-sidebar (99999) and the page
+          masks (9999 / 10000), and make it the full screen itself. */
+    .solar-host-modal {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 9999997 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .steel-host-modal {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 9999997 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 2. Kill the SLDS entrance transform so the child's position: fixed
+          resolves against the viewport again. Also drop the inline
+          width/max-width: 95% and let the wrapper fill the screen. */
+    .solar-host-modal .slds-modal__container {
+        transform: none !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .steel-host-modal .slds-modal__container{
+        transform: none !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* The child renders its own header, so the wrapper's duplicate
+       "Solar Structure Configuration" bar is hidden on the phone. */
+    .solar-host-modal .slds-modal__header {
+        display: none !important;
+    }
+    .steel-host-modal .slds-modal__header  {
+        display: none !important;
+    }
+
+    /* Beats the inline min-height: 50vh; the child fills this box. */
+    .solar-host-modal .slds-modal__content {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        max-height: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;   /* the child scrolls internally */
+        border-radius: 0 !important;
+    }
+
+    .steel-host-modal .slds-modal__content {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        max-height: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;   /* the child scrolls internally */
+        border-radius: 0 !important;
+    }
+}
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE — PEB HOST MODALS. Deepanjan (27th August 2026)
+
+   Every declaration below was applied live in the browser console at
+   360px and confirmed working before being written here.
+
+   Measured state of the QFR wrapper before the fix:
+
+       SECTION   w 360px  pos fixed     z 9001
+       CONTAINER w 296px  pos relative  transform matrix(1,0,0,1,0,0)
+
+   1. z-index 9001 lost to the mobile .template-sidebar rule above
+      (99999 !important) — the "PEB - Department" bar painted over the
+      modal. Lifted to 9999997.
+
+   2. The container sat at 296px inside a 360px section: 64px lost, which
+      cut the SPECIFICATION column off on the right.
+
+   3. transform was matrix(1,0,0,1,0,0), not none. SLDS puts its entrance
+      transform on .slds-modal__container, and any transform other than
+      none makes that box the containing block for fixed descendants.
+
+   4. HEIGHT: SLDS centres the container inside a flex .slds-modal, so the
+      container kept sizing to its content and the modal floated with gaps
+      above and below. display: block on the section is what stops that.
+
+      height is given as a cascade — 100% then 100vh then 100dvh — and the
+      viewport units are what matter. On the Salesforce mobile app the
+      section does NOT get the full screen: the app's record-page
+      container becomes its containing block, so height: 100% inherited
+      that shorter box and the page showed through below the modal.
+      Viewport units ignore the ancestor. This is exactly what the solar
+      child modal already does, which is why solar was correct on the
+      phone while this was not. 100% is kept first as a fallback.
+
+   Header is KEPT: unlike the solar child, these two children are plain
+   <lightning-card>s, so this wrapper header carries the only close
+   button. It gets the solar blue because .slds-modal__close uses an
+   inverse (white) icon, invisible on the default white header once
+   pulled inside it.
+
+   Scoped to .peb-host-modal — a marker class on those two <section>s
+   only. Inside @media (max-width: 600px), so desktop is untouched.
+   Append-only; nothing above this line is changed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+    .peb-host-modal {
+        display: block !important;   /* SLDS flex-centres the container */
+        position: fixed !important;
+        inset: 0 !important;
+        height: 100vh !important;
+        height: 100dvh !important;   /* viewport, not the ancestor box */
+        z-index: 9999997 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .peb-host-modal .slds-modal__container {
+        transform: none !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;   /* wins where supported */
+        max-height: 100vh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .peb-host-modal .slds-modal__header {
+        position: relative !important;
+        flex-shrink: 0 !important;
+        border-bottom: 0 !important;
+        background: linear-gradient(135deg, #0b5cab, #1589ee) !important;
+        padding: 0.85rem 2.75rem 0.85rem 1rem !important;
+    }
+
+    .peb-host-modal .slds-modal__header h2 {
+        color: #ffffff !important;
+        font-size: 1rem !important;
+        line-height: 1.3 !important;
+        text-align: left !important;
+    }
+
+    .peb-host-modal .slds-modal__close {
+        position: absolute !important;
+        top: 50% !important;
+        right: 0.5rem !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+    }
+
+    .peb-host-modal .slds-modal__content {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: auto !important;
+        padding: 0.5rem 0.4rem 1rem !important;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MOBILE — QUOTE CLONE MODAL. Deepanjan (7th September 2026)
+
+   Same recipe as the PEB / Solar host modals above, scoped to the
+   .clone-quote-modal marker class so nothing else is touched:
+   1. z-index 9999997 so the modal is not painted over by the mobile
+      .template-sidebar (99999) and the page masks.
+   2. transform: none on the container (SLDS entrance transform otherwise
+      breaks position: fixed for descendants) and a full-screen sheet.
+   3. Header and footer stay put; only the body scrolls, so Create/Cancel are
+      always reachable with the keyboard open.
+   Desktop keeps stock slds-modal_small - everything is inside the media query
+   except the result-list cap, which is a plain scroll guard on both.
+   ════════════════════════════════════════════════════════════════════════ */
+.clone-quote-results .slds-listbox__option { cursor: pointer; }
+.clone-quote-entity-icon lightning-icon { --sds-c-icon-color-background: #fcb95b; }
+.clone-quote-meta { margin-top: 0.25rem; }
+/* The dropdown must not be clipped by the modal body. */
+.clone-quote-body { overflow: visible; }
+
+@media (max-width: 600px) {
+    .clone-quote-modal {
+        position: fixed !important;
+        inset: 0 !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        z-index: 9999997 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .clone-quote-modal .slds-modal__container {
+        transform: none !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .clone-quote-modal .slds-modal__header {
+        flex: 0 0 auto !important;
+        border-radius: 0 !important;
+    }
+    .clone-quote-modal .clone-quote-body {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0 !important;
+    }
+    .clone-quote-modal .clone-quote-footer {
+        flex: 0 0 auto !important;
+        border-radius: 0 !important;
+        padding-bottom: calc(0.75rem + env(safe-area-inset-bottom)) !important;
+    }
+    .clone-quote-modal .clone-quote-footer lightning-button {
+        display: inline-block;
+        min-width: 45%;
+    }
+    .clone-quote-results { position: static; max-height: none; box-shadow: none; }
+    .clone-quote-modal .clone-quote-body { overflow-y: auto !important; }
+
+    /* The button sits under the green "finalized" banner; full width on the phone. */
+    .clone-quote-action lightning-button { display: block; width: 100%; }
+}
+
+/* Approver column in the Quotes tab. Deepanjan (18th September 2026) */
+.cell-approver {
+    flex: 1.2;
+    min-width: 110px;
+}
+@media (max-width: 768px) {
+    .cell-approver { min-width: 90px; }
+}
+@media (max-width: 600px) {
+    .cell-approver {
+        min-width: 80px;
+        white-space: nowrap;
+        align-self: center;
+        display: flex;
+        align-items: center;
+    }
+}

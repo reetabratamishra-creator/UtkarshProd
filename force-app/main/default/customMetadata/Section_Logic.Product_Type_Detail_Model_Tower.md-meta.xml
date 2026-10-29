@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Product Type Detail Model Tower</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Tower_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Tower</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tower_folder&quot;,
+      &quot;label&quot;: &quot;Price Model - Tower&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;type_of_product&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Tower&quot;: {
+          &quot;title&quot;: &quot;PRICE MODEL - TOWER&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;pvt_general_details&quot;,
+              &quot;label&quot;: &quot;General Details - Tower&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_price_basics&quot;,
+                  &quot;label&quot;: &quot;PRICE BASICS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;Price Variation&quot;,
+                    &quot;FIRM&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_price_module&quot;,
+                  &quot;label&quot;: &quot;PRICE MODULE&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;IEEMA&quot;,
+                    &quot;PGCIL&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_price_variable_month&quot;,
+                  &quot;label&quot;: &quot;PRICE VARIABLE (MONTH)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;January&quot;,
+                    &quot;February&quot;,
+                    &quot;March&quot;,
+                    &quot;April&quot;,
+                    &quot;May&quot;,
+                    &quot;June&quot;,
+                    &quot;July&quot;,
+                    &quot;August&quot;,
+                    &quot;September&quot;,
+                    &quot;October&quot;,
+                    &quot;November&quot;,
+                    &quot;December&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_price_variable_year&quot;,
+                  &quot;label&quot;: &quot;PRICE VARIABLE (YEAR)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Price Variation&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;2016&quot;,
+                    &quot;2017&quot;,
+                    &quot;2018&quot;,
+                    &quot;2019&quot;,
+                    &quot;2020&quot;,
+                    &quot;2021&quot;,
+                    &quot;2022&quot;,
+                    &quot;2023&quot;,
+                    &quot;2024&quot;,
+                    &quot;2025&quot;,
+                    &quot;2026&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_tower&quot;,
+              &quot;label&quot;: &quot;PV - Pricing Model (Tower)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Price Variation&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_part_a&quot;,
+                  &quot;label&quot;: &quot;PART A&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_blooms&quot;,
+                  &quot;label&quot;: &quot;Blooms&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_billets&quot;,
+                  &quot;label&quot;: &quot;Billets&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;pvt_price_module&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;IEEMA&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_avg_of_blooms&quot;,
+                  &quot;label&quot;: &quot;Average of Blooms &amp; Billets&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;labelsByController&quot;: {
+                    &quot;controllingApi&quot;: &quot;pvt_price_module&quot;,
+                    &quot;map&quot;: {
+                      &quot;IEEMA&quot;: &quot;Average of Blooms &amp; Billets&quot;,
+                      &quot;PGCIL&quot;: &quot;Average of Blooms&quot;
+                    },
+                    &quot;default&quot;: &quot;Average of Blooms &amp; Billets&quot;
+                  },
+                  &quot;formula&quot;: &quot;pvt_price_module == &apos;IEEMA&apos; ? Math.round(((Number(pvt_pv_blooms || 0) + Number(pvt_pv_billets || 0)) / 2) * 100) / 100 : (pvt_price_module == &apos;PGCIL&apos; ? Math.round(Number(pvt_pv_blooms || 0) * 100) / 100 : 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_convergence_to_angles&quot;,
+                  &quot;label&quot;: &quot;Conversion to Angles&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;8500&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_rm_cost&quot;,
+                  &quot;label&quot;: &quot;RM Cost&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Number(pvt_pv_convergence_to_angles || 0) + Number(pvt_pv_avg_of_blooms || 0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_part_b_overheads&quot;,
+                  &quot;label&quot;: &quot;PART B - OVERHEADS&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_cost_of_production&quot;,
+                  &quot;label&quot;: &quot;Cost of production&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Number(pvt_base_cop||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_interest_component_on_product_cycle&quot;,
+                  &quot;label&quot;: &quot;Interest Component on product cycle &amp; Inventory Carrying Cost and Working capital&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Number(pvt_int_carrying_cost||0)+Number(pvt_int_comp_working_capital||0)&quot;,
+                  &quot;min&quot;: 2000,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_value_as_IEEMA&quot;,
+                  &quot;label&quot;: &quot;Zinc Value as per IEEMA&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;labelsByController&quot;: {
+                    &quot;controllingApi&quot;: &quot;pvt_price_module&quot;,
+                    &quot;map&quot;: {
+                      &quot;IEEMA&quot;: &quot;Zinc Value as per IEEMA&quot;,
+                      &quot;PGCIL&quot;: &quot;Zinc Value as per Index&quot;
+                    },
+                    &quot;default&quot;: &quot;Zinc Value&quot;
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_consumption_percent&quot;,
+                  &quot;label&quot;: &quot;Zinc Consumption (%)&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;formula&quot;: &quot;Number(pvt_base_zcp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_consumption_value&quot;,
+                  &quot;label&quot;: &quot;Add on Amount in Zinc value&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(pvt_pv_610_gsm ? 0 : 0) + (pvt_pv_900_gsm ? 5000 : 0) + (pvt_pv_1000_gsm ? 6000 : 0)&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;Price Variation&quot;
+              ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_value&quot;,
+                  &quot;label&quot;: &quot;Zinc value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Math.round((((pvt_pv_610_gsm || pvt_pv_900_gsm || pvt_pv_1000_gsm) ? ((Number(pvt_pv_zinc_value_as_IEEMA || 0) * Number(pvt_pv_zinc_consumption_percent || 0)) / 100) : 0) + (pvt_pv_900_gsm ? 5000 : 0) + (pvt_pv_1000_gsm ? 6000 : 0)) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC Coating&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_610_gsm_label&quot;,
+                  &quot;label&quot;: &quot;610 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_610_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_900_gsm_label&quot;,
+                  &quot;label&quot;: &quot;900 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_900_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_1000_gsm_label&quot;,
+                  &quot;label&quot;: &quot;1000 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_1000_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_scrap&quot;,
+                  &quot;label&quot;: &quot;Scrap (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvt_base_sp||0)&quot;,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_scrap_value&quot;,
+                  &quot;label&quot;: &quot;Scrap Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;127.5&quot;,
+                  &quot;formula&quot;: &quot;Math.round((((Number(pvt_pv_avg_of_blooms || 0) + Number(pvt_pv_convergence_to_angles || 0)) * Number(pvt_pv_scrap || 0)/100)) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_proto&quot;,
+                  &quot;label&quot;: &quot;Proto (if required)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_proto_required&quot;,
+                  &quot;label&quot;: &quot;Proto Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;value/ton&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_pv_proto&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvt_pv_proto==&apos;YES&apos;? Number(pvt_proto_value||0) : 0&quot;,
+                  &quot;min&quot;: 800,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_pat&quot;,
+                  &quot;label&quot;: &quot;Proto Assembly Testing (Not included in Price)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_pat_price&quot;,
+                  &quot;label&quot;: &quot;Price for Proto Assembly&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_pv_pat&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_part_c&quot;,
+                  &quot;label&quot;: &quot;PART - c&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_interest_component&quot;,
+                  &quot;label&quot;: &quot;Interest Component (as per respective payment terms)?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_payment_terms&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_pv_interest_component&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_market_price&quot;,
+                  &quot;label&quot;: &quot;Market Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(pvt_pv_avg_of_blooms || 0) + Number(pvt_pv_convergence_to_angles || 0) + Number(pvt_pv_cost_of_production || 0) + ((Number(pvt_pv_zinc_value_as_IEEMA || 0) * Number(pvt_pv_zinc_consumption_percent || 0))/100) &quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_prevailing_rate_of_bank_interest&quot;,
+                  &quot;label&quot;: &quot;Prevailing rate of Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos; ? (Number(pvt_pv_no_of_days||0)&lt;=90 ? Number(pvt_int_LC||0) : 8.5) : pvt_pv_payment_terms==&apos;Against VFS&apos; ? Number(pvt_int_VFS||0) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_terms_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_no_of_days&quot;,
+                  &quot;label&quot;: &quot;No Of Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_pv_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_part_d&quot;,
+                  &quot;label&quot;: &quot;PART - D&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_margin&quot;,
+                  &quot;label&quot;: &quot;Margin&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;isMargin&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;5&quot;,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_additional_pricing&quot;,
+                  &quot;label&quot;: &quot;ADDITIONAL PRICING (HT SECTIONS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;3000&quot;,
+                  &quot;required&quot;: true,
+                  &quot;min&quot;: 3000
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm&quot;,
+              &quot;label&quot;: &quot;FIRM - Pricing Model (Tower)&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;FIRM&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_part_a&quot;,
+                  &quot;label&quot;: &quot;PART A&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_angles&quot;,
+                  &quot;label&quot;: &quot;Angles&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: &quot;true&quot;,
+                  &quot;unit&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;55000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_price&quot;,
+                  &quot;label&quot;: &quot;Zinc Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: &quot;true&quot;,
+                  &quot;unit&quot;: &quot;&quot;,
+                  &quot;defaultValue&quot;: &quot;375000&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_consumption_percent&quot;,
+                  &quot;label&quot;: &quot;Zinc Consumption (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;readOnly&quot;: &quot;true&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvt_base_zcp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_consumption_value&quot;,
+                  &quot;label&quot;: &quot;Add on Amount in Zinc value&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(pvt_firm_610_gsm ? 0 : 0) + (pvt_firm_900_gsm ? 4000 : 0) + (pvt_firm_1000_gsm ? 6000 : 0)&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;FIRM&quot;
+              ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_value&quot;,
+                  &quot;label&quot;: &quot;Zinc Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: &quot;true&quot;,
+                  &quot;unit&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;14850&quot;,
+                  &quot;formula&quot;: &quot;Math.round(((((pvt_firm_610_gsm || pvt_firm_900_gsm || pvt_firm_1000_gsm) ? ((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent || 0)) / 100) : 0) + (pvt_firm_900_gsm ? 4000 : 0) + (pvt_firm_1000_gsm ? 6000 : 0)) * 100)) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_cost_of_production&quot;,
+                  &quot;label&quot;: &quot;Cost of production&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: &quot;true&quot;,
+                  &quot;unit&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvt_base_cop||0)&quot;
+                },
+                
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_610_gsm_label&quot;,
+                  &quot;label&quot;: &quot;610 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_610_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_900_gsm_label&quot;,
+                  &quot;label&quot;: &quot;900 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_900_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_1000_gsm_label&quot;,
+                  &quot;label&quot;: &quot;1000 GSM&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_1000_gsm&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_part_b&quot;,
+                  &quot;label&quot;: &quot;PART B&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_interest_component_on_product_cycle&quot;,
+                  &quot;label&quot;: &quot;Interest Component on product cycle &amp; Inventory Carrying Cost and Working capital&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Number(pvt_int_carrying_cost||0)+Number(pvt_int_comp_working_capital||0)&quot;,
+                  &quot;min&quot;: 2000,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_scrap_value&quot;,
+                  &quot;label&quot;: &quot;Scrap Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(pvt_firm_angles||0)* Number(pvt_firm_scrap_percent||0)/100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_proto&quot;,
+                  &quot;label&quot;: &quot;Proto (if required)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;YES&quot;,
+                    &quot;NO&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_proto_required&quot;,
+                  &quot;label&quot;: &quot;Proto Cost&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;value/ton&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_firm_proto&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;YES&quot;
+                  ],
+                  &quot;formula&quot;: &quot;pvt_firm_proto==&apos;YES&apos;? Number(pvt_proto_value||0) : 0&quot;,
+                  &quot;min&quot;: 800,
+                  &quot;required&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_pat&quot;,
+                  &quot;label&quot;: &quot;Proto Assembly Testing (Not included in Price)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_pat_price&quot;,
+                  &quot;label&quot;: &quot;Price for Proto Assembly&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;pvt_firm_pat&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_part_c&quot;,
+                  &quot;label&quot;: &quot;PART - C&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_interest_component&quot;,
+                  &quot;label&quot;: &quot;Interest Component (as per respective payment terms)?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_payment_terms&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_firm_interest_component&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_market_price&quot;,
+                  &quot;label&quot;: &quot;Market Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(pvt_firm_angles || 0) + Number(pvt_firm_cost_of_production || 0) + ((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent || 0)) / 100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_prevailing_rate_of_bank_interest&quot;,
+                  &quot;label&quot;: &quot;Prevailing rate of Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;,
+                  &quot;controllingField&quot;: &quot;pvt_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;required&quot;: true,
+                  &quot;formula&quot;: &quot;pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos; ? (Number(pvt_firm_no_of_days||0)&lt;=90 ? Number(pvt_int_LC||0) : 8.5) : pvt_firm_payment_terms==&apos;Against VFS&apos; ? Number(pvt_int_VFS||0) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_terms_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;controllingField&quot;: &quot;pvt_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_no_of_days&quot;,
+                  &quot;label&quot;: &quot;No Of Days&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: true,
+                  &quot;controllingField&quot;: &quot;pvt_firm_payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_part_d&quot;,
+                  &quot;label&quot;: &quot;PART - D&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_margin&quot;,
+                  &quot;label&quot;: &quot;Margin&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isMargin&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_additional_pricing&quot;,
+                  &quot;label&quot;: &quot;ADDITIONAL PRICING (HT SECTIONS)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;3000&quot;,
+                  &quot;min&quot;: 3000,
+                  &quot;required&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ms610_gsm&quot;,
+              &quot;label&quot;: &quot;PV-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ms610_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_N5_N12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_N5_N12||0) * (1 + Number(pvt_pv_margin||0)/100)))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ht610_gsm&quot;,
+              &quot;label&quot;: &quot;PV-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ht610_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;(((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_N5_N12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_N5_N12||0) * (1 + Number(pvt_pv_margin||0)/100))) + Number(pvt_pv_additional_pricing||0))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ms900_gsm&quot;,
+              &quot;label&quot;: &quot;PV-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ms900_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_O5_O12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_O5_O12||0) * (1 + Number(pvt_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ht900_gsm&quot;,
+              &quot;label&quot;: &quot;PV-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ht900_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_O5_O12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_O5_O12||0) * (1 + Number(pvt_pv_margin||0)/100))) + Number(pvt_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ms1000_gsm&quot;,
+              &quot;label&quot;: &quot;PV-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ms1000_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_P5_P12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_P5_P12||0) * (1 + Number(pvt_pv_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_pv_ht1000_gsm&quot;,
+              &quot;label&quot;: &quot;PV-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_pv_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_ht1000_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_P5_P12||0) * (1 + Number(pvt_pv_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_P5_P12||0) * (1 + Number(pvt_pv_margin||0)/100))) + Number(pvt_pv_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ms610_gsm&quot;,
+              &quot;label&quot;: &quot;FIRM-MS-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ms610_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_T6_T13||0) * (1 + Number(pvt_firm_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_T6_T13||0) * (1 + Number(pvt_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ht610_gsm&quot;,
+              &quot;label&quot;: &quot;FIRM-HT-610 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_610_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ht610_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_T6_T13||0) * (1 + Number(pvt_firm_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_T6_T13||0) * (1 + Number(pvt_firm_margin||0)/100))) + Number(pvt_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ms900_gsm&quot;,
+              &quot;label&quot;: &quot;FIRM-MS-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ms900_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_U6_U13||0) * (1 + Number(pvt_firm_margin || 0) / 100)) + Number(pvt_C19||0) : Math.round(Number(pvt_U6_U13||0) * (1 + Number(pvt_firm_margin || 0) / 100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ht900_gsm&quot;,
+              &quot;label&quot;: &quot;FIRM-HT-900 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_900_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ht900_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_U6_U13||0) * (1 + Number(pvt_firm_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_U6_U13||0) * (1 + Number(pvt_firm_margin||0)/100))) + Number(pvt_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ms1000_gsm&quot;,
+              &quot;label&quot;: &quot;Firm-MS-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ms1000_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;(Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_V6_V13||0) * (1 + Number(pvt_firm_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_V6_V13||0) * (1 + Number(pvt_firm_margin||0)/100))&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_firm_ht1000_gsm&quot;,
+              &quot;label&quot;: &quot;FIRM-HT-1000 GSM&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_firm_1000_gsm&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_ht1000_gsm_unit_price&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;formula&quot;: &quot;((Incoterms == &apos;F.O.R (Freight on Road)&apos; &amp;&amp; tower_project_for_transportation_addition == &apos;NO&apos;) ? Math.round(Number(pvt_V6_V13||0) * (1 + Number(pvt_firm_margin||0)/100)) + Number(pvt_C19||0) : Math.round(Number(pvt_V6_V13||0) * (1 + Number(pvt_firm_margin||0)/100))) + Number(pvt_firm_additional_pricing||0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvt_formula_block&quot;,
+              &quot;label&quot;: &quot;Internal Formulas Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;isVisible&quot;: false,
+              &quot;controllingField&quot;: &quot;pvt_price_basics&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;*&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_int_carrying_cost&quot;,
+                  &quot;label&quot;: &quot;Inventory Carrying Cost&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_int_comp_working_capital&quot;,
+                  &quot;label&quot;: &quot;Interest component on working capital&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_int_LC&quot;,
+                  &quot;label&quot;: &quot;Prevalling Interest LC&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_int_VFS&quot;,
+                  &quot;label&quot;: &quot;Prevalling Interest VFS&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;7.90&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_base_cop&quot;,
+                  &quot;label&quot;: &quot;Base Cost of Production&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;9000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_base_zcp&quot;,
+                  &quot;label&quot;: &quot;Base Zinc Consumption (%)&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;4.5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_base_sp&quot;,
+                  &quot;label&quot;: &quot;Base Scrap (%)&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: &quot;1.5&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_scrap_percent&quot;,
+                  &quot;label&quot;: &quot;FIRM Scrap %&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;Number(pvt_base_sp||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_proto_value&quot;,
+                  &quot;label&quot;: &quot;Proto Value&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;800&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_CPI&quot;,
+                  &quot;label&quot;: &quot;Consumer Price Index&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_G61&quot;,
+                  &quot;label&quot;: &quot;CELL Content G61&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;pvt_price_basics==&apos;Price Variation&apos; ? ((pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_pv_payment_terms==&apos;Against VFS&apos;) ? Number(pvt_pv_no_of_days||0) : 0 ) : pvt_price_basics==&apos;FIRM&apos; ? ((pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_firm_payment_terms==&apos;Against VFS&apos;) ? Number(pvt_firm_no_of_days||0) : 0 ) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_G60&quot;,
+                  &quot;label&quot;: &quot;CELL Content G60&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;pvt_price_basics==&apos;Price Variation&apos; ? ((pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_pv_payment_terms==&apos;Against VFS&apos;) ? Number(pvt_pv_prevailing_rate_of_bank_interest||0) : 0 )/100 : pvt_price_basics==&apos;FIRM&apos; ? ((pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_firm_payment_terms==&apos;Against VFS&apos;) ? Number(pvt_firm_prevailing_rate_of_bank_interest||0)/100 : 0 ) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_value_610&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_pv_610_gsm ? ((Number(pvt_pv_zinc_value_as_IEEMA||0) * Number(pvt_pv_zinc_consumption_percent||0))/100) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_value_900&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_pv_900_gsm ? (((Number(pvt_pv_zinc_value_as_IEEMA||0) * Number(pvt_pv_zinc_consumption_percent||0))/100) + 5000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_zinc_value_1000&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_pv_1000_gsm ? (((Number(pvt_pv_zinc_value_as_IEEMA||0) * Number(pvt_pv_zinc_consumption_percent||0))/100) + 6000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_value_610&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_firm_610_gsm ? ((Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0))/100) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_value_900&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_firm_900_gsm ? (((Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0))/100) + 4000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_zinc_value_1000&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;Math.round((pvt_firm_1000_gsm ? (((Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0))/100) + 6000) : 0) * 100) / 100&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_AO31&quot;,
+                  &quot;label&quot;: &quot;CELL Rate &amp; Cost AO31&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: 0,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_payment_terms!==&apos;undefined&apos;&amp;&amp;pvt_pv_payment_terms!==null?(pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(pvt_G60||0)*(Number(pvt_pv_avg_of_blooms||0) + Number(pvt_pv_convergence_to_angles||0) + (Number(pvt_pv_zinc_value_as_IEEMA || 0) * Number(pvt_pv_zinc_consumption_percent || 0)/100) + Number(pvt_pv_cost_of_production||0))*Number(pvt_G61||0)/365):pvt_pv_payment_terms==&apos;Against VFS&apos;?Math.round((Number(pvt_pv_avg_of_blooms||0) + Number(pvt_pv_convergence_to_angles||0) + (Number(pvt_pv_zinc_value_as_IEEMA || 0) * Number(pvt_pv_zinc_consumption_percent || 0)/100) + Number(pvt_pv_cost_of_production||0))*Number(pvt_G60||0)*Number(pvt_G61||0)/365):0):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_AW22&quot;,
+                  &quot;label&quot;: &quot;CELL Content AW22&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;(typeof pvt_firm_payment_terms!==&apos;undefined&apos;&amp;&amp;pvt_firm_payment_terms!==null?(pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(pvt_G60||0)*(Number(pvt_firm_angles||0) + (Number(pvt_firm_zinc_price || 0) * (Number(pvt_firm_zinc_consumption_percent || 0)/100)) + Number(pvt_firm_cost_of_production||0))*Number(pvt_G61||0)/365):pvt_firm_payment_terms==&apos;Against VFS&apos;?Math.round((Number(pvt_firm_angles||0) + (Number(pvt_firm_zinc_price || 0) * (Number(pvt_firm_zinc_consumption_percent || 0)/100)) + Number(pvt_firm_cost_of_production||0))*Number(pvt_G60||0)*Number(pvt_G61||0)/365):0):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_C19&quot;,
+                  &quot;label&quot;: &quot;CELL Content C19&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: 0,
+                  &quot;formula&quot;: &quot;(typeof tower_project_for_transportation_addition!==&apos;undefined&apos;&amp;&amp;tower_project_for_transportation_addition!==null?(tower_project_for_transportation_addition==&apos;YES&apos;?0:(Number(mgl_minimum_guranteed_freight_1||0)+Number(mgl_minimum_guranteed_freight_2||0)+Number(mgl_minimum_guranteed_freight_3||0)+Number(mgl_minimum_guranteed_freight_4||0)+Number(mgl_minimum_guranteed_freight_5||0)+Number(mgl_minimum_guranteed_freight_6||0)+Number(mgl_minimum_guranteed_freight_7||0)+Number(mgl_minimum_guranteed_freight_8||0)+Number(mgl_minimum_guranteed_freight_9||0)+Number(mgl_minimum_guranteed_freight_10||0)+Number(rpt_rate_per_ton_1||0)+Number(rpt_rate_per_ton_2||0)+Number(rpt_rate_per_ton_3||0)+Number(rpt_rate_per_ton_4||0)+Number(rpt_rate_per_ton_5||0)+Number(rpt_rate_per_ton_6||0)+Number(rpt_rate_per_ton_7||0)+Number(rpt_rate_per_ton_8||0)+Number(rpt_rate_per_ton_9||0)+Number(rpt_rate_per_ton_10||0))):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_N5_N12&quot;,
+                  &quot;label&quot;: &quot;CELL Content N5 - N12&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;Number(pvt_pv_avg_of_blooms||0) + Number(pvt_pv_convergence_to_angles||0)+ (pvt_pv_610_gsm ? Number(pvt_pv_zinc_value_610||0) : 0) + Number(pvt_pv_scrap_value||0) + Number(pvt_AO31||0) + Number(pvt_pv_interest_component_on_product_cycle||0) + Number(pvt_pv_cost_of_production||0) + Number(pvt_pv_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_O5_O12&quot;,
+                  &quot;label&quot;: &quot;CELL Content O5 - O12&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(pvt_pv_avg_of_blooms||0) + Number(pvt_pv_convergence_to_angles||0) + (pvt_pv_900_gsm ? Number(pvt_pv_zinc_value_900||0) : 0) + Number(pvt_pv_scrap_value||0) + Number(pvt_AO31||0) + Number(pvt_pv_interest_component_on_product_cycle||0) + Number(pvt_pv_cost_of_production||0) + Number(pvt_pv_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_P5_P12&quot;,
+                  &quot;label&quot;: &quot;CELL Content P5 - P12&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(pvt_pv_1000_gsm ? Number(pvt_pv_zinc_value_1000) : 0)+Number(pvt_pv_scrap_value||0)+ Number(pvt_AO31||0)+Number(pvt_pv_interest_component_on_product_cycle||0)+Number(pvt_pv_cost_of_production||0)+Number(pvt_pv_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_T6_T13&quot;,
+                  &quot;label&quot;: &quot;CELL Content T6 - T13&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;Number(pvt_firm_angles||0)+(pvt_firm_610_gsm ? Number(pvt_firm_zinc_value_610||0) : 0)+Number(pvt_firm_scrap_value||0)+Number(pvt_AW22||0)+Number(pvt_firm_cost_of_production||0)+Number(pvt_firm_interest_component_on_product_cycle||0)+Number(pvt_firm_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_U6_U13&quot;,
+                  &quot;label&quot;: &quot;CELL Content U6 - U13&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;Number(pvt_firm_angles||0)+(pvt_firm_900_gsm? Number(pvt_firm_zinc_value_900||0):0)+Number(pvt_firm_scrap_value||0)+Number(pvt_AW22||0)+Number(pvt_firm_cost_of_production||0)+Number(pvt_firm_interest_component_on_product_cycle||0)+Number(pvt_firm_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_V6_V13&quot;,
+                  &quot;label&quot;: &quot;CELL Content V6 - V13&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;Number(pvt_firm_angles||0)+(pvt_firm_1000_gsm ? Number(pvt_firm_zinc_value_1000||0) : 0)+Number(pvt_firm_scrap_value||0)+Number(pvt_AW22||0)+Number(pvt_firm_cost_of_production||0)+Number(pvt_firm_interest_component_on_product_cycle||0)+Number(pvt_firm_proto_required||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_bank_interest&quot;,
+                  &quot;label&quot;: &quot;Price Variation Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;pvt_AO31&quot;,
+                  &quot;readOnly&quot;: true
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_bank_interest&quot;,
+                  &quot;label&quot;: &quot;FIRM Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;formula&quot;: &quot;pvt_AW22&quot;,
+                  &quot;readOnly&quot;: true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

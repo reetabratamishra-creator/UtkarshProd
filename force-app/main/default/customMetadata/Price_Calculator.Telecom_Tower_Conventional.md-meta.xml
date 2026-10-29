@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Telecom Tower Conventional</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Telecom Tower - Department</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;ang_rmc&quot;,&quot;defaultValue&quot;:55000},{&quot;apiName&quot;:&quot;ang_zinc_value&quot;,&quot;defaultValue&quot;:375000},{&quot;apiName&quot;:&quot;ang_zinc_conversion_percent&quot;,&quot;defaultValue&quot;:6},{&quot;apiName&quot;:&quot;ang_fabrication_cost&quot;,&quot;defaultValue&quot;:8000},{&quot;apiName&quot;:&quot;ang_labour_cost&quot;,&quot;defaultValue&quot;:2000},{&quot;apiName&quot;:&quot;against_LC_percent&quot;,&quot;defaultValue&quot;:8},{&quot;apiName&quot;:&quot;against_VFS_percent&quot;,&quot;defaultValue&quot;:7.9},{&quot;apiName&quot;:&quot;tub_without_bom_value1&quot;,&quot;defaultValue&quot;:61000},{&quot;apiName&quot;:&quot;tub_pipe_rate&quot;,&quot;defaultValue&quot;:61},{&quot;apiName&quot;:&quot;tub_plate_rate&quot;,&quot;defaultValue&quot;:57},{&quot;apiName&quot;:&quot;tub_ang_chan_rate&quot;,&quot;defaultValue&quot;:53},{&quot;apiName&quot;:&quot;tub_misc_chan_rate&quot;,&quot;defaultValue&quot;:130}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

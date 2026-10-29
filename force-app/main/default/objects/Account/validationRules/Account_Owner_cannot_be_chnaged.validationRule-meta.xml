@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Owner_cannot_be_chnaged</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED( OwnerId )
+)</errorConditionFormula>
+    <errorMessage>Account Owner cannot be changed</errorMessage>
+</ValidationRule>

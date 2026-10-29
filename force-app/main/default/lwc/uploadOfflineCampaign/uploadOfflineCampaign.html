@@ -1,0 +1,123 @@
+<template>
+  <lightning-card title="Upload Offline Campaign" icon-name="standard:upload">
+    <div class="slds-p-around_medium">
+      <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+
+      <div class="slds-m-bottom_medium">
+        <lightning-button
+          variant="brand"
+          label="Download Upload Format"
+          icon-name="utility:download"
+          onclick={handleDownloadFormat}
+          disabled={isLoading}
+        ></lightning-button>
+        <p class="slds-text-body_small slds-m-top_x-small">
+          Download this file first. Fill one customer per row, then upload it below.
+        </p>
+      </div>
+
+      <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <lightning-input
+            type="text"
+            label="Group / List"
+            value={groupList}
+            placeholder="Enter group or list name for this upload"
+            onchange={handleGroupListChange}
+            required
+          ></lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <lightning-input
+            type="file"
+            label="Upload CSV File"
+            accept=".csv"
+            onchange={handleFileChange}
+          ></lightning-input>
+          <template if:true={hasUploadedFile}>
+            <p class="slds-text-body_small slds-m-top_x-small">
+              Loaded file: {uploadedFileName}
+            </p>
+          </template>
+        </div>
+      </div>
+
+      <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"></div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-align-bottom">
+          <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+              <lightning-button
+                variant="brand"
+                label="Insert Records"
+                onclick={handleInsert}
+                disabled={disableInsert}
+              ></lightning-button>
+            </div>
+            <div class="slds-col">
+              <lightning-button
+                variant="neutral"
+                label="Reset"
+                onclick={handleReset}
+                disabled={isLoading}
+              ></lightning-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="slds-text-body_small slds-m-bottom_x-small">
+        Download the upload format, fill one customer per row, then upload that CSV.
+        Type the Group / List name on this screen. It applies to every row in the file.
+      </p>
+      <p class="slds-text-body_small slds-m-bottom_small">
+        CSV columns: Name (required), Email, Phone (at least 10 digits), Department.
+        Department must match one of these values: {departmentNames}.
+      </p>
+
+      <template if:true={hasRows}>
+        <lightning-datatable
+          key-field="rowKey"
+          data={rows}
+          columns={columns}
+          draft-values={draftValues}
+          oncellchange={handleCellChange}
+          onsave={handleSaveEdits}
+          oncancel={handleCancelEdits}
+          hide-checkbox-column
+          class="slds-m-bottom_large"
+        ></lightning-datatable>
+      </template>
+
+      <template if:true={showSummary}>
+        <div class="slds-box slds-theme_shade summary-panel">
+          <h2 class="slds-text-heading_small slds-m-bottom_small">Insert Summary</h2>
+          <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-3">
+              <p><strong>Total:</strong> {insertSummary.totalCount}</p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+              <p><strong>Success:</strong> {insertSummary.successCount}</p>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+              <p><strong>Failed:</strong> {insertSummary.failedCount}</p>
+            </div>
+          </div>
+
+          <template if:true={errorSummary.length}>
+            <h3 class="slds-text-title_caps slds-m-top_medium slds-m-bottom_x-small">
+              Error Details
+            </h3>
+            <ul class="error-list">
+              <template for:each={errorSummary} for:item="errorItem">
+                <li key={errorItem.key}>{errorItem.value}</li>
+              </template>
+            </ul>
+          </template>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

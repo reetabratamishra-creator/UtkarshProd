@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Blooms September 2019</label>
+    <protected>false</protected>
+    <values>
+        <field>Core_Department_Type__c</field>
+        <value xsi:type="xsd:string">Part Variation</value>
+    </values>
+    <values>
+        <field>Material__c</field>
+        <value xsi:type="xsd:string">Blooms</value>
+    </values>
+    <values>
+        <field>Month__c</field>
+        <value xsi:type="xsd:string">September</value>
+    </values>
+    <values>
+        <field>Unit_Price__c</field>
+        <value xsi:type="xsd:double">34198.0</value>
+    </values>
+    <values>
+        <field>Year__c</field>
+        <value xsi:type="xsd:string">2019</value>
+    </values>
+</CustomMetadata>

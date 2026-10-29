@@ -1,0 +1,112 @@
+<template>
+    <div class="lost-records-wrapper">
+
+        <!-- ── Lost Leads Section ───────────────────────────────────────── -->
+        <template if:true={hasLeadAccess}>
+            <div class="lr-section">
+                <div class="lr-section__header">
+                    <div class="lr-section__badge lr-section__badge--lead">
+                        <lightning-icon icon-name="standard:lead" size="x-small" variant="inverse"></lightning-icon>
+                    </div>
+                    <h2 class="lr-section__title">Lost Leads</h2>
+                    <template if:true={hasLeads}>
+                        <span class="lr-section__count">{leadCount}</span>
+                    </template>
+                </div>
+
+                <!-- Loading -->
+                <template if:true={isLeadsLoading}>
+                    <div class="lr-spinner-wrapper">
+                        <lightning-spinner alternative-text="Loading lost leads..." size="medium"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Loaded with error -->
+                <template if:true={showLeadsError}>
+                    <div class="lr-error">
+                        <lightning-icon icon-name="utility:error" size="x-small" variant="error"></lightning-icon>
+                        <span>{leadsError}</span>
+                    </div>
+                </template>
+
+                <!-- Loaded with data -->
+                <template if:true={showLeadsTable}>
+                    <div class="lr-datatable-wrapper">
+                        <lightning-datatable
+                            key-field="Id"
+                            data={leadsData}
+                            columns={leadsColumns}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+
+                <!-- Loaded, no data, no error -->
+                <template if:true={showLeadsEmpty}>
+                    <div class="lr-empty">
+                        <lightning-icon icon-name="utility:check" size="large" variant="success"></lightning-icon>
+                        <p class="lr-empty__title">No Lost Leads</p>
+                        <p class="lr-empty__msg">There are currently no leads with a Lost status.</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- ── Divider ──────────────────────────────────────────────────── -->
+        <template if:true={showDivider}>
+            <div class="lr-divider"></div>
+        </template>
+
+        <!-- ── Closed Lost Opportunities Section ───────────────────────── -->
+        <template if:true={hasOpportunityAccess}>
+            <div class="lr-section">
+                <div class="lr-section__header">
+                    <div class="lr-section__badge lr-section__badge--opp">
+                        <lightning-icon icon-name="standard:opportunity" size="x-small" variant="inverse"></lightning-icon>
+                    </div>
+                    <h2 class="lr-section__title">Closed Lost Opportunities</h2>
+                    <template if:true={hasOpps}>
+                        <span class="lr-section__count">{oppCount}</span>
+                    </template>
+                </div>
+
+                <!-- Loading -->
+                <template if:true={isOppsLoading}>
+                    <div class="lr-spinner-wrapper">
+                        <lightning-spinner alternative-text="Loading opportunities..." size="medium"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Loaded with error -->
+                <template if:true={showOppsError}>
+                    <div class="lr-error">
+                        <lightning-icon icon-name="utility:error" size="x-small" variant="error"></lightning-icon>
+                        <span>{oppsError}</span>
+                    </div>
+                </template>
+
+                <!-- Loaded with data -->
+                <template if:true={showOppsTable}>
+                    <div class="lr-datatable-wrapper">
+                        <lightning-datatable
+                            key-field="Id"
+                            data={oppsData}
+                            columns={oppsColumns}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+
+                <!-- Loaded, no data, no error -->
+                <template if:true={showOppsEmpty}>
+                    <div class="lr-empty">
+                        <lightning-icon icon-name="utility:check" size="large" variant="success"></lightning-icon>
+                        <p class="lr-empty__title">No Closed Lost Opportunities</p>
+                        <p class="lr-empty__msg">There are currently no opportunities with a Closed Lost stage.</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+    </div>
+</template>

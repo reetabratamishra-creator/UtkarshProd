@@ -1,0 +1,53 @@
+.list-view-page { background: #fff; }
+
+.view-title-btn { display: inline-flex; align-items: center; padding: 0; line-height: 1.25; }
+.view-picker { position: relative; }
+
+.view-dropdown {
+    min-width: 22rem;
+    max-height: 22rem;
+    overflow-y: auto;
+    z-index: 9000;
+    left: 0;
+    transform: none;
+}
+
+.list-item { cursor: pointer; }
+.list-item:hover { background: #f3f3f3; }
+.list-item_selected, .list-item_selected:hover { background: #d8e6fe; }
+.check-slot { display: inline-block; width: 1.5rem; }
+
+.search-box { width: 16rem; }
+
+.filter-anchor { position: relative; display: inline-block; }
+.filter-panel { position: absolute; right: -0.25rem; top: 2.5rem; width: 18rem; z-index: 9000; }
+.filter-body { max-height: 22rem; overflow-y: auto; }
+
+.table-wrap { position: relative; height: calc(100vh - 300px); min-height: 320px; overflow: hidden; }
+.loading-holder { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.6); }
+
+.chart-label { width: 9rem; }
+.chart-track { background: #ecebea; border-radius: 0.25rem; height: 0.75rem; margin: 0 0.5rem; }
+.chart-bar { background: #0176d3; border-radius: 0.25rem; height: 100%; }
+.chart-count { width: 3rem; text-align: right; }
+
+
+:host {
+    display: block;
+    background: #ffffff;
+}
+
+.list-view-page {
+    background: #ffffff;
+}
+
+.list-view-page .slds-page-header {
+    background: #ffffff;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+}
+
+.chart-panel {
+    background: #ffffff;
+}

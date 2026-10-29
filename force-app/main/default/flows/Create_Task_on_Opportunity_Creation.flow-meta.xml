@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_the_created_Timing</name>
+        <label>Check the created Timing</label>
+        <locationX>537</locationX>
+        <locationY>479</locationY>
+        <defaultConnector>
+            <targetReference>Create_task_at_10AM</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>After 2PM</defaultConnectorLabel>
+        <rules>
+            <name>Created_Timing_before_2PM</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>HourofCreatedTimeFormula</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>10.5</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_task_at_5PM</targetReference>
+            </connector>
+            <label>Before 2PM</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Recordtype</name>
+        <label>Recordtype</label>
+        <locationX>900</locationX>
+        <locationY>367</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Master_Opportunity</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Master_Opportunity</stringValue>
+                </rightValue>
+            </conditions>
+            <label>Master_Opportunity</label>
+        </rules>
+    </decisions>
+    <description>created from v29-grammatical mistake 
+Directly create task on Opportunity
+Created from v1 only for task creation on Opportunity creation, subtype
+changed 9AM to 10AM</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>FollowupDateTimeAt10AMnextdayFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(
+  TEXT(DATEVALUE({!$Record.CreatedDate}) + 1) &amp; &quot; 04:30:00&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>FollowupDateTimeAt5PMFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(
+  TEXT(DATEVALUE({!$Record.CreatedDate})) &amp; &quot; 11:30:00&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>HourofCreatedTimeFormula</name>
+        <dataType>Number</dataType>
+        <expression>HOUR(TIMEVALUE({!$Record.CreatedDate}))+(
+    MINUTE(TIMEVALUE({!$Record.CreatedDate})) / 60
+)</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Create Task on [Opportunity] Creation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Task on [Opportunity] Creation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_task_at_10AM</name>
+        <label>Create task at 10AM</label>
+        <locationX>669</locationX>
+        <locationY>587</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>An opportunity has been created , make sure to call at 10AM tomorrow</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Follow_Up_Date_Time__c</field>
+            <value>
+                <elementReference>FollowupDateTimeAt10AMnextdayFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <stringValue>Nurture</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Call Customer - New Opportunity Created</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TaskSubtype</field>
+            <value>
+                <stringValue>Call</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Who_ID_Type__c</field>
+            <value>
+                <stringValue>Opportunity</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_task_at_5PM</name>
+        <label>Create task at 5PM</label>
+        <locationX>406</locationX>
+        <locationY>586</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>An opportunity has been created , make sure to call at 5PM</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Follow_Up_Date_Time__c</field>
+            <value>
+                <elementReference>FollowupDateTimeAt5PMFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <stringValue>Nurture</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Call Customer - New Opportunity Created</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TaskSubtype</field>
+            <value>
+                <stringValue>Call</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Who_ID_Type__c</field>
+            <value>
+                <stringValue>Opportunity</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>609</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Check_the_created_Timing</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>cNotificationRecipientVAR</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

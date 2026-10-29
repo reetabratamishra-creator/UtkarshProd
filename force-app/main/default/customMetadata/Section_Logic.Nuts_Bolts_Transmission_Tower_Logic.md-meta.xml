@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Nuts &amp; Bolts Transmission Tower Logic</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Nuts_Bolts_Transmission_Tower</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">True</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;tower_nut_bolts&quot;,
+      &quot;label&quot;: &quot;Nuts &amp; Bolts&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;Nuts_Bolts_transmission_tower&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;Nuts &amp; Bolts&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;lineItemMultiplierConfig&quot;: {
+            &quot;mode&quot;: &quot;combined&quot;,
+            &quot;flat&quot;: {
+              &quot;sources&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_610_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | PV-610 GSM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_900_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | PV-900 GSM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_pv_1000_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | PV-1000 GSM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_610_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | FIRM-610 GSM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_900_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | FIRM-900 GSM&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvt_firm_1000_gsm&quot;,
+                  &quot;label&quot;: &quot;Tower | FIRM-1000 GSM&quot;
+                }
+              ]
+            },
+            &quot;cartesian&quot;: {
+              &quot;groups&quot;: [
+                {
+                  &quot;groupKey&quot;: &quot;structure&quot;,
+                  &quot;sources&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;pvs_gantry_structure&quot;,
+                      &quot;label&quot;: &quot;Gantry&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_equipment_structure&quot;,
+                      &quot;label&quot;: &quot;Equipment&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_composite_structure&quot;,
+                      &quot;label&quot;: &quot;Composite&quot;
+                    }
+                  ]
+                },
+                {
+                  &quot;groupKey&quot;: &quot;gsm&quot;,
+                  &quot;sources&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;pvs_pv_610_gsm&quot;,
+                      &quot;label&quot;: &quot;PV-610 GSM&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_pv_900_gsm&quot;,
+                      &quot;label&quot;: &quot;PV-900 GSM&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_pv_1000_gsm&quot;,
+                      &quot;label&quot;: &quot;PV-1000 GSM&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_firm_610_gsm&quot;,
+                      &quot;label&quot;: &quot;FIRM-610 GSM&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_firm_900_gsm&quot;,
+                      &quot;label&quot;: &quot;FIRM-900 GSM&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;pvs_firm_1000_gsm&quot;,
+                      &quot;label&quot;: &quot;FIRM-1000 GSM&quot;
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;pvs_nuts_bolts_types&quot;,
+              &quot;label&quot;: &quot;Nuts &amp; Bolts Types&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;isCheckboxGroup&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_of_grade&quot;,
+                  &quot;label&quot;: &quot;Type of Grade (Nuts &amp; Bolts) &amp; Foundation&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;required&quot;: true
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_details_type_of_grade&quot;,
+              &quot;label&quot;: &quot;Type of Grade&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_of_grade&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_5_6&quot;,
+                  &quot;label&quot;: &quot;5.6&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_6_8&quot;,
+                  &quot;label&quot;: &quot;6.8&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_8_8&quot;,
+                  &quot;label&quot;: &quot;8.8&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_details_type_of_grade_5_6&quot;,
+              &quot;label&quot;: &quot;GRADE - 5.6&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_5_6&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_5_6_price_unit&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;110000&quot;,
+                  &quot;formula&quot;: &quot;(nb_payment_terms !== null &amp;&amp; nb_payment_terms != &apos;&apos;) ? (nb_payment_terms==&apos;Against LC Before Dispatch&apos; ? Math.round((nb_G60*(pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)*Number(nb_G61||0)/365)+(pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)) : nb_payment_terms==&apos;Against VFS&apos; ? Math.round(((pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)*Number(nb_G60||0)*(nb_G61||0)/365)+(pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)) : (pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)) : (pvs_type_5_6?Number(base_price||0)*(1+Number(pvs_type_5_6_margin||0)/100):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_5_6_margin&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				  &quot;isMargin&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;10&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_5_6_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_details_type_of_grade_6_8&quot;,
+              &quot;label&quot;: &quot;GRADE - 6.8&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_6_8&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_6_8_price_unit&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round((Number(nb_G60||0)*(pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)*Number(nb_G61||0)/365)+(pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)):nb_payment_terms==&apos;Against VFS&apos;?Math.round(((pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+(pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)):(pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)):(pvs_type_6_8?Number(base_price||0)*(1+Number(pvs_type_6_8_margin||0)/100):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_6_8_margin&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				  &quot;isMargin&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;20&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_6_8_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_details_type_of_grade_8_8&quot;,
+              &quot;label&quot;: &quot;GRADE - 8.8&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_8_8&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_8_8_price_unit&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;133100&quot;,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round((Number(nb_G60||0)*(pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)*Number(nb_G61||0)/365)+(pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)):nb_payment_terms==&apos;Against VFS&apos;?Math.round((((pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)*Number(nb_G60||0)*Number(nb_G61||0)/365))+(pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)):(pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)):(pvs_type_8_8?Number(base_price||0)*(1+Number(pvs_type_8_8_margin||0)/100):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_8_8_margin&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				          &quot;isMargin&quot;: true,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;30&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_type_8_8_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_foundation_bolt&quot;,
+              &quot;label&quot;: &quot;Foundation Bolt&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_of_grade&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_foundation_bolt_checkbox&quot;,
+                  &quot;label&quot;: &quot;Foundation Bolt&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_detail_foundation_bolt&quot;,
+              &quot;label&quot;: &quot;FOUNDATION BOLT&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_foundation_bolt_checkbox&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_foundation_bolt_price_unit&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;102600&quot;,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round((Number(nb_G60||0)*(pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)*Number(nb_G61||0)/365)+(pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)):nb_payment_terms==&apos;Against VFS&apos;?Math.round((((pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)*Number(nb_G60||0)*Number(nb_G61||0)/365))+(pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)):(pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)):(pvs_foundation_bolt_checkbox?Number(foundation_base_price||0)*(1+Number(pvs_detail_foundation_bolt_margin||0)/100):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_foundation_bolt_margin&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+				  &quot;isMargin&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;defaultValue&quot;: &quot;8&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_foundation_bolt_quantity&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_ms_template_without_galvanization&quot;,
+              &quot;label&quot;: &quot;MS Template (without Galvanization)&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_type_of_grade&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_ms_template_without_galvanization_checkbox&quot;,
+                  &quot;label&quot;: &quot;MS Template (without Galvanization)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_detail_ms_template_pv&quot;,
+              &quot;label&quot;: &quot;MS TEMPLATE (PV)&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_ms_template_without_galvanization_checkbox,pvs_pv_price_variation_active&quot;,
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_pv_unitprice&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;Price Variation&apos;)?Number(pvs_N28||0):pvs_gantry_structure?Number(pvs_AH35||0):pvs_equipment_structure?Number(pvs_AH49||0):pvs_composite_structure?Number(pvs_AH63||0):0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_margin_pv&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+				          &quot;isMargin&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 5
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_quantity_pv&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_detail_ms_template_firm&quot;,
+              &quot;label&quot;: &quot;MS TEMPLATE (Firm)&quot;,
+              &quot;expanded&quot;: true,
+              &quot;showRequired&quot;: true,
+              &quot;controllingField&quot;: &quot;pvs_ms_template_without_galvanization_checkbox, pvs_pv_firm_active&quot;,
+              &quot;controllingOperator&quot;: &quot;AND&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_firm_unitprice&quot;,
+                  &quot;label&quot;: &quot;Unit Price&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isUnitPrice&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;FIRM&apos;)? Number(pvs_U28||0) : pvs_gantry_structure? Number(pvs_AP35||0) : pvs_equipment_structure? Number(pvs_AP49||0) : pvs_composite_structure? Number(pvs_AP63||0) : 0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_margin_firm&quot;,
+                  &quot;label&quot;: &quot;Margin %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+				  &quot;isMargin&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 5
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_quantity_firm&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pvs_detail_ms_template_formulas&quot;,
+              &quot;label&quot;: &quot;Internal Formulas Section&quot;,
+              &quot;expanded&quot;: false,
+              &quot;isVisible&quot;: false,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH35&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH35 G610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!= &apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE35||0)*Number(nb_G61||0)/365)+Number(pvs_AE35||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE35||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE35||0):Number(pvs_AE35||0)):Number(pvs_AE35||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE35&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE35&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!==&apos;undefined&apos;&amp;&amp;pvs_gantry_structure!==null&amp;&amp;pvs_gantry_structure)?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)):0)-(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH49&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH49 E610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE49||0)*Number(nb_G61||0)/365)+Number(pvs_AE49||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE49||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE49||0):Number(pvs_AE49||0)):Number(pvs_AE49||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE49&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE49&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH63&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH63 C610&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE63||0)*Number(nb_G61||0)/365)+Number(pvs_AE63||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE63||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE63||0):Number(pvs_AE63||0)):Number(pvs_AE63||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE63&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE63&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_pv_610_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH78&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH78 G900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE78||0)*Number(nb_G61||0)/365)+Number(pvs_AE78||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE78||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE78||0):Number(pvs_AE78||0)):Number(pvs_AE78||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE78&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE78&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!==&apos;undefined&apos;&amp;&amp;pvs_gantry_structure!==null&amp;&amp;pvs_gantry_structure)?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm?((Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100)+5000):0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)):0)-(pvs_pv_900_gsm?((Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100)+5000):0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH92&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH92 E900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE92||0)*Number(nb_G61||0)/365)+Number(pvs_AE92||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE92||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE92||0):Number(pvs_AE92||0)):Number(pvs_AE92||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE92&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE92&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+5000:0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_pv_900_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+5000:0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH106&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH106 C900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE106||0)*Number(nb_G61||0)/365)+Number(pvs_AE106||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE106||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE106||0):Number(pvs_AE106||0)):Number(pvs_AE106||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE106&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE106&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_900_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+5000:0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_pv_900_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+5000:0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH121&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH121 G1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE121||0)*Number(nb_G61||0)/365)+Number(pvs_AE121||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE121||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE121||0):Number(pvs_AE121||0)):Number(pvs_AE121||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE121&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE121&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!=&apos;undefined&apos; &amp;&amp; pvs_gantry_structure!=null &amp;&amp; pvs_gantry_structure) ? (Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm ? ((Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100)+6000) : 0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)) : 0) - (pvs_pv_1000_gsm ? ((Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100)+6000) : 0)) * (1 + Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH135&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH135 E1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE135||0)*Number(nb_G61||0)/365)+Number(pvs_AE135||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE135||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE135||0):Number(pvs_AE135||0)):Number(pvs_AE135||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE135&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE135&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+6000:0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_pv_1000_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+6000:0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AH149&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AH149 C1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AE149||0)*Number(nb_G61||0)/365)+Number(pvs_AE149||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AE149||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AE149||0):Number(pvs_AE149||0)):Number(pvs_AE149||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AE149&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AE149&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+(pvs_pv_1000_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+6000:0)+Number(pvs_pv_scrap_value||0)+Number(nb_BJ34||0)+Number(pvs_pv_interest_component_on_product_cycle||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_pv_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_pv_1000_gsm?(Number(pvs_pv_zinc_value_as_per_ieema||0)*(Number(pvs_pv_zinc_consumption_percent||0)/100))+6000:0))*(1+Number(pvs_detail_ms_template_margin_pv||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_BJ34&quot;,
+                  &quot;label&quot;: &quot;CELL Rate &amp; Cost - BJ34&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms != &apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?(Number(nb_G60||0)*Math.round((Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+Number(pvs_base_Cost_of_Production||0)+(Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100))*100)/100*Number(nb_G61||0)/365):nb_payment_terms==&apos;Against VFS&apos;?(Math.round((Number(pvs_pv_avg_of_blooms||0)+Number(pvs_pv_conversion_to_angle||0)+Number(pvs_base_Cost_of_Production||0)+(Number(pvs_pv_zinc_value_as_per_ieema||0)*Number(pvs_pv_zinc_consumption_percent||0)/100))*100)/100*(Number(nb_G60||0))*Number(nb_G61||0)/365):0):0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_G61&quot;,
+                  &quot;label&quot;: &quot;CELL Content-G61&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;type_of_product==&apos;Tower&apos; ? ((pvt_price_basics==&apos;Price Variation&apos; &amp;&amp; (pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_pv_payment_terms==&apos;Against VFS&apos;)) ? Number(pvt_pv_no_of_days||0) : (pvt_price_basics==&apos;FIRM&apos; &amp;&amp; (pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_firm_payment_terms==&apos;Against VFS&apos;)) ? Number(pvt_firm_no_of_days||0) : &apos;&apos;) : type_of_product==&apos;Substation&apos; ? ((pvs_price_model==&apos;Price Variation&apos; &amp;&amp; (pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_pv_payment_terms==&apos;Against VFS&apos;)) ? Number(pvs_pv_no_of_days||0) : (pvs_price_model==&apos;Firm&apos; &amp;&amp; (pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_firm_payment_terms==&apos;Against VFS&apos;)) ? Number(pvs_firm_no_of_days||0) : &apos;&apos;) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_G60&quot;,
+                  &quot;label&quot;: &quot;CELL Content-G60&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;type_of_product==&apos;Tower&apos; ? ((pvt_price_basics==&apos;Price Variation&apos; &amp;&amp; (pvt_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_pv_payment_terms==&apos;Against VFS&apos;)) ? Number(pvt_pv_prevailing_rate_of_bank_interest||0)/100 : (pvt_price_basics==&apos;FIRM&apos; &amp;&amp; (pvt_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvt_firm_payment_terms==&apos;Against VFS&apos;)) ? Number(pvt_firm_prevailing_rate_of_bank_interest||0)/100 : &apos;&apos;) : type_of_product==&apos;Substation&apos; ? ((pvs_price_model==&apos;Price Variation&apos; &amp;&amp; (pvs_pv_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_pv_payment_terms==&apos;Against VFS&apos;)) ? Number(pvs_pv_prevailing_rate_of_bank_interest||0)/100 : (pvs_price_model==&apos;Firm&apos; &amp;&amp; (pvs_firm_payment_terms==&apos;Against LC Before Dispatch&apos; || pvs_firm_payment_terms==&apos;Against VFS&apos;)) ? Number(pvs_firm_prevailing_rate_of_bank_interest||0)/100 : &apos;&apos;) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_N28&quot;,
+                  &quot;label&quot;: &quot;CELL Content-N28&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_N16||0)*Number(nb_G61||0)/365)+Number(pvs_N16||0):(nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_N16||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_N16||0):Number(pvs_N16||0))):Number(pvs_N16||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_N16&quot;,
+                  &quot;label&quot;: &quot;CELL Content-N16&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(pvt_pv_610_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)):0)+Number(pvt_pv_scrap_value||0)+Number(pvs_AO31||0)+Number(pvt_pv_cost_of_production||0)+Number(pvt_pv_interest_component_on_product_cycle||0)+Number(pvt_pv_proto_required||0)+ Number(nb_C19||0)) - ((pvt_pv_610_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)):0)))*(1 + Number(pvs_detail_ms_template_margin_pv)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_N44&quot;,
+                  &quot;label&quot;: &quot;CELL Content-N44&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_O16||0)*Number(nb_G61||0)/365)+Number(pvs_O16||0):(nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_O16||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_O16||0):Number(pvs_O16||0))):Number(pvs_O16||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_O16&quot;,
+                  &quot;label&quot;: &quot;CELL Content-O16&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(pvt_pv_900_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+5000):0)+Number(pvt_pv_scrap_value||0)+Number(pvs_AO31||0)+Number(pvt_pv_cost_of_production||0)+Number(pvt_pv_interest_component_on_product_cycle||0)+Number(pvt_pv_proto_required||0)+ Number(nb_C19||0)) - (pvt_pv_900_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+5000):0))*(1 + Number(pvs_detail_ms_template_margin_pv)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_N59&quot;,
+                  &quot;label&quot;: &quot;CELL Content-N59&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_P16||0)*Number(nb_G61||0)/365)+Number(pvs_P16||0):(nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_P16||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_P16||0):Number(pvs_P16||0))):Number(pvs_P16||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_P16&quot;,
+                  &quot;label&quot;: &quot;CELL Content-P16&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(pvt_pv_1000_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+6000):0)+Number(pvt_pv_scrap_value||0)+Number(pvs_AO31||0)+Number(pvt_pv_cost_of_production||0)+Number(pvt_pv_interest_component_on_product_cycle||0)+Number(pvt_pv_proto_required||0)+ Number(nb_C19||0)) - (pvt_pv_1000_gsm?((Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+6000):0))*(1 + Number(pvs_detail_ms_template_margin_pv)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_U28&quot;,
+                  &quot;label&quot;: &quot;CELL Content-U28&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_T17||0)*Number(nb_G61||0)/365)+Number(pvs_T17||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_T17||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_T17||0):Number(pvs_T17||0)):Number(pvs_T17||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_T17&quot;,
+                  &quot;label&quot;: &quot;CELL Content-T17&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_firm_angles||0)+(pvt_firm_610_gsm?(Number(pvt_firm_zinc_price||0) * Number(pvt_firm_zinc_consumption_percent||0)/100):0)+Number(pvt_firm_scrap_value||0)+Number(pvs_AW22||0)+Number(pvt_firm_cost_of_production||0)+Number(pvt_firm_interest_component_on_product_cycle||0)+Number(pvt_firm_proto_required||0)+Number(nb_C19||0))-(pvt_firm_610_gsm?(Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0)/100):0))*(1 + Number(pvs_detail_ms_template_margin_firm||0)/100) &quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_U44&quot;,
+                  &quot;label&quot;: &quot;CELL Content-U44&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_U17||0)*Number(nb_G61||0)/365)+Number(pvs_U17||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_U17||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_U17||0):Number(pvs_U17||0)):Number(pvs_U17||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_U17&quot;,
+                  &quot;label&quot;: &quot;CELL Content-U17&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_firm_angles||0)+(pvt_firm_900_gsm?((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent||0)/100) + 4000):0)+Number(pvt_firm_scrap_value||0) + Number(pvs_AW22||0) + Number(pvt_firm_cost_of_production||0) + Number(pvt_firm_interest_component_on_product_cycle||0) + Number(pvt_firm_proto_required||0) + Number(nb_C19||0))-(pvt_firm_900_gsm?((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent||0)/100) + 4000):0))*(1 + Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_U59&quot;,
+                  &quot;label&quot;: &quot;CELL Content-U59&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_V17||0)*Number(nb_G61||0)/365)+Number(pvs_V17||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_V17||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_V17||0):Number(pvs_V17||0)):Number(pvs_V17||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_V17&quot;,
+                  &quot;label&quot;: &quot;CELL Content-T17&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((Number(pvt_firm_angles||0)+(pvt_firm_1000_gsm?((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent||0)/100)+6000):0)+Number(pvt_firm_scrap_value||0) + Number(pvs_AW22||0) + Number(pvt_firm_cost_of_production||0) + Number(pvt_firm_interest_component_on_product_cycle||0) + Number(pvt_firm_proto_required||0) + Number(nb_C19||0))-(pvt_firm_1000_gsm?((Number(pvt_firm_zinc_price || 0) * Number(pvt_firm_zinc_consumption_percent||0)/100)+6000):0))*(1 + Number(pvs_detail_ms_template_margin_firm||0)/100) &quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP35&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP35&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM35||0)*Number(nb_G61||0)/365)+Number(pvs_AM35||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM35||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM35||0):Number(pvs_AM35||0)):Number(pvs_AM35||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM35&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM35&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!==&apos;undefined&apos;&amp;&amp;pvs_gantry_structure!==null&amp;&amp;pvs_gantry_structure)?(Number(pvs_firm_angles||0)+(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0)+Number(pvs_firm_scrap_value||0)+Number(nb_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)):0)-(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP49&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP49&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM49||0)*Number(nb_G61||0)/365)+Number(pvs_AM49||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM49||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM49||0):Number(pvs_AM49||0)):Number(pvs_AM49||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM49&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM49&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_firm_angles||0)+(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP63&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP63&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms == &apos;Against LC Before Dispatch&apos; ? Math.round(Number(nb_G60||0) * Number(pvs_AM63||0) * Number(nb_G61||0) / 365) + Number(pvs_AM63||0) : nb_payment_terms == &apos;Against VFS&apos; ? Math.round(Number(pvs_AM63||0) * Number(nb_G60||0)* Number(nb_G61||0)/365) + Number(pvs_AM63||0): Number(pvs_AM63||0)):Number(pvs_AM63||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM63&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM63&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_firm_angles||0)+(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_firm_610_gsm?(Number(pvs_firm_zinc_price||0)*(Number(pvs_firm_zinc_consumption_percent||0)/100)):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_C19&quot;,
+                  &quot;label&quot;: &quot;CELL Content-C19&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(typeof tower_project_for_transportation_addition!==&apos;undefined&apos;&amp;&amp;tower_project_for_transportation_addition!==null?(tower_project_for_transportation_addition==&apos;YES&apos;?0:(Number(mgl_minimum_guranteed_freight_1||0)+Number(mgl_minimum_guranteed_freight_2||0)+Number(mgl_minimum_guranteed_freight_3||0)+Number(mgl_minimum_guranteed_freight_4||0)+Number(mgl_minimum_guranteed_freight_5||0)+Number(mgl_minimum_guranteed_freight_6||0)+Number(mgl_minimum_guranteed_freight_7||0)+Number(mgl_minimum_guranteed_freight_8||0)+Number(mgl_minimum_guranteed_freight_9||0)+Number(mgl_minimum_guranteed_freight_10||0)+Number(rpt_rate_per_ton_1||0)+Number(rpt_rate_per_ton_2||0)+Number(rpt_rate_per_ton_3||0)+Number(rpt_rate_per_ton_4||0)+Number(rpt_rate_per_ton_5||0)+Number(rpt_rate_per_ton_6||0)+Number(rpt_rate_per_ton_7||0)+Number(rpt_rate_per_ton_8||0)+Number(rpt_rate_per_ton_9||0)+Number(rpt_rate_per_ton_10||0))):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AO31&quot;,
+                  &quot;label&quot;: &quot;Rate &amp; Cost AO31&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms == &apos;Against LC Before Dispatch&apos; ? Math.round(Number(nb_G60||0) * (Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+Number(pvt_pv_cost_of_production||0)) * Number(nb_G61||0) / 365) : nb_payment_terms == &apos;Against VFS&apos; ? Math.round((Number(pvt_pv_avg_of_blooms||0)+Number(pvt_pv_convergence_to_angles||0)+(Number(pvt_pv_zinc_value_as_IEEMA||0)*Number(pvt_pv_zinc_consumption_percent||0)/100)+Number(pvt_pv_cost_of_production||0)) * Number(nb_G60||0) * Number(nb_G61||0)/365) : 0):0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AW22&quot;,
+                  &quot;label&quot;: &quot;Rate &amp; Cost AW22&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*(Number(pvt_firm_angles||0)+(Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0)/100)+Number(pvt_firm_cost_of_production||0))*Number(nb_G61||0)/365):nb_payment_terms==&apos;Against VFS&apos;?Math.round((Number(pvt_firm_angles||0)+(Number(pvt_firm_zinc_price||0)*Number(pvt_firm_zinc_consumption_percent||0)/100)+Number(pvt_firm_cost_of_production||0))*(Number(nb_G60||0))*Number(nb_G61||0)/365):0):0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP78&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP78 G900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM78||0)*Number(nb_G61||0)/365)+Number(pvs_AM78||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM78||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM78||0):Number(pvs_AM78||0)):Number(pvs_AM78||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM78&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM78&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!==&apos;undefined&apos;&amp;&amp;pvs_gantry_structure!==null&amp;&amp;pvs_gantry_structure)?(Number(pvs_firm_angles||0)+(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0)+Number(pvs_firm_scrap_value||0)+Number(nb_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)):0)-(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP92&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP92 E900&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM92||0)*Number(nb_G61||0)/365)+Number(pvs_AM92||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM92||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM92||0):Number(pvs_AM92||0)):Number(pvs_AM92||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM92&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM92&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_firm_angles||0)+(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP106&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP106&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms == &apos;Against LC Before Dispatch&apos; ? Math.round(Number(nb_G60||0) * Number(pvs_AM106||0) * Number(nb_G61||0) / 365) + Number(pvs_AM106||0) : nb_payment_terms == &apos;Against VFS&apos; ? Math.round(Number(pvs_AM106||0) * Number(nb_G60||0) * Number(nb_G61||0)/365) + Number(pvs_AM106||0): Number(pvs_AM106||0)):Number(pvs_AM106||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM106&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM106&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_firm_angles||0)+(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_firm_900_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+4000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP121&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP121 G1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM121||0)*Number(nb_G61||0)/365)+Number(pvs_AM121||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM121||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM121||0):Number(pvs_AM121||0)):Number(pvs_AM121||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM121&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM121&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(((typeof pvs_gantry_structure!==&apos;undefined&apos;&amp;&amp;pvs_gantry_structure!==null&amp;&amp;pvs_gantry_structure)?(Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0)+Number(pvs_firm_scrap_value||0)+Number(nb_BT29||0)+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_gantary_st||0)+Number(nb_C19||0)):0)-(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP135&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP135 E1000&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*Number(pvs_AM135||0)*Number(nb_G61||0)/365)+Number(pvs_AM135||0):nb_payment_terms==&apos;Against VFS&apos;?Math.round(Number(pvs_AM135||0)*Number(nb_G60||0)*Number(nb_G61||0)/365)+Number(pvs_AM135||0):Number(pvs_AM135||0)):Number(pvs_AM135||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM135&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM135&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvs_equipment_structure!==&apos;undefined&apos;&amp;&amp;pvs_equipment_structure!==null&amp;&amp;pvs_equipment_structure?(Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_equipment_st||0)+Number(nb_C19||0)):0)-(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AP149&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AP149 C100&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms == &apos;Against LC Before Dispatch&apos; ? Math.round(Number(nb_G60||0) * Number(pvs_AM149||0) * Number(nb_G61||0) / 365) + Number(pvs_AM149||0) : nb_payment_terms == &apos;Against VFS&apos; ? Math.round(Number(pvs_AM149||0) * Number(nb_G60||0) * Number(nb_G61||0)/365) + Number(pvs_AM149||0): Number(pvs_AM149||0)):Number(pvs_AM149||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_AM149&quot;,
+                  &quot;label&quot;: &quot;CELL Content-AM149&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: &quot;0&quot;,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((typeof pvs_composite_structure!==&apos;undefined&apos;&amp;&amp;pvs_composite_structure!==null&amp;&amp;pvs_composite_structure?(Number(pvs_firm_angles||0)+(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0)+Number(pvs_firm_scrap_value||0)+nb_BT29+Number(pvs_base_Cost_of_Production||0)+Number(pvs_firm_interest_component_on_product_cycle||0)+Number(pvs_firm_proto_required||0)+Number(pvs_composite_st||0)+Number(nb_C19||0)):0)-(pvs_firm_1000_gsm?((Number(pvs_firm_zinc_price||0)*Number(pvs_firm_zinc_consumption_percent||0)/100)+6000):0))*(1+Number(pvs_detail_ms_template_margin_firm||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_BT29&quot;,
+                  &quot;label&quot;: &quot;Substation FIRM Bank Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;((nb_payment_terms!==null &amp;&amp; nb_payment_terms!=&apos;&apos;)?(nb_payment_terms==&apos;Against LC Before Dispatch&apos;?Math.round(Number(nb_G60||0)*(Number(pvs_firm_angles||0)+(Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0)/100))+Number(pvs_base_Cost_of_Production||0))*Number(nb_G61||0)/365):nb_payment_terms==&apos;Against VFS&apos;?((Number(pvs_firm_angles||0)+(Number(pvs_firm_zinc_price || 0) * (Number(pvs_firm_zinc_consumption_percent || 0)/100))+Number(pvs_base_Cost_of_Production||0))*Number(nb_G60||0)*Number(nb_G61||0)/365):0):0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_price_variation_active&quot;,
+                  &quot;label&quot;: &quot;Price Modal Check (PV)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvt_price_basics!==&apos;undefined&apos; &amp;&amp; pvt_price_basics!==null &amp;&amp; pvt_price_basics==&apos;Price Variation&apos;) || (typeof pvs_price_model!==&apos;undefined&apos; &amp;&amp; pvs_price_model!==null &amp;&amp; pvs_price_model==&apos;Price Variation&apos;)) ? true : false&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_pv_firm_active&quot;,
+                  &quot;label&quot;: &quot;Price Modal Check (FIRM)&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;((typeof pvt_price_basics!==&apos;undefined&apos; &amp;&amp; pvt_price_basics!==null &amp;&amp; pvt_price_basics==&apos;FIRM&apos;) || (typeof pvs_price_model!==&apos;undefined&apos; &amp;&amp; pvs_price_model!==null &amp;&amp; pvs_price_model==&apos;Firm&apos;)) ? true : false&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;base_price&quot;,
+                  &quot;label&quot;: &quot;Base Price nuts &amp; Bolts&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;100000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;base_price_5_6&quot;,
+                  &quot;label&quot;: &quot;Base Price 5.6&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(base_price||0)*(1 + Number(pvs_type_5_6_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;base_price_6_8&quot;,
+                  &quot;label&quot;: &quot;Base Price 6.8&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;Number(base_price||0)*(1 + Number(pvs_type_6_8_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;base_price_8_8&quot;,
+                  &quot;label&quot;: &quot;Base Price 8.8&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;Number(base_price||0)*(1 + Number(pvs_type_8_8_margin)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;foundation_base_price&quot;,
+                  &quot;label&quot;: &quot;Base Price nuts &amp; Bolts&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;readOnly&quot;: true,
+                  &quot;isVisible&quot;: false,
+                  &quot;defaultValue&quot;: &quot;95000&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;foundation_base_value&quot;,
+                  &quot;label&quot;: &quot;Foundation Base Value&quot;,
+                  &quot;type&quot;: &quot;Number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;Number(foundation_base_price||0)*(1 + Number(pvs_detail_foundation_bolt_margin||0)/100)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;nb_payment_terms&quot;,
+                  &quot;label&quot;: &quot;Selected Payment Terms&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC Before Dispatch&quot;,
+                    &quot;Against VFS&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;formula&quot;: &quot;type_of_product==&apos;Tower&apos; ? (pvt_price_basics==&apos;Price Variation&apos; ? pvt_pv_payment_terms : pvt_price_basics==&apos;FIRM&apos; ? pvt_firm_payment_terms : &apos;&apos;) : type_of_product==&apos;Substation&apos; ? (pvs_price_model==&apos;Price Variation&apos; ? pvs_pv_payment_terms : pvs_price_model==&apos;Firm&apos; ? pvs_firm_payment_terms : &apos;&apos;) : &apos;&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_pv_gantry&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;Price Variation&apos;)?Number(pvs_N28||0):Number(pvs_AH35||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_pv_equipment&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;Price Variation&apos;)?Number(pvs_N28||0):Number(pvs_AH49||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_pv_composite&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;Price Variation&apos;)?Number(pvs_N28||0):Number(pvs_AH63||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_firm_gantry&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;FIRM&apos;)? Number(pvs_U28||0) : Number(pvs_AP35||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_firm_equipment&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;FIRM&apos;)? Number(pvs_U28||0) : Number(pvs_AP49||0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvs_detail_ms_template_price_firm_composite&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 4,
+                  &quot;isVisible&quot;: false,
+                  &quot;formula&quot;: &quot;(type_of_product==&apos;Tower&apos;&amp;&amp;pvt_price_basics==&apos;FIRM&apos;)? Number(pvs_U28||0) : Number(pvs_AP63||0)&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Line_Item_Grand_Total__c</fullName>
+    <label>Line Item Grand Total</label>
+    <summarizedField>Quote_Line_Item__c.NET_PRICE__c</summarizedField>
+    <summaryForeignKey>Quote_Line_Item__c.Quote__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

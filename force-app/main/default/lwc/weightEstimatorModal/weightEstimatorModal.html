@@ -1,0 +1,307 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <template lwc:if={isModalOpen}>
+
+        <!-- ✅ FIX #2: Full-screen backdrop blocks the parent page's Quick Action buttons -->
+        <div class="modal-backdrop"></div>
+
+        <div class="modal-container" onclick={stopPropagation}>
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <div class="modal-header">
+                <h2 class="modal-title">{modalTitle}</h2>
+                <button class="close-btn" onclick={handleClose} title="Close">
+                    <lightning-icon icon-name="utility:close" size="x-small" variant="inverse"></lightning-icon>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <template for:each={accordionSections} for:item="section">
+                    <template lwc:if={section.isVisible}>
+                        <div key={section.id} class="accordion-section">
+
+                            <div class={section.headerClass} onclick={handleSectionToggle} data-id={section.id}>
+                                <lightning-icon icon-name={section.chevronIcon} size="x-small"
+                                    class="chevron-icon"></lightning-icon>
+                                <span class="section-label">{section.label}</span>
+                            </div>
+
+                            <template lwc:if={section.isExpanded}>
+                                <div class={section.gridWrapperClass}>
+
+                                    <template for:each={section.visibleFields} for:item="field">
+
+                                        <div key={field.apiName} class={field.containerClass}>
+
+                                            <template lwc:if={field.isHeader}>
+                                                <span class="header-text">{field.label}</span>
+                                            </template>
+
+                                            <template lwc:else>
+
+                                                <div class="field-label-cell">
+                                                    <span class={field.labelClass}>{field.label}</span>
+                                                </div>
+
+                                                <div class={field.dividerClass}></div>
+
+                                                <div class="field-input-cell">
+
+                                                    <template lwc:if={field.isPicklist}>
+                                                        <template lwc:if={field.isDependentBlocked}>
+                                                            <lightning-combobox variant="label-hidden" options={field.options} value=""
+                                                                placeholder=" " disabled class="modal-combobox"></lightning-combobox>
+                                                        </template>
+                                                        <template lwc:elseif={field.readOnly}>
+                                                            <span class="readonly-value">{field.value}</span>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-combobox variant="label-hidden"
+                                                                options={field.options} value={field.value}
+                                                                placeholder=" " data-name={field.apiName}
+                                                                data-section={section.id} required={field.required}
+                                                                onchange={handleFieldChange}
+                                                                class="modal-combobox"></lightning-combobox>
+                                                        </template>
+                                                        <template lwc:if={field.unit}><span class="field-unit">{field.unit}</span></template>
+                                                    </template>
+                                                    
+                                                    <template lwc:if={field.isNumber}>
+                                                        <template lwc:if={field.readOnly}>
+                                                            <span class="readonly-value">{field.value}</span>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input type="float" variant="label-hidden"
+                                                                value={field.value} min={field.min} max={field.max}
+                                                                data-name={field.apiName} data-section={section.id}
+                                                                required={field.required} onchange={handleFieldChange}
+                                                                class="modal-input"></lightning-input>
+                                                        </template>
+                                                        <template lwc:if={field.unit}><span
+                                                                class="field-unit">{field.unit}</span></template>
+                                                    </template>
+
+                                                    <template lwc:if={field.isText}>
+                                                        <template lwc:if={field.readOnly}>
+                                                            <span class="readonly-value">{field.value}</span>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input type="text" variant="label-hidden"
+                                                                value={field.value} data-name={field.apiName}
+                                                                data-section={section.id} required={field.required}
+                                                                onchange={handleFieldChange}
+                                                                class="modal-input"></lightning-input>
+                                                        </template>
+                                                    </template>
+
+                                                    <template lwc:if={field.isTextarea}>
+                                                        <template lwc:if={field.readOnly}>
+                                                            <span class="readonly-value">{field.value}</span>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-textarea variant="label-hidden"
+                                                                value={field.value} data-name={field.apiName}
+                                                                data-section={section.id} required={field.required}
+                                                                onchange={handleFieldChange}
+                                                                class="modal-textarea"></lightning-textarea>
+                                                        </template>
+                                                    </template>
+
+                                                    <template lwc:if={field.isDate}>
+                                                        <template lwc:if={field.readOnly}>
+                                                            <span class="readonly-value">{field.displayValue}</span>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-input type="date" variant="label-hidden"
+                                                                value={field.value}
+                                                                date-style="short"
+                                                                data-name={field.apiName}
+                                                                data-section={section.id}
+                                                                required={field.required}
+                                                                onchange={handleFieldChange}
+                                                                class="modal-input"></lightning-input>
+                                                        </template>
+                                                    </template>
+
+                                                    <template lwc:if={field.isCheckbox}>
+                                                        <div class="checkbox-wrapper">
+                                                            <lightning-input type="toggle" message-toggle-active="Yes"
+                                                                message-toggle-inactive="No" variant="label-hidden"
+                                                                checked={field.value} data-name={field.apiName}
+                                                                data-section={section.id} onchange={handleFieldChange}
+                                                                class="modal-toggle" disabled={field.readOnly}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </template>
+
+                                                    <!-- Core SUB-TYPE x QUANTITY multiselect widget (Path B) -->
+                                                    <template lwc:if={field.isSubtypeQtyGrid}>
+                                                        <div class="sqg-wrap" style="width:100%;">
+                                                            <template lwc:if={field.isDependentBlocked}>
+                                                                <span class="sqg-blocked" style="color:#706e6b; font-style:italic; font-size:11px;">Select a material type first.</span>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <div class="sqg-inline">
+                                                                <div class="sqg-list" style="max-height:150px; overflow-y:auto; border:1px solid #dddbda; border-radius:3px; padding:4px;">
+                                                                    <template for:each={field.subtypeOptions} for:item="opt">
+                                                                        <label key={opt.value} class="sqg-opt" style="display:flex; align-items:center; font-size:12px; padding:1px 0;">
+                                                                            <input type="checkbox" checked={opt.checked}
+                                                                                data-name={field.apiName} data-subtype={opt.value}
+                                                                                onchange={handleSubtypeCheckToggle}
+                                                                                disabled={field.readOnly} class="sqg-cb" style="margin-right:5px;" />
+                                                                            <span>{opt.label}</span>
+                                                                        </label>
+                                                                    </template>
+                                                                </div>
+                                                                <template lwc:if={field.qtyRows.length}>
+                                                                    <div class="sqg-qty-table" style="margin-top:4px; border-top:1px solid #dddbda;">
+                                                                        <template for:each={field.qtyRows} for:item="row">
+                                                                            <div key={row.key} class="sqg-qty-row" style="display:flex; align-items:center; font-size:11px; padding:2px 0; gap:4px;">
+                                                                                <span class="sqg-name" style="flex:1 1 0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title={row.subtype}>{row.subtype}</span>
+                                                                                <span class="sqg-qty-cell" style="width:64px;">
+                                                                                    <lightning-input type="number" variant="label-hidden" min="0"
+                                                                                        value={row.qty} data-name={field.apiName} data-subtype={row.subtype}
+                                                                                        onchange={handleSubtypeQtyChange} disabled={field.readOnly}></lightning-input>
+                                                                                </span>
+                                                                                <span class="sqg-wt" style="width:52px; text-align:right;">{row.rowWeight}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <div class="sqg-total-row" style="display:flex; font-size:11px; font-weight:700; color:#16325c; padding-top:3px; border-top:1px solid #f0f0f0; gap:4px;">
+                                                                            <span class="sqg-name" style="flex:1 1 0;">TOTAL</span>
+                                                                            <span class="sqg-qty-cell" style="width:64px; text-align:center;">{field.totalQuantity}</span>
+                                                                            <span class="sqg-wt" style="width:52px; text-align:right;">{field.totalWeight}</span>
+                                                                        </div>
+                                                    </div>
+                                                                </template>
+                                                                </div>
+
+                                                                <!-- launcher stays ENABLED in read-only so the saved selection can be
+                                                                     viewed in the popup (all controls inside it are disabled then).
+                                                                     Reetabrata (24th July 2026) -->
+                                                                <button class="sqg-mobile-launch" type="button"
+                                                                    data-name={field.apiName} onclick={handleSqgSheetOpen}>
+                                                                    <span class="sqg-launch-txt">{field.sqgLaunchLabel}</span>
+                                                                    <lightning-icon icon-name="utility:chevronright" size="xx-small"></lightning-icon>
+                                                                </button>
+
+                                                                <template lwc:if={field.sqgSheetOpen}>
+                                                                    <div class="sqg-sheet-backdrop" data-name={field.apiName} onclick={handleSqgSheetClose}></div>
+                                                                    <div class="sqg-sheet">
+                                                                        <div class="sqg-sheet-head">
+                                                                            <span class="sqg-sheet-title">{field.sqgSheetTitle}</span>
+                                                                            <button class="sqg-sheet-x" type="button" data-name={field.apiName}
+                                                                                onclick={handleSqgSheetClose} title="Close">
+                                                                                <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="sqg-sheet-body">
+                                                                            <div class="sqg-list sqg-sheet-list">
+                                                                                <template for:each={field.subtypeOptions} for:item="opt">
+                                                                                    <label key={opt.value} class="sqg-opt">
+                                                                                        <input type="checkbox" checked={opt.checked}
+                                                                                            data-name={field.apiName} data-subtype={opt.value}
+                                                                                            onchange={handleSubtypeCheckToggle}
+                                                                                            disabled={field.readOnly} class="sqg-cb" />
+                                                                                        <span>{opt.label}</span>
+                                                                                    </label>
+                                                                                </template>
+                                                                            </div>
+                                                                            <template lwc:if={field.qtyRows.length}>
+                                                                                <div class="sqg-qty-table sqg-sheet-qty">
+                                                                                    <template for:each={field.qtyRows} for:item="row">
+                                                                                        <div key={row.key} class="sqg-qty-row">
+                                                                                            <span class="sqg-name" title={row.subtype}>{row.subtype}</span>
+                                                                                            <span class="sqg-qty-cell">
+                                                                                                <lightning-input type="number" variant="label-hidden" min="0"
+                                                                                                    value={row.qty} data-name={field.apiName} data-subtype={row.subtype}
+                                                                                                    onchange={handleSubtypeQtyChange} disabled={field.readOnly}></lightning-input>
+                                                                                            </span>
+                                                                                            <span class="sqg-wt">{row.rowWeight}</span>
+                                                                                        </div>
+                                                                                    </template>
+                                                                                    <div class="sqg-total-row">
+                                                                                        <span class="sqg-name">TOTAL</span>
+                                                                                        <span class="sqg-qty-cell">{field.totalQuantity}</span>
+                                                                                        <span class="sqg-wt">{field.totalWeight}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </template>
+                                                                        </div>
+                                                                        <div class="sqg-sheet-foot">
+                                                                            <button class="sqg-sheet-done" type="button" data-name={field.apiName}
+                                                                                onclick={handleSqgSheetClose}>DONE</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                        </div>
+                                                    </template>
+
+                                                </div>
+
+                                                <div class="field-action-cell">
+                                                    <template lwc:if={field.readOnly}><span></span></template>
+                                                    <template lwc:else>
+                                                        <template lwc:if={field.hasValue}>
+                                                            <button class="clear-btn" data-name={field.apiName}
+                                                                data-section={section.id} onclick={handleClearField}
+                                                                title="Clear">
+                                                                <lightning-icon icon-name="utility:clear"
+                                                                    size="xx-small"></lightning-icon>
+                                                            </button>
+                                                        </template>
+                                                    </template>
+                                                </div>
+
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </template>
+                <!-- <template if:true={columnTotalsArray.length}>
+                    <div class="slds-grid slds-wrap slds-p-vertical_small slds-m-top_medium"
+                        style="background-color: #f3f3f3; border: 2px solid #dddbda; border-radius: 4px; font-weight: bold; font-size: 14px; text-transform: uppercase; align-items: center;">
+
+                        <template for:each={columnTotalsArray} for:item="col">
+                            <div key={col.id} class={col.spanClass} style="padding: 0 0.5rem;">
+
+                                <template if:true={col.isLabel}>
+                                    <div style="text-align: centre; padding-right: 10px; color: #16325c;">
+                                        {col.text}
+                                    </div>
+                                </template>
+
+                                <template if:false={col.isLabel}>
+                                    <div style="color: #0176d3; font-size: 15px; text-align: center;">
+                                        {col.value}
+                                    </div>
+                                </template>
+
+                            </div>
+                        </template>
+
+                    </div>
+                </template> -->
+            </div>
+
+            <div class="modal-footer">
+    <template lwc:if={isReadOnly}>
+        <button class="apply-btn" onclick={handleClose}>CLOSE</button>
+    </template>
+    <template lwc:else>
+        <button class="mobile-close-btn" onclick={handleClose}>CLOSE</button>
+        <button class="calculate-btn" onclick={handleCalculate}>CALCULATE</button>
+        <button class="apply-btn" onclick={handleApply}>APPLY</button>
+    </template>
+</div>
+
+        </div>
+    </template>
+</template>

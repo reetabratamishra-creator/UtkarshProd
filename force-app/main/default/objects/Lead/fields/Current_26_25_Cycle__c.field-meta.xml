@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_26_25_Cycle__c</fullName>
+    <formula>AND(
+  DATEVALUE(CreatedDate) &gt;= 
+    IF(MONTH(TODAY()) = 1,
+       DATE(YEAR(TODAY()) - 1, 12, 26),
+       DATE(YEAR(TODAY()), MONTH(TODAY()) - 1, 26)
+    ),
+  DATEVALUE(CreatedDate) &lt;= 
+    DATE(YEAR(TODAY()), MONTH(TODAY()), 25)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Current_26_25_Cycle</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

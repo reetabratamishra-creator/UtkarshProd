@@ -1,0 +1,239 @@
+<apex:page standardController="Opportunity" extensions="PEBPriceCalcPDFController"
+           renderAs="pdf" applyHtmlTag="false" showHeader="false" sidebar="false"
+           standardStylesheets="false">
+<html>
+<head>
+<style type="text/css">
+    @page { size: A4 landscape; margin: 12mm; }
+    body { font-family: Arial, Helvetica, sans-serif; font-size: 8.5px; color: #000; }
+    h1 { font-size: 13px; margin: 0 0 2px 0; text-align: center; }
+    .sub { text-align: center; font-size: 9px; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    th, td { border: 0.5px solid #666; padding: 3px 4px; }
+    th { background: #e8eef7; text-align: center; font-weight: bold; }
+    .sec { background: #d9e2f0; font-weight: bold; }
+    .num { text-align: right; }
+    .ctr { text-align: center; }
+    .tot td { font-weight: bold; background: #f2f2f2; }
+    .grand td { font-weight: bold; background: #fff2cc; font-size: 10px; }
+    .muted { color: #666; }
+</style>
+</head>
+<body>
+
+<h1>PEB Price Calculation</h1>
+<div class="sub">
+    Project: {!opp.Name}
+    <apex:outputText rendered="{!hasData}"> &nbsp;|&nbsp; Generated: {!model.generatedDate}</apex:outputText>
+</div>
+
+<apex:outputPanel rendered="{!NOT(hasData)}">
+    <p style="text-align:center;color:#a00;">No saved price calculation was found for this Opportunity. Open the
+    PEB Price Calculator tab, calculate and save first.</p>
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!hasData}">
+
+    <!-- ============ SECTION A : Raw Materials ============ -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width:4%">Sl.</th>
+                <th style="width:34%">Description of Item</th>
+                <th style="width:7%">Unit</th>
+                <th style="width:11%">Total Weight (Kg)</th>
+                <th style="width:9%">Add. Weight</th>
+                <th style="width:11%">Reason</th>
+                <th style="width:11%">Total Calc. Weight</th>
+                <th style="width:6%">Rate</th>
+                <th style="width:11%">Cost (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="9">A &nbsp; Raw Materials - Section A</td></tr>
+            <apex:repeat value="{!model.sectionA}" var="r">
+                <tr>
+                    <td class="ctr">{!r.slNo}</td>
+                    <td>{!r.description}</td>
+                    <td class="ctr">{!r.unit}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.totalWeight}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.additionalWeight}"/></apex:outputText></td>
+                    <td>{!r.reason}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.totalCalcWeight}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.rate}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="tot">
+                <td colspan="6" class="ctr">Sub Total of A</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!model.totals.sectionATotalWeight}"/></apex:outputText></td>
+                <td></td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.sectionATotalCost}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============ SECTION B : Accessories & Buyouts ============ -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width:38%">Description</th>
+                <th style="width:8%">Unit</th>
+                <th style="width:10%">Qty</th>
+                <th style="width:10%">Unit Wt.</th>
+                <th style="width:12%">Total Weight</th>
+                <th style="width:9%">Rate</th>
+                <th style="width:13%">Cost (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="7">B &nbsp; Accessories</td></tr>
+            <apex:repeat value="{!model.accessories}" var="r">
+                <tr>
+                    <td>{!r.description}</td>
+                    <td class="ctr">{!r.unit}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.qty}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.unitWt}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.totalWeight}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.rate}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="sec"><td colspan="7">Buyouts</td></tr>
+            <apex:repeat value="{!model.buyouts}" var="r">
+                <tr>
+                    <td>{!r.description}</td>
+                    <td class="ctr">{!r.unit}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.qty}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.unitWt}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.totalWeight}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.rate}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="tot">
+                <td colspan="6" class="ctr">Sub Total of B (Accessories + Buyouts)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.sectionBTotalCost}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============ SECTION C : Conversion Cost ============ -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width:46%">Conversion Cost</th>
+                <th style="width:10%">Unit</th>
+                <th style="width:16%">Weight</th>
+                <th style="width:12%">Rate</th>
+                <th style="width:16%">Cost (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="5">C &nbsp; Conversion Cost</td></tr>
+            <apex:repeat value="{!model.conversion}" var="r">
+                <tr>
+                    <td>{!r.description}</td>
+                    <td class="ctr">{!r.unit}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.weight}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.rate}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="tot">
+                <td colspan="4" class="ctr">Sub Total of C</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.conversionTotalCost}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============ SECTION D : Other Cost ============ -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width:46%">Other Cost</th>
+                <th style="width:10%">Unit</th>
+                <th style="width:14%">Qty</th>
+                <th style="width:14%">Rate</th>
+                <th style="width:16%">Cost (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="5">D &nbsp; Other Cost</td></tr>
+            <apex:repeat value="{!model.otherCost}" var="r">
+                <tr>
+                    <td>{!r.description}</td>
+                    <td class="ctr">{!r.unit}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.qty}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!r.rate}"/></apex:outputText></td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="tot">
+                <td colspan="4" class="ctr">Sub Total of D</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.otherCostTotal}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============ SECTION E : Variable Cost ============ -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width:70%">Variable Cost</th>
+                <th style="width:30%">Cost (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="2">E &nbsp; Variable Cost (direct)</td></tr>
+            <apex:repeat value="{!model.variableCost}" var="r">
+                <tr>
+                    <td>{!r.description}</td>
+                    <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!r.cost}"/></apex:outputText></td>
+                </tr>
+            </apex:repeat>
+            <tr class="tot">
+                <td class="ctr">Total Variable Cost</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.variableCostTotal}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============ GRAND TOTALS ============ -->
+    <table>
+        <tbody>
+            <tr class="tot">
+                <td style="width:70%">Total Direct Cost (A + B + C + D)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.totalDirectCost}"/></apex:outputText></td>
+            </tr>
+            <tr class="tot">
+                <td>TOTAL PROJECT COST (incl. Variable Cost)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.totalProjectCost}"/></apex:outputText></td>
+            </tr>
+            <tr>
+                <td>Margin (<apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!model.totals.marginPercent}"/></apex:outputText>%)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.marginRs}"/></apex:outputText></td>
+            </tr>
+            <tr class="tot">
+                <td>Total Price (Project Cost + Margin)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.totalWithMargin}"/></apex:outputText></td>
+            </tr>
+            <tr>
+                <td>GST @ <apex:outputText value="{0,number,###,##0.00}"><apex:param value="{!model.totals.gstPercent}"/></apex:outputText>%</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.gstRs}"/></apex:outputText></td>
+            </tr>
+            <tr class="grand">
+                <td>TOTAL QUOTE PRICE (incl. GST)</td>
+                <td class="num"><apex:outputText value="{0,number,###,##0}"><apex:param value="{!model.totals.grandTotal}"/></apex:outputText></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="muted">Rates sourced from Price_Calculator__mdt (PEB_Rate_Config). This document is a
+    cost estimate generated from the uploaded Estimation.pdf.</p>
+
+</apex:outputPanel>
+
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRM_User_Name_Formula__c</fullName>
+    <description>Used for Email templates</description>
+    <externalId>false</externalId>
+    <formula>IF(Department__c = &quot;High Mast &amp; Polygonal&quot;, $CustomMetadata.Department_CRM_Person__mdt.HIGH_MAST_POLYGONAL.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Steel Pipes&quot;, $CustomMetadata.Department_CRM_Person__mdt.STEEL_PIPES.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Crash Barrier&quot;, $CustomMetadata.Department_CRM_Person__mdt.CRASH_BARRIER.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Steel Tubular Poles&quot;, $CustomMetadata.Department_CRM_Person__mdt.STEEL_TUBULAR_POLES.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Polymer&quot;, $CustomMetadata.Department_CRM_Person__mdt.POLYMER.Dept_CRM_Person_Name__c, IF(Department__c = &quot;HDPE&quot;, $CustomMetadata.Department_CRM_Person__mdt.HDPE.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Transmission &amp; Telecom Tower&quot;, $CustomMetadata.Department_CRM_Person__mdt.TRANSMISSION_TOWER.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Pre Engineering Building&quot;, $CustomMetadata.Department_CRM_Person__mdt.PRE_ENGINEERING_BUILDINGS.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Solar Structure&quot;, $CustomMetadata.Department_CRM_Person__mdt.SOLAR.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Railway Electrification Structure&quot;, $CustomMetadata.Department_CRM_Person__mdt.RAILWAY_ELECTRIFICATION_STRUCTURE.Dept_CRM_Person_Name__c, IF(Department__c = &quot;Enquiry&quot;, $CustomMetadata.Department_CRM_Person__mdt.ENQUIRY.Dept_CRM_Person_Name__c, &quot;&quot;)))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CRM User Name Formula</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

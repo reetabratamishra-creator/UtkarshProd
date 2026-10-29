@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Project Set-up Details For Crash Barrier</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Project_Setup_Details_for_crash_barrier</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;freight_incoterms&quot;,
+      &quot;label&quot;: &quot;Trans.in offer?&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;(w_SSSB_w_beam_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || w_SSDB_w_beam_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || w_DSSB_w_beam_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || w_DSDB_w_beam_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || Thrie_SSSB_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || Thrie_SSDB_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || Thrie_DSSB_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || Thrie_DSDB_trans_in_offer_rm == &apos;F.O.R (Freight on Road)&apos; || wb_natrax_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || wb_alka_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || wb_trans_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || tb_natrax_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || tb_alka_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || ns_w_beam_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || ns_thrie_beam_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || rlw_graded_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || rlw_non_graded_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; ||  a_s_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || r_s_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || acc_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || misc_section_trans_in_offer == &apos;F.O.R (Freight on Road)&apos; || add_misc_trans_in_offer == &apos;F.O.R (Freight on Road)&apos;) ? &apos;F.O.R (Freight on Road)&apos; : &apos;Ex-works&apos;&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;customer_address_folder&quot;,
+      &quot;label&quot;: &quot;Customer Address&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;freight_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;CUSTOMER ADDRESS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;billing_address&quot;,
+              &quot;label&quot;: &quot;Billing Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ba_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingStreet@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingCity@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_zip_code&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingPostalCode@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingState@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@BillingCountry@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Phone@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_email&quot;,
+                  &quot;label&quot;: &quot;EMAIL&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Email__c@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;ba_website&quot;,
+                  &quot;label&quot;: &quot;WEBSITE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Website@@&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;has_transportation_address&quot;,
+                  &quot;label&quot;: &quot;TRANSPORTATION ADDRESS?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;defaultValue&quot;: false,
+                  &quot;colSpan&quot;: 12
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;shipping_address_section&quot;,
+              &quot;label&quot;: &quot;Shipping address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;has_transportation_address&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;sa_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;sa_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;sa_zip_code&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;sa_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;sa_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;terms_and_conditions_folder&quot;,
+      &quot;label&quot;: &quot;Terms &amp; Conditions&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;red&quot;,
+      &quot;controllingField&quot;: &quot;freight_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;tc_details&quot;,
+              &quot;label&quot;: &quot;Terms &amp; Condition Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_validity_days&quot;,
+                  &quot;label&quot;: &quot;Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;defaultValue&quot;: 5,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_special_note&quot;,
+                  &quot;label&quot;: &quot;Special Note&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 9
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;payment_terms_section&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;label&quot;: &quot;PAYMENT TERMS&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;defaultValue&quot;: &quot;Advance&quot;,
+                  &quot;options&quot;: [
+                    &quot;Advance&quot;,
+                    &quot;Against LC&quot;,
+                    &quot;Against BG&quot;,
+                    &quot;Against Open Credit&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_no_of_days_interest_free_credit&quot;,
+                  &quot;label&quot;: &quot;No. of days Interest free credit&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;,
+                    &quot;Against BG&quot;,
+                    &quot;Against Open Credit&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_rate_of_interest&quot;,
+                  &quot;label&quot;: &quot;Rate of Interest %&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;,
+                    &quot;Against BG&quot;,
+                    &quot;Against Open Credit&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_usance_period&quot;,
+                  &quot;label&quot;: &quot;Usance Period (Days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;tc_payment_terms_picklist&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

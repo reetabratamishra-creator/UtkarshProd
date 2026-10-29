@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_No_Activity_Push_72_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates the 72-hour Active opportunity no-activity push notification was sent.</description>
+    <label>Active No Activity Push 72 Sent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

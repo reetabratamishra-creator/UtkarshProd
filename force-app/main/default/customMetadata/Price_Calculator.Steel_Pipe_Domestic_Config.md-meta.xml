@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Steel Pipe Domestic Config</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Steel Pipe Domestic Config</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:type="xsd:double">18.0</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;BASE_RATES&quot;: {
+    &quot;Black Steel&quot;: 65.5,
+    &quot;Galvanized Iron (GI)&quot;: 70,
+    &quot;Stainless Steel&quot;: 200
+  },
+  &quot;CORE_PIPE_RATES&quot;: {
+    &quot;Supply of Galvanized STAY &amp; REGISTER ARM Small Tube(33.7X28.40mm),As per specification ETI/OHE/11(5/89)&amp; ETI/OHE/13(4/84).&quot;: 140,
+    &quot;Supply of Galvanized Large Tube (49.00X40.90mm),As per specification ETI/OHE/11(5/89)&amp; ETI/OHE/13(4/84)&quot;: 335,
+    &quot;Supply of Galvanized BRACKET Standard Tube (38.00X29.90mm),As per specification ETI/OHE/11(5/89)&amp; ETI/OHE/13(4/84).&quot;: 250,
+    &quot;Supply of Galvanized GUIDE Counter Weight Tube 25mm(NB),Length- 5.6MTR. Drawing No. ETI/OHE/P/5060-2 Rev-C&quot;: 900
+  }
+}</value>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

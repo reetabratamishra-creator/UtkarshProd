@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Pedestrian Guard Rail Estimator</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Pedestrian Guard Rail</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;MBCB_PGR_folder_1&quot;,
+      &quot;label&quot;: &quot;Pedestrian Guard Rail Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;MBCB_Type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Pedestrian Guard Rail&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Pedestrian Guard Rail&quot;: {
+          &quot;title&quot;: &quot;GENERAL DETAILS - Pedestrian Guard Rail&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;std_general_details&quot;,
+              &quot;label&quot;: &quot;General Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;PGR_itemName_header&quot;,
+                  &quot;label&quot;: &quot;Item Name&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_itemName&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;defaultValue&quot;: &quot;PEDESTRIAN GUARD RAIL (AS PER DRAWING)&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Quantity_header&quot;,
+                  &quot;label&quot;: &quot;Quantity&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Quantity&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;isQuantity&quot;: true,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Rate_header&quot;,
+                  &quot;label&quot;: &quot;Rate&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Rate&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Realization_header&quot;,
+                  &quot;label&quot;: &quot;Realization %&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_Realization&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_trans_in_offer_header&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                
+                
+                {
+                  &quot;apiName&quot;: &quot;PGR_fvf_header&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;controllingField&quot;: &quot;PGR_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_full_vehicle_freight&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;min&quot;: 1,
+                  &quot;required&quot;:true,
+                  &quot;controllingField&quot;: &quot;PGR_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;PGR_pricing_sub&quot;,
+                  &quot;label&quot;: &quot;Amount Calculation&quot;,
+                  &quot;type&quot;: &quot;sub-section&quot;,
+                  &quot;expanded&quot;: false,
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;PGR_total_amount&quot;,
+                      &quot;label&quot;: &quot;Total Amount&quot;,
+                      &quot;formula&quot;: &quot;(PGR_Quantity*PGR_Rate)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 12
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;PGR_total_amount_wp&quot;,
+                      &quot;label&quot;: &quot;Total Amount with Profit&quot;,
+                      &quot;formula&quot;: &quot;(PGR_Quantity*PGR_Rate)*(1+PGR_Realization/100)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 12
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

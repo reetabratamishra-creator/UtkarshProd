@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Nuts &amp; Bolts Type</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;nutsBoltsFormulaEval&quot;: [
+    {
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;pvs_type_5_6_price&quot;,
+          &quot;label&quot;: &quot;Price&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isUnitPrice&quot;: true,
+          &quot;colSpan&quot;: 4,
+          &quot;defaultValue&quot;: &quot;110000&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;pvs_type_5_6_margin&quot;,
+          &quot;label&quot;: &quot;Margin %&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;%&quot;,
+          &quot;colSpan&quot;: 4,
+          &quot;defaultValue&quot;: 10
+        },
+        {
+          &quot;apiName&quot;: &quot;pvs_type_5_6_quantity&quot;,
+          &quot;label&quot;: &quot;Quantity&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true,
+          &quot;colSpan&quot;: 4
+        }
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

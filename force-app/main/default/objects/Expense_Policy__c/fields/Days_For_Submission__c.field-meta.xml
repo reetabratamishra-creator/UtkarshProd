@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Days_For_Submission__c</fullName>
+    <description>Number of days within which expenses must be submitted after travel completion</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Expenses submitted beyond 10 days of expenditures will not be entertained (per Standing Instructions)</inlineHelpText>
+    <label>Days For Submission</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

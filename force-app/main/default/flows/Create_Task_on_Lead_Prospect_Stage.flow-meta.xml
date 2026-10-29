@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Check_the_created_Timing</name>
+        <label>Check the created Timing</label>
+        <locationX>796</locationX>
+        <locationY>671</locationY>
+        <defaultConnector>
+            <targetReference>Create_task_at_10AM</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>After 4PM</defaultConnectorLabel>
+        <rules>
+            <name>Created_Timing_before_4PM</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>HourofCreatedTimeFormula</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>10.5</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_task_at_5PM</targetReference>
+            </connector>
+            <label>Before 4PM</label>
+        </rules>
+    </decisions>
+    <description>created from v10: removing IndiaMart fields
+Lead Created task time change 2 to 4 
+Subject from New Call to New Phone call
+Subtask call type
+Changed 9AM to 10AM
+Subject of Task has been changed</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>FollowupDateTimeAt10AMnextdayFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(
+  TEXT(DATEVALUE({!$Record.CreatedDate}) + 1) &amp; &quot; 04:30:00&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>FollowupDateTimeAt5PMFormula</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(
+  TEXT(DATEVALUE({!$Record.CreatedDate})) &amp; &quot; 11:30:00&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_Country</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.indiaMartConfig__SenderCountryISO__c} = &quot;IN&quot;, &quot;India&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Formula_State_NoSpaces</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+UPPER(SUBSTITUTE(TRIM({!$Record.indiaMartConfig__SenderState__c}), &quot; &quot;, &quot;&quot;)),
+&quot;ANDHRAPRADESH&quot;, &quot;Andhra Pradesh&quot;,
+&quot;ARUNACHALPRADESH&quot;, &quot;Arunachal Pradesh&quot;,
+&quot;ASSAM&quot;, &quot;Assam&quot;,
+&quot;BIHAR&quot;, &quot;Bihar&quot;,
+&quot;CHHATTISGARH&quot;, &quot;Chhattisgarh&quot;,
+&quot;GOA&quot;, &quot;Goa&quot;,
+&quot;GUJARAT&quot;, &quot;Gujarat&quot;,
+&quot;HARYANA&quot;, &quot;Haryana&quot;,
+&quot;HIMACHALPRADESH&quot;, &quot;Himachal Pradesh&quot;,
+&quot;JHARKHAND&quot;, &quot;Jharkhand&quot;,
+&quot;KARNATAKA&quot;, &quot;Karnataka&quot;,
+&quot;KERALA&quot;, &quot;Kerala&quot;,
+&quot;MADHYAPRADESH&quot;, &quot;Madhya Pradesh&quot;,
+&quot;MAHARASHTRA&quot;, &quot;Maharashtra&quot;,
+&quot;MANIPUR&quot;, &quot;Manipur&quot;,
+&quot;MEGHALAYA&quot;, &quot;Meghalaya&quot;,
+&quot;MIZORAM&quot;, &quot;Mizoram&quot;,
+&quot;NAGALAND&quot;, &quot;Nagaland&quot;,
+&quot;ODISHA&quot;, &quot;Odisha&quot;,
+&quot;PUNJAB&quot;, &quot;Punjab&quot;,
+&quot;RAJASTHAN&quot;, &quot;Rajasthan&quot;,
+&quot;SIKKIM&quot;, &quot;Sikkim&quot;,
+&quot;TAMILNADU&quot;, &quot;Tamil Nadu&quot;,
+&quot;TELANGANA&quot;, &quot;Telangana&quot;,
+&quot;TRIPURA&quot;, &quot;Tripura&quot;,
+&quot;UTTARPRADESH&quot;, &quot;Uttar Pradesh&quot;,
+&quot;UTTARAKHAND&quot;, &quot;Uttarakhand&quot;,
+&quot;WESTBENGAL&quot;, &quot;West Bengal&quot;,
+&quot;ANDAMANANDNICOBARISLANDS&quot;, &quot;Andaman and Nicobar Islands&quot;,
+&quot;CHANDIGARH&quot;, &quot;Chandigarh&quot;,
+&quot;DADRAANDNAGARHAVELIANDDAMANANDDIU&quot;, &quot;Dadra and Nagar Haveli and Daman and Diu&quot;,
+&quot;DELHI&quot;, &quot;Delhi&quot;,
+&quot;JAMMUANDKASHMIR&quot;, &quot;Jammu and Kashmir&quot;,
+&quot;LADAKH&quot;, &quot;Ladakh&quot;,
+&quot;LAKSHADWEEP&quot;, &quot;Lakshadweep&quot;,
+&quot;PUDUCHERRY&quot;, &quot;Puducherry&quot;,
+&quot;&quot;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>HourofCreatedTimeFormula</name>
+        <dataType>Number</dataType>
+        <expression>HOUR(TIMEVALUE({!$Record.CreatedDate}))
++
+(
+    MINUTE(TIMEVALUE({!$Record.CreatedDate})) / 60
+)</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Create Task on [Lead] Prospect Stage {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Task on [Lead] Prospect Stage</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_task_at_10AM</name>
+        <label>Create task at 10AM</label>
+        <locationX>928</locationX>
+        <locationY>779</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>A Lead has been Created , make sure to call at 10AM tomorrow</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Follow_Up_Date_Time__c</field>
+            <value>
+                <elementReference>FollowupDateTimeAt10AMnextdayFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <stringValue>Prospect</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>New Phone Call-New Lead Created</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TaskSubtype</field>
+            <value>
+                <stringValue>Call</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Who_ID_Type__c</field>
+            <value>
+                <stringValue>Lead</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_task_at_5PM</name>
+        <label>Create task at 5PM</label>
+        <locationX>664</locationX>
+        <locationY>779</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>A Lead has been Created , make sure to call at 5PM</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Follow_Up_Date_Time__c</field>
+            <value>
+                <elementReference>FollowupDateTimeAt5PMFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <stringValue>Prospect</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>New Phone Call-New Lead Created</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TaskSubtype</field>
+            <value>
+                <stringValue>Call</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Who_ID_Type__c</field>
+            <value>
+                <stringValue>Lead</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>670</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Check_the_created_Timing</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Prospect</stringValue>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>InvalidDraft</status>
+</Flow>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_Manager__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box for your Admin/Manager users. Leave it unchecked for normal employees.</description>
+    <inlineHelpText>Check this box for your Admin/Manager users. Leave it unchecked for normal employees.</inlineHelpText>
+    <label>Target Manager</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

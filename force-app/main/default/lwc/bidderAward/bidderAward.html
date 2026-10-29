@@ -1,0 +1,313 @@
+<template>
+    <lightning-quick-action-panel title="Select or Create Account">
+        
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Processing" size="small" variant="brand"></lightning-spinner>
+        </template>
+
+        <div class="slds-var-p-bottom_medium">
+            <!-- Optional Inputs for Duplicate Check & Account Creation -->
+            <!--<div class="slds-grid slds-gutters slds-var-m-bottom_medium">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input label="Phone (Optional)" type="tel" value={phone} onchange={handlePhoneChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input label="Email (Optional)" type="email" value={email} onchange={handleEmailChange}></lightning-input>
+                </div>
+            </div>
+
+            <lightning-button label="Check for Duplicates" variant="neutral" onclick={loadDuplicates} class="slds-var-m-bottom_medium slds-show"></lightning-button>-->
+
+            <lightning-radio-group
+                name="modeSelector"
+                label="How do you want to choose the account?"
+                options={modeOptions}
+                value={selectedMode}
+                type="radio"
+                onchange={handleModeChange}>
+            </lightning-radio-group>
+
+            <!-- OPTION 1: search / free text -->
+            <template lwc:if={isSearchMode}>
+                <div class="slds-var-m-top_medium slds-box slds-box_x-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <div class={comboboxClass}>
+                                <div class="slds-combobox__form-element" role="none">
+                                    <lightning-input
+                                        type="search"
+                                        label="Account name"
+                                        value={searchTerm}
+                                        autocomplete="off"
+                                        placeholder="Search existing accounts or type a new name…"
+                                        onchange={handleSearchChange}
+                                        onblur={handleBlur}>
+                                    </lightning-input>
+                                </div>
+                                <div lwc:if={showDropdown}
+                                     class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                     role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        <template for:each={searchResults} for:item="opt">
+                                            <li key={opt.Id} role="presentation" class="slds-listbox__item">
+                                                <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                     role="option"
+                                                     data-id={opt.Id}
+                                                     data-name={opt.Name}
+                                                     onmousedown={handleOptionSelect}>
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{opt.Name}</span>
+                                                        <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{opt.Phone} {opt.Email__c}</span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-var-m-top_x-small">
+                        <template lwc:if={isSearching}>
+                            <lightning-spinner alternative-text="Searching" size="small" variant="brand"></lightning-spinner>
+                        </template>
+                        <template lwc:if={searchSelected}>
+                            <lightning-badge label="Existing account selected" class="slds-theme_success"></lightning-badge>
+                            <lightning-button variant="base" label="Clear" onclick={handleClearSearch}
+                                              class="slds-var-m-left_small"></lightning-button>
+                        </template>
+                        <template lwc:else>
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                No existing account selected — the typed name will be used to create a new account.
+                            </p>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <!-- OPTION 2: duplicate picklist -->
+            <template lwc:if={isDuplicateMode}>
+                <div class="slds-var-m-top_medium slds-box slds-box_x-small">
+                    <template lwc:if={hasDuplicates}>
+                        <lightning-combobox
+                            name="duplicateAccount"
+                            label="Matched duplicate accounts"
+                            placeholder="Select an account"
+                            options={duplicateOptions}
+                            value={selectedDuplicateId}
+                            onchange={handleDuplicateChange}>
+                        </lightning-combobox>
+                    </template>
+                    <template lwc:else>
+                        <div class="slds-text-color_weak slds-text-body_small">
+                            No duplicate accounts were found. Try checking duplicates above.
+                        </div>
+                    </template>
+                    <template lwc:if={duplicateError}>
+                        <div class="slds-text-color_error slds-text-body_small slds-var-m-top_x-small">{duplicateError}</div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- CONTACT SELECTOR -->
+            <div class="slds-var-m-top_medium slds-box slds-box_x-small">
+                <div class="slds-text-heading_small slds-var-m-bottom_small">Contact Assignment</div>
+
+                <lightning-radio-group
+                    name="contactMode"
+                    label="How do you want to assign a contact?"
+                    options={availableContactModes}
+                    value={selectedContactMode}
+                    onchange={handleContactModeChange}
+                    type="radio"
+                    class="slds-var-m-bottom_small">
+                </lightning-radio-group>
+
+                <!-- MODE: Bidder Details -->
+                <template lwc:if={isContactModeBidder}>
+                    <div class="slds-p-around_small slds-color__background_gray-1 slds-border_all slds-border_radius">
+                        <p class="slds-text-color_weak slds-var-m-bottom_xx-small">The following contact will be created:</p>
+                        <p><strong>Name:</strong> {bidderContactDetails.Name}</p>
+                        <p><strong>Phone:</strong> {bidderContactDetails.Contact_Number__c}</p>
+                        <p><strong>Email:</strong> {bidderContactDetails.Email__c}</p>
+                    </div>
+                </template>
+
+                <!-- MODE: Existing Contact -->
+                <template lwc:if={isContactModeExisting}>
+                    <lightning-combobox
+                        name="contactSelector"
+                        label="Select Existing Contact"
+                        placeholder="Choose a contact..."
+                        options={accountContacts}
+                        value={selectedContactId}
+                        onchange={handleContactChange}
+                        required>
+                    </lightning-combobox>
+                    <template lwc:if={noContactsFound}>
+                        <div class="slds-text-color_error slds-text-body_small slds-var-m-top_xx-small">
+                            No existing contacts found for this account. Please select another option above.
+                        </div>
+                    </template>
+                </template>
+
+                <!-- MODE: Manual New Contact -->
+                <template lwc:if={isContactModeManual}>
+                    <div class="slds-var-m-top_small">
+                        <div class="slds-grid slds-gutters slds-wrap">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input label="First Name" value={manualContact.FirstName} onchange={handleManualContactChange} data-field="FirstName" class="contact-input"></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input label="Last Name" value={manualContact.LastName} onchange={handleManualContactChange} data-field="LastName" required class="contact-input"></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small">
+                                <lightning-input label="Phone" type="tel" value={manualContact.Phone} onchange={handleManualContactChange} data-field="Phone" required class="contact-input"></lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-var-m-top_x-small">
+                                <lightning-input label="Email" type="email" value={manualContact.Email} onchange={handleManualContactChange} data-field="Email" required class="contact-input"></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- ADDRESS SELECTOR (Shows when an existing account is selected) -->
+            <template lwc:if={showAddressSelector}>
+                <div class="slds-var-m-top_medium">
+                    <c-qa-address-book-selector
+                        account-id={selectedAccountId}
+                        onaddressselected={handleAddressSelected}>
+                    </c-qa-address-book-selector>
+                </div>
+            </template>
+            <template lwc:if={showNewAddressBookFields}>
+                <div class="slds-var-m-top_medium slds-box slds-box_x-small">
+                    <div class="slds-text-heading_small slds-var-m-bottom_x-small">New Address Book</div>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="Street" data-field="Street__c" value={newAddressBook.Street__c} onchange={handleAddressFieldChange} required class="address-input"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="City" data-field="City__c" value={newAddressBook.City__c} onchange={handleAddressFieldChange} required class="address-input"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-combobox label="Country" data-field="Country__c" value={newAddressBook.Country__c} options={countryOptions} onchange={handleAddressFieldChange} required class="address-input"></lightning-combobox>
+                        </div>
+                        <template lwc:if={showStateField}>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-combobox label="State" data-field="State__c" value={newAddressBook.State__c} options={stateOptions} onchange={handleAddressFieldChange} required class="address-input"></lightning-combobox>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="PIN" data-field="PIN__c" value={newAddressBook.PIN__c} onchange={handleAddressFieldChange} required class="address-input"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-combobox label="Zone" data-field="Zone__c" value={newAddressBook.Zone__c} options={zoneOptions} onchange={handleAddressFieldChange} required class="address-input"></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- PRODUCT CATEGORY SECTION -->
+            <div class="slds-var-m-top_medium slds-box slds-box_x-small">
+
+                <div class="slds-text-heading_small">
+                    Add Product Category
+                </div>
+
+                <!-- Required message -->
+                <div class="slds-var-m-top_x-small slds-var-m-bottom_medium">
+                    <span class="slds-required">*</span>
+                    <span class="slds-text-body_small">
+                        Please add at least one product category
+                    </span>
+                </div>
+
+                <!-- TABLE -->
+                <template lwc:if={hasProductCategories}>
+                    <div class="slds-var-m-bottom_medium">
+                        <lightning-datatable
+                            key-field="Id"
+                            data={productCategoryRows}
+                            columns={productColumns}
+                            draft-values={productDraftValues}
+                            onsave={handleProductSave}
+                            onrowaction={handleProductRowAction}
+                            hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+
+                <!-- INPUTS -->
+                <div class="slds-grid slds-gutters slds-wrap">
+
+                    <!-- Department - READ ONLY -->
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input
+                            label="Department"
+                            value={opportunityDepartment}
+                            read-only>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Product Category -->
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-combobox
+                            label="Product Category"
+                            value={selectedProductCategory}
+                            options={productCategoryOptions}
+                            placeholder={productCategoryPlaceholder}
+                            onchange={handleProductCategoryChange}
+                            disabled={isProductCategoryDisabled}>
+                        </lightning-combobox>
+                    </div>
+
+                    <!-- UOM - REQUIRED -->
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-combobox
+                            label="UOM"
+                            value={selectedUom}
+                            options={uomOptions}
+                            onchange={handleUomChange}
+                            required>
+                        </lightning-combobox>
+                    </div>
+
+                    <!-- Quantity - REQUIRED -->
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input
+                            type="number"
+                            label="Quantity"
+                            value={productQuantity}
+                            min="1"
+                            step="1"
+                            onchange={handleQuantityChange}
+                            required>
+                        </lightning-input>
+                    </div>
+
+                </div>
+
+                <div class="slds-var-m-top_medium">
+                    <lightning-button
+                        label="Add"
+                        variant="brand-outline"
+                        onclick={handleAddProductCategory}>
+                    </lightning-button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FOOTER ACTIONS -->
+        <div slot="footer">
+            <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+            <lightning-button label="Save Account" variant="brand" onclick={handleSave} class="slds-var-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

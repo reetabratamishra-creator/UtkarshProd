@@ -1,0 +1,291 @@
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.table-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 55vh;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    border-bottom: 2px solid #0b5cba;
+    position: relative;
+}
+
+/* Sticky Headers to maintain context while scrolling down */
+.table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #d0e1f9 !important;
+    box-shadow: inset 0 -2px 0 #a0c4f3;
+}
+
+/* Sticky First Column (Steel Type) for row tracking during horizontal scroll */
+.table-scroll th:first-child,
+.table-scroll td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    background-color: #ffffff;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.12);
+}
+
+.table-scroll thead th:first-child {
+    z-index: 15;
+    background-color: #d0e1f9 !important;
+}
+
+/* Elevate focused row and cell so open dropdowns/comboboxes pop over all sibling rows and headers */
+.table-scroll tr:focus-within {
+    position: relative;
+    z-index: 100 !important;
+}
+
+.table-scroll tr:focus-within td {
+    position: relative;
+    z-index: 100 !important;
+}
+
+.table-scroll tr:focus-within td:first-child {
+    z-index: 110 !important;
+    position: sticky;
+}
+
+.table-scroll td:focus-within {
+    z-index: 500 !important;
+    position: relative;
+}
+
+.table-scroll td:first-child:focus-within {
+    z-index: 510 !important;
+    position: sticky;
+}
+
+/* Ensure combobox popovers have high z-index and stay unclipped */
+.table-scroll lightning-combobox:focus-within {
+    position: relative;
+    z-index: 1000 !important;
+}
+
+/* Top Synced Scrollbar Track */
+.top-scrollbar-track {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    height: 14px;
+    margin-bottom: 6px;
+    border-top: 1px solid #d8e2ef;
+    border-bottom: 1px solid #d8e2ef;
+    background: #f8fafd;
+}
+
+/* High-contrast, easy-to-grab 12px scrollbar */
+.table-scroll::-webkit-scrollbar,
+.top-scrollbar-track::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+    height: 12px;
+    width: 10px;
+}
+.table-scroll::-webkit-scrollbar-track,
+.top-scrollbar-track::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #eef2f7;
+    border-radius: 6px;
+}
+.table-scroll::-webkit-scrollbar-thumb,
+.top-scrollbar-track::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #0b5cba;
+    border-radius: 6px;
+}
+.table-scroll::-webkit-scrollbar-thumb:hover,
+.top-scrollbar-track::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #084388;
+}
+
+.short-input {
+    max-width: 150px;
+}
+
+.border-blue {
+    border-top: 4px solid #0b5cba;
+}
+
+.bg-blue th {
+    background-color: #d0e1f9 !important;
+    color: #0b5cba;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+/* Fixed Custom Table Layout to guarantee exact column widths and prevent cutoff */
+.custom-table {
+    table-layout: fixed !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.steel-type-select {
+    height: 32px !important;
+    min-height: 32px !important;
+    font-size: 0.75rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 1.5rem !important;
+    border: 1px solid #c9c9c9 !important;
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    color: #181818 !important;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
+
+.steel-type-select:disabled {
+    background-color: #f3f3f3 !important;
+    cursor: not-allowed;
+    color: #706e6b !important;
+    border-color: #e5e5e5 !important;
+}
+
+.custom-table th {
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em;
+    background-color: #d0e1f9 !important;
+    color: #0b5cba !important;
+    border-right: 1px solid #b8d2f5 !important;
+    border-bottom: 2px solid #0b5cba !important;
+}
+
+.custom-table td {
+    padding: 0.35rem 0.4rem !important;
+    vertical-align: middle !important;
+    border-right: 1px solid #eef2f7 !important;
+    border-bottom: 1px solid #eef2f7 !important;
+    background-color: #ffffff;
+}
+
+.custom-table tr:hover td {
+    background-color: #f9fbfe;
+}
+
+.custom-table td lightning-input,
+.custom-table td lightning-combobox {
+    width: 100%;
+}
+
+table th, table td {
+    vertical-align: middle;
+}
+
+/* 👉 NEW: Custom Red Close Button styling */
+.custom-close-btn {
+    background-color: #ba0517 !important; /* Bold SLDS Red */
+    border-radius: 50% !important;
+    border: 2px solid white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    top: -1.25rem !important;
+    right: -1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+}
+
+.custom-close-btn:hover {
+    background-color: #8e030f !important; /* Darker red on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .slds-modal {
+        padding: 0 !important;
+    }
+
+    .slds-modal__container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .slds-modal__content {
+        flex: 1 1 auto !important;
+        max-height: none !important; 
+        height: auto !important;
+        padding: 0.25rem !important;
+    }
+
+    .slds-modal__footer {
+        padding: 0.75rem !important;
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        background: #fff;
+    }
+
+    /* Safely tuck the custom close button back into the screen view on mobile */
+    .custom-close-btn {
+        top: 0.25rem !important;
+        right: 0.25rem !important;
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    .top-controls {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+    .top-controls > div {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+    .short-input {
+        max-width: 60% !important;
+        flex: 1 !important;
+    }
+    
+    .table-scroll {
+        padding-bottom: 0.5rem;
+    }
+
+
+
+    table td lightning-input,
+    table td lightning-combobox {
+        min-height: 36px;
+    }
+    
+    table th, table td {
+        padding: 0.35rem 0.25rem !important;
+    }
+}

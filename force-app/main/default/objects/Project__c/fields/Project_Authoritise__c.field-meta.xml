@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Authoritise__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>removing lookup filter on 30th july as per instruction</description>
+    <label>Project Authoritise</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Project (Project Authorities)</relationshipLabel>
+    <relationshipName>Project</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOD_User_Email_Formula__c</fullName>
+    <description>Used for Email templates</description>
+    <externalId>false</externalId>
+    <formula>IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;High Mast &amp; Polygonal&quot;, $CustomMetadata.Department_HOD_Person__mdt.HIGH_MAST_POLYGONAL.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Steel Pipes&quot;, $CustomMetadata.Department_HOD_Person__mdt.STEEL_PIPES.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Crash Barrier&quot;, $CustomMetadata.Department_HOD_Person__mdt.CRASH_BARRIER.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Steel Tubular Poles&quot;, $CustomMetadata.Department_HOD_Person__mdt.STEEL_TUBULAR_POLES.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Polymer&quot;, $CustomMetadata.Department_HOD_Person__mdt.POLYMER.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;HDPE&quot;, $CustomMetadata.Department_HOD_Person__mdt.HDPE.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Transmission &amp; Telecom Tower&quot;, $CustomMetadata.Department_HOD_Person__mdt.TRANSMISSION_TOWER.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Pre Engineering Building&quot;, $CustomMetadata.Department_HOD_Person__mdt.PRE_ENGINEERING_BUILDINGS.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Solar Structure&quot;, $CustomMetadata.Department_HOD_Person__mdt.SOLAR.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Railway Electrification Structure&quot;, $CustomMetadata.Department_HOD_Person__mdt.RAILWAY_ELECTRIFICATION_STRUCTURE.HOD_Person_Email__c, IF(IF(BEGINS(OwnerId, &quot;005&quot;), Owner:User.Department, &quot;&quot;) = &quot;Enquiry&quot;, $CustomMetadata.Department_HOD_Person__mdt.ENQUIRY.HOD_Person_Email__c, &quot;&quot;)))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>HOD User Email Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

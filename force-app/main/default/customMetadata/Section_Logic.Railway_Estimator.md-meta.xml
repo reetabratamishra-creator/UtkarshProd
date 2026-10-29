@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Railway Estimator</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Railway</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;MBCB_RLW_folder_1&quot;,
+      &quot;label&quot;: &quot;MBCB Railway&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;MBCB_Type&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Railway&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;MBCM RAILWAY&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;rlw_section&quot;,
+              &quot;label&quot;: &quot;W-Type SSDB&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded&quot;,
+                  &quot;label&quot;: &quot;Graded&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;label&quot;: &quot;Non-Graded&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 6
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rlw_graded_section&quot;,
+              &quot;label&quot;: &quot;W-Type SSDB - GRADED&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_header&quot;,
+                  &quot;label&quot;: &quot;Graded &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_spacer&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot; (rlw_graded_section_total_wt || 0)&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_rate_rm&quot;,
+                  &quot;label&quot;: &quot;RATE/RM&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(rlw_graded_section_total_wt || 0) * (railway_rate_graded + (rlw_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? zinc_minimum_delta : (rlw_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? zinc_average_delta : (rlw_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? zinc_medium_55_delta : (rlw_graded_section_zinc_coating_input == &apos;Regular&apos; ? zinc_regular_delta : 0)))) + (rlw_graded_section_margin || 0) + (rlw_Tran_Kg || 0))&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_quantity&quot;,
+                  &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isQuantity&quot;: true,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_margin&quot;,
+                  &quot;label&quot;: &quot;MARGIN&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isMargin&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_item&quot;,
+                  &quot;label&quot;: &quot;ITEM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_beam_thickness&quot;,
+                  &quot;label&quot;: &quot;BEAM THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_post_thickness&quot;,
+                  &quot;label&quot;: &quot;POST THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_post_height&quot;,
+                  &quot;label&quot;: &quot;POST HEIGHT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_nuts_bolts&quot;,
+                  &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_dimension&quot;,
+                  &quot;label&quot;: &quot;DIMENSION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_beam_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;1.8&quot;,
+                    &quot;2&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_post_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;3.8&quot;,
+                    &quot;3.9&quot;,
+                    &quot;4&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_post_height_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2100&quot;,
+                    &quot;2400&quot;,
+                    &quot;2700&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;2700&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_nuts_bolts_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_section_zinc_coating_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Regular&quot;,
+                    &quot;Medium 55 micron&quot;,
+                    &quot;Average 77 microns over Crash Tested Rates&quot;,
+                    &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;Regular&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_remove_post&quot;,
+                  &quot;label&quot;: &quot;Remove Post&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_show_original&quot;,
+                  &quot;label&quot;: &quot;Show original value&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_remove_post_value&quot;,
+                  &quot;label&quot;: &quot;Value&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;8&quot;,
+                    &quot;9&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_remove_post&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_types_offer&quot;,
+                  &quot;label&quot;: &quot;types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Transportation KG&quot;,
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_graded_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_Tran_Kg&quot;,
+                  &quot;label&quot;: &quot;Transportation KG&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;controllingField&quot;: &quot;rlw_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_full_Vehicle_freight&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;rlw_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_graded_pricing_sub&quot;,
+                  &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                  &quot;type&quot;: &quot;sub-section&quot;,
+                  &quot;expanded&quot;: false,
+                  &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ],
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_weight_calculation_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For W BEAM&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;common_base_rate&quot;,
+                      &quot;label&quot;: &quot;Base Rate (From DB)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_regular_delta&quot;,
+                      &quot;label&quot;: &quot;Regular (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_medium_55_delta&quot;,
+                      &quot;label&quot;: &quot;Medium 55 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_average_delta&quot;,
+                      &quot;label&quot;: &quot;Average 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;zinc_minimum_delta&quot;,
+                      &quot;label&quot;: &quot;Minimum 77 micron (Zinc Coating)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_reg&quot;,
+                      &quot;label&quot;: &quot;Consumption Zinc Regular&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_medium_55&quot;,
+                      &quot;label&quot;: &quot;Consumption Zinc Medium 55 micron&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_avg_77&quot;,
+                      &quot;label&quot;: &quot;Consumption Zinc Average 77 micron&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;con_zinc_min_77&quot;,
+                      &quot;label&quot;: &quot;Consumption Zinc Minimum 77 micron&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_graded_delta2&quot;,
+                      &quot;label&quot;: &quot;Railway graded delta(From DB for 2.0)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_graded_delta1_8&quot;,
+                      &quot;label&quot;: &quot;Railway graded delta(From DB for 1.8)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_rate_graded&quot;,
+                      &quot;label&quot;: &quot;Railway graded rate&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;(rlw_graded_section_beam_thickness_input == &apos;1.8&apos; ? (railway_graded_delta1_8 || 0) : rlw_graded_section_beam_thickness_input == &apos;2&apos; ? (railway_graded_delta2 || 0) : 0) + (common_base_rate || 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_blk_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;BLK WT For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((4.318 * ((rlw_graded_section_beam_thickness_input || 0) / 1000) * 0.465 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_zn_consumption_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) : rlw_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_finish_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For W BEAM&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.318 * 0.465 * ((rlw_graded_section_zn_consumption_for_w_beam || 0) / 1000)) * 2) + (rlw_graded_section_blk_wt_for_w_beam || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_total_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_graded_section_finish_wt_for_w_beam || 0) * 500) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_weight_calculation_for_post&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_blk_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;BLK WT For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((rlw_graded_section_post_height_input || 0) / 1000) * ((rlw_graded_section_post_thickness_input || 0) / 1000) * 0.28) * 7850) + 0.2) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_zn_consumption_for_post&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) : rlw_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_finish_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((rlw_graded_section_post_height_input || 0) / 1000) * 0.28 * ((rlw_graded_section_zn_consumption_for_post || 0) / 1000)) * 2) + (rlw_graded_section_blk_wt_for_post || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_total_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_graded_section_finish_wt_for_post || 0) * (rlw_remove_post_value == &apos;9&apos; ? 562.5 : 481.5)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_weight_calculation_for_washer&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For WASHER&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_blk_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;BLK WT For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((0.075 * 0.004 * 0.045 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_zn_consumption_for_washer&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) : rlw_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_finish_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For WASHER&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((0.075 * 0.045 * ((rlw_graded_section_zn_consumption_for_washer || 0) / 1000)) * 2) + (rlw_graded_section_blk_wt_for_washer || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_total_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_graded_section_finish_wt_for_washer || 0) * 1125) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_weight_calculation_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For Button head bolt&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_total_wt_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For Button head bolt &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((4125 * 0.14) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_total_wt&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot; (rlw_graded_section_total_wt_for_w_beam || 0) + (rlw_graded_section_total_wt_for_post || 0) + (rlw_graded_section_total_wt_for_washer || 0) + (rlw_graded_section_total_wt_for_bhb || 0) &quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_unit_cost&quot;,
+                      &quot;label&quot;: &quot;Unit Cost For Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(rlw_graded_section_unit_price || 0) - ((rlw_graded_section_unit_price || 0) * (rlw_graded_section_margin || 0) / 100)&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_unit_price&quot;,
+                      &quot;label&quot;: &quot;Unit Price For Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;(Math.ceil(((rlw_graded_section_rate_rm || 0)) / 5) * 5)&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_graded_section_list_price&quot;,
+                      &quot;label&quot;: &quot;List Price For Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isListPrice&quot;: true,
+                      &quot;formula&quot;: &quot;Math.ceil((((79 + (rlw_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? 2 : (rlw_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? 0 : 0))) + 4) * (rlw_graded_section_weight || 0)) / 5) * 5&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;rlw_non_graded_section&quot;,
+              &quot;label&quot;: &quot;W-Type SSDB - NON Graded&quot;,
+              &quot;expanded&quot;: false,
+              &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+              &quot;controllingValues&quot;: [
+                true
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_header&quot;,
+                  &quot;label&quot;: &quot;Non-Graded &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_spacer&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot; (rlw_non_graded_section_total_wt || 0)&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_rate_rm&quot;,
+                  &quot;label&quot;: &quot;RATE/RM&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;formula&quot;: &quot;(rlw_non_graded_section_total_wt || 0) * (railway_nonrate_graded + (rlw_non_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? zinc_minimum_delta : (rlw_non_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? zinc_average_delta : (rlw_non_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? zinc_medium_55_delta : (rlw_non_graded_section_zinc_coating_input == &apos;Regular&apos; ? zinc_regular_delta : 0)))) + (rlw_non_graded_section_margin || 0) + (non_rlw_Tran_Kg || 0))&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_quantity&quot;,
+                  &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isQuantity&quot;: true,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_margin&quot;,
+                  &quot;label&quot;: &quot;MARGIN&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;isMargin&quot;: true,
+                  &quot;defaultValue&quot;: &quot;2&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_item&quot;,
+                  &quot;label&quot;: &quot;ITEM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_beam_thickness&quot;,
+                  &quot;label&quot;: &quot;BEAM THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_post_thickness&quot;,
+                  &quot;label&quot;: &quot;POST THICKNESS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_post_height&quot;,
+                  &quot;label&quot;: &quot;POST HEIGHT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_nuts_bolts&quot;,
+                  &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_zinc_coating&quot;,
+                  &quot;label&quot;: &quot;ZINC COATING&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_dimension&quot;,
+                  &quot;label&quot;: &quot;DIMENSION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_beam_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;1.8&quot;,
+                    &quot;2&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_post_thickness_input&quot;,
+                  &quot;label&quot;: &quot;BLACK(MM)&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;3.8&quot;,
+                    &quot;3.9&quot;,
+                    &quot;4&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_post_height_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;2100&quot;,
+                    &quot;2400&quot;,
+                    &quot;2700&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;2700&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_nuts_bolts_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_section_zinc_coating_input&quot;,
+                  &quot;label&quot;: &quot; &quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Regular&quot;,
+                    &quot;Medium 55 micron&quot;,
+                    &quot;Average 77 microns over Crash Tested Rates&quot;,
+                    &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;Regular&quot;,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_remove_post&quot;,
+                  &quot;label&quot;: &quot;Remove Post&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_show_original&quot;,
+                  &quot;label&quot;: &quot;Show original value&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_remove_post_value&quot;,
+                  &quot;label&quot;: &quot;Value&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;required&quot;: true,
+                  &quot;options&quot;: [
+                    &quot;8&quot;,
+                    &quot;9&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_non_remove_post&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;true&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;non_rlw_types_offer&quot;,
+                  &quot;label&quot;: &quot;types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;options&quot;: [
+                    &quot;Transportation KG&quot;,
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;rlw_non_graded_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;non_rlw_Tran_Kg&quot;,
+                  &quot;label&quot;: &quot;Transportation KG&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;controllingField&quot;: &quot;non_rlw_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_full_Vehicle_freight&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;non_rlw_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;rlw_non_graded_pricing_sub&quot;,
+                  &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                  &quot;type&quot;: &quot;sub-section&quot;,
+                  &quot;expanded&quot;: false,
+                  &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ],
+                  &quot;fields&quot;: [
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_weight_calculation_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For W BEAM&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_nongraded_delta2&quot;,
+                      &quot;label&quot;: &quot;Railway Non graded delta(From DB for 2.0)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_nongraded_delta1_8&quot;,
+                      &quot;label&quot;: &quot;Railway Non graded delta(From DB for 1.8)&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;railway_nonrate_graded&quot;,
+                      &quot;label&quot;: &quot;Railway non graded rate&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;readOnly&quot;: true,
+                      &quot;colSpan&quot;: 2,
+                      &quot;formula&quot;: &quot;(rlw_non_graded_section_beam_thickness_input == &apos;1.8&apos; ? (railway_nongraded_delta1_8 || 0) : rlw_non_graded_section_beam_thickness_input == &apos;2&apos; ? (railway_nongraded_delta2 || 0) : 0 ) + (common_base_rate || 0)&quot;
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_blk_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;BLK WT For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((4.318 * ((rlw_non_graded_section_beam_thickness_input || 0) / 1000) * 0.465 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_zn_consumption_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_non_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) :rlw_non_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_finish_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For W BEAM&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((4.318 * 0.465 * ((rlw_non_graded_section_zn_consumption_for_w_beam || 0) / 1000)) * 2) + (rlw_non_graded_section_blk_wt_for_w_beam || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_total_wt_for_w_beam&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For W BEAM &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_non_graded_section_finish_wt_for_w_beam || 0) * 500) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_weight_calculation_for_post&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_blk_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;BLK WT For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((rlw_non_graded_section_post_height_input || 0) / 1000) * ((rlw_non_graded_section_post_thickness_input || 0) / 1000) * 0.28) * 7850) + 0.2) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_zn_consumption_for_post&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_non_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) :rlw_non_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_finish_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((((rlw_non_graded_section_post_height_input || 0) / 1000) * 0.28 * ((rlw_non_graded_section_zn_consumption_for_post || 0) / 1000)) * 2) + (rlw_non_graded_section_blk_wt_for_post || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_total_wt_for_post&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For POST &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_non_graded_section_finish_wt_for_post || 0) * (rlw_non_remove_post_value == &apos;9&apos; ? 562.5 : 481.5)) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_weight_calculation_for_washer&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For WASHER&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_blk_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;BLK WT For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((0.075 * 0.004 * 0.045 * 7850) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_zn_consumption_for_washer&quot;,
+                      &quot;label&quot;: &quot;Zn consumption (gm/sqm) For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((rlw_non_graded_section_zinc_coating_input == &apos;Regular&apos; ? (con_zinc_reg || 0) :rlw_non_graded_section_zinc_coating_input == &apos;Medium 55 micron&apos; ? (con_zinc_medium_55 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? (con_zinc_avg_77 || 0) : rlw_non_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? (con_zinc_min_77 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_finish_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Finish wt/pcs For WASHER&quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((0.075 * 0.045 * ((rlw_non_graded_section_zn_consumption_for_washer || 0) / 1000)) * 2) + (rlw_non_graded_section_blk_wt_for_washer || 0)) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_total_wt_for_washer&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For WASHER &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round((((rlw_non_graded_section_finish_wt_for_washer || 0) * 1125) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_weight_calculation_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Weight Calculation For Button head bolt&quot;,
+                      &quot;type&quot;: &quot;header&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_total_wt_for_bhb&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr For Button head bolt &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot;Math.round(((4125 * 0.14) / 1000) * 100) / 100&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_total_wt&quot;,
+                      &quot;label&quot;: &quot;Total wt/mtr &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;formula&quot;: &quot; (rlw_non_graded_section_total_wt_for_w_beam || 0) + (rlw_non_graded_section_total_wt_for_post || 0) + (rlw_non_graded_section_total_wt_for_washer || 0) + (rlw_non_graded_section_total_wt_for_bhb || 0) &quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_unit_cost&quot;,
+                      &quot;label&quot;: &quot;Unit Cost For Non Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitCost&quot;: true,
+                      &quot;formula&quot;: &quot;(rlw_non_graded_section_unit_price || 0) - ((rlw_non_graded_section_unit_price || 0) * (rlw_non_graded_section_margin || 0) / 100)&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_unit_price&quot;,
+                      &quot;label&quot;: &quot;Unit Price For Non Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isUnitPrice&quot;: true,
+                      &quot;formula&quot;: &quot;(Math.ceil(((rlw_non_graded_section_rate_rm || 0))/ 5) * 5)&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    },
+                    {
+                      &quot;apiName&quot;: &quot;rlw_non_graded_section_list_price&quot;,
+                      &quot;label&quot;: &quot;List Price For Non Graded &quot;,
+                      &quot;type&quot;: &quot;number&quot;,
+                      &quot;colSpan&quot;: 2,
+                      &quot;readOnly&quot;: true,
+                      &quot;isListPrice&quot;: true,
+                      &quot;formula&quot;: &quot;Math.ceil(((76 + (rlw_non_graded_section_zinc_coating_input == &apos;Minimum 77 microns ( Delta over Crash Tested Rates )&apos; ? 4 : (rlw_non_graded_section_zinc_coating_input == &apos;Average 77 microns over Crash Tested Rates&apos; ? 2 : 0)) + 2) * (rlw_non_graded_section_weight || 0)) / 5) * 5&quot;,
+                      &quot;controllingField&quot;: &quot;rlw_non_graded&quot;,
+                      &quot;controllingValues&quot;: [
+                        true
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,2684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Accessories &amp; Miscellaneous Details</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Accessories_Miscellaneous_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;MBCB_CTD_folder_2&quot;,
+      &quot;label&quot;: &quot;Accessories &amp; Miscellaneous Details&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;ACCESSORIES &amp; MISCELLANEOUS DETAILS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;acc_section&quot;,
+              &quot;label&quot;: &quot;Accessories Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam&quot;,
+                  &quot;label&quot;: &quot;W/T BEAM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories&quot;,
+                  &quot;label&quot;: &quot;ACCESSORIES&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length&quot;,
+                  &quot;label&quot;: &quot;LENGTH (MM/MTR)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width&quot;,
+                  &quot;label&quot;: &quot;WIDTH (MM/MTR)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height&quot;,
+                  &quot;label&quot;: &quot;HEIGHT (MM/MTR)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom&quot;,
+                  &quot;label&quot;: &quot;UOM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate&quot;,
+                  &quot;label&quot;: &quot;RATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantityIOS&quot;,
+                  &quot;label&quot;: &quot;QUANTITY (IN ONE SET)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantityNo&quot;,
+                  &quot;label&quot;: &quot;QUANTITY (NO.)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark&quot;,
+                  &quot;label&quot;: &quot;REMARK&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input&quot;,
+                    &quot;acc_section_accessories_input&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input2&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input2&quot;,
+                    &quot;acc_section_accessories_input2&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input3&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input3&quot;,
+                    &quot;acc_section_accessories_input3&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input4&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input4&quot;,
+                    &quot;acc_section_accessories_input4&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input5&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input5&quot;,
+                    &quot;acc_section_accessories_input5&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input6&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input6&quot;,
+                    &quot;acc_section_accessories_input6&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input7&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input7&quot;,
+                    &quot;acc_section_accessories_input7&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input8&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input8&quot;,
+                    &quot;acc_section_accessories_input8&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input9&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input9&quot;,
+                    &quot;acc_section_accessories_input9&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_w_t_beam_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;W-Beam&quot;,
+                    &quot;Thrie Beam&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_accessories_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 2,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input10&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;FISH TAIL&quot;,
+                    &quot;END CONNECTOR&quot;,
+                    &quot;END SHOE&quot;,
+                    &quot;TERMINAL CONNECTOR&quot;,
+                    &quot;BULL NOSE&quot;,
+                    &quot;BUFFER END RETURN&quot;,
+                    &quot;U BEND SHOULDER&quot;,
+                    &quot;NJB Connection&quot;,
+                    &quot;MELT &quot;,
+                    &quot;TT&quot;,
+                    &quot;End Beam&quot;
+                  ],
+                  &quot;dependentOptionsMap&quot;: {
+                    &quot;W-Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;U BEND SHOULDER&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ],
+                    &quot;Thrie Beam&quot;: [
+                      &quot;FISH TAIL&quot;,
+                      &quot;END CONNECTOR&quot;,
+                      &quot;END SHOE&quot;,
+                      &quot;TERMINAL CONNECTOR&quot;,
+                      &quot;BULL NOSE&quot;,
+                      &quot;BUFFER END RETURN&quot;,
+                      &quot;NJB Connection&quot;,
+                      &quot;MELT&quot;,
+                      &quot;TT&quot;,
+                      &quot;End Beam&quot;
+                    ]
+                  }
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_length_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_width_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_height_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_weight_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingFields&quot;: [
+                    &quot;acc_section_w_t_beam_input10&quot;,
+                    &quot;acc_section_accessories_input10&quot;
+                  ],
+                  &quot;weightMap&quot;: {
+                    &quot;W-Beam|FISH TAIL&quot;: 10,
+                    &quot;W-Beam|END CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|END SHOE&quot;: 7.5,
+                    &quot;W-Beam|TERMINAL CONNECTOR&quot;: 7.5,
+                    &quot;W-Beam|BULL NOSE&quot;: 10,
+                    &quot;W-Beam|BUFFER END RETURN&quot;: 23,
+                    &quot;W-Beam|U BEND SHOULDER&quot;: 22,
+                    &quot;W-Beam|NJB Connection&quot;: 424,
+                    &quot;W-Beam|MELT&quot;: 289,
+                    &quot;W-Beam|TT&quot;: 120,
+                    &quot;W-Beam|End Beam&quot;: 75,
+                    &quot;Thrie Beam|FISH TAIL&quot;: 15,
+                    &quot;Thrie Beam|END CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|END SHOE&quot;: 13,
+                    &quot;Thrie Beam|TERMINAL CONNECTOR&quot;: 13,
+                    &quot;Thrie Beam|BULL NOSE&quot;: 14,
+                    &quot;Thrie Beam|BUFFER END RETURN&quot;: 34,
+                    &quot;Thrie Beam|NJB Connection&quot;: 595,
+                    &quot;Thrie Beam|MELT&quot;: 399,
+                    &quot;Thrie Beam|TT&quot;: 170,
+                    &quot;Thrie Beam|End Beam&quot;: 112
+                  },
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_uom_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_rate_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_in_one_set_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_quantity_no_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_remark_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_types_offer&quot;,
+                  &quot;label&quot;: &quot;Types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;acc_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_Transportation&quot;,
+                  &quot;label&quot;: &quot;Transportation (Kg)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;acc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_fvf&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;acc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_anchor_fastner&quot;,
+                  &quot;label&quot;:&quot;Anchor Fasteners applicable&quot;,
+                  &quot;type&quot;:&quot;checkbox&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;acc_section_anchor_fastner_amount&quot;,
+                  &quot;label&quot;:&quot;Anchor Fasteners Per Pcs Rate&quot;,
+                  &quot;type&quot;:&quot;number&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;controllingField&quot;: &quot;acc_section_anchor_fastner&quot;,
+                  &quot;controllingValues&quot;: [
+                    true
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;misc_section&quot;,
+              &quot;label&quot;: &quot;Miscellaneous Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;misc_section_description&quot;,
+                  &quot;label&quot;: &quot;DESCRIPTION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length&quot;,
+                  &quot;label&quot;: &quot;LENGTH (MM/MTR)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness&quot;,
+                  &quot;label&quot;: &quot;THICKNESS (MM)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight&quot;,
+                  &quot;label&quot;: &quot;WEIGHT (KG)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom&quot;,
+                  &quot;label&quot;: &quot;UOM&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate&quot;,
+                  &quot;label&quot;: &quot;RATE&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS&quot;,
+                  &quot;label&quot;: &quot;QUANTITY (IN ONE SET)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo&quot;,
+                  &quot;label&quot;: &quot;QUANTITY (NO.)&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark&quot;,
+                  &quot;label&quot;: &quot;REMARK&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_desc_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_length_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_thickness_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_weight_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_uom_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 1,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running Meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_rate_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityIOS_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_quantityNo_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 1
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_remark_input10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_types_offer&quot;,
+                  &quot;label&quot;: &quot;Types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;misc_section_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_Transportation&quot;,
+                  &quot;label&quot;: &quot;Transportation (Kg)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;misc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;misc_section_fvf&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;misc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;add_misc_section&quot;,
+              &quot;label&quot;: &quot;Additional Miscellaneous&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_hdr&quot;,
+                  &quot;label&quot;: &quot;DESCRIPTION&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_hdr&quot;,
+                  &quot;label&quot;: &quot;UNIT&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_hdr&quot;,
+                  &quot;label&quot;: &quot;QUANTITY&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_hdr&quot;,
+                  &quot;label&quot;: &quot;RATE/MTR&quot;,
+                  &quot;type&quot;: &quot;header&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_1&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_2&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_3&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_4&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_5&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_6&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_7&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_8&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_9&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_desc_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_unit_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;PCS&quot;,
+                    &quot;Running meter&quot;,
+                    &quot;Set&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_qty_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 2
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_rate_10&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_trans_in_offer&quot;,
+                  &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Ex-works&quot;,
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_section_types_offer&quot;,
+                  &quot;label&quot;: &quot;Types of freight&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;controllingField&quot;: &quot;add_misc_trans_in_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;F.O.R (Freight on Road)&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_Transportation&quot;,
+                  &quot;label&quot;: &quot;Transportation (Kg)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;controllingField&quot;: &quot;add_misc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Transportation KG&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                },
+                {
+                  &quot;apiName&quot;: &quot;add_misc_fvf&quot;,
+                  &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;min&quot;: 1,
+                  &quot;controllingField&quot;: &quot;add_misc_section_types_offer&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Full Vehicle Freight&quot;
+                  ],
+                  &quot;colSpan&quot;: 4
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

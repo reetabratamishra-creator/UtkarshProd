@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Transmission Nuts &amp; Bolts</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Nuts &amp; Bolts Details</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;base_price&quot;,&quot;defaultValue&quot;:100000},{&quot;apiName&quot;:&quot;foundation_base_price&quot;,&quot;defaultValue&quot;:95000},{&quot;apiName&quot;:&quot;pvs_type_5_6_margin&quot;,&quot;defaultValue&quot;:10},{&quot;apiName&quot;:&quot;pvs_type_6_8_margin&quot;,&quot;defaultValue&quot;:20},{&quot;apiName&quot;:&quot;pvs_type_8_8_margin&quot;,&quot;defaultValue&quot;:30},{&quot;apiName&quot;:&quot;pvs_detail_foundation_bolt_margin&quot;,&quot;defaultValue&quot;:8},{&quot;apiName&quot;:&quot;pvs_detail_ms_template_margin_firm&quot;,&quot;defaultValue&quot;:5},{&quot;apiName&quot;:&quot;pvs_detail_ms_template_margin_pv&quot;,&quot;defaultValue&quot;:5}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

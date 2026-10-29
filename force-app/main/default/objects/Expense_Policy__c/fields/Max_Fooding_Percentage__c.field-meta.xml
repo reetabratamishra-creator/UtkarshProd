@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Fooding_Percentage__c</fullName>
+    <description>Maximum percentage of entitled allowance claimable for fooding when not supported by bills</description>
+    <inlineHelpText>Maximum 50% of entitled allowance per day can be claimed against fooding in case not supported by bills</inlineHelpText>
+    <label>Max Fooding Percentage</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

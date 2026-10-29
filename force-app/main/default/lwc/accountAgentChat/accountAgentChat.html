@@ -1,0 +1,56 @@
+<template>
+    <div class="widget-root">
+        <!-- Floating bubble (closed state) -->
+        <button class={bubbleClass} onclick={toggleChat} title="Chat with Account Assistant">
+            <lightning-icon icon-name="utility:einstein" size="medium" class="bubble-icon"></lightning-icon>
+        </button>
+
+        <!-- Chat panel (open state) -->
+        <div class={widgetClass}>
+            <div class="chat-header">
+                <div class="header-left">
+                    <div class="avatar">
+                        <lightning-icon icon-name="utility:einstein" size="x-small"></lightning-icon>
+                    </div>
+                    <div class="header-text">
+                        <span class="header-title">Account Assistant</span>
+                        <span class="header-subtitle">
+                            <span class="status-dot"></span>Online
+                        </span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick={minimizeChat} title="Minimize">
+                        <lightning-icon icon-name="utility:minimize_window" size="x-small" variant="inverse"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container">
+                <template for:each={messages} for:item="msg">
+                    <div key={msg.id} class={msg.cssClass}>
+                        <p>{msg.text}</p>
+                    </div>
+                </template>
+                <template if:true={isLoading}>
+                    <div class="bubble agent typing">
+                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    </div>
+                </template>
+            </div>
+
+            <div class="chat-input">
+                <lightning-input
+                    variant="label-hidden"
+                    placeholder="Ask about this account..."
+                    value={draft}
+                    onchange={handleInputChange}
+                    onkeyup={handleKeyUp}>
+                </lightning-input>
+                <button class="send-btn" disabled={isSendDisabled} onclick={handleSend}>
+                    <lightning-icon icon-name="utility:send" size="x-small" variant="inverse"></lightning-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>

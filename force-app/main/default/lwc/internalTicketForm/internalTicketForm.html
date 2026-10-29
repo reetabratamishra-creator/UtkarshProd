@@ -1,0 +1,204 @@
+<template>
+    <div class="ticket-form slds-is-relative">
+
+        <template lwc:if={isSaving}>
+            <lightning-spinner alternative-text="Raising the ticket" size="medium"></lightning-spinner>
+        </template>
+
+        <div class="slds-p-around_medium">
+
+            <div class="slds-media slds-media_center slds-p-bottom_medium slds-border_bottom">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:case" size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-text-heading_medium">Raise an internal ticket</h1>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        The module decides who picks this up — the L1 owner from the ticket matrix.
+                    </p>
+                </div>
+            </div>
+
+            <template lwc:if={hasPicklistIssues}>
+                <div class="slds-notify slds-notify_alert slds-alert_warning slds-m-top_medium" role="alert">
+                    <lightning-icon icon-name="utility:warning" size="x-small"
+                        class="slds-m-right_x-small"></lightning-icon>
+                    <div>
+                        <p>Some picklists could not be loaded fully:</p>
+                        <ul class="slds-list_dotted">
+                            <template for:each={picklistIssues} for:item="issue">
+                                <li key={issue}>{issue}</li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ---------------- Module ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Module</h2>
+
+            <lightning-combobox
+                label="Module"
+                required
+                placeholder="Select a module"
+                value={form.moduleId}
+                options={moduleOptions}
+                data-field="moduleId"
+                onchange={handleFieldChange}>
+            </lightning-combobox>
+
+            <template lwc:if={showAssignee}>
+                <div class="assignee-callout slds-box slds-box_x-small slds-m-top_x-small">
+                    <template lwc:if={hasNoAssignee}>
+                        <lightning-icon icon-name="utility:warning" size="x-small"
+                            class="slds-m-right_x-small"></lightning-icon>
+                        <span>No L1 owner is set for this module — the ticket will be assigned to you.</span>
+                    </template>
+                    <template lwc:else>
+                        <lightning-icon icon-name="utility:user" size="x-small"
+                            class="slds-m-right_x-small"></lightning-icon>
+                        <span>Will be assigned to <b>{assigneeName}</b>.</span>
+                    </template>
+                </div>
+            </template>
+
+            <template lwc:if={hasNoModules}>
+                <p class="slds-text-body_small slds-text-color_weak slds-p-top_xx-small">
+                    No modules found in the ticket matrix.
+                </p>
+            </template>
+
+            <!-- ---------------- Routing ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Routing</h2>
+
+            <div class="slds-grid slds-wrap slds-gutters_small">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <!--
+                      Rendered as static text rather than a disabled combobox when it comes
+                      from the user's profile: a greyed-out control still reads as editable.
+                    -->
+                    <template lwc:if={isDepartmentLocked}>
+                        <span class="slds-form-element__label">Department</span>
+                        <div class="slds-form-element__static read-only-value">
+                            {departmentDisplay}
+                            <lightning-icon icon-name="utility:lock" size="xx-small"
+                                alternative-text="From your profile"
+                                class="slds-m-left_xx-small"></lightning-icon>
+                        </div>
+                        <p class="slds-text-body_small slds-text-color_weak">
+                            Taken from your profile.
+                        </p>
+                    </template>
+                    <template lwc:else>
+                        <lightning-combobox
+                            label="Department"
+                            required
+                            value={form.department}
+                            options={departmentOptions}
+                            data-field="department"
+                            onchange={handleFieldChange}>
+                        </lightning-combobox>
+                        <template lwc:if={hasDepartmentNote}>
+                            <p class="slds-text-body_small slds-text-color_weak slds-p-top_xx-small">
+                                {departmentNote}
+                            </p>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-combobox
+                        label="Priority"
+                        required
+                        value={form.priority}
+                        options={priorityOptions}
+                        data-field="priority"
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- ---------------- Detail ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Detail</h2>
+
+            <lightning-input
+                label="Subject"
+                required
+                max-length="255"
+                value={form.subject}
+                data-field="subject"
+                onchange={handleFieldChange}>
+            </lightning-input>
+
+            <div class="slds-p-top_small">
+                <lightning-textarea
+                    label="Description"
+                    required
+                    placeholder="What is happening, and what did you expect instead?"
+                    value={form.description}
+                    data-field="description"
+                    onchange={handleFieldChange}>
+                </lightning-textarea>
+            </div>
+
+            <!-- ---------------- Attachments ---------------- -->
+            <h2 class="slds-text-title_caps slds-p-vertical_x-small slds-p-top_medium">Attachments</h2>
+
+            <!--
+              No accept attribute, so every file type is allowed, video included.
+              record-id points at the running user because the ticket does not exist yet:
+              the file uploads immediately and is relinked to the ticket on save.
+            -->
+            <lightning-file-upload
+                label="Add files"
+                name="ticketFiles"
+                record-id={stagingRecordId}
+                multiple
+                onuploadfinished={handleUploadFinished}>
+            </lightning-file-upload>
+            <p class="slds-text-body_small slds-text-color_weak slds-p-top_xx-small">
+                Any file type, up to {maxFileSizeLabel} each. Files move onto the ticket when you raise it.
+            </p>
+
+            <template lwc:if={hasFiles}>
+                <ul class="slds-listbox slds-listbox_horizontal slds-p-top_x-small">
+                    <template for:each={stagedFiles} for:item="file">
+                        <li key={file.documentId} class="slds-listbox-item">
+                            <lightning-pill
+                                label={file.name}
+                                name={file.documentId}
+                                onremove={handleRemoveFile}>
+                                <lightning-icon icon-name="doctype:attachment"
+                                    alternative-text="File" size="x-small"></lightning-icon>
+                            </lightning-pill>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-p-top_medium">
+                    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                        <lightning-icon icon-name="utility:error" variant="inverse" size="x-small"
+                            class="slds-m-right_x-small"></lightning-icon>
+                        <span>{errorMessage}</span>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- ---------------- Footer ---------------- -->
+        <footer class="slds-border_top slds-p-around_small slds-text-align_right">
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-m-right_x-small">
+            </lightning-button>
+            <lightning-button
+                variant="brand"
+                label="Raise Ticket"
+                disabled={isSaving}
+                onclick={handleSave}>
+            </lightning-button>
+        </footer>
+    </div>
+</template>

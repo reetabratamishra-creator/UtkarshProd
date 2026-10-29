@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LastName_not_Special_character_or_Number</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT(REGEX( LastName , &quot;^[A-Za-z]+( [A-Za-z]+)*$&quot;))</errorConditionFormula>
+    <errorDisplayField>LastName</errorDisplayField>
+    <errorMessage>Name field can&apos;t be Number and Special Character</errorMessage>
+</ValidationRule>

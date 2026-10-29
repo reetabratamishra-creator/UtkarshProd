@@ -1,0 +1,128 @@
+<template>
+  <lightning-card title="Email Campaign Report" icon-name="standard:email">
+    <div class="slds-p-around_medium">
+      <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+
+      <template if:true={errorMessage}>
+        <div class="slds-notify slds-notify_alert slds-theme_error slds-m-bottom_small" role="alert">
+          <span class="slds-assistive-text">error</span>
+          <h2>{errorMessage}</h2>
+        </div>
+      </template>
+
+      <div class="slds-m-top_small">
+        <lightning-radio-group
+          name="product"
+          label="Product Name"
+          options={productOptions}
+          value={selectedProduct}
+          type="radio"
+          onchange={handleProductChange}
+          required
+        ></lightning-radio-group>
+      </div>
+
+      <div class="slds-m-top_medium">
+        <lightning-input
+          type="search"
+          data-id="subjectSearchInput"
+          name="campaignEmailSubject"
+          label="Campaign Email Subject"
+          value={subjectSearchTerm}
+          placeholder="Type subject to filter (leave blank for all)"
+          onchange={handleSubjectSearchChange}
+          oninput={handleSubjectSearchChange}
+        ></lightning-input>
+        <p class="slds-text-body_small slds-m-top_x-small">
+          All delivery results load automatically when you open this page. Type a subject
+          and click Fetch Report to filter, or click Clear Filter to reload all results.
+        </p>
+      </div>
+
+      <div class="slds-m-top_medium slds-grid slds-gutters slds-grid_vertical-align-center">
+        <div class="slds-col">
+          <lightning-button
+            variant="brand"
+            label="Fetch Report"
+            onclick={handleFetch}
+            disabled={disableFetch}
+          ></lightning-button>
+        </div>
+        <div class="slds-col">
+          <lightning-button
+            variant="neutral"
+            label="Clear Filter"
+            onclick={handleClearFilter}
+            disabled={disableClearFilter}
+          ></lightning-button>
+        </div>
+        <div class="slds-col">
+          <lightning-button
+            variant="neutral"
+            label="Back to Campaigns"
+            onclick={handleBackToList}
+          ></lightning-button>
+        </div>
+      </div>
+
+      <template if:true={showReportSection}>
+        <template if:true={showEmptyState}>
+          <div class="slds-box slds-theme_shade slds-m-top_large empty-state-panel">
+            <h3 class="slds-text-heading_small slds-m-bottom_x-small">{emptyStateTitle}</h3>
+            <p class="slds-text-body_regular">{emptyStateMessage}</p>
+          </div>
+        </template>
+
+        <template if:true={hasReport}>
+          <div class="slds-m-top_large">
+            <h2 class="slds-text-heading_small slds-m-bottom_small">Report</h2>
+            <dl class="slds-dl_horizontal">
+              <dt class="slds-dl_horizontal__label">Product Name</dt>
+              <dd class="slds-dl_horizontal__detail">{productName}</dd>
+              <dt class="slds-dl_horizontal__label">Campaign Email Subject</dt>
+              <dd class="slds-dl_horizontal__detail">{activeSubjectFilter}</dd>
+              <dt class="slds-dl_horizontal__label">Lookback</dt>
+              <dd class="slds-dl_horizontal__detail">Last 48 hours</dd>
+            </dl>
+
+            <div class="slds-box slds-theme_shade slds-m-top_medium slds-m-bottom_medium consolidated-summary">
+              <h3 class="slds-text-heading_small slds-m-bottom_small">Summary</h3>
+              <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5">
+                  <p class="slds-text-title_caps slds-m-bottom_xx-small">Total Recipients</p>
+                  <p class="slds-text-heading_medium">{totalRecipients}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5">
+                  <p class="slds-text-title_caps slds-m-bottom_xx-small">Total Delivered</p>
+                  <p class="slds-text-heading_medium">{totalDelivered}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5">
+                  <p class="slds-text-title_caps slds-m-bottom_xx-small">Total Failed</p>
+                  <p class="slds-text-heading_medium">{totalFailed}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5">
+                  <p class="slds-text-title_caps slds-m-bottom_xx-small">Total Pending</p>
+                  <p class="slds-text-heading_medium">{totalPending}</p>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-5">
+                  <p class="slds-text-title_caps slds-m-bottom_xx-small">Total Opened</p>
+                  <p class="slds-text-heading_medium">{totalOpened}</p>
+                </div>
+              </div>
+            </div>
+
+            <lightning-datatable
+              key-field="indexNo"
+              data={summaryRows}
+              columns={columns}
+              hide-checkbox-column
+              class="slds-m-top_small"
+            ></lightning-datatable>
+          </div>
+        </template>
+      </template>
+    </div>
+  </lightning-card>
+</template>

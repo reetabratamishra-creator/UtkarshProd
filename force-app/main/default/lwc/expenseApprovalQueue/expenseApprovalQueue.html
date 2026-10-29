@@ -1,0 +1,181 @@
+<template>
+    <lightning-card title="Pending Expense Approvals" icon-name="standard:approval">
+        <div slot="actions">
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                onclick={handleRefresh}
+                variant="border-filled">
+            </lightning-button-icon>
+        </div>
+
+        <!-- Summary -->
+        <div class="slds-p-horizontal_medium slds-p-bottom_small">
+            <div class="slds-text-body_regular slds-text-color_weak">
+                {pendingCount} pending approval(s) | Total Amount: 
+                <lightning-formatted-number
+                    value={totalPendingAmount}
+                    format-style="currency"
+                    currency-code="INR"
+                    minimum-fraction-digits="2"
+                    class="slds-text-heading_small">
+                </lightning-formatted-number>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <!-- <template if:true={hasExpenses}>
+            <div class="slds-p-horizontal_medium">
+                <lightning-datatable
+                    key-field="Id"
+                    data={expenses}
+                    columns={columns}
+                    sort-direction={sortDirection}
+                    sorted-by={sortBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column
+                    show-row-number-column>
+                </lightning-datatable>
+            </div>
+        </template> -->
+        <template if:true={hasExpenses}>
+            <div class="custom-table-wrapper">
+                <div class="table-scroll-inner">
+                    <!-- Header row (hidden on mobile via CSS) -->
+                    <div class="table-header" role="row">
+                        <div class="th" data-field="Name" onclick={handleSort}>Expense #</div>
+                        <div class="th" data-field="employeeName" onclick={handleSort}>Employee</div>
+                        <div class="th" data-field="Employee_Level__c" onclick={handleSort}>Level</div>
+                        <div class="th" data-field="Total_Amount__c" onclick={handleSort}>Amount</div>
+                        <div class="th" data-field="Status__c" onclick={handleSort}>Status</div>
+                        <div class="th" data-field="Submitted_Date__c" onclick={handleSort}>Submitted</div>
+                        <div class="th" data-field="Travel_Start_Date__c" onclick={handleSort}>Travel Start</div>
+                        <div class="th" data-field="Travel_End_Date__c" onclick={handleSort}>Travel End</div>
+                        <div class="th" data-field="daysPending" onclick={handleSort}>Days Pending</div>
+                        <div class="th" data-field="Purpose__c" onclick={handleSort}>Purpose</div>
+                        <div class="th actions-col">Actions</div>
+                    </div>
+
+                    <!-- Rows -->
+                    <template for:each={expenses} for:item="exp">
+                        <div key={exp.Id} class="table-row" role="row">
+                            <div class="td" data-label="Expense #">
+                                <a href={exp.expenseUrl} target="_blank">{exp.Name}</a>
+                            </div>
+                            <div class="td" data-label="Employee">{exp.employeeName}</div>
+                            <div class="td" data-label="Level">{exp.Employee_Level__c}</div>
+                            <div class="td" data-label="Amount">
+                                <lightning-formatted-number
+                                    value={exp.Total_Amount__c}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    minimum-fraction-digits="2">
+                                </lightning-formatted-number>
+                            </div>
+                            <div class="td" data-label="Status">
+                                {exp.Status__c}
+                            </div>
+                            <div class="td" data-label="Submitted">
+                                <lightning-formatted-date-time value={exp.Submitted_Date__c}></lightning-formatted-date-time>
+                            </div>
+                            <div class="td" data-label="Travel Start">
+                                <lightning-formatted-date-time
+                                    value={exp.Travel_Start_Date__c}>
+                                </lightning-formatted-date-time>
+                            </div>
+
+                            <div class="td" data-label="Travel End">
+                                <lightning-formatted-date-time
+                                    value={exp.Travel_End_Date__c}>
+                                </lightning-formatted-date-time>
+                            </div>
+                            <div class="td" data-label="Days Pending">
+                                <span class={exp.pendingBadgeClass}>{exp.daysPending}</span>
+                            </div>
+                            <div class="td" data-label="Purpose">{exp.Purpose__c}</div>
+                            <div class="td actions-col" data-label="Actions">
+                                <lightning-button-icon icon-name="utility:preview" alternative-text="View"
+                                    data-id={exp.Id} data-action="view" onclick={handleAction}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:check" alternative-text="Approve"
+                                    variant="brand" data-id={exp.Id} data-action="approve" onclick={handleAction}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:close" alternative-text="Reject"
+                                    variant="destructive-text" data-id={exp.Id} data-action="reject" onclick={handleAction}>
+                                </lightning-button-icon>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- Empty State -->
+        <template if:false={hasExpenses}>
+            <div class="slds-p-around_medium">
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-align_center">
+                        <h3 class="slds-text-heading_medium">No Pending Approvals</h3>
+                        <p class="slds-text-body_regular slds-m-top_small">
+                            There are no expenses waiting for your approval.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Error State -->
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">error</span>
+                    <h2>Error loading pending approvals. Please try again or contact your administrator.</h2>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+
+    <!-- Rejection Modal -->
+    <template if:true={showRejectModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" 
+                            title="Close" onclick={closeRejectModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Reject Expense</h2>
+                </header>
+
+                <!-- Modal Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-textarea
+                        label="Rejection Comments"
+                        placeholder="Please provide reason for rejection..."
+                        value={rejectionComments}
+                        onchange={handleCommentsChange}
+                        required
+                        max-length="255">
+                    </lightning-textarea>
+                </div>
+
+                <!-- Modal Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button 
+                        label="Cancel" 
+                        onclick={closeRejectModal}>
+                    </lightning-button>
+                    <lightning-button 
+                        variant="destructive" 
+                        label="Reject Expense" 
+                        onclick={handleReject}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

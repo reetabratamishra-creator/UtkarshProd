@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Steel Tubular Poles</label>
+    <protected>false</protected>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">Steel_Tubular_Poles</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Steel Tubular Poles</value>
+    </values>
+    <values>
+        <field>File_Name__c</field>
+        <value xsi:type="xsd:string">Steel_Tubular_Poles.pdf</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide Steel Tubular Poles built for lighting and power distribution across highways, urban streets, and industrial areas. Galvanised for corrosion resistance with long operational life and minimal maintenance.
+Types: Swaged Poles | Lighting Poles | GI Poles | MS Poles | Solar lighting poles etc.</value>
+    </values>
+    <values>
+        <field>Public_Download_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C20000055M9t&amp;d=%2Fa%2FC2000000udWd%2FIEo0DYCZIxN7dZgQ2o3CAlPq09bQ5VbwU75LUnipcMQ&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Steel_Tubular_Poles_pdf</value>
+    </values>
+</CustomMetadata>

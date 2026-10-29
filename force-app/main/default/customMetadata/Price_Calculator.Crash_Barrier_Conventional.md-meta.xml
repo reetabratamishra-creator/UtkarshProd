@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Crash Barrier Conventional</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">Conventional Type</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">[{&quot;apiName&quot;:&quot;b_rate&quot;,&quot;defaultValue&quot;:76},{&quot;apiName&quot;:&quot;w_SSSB&quot;,&quot;defaultValue&quot;:0},{&quot;apiName&quot;:&quot;w_SSDB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;w_DSSB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;w_DSDB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;t_SSSB&quot;,&quot;defaultValue&quot;:0},{&quot;apiName&quot;:&quot;t_SSDB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;t_DSSB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;t_DSDB&quot;,&quot;defaultValue&quot;:1},{&quot;apiName&quot;:&quot;zinc_reg&quot;,&quot;defaultValue&quot;:0},{&quot;apiName&quot;:&quot;zinc_medium_55_delta&quot;,&quot;defaultValue&quot;:2},{&quot;apiName&quot;:&quot;zinc_avg_77&quot;,&quot;defaultValue&quot;:4},{&quot;apiName&quot;:&quot;zinc_min_77&quot;,&quot;defaultValue&quot;:6},{&quot;apiName&quot;:&quot;con_zinc_reg&quot;,&quot;defaultValue&quot;:40},{&quot;apiName&quot;:&quot;con_zinc_medium_55&quot;,&quot;defaultValue&quot;:55},{&quot;apiName&quot;:&quot;con_zinc_avg_77&quot;,&quot;defaultValue&quot;:65},{&quot;apiName&quot;:&quot;con_zinc_min_77&quot;,&quot;defaultValue&quot;:77}]</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

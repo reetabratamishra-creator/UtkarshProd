@@ -1,0 +1,916 @@
+<template>
+    <div class="expense-card">
+        <!-- Header -->
+        <div class="card-header">
+            <div class="header-icon">
+                <lightning-icon icon-name="custom:custom17" size="medium"></lightning-icon>
+            </div>
+            <div class="header-text">
+                <h1 class="card-title">{cardTitle}</h1>
+                <p class="card-subtitle">{cardSubtitle}</p>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <template if:true={isLoadingEligibility}>
+                <div class="spinner-overlay">
+                    <lightning-spinner alternative-text="Loading eligibility" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <template if:true={eligibilityError}>
+                <div class="eligibility-error">
+                    {eligibilityError}
+                </div>
+            </template>
+
+            <!-- Edit mode (rejected expense resubmission) -->
+            <template if:true={isLoadingEdit}>
+                <div class="spinner-overlay">
+                    <lightning-spinner alternative-text="Loading expense" size="medium"></lightning-spinner>
+                </div>
+            </template>
+            <template if:true={editLoadError}>
+                <div class="eligibility-error">
+                    {editLoadError}
+                </div>
+            </template>
+            <template if:true={showEditBanner}>
+                <div class="edit-banner">
+                    <div class="edit-banner-status">{editExpenseStatus}</div>
+                    <template if:true={hasEditRemark}>
+                        <div class="edit-banner-remark">
+                            <span class="edit-banner-label">Remark:</span> {editExpenseRemark}
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={hasEligibility}>
+                <!-- Travel Details Section -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-icon">✈️</span>
+                        <span class="section-title">Travel Details</span>
+                    </div>
+
+                    <lightning-layout multiple-rows class="travel-details-grid">
+                        <!-- 1. Subject Field right at the top -->
+                        <lightning-layout-item size="12" padding="around-small">
+                            <lightning-input type="text" label="Subject" name="subject"
+                                placeholder="Enter purpose or title of travel / expense claim" value={formData.subject}
+                                onchange={handleInputChange} class="uniform-input" required>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <!-- Travel Dates -->
+                        <lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+                            <lightning-input type="date" label="Travel Start Date" name="startDate"
+                                value={formData.startDate} onchange={handleInputChange} class="uniform-input" required>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+                            <lightning-input type="date" label="Travel End Date" name="endDate" min={minTravelEndDate}
+                                value={formData.endDate} onchange={handleInputChange} class="uniform-input" required>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <!-- City & Tier -->
+                        <lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+                            <lightning-input type="text" label="City" name="city" list="citiesList"
+                                value={formData.city} onchange={handleCityChange} class="uniform-input" required>
+                            </lightning-input>
+                            <datalist id="citiesList">
+                                <template for:each={allCitySuggestions} for:item="city">
+                                    <option key={city} value={city}></option>
+                                </template>
+                            </datalist>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" medium-device-size="6" padding="around-small">
+                            <lightning-input type="text" label="City Tier" value={formData.cityTier}
+                                class="uniform-input" disabled>
+                            </lightning-input>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+
+                <!-- Expense Types Section -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-icon">🧾</span>
+                        <span class="section-title">Select Expense Types</span>
+                    </div>
+
+                    <div class="toggle-grid">
+                        <template for:each={expenseTypeOptions} for:item="opt">
+                            <div key={opt.value} class="toggle-card">
+                                <lightning-input type="toggle" label={opt.label} value={opt.value} data-type={opt.value}
+                                    checked={opt.checked}
+                                    message-toggle-active="Added" message-toggle-inactive="Skip"
+                                    onchange={handleTypeSelection}>
+                                </lightning-input>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Expense Details Section -->
+                <template if:true={hasSelectedTypes}>
+                    <div class="section-block">
+                        <div class="section-header">
+                            <span class="section-icon">📋</span>
+                            <span class="section-title">Expense Details</span>
+                        </div>
+
+                        <!-- Private Vehicle Section (Custom Mobile-Friendly Datatable) -->
+                        <template if:true={showPrivateVehicleSection}>
+                            <div class="expense-group">
+                                <div class="group-header">
+                                    <span class="group-badge">Private Vehicle</span>
+                                    <span class="group-label">Logged Trips &amp; Claims</span>
+                                </div>
+
+                                <template if:true={isLoadingPrivateVehicle}>
+                                    <div class="pv-spinner-container">
+                                        <lightning-spinner alternative-text="Loading trips"
+                                            size="small"></lightning-spinner>
+                                    </div>
+                                </template>
+
+                                <template if:false={isLoadingPrivateVehicle}>
+                                    <template if:true={hasPrivateVehicleLines}>
+                                        <div class="custom-table-container">
+                                            <table class="custom-datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-checkbox">
+                                                            <lightning-input type="checkbox"
+                                                                checked={isAllPrivateVehicleSelected}
+                                                                onchange={handleSelectAllPrivateVehicle}
+                                                                variant="label-hidden" aria-label="Select All Trips">
+                                                            </lightning-input>
+                                                        </th>
+                                                        <th class="col-date">Travel Date</th>
+                                                        <th class="col-distance">AI Extracted Distance</th>
+                                                        <th class="col-distance">Manually Extracted Distance</th>
+                                                        <th class="col-vehicle">Vehicle Type</th>
+                                                        <th class="col-amount">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={privateVehicleLines} for:item="row">
+                                                        <tr key={row.Id} class={row.rowClass}>
+                                                            <td class="col-checkbox" data-label="Select">
+                                                                <lightning-input type="checkbox" data-id={row.Id}
+                                                                    checked={row.selected}
+                                                                    onchange={handlePrivateVehicleRowSelect}
+                                                                    variant="label-hidden" aria-label="Select Trip">
+                                                                </lightning-input>
+                                                            </td>
+                                                            <td class="col-date" data-label="Travel Date">
+                                                                <div class="cell-content">
+                                                                    <span class="cell-mobile-label">Travel Date</span>
+                                                                    <span
+                                                                        class="cell-value date-val">{row.formattedDate}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="col-distance" data-label="AI Extracted Distance">
+                                                                <div class="cell-content">
+                                                                    <span class="cell-mobile-label">AI Distance</span>
+                                                                    <span
+                                                                        class="cell-value badge ai-badge">{row.aiDistanceFormatted}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="col-distance"
+                                                                data-label="Manually Extracted Distance">
+                                                                <div class="cell-content">
+                                                                    <span class="cell-mobile-label">Manual
+                                                                        Distance</span>
+                                                                    <span
+                                                                        class="cell-value badge manual-badge">{row.manualDistanceFormatted}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="col-vehicle" data-label="Vehicle Type">
+                                                                <div class="cell-content">
+                                                                    <span class="cell-mobile-label">Vehicle Type</span>
+                                                                    <span
+                                                                        class="cell-value vehicle-val">{row.vehicleType}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="col-amount" data-label="Amount">
+                                                                <div class="cell-content">
+                                                                    <span class="cell-mobile-label">Amount</span>
+                                                                    <span
+                                                                        class="cell-value amount-val">{row.amountFormatted}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Summary Box -->
+                                        <template if:true={showPrivateVehicleSummary}>
+                                            <div class="pv-summary-card">
+                                                <div class="pv-summary-header">
+                                                    <span class="pv-summary-badge">Summary</span>
+                                                    <span class="pv-summary-title">Selected Trips Calculation</span>
+                                                </div>
+                                                <div class="pv-summary-grid">
+                                                    <div class="pv-stat-box">
+                                                        <span class="pv-stat-label">Trips Selected</span>
+                                                        <span
+                                                            class="pv-stat-number">{selectedPrivateVehicleCount}</span>
+                                                    </div>
+                                                    <div class="pv-stat-box">
+                                                        <span class="pv-stat-label">Total Distance Selected (AI)</span>
+                                                        <span class="pv-stat-number">{totalPrivateVehicleDistance}
+                                                            KM</span>
+                                                    </div>
+                                                    <div class="pv-stat-box pv-stat-highlight">
+                                                        <span class="pv-stat-label">Total Amount to be Claimed</span>
+                                                        <span
+                                                            class="pv-stat-number highlight-amount">₹{totalPrivateVehicleAmount}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+
+                                    <template if:false={hasPrivateVehicleLines}>
+                                        <div class="pv-empty-state">
+                                            <span class="pv-empty-icon">🚗</span>
+                                            <p class="pv-empty-text">No eligible private vehicle expense records found
+                                                for the selected travel date range ({formData.startDate} to
+                                                {formData.endDate}).</p>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </template>
+
+                        <template for:each={selectedTypesArray} for:item="typeGroup">
+                            <div key={typeGroup.name} class="expense-group">
+
+                                <div class="group-header">
+                                    <span class="group-badge">{typeGroup.name}</span>
+                                    <span class="group-label">Expenses</span>
+                                </div>
+
+                                <template for:each={typeGroup.items} for:item="item" for:index="index">
+                                    <div key={item.id} class="expense-row">
+                                        <lightning-layout multiple-rows class="expense-row-layout">
+
+                                            <!-- FOODING: Date (3), Amount (3), Upload (5), Delete (1) = 12 -->
+                                            <template if:true={item.isFooding}>
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="Date" data-type={typeGroup.name}
+                                                        data-index={index} value={item.startDate}
+                                                        min={formData.startDate} max={formData.endDate}
+                                                        onchange={handleStartDateChange} class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="5"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <template if:true={item.isBillMandatory}>
+                                                                <abbr class="slds-required" title="required">*</abbr>
+                                                            </template>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- MISCELLANEOUS: Date (2), Misc Cost (3), Amount (2), Upload (4), Delete (1) = 12 -->
+                                            <template if:true={item.isMiscellaneous}>
+                                                <lightning-layout-item size="12" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="Date" data-type={typeGroup.name}
+                                                        data-index={index} value={item.startDate}
+                                                        min={formData.startDate} max={formData.endDate}
+                                                        onchange={handleStartDateChange} class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-input type="text" label="Miscellaneous Items"
+                                                        placeholder="e.g. Courier, stationery, parking"
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.miscellaneousCost}
+                                                        onchange={handleMiscellaneousCostChange} class="uniform-input"
+                                                        required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="4"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <abbr class="slds-required" title="required">*</abbr>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- LODGING: From (2), To (2), Amount (3), Upload (4), Delete (1) = 12 -->
+                                            <template if:true={item.isLodging}>
+                                                <lightning-layout-item size="6" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="From" data-type={typeGroup.name}
+                                                        data-index={index} value={item.startDate}
+                                                        min={formData.startDate} max={formData.endDate}
+                                                        onchange={handleStartDateChange} class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="6" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="To" data-type={typeGroup.name}
+                                                        data-index={index} value={item.endDate} min={item.startDate}
+                                                        max={formData.endDate} onchange={handleEndDateChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="4"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <abbr class="slds-required" title="required">*</abbr>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- AIR: Journey Date (3), Travel Class (3), Amount (2), Upload (3), Delete (1) = 12 -->
+                                            <template if:true={item.isAir}>
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="Journey Date"
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.startDate} min={formData.startDate}
+                                                        max={formData.endDate} onchange={handleStartDateChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-combobox label="Travel Class" options={airClassOptions}
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.selectedValue} onchange={handleLineDataChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-combobox>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <abbr class="slds-required" title="required">*</abbr>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- TRAIN: Journey Date (3), Travel Class (3), Amount (2), Upload (3), Delete (1) = 12 -->
+                                            <template if:true={item.isTrain}>
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="Journey Date"
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.startDate} min={formData.startDate}
+                                                        max={formData.endDate} onchange={handleStartDateChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-combobox label="Travel Class" options={trainClassOptions}
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.selectedValue} onchange={handleLineDataChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-combobox>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <abbr class="slds-required" title="required">*</abbr>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- ROADWAYS: Journey Date (3), Vehicle Type (3), Amount (2), Upload (3), Delete (1) = 12 -->
+                                            <template if:true={item.isRoadways}>
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-input type="date" label="Journey Date"
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.startDate} min={formData.startDate}
+                                                        max={formData.endDate} onchange={handleStartDateChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <lightning-combobox label="Vehicle Type" options={roadwayOptions}
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        value={item.selectedValue} onchange={handleLineDataChange}
+                                                        class="uniform-input" required>
+                                                    </lightning-combobox>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2"
+                                                    padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input type="number" label="Amount"
+                                                            formatter="currency" step="0.01" data-type={typeGroup.name}
+                                                            data-index={index} value={item.amount}
+                                                            onchange={handleAmountChange} class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="3"
+                                                    padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <template if:true={item.isBillMandatory}>
+                                                                <abbr class="slds-required" title="required">*</abbr>
+                                                            </template>Upload Bill / Receipt
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name"
+                                                                            title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button type="button" class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index} data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+
+                                            <!-- OWN VEHICLE (Commented out per requirement - to be restored later)
+                                            <template if:true={item.isOwnVehicle}>
+                                                <lightning-layout-item size="6" medium-device-size="2" padding="around-small">
+                                                    <lightning-input
+                                                        type="date"
+                                                        label="From"
+                                                        data-type={typeGroup.name}
+                                                        data-index={index}
+                                                        value={item.startDate}
+                                                        min={formData.startDate}
+                                                        max={formData.endDate}
+                                                        onchange={handleStartDateChange}
+                                                        class="uniform-input"
+                                                        required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="6" medium-device-size="2" padding="around-small">
+                                                    <lightning-input
+                                                        type="date"
+                                                        label="To"
+                                                        data-type={typeGroup.name}
+                                                        data-index={index}
+                                                        value={item.endDate}
+                                                        min={item.startDate}
+                                                        max={formData.endDate}
+                                                        onchange={handleEndDateChange}
+                                                        class="uniform-input"
+                                                        required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2" padding="around-small">
+                                                    <lightning-combobox
+                                                        label="Vehicle Type"
+                                                        options={ownVehicleOptions}
+                                                        data-type={typeGroup.name}
+                                                        data-index={index}
+                                                        value={item.selectedValue}
+                                                        onchange={handleLineDataChange}
+                                                        class="uniform-input"
+                                                        required>
+                                                    </lightning-combobox>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="2" padding="around-small">
+                                                    <lightning-input
+                                                        type="number"
+                                                        label="Distance (KM)"
+                                                        step="0.01"
+                                                        min="0"
+                                                        data-type={typeGroup.name}
+                                                        data-index={index}
+                                                        value={item.distanceKm}
+                                                        onchange={handleDistanceChange}
+                                                        class="uniform-input"
+                                                        required>
+                                                    </lightning-input>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="12" medium-device-size="1" padding="around-small">
+                                                    <div class={item.amountClass}>
+                                                        <lightning-input
+                                                            type="number"
+                                                            label="Amount"
+                                                            formatter="currency"
+                                                            step="0.01"
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            value={item.amount}
+                                                            onchange={handleAmountChange}
+                                                            class="uniform-input"
+                                                            required>
+                                                        </lightning-input>
+                                                    </div>
+                                                </lightning-layout-item>
+
+                                                <lightning-layout-item size="10" medium-device-size="2" padding="around-small">
+                                                    <div class="file-upload-wrapper">
+                                                        <label class="file-upload-label">
+                                                            <abbr class="slds-required" title="required">*</abbr>Upload Bill
+                                                        </label>
+                                                        <lightning-file-upload
+                                                            label=""
+                                                            variant="label-hidden"
+                                                            name="billUpload"
+                                                            record-id={stagingRecordId}
+                                                            multiple
+                                                            data-type={typeGroup.name}
+                                                            data-index={index}
+                                                            onuploadfinished={handleBillUpload}>
+                                                        </lightning-file-upload>
+                                                        <template if:true={item.hasBills}>
+                                                            <div class="file-chips-container">
+                                                                <template for:each={item.bills} for:item="f">
+                                                                    <span key={f.id} class="file-chip bill-chip">
+                                                                        <span class="file-chip-name" title={f.fileName}>📄 {f.fileName}</span>
+                                                                        <button
+                                                                            type="button"
+                                                                            class="file-chip-remove"
+                                                                            data-type={typeGroup.name}
+                                                                            data-index={index}
+                                                                            data-file-id={f.id}
+                                                                            data-document-id={f.documentId}
+                                                                            onclick={handleRemoveBill}
+                                                                            title="Remove file">✕</button>
+                                                                    </span>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </lightning-layout-item>
+                                            </template>
+                                            -->
+
+                                            <!-- Common Delete Button Column (Always size 1 on medium device, never wraps) -->
+                                            <lightning-layout-item size="2" medium-device-size="1"
+                                                padding="around-small" class="action-col">
+                                                <div class="delete-btn-wrapper">
+                                                    <lightning-button-icon icon-name="utility:delete"
+                                                        variant="border-filled" alternative-text="Remove Row"
+                                                        title="Remove Row" class="delete-row-btn"
+                                                        data-type={typeGroup.name} data-index={index}
+                                                        onclick={handleRemoveRow}>
+                                                    </lightning-button-icon>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                        </lightning-layout>
+
+                                        <!-- Limit Hint / Status -->
+                                        <template if:true={item.showLimitLabel}>
+                                            <div class={item.limitHintClass}>
+                                                {item.limitLabel}
+                                            </div>
+                                        </template>
+
+                                        <!-- 2. Conditional Justification & Proof Upload Section -->
+                                        <template if:true={item.showJustificationSection}>
+                                            <div class="out-of-policy-box">
+                                                <div class="out-of-policy-header">
+                                                    <span class="out-of-policy-icon">⚠️</span>
+                                                    <template if:true={item.requiresJustificationAndProof}>
+                                                        <span class="out-of-policy-title">Special Approval Required (Limit
+                                                            Exceeded / Out of Criteria)</span>
+                                                    </template>
+                                                    <template if:true={item.requiresJustificationOnly}>
+                                                        <span class="out-of-policy-title">Justification Required (Overlapping Dates)</span>
+                                                    </template>
+                                                </div>
+
+                                                <!-- Lodging only: overlapping dates warning -->
+                                                <template if:true={item.hasDateOverlap}>
+                                                    <div class="overlap-message">{item.overlapMessage}</div>
+                                                </template>
+
+                                                <lightning-layout multiple-rows class="justification-row-layout">
+                                                    <lightning-layout-item size="12" medium-device-size="7"
+                                                        padding="around-small">
+                                                        <lightning-textarea label="Justification"
+                                                            placeholder="Provide reason for exceeding limit or choosing out-of-criteria class/vehicle..."
+                                                            data-type={typeGroup.name} data-index={index}
+                                                            value={item.justification}
+                                                            onchange={handleJustificationChange} required>
+                                                        </lightning-textarea>
+                                                    </lightning-layout-item>
+
+                                                    <lightning-layout-item size="12" medium-device-size="5"
+                                                        padding="around-small">
+                                                        <div class="file-upload-wrapper">
+                                                            <label class="file-upload-label">
+                                                                <template if:true={item.requiresJustificationAndProof}>
+                                                                    <abbr class="slds-required" title="required">*</abbr>
+                                                                </template>Upload Approval
+                                                            </label>
+                                                            <lightning-file-upload
+                                                                label=""
+                                                                variant="label-hidden"
+                                                                name="proofUpload"
+                                                                record-id={stagingRecordId}
+                                                                multiple
+                                                                data-type={typeGroup.name}
+                                                                data-index={index}
+                                                                onuploadfinished={handleProofUpload}>
+                                                            </lightning-file-upload>
+                                                            <!-- Proof Files Chips -->
+                                                            <template if:true={item.hasProofs}>
+                                                                <div class="file-chips-container">
+                                                                    <template for:each={item.proofs} for:item="p">
+                                                                        <span key={p.id} class="file-chip proof-chip">
+                                                                            <span class="file-chip-name"
+                                                                                title={p.fileName}>🛡️
+                                                                                {p.fileName}</span>
+                                                                            <button type="button"
+                                                                                class="file-chip-remove"
+                                                                                data-type={typeGroup.name}
+                                                                                data-index={index} data-file-id={p.id}
+                                                                                data-document-id={p.documentId}
+                                                                                onclick={handleRemoveProof}
+                                                                                title="Remove file">✕</button>
+                                                                        </span>
+                                                                    </template>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </div>
+                                        </template>
+
+                                    </div>
+                                </template>
+
+                                <div class="add-row-footer">
+                                    <lightning-button variant="base" label="+ Add Another Entry"
+                                        data-type={typeGroup.name} onclick={handleAddMoreRow}>
+                                    </lightning-button>
+                                </div>
+
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- Submit -->
+                <div class="submit-section">
+                    <lightning-button variant="brand" label={submitButtonLabel} onclick={saveExpense}
+                        disabled={isSubmitDisabled}>
+                    </lightning-button>
+                </div>
+            </template>
+
+            <template if:true={isSaving}>
+                <div class="spinner-overlay">
+                    <lightning-spinner alternative-text="Saving" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+        </div>
+    </div>
+</template>

@@ -1,0 +1,311 @@
+/* ========================================
+   CHAT CONTAINER & FLOATING BUBBLE
+   ======================================== */
+.premium-chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+.chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #0176d3, #1589ee);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(1, 118, 211, 0.4);
+    transition: all 0.3s ease;
+    z-index: 9998;
+}
+
+.chat-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(1, 118, 211, 0.6);
+}
+
+.chat-bubble.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
+}
+
+.chat-bubble.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.chat-header {
+    background: linear-gradient(135deg, #0176d3, #1589ee);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #4bca81;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.header-text h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sub-text {
+    margin: 0;
+    font-size: 11px;
+    opacity: 0.9;
+}
+/* ========================================
+   LANGUAGE SELECTOR
+   ======================================== */
+.lang-bar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #f3f3f3;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.lang-chip {
+    padding: 6px 14px;
+    border: 1px solid #d8d8d8;
+    background: white;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.lang-chip:hover {
+    background: #f9f9f9;
+    border-color: #0176d3;
+}
+
+.lang-chip.active {
+    background: #0176d3;
+    color: white;
+    border-color: #0176d3;
+}
+
+/* ========================================
+   MESSAGES AREA
+   ======================================== */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: #fafafa;
+}
+
+/* ========================================
+   FOOTER INPUT
+   ======================================== */
+.chat-footer {
+    padding: 16px;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    gap: 10px;
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 24px;
+    padding: 4px 8px 4px 16px;
+    transition: all 0.2s;
+}
+
+.input-wrapper:focus-within {
+    background: #e8e8e8;
+    box-shadow: 0 0 0 2px #0176d3;
+}
+
+.input-wrapper.disabled-bg {
+    background: #f9f9f9;
+    opacity: 0.6;
+}
+
+.custom-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 10px 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.custom-input::placeholder {
+    color: #999;
+}
+
+/* ========================================
+   MICROPHONE BUTTON - ENHANCED
+   ======================================== */
+.mic-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #FF6B6B, #EE5A6F);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.mic-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.5);
+}
+
+.mic-btn:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.mic-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #cccccc;
+    box-shadow: none;
+}
+
+.mic-btn.listening {
+    background: linear-gradient(135deg, #4bca81, #3ba76a);
+    animation: micPulse 1.5s infinite;
+    box-shadow: 0 4px 16px rgba(75, 202, 129, 0.5);
+}
+
+@keyframes micPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 16px rgba(75, 202, 129, 0.5);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 6px 24px rgba(75, 202, 129, 0.8);
+    }
+}
+
+.mic-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add a ripple effect for mic button */
+.mic-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease;
+}
+
+.mic-btn:active:not(:disabled)::before {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+}
+
+/* ========================================
+   SEND BUTTON
+   ======================================== */
+.send-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #0176d3, #1589ee);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(1, 118, 211, 0.3);
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(1, 118, 211, 0.5);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 480px) {
+    .premium-chat-container {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 120px);
+        bottom: 80px;
+        right: 20px;
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>High Mast &amp; Polygonal</label>
+    <protected>false</protected>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">HIGH MAST BROCHURE</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">High Mast &amp; Polygonal</value>
+    </values>
+    <values>
+        <field>File_Name__c</field>
+        <value xsi:type="xsd:string">High_mast_brochure.pdf</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide High-intensity lighting solutions for highways, ports, stadiums, railway yards, and industrial areas, designed for durability with a 25-year design life.
+Types: High Mast | Flag Mast | Stadium &amp; Sports Lighting Masts|Octagonal poles|Solar Street Light Poles|CCTV Poles etc.</value>
+    </values>
+    <values>
+        <field>Public_Download_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C2000005CJQb&amp;d=%2Fa%2FC2000000v04v%2FWFhdJGorqBaF_YZW0Cw9WXDpfBDCDMbLmg.fusgdGhI&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">High_mast_brochure_pdf</value>
+    </values>
+</CustomMetadata>

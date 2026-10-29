@@ -1,0 +1,357 @@
+<apex:page standardController="Quote" extensions="CrashBarrierQuoteController" renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: A4;
+                /* Create physical space at the top and bottom of every page for the header/footer */
+                margin-top: 40mm;    
+                margin-bottom: 35mm; 
+                margin-left: 15mm;
+                margin-right: 15mm;
+                
+                /* This injects the running elements into the page margins */
+                @top-center {
+                    content: element(header);
+                }
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+            
+            body {
+                font-family: sans-serif;
+                font-size: 11px;
+                color: #333;
+            }
+            
+            /* ── Assign the header and footer to the running elements ── */
+            .pdf-header {
+                position: running(header);
+            }
+            
+            .pdf-footer {
+                position: running(footer);
+                text-align: right;
+                font-size: 8px;
+                line-height: 1.3;
+                color: #333;
+            }
+
+            /* ── Specifications Table Styling ── */
+            .spec-table {
+                width: 100%;
+                border-collapse: collapse;
+                border: 1px solid #000;
+                margin-top: 5px;
+                margin-bottom: 20px;
+            }
+            .spec-table th, .spec-table td {
+                border: 1px solid #000;
+                padding: 6px;
+                text-align: center;
+            }
+            .spec-table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+                font-size: 10px;
+            }
+            .spec-table td {
+                font-size: 10px;
+            }
+            .table-title {
+                font-weight: bold;
+                font-size: 11px;
+                margin-top: 15px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="pdf-header">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 0; font-family: sans-serif; margin-top: 10mm;">
+                <tr>
+                    <td style="width: 100%; text-align: right; vertical-align: bottom; padding-bottom: 5px;">
+                        <img src="{!$Resource.UtkarshHeader}" alt="Utkarsh header" style="width: 100%; height: auto;"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <apex:repeat value="{!lineItems}" var="row">
+            
+            <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CRASH TESTED') || CONTAINS(UPPER(row['name']), 'CONVENTIONAL') || CONTAINS(UPPER(row['name']), 'RAILWAY') || CONTAINS(UPPER(row['name']), 'NON-SPACER')}">
+                
+                <div class="table-title">{!row['name']}</div>
+                
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 33%;">THICKNESS NAME</th>
+                            <th style="width: 33%;">BLACK THICKNESS</th>
+                            <th style="width: 33%;">FINISHED THICKNESS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td style="font-weight: bold;">BEAM</td>
+                            
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['tb_natrax_beam_thickness'], jsonData['wb_natrax_beam_thickness'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['tb_alka_beam_thickness'], jsonData['wb_alka_beam_thickness'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'TRANSPOLIS')}">
+                                    <apex:outputText value="{!jsonData['wb_trans_beam_thickness']}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY')}">
+                                    <!-- Was hardcoded 2. print_graded_thickness / print_nongraded_thickness are what the
+                                         offer PDF prints, so the two documents now always agree. The graded vs non-graded
+                                         test is the same CONTAINS('NON') the offer PDF uses. Deepanjan (13th August 2026) -->
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'NON'), BLANKVALUE(jsonData['print_nongraded_thickness'], '2'), BLANKVALUE(jsonData['print_graded_thickness'], '2'))}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_beam_thickness_input'], jsonData['ns_w_beam_section_beam_thickness_input'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'SSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_beamThickness_input'], jsonData['w_SSSB_w_beam_beamThickness_input']), 
+                                                              IF(CONTAINS(UPPER(row['name']), 'SSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_beamThickness_input'], jsonData['w_SSDB_w_beam_beamThickness_input']),
+                                                              IF(CONTAINS(UPPER(row['name']), 'DSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_beamThickness_input'], jsonData['w_DSSB_w_beam_beamThickness_input']),
+                                                              IF(CONTAINS(UPPER(row['name']), 'DSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_beamThickness_input'], jsonData['w_DSDB_w_beam_beamThickness_input']), ''))))}"/>
+                                </apex:outputPanel>
+                            </td>
+
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_natrax_beam_thickness']) + ((IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['tb_natrax_beam_thickness']) + ((IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_alka_beam_thickness']) + ((IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['tb_alka_beam_thickness']) + ((IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'TRANSPOLIS')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_trans_beam_thickness']) + ((IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <!-- Was hardcoded 2.15. Same black + zinc x 2 / 1000 rule as every other variant.
+                                     Deepanjan (13th August 2026) -->
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY') && NOT(CONTAINS(UPPER(row['name']), 'NON'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(BLANKVALUE(jsonData['print_graded_thickness'], '2')) + ((IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY') && CONTAINS(UPPER(row['name']), 'NON')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(BLANKVALUE(jsonData['print_nongraded_thickness'], '2')) + ((IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['ns_w_beam_section_beam_thickness_input']) + ((IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['ns_thrie_beam_section_beam_thickness_input']) + ((IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_SSSB_w_beam_beamThickness_input']) + ((IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_SSDB_w_beam_beamThickness_input']) + ((IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_DSSB_w_beam_beamThickness_input']) + ((IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_DSDB_w_beam_beamThickness_input']) + ((IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <!-- Conventional THRIE finished thickness. The four panels above are all gated
+                                     NOT(THRIE), so a Thrie row printed nothing here. The Thrie_* fields live in the
+                                     Conventional Type T-beam blueprint. Deepanjan (13th August 2026) -->
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSSB_beamThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSDB_beamThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSSB_beamThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSDB_beamThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="font-weight: bold;">POST</td>
+                            
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['tb_natrax_post_thickness'], jsonData['wb_natrax_post_thickness'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['tb_alka_post_thickness'], jsonData['wb_alka_post_thickness'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'TRANSPOLIS')}">
+                                    <apex:outputText value="{!jsonData['wb_trans_post_thickness']}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY')}">
+                                    <!-- Reads the estimator post thickness. BLANKVALUE keeps the old 4 when nobody
+                                         picked one, so this cell can never go empty the way it never did before.
+                                         Note the offer PDF still prints a hardcoded "4 MM thick" for the railway post
+                                         (crashBarrierVFPage lines 745 / 842) - it was left alone on purpose, so a
+                                         quote that picks 3.8 or 3.9 will show that here and 4 MM there.
+                                         Deepanjan (13th August 2026) -->
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'NON'), BLANKVALUE(jsonData['rlw_non_graded_section_post_thickness_input'], '4'), BLANKVALUE(jsonData['rlw_graded_section_post_thickness_input'], '4'))}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_post_thickness_input'], jsonData['ns_w_beam_section_post_thickness_input'])}"/>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL')}">
+                                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'SSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_postThickness_input'], jsonData['w_SSSB_w_beam_postThickness_input']), 
+                                                              IF(CONTAINS(UPPER(row['name']), 'SSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_postThickness_input'], jsonData['w_SSDB_w_beam_postThickness_input']),
+                                                              IF(CONTAINS(UPPER(row['name']), 'DSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_postThickness_input'], jsonData['w_DSSB_w_beam_postThickness_input']),
+                                                              IF(CONTAINS(UPPER(row['name']), 'DSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_postThickness_input'], jsonData['w_DSDB_w_beam_postThickness_input']), ''))))}"/>
+                                </apex:outputPanel>
+                            </td>
+
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_natrax_post_thickness']) + ((IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['tb_natrax_post_thickness']) + ((IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_alka_post_thickness']) + ((IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_alka_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ALKA') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['tb_alka_post_thickness']) + ((IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['tb_alka_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'TRANSPOLIS')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['wb_trans_post_thickness']) + ((IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_trans_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <!-- Was hardcoded 4.15, which silently assumed Minimum 77. Now the picked post
+                                     thickness (or 4 when none was picked) plus the real zinc allowance.
+                                     Deepanjan (13th August 2026) -->
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY') && NOT(CONTAINS(UPPER(row['name']), 'NON'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(BLANKVALUE(jsonData['rlw_graded_section_post_thickness_input'], '4')) + ((IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['rlw_graded_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'RAILWAY') && CONTAINS(UPPER(row['name']), 'NON')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(BLANKVALUE(jsonData['rlw_non_graded_section_post_thickness_input'], '4')) + ((IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['rlw_non_graded_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['ns_w_beam_section_post_thickness_input']) + ((IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['ns_w_beam_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NON-SPACER') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['ns_thrie_beam_section_post_thickness_input']) + ((IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Average'), 65, IF(CONTAINS(jsonData['ns_thrie_beam_section_zinc_coating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_SSSB_w_beam_postThickness_input']) + ((IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_SSSB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_SSDB_w_beam_postThickness_input']) + ((IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_SSDB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_DSSB_w_beam_postThickness_input']) + ((IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_DSSB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['w_DSDB_w_beam_postThickness_input']) + ((IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['w_DSDB_w_beam_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+
+                                <!-- Conventional THRIE finished thickness. The four panels above are all gated
+                                     NOT(THRIE), so a Thrie row printed nothing here. The Thrie_* fields live in the
+                                     Conventional Type T-beam blueprint. Deepanjan (13th August 2026) -->
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSSB_postThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSDB_postThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSSB_postThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                    <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSDB_postThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+
+                        <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') || CONTAINS(UPPER(row['name']), 'CONVENTIONAL')}">
+                            <tr>
+                                <td style="font-weight: bold;">SPACER</td>
+                                
+                                <td>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX')}">
+                                        <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['tb_natrax_spacer_thickness'], jsonData['wb_natrax_spacer_thickness'])}"/>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL')}">
+                                        <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'SSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_spacerThickness_input'], jsonData['w_SSSB_w_beam_spacerThickness_input']), 
+                                                                  IF(CONTAINS(UPPER(row['name']), 'SSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_spacerThickness_input'], jsonData['w_SSDB_w_beam_spacerThickness_input']),
+                                                                  IF(CONTAINS(UPPER(row['name']), 'DSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_spacerThickness_input'], jsonData['w_DSSB_w_beam_spacerThickness_input']),
+                                                                  IF(CONTAINS(UPPER(row['name']), 'DSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_spacerThickness_input'], jsonData['w_DSDB_w_beam_spacerThickness_input']), ''))))}"/>
+                                    </apex:outputPanel>
+                                </td>
+
+                                <td>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                        <apex:outputText value="{0, number, 0.00}">
+                                            <apex:param value="{!VALUE(jsonData['wb_natrax_spacer_thickness']) + ((IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['wb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" />
+                                        </apex:outputText>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'NATRAX') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                        <apex:outputText value="{0, number, 0.00}">
+                                            <apex:param value="{!VALUE(jsonData['tb_natrax_spacer_thickness']) + ((IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Regular'), 40, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Average'), 65, IF(CONTAINS(jsonData['tb_natrax_zinc_coating'], 'Minimum'), 77, 0))) / 1000) * 2)}" />
+                                        </apex:outputText>
+                                    </apex:outputPanel>
+
+                                    <!-- Narrowed to W rows. It picked the Thrie thickness correctly but always read the
+                                         W-beam zinc coating, so a Thrie row got the wrong finished figure. The Thrie
+                                         panel below reads Thrie_*_zincCoating_input. Deepanjan (13th August 2026) -->
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && NOT(CONTAINS(UPPER(row['name']), 'THRIE'))}">
+                                        <apex:outputText value="{0, number, 0.00}">
+                                            <apex:param value="{!VALUE(IF(CONTAINS(UPPER(row['name']), 'SSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_spacerThickness_input'], jsonData['w_SSSB_w_beam_spacerThickness_input']), 
+                                                                      IF(CONTAINS(UPPER(row['name']), 'SSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_spacerThickness_input'], jsonData['w_SSDB_w_beam_spacerThickness_input']),
+                                                                      IF(CONTAINS(UPPER(row['name']), 'DSSB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_spacerThickness_input'], jsonData['w_DSSB_w_beam_spacerThickness_input']),
+                                                                      IF(CONTAINS(UPPER(row['name']), 'DSDB'), IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_spacerThickness_input'], jsonData['w_DSDB_w_beam_spacerThickness_input']), ''))))) 
+                                                                      + ((IF(CONTAINS(IF(CONTAINS(UPPER(row['name']), 'SSSB'), jsonData['w_SSSB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'SSDB'), jsonData['w_SSDB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'DSSB'), jsonData['w_DSSB_w_beam_zincCoating_input'], jsonData['w_DSDB_w_beam_zincCoating_input']))), 'Regular'), 40, IF(CONTAINS(IF(CONTAINS(UPPER(row['name']), 'SSSB'), jsonData['w_SSSB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'SSDB'), jsonData['w_SSDB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'DSSB'), jsonData['w_DSSB_w_beam_zincCoating_input'], jsonData['w_DSDB_w_beam_zincCoating_input']))), 'Average'), 65, IF(CONTAINS(IF(CONTAINS(UPPER(row['name']), 'SSSB'), jsonData['w_SSSB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'SSDB'), jsonData['w_SSDB_w_beam_zincCoating_input'], IF(CONTAINS(UPPER(row['name']), 'DSSB'), jsonData['w_DSSB_w_beam_zincCoating_input'], jsonData['w_DSDB_w_beam_zincCoating_input']))), 'Minimum'), 77, 0))) / 1000) * 2)}" />
+                                        </apex:outputText>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                        <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSSB_spacerThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                        <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_SSDB_spacerThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_SSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                        <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSSB_spacerThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSSB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB') && CONTAINS(UPPER(row['name']), 'THRIE')}">
+                                        <apex:outputText value="{0, number, 0.00}"><apex:param value="{!VALUE(jsonData['Thrie_DSDB_spacerThickness_input']) + ((IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Regular'), 40, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Average'), 65, IF(CONTAINS(jsonData['Thrie_DSDB_zincCoating_input'], 'Minimum'), 77, 0))) / 1000) * 2)}" /></apex:outputText>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+
+                    </tbody>
+                </table>
+            </apex:outputPanel>
+            
+        </apex:repeat>
+    </body>
+</apex:page>

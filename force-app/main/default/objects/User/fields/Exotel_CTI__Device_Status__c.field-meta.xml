@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exotel_CTI__Device_Status__c</fullName>
+    <deprecated>false</deprecated>
+    <label>Device_Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>action:new</fullName>
+                <default>true</default>
+                <label>action:new</label>
+            </value>
+            <value>
+                <fullName>action:close</fullName>
+                <default>false</default>
+                <label>action:close</label>
+            </value>
+            <value>
+                <fullName>action:approval</fullName>
+                <default>false</default>
+                <label>action:approval</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

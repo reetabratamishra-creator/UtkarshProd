@@ -1,0 +1,1179 @@
+<apex:page standardController="Quote"
+           extensions="HighMastWeightCalcController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           >
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+}
+
+@page {
+    size: A4;
+    margin: 0mm;
+}
+
+@page standard-content {
+    size: A4;
+    margin: 38mm 0mm 30mm 0mm;
+    @top-left { content: element(header); }
+    @bottom-left { content: element(footer); }
+}
+
+.page-break  { page-break-before: always; }
+.avoid-break { page-break-inside: avoid; }
+
+div.corporate-header {
+    position: running(header);
+    top: 0; left: 0;
+    width: 300%;
+    height: 38mm;
+    padding: 0; margin: 0;
+}
+.header-lime-line { width: 155%; border-bottom: 3px solid #99cc33; }
+.header-inner { padding: 4mm 20mm 2mm 20mm; }
+.header-right { float: right; width: 20%; text-align: right; position: relative; z-index: 999; }
+.logo-img { height: 22mm; width: auto; display: inline-block; background-color: #fff; padding: 1px; }
+.header-left { float: left; width: 75%; margin-top: 2mm; }
+.company-name { font-size: 14pt; font-weight: bold; color: #000; margin-bottom: 2px; text-align: right; }
+.office-details { font-size: 7.5pt; color: #333; line-height: 1.4; text-align: right; }
+
+div.corporate-footer {
+    position: running(footer);
+    bottom: 0; left: 0;
+    width: 300%;
+    height: 30mm;
+    padding: 0; margin: 0;
+}
+.footer-lime-line { width: 155%; border-top: 3px solid #99cc33; }
+.footer-inner { padding: 2mm 20mm 0mm 20mm; font-size: 7pt; color: #333; line-height: 1.4; text-align: right; }
+.factory-details { margin-bottom: 3px; }
+.social-row { margin-top: 4px; font-size: 7.5pt; }
+
+div.document-body { page: standard-content; }
+div.document-body-inner { padding: 2mm 20mm 2mm 20mm; }
+
+.row-banner {
+    background: #2e7d32; color: #fff;
+    font-size: 10pt; font-weight: bold;
+    padding: 4px 10px; margin-bottom: 10px; text-align: center;
+}
+
+.sec-title {
+    text-align: center; font-size: 12pt; font-weight: bold;
+    font-style: italic; text-decoration: underline;
+    margin: 14px 0 10px 0;
+}
+.sec-title-sm {
+    text-align: center; font-size: 10.5pt; font-weight: bold;
+    font-style: italic; text-decoration: underline;
+    margin: 10px 0 8px 0;
+}
+
+.ref-block { margin: 8px 0 6px 0; font-size: 9pt; }
+.ref-block p { margin-bottom: 3px; }
+
+/* ── MERGED MAST INFO TABLE ── */
+.mast-tbl { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt; }
+.mast-tbl thead th {
+    background: #c8c8c8; border: 1px solid #888;
+    padding: 4px 5px; font-weight: bold;
+    text-align: center; vertical-align: middle;
+}
+.mast-tbl tbody td {
+    border: 1px solid #bbb; padding: 3px 6px;
+    vertical-align: middle;
+}
+.mast-tbl tbody tr:nth-child(even) td { background: #f7f7f7; }
+.mast-row-lbl {
+    text-align: left !important; font-weight: bold;
+    background: #efefef !important; width: 20%;
+}
+.mast-tbl .section-hdr td {
+    background: #2e7d32 !important; color: #fff;
+    font-weight: bold; font-size: 8pt;
+    padding: 3px 6px; text-align: left;
+}
+.mast-tbl .subtotal-hdr td {
+    background: #e8e8e8 !important;
+    font-weight: bold; font-size: 8pt;
+    padding: 3px 6px;
+}
+
+/* ── SEGMENT TABLE (multi-col inside mast-tbl) ── */
+.seg-tbl { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt; }
+.seg-tbl thead th {
+    background: #c8c8c8; border: 1px solid #888;
+    padding: 4px 5px; font-weight: bold;
+    text-align: center; vertical-align: middle;
+}
+.seg-tbl tbody td {
+    border: 1px solid #bbb; padding: 3px 5px;
+    text-align: center; vertical-align: middle;
+}
+.seg-tbl tbody tr:nth-child(even) td { background: #f7f7f7; }
+.seg-row-lbl {
+    text-align: left !important; font-weight: bold;
+    background: #efefef !important; width: 22%;
+}
+
+/* ── TOTAL WEIGHT ROW ── */
+.wt-row td {
+    background: #e8e8e8 !important; font-weight: bold;
+    font-size: 10pt; border: 1.5px solid #555 !important;
+}
+
+/* ── CONFIG TABLE ── */
+.cfg-tbl { width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 7.2pt; }
+.cfg-tbl th {
+    background: #c8c8c8; border: 1px solid #888; padding: 3px;
+    text-align: center; font-weight: bold; vertical-align: middle; line-height: 1.2;
+}
+.cfg-tbl td {
+    border: 1px solid #bbb; padding: 3px;
+    text-align: center; vertical-align: middle; font-size: 7.2pt;
+}
+
+/* ── AOL TABLE ── */
+.aol-tbl { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt; }
+.aol-tbl th { background: #c8c8c8; border: 1px solid #888; padding: 4px 7px; font-weight: bold; text-align: left; }
+.aol-tbl td { border: 1px solid #bbb; padding: 4px 7px; }
+
+/* ── COSTING TABLE ── */
+.cost-tbl { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8pt; }
+.cost-tbl thead th {
+    background: #c8c8c8; border: 1px solid #888;
+    padding: 4px 5px; font-weight: bold;
+    text-align: left; vertical-align: middle;
+}
+.cost-tbl tbody td { border: 1px solid #ccc; padding: 3px 5px; vertical-align: top; }
+.cost-tbl tbody tr:nth-child(even) td { background: #fafafa; }
+.sub  td { background: #f3f3f3 !important; font-size: 7.6pt; }
+.zero td { color: #999; }
+.c-sno  { width: 6%;  text-align: center; }
+.c-item { width: 15%; }
+.c-desc { width: 20%; }
+.c-unit { width: 7%;  text-align: center; }
+.c-qty  { width: 11%; text-align: right; }
+.c-cost { width: 13%; text-align: right; }
+.c-tqty { width: 11%; text-align: right; }
+
+/* ── SUMMARY ROWS ── */
+.sum-row td {
+    background: #e5e5e5 !important; font-weight: bold;
+    font-size: 9.5pt; border: 1.5px solid #666;
+    padding: 5px 8px; text-align: right;
+}
+.grand-row td {
+    background: #d5e8d4 !important; font-weight: bold;
+    font-size: 11pt; border: 2px solid #2e7d32;
+    padding: 7px 10px; text-align: right;
+}
+
+.sp6  { height: 6px; }
+.sp12 { height: 12px; }
+
+/* ── LP WEIGHT LABEL ROWS ── */
+.lp-wt-label {
+    width: 55%; font-weight: bold; font-style: italic;
+    text-decoration: underline; border: 1px solid #999;
+    padding: 4px 6px; background: #efefef;
+}
+.lp-wt-value {
+    width: 45%; font-weight: bold; border: 1px solid #999;
+    padding: 4px 6px; font-size: 10pt;
+}
+
+</style>
+</head>
+<body>
+
+<!-- RUNNING HEADER -->
+<div class="corporate-header">
+    <div class="header-inner">
+        <div class="header-right">
+            <apex:image url="{!$Resource.UtkarshLogo}" styleClass="logo-img"/>
+        </div>
+        <div class="header-left">
+            <div class="company-name">Utkarsh India Limited</div>
+            <div class="office-details">
+                Corporate Office: Arrjavv Square, 95A Elliot Road, 4th Floor, Kolkata - 700016<br/>
+                P: 033 2264 6666 / 2265 888 &nbsp;|&nbsp; E: info@utkarshindia.in &nbsp;|&nbsp; W: www.utkarshindia.in
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="header-lime-line"></div>
+</div>
+
+<!-- RUNNING FOOTER -->
+<div class="corporate-footer">
+    <div class="footer-lime-line"></div>
+    <div class="footer-inner">
+        <div class="factory-details">F1: Nh6. Vill-Jangalpur, Po: Andul Mouri, Howrah - 711302 &nbsp;|&nbsp; P: 033 2669 0833 / 1151 / 1571</div>
+        <div class="factory-details">F2: NH2, Durgapur Expressway, PO: Gurap, Hoogly - 712303 &nbsp;|&nbsp; P: 03213 253996</div>
+        <div class="social-row">CIN: US1109 WB1995PLC070893</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     LIGHTING POLE SECTION
+============================================================ -->
+<apex:outputPanel rendered="{!isLightingPole}">
+
+<!-- LP PAGE 1 – SEGMENTS WEIGHT CALCULATOR -->
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="ref-block">
+        <p><strong>Ref</strong> &nbsp;- <apex:outputText value="{!soWRef}"/></p>
+        <p><strong>Date</strong> - <apex:outputText value="{!soWDate}"/></p>
+    </div>
+
+    <div class="sec-title avoid-break">Segments Weight Calculator</div>
+
+    <apex:repeat value="{!lpDisplayList}" var="lp">
+    <div class="avoid-break" style="margin-bottom:22px;">
+
+        <!-- LINE ITEM BANNER -->
+        <div class="row-banner">
+            LINE ITEM <apex:outputText value="{!lp.colNum}"/>
+        </div>
+
+        <!-- SUBTITLE -->
+        <div class="sec-title-sm">
+            <apex:outputPanel layout="none" rendered="{!NOT(lp.isTwoSegment)}">
+                Lighting Pole &#8211; Single Segment <apex:outputText value="{!lp.colNum}"/>
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!lp.isTwoSegment}">
+                Lighting Pole &#8211; Two Segment <apex:outputText value="{!lp.colNum}"/>
+            </apex:outputPanel>
+        </div>
+
+        <!-- SEGMENT SECTION LABEL -->
+        <div style="font-weight:bold; font-style:italic; text-decoration:underline;
+                    margin:8px 0 4px 0; font-size:9.5pt;">Segment</div>
+
+        <!-- SEGMENT SPEC TABLE -->
+        <table class="mast-tbl">
+            <thead>
+                <tr>
+                    <th style="width:55%; text-align:left;">DESCRIPTION</th>
+                    <th style="width:45%; text-align:left;">VALUE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="mast-row-lbl">Pole Type</td>
+                    <td><apex:outputText value="{!lp.poleType}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Height of Pole</td>
+                    <td><apex:outputText value="{!lp.height}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Top Dia (Outer A/F)</td>
+                    <td><apex:outputText value="{!lp.topDia}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Bottom Dia (Outer A/F)</td>
+                    <td><apex:outputText value="{!lp.botDia}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">No. of Polygonal Side</td>
+                    <td><apex:outputText value="{!lp.noOfSides}"/></td>
+                </tr>
+
+                <!-- Single-segment rows -->
+                <apex:outputPanel layout="none" rendered="{!NOT(lp.isTwoSegment)}">
+                    <tr>
+                        <td class="mast-row-lbl">Segment Length (mm)</td>
+                        <td><apex:outputText value="{!lp.segLength}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Thickness (mm)</td>
+                        <td><apex:outputText value="{!lp.thickness}"/></td>
+                    </tr>
+                </apex:outputPanel>
+
+                <!-- Two-segment rows -->
+                <apex:outputPanel layout="none" rendered="{!lp.isTwoSegment}">
+                    <tr>
+                        <td class="mast-row-lbl">Segment-2 Length (Top)</td>
+                        <td><apex:outputText value="{!lp.segLengthTop}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Segment-1 Length (Bot)</td>
+                        <td><apex:outputText value="{!lp.segLengthBot}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Segment-2 Thickness (Top)</td>
+                        <td><apex:outputText value="{!lp.thicknessTop}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Segment-1 Thickness (Bot)</td>
+                        <td><apex:outputText value="{!lp.thicknessBot}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Overlap</td>
+                        <td><apex:outputText value="{!lp.overlapLen}"/></td>
+                    </tr>
+                </apex:outputPanel>
+
+                <!-- Common remaining fields -->
+                <tr>
+                    <td class="mast-row-lbl">Door Height (mm)</td>
+                    <td><apex:outputText value="{!lp.doorHeight}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Base Plate Type</td>
+                    <td><apex:outputText value="{!lp.basePlateType}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Size / Dia of Base Plate (mm)</td>
+                    <td><apex:outputText value="{!lp.bpSize}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Thickness of Base Plate (mm)</td>
+                    <td><apex:outputText value="{!lp.bpThickness}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Stiffener at Base</td>
+                    <td><apex:outputText value="{!lp.stiffener}"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SEGMENT PART TOTAL WEIGHT -->
+        <table class="mast-tbl" style="margin-bottom:8px;">
+            <tbody>
+                <tr>
+                    <td class="lp-wt-label">Segment Part Total Weight (GI)</td>
+                    <td class="lp-wt-value"><apex:outputText value="{!lp.weight}"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- FOUNDATION SECTION LABEL -->
+        <div style="font-weight:bold; font-style:italic; text-decoration:underline;
+                    margin:10px 0 4px 0; font-size:9.5pt;">Foundation</div>
+
+        <!-- FOUNDATION SPEC TABLE -->
+        <table class="mast-tbl">
+            <tbody>
+                <tr>
+                    <td class="mast-row-lbl">Foundation Bolt Dia</td>
+                    <td><apex:outputText value="{!lp.boltDia}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Foundation Bolt Length</td>
+                    <td><apex:outputText value="{!lp.boltLength}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Bolt Quantity</td>
+                    <td><apex:outputText value="{!lp.boltQty}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">P.C.D.</td>
+                    <td><apex:outputText value="{!lp.pcd}"/></td>
+                </tr>
+                <tr>
+                    <td class="mast-row-lbl">Template</td>
+                    <td><apex:outputText value="{!lp.template}"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- FOUNDATION ACCESSORIES WEIGHT -->
+        <table class="mast-tbl" style="margin-bottom:8px;">
+            <tbody>
+                <tr>
+                    <td class="lp-wt-label">Foundation Accessories Weight (GI)</td>
+                    <td class="lp-wt-value"><apex:outputText value="{!lp.foundationWeight}"/></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        <!-- BRACKET DETAILS - Lighting Pole / Mid Hinge Pole.
+             Gated by hasBracket, which is null for every other display path, so no
+             existing sheet gains a block. -->
+        <apex:outputPanel layout="none" rendered="{!lp.hasBracket}">
+        
+            <!-- BRACKET SECTION LABEL -->
+            <div style="font-weight:bold; font-style:italic; text-decoration:underline;
+                        margin:10px 0 4px 0; font-size:9.5pt;">Bracket</div>
+        
+            <!-- BRACKET SPEC TABLE -->
+            <table class="mast-tbl">
+                <tbody>
+                    <tr>
+                        <td class="mast-row-lbl">Bracket Type</td>
+                        <td><apex:outputText value="{!lp.bracketType}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Type of Arm</td>
+                        <td><apex:outputText value="{!lp.typeOfArm}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Arm Length (mm)</td>
+                        <td><apex:outputText value="{!lp.armLength}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Arm Dia / OD (mm)</td>
+                        <td><apex:outputText value="{!lp.armDia}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Sleeve Dia (mm)</td>
+                        <td><apex:outputText value="{!lp.sleeveDia}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="mast-row-lbl">Sleeve Length (mm)</td>
+                        <td><apex:outputText value="{!lp.sleeveLength}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <!-- BRACKET WEIGHT -->
+            <table class="mast-tbl" style="margin-bottom:8px;">
+                <tbody>
+                    <tr>
+                        <td class="lp-wt-label">Bracket Weight (GI)</td>
+                        <td class="lp-wt-value"><apex:outputText value="{!lp.bracketWeight}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        
+        </apex:outputPanel>
+
+        <!-- TOTAL WEIGHT WITH GI -->
+        <table class="mast-tbl">
+            <tbody>
+                <tr class="wt-row">
+                    <td style="width:55%;"><strong>TOTAL WEIGHT WITH GI</strong></td>
+                    <td style="width:45%;">
+                        <strong><apex:outputText value="{!lp.totalWeightGI}"/></strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    </apex:repeat>
+
+</div>
+</div>
+
+<!-- LP PAGE 2 – WEIGHT & COSTING SUMMARY -->
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="sec-title">Lighting Pole &#8211; Weight &amp; Costing</div>
+
+    <table class="cost-tbl">
+        <thead>
+            <tr>
+                <th class="c-sno">S.No.</th>
+                <th style="width:38%">Item</th>
+                <th style="width:12%; text-align:right;">Weight (kg)</th>
+                <th style="width:10%; text-align:right;">Quantity</th>
+                <th style="width:14%; text-align:right;">Unit Price</th>
+                <th style="width:14%; text-align:right;">Unit Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!lpRowList}" var="lp">
+                <tr>
+                    <td class="c-sno"><apex:outputText value="{!lp.rowIndex}"/></td>
+                    <td><apex:outputText value="{!lp.itemName}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!lp.weight}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!lp.quantity}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!lp.unitPrice}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!lp.unitCost}"/></td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+    </table>
+
+    <div style="border-top:1px solid #aaa; margin-top:40px;"></div>
+
+</div>
+</div>
+
+</apex:outputPanel>
+
+<!-- ============================================================
+     TRANSMISSION POLE SECTION
+============================================================ -->
+<apex:outputPanel rendered="{!isTransmissionPole}">
+
+<!-- TP PAGE 1 – SPEC PER ITEM -->
+<apex:repeat value="{!tpRowList}" var="tp">
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="ref-block">
+        <p><strong>Ref</strong> &nbsp;- <apex:outputText value="{!soWRef}"/></p>
+        <p><strong>Date</strong> - <apex:outputText value="{!soWDate}"/></p>
+    </div>
+
+    <div class="sec-title">Transmission Pole &#8211; Weight Calculator</div>
+
+    <div class="avoid-break" style="margin-bottom:22px;">
+        <div class="row-banner"><apex:outputText value="{!tp.itemName}"/></div>
+
+        <div style="font-weight:bold;font-style:italic;text-decoration:underline;margin:8px 0 4px 0;font-size:9.5pt;">General</div>
+        <table class="mast-tbl">
+            <thead>
+                <tr>
+                    <th style="width:55%; text-align:left;">DESCRIPTION</th>
+                    <th style="width:45%; text-align:left;">VALUE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="mast-row-lbl">Pole Type</td><td><apex:outputText value="{!tp.poleType}"/></td></tr>
+                <tr><td class="mast-row-lbl">Height of Pole (m)</td><td><apex:outputText value="{!tp.height}"/></td></tr>
+                <tr><td class="mast-row-lbl">Top Diameter (mm)</td><td><apex:outputText value="{!tp.topDia}"/></td></tr>
+                <tr><td class="mast-row-lbl">Bottom Diameter (mm)</td><td><apex:outputText value="{!tp.botDia}"/></td></tr>
+                <tr><td class="mast-row-lbl">No. of Polygonal Sides</td><td><apex:outputText value="{!tp.noOfSides}"/></td></tr>
+                <tr><td class="mast-row-lbl">Segment Length (mm)</td><td><apex:outputText value="{!tp.segLength}"/></td></tr>
+                <tr><td class="mast-row-lbl">Segment Thickness (mm)</td><td><apex:outputText value="{!tp.thickness}"/></td></tr>
+            </tbody>
+        </table>
+
+        <div style="font-weight:bold;font-style:italic;text-decoration:underline;margin:8px 0 4px 0;font-size:9.5pt;">Bearing Plate</div>
+        <table class="mast-tbl">
+            <tbody>
+                <tr><td class="mast-row-lbl">Bearing Plate Type</td><td><apex:outputText value="{!tp.bearingPlateType}"/></td></tr>
+                <tr><td class="mast-row-lbl">Size / Dia of Bearing Plate (mm)</td><td><apex:outputText value="{!tp.bpSize}"/></td></tr>
+                <tr><td class="mast-row-lbl">Thickness of Bearing Plate (mm)</td><td><apex:outputText value="{!tp.bpThickness}"/></td></tr>
+            </tbody>
+        </table>
+
+        <div style="font-weight:bold;font-style:italic;text-decoration:underline;margin:8px 0 4px 0;font-size:9.5pt;">Cable Details</div>
+        <table class="mast-tbl">
+            <tbody>
+                <tr><td class="mast-row-lbl">Pole Cable Dia (mm)</td><td><apex:outputText value="{!tp.poleCabDia}"/></td></tr>
+                <tr><td class="mast-row-lbl">Pole Cable Thickness (mm)</td><td><apex:outputText value="{!tp.poleCabThickness}"/></td></tr>
+            </tbody>
+        </table>
+
+        <div style="font-weight:bold;font-style:italic;text-decoration:underline;margin:8px 0 4px 0;font-size:9.5pt;">Other Details</div>
+        <table class="mast-tbl">
+            <tbody>
+                <tr><td class="mast-row-lbl">DAN</td><td><apex:outputText value="{!tp.dan}"/></td></tr>
+                <tr><td class="mast-row-lbl">Note</td><td><apex:outputText value="{!tp.note}"/></td></tr>
+                <tr><td class="mast-row-lbl">Extra Micron</td><td><apex:outputText value="{!tp.extraMicron}"/></td></tr>
+                <tr><td class="mast-row-lbl">Realization</td><td><apex:outputText value="{!tp.realization}"/></td></tr>
+            </tbody>
+        </table>
+
+        <table class="mast-tbl">
+            <tbody>
+                <tr class="wt-row">
+                    <td style="width:55%;"><strong>Weight (kg)</strong></td>
+                    <td style="width:45%;"><strong><apex:outputText value="{!tp.weight}"/></strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</div>
+</apex:repeat>
+
+<!-- TP PAGE 2 – WEIGHT & COSTING SUMMARY -->
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="sec-title">Transmission Pole &#8211; Weight &amp; Costing</div>
+
+    <table class="cost-tbl">
+        <thead>
+            <tr>
+                <th class="c-sno">S.No.</th>
+                <th style="width:38%">Item</th>
+                <th style="width:12%; text-align:right;">Weight (kg)</th>
+                <th style="width:10%; text-align:right;">Quantity</th>
+                <th style="width:14%; text-align:right;">Unit Price</th>
+                <th style="width:14%; text-align:right;">Unit Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!tpRowList}" var="tp">
+                <tr>
+                    <td class="c-sno"><apex:outputText value="{!tp.rowIndex}"/></td>
+                    <td><apex:outputText value="{!tp.itemName}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!tp.weight}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!tp.quantity}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!tp.unitPrice}"/></td>
+                    <td style="text-align:right;"><apex:outputText value="{!tp.unitCost}"/></td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+    </table>
+
+    <div style="border-top:1px solid #aaa; margin-top:40px;"></div>
+
+</div>
+</div>
+
+</apex:outputPanel>
+
+<!-- ============================================================
+     HIGH MAST SECTION
+============================================================ -->
+<apex:outputPanel rendered="{!AND(NOT(isLightingPole), NOT(isTransmissionPole))}">
+<apex:repeat value="{!rowDataList}" var="rd">
+
+<!-- PAGE 1 – MERGED MAST INFO -->
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="ref-block">
+        <p><strong>Ref</strong> &nbsp;- <apex:outputText value="{!soWRef}"/></p>
+        <p><strong>Date</strong> - <apex:outputText value="{!soWDate}"/></p>
+    </div>
+
+    <div class="sec-title">
+        <!-- mast-type aware title; Stadium/Flag no longer mislabelled as Lighting. Reetabrata (13th July 2026) -->
+        <apex:outputText value="{!mastTypeTitle}"/> - <apex:outputText value="{!rd.segmentTitleWord}"/> Segment
+    </div>
+
+    <table class="mast-tbl">
+        <thead>
+            <tr>
+                <th style="width:50%; text-align:left;">Description</th>
+                <th style="width:50%; text-align:left;">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="mast-row-lbl">Height of Mast</td>
+                <td><apex:outputText value="{!rd.mastHeight}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">No of Segment</td>
+                <td><apex:outputText value="{!rd.noOfSegment}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">No. of Sides</td>
+                <td><apex:outputText value="{!rd.noOfSides}"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="seg-tbl">
+        <thead>
+            <tr>
+                <th class="seg-row-lbl">Property</th>
+                <apex:repeat value="{!rd.segmentHeaders}" var="hdr">
+                    <th><apex:outputText value="{!hdr}"/></th>
+                </apex:repeat>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="seg-row-lbl">Length (mm)</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.length}"/></td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td class="seg-row-lbl">Thickness (mm)</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.thickness}"/></td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td class="seg-row-lbl">OAF Top (mm)</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.oafTop}"/></td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td class="seg-row-lbl">OAF Bottom (mm)</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.oafBot}"/></td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td class="seg-row-lbl">Overlap (mm)</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.overlap}"/></td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td class="seg-row-lbl">Long. Welding</td>
+                <apex:repeat value="{!rd.segmentData}" var="sd">
+                    <td><apex:outputText value="{!sd.longWeld}"/></td>
+                </apex:repeat>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mast-tbl">
+        <thead>
+            <tr>
+                <th style="width:50%; text-align:left;">Description</th>
+                <th style="width:50%; text-align:left;">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-hdr"><td colspan="2">Base Plate &amp; Foundation Details</td></tr>
+            <tr>
+                <td class="mast-row-lbl">Base Plate Type</td>
+                <td><apex:outputText value="{!rd.basePlateType}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">OD of Base Plate (mm)</td>
+                <td><apex:outputText value="{!rd.bpOD}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Thickness Of Base Plate (mm)</td>
+                <td><apex:outputText value="{!rd.bpThickness}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">PCD (mm)</td>
+                <td><apex:outputText value="{!rd.pcd}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Anchor Plate &amp; Template Plate Thickness (mm)</td>
+                <td><apex:outputText value="{!rd.anchorPlateThick}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Dia of Foundation Bolt (mm)</td>
+                <td><apex:outputText value="{!rd.fdnBoltDia}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Length of Bolt (mm)</td>
+                <td><apex:outputText value="{!rd.fdnBoltLength}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">No of Bolt</td>
+                <td><apex:outputText value="{!rd.fdnNoOfBolt}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">No of Nut</td>
+                <td><apex:outputText value="{!rd.noOfNut}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Thickness (Stiffener)</td>
+                <td><apex:outputText value="{!rd.stiffnerThickness}"/></td>
+            </tr>
+            <tr class="section-hdr"><td colspan="2">L-Ring Details</td></tr>
+            <tr>
+                <td class="mast-row-lbl">Type of L-Ring</td>
+                <td><apex:outputText value="{!rd.lRingType}"/></td>
+            </tr>
+            <tr>
+                <td class="mast-row-lbl">Ring Dia</td>
+                <td><apex:outputText value="{!rd.ringDia}"/></td>
+            </tr>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════
+     FLAG MAST - ACCESSORY COSTING FORMAT + ADDITIONAL DETAILS
+     Paste AFTER the </apex:repeat> that closes the rowDataList segment table,
+     not inside it: both grids are one set per quote, so rendering them inside
+     the row repeat would print them once per mast row.
+     rendered="{!isFlagMast && ...}" keeps every other mast type unchanged.
+     Column headers and section titles match the blueprint.
+     ═══════════════════════════════════════════════════════════════════════ -->
+		
+            <!-- comment pre existing seprate Addition/Accessory Details Table
+		<apex:outputPanel rendered="{!AND(isFlagMast, OR(hasFmAccessory, hasFmAdditional))}">
+            <div class="document-body">
+            <div class="document-body-inner">
+            
+                <apex:outputPanel rendered="{!hasFmAccessory}">
+                    <div class="sec-title">Accessory Costing Format</div>
+            
+                    <table class="cost-tbl">
+                        <thead>
+                            <tr>
+                                <th class="c-sno">S.No.</th>
+                                <th style="width:44%">BOM</th>
+                                <th style="width:14%; text-align:right;">Qty</th>
+                                <th style="width:18%; text-align:right;">Rate</th>
+                                <th style="width:18%; text-align:right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!fmAccessoryList}" var="ac">
+                                <tr>
+                                    <td class="c-sno"><apex:outputText value="{!ac.slNo}"/></td>
+                                    <td><apex:outputText value="{!ac.itemName}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ac.quantity}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ac.rate}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ac.amount}"/></td>
+                                </tr>
+                            </apex:repeat>
+                            <tr class="sum-row">
+                                <td colspan="4"><strong>Total</strong></td>
+                                <td><apex:outputText value="{!fmAcTotal}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+            
+                <div class="sp12"></div>
+            
+                <apex:outputPanel rendered="{!hasFmAdditional}">
+                    <div class="sec-title">Additional Details</div>
+            
+                    <table class="cost-tbl">
+                        <thead>
+                            <tr>
+                                <th class="c-sno">S.No.</th>
+                                <th style="width:44%">Description</th>
+                                <th style="width:14%; text-align:right;">Qty</th>
+                                <th style="width:18%; text-align:right;">Rate</th>
+                                <th style="width:18%; text-align:right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!fmAdditionalList}" var="ad">
+                                <tr>
+                                    <td class="c-sno"><apex:outputText value="{!ad.slNo}"/></td>
+                                    <td><apex:outputText value="{!ad.itemName}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ad.quantity}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ad.rate}"/></td>
+                                    <td style="text-align:right;"><apex:outputText value="{!ad.amount}"/></td>
+                                </tr>
+                            </apex:repeat>
+                            <tr class="grand-row">
+                                <td colspan="4"><strong>Total</strong></td>
+                                <td><apex:outputText value="{!fmAddTotal}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+            
+                <div style="border-top:1px solid #aaa; margin-top:40px;"></div>
+            
+            </div>
+            </div>
+		</apex:outputPanel>
+		-->
+            <!-- LCLM only: these render solely when the controller filled them, so every
+                 other mast type shows exactly the rows it always did. Reetabrata (15th July 2026) -->
+            <apex:outputPanel layout="none" rendered="{!OR(rd.spikeWeight != null, rd.dcWeight != null)}">
+                <tr class="section-hdr"><td colspan="2">Lightning Spike &amp; Down Conductor</td></tr>
+                <apex:outputPanel layout="none" rendered="{!rd.spikeLength != null}">
+                    <tr>
+                        <td class="mast-row-lbl">Lightning Spike Length (M)</td>
+                        <td><apex:outputText value="{!rd.spikeLength}"/></td>
+                    </tr>
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!rd.spikeWeight != null}">
+                    <tr>
+                        <td class="mast-row-lbl">Lightning Spike Weight (Kg)</td>
+                        <td><apex:outputText value="{!rd.spikeWeight}"/></td>
+                    </tr>
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!rd.dcWeight != null}">
+                    <tr>
+                        <td class="mast-row-lbl">Down Conductor Weight (Kg)</td>
+                        <td><apex:outputText value="{!rd.dcWeight}"/></td>
+                    </tr>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <!-- Signage Mast Additional Details weight. The controller fills this only on the
+                 first mast row of a Signage Mast quote entered on the Weight basis, so every
+                 other row and every other mast type shows exactly the rows it always did.
+                 Reetabrata (16th July 2026) -->
+            <apex:outputPanel layout="none" rendered="{!rd.additionalWeight != null}">
+                <tr>
+                    <td class="mast-row-lbl">Additional Detail Weight (Kg)</td>
+                    <td><apex:outputText value="{!rd.additionalWeight}"/></td>
+                </tr>
+            </apex:outputPanel>
+            <tr class="wt-row">
+                <td><strong>TOTAL WEIGHT (GI)</strong></td>
+                <td><strong><apex:outputText value="{!rd.totalWeightGI}"/></strong></td>
+            </tr>
+        </tbody>
+    </table>
+	<apex:outputPanel rendered="{!AND(isFlagMast, rd.hasFmAccessory)}">
+        <div class="sec-title">Accessory Costing Format</div>
+        <table class="cost-tbl">
+            <thead>
+                <tr>
+                    <th class="c-sno">S.No.</th>
+                    <th style="width:44%">BOM</th>
+                    <th style="width:14%; text-align:right;">Qty</th>
+                    <th style="width:18%; text-align:right;">Rate</th>
+                    <th style="width:18%; text-align:right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!rd.fmAccessoryList}" var="ac">
+                    <tr>
+                        <td class="c-sno"><apex:outputText value="{!ac.slNo}"/></td>
+                        <td><apex:outputText value="{!ac.itemName}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ac.quantity}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ac.rate}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ac.amount}"/></td>
+                    </tr>
+                </apex:repeat>
+                <tr class="sum-row">
+                    <td colspan="4"><strong>Total with Realization</strong></td>
+                    <td><apex:outputText value="{!rd.fmAcTotal}"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+
+    <div class="sp12"></div>
+
+    <apex:outputPanel rendered="{!AND(isFlagMast, rd.hasFmAdditional)}">
+        <div class="sec-title">Additional Details</div>
+        <table class="cost-tbl">
+            <thead>
+                <tr>
+                    <th class="c-sno">S.No.</th>
+                    <th style="width:44%">Description</th>
+                    <th style="width:14%; text-align:right;">Qty</th>
+                    <th style="width:18%; text-align:right;">Rate</th>
+                    <th style="width:18%; text-align:right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!rd.fmAdditionalList}" var="ad">
+                    <tr>
+                        <td class="c-sno"><apex:outputText value="{!ad.slNo}"/></td>
+                        <td><apex:outputText value="{!ad.itemName}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ad.quantity}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ad.rate}"/></td>
+                        <td style="text-align:right;"><apex:outputText value="{!ad.amount}"/></td>
+                    </tr>
+                </apex:repeat>
+                <tr class="grand-row">
+                    <td colspan="4"><strong>Total with Realization</strong></td>
+                    <td><apex:outputText value="{!rd.fmAddTotal}"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+</div>
+</div>
+
+<!-- PAGE 2 – CONFIG + COSTING -->
+<div class="document-body">
+<div class="document-body-inner">
+
+    <div class="sec-title">
+        <apex:outputText value="{!rd.codeNoTitle}"/>
+    </div>
+
+    <table class="cfg-tbl">
+        <thead>
+            <tr>
+                <th style="width:6%">Qty Of HM</th>
+                <th style="width:6%">Mast Height</th>
+                <th style="width:7%">Type of Lum</th>
+                <th style="width:6%">No of Lum</th>
+                <th style="width:6%">CG Box / Lum</th>
+                <th style="width:7%">Type of Welded Arm</th>
+                <th style="width:7%">Suspn Sysm (no of Wire)</th>
+                <th style="width:7%">Cable Type T,F &amp; X</th>
+                <th style="width:6%">No of Cable</th>
+                <th style="width:7%">1 Tier or 2 Tier L-Ring</th>
+                <th style="width:6%">Type of ring V/W</th>
+                <th style="width:7%">Type of Winch</th>
+                <th style="width:8%">Type of Power Tool</th>
+                <th style="width:8%">Type of Wire Rope</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><apex:outputText value="{!rd.cfgQtyOfHM}"/></td>
+                <td><apex:outputText value="{!rd.cfgMastHeight}"/></td>
+                <td><apex:outputText value="{!rd.cfgTypeOfLum}"/></td>
+                <td><apex:outputText value="{!rd.cfgNoOfLum}"/></td>
+                <td><apex:outputText value="{!rd.cfgCgBox}"/></td>
+                <td><apex:outputText value="{!rd.cfgWeldedArm}"/></td>
+                <td><apex:outputText value="{!rd.cfgSuspnSysm}"/></td>
+                <td><apex:outputText value="{!rd.cfgCableType}"/></td>
+                <td><apex:outputText value="{!rd.cfgNoOfCable}"/></td>
+                <td><apex:outputText value="{!rd.cfgTierLRing}"/></td>
+                <td><apex:outputText value="{!rd.cfgRingVW}"/></td>
+                <td><apex:outputText value="{!rd.cfgTypeOfWinch}"/></td>
+                <td><apex:outputText value="{!rd.cfgTypePowerTool}"/></td>
+                <td><apex:outputText value="{!rd.cfgTypeWireRope}"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="sp6"></div>
+
+    <table class="aol-tbl">
+        <thead>
+            <tr>
+                <th style="width:33%">Type of AOL</th>
+                <th style="width:33%">No of Aviation Light</th>
+                <th style="width:34%">Feeder Piller / Control Panel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><apex:outputText value="{!rd.cfgTypeOfAol}"/></td>
+                <td><apex:outputText value="{!rd.cfgNoOfAvnLight}"/></td>
+                <td><apex:outputText value="{!rd.cfgFeederPillar}"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- costing block hidden when showCosting=false (Customized/Stadium, no KIT). Reetabrata (13th July 2026) -->
+    <apex:outputPanel rendered="{!rd.showCosting}">
+    <div class="sp6"></div>
+    <div class="sec-title-sm">
+        <apex:outputText value="{!rd.costingGroupTitle}"/>
+    </div>
+
+    <table class="cost-tbl">
+        <thead>
+            <tr>
+                <th class="c-sno">S.No.</th>
+                <th class="c-item">Items</th>
+                <th class="c-desc">Description</th>
+                <th class="c-unit">Unit</th>
+                <th class="c-qty">Qty Consumed</th>
+                <th class="c-cost">Total Cost</th>
+                <th class="c-tqty">Total Qty</th>
+                <th class="c-tqty">Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!rd.accessories}" var="acc">
+                <tr class="{!IF(acc.isSubItem,'sub','')} {!IF(acc.isZero,'zero','')}">
+                    <td class="c-sno"><apex:outputText value="{!acc.sNo}"/></td>
+                    <td class="c-item"><apex:outputText value="{!acc.itemName}"/></td>
+                    <td class="c-desc"><apex:outputText value="{!acc.description}"/></td>
+                    <td class="c-unit"><apex:outputText value="{!acc.unit}"/></td>
+                    <td class="c-qty"><apex:outputText value="{!acc.qtyConsumed}"/></td>
+                    <td class="c-cost"><apex:outputText value="{!acc.totalCost}"/></td>
+                    <td class="c-tqty"><apex:outputText value="{!acc.totalQty}"/></td>
+                    <td class="c-tqty"><apex:outputText value="{!acc.remarks}"/></td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+    </table>
+    </apex:outputPanel>
+
+</div>
+</div>
+
+<!-- PAGE 3 - COST/SET SUMMARY: hidden for Customized/Stadium (no KIT). Reetabrata (13th July 2026) -->
+<apex:outputPanel rendered="{!rd.showCosting}">
+<div class="document-body" style="page-break-inside: avoid">
+<div class="document-body-inner">
+
+    <div class="sp12"></div>
+
+    <table class="cost-tbl">
+        <tbody>
+            <tr class="sum-row">
+                <td colspan="6"
+                    style="text-align:right; font-size:10pt; padding:6px 10px;
+                           background:#e5e5e5; font-weight:bold; border:1.5px solid #666;">
+                    <strong>Cost/SET</strong>
+                </td>
+                <td style="text-align:right; width:16%; font-size:10pt; padding:6px 10px;
+                           background:#e5e5e5; font-weight:bold; border:1.5px solid #666;">
+                    <apex:outputText value="{!rd.costPerSet}"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="sp12"></div>
+
+    <table class="cost-tbl">
+        <tbody>
+            <tr class="grand-row">
+                <td colspan="6"
+                    style="text-align:right; font-size:11pt; padding:7px 10px;
+                           background:#d5e8d4; font-weight:bold; border:2px solid #2e7d32;">
+                    <strong>Total Cost Price</strong>
+                </td>
+                <td style="text-align:right; width:16%; font-size:11pt; padding:7px 10px;
+                           background:#d5e8d4; font-weight:bold; border:2px solid #2e7d32;">
+                    <apex:outputText value="{!rd.totalCostPrice}"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="border-top:1px solid #aaa; margin-top:40px;"></div>
+
+</div>
+</div>
+</apex:outputPanel>
+
+</apex:repeat>
+
+<!-- ============================================================
+     SEGMENT ABOVE 5 - ADDITIONAL ACCESSORIES + SPECIAL ITEMS
+     Renders only when the estimator saved those keys. - Reetabrata (9th July 2026)
+============================================================ -->
+<apex:outputPanel rendered="{!OR(hasAdditionalAcc, hasSpecialItem)}">
+<div class="document-body">
+<div class="document-body-inner">
+
+    <apex:outputPanel rendered="{!hasAdditionalAcc}">
+        <div class="sec-title">Additional Accessories</div>
+        <table class="mast-tbl">
+            <tbody>
+                <tr><td class="mast-row-lbl">Rate</td>
+                    <td><apex:outputText value="{!accRate}"/></td></tr>
+                <tr><td class="mast-row-lbl">Realization (%)</td>
+                    <td><apex:outputText value="{!accRealization}"/></td></tr>
+                <tr><td class="mast-row-lbl">Realization Amount</td>
+                    <td><apex:outputText value="{!accRealizationAmount}"/></td></tr>
+                <tr><td class="mast-row-lbl">Total Rate</td>
+                    <td><apex:outputText value="{!accTotalRate}"/></td></tr>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!hasSpecialItem}">
+        <div class="sec-title">Special Items</div>
+        <table class="mast-tbl">
+            <tbody>
+                <tr><td class="mast-row-lbl">Type</td>
+                    <td><apex:outputText value="{!siType}"/></td></tr>
+                <tr><td class="mast-row-lbl">Item Description</td>
+                    <td><apex:outputText value="{!siDescription}"/></td></tr>
+                <tr><td class="mast-row-lbl">Value</td>
+                    <td><apex:outputText value="{!siValue}"/></td></tr>
+                <tr><td class="mast-row-lbl">Shown separately in offer</td>
+                    <td><apex:outputText value="{!IF(siShownSeparately,
+                            'Yes - billed as its own offer line',
+                            'No - already included in mast price / weight')}"/></td></tr>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+
+</div>
+</div>
+</apex:outputPanel>
+
+</apex:outputPanel>
+
+</body>
+</html>
+</apex:page>

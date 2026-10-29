@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Previous_Revision__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The quote this revision was created from (immediate parent in the revision chain). Blank on the original (R0)</description>
+    <inlineHelpText>The quote this revision was created from (immediate parent in the revision chain). Blank on the original (R0)</inlineHelpText>
+    <label>Previous Revision</label>
+    <referenceTo>Quote</referenceTo>
+    <relationshipLabel>Quotes</relationshipLabel>
+    <relationshipName>Quotes</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

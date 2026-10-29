@@ -1,0 +1,78 @@
+<template>
+    <lightning-card title="PEB Quote Request Form (QRF)" icon-name="standard:portal">
+        <div class="slds-m-around_medium slds-scrollable_x">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col" style="width: 5%;">
+                            <div class="slds-truncate" title="SL NO.">SL NO.</div>
+                        </th>
+                        <th scope="col" style="width: 35%;">
+                            <div class="slds-truncate" title="Description">DESCRIPTION</div>
+                        </th>
+                        <th scope="col" style="width: 30%;">
+                            <div class="slds-truncate" title="Specification">SPECIFICATION</div>
+                        </th>
+                        <th scope="col" style="width: 30%;">
+                            <div class="slds-truncate" title="Requirement">REQUIREMENT</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={tableData} for:item="row">
+                        <tr key={row.id}>
+                            <td><div class="slds-truncate">{row.slNo}</div></td>
+                            <td><div class="slds-cell-wrap">{row.description}</div></td>
+                            
+                            <td>
+                                <template if:true={row.isPicklist}>
+                                    <lightning-combobox disabled={isReadOnly} name="specification" value={row.specification} options={row.options} placeholder="--Select--" data-id={row.id} data-field="specification" variant="label-hidden" onchange={handleInputChange} class="full-width-input"></lightning-combobox>
+                                </template>
+                                <template if:true={row.isStatic}>
+                                    <div class="slds-cell-wrap static-text" title={row.staticText}>{row.staticText}</div>
+                                </template>
+                                <template if:true={row.isInput}>
+                                    <lightning-input disabled={isReadOnly} type="text" value={row.specification} data-id={row.id} data-field="specification" variant="label-hidden" onchange={handleInputChange} class="full-width-input"></lightning-input>
+                                </template>
+                            </td>
+
+                            <td>
+                                <lightning-input disabled={isReadOnly} type="text" value={row.requirement} data-id={row.id} data-field="requirement" variant="label-hidden" onchange={handleInputChange} class="full-width-input"></lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <!-- SPECIAL NOTES ROW -->
+                    <tr>
+                        <td colspan="2" class="slds-text-align_center">
+                            <div class="slds-text-heading_small"><strong>Special Notes</strong></div>
+                        </td>
+                        <td colspan="2">
+                            <lightning-textarea 
+                                disabled={isReadOnly} 
+                                value={specialNotes} 
+                                onchange={handleSpecialNotesChange} 
+                                variant="label-hidden" 
+                                class="full-width-input">
+                            </lightning-textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="slds-m-around_medium slds-grid slds-grid_align-end slds-gutters">
+            <div class="slds-col">
+                <lightning-button label="Download PDF" variant="brand-outline" icon-name="utility:download" onclick={generatePDF}></lightning-button>
+            </div>
+            <template if:false={isReadOnly}>
+                <div class="slds-col">
+                    <lightning-button label="Save Form" variant="brand" icon-name="utility:save" onclick={handleSave}></lightning-button>
+                </div>
+            </template>
+        </div>
+
+        <!-- 👉 Hidden Iframe for Secure LockerService-compliant Printing -->
+        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank" style="display:none;"></iframe>
+    </lightning-card>
+</template>

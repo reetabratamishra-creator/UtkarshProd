@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Project Set-up Details Core Department</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Project_Set_up_Details_Core_Department</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;transit_insurance_charges&quot;,
+      &quot;label&quot;: &quot;Transit Insurance Charges&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 12,
+      &quot;controllingField&quot;: &quot;psd_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;terms_and_conditions&quot;,
+      &quot;label&quot;: &quot;Terms &amp; Conditions&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;colSpan&quot;: 12,
+      &quot;controllingField&quot;: &quot;psd_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;Ex-works &quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;payment_terms&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;payment_terms&quot;,
+                  &quot;label&quot;: &quot;Payment Terms&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit with PDC&quot;,
+                    &quot;Others&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;other_detail&quot;,
+                  &quot;label&quot;: &quot;Other Details&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Others&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lc_interest_reflect_separately&quot;,
+                  &quot;label&quot;: &quot;LC Interest Reflect Separately&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Yes&quot;,
+                    &quot;No&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;No&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_buyer_days&quot;,
+                  &quot;label&quot;: &quot;(I) Usance Interest in Buyer&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_seller_days&quot;,
+                  &quot;label&quot;: &quot;(II) Usance Interest in Seller&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;(III) % of Usance Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_pdc_days&quot;,
+                  &quot;label&quot;: &quot;Against PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pdc_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_open_credit_days&quot;,
+                  &quot;label&quot;: &quot;Against Open Credit with PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;open_credit_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tnc_details&quot;,
+              &quot;label&quot;: &quot;T&amp;C Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;subject_line&quot;,
+                  &quot;label&quot;: &quot;Subject Line&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;unit&quot;: &quot;Subject Line&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Value&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule_in&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule In&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;Days&quot;,
+                    &quot;Weeks&quot;,
+                    &quot;Months&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_start_date&quot;,
+                  &quot;label&quot;: &quot;Warranty Start Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty start Date (months)&quot;,
+                  &quot;defaultValue&quot;: 12,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_end_date&quot;,
+                  &quot;label&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;defaultValue&quot;: 18,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;offer_validity&quot;,
+                  &quot;label&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;defaultValue&quot;: 6,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;extra_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;your_ref&quot;,
+                  &quot;label&quot;: &quot;Enter Reference&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;enquiry_date&quot;,
+                  &quot;label&quot;: &quot;Enquiry Date&quot;,
+                  &quot;type&quot;: &quot;date&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges&quot;,
+                  &quot;label&quot;: &quot;Loading Charges&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_per_mt&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Per MT)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_lumpsum&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Lump Sum)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;editable_clauses&quot;,
+              &quot;label&quot;: &quot;Editable Clause&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;clause_3&quot;,
+                  &quot;label&quot;: &quot;Point 3 - Rates &amp; Taxes&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Rates and Taxes: The rates quoted are exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes shall be chargeable extra @18% on the total order value.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;payment_terms_note&quot;,
+                  &quot;label&quot;: &quot;Point 4 - Payment Terms (Additional Note)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: &quot;6&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_5&quot;,
+                  &quot;label&quot;: &quot;Point 5 - Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Delivery Schedule: If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply order however if an advance payment has to be made with the supply order the date of receipt of such advance payment or the supply order, whichever is later shall be the date from which the delivery date shall be accounted for. The supplier will be responsible for delivering the entire consignment segment-wise, subject to mutual discussion and taking into account the date of receipt of the clear techno commercial order and commercial clearance. However, this is contingent upon normal working conditions.&apos; + (delivery_schedule ? (&apos; Here, delivery schedule shall be &apos; + delivery_schedule + &apos; &apos; + (delivery_schedule_in || &apos;&apos;) + &apos; from the date of clear order &amp; commercial clearance.&apos;) : &apos;&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_8&quot;,
+                  &quot;label&quot;: &quot;Point 8 - Transportation &amp; Freight&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;for_value == &apos;Per mt (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Lump sum (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Per mt (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic) shall be charged extra at actual.&apos; : for_value == &apos;Lump sum (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum) shall be charged extra at actual.&apos; : psd_incoterms == &apos;F.O.R (Freight on Road)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis are inclusive of any transportation and freight charges only.&apos; : &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on ex-works basis are exclusive of any transportation and freight charges, therefore be it mentioned here that if the Supplier has to facilitate the process of transportation in that event such freight charges shall become chargeable additionally.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_9&quot;,
+                  &quot;label&quot;: &quot;Point 9 - Inspection&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier&apos;s plant and/or factory or the Buyer may depute its own team at the Supplier&apos;s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier&apos;s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;,
+                  &quot;value&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier’s plant and/or factory or the Buyer may depute its own team at the Supplier’s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under despatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier’s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or despatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_12&quot;,
+                  &quot;label&quot;: &quot;Point 12 - Warranty&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Warranty: The Supplier’s products are covered by a mechanical guarantee for a period of &apos; + (warranty_start_date || 12) + &apos; months from the date of commissioning or at the latest &apos; + (warranty_end_date || 18) + &apos; months from the date of delivery as per the agreed incoterm, unless a longer period has been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_13&quot;,
+                  &quot;label&quot;: &quot;Point 13 - Return of Goods&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Return of Goods: Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_15&quot;,
+                  &quot;label&quot;: &quot;Point 15 - Validity&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Validity: This offer shall remain valid for a period of &apos; + (offer_validity || 6) + &apos; days from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_16&quot;,
+                  &quot;label&quot;: &quot;Point 16 - Penal Interest&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Penal interest: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;,
+                  &quot;value&quot;: &quot;Penal interest &amp; Ground Rent: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_20&quot;,
+                  &quot;label&quot;: &quot;Point 20 - Price Variation&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Price_Basis == &apos;FIRM&apos; ? &apos;Price variation: The rates as quoted herein by the Supplier are subject to factoring of price variation being applicable. If for any reason the supplies get carried forward to the next month in that event the next month’s rates shall become applicable. For quantities that are proposed to be delivered after that price variation will be applicable as per change of rates between base month (that is the month in which the order was placed) and month of despatch. If there are changes in price of raw materials by SAIL/TATA then the prices of the material will also become liable to be changed.&apos; : (&apos;Price variation: PVC will be applicable as per IEEMA Circular, where base month will be considered as (&apos; + (price_variable_month ? price_variable_month : &apos;MM&apos;) + &apos; &apos; + (price_variable_year ? price_variable_year : &apos;YYYY&apos;) + &apos;).&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_label&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Label&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;As new requirement&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_text&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Text&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        },
+        &quot;Ex-works&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;payment_terms&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;payment_terms&quot;,
+                  &quot;label&quot;: &quot;Payment Terms&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit with PDC&quot;,
+                    &quot;Others&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;other_detail&quot;,
+                  &quot;label&quot;: &quot;Other Details&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Others&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lc_interest_reflect_separately&quot;,
+                  &quot;label&quot;: &quot;LC Interest Reflect Separately&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Yes&quot;,
+                    &quot;No&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;No&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_buyer_days&quot;,
+                  &quot;label&quot;: &quot;(I) Usance Interest in Buyer&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_seller_days&quot;,
+                  &quot;label&quot;: &quot;(II) Usance Interest in Seller&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;(III) % of Usance Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_pdc_days&quot;,
+                  &quot;label&quot;: &quot;Against PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pdc_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_open_credit_days&quot;,
+                  &quot;label&quot;: &quot;Against Open Credit with PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;open_credit_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tnc_details&quot;,
+              &quot;label&quot;: &quot;T&amp;C Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;subject_line&quot;,
+                  &quot;label&quot;: &quot;Subject Line&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;unit&quot;: &quot;Subject Line&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Value&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule_in&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule In&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;Days&quot;,
+                    &quot;Weeks&quot;,
+                    &quot;Months&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_start_date&quot;,
+                  &quot;label&quot;: &quot;Warranty Start Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty start Date (months)&quot;,
+                  &quot;defaultValue&quot;: 12,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_end_date&quot;,
+                  &quot;label&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;defaultValue&quot;: 18,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;offer_validity&quot;,
+                  &quot;label&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;defaultValue&quot;: 6,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;extra_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;your_ref&quot;,
+                  &quot;label&quot;: &quot;Enter Reference&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;enquiry_date&quot;,
+                  &quot;label&quot;: &quot;Enquiry Date&quot;,
+                  &quot;type&quot;: &quot;date&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges&quot;,
+                  &quot;label&quot;: &quot;Loading Charges&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_per_mt&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Per MT)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_lumpsum&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Lump Sum)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;editable_clauses&quot;,
+              &quot;label&quot;: &quot;Editable Clause&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;clause_3&quot;,
+                  &quot;label&quot;: &quot;Point 3 - Rates &amp; Taxes&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Rates and Taxes: The rates quoted are exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes shall be chargeable extra @18% on the total order value.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;payment_terms_note&quot;,
+                  &quot;label&quot;: &quot;Point 4 - Payment Terms (Additional Note)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: &quot;6&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_5&quot;,
+                  &quot;label&quot;: &quot;Point 5 - Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Delivery Schedule: If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply order however if an advance payment has to be made with the supply order the date of receipt of such advance payment or the supply order, whichever is later shall be the date from which the delivery date shall be accounted for. The supplier will be responsible for delivering the entire consignment segment-wise, subject to mutual discussion and taking into account the date of receipt of the clear techno commercial order and commercial clearance. However, this is contingent upon normal working conditions.&apos; + (delivery_schedule ? (&apos; Here, delivery schedule shall be &apos; + delivery_schedule + &apos; &apos; + (delivery_schedule_in || &apos;&apos;) + &apos; from the date of clear order &amp; commercial clearance.&apos;) : &apos;&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_8&quot;,
+                  &quot;label&quot;: &quot;Point 8 - Transportation &amp; Freight&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;for_value == &apos;Per mt (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Lump sum (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Per mt (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic) shall be charged extra at actual.&apos; : for_value == &apos;Lump sum (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum) shall be charged extra at actual.&apos; : psd_incoterms == &apos;F.O.R (Freight on Road)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis are inclusive of any transportation and freight charges only.&apos; : &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on ex-works basis are exclusive of any transportation and freight charges, therefore be it mentioned here that if the Supplier has to facilitate the process of transportation in that event such freight charges shall become chargeable additionally.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_9&quot;,
+                  &quot;label&quot;: &quot;Point 9 - Inspection&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier&apos;s plant and/or factory or the Buyer may depute its own team at the Supplier&apos;s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier&apos;s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;,
+                  &quot;value&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier’s plant and/or factory or the Buyer may depute its own team at the Supplier’s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under despatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier’s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or despatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_12&quot;,
+                  &quot;label&quot;: &quot;Point 12 - Warranty&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Warranty: The Supplier’s products are covered by a mechanical guarantee for a period of &apos; + (warranty_start_date || 12) + &apos; months from the date of commissioning or at the latest &apos; + (warranty_end_date || 18) + &apos; months from the date of delivery as per the agreed incoterm, unless a longer period has been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_13&quot;,
+                  &quot;label&quot;: &quot;Point 13 - Return of Goods&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Return of Goods: Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_15&quot;,
+                  &quot;label&quot;: &quot;Point 15 - Validity&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Validity: This offer shall remain valid for a period of &apos; + (offer_validity || 6) + &apos; days from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_16&quot;,
+                  &quot;label&quot;: &quot;Point 16 - Penal Interest&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Penal interest: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;,
+                  &quot;value&quot;: &quot;Penal interest &amp; Ground Rent: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_20&quot;,
+                  &quot;label&quot;: &quot;Point 20 - Price Variation&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Price_Basis == &apos;FIRM&apos; ? &apos;Price variation: The rates as quoted herein by the Supplier are subject to factoring of price variation being applicable. If for any reason the supplies get carried forward to the next month in that event the next month’s rates shall become applicable. For quantities that are proposed to be delivered after that price variation will be applicable as per change of rates between base month (that is the month in which the order was placed) and month of despatch. If there are changes in price of raw materials by SAIL/TATA then the prices of the material will also become liable to be changed.&apos; : (&apos;Price variation: PVC will be applicable as per IEEMA Circular, where base month will be considered as (&apos; + (price_variable_month ? price_variable_month : &apos;MM&apos;) + &apos; &apos; + (price_variable_year ? price_variable_year : &apos;YYYY&apos;) + &apos;).&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_label&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Label&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;As new requirement&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_text&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Text&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        },
+        &quot;F.O.R (Freight on Road)&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;payment_terms&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;payment_terms&quot;,
+                  &quot;label&quot;: &quot;Payment Terms&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit with PDC&quot;,
+                    &quot;Others&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;other_detail&quot;,
+                  &quot;label&quot;: &quot;Other Details&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Others&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lc_interest_reflect_separately&quot;,
+                  &quot;label&quot;: &quot;LC Interest Reflect Separately&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Yes&quot;,
+                    &quot;No&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;No&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_buyer_days&quot;,
+                  &quot;label&quot;: &quot;(I) Usance Interest in Buyer&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_seller_days&quot;,
+                  &quot;label&quot;: &quot;(II) Usance Interest in Seller&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;(III) % of Usance Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_pdc_days&quot;,
+                  &quot;label&quot;: &quot;Against PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pdc_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_open_credit_days&quot;,
+                  &quot;label&quot;: &quot;Against Open Credit with PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;open_credit_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tnc_details&quot;,
+              &quot;label&quot;: &quot;T&amp;C Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;subject_line&quot;,
+                  &quot;label&quot;: &quot;Subject Line&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;unit&quot;: &quot;Subject Line&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Value&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule_in&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule In&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;Days&quot;,
+                    &quot;Weeks&quot;,
+                    &quot;Months&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_start_date&quot;,
+                  &quot;label&quot;: &quot;Warranty Start Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty start Date (months)&quot;,
+                  &quot;defaultValue&quot;: 12,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_end_date&quot;,
+                  &quot;label&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;defaultValue&quot;: 18,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;offer_validity&quot;,
+                  &quot;label&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;defaultValue&quot;: 6,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;extra_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;your_ref&quot;,
+                  &quot;label&quot;: &quot;Enter Reference&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;enquiry_date&quot;,
+                  &quot;label&quot;: &quot;Enquiry Date&quot;,
+                  &quot;type&quot;: &quot;date&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges&quot;,
+                  &quot;label&quot;: &quot;Loading Charges&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_per_mt&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Per MT)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_lumpsum&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Lump Sum)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;for_value&quot;,
+                  &quot;label&quot;: &quot;F.O.R&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;transportation_charges&quot;,
+                  &quot;label&quot;: &quot;Transportation Charges&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;for_value&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lumpsum_charges&quot;,
+                  &quot;label&quot;: &quot;Lump sum Charges&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;for_value&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;editable_clauses&quot;,
+              &quot;label&quot;: &quot;Editable Clause&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;clause_3&quot;,
+                  &quot;label&quot;: &quot;Point 3 - Rates &amp; Taxes&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Rates and Taxes: The rates quoted are exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes shall be chargeable extra @18% on the total order value.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;payment_terms_note&quot;,
+                  &quot;label&quot;: &quot;Point 4 - Payment Terms (Additional Note)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: &quot;6&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_5&quot;,
+                  &quot;label&quot;: &quot;Point 5 - Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Delivery Schedule: If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply order however if an advance payment has to be made with the supply order the date of receipt of such advance payment or the supply order, whichever is later shall be the date from which the delivery date shall be accounted for. The supplier will be responsible for delivering the entire consignment segment-wise, subject to mutual discussion and taking into account the date of receipt of the clear techno commercial order and commercial clearance. However, this is contingent upon normal working conditions.&apos; + (delivery_schedule ? (&apos; Here, delivery schedule shall be &apos; + delivery_schedule + &apos; &apos; + (delivery_schedule_in || &apos;&apos;) + &apos; from the date of clear order &amp; commercial clearance.&apos;) : &apos;&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_8&quot;,
+                  &quot;label&quot;: &quot;Point 8 - Transportation &amp; Freight&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;for_value == &apos;Per mt (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Lump sum (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Per mt (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic) shall be charged extra at actual.&apos; : for_value == &apos;Lump sum (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum) shall be charged extra at actual.&apos; : psd_incoterms == &apos;F.O.R (Freight on Road)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis are inclusive of any transportation and freight charges only.&apos; : &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on ex-works basis are exclusive of any transportation and freight charges, therefore be it mentioned here that if the Supplier has to facilitate the process of transportation in that event such freight charges shall become chargeable additionally.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_9&quot;,
+                  &quot;label&quot;: &quot;Point 9 - Inspection&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier&apos;s plant and/or factory or the Buyer may depute its own team at the Supplier&apos;s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier&apos;s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;,
+                  &quot;value&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier’s plant and/or factory or the Buyer may depute its own team at the Supplier’s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under despatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier’s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or despatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_12&quot;,
+                  &quot;label&quot;: &quot;Point 12 - Warranty&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Warranty: The Supplier’s products are covered by a mechanical guarantee for a period of &apos; + (warranty_start_date || 12) + &apos; months from the date of commissioning or at the latest &apos; + (warranty_end_date || 18) + &apos; months from the date of delivery as per the agreed incoterm, unless a longer period has been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_13&quot;,
+                  &quot;label&quot;: &quot;Point 13 - Return of Goods&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Return of Goods: Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_15&quot;,
+                  &quot;label&quot;: &quot;Point 15 - Validity&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Validity: This offer shall remain valid for a period of &apos; + (offer_validity || 6) + &apos; days from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_16&quot;,
+                  &quot;label&quot;: &quot;Point 16 - Penal Interest&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Penal interest: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;,
+                  &quot;value&quot;: &quot;Penal interest &amp; Ground Rent: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_20&quot;,
+                  &quot;label&quot;: &quot;Point 20 - Price Variation&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Price_Basis == &apos;FIRM&apos; ? &apos;Price variation: The rates as quoted herein by the Supplier are subject to factoring of price variation being applicable. If for any reason the supplies get carried forward to the next month in that event the next month’s rates shall become applicable. For quantities that are proposed to be delivered after that price variation will be applicable as per change of rates between base month (that is the month in which the order was placed) and month of despatch. If there are changes in price of raw materials by SAIL/TATA then the prices of the material will also become liable to be changed.&apos; : (&apos;Price variation: PVC will be applicable as per IEEMA Circular, where base month will be considered as (&apos; + (price_variable_month ? price_variable_month : &apos;MM&apos;) + &apos; &apos; + (price_variable_year ? price_variable_year : &apos;YYYY&apos;) + &apos;).&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_label&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Label&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;As new requirement&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_text&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Text&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        },
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;payment_terms&quot;,
+              &quot;label&quot;: &quot;Payment Terms&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;payment_terms&quot;,
+                  &quot;label&quot;: &quot;Payment Terms&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Before Dispatch&quot;,
+                    &quot;Against LC&quot;,
+                    &quot;Against PDC&quot;,
+                    &quot;Against Open Credit with PDC&quot;,
+                    &quot;Others&quot;
+                  ],
+                  &quot;colSpan&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;other_detail&quot;,
+                  &quot;label&quot;: &quot;Other Details&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Others&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lc_interest_reflect_separately&quot;,
+                  &quot;label&quot;: &quot;LC Interest Reflect Separately&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;options&quot;: [
+                    &quot;Yes&quot;,
+                    &quot;No&quot;
+                  ],
+                  &quot;defaultValue&quot;: &quot;No&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_buyer_days&quot;,
+                  &quot;label&quot;: &quot;(I) Usance Interest in Buyer&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_seller_days&quot;,
+                  &quot;label&quot;: &quot;(II) Usance Interest in Seller&apos;s Account&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;usance_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;(III) % of Usance Interest&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against LC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_pdc_days&quot;,
+                  &quot;label&quot;: &quot;Against PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pdc_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;against_open_credit_days&quot;,
+                  &quot;label&quot;: &quot;Against Open Credit with PDC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Days&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;open_credit_interest_percentage&quot;,
+                  &quot;label&quot;: &quot;Interest (%)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;%&quot;,
+                  &quot;colSpan&quot;: 12,
+                  &quot;controllingField&quot;: &quot;payment_terms&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Against Open Credit&quot;,
+                    &quot;Against Open Credit with PDC&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;tnc_details&quot;,
+              &quot;label&quot;: &quot;T&amp;C Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;subject_line&quot;,
+                  &quot;label&quot;: &quot;Subject Line&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;unit&quot;: &quot;Subject Line&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Value&quot;,
+                  &quot;colSpan&quot;: 3
+                },
+                {
+                  &quot;apiName&quot;: &quot;delivery_schedule_in&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule In&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 3,
+                  &quot;options&quot;: [
+                    &quot;Days&quot;,
+                    &quot;Weeks&quot;,
+                    &quot;Months&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_start_date&quot;,
+                  &quot;label&quot;: &quot;Warranty Start Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty start Date (months)&quot;,
+                  &quot;defaultValue&quot;: 12,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;warranty_end_date&quot;,
+                  &quot;label&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Warranty End Date (months)&quot;,
+                  &quot;defaultValue&quot;: 18,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;offer_validity&quot;,
+                  &quot;label&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;unit&quot;: &quot;Offer Validity (days)&quot;,
+                  &quot;defaultValue&quot;: 6,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;extra_space&quot;,
+                  &quot;label&quot;: &quot;&quot;,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;your_ref&quot;,
+                  &quot;label&quot;: &quot;Enter Reference&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;enquiry_date&quot;,
+                  &quot;label&quot;: &quot;Enquiry Date&quot;,
+                  &quot;type&quot;: &quot;date&quot;,
+                  &quot;required&quot;: true,
+                  &quot;colSpan&quot;: 6
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges&quot;,
+                  &quot;label&quot;: &quot;Loading Charges&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_per_mt&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Per MT)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;loading_charges_lumpsum&quot;,
+                  &quot;label&quot;: &quot;Loading Charges (Lump Sum)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;for_value&quot;,
+                  &quot;label&quot;: &quot;F.O.R&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;options&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;,
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;transportation_charges&quot;,
+                  &quot;label&quot;: &quot;Transportation Charges&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;for_value&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;,
+                    &quot;Per mt (Excluded Price)&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;lumpsum_charges&quot;,
+                  &quot;label&quot;: &quot;Lump sum Charges&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;for_value&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;,
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ]
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;editable_clauses&quot;,
+              &quot;label&quot;: &quot;Editable Clause&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;clause_3&quot;,
+                  &quot;label&quot;: &quot;Point 3 - Rates &amp; Taxes&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Rates and Taxes: The rates quoted are exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes shall be chargeable extra @18% on the total order value.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;payment_terms_note&quot;,
+                  &quot;label&quot;: &quot;Point 4 - Payment Terms (Additional Note)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: &quot;6&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_5&quot;,
+                  &quot;label&quot;: &quot;Point 5 - Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Delivery Schedule: If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply order however if an advance payment has to be made with the supply order the date of receipt of such advance payment or the supply order, whichever is later shall be the date from which the delivery date shall be accounted for. The supplier will be responsible for delivering the entire consignment segment-wise, subject to mutual discussion and taking into account the date of receipt of the clear techno commercial order and commercial clearance. However, this is contingent upon normal working conditions.&apos; + (delivery_schedule ? (&apos; Here, delivery schedule shall be &apos; + delivery_schedule + &apos; &apos; + (delivery_schedule_in || &apos;&apos;) + &apos; from the date of clear order &amp; commercial clearance.&apos;) : &apos;&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_excluded&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Excluded)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Excluded Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) will be charged extra at actual.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_per_mt_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Per MT, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Per mt (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_per_mt || 0) + &apos; per MT (Basic) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_7_lumpsum_included&quot;,
+                  &quot;label&quot;: &quot;Point 7 - Loading Charges (Lump Sum, Included)&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;controllingField&quot;: &quot;loading_charges&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;Lump sum (Included Price)&quot;
+                  ],
+                  &quot;formula&quot;: &quot;&apos;Loading Charges: Rs. &apos; + (loading_charges_lumpsum || 0) + &apos; (Lump Sum) is included in the quoted unit price.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_8&quot;,
+                  &quot;label&quot;: &quot;Point 8 - Transportation &amp; Freight&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;for_value == &apos;Per mt (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Lump sum (Included Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis and are inclusive of transportation and freight charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum), therefore no freight shall be chargeable additionally.&apos; : for_value == &apos;Per mt (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (transportation_charges || 0) + &apos; per MT (Basic) shall be charged extra at actual.&apos; : for_value == &apos;Lump sum (Excluded Price)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are exclusive of transportation and freight charges. Transportation Charges of Rs. &apos; + (lumpsum_charges || 0) + &apos; (Lump Sum) shall be charged extra at actual.&apos; : psd_incoterms == &apos;F.O.R (Freight on Road)&apos; ? &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on FOR basis are inclusive of any transportation and freight charges only.&apos; : &apos;Transportation &amp; Freight: The rates quoted for the materials and/or goods are on ex-works basis are exclusive of any transportation and freight charges, therefore be it mentioned here that if the Supplier has to facilitate the process of transportation in that event such freight charges shall become chargeable additionally.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_9&quot;,
+                  &quot;label&quot;: &quot;Point 9 - Inspection&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier&apos;s plant and/or factory or the Buyer may depute its own team at the Supplier&apos;s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier&apos;s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;,
+                  &quot;value&quot;: &quot;Inspection: The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognised inspection agency at the Supplier’s plant and/or factory or the Buyer may depute its own team at the Supplier’s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under despatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier’s plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or despatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_12&quot;,
+                  &quot;label&quot;: &quot;Point 12 - Warranty&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Warranty: The Supplier’s products are covered by a mechanical guarantee for a period of &apos; + (warranty_start_date || 12) + &apos; months from the date of commissioning or at the latest &apos; + (warranty_end_date || 18) + &apos; months from the date of delivery as per the agreed incoterm, unless a longer period has been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_13&quot;,
+                  &quot;label&quot;: &quot;Point 13 - Return of Goods&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Return of Goods: Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_15&quot;,
+                  &quot;label&quot;: &quot;Point 15 - Validity&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;&apos;Validity: This offer shall remain valid for a period of &apos; + (offer_validity || 6) + &apos; days from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.&apos;&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_16&quot;,
+                  &quot;label&quot;: &quot;Point 16 - Penal Interest&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;Penal interest: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;,
+                  &quot;value&quot;: &quot;Penal interest &amp; Ground Rent: Once the material is inspected and final IC is cleared, then if there is any delay to lift the material for commercial clearance (i.e. Payment / Opening of LC, etc) then both Ground Rent of 1% monthly and Penal interest of 18% per annum shall be charged to the Buyer. Also in the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;clause_20&quot;,
+                  &quot;label&quot;: &quot;Point 20 - Price Variation&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;formula&quot;: &quot;Price_Basis == &apos;FIRM&apos; ? &apos;Price variation: The rates as quoted herein by the Supplier are subject to factoring of price variation being applicable. If for any reason the supplies get carried forward to the next month in that event the next month’s rates shall become applicable. For quantities that are proposed to be delivered after that price variation will be applicable as per change of rates between base month (that is the month in which the order was placed) and month of despatch. If there are changes in price of raw materials by SAIL/TATA then the prices of the material will also become liable to be changed.&apos; : (&apos;Price variation: PVC will be applicable as per IEEMA Circular, where base month will be considered as (&apos; + (price_variable_month ? price_variable_month : &apos;MM&apos;) + &apos; &apos; + (price_variable_year ? price_variable_year : &apos;YYYY&apos;) + &apos;).&apos;)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_label&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Label&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;As new requirement&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;point_26_text&quot;,
+                  &quot;label&quot;: &quot;Point 26 - Custom Term Text&quot;,
+                  &quot;type&quot;: &quot;textarea&quot;,
+                  &quot;colSpan&quot;: 6,
+                  &quot;defaultValue&quot;: &quot;&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  &quot;_lineItemAdjustments&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;for_value&quot;,
+      &quot;conditionValue&quot;: &quot;Per mt (Included Price)&quot;,
+      &quot;chargeField&quot;: &quot;transportation_charges&quot;,
+      &quot;applyGST&quot;: true,
+      &quot;divideByQuantity&quot;: false,
+      &quot;multiplyByWeight&quot;: true,
+      &quot;weightFieldPrefix&quot;: &quot;c&quot;,
+      &quot;weightFieldByTarget&quot;: {
+        &quot;Material Price Summary&quot;: &quot;total_weight_mt&quot;,
+        &quot;Special Section&quot;: &quot;ss_total_weight_mt&quot;
+      },
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;Material Price Summary&quot;,
+        &quot;Special Section&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;for_value&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum (Included Price)&quot;,
+      &quot;chargeField&quot;: &quot;lumpsum_charges&quot;,
+      &quot;applyGST&quot;: true,
+      &quot;divideByQuantity&quot;: true,
+      &quot;multiplyByWeight&quot;: false,
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;Material Price Summary&quot;,
+        &quot;Special Section&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;loading_charges&quot;,
+      &quot;conditionValue&quot;: &quot;Per mt (Included Price)&quot;,
+      &quot;chargeField&quot;: &quot;loading_charges_per_mt&quot;,
+      &quot;applyGST&quot;: true,
+      &quot;divideByQuantity&quot;: false,
+      &quot;multiplyByWeight&quot;: true,
+      &quot;weightFieldPrefix&quot;: &quot;c&quot;,
+      &quot;weightFieldByTarget&quot;: {
+        &quot;Material Price Summary&quot;: &quot;total_weight_mt&quot;,
+        &quot;Special Section&quot;: &quot;ss_total_weight_mt&quot;
+      },
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;Material Price Summary&quot;,
+        &quot;Special Section&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;loading_charges&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum (Included Price)&quot;,
+      &quot;chargeField&quot;: &quot;loading_charges_lumpsum&quot;,
+      &quot;applyGST&quot;: true,
+      &quot;divideByQuantity&quot;: true,
+      &quot;multiplyByWeight&quot;: false,
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;Material Price Summary&quot;,
+        &quot;Special Section&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    }
+  ],
+  &quot;_newLineItemGenerators&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;for_value&quot;,
+      &quot;conditionValue&quot;: &quot;Per mt (Excluded Price)&quot;,
+      &quot;chargeField&quot;: &quot;transportation_charges&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Transportation Charges (Per MT)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;for_value&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum (Excluded Price)&quot;,
+      &quot;chargeField&quot;: &quot;lumpsum_charges&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Transportation Charges (Lump Sum)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;loading_charges&quot;,
+      &quot;conditionValue&quot;: &quot;Per mt (Excluded Price)&quot;,
+      &quot;chargeField&quot;: &quot;loading_charges_per_mt&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Loading Charges (Per MT)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;loading_charges&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum (Excluded Price)&quot;,
+      &quot;chargeField&quot;: &quot;loading_charges_lumpsum&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Loading Charges (Lump Sum)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    },
+    {
+      &quot;conditionField&quot;: &quot;psd_incoterms&quot;,
+      &quot;conditionValue&quot;: &quot;*&quot;,
+      &quot;chargeField&quot;: &quot;transit_insurance_charges&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Transit Insurance Charges&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

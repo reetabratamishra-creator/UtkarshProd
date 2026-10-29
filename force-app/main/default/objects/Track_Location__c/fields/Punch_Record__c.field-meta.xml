@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Punch_Record__c</fullName>
+    <label>Punch Record</label>
+    <referenceTo>Punch_Record__c</referenceTo>
+    <relationshipLabel>Track Location</relationshipLabel>
+    <relationshipName>Track_Location</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

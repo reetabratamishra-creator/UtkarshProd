@@ -1,0 +1,83 @@
+:host {
+    display: block;
+    background: #f4f6f9;
+    min-height: 100vh;
+}
+.slds-align-middle {
+    display: flex;
+    align-items: center;
+}
+
+.page-container{
+    padding:2rem;
+}
+
+.card-wrapper{
+    max-width:1100px;
+    margin:auto;
+}
+
+.upload-section{
+
+    padding:20px;
+
+    border:1px solid #d8dde6;
+
+    border-radius:10px;
+
+    background:white;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.preview-box{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.action-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+.summary-card{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.summary-title{
+    font-weight:600;
+    color:#666;
+}
+
+.summary-value{
+    font-size:30px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.success{
+    border-left:5px solid #2e844a;
+}
+
+.failure{
+    border-left:5px solid #ba0517;
+}

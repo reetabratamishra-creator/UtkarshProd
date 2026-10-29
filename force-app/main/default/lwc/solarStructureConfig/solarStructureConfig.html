@@ -1,0 +1,326 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large solar-modal">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClose}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate">{modalTitle}</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium custom-scrollbar">
+                
+                <!-- SETUP SECTION -->
+                <div class="slds-box slds-theme_default slds-m-bottom_medium" style="border-top: 4px solid #1589ee;">
+                    <div class="slds-grid slds-wrap slds-grid_align-spread slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <h3 class="slds-text-heading_small slds-m-bottom_small" style="font-weight: 700; color: #1589ee;">1. SELECT STRUCTURE TYPES</h3>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                                    <lightning-input disabled={isReadOnly} type="checkbox" label="HDG/MMS Structure & Piers for Tracker" checked={includeHdg} onchange={handleIncludeHdg}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input disabled={isReadOnly} type="checkbox" label="Galvalume & Black Structure" checked={includeGalv} onchange={handleIncludeGalv}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Minimum Micron moved to a per-line checkbox inside each
+                             HDG MMS item; see the HDG section below. -->
+                    </div>
+                </div>
+
+                <!-- HDG/MMS SECTION -->
+                <template if:true={includeHdg}>
+                    <div class="slds-m-bottom_large">
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_small slds-grid_vertical-align-end">
+                            <div>
+                                <h3 class="slds-text-heading_small section-heading hdg">2. HDG/MMS STRUCTURE</h3>
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center section-toolbar" style="gap: 15px;">
+                                <div class="count-input" style="width: 150px;">
+                                    <lightning-input disabled={isReadOnly} type="number" label="Number of items:" value={hdgCount} onchange={handleHdgCountChange} min="1"></lightning-input>
+                                </div>
+                                <lightning-button variant="brand-outline" label={toggleHdgLabel} icon-name={toggleHdgIcon} onclick={toggleHdgCalculations}></lightning-button>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-grid slds-wrap" style="gap: 15px;">
+                            <template for:each={hdgLines} for:item="line" for:index="index">
+                                <div key={line.key} class="slds-col slds-size_1-of-1 slds-box slds-theme_default slds-m-bottom_small item-card hdg">
+                                    <div class="slds-grid slds-grid_align-spread slds-m-bottom_small slds-grid_vertical-align-center">
+                                        <div class="slds-text-heading_small item-title">Item {line.displayIndex}</div>
+                                        <!-- Standard is the default; Custom opens the costing panel for editing. -->
+                                        <lightning-input disabled={isReadOnly} type="toggle" variant="label-hidden"
+                                            label="Pricing Mode" data-index={index}
+                                            message-toggle-active="Custom Mode" message-toggle-inactive="Standard Mode"
+                                            checked={line.isCustomMode} onchange={handleHdgModeToggle}></lightning-input>
+                                    </div>
+                                    
+                                    <!-- DISPLAY FIELDS (EXTERNAL) -->
+                                    <div class="slds-grid slds-wrap" style="margin: -0.5rem;">
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-combobox disabled={isReadOnly} label="Material" data-index={index} data-field="material" value={line.material} options={hdgMaterialOptions} onchange={handleHdgFieldChange}></lightning-combobox>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox disabled={isReadOnly} label="Price Grade" data-index={index} data-field="materialGrade" value={line.materialGrade} options={line.gradeOptions} onchange={handleHdgFieldChange}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input disabled type="text" label="Price Grade" data-index={index} data-field="materialGrade" value={line.materialGrade}></lightning-input>
+                                        </template>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="text" label="Print Grade" data-index={index} data-field="displayGrade" value={line.displayGrade} onchange={handleHdgFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="text" label="Description" data-index={index} data-field="description" value={line.description} onchange={handleHdgFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox label="Thick(mm)" data-index={index} data-field="thickness" value={line.thickness} options={hdgThicknessOptions} onchange={handleHdgFieldChange} disabled={line.isHdgMms}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input disabled={isReadOnly} type="text" label="Thick(mm)" data-index={index} data-field="thickness" value={line.thickness} onchange={handleHdgFieldChange}></lightning-input>
+                                        </template>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox disabled={isReadOnly} label="Micron" data-index={index} data-field="micronThickness" value={line.micronThickness} options={hdgMicronOptions} onchange={handleHdgFieldChange}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input disabled={isReadOnly} type="text" label="Micron" data-index={index} data-field="micronThickness" value={line.micronThickness} onchange={handleHdgFieldChange}></lightning-input>
+                                        </template>
+                                        </div>
+                                        <template if:true={line.showMinMicron}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <div class="min-micron-box">
+                                                    <lightning-input disabled={isReadOnly} type="checkbox" label="Minimum Micron (Auto +20 Avg)" data-index={index} checked={line.isMinimumMicron} onchange={handleHdgMinMicronToggle}></lightning-input>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <template if:false={isPCs}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.001" label="Weight (MT)" data-index={index} data-field="totalWeight" value={line.totalWeight} onchange={handleHdgFieldChange}></lightning-input>
+                                            </div>
+                                        </template>
+                                        <template if:true={isPCs}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.001" label="Unit Wt (MT)" data-index={index} data-field="unitWeight" value={line.unitWeight} onchange={handleHdgFieldChange}></lightning-input>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" label="Quantity" data-index={index} data-field="quantity" value={line.quantity} onchange={handleHdgFieldChange}></lightning-input>
+                                            </div>
+                                        </template>
+
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Freight" data-index={index} data-field="freight" value={line.freight} onchange={handleHdgFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Discount" data-index={index} data-field="discount" value={line.discount} onchange={handleHdgFieldChange}></lightning-input>
+                                        </div>
+                                        <!-- Custom Mode only: the base steel rate is typed here instead
+                                             of being looked up from the rate card. -->
+                                        <template if:true={line.isCustomMode}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <div class="custom-rate-box">
+                                                    <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Base Steel Rate" data-index={index} data-field="customSteelRate" value={line.customSteelRate} onchange={handleHdgFieldChange}></lightning-input>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small" style="margin-left: auto;">
+                                            <div class="final-value-box">
+                                                <lightning-input type="number" label="FINAL VALUE" value={line.totalQuoteValue} readonly style="font-weight: 700; --sds-c-input-text-color: #0d6e27;"></lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- INTERNAL COSTING PANEL (BACKEND) -->
+                                    <template if:true={showHdgCalculations}>
+                                        <div class="costing-panel">
+                                            <div class="slds-text-title_caps slds-m-bottom_x-small costing-title">Internal Costing View (Hidden from Client)</div>
+                                            <div class="slds-grid slds-wrap" style="margin: -0.25rem;">
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Base Steel Rate" value={line.steelRate} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Total Steel Rate" value={line.totalSteelRate} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Zinc Rate" value={line.zincRate} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Zinc Ratio (%)" value={line.zincRatio} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="GI Cost Total" value={line.giCostTotal} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Misc Total" value={line.miscTotal} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Other Cost" value={line.otherCostTotal} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Total Cost" value={line.totalCost} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Quote MT Base" value={line.quoteMt} readonly></lightning-input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- GALVALUME/BLACK SECTION -->
+                <template if:true={includeGalv}>
+                    <div class="slds-m-bottom_large">
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_small slds-grid_vertical-align-end">
+                            <div>
+                                <h3 class="slds-text-heading_small section-heading galv">3. GALVALUME & BLACK STRUCTURE</h3>
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center section-toolbar" style="gap: 15px;">
+                                <div class="count-input" style="width: 150px;">
+                                    <lightning-input disabled={isReadOnly} type="number" label="Number of items:" value={galvCount} onchange={handleGalvCountChange} min="1"></lightning-input>
+                                </div>
+                                <lightning-button variant="brand-outline" label={toggleGalvLabel} icon-name={toggleGalvIcon} onclick={toggleGalvCalculations}></lightning-button>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-grid slds-wrap" style="gap: 15px;">
+                            <template for:each={galvLines} for:item="line" for:index="index">
+                                <div key={line.key} class="slds-col slds-size_1-of-1 slds-box slds-theme_default slds-m-bottom_small item-card galv">
+                                    <div class="slds-grid slds-grid_align-spread slds-m-bottom_small slds-grid_vertical-align-center">
+                                        <div class="slds-text-heading_small item-title">Item {line.displayIndex}</div>
+                                        <!-- Standard is the default; Custom opens the costing panel for editing. -->
+                                        <lightning-input disabled={isReadOnly} type="toggle" variant="label-hidden"
+                                            label="Pricing Mode" data-index={index}
+                                            message-toggle-active="Custom Mode" message-toggle-inactive="Standard Mode"
+                                            checked={line.isCustomMode} onchange={handleGalvModeToggle}></lightning-input>
+                                    </div>
+                                    
+                                    <!-- DISPLAY FIELDS (EXTERNAL) -->
+                                    <div class="slds-grid slds-wrap" style="margin: -0.5rem;">
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-combobox disabled={isReadOnly} label="Material" data-index={index} data-field="material" value={line.material} options={galvMaterialOptions} onchange={handleGalvFieldChange}></lightning-combobox>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox disabled={isReadOnly} label="Grade" data-index={index} data-field="materialGrade" value={line.materialGrade} options={line.gradeOptions} onchange={handleGalvFieldChange}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input disabled={isReadOnly} type="text" label="Grade" data-index={index} data-field="materialGrade" value={line.materialGrade} onchange={handleGalvFieldChange}></lightning-input>
+                                        </template>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox label="Coating" data-index={index} data-field="coating" value={line.coating} options={line.coatingOptions} onchange={handleGalvFieldChange} disabled={line.isNotGalvalume}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input label="Coating" type="text" data-index={index} data-field="coating" value={line.coating} onchange={handleGalvFieldChange} disabled={line.isNotGalvalume}></lightning-input>
+                                        </template>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="text" label="Print YSD" data-index={index} data-field="displayGrade" value={line.displayGrade} onchange={handleGalvFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="text" label="Description" data-index={index} data-field="description" value={line.description} onchange={handleGalvFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <template if:false={line.isCustomMode}>
+                                            <lightning-combobox disabled={isReadOnly} label="Thick(mm)" data-index={index} data-field="thickness" value={line.thickness} options={galvThicknessOptions} onchange={handleGalvFieldChange}></lightning-combobox>
+                                        </template>
+                                        <template if:true={line.isCustomMode}>
+                                            <lightning-input disabled={isReadOnly} type="text" label="Thick(mm)" data-index={index} data-field="thickness" value={line.thickness} onchange={handleGalvFieldChange}></lightning-input>
+                                        </template>
+                                        </div>
+
+                                        <template if:false={isPCs}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.001" label="Weight (MT)" data-index={index} data-field="totalWeight" value={line.totalWeight} onchange={handleGalvFieldChange}></lightning-input>
+                                            </div>
+                                        </template>
+                                        <template if:true={isPCs}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" step="0.001" label="Unit Wt" data-index={index} data-field="unitWeight" value={line.unitWeight} onchange={handleGalvFieldChange}></lightning-input>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                                <lightning-input disabled={isReadOnly} type="number" label="Qty" data-index={index} data-field="quantity" value={line.quantity} onchange={handleGalvFieldChange}></lightning-input>
+                                            </div>
+                                        </template>
+
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Freight" data-index={index} data-field="freight" value={line.freight} onchange={handleGalvFieldChange}></lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-p-around_xx-small">
+                                            <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Discount" data-index={index} data-field="discount" value={line.discount} onchange={handleGalvFieldChange}></lightning-input>
+                                        </div>
+                                        <template if:true={line.isCustomMode}>
+                                            <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small">
+                                                <div class="custom-rate-box">
+                                                    <lightning-input disabled={isReadOnly} type="number" step="0.01" label="Base Steel Rate" data-index={index} data-field="customSteelRate" value={line.customSteelRate} onchange={handleGalvFieldChange}></lightning-input>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-p-around_xx-small" style="margin-left: auto;">
+                                            <div class="final-value-box">
+                                                <lightning-input type="number" label="FINAL VALUE" value={line.totalQuoteValue} readonly style="font-weight: 700; --sds-c-input-text-color: #0d6e27;"></lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- INTERNAL COSTING PANEL (BACKEND) -->
+                                    <template if:true={showGalvCalculations}>
+                                        <div class="costing-panel">
+                                            <div class="slds-text-title_caps slds-m-bottom_x-small costing-title">Internal Costing View (Hidden from Client)</div>
+                                            <div class="slds-grid slds-wrap" style="margin: -0.25rem;">
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Base Steel Rate" value={line.steelRate} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Total Steel Cost" value={line.totalSteelRate} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Misc Total" value={line.miscTotal} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Other Cost" value={line.otherCostTotal} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Total Cost" value={line.totalCost} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Quote MT Base" value={line.quoteMt} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Quote Black" value={line.finalQuoteBlack} readonly></lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-6 slds-p-around_xx-small">
+                                                    <lightning-input type="number" label="Quote Incl Thick" value={line.finalQuoteInclThickness} readonly></lightning-input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={handleClose}>Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

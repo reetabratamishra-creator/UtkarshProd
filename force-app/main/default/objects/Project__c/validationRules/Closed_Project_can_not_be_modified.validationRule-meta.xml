@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Project_can_not_be_modified</fullName>
+    <active>true</active>
+    <description>Closed Project can&apos;t be modified except Admins</description>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    OR(
+        PRIORVALUE(Project_Stage__c) = &quot;Closed Lost&quot;,
+        PRIORVALUE(Project_Stage__c) = &quot;Closed Won&quot;
+    ),
+    NOT(
+        OR(
+            $Profile.Name = &quot;System Administrator&quot;,
+            $Profile.Name = &quot;Utkarsh Admin&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>Closed Project can&apos;t be modified except Admins</errorMessage>
+</ValidationRule>

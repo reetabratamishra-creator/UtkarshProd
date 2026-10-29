@@ -1,0 +1,55 @@
+.container {
+    padding: 1.5rem;
+    min-height: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0176d3;
+    margin-bottom: 1.5rem;
+}
+
+.section {
+    background: #f8f9fb;
+    border: 1px solid #d8dde6;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    gap: .75rem;
+}
+
+.warning-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #fff7e6;
+    color: #8a6d3b;
+    border: 1px solid #ffe58f;
+    font-weight: 600;
+}
+
+.success-icon {
+    color: #2e844a;
+}
+
+lightning-combobox {
+    width: 100%;
+}
+
+lightning-input {
+    width: 100%;
+}
+
+lightning-button {
+    --slds-c-button-brand-radius-border: 8px;
+    --slds-c-button-radius-border: 8px;
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transport_Class_Eligible__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISPICKVAL(Category__c, &quot;Transport&quot;),
+  CASE(Expense_Report__r.Travel_Request__r.Employee_Level__c,
+    &quot;L2&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Economy&quot;),  &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Business&quot;), &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_2AC&quot;),    &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_1AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_3AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_Sleeper&quot;),&quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Ola_Uber&quot;),     &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Auto&quot;),         &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Bus&quot;),          &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_4W&quot;),       &quot;Eligible - Rs.8/km, HOD &amp; Mgmt approval required&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_2W&quot;),       &quot;Not Eligible&quot;,
+      &quot;Unknown transport type&quot;))))))))))),
+    &quot;L3&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Economy&quot;),  &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Business&quot;), &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_2AC&quot;),    &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_1AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_3AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_Sleeper&quot;),&quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Ola_Uber&quot;),     &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Auto&quot;),         &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Bus&quot;),          &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_4W&quot;),       &quot;Eligible - Rs.8/km, HOD &amp; Mgmt approval required&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_2W&quot;),       &quot;Not Eligible&quot;,
+      &quot;Unknown transport type&quot;))))))))))),
+    &quot;L4&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Economy&quot;),  &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Business&quot;), &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_3AC&quot;),    &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_1AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_2AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_Sleeper&quot;),&quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Ola_Uber&quot;),     &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Auto&quot;),         &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Bus&quot;),          &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_2W&quot;),       &quot;Eligible - Rs.3/km, HOD &amp; Mgmt approval required&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_4W&quot;),       &quot;Not Eligible&quot;,
+      &quot;Unknown transport type&quot;))))))))))),
+    /*L5, L6, L7, L8, L9 — identical entitlements*/
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_Sleeper&quot;),&quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_1AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_2AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Train_3AC&quot;),    &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Economy&quot;),  &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Air_Business&quot;), &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Ola_Uber&quot;),     &quot;Not Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Auto&quot;),         &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Bus&quot;),          &quot;Eligible&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_2W&quot;),       &quot;Eligible - Rs.3/km, HOD &amp; Mgmt approval required&quot;,
+      IF( ISPICKVAL(Transport_Sub_Type__c, &quot;Own_4W&quot;),       &quot;Not Eligible&quot;,
+      &quot;Unknown transport type&quot;)))))))))))
+  ),
+  &quot;N/A - Not a Transport expense&quot;
+)</formula>
+    <label>Transport Class Eligible</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

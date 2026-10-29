@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>HDPE</label>
+    <protected>false</protected>
+    <values>
+        <field>CRM_Person_Email__c</field>
+        <value xsi:type="xsd:string">sukriti.das@utkarshindia.invalid</value>
+    </values>
+    <values>
+        <field>Contact_Number__c</field>
+        <value xsi:type="xsd:string">8981222419</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">HDPE</value>
+    </values>
+    <values>
+        <field>Dept_CRM_Person_Name__c</field>
+        <value xsi:type="xsd:string">Sukriti Das</value>
+    </values>
+</CustomMetadata>

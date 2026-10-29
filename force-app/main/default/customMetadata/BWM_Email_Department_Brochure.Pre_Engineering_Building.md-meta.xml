@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Pre Engineering Building</label>
+    <protected>false</protected>
+    <values>
+        <field>Content_File_Title__c</field>
+        <value xsi:type="xsd:string">PEB</value>
+    </values>
+    <values>
+        <field>Department_Name__c</field>
+        <value xsi:type="xsd:string">Pre Engineering Building</value>
+    </values>
+    <values>
+        <field>File_Name__c</field>
+        <value xsi:type="xsd:string">Pre_Engineered_Building_Structure.pdf</value>
+    </values>
+    <values>
+        <field>Product_Brief__c</field>
+        <value xsi:type="xsd:string">We provide structures which are cost-effective, high-strength solutions for industrial and commercial construction. Modular design enables faster project completion — ideal for warehouses, factories, and logistics hubs.
+Types: Warehouse | Factory Shed | Industrial Buildings, etc.</value>
+    </values>
+    <values>
+        <field>Public_Download_Url__c</field>
+        <value xsi:type="xsd:string">https://momentum-customer-397--utkarshuat.sandbox.file.force.com/sfc/dist/version/download/?oid=00DC2000003CoP7&amp;ids=068C20000055MEj&amp;d=%2Fa%2FC2000000udWZ%2FsgkkJNKej_VNcP2Bs9Rb8twc3C849of2Yavb10cj5AA&amp;asPdf=false</value>
+    </values>
+    <values>
+        <field>Static_Resource_Name__c</field>
+        <value xsi:type="xsd:string">Pre_Engineered_Building_Structure_pdf</value>
+    </values>
+</CustomMetadata>

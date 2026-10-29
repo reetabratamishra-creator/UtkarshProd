@@ -1,0 +1,135 @@
+<template>
+
+
+    <lightning-card title="Punch In / Out" icon-name="utility:clock">
+        <div class="mp-container">
+
+            <!-- Employee info -->
+            
+            <template if:true={stateLoaded}>
+                <div class="mp-header">
+                    <div class="mp-name">{employeeName}</div>
+                    <div class={statusBadgeClass}>{statusLabel}</div>
+                </div>
+
+                <div class="mp-info-row">
+                    <span class="mp-label">Last Punch:</span>
+                    <span class="mp-value">
+                        <template if:true={lastPunchDisplay}>
+                            {lastPunchDisplay}
+                        </template>
+                        <template if:false={lastPunchDisplay}>
+                            No punches yet
+                        </template>
+                    </span>
+                </div>
+
+                <div class="mp-info-row">
+                    <span class="mp-label">Battery:</span>
+                    <span class="mp-value">
+                        <template if:true={lastBatteryDisplay}>
+                            {lastBatteryDisplay}%
+                        </template>
+                        <template if:false={lastBatteryDisplay}>
+                            -
+                        </template>
+                    </span>
+                </div>
+
+            </template>
+
+            <template if:true={loading}>
+                <div class="mp-loading">Loading...</div>
+            </template>
+
+            <template if:true={error}>
+                <div class="mp-error">{error}</div>
+            </template>
+
+<!-- 
+            <div class="mp-image-block">
+                <lightning-input 
+                    type="file"
+                    accept="image/*"
+                    capture="camera"
+                    label="Capture Odometer"
+                    onchange={handleImageCapture}>
+                </lightning-input>
+
+                <template if:true={previewImage}>
+                    <img src={previewImage} class="mp-preview" />
+                </template>
+            </div> -->
+
+
+
+            <!-- new camera input -->
+
+
+
+                <template if:true={isViewMode}>
+                
+                    <lightning-card title="Capture Oddometer Reading">
+                        <div class="slds-p-around_medium">
+
+                            <template if:true={isSaving}>
+                                <lightning-spinner alternative-text="Saving..." size="medium"></lightning-spinner>
+                            </template>
+                            <div class="slds-m-top_medium">
+                                <video autoplay playsinline muted webkit-playsinline width="320" height="240"></video>
+                                <canvas style="display:none;"></canvas>
+                            </div>
+
+                            <template if:true={selfiePreview}>
+                                <div class="slds-m-top_small">
+                                    <p><strong>Oddometer Preview</strong></p>
+                                    <img src={selfiePreview} width="200" style="border-radius:8px;" />
+                                </div>
+                            </template>
+
+                            <template if:true={selfieUrl}>
+                                <div class="slds-m-top_small">
+                                    <p><strong>Saved Selfie:</strong></p>
+                                    <img src={selfieUrl} width="200" style="border-radius:8px;" />
+                                </div>
+                            </template>
+
+                            <div class="slds-m-top_small">
+                                <lightning-button label="Capture Oddometer" onclick={capturePhoto}></lightning-button>
+                                <!-- <lightning-button variant="brand" label="Save Selfie" onclick={saveSelfie} class="slds-m-left_small"></lightning-button> -->
+                            </div>
+                        </div>
+                    </lightning-card>
+                    
+              
+                </template>
+
+
+
+            <!-- Punch button -->
+            <div class="mp-button-row">
+                <lightning-button
+                    label={buttonLabel}
+                    variant="brand"
+                    title="Punch In / Out"
+                    onclick={handlePunch}
+                    disabled={isPunching}>
+                </lightning-button>
+            </div>
+
+            <template if:true={isPunching}>
+                <div class="mp-note">Getting location…</div>
+            </template>
+
+        </div>
+    </lightning-card>
+
+    
+
+
+    
+
+    
+
+
+</template>

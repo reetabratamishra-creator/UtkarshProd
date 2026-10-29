@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Crash_Barrier_Read</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Crash Barrier Read</label>
+        <sharedTo>
+            <group>Crash_Barrier_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Crash Barrier</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>HDPE_Sharing_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>HDPE Sharing Rule</label>
+        <sharedTo>
+            <group>HDPE_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>HDPE</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>High_Mast_Polygonal_Read_Write</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>High Mast &amp; Polygonal Read Write</label>
+        <sharedTo>
+            <group>High_Mast_Polygonal_Read_Write</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>High Mast &amp; Polygonal</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Polymer</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Polymer</label>
+        <sharedTo>
+            <group>Polymer_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Polymer</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Pre_Engineering_Building</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Pre Engineering Building</label>
+        <sharedTo>
+            <group>Pre_Engineering_Building_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Pre Engineering Building</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Railway_Electrification_Structure</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Railway Electrification Structure</label>
+        <sharedTo>
+            <group>Railway_Electrification_Structure_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Railway Electrification Structure</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Solar_Structure</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Solar Structure</label>
+        <sharedTo>
+            <group>Solar_Structure_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Solar Structure</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Steel_Pipes</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Steel Pipes</label>
+        <sharedTo>
+            <group>Steel_Pipes_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Steel Pipes</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Steel_Tubular_Poles</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Steel Tubular Poles</label>
+        <sharedTo>
+            <group>Steel_Tubular_Poles_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Steel Tubular Poles</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Transmission_Tower</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Transmission Tower</label>
+        <sharedTo>
+            <group>Transmission_Telecom_Tower_Read</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Department_Name__c</field>
+            <operation>equals</operation>
+            <value>Transmission &amp; Telecom Tower</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Share_All_Opportunities_With_CRM_Heads</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share All Opportunities With CRM Heads</label>
+        <sharedTo>
+            <group>Department_CRM_Heads</group>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

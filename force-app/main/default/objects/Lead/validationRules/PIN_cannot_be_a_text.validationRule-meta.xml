@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PIN_cannot_be_a_text</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(PIN__c)),
+    NOT(
+        REGEX(PIN__c, &quot;^[0-9]+$&quot;)
+    )
+)</errorConditionFormula>
+    <errorDisplayField>PIN__c</errorDisplayField>
+    <errorMessage>PIN must contain only numeric values</errorMessage>
+</ValidationRule>

@@ -1,0 +1,299 @@
+:host {
+    --bcl-ink: #14202b;
+    --bcl-ink-soft: #4a5a68;
+    --bcl-muted: #8798a6;
+    --bcl-surface: #ffffff;
+    --bcl-surface-tint: #f4f8f8;
+    --bcl-accent: #1f6f6b;
+    --bcl-accent-deep: #123f3d;
+    --bcl-success: #1c7c54;
+    --bcl-error: #b3261e;
+    --bcl-border: #e2e8ea;
+    display: block;
+}
+
+.bcl-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--bcl-surface);
+    padding: 0;
+}
+
+.bcl-accent-bar {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--bcl-accent) 0%, var(--bcl-accent-deep) 60%, var(--bcl-accent) 100%);
+    background-size: 200% 100%;
+    animation: bcl-flow 3.5s linear infinite;
+}
+
+@keyframes bcl-flow {
+    0% { background-position: 0% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.bcl-header {
+    padding: 1.5rem 1.75rem 0.75rem;
+}
+
+.bcl-eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bcl-accent);
+}
+
+.bcl-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bcl-ink);
+    letter-spacing: -0.01em;
+}
+
+.bcl-body {
+    padding: 0.5rem 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.bcl-record-chip {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: var(--bcl-surface-tint);
+    border: 1px solid var(--bcl-border);
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    margin-bottom: 1.75rem;
+}
+
+.bcl-record-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bcl-muted);
+    flex-shrink: 0;
+}
+
+.bcl-record-id {
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 0.8125rem;
+    color: var(--bcl-ink-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    direction: rtl;
+    text-align: left;
+}
+
+.bcl-status-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 9rem;
+    justify-content: center;
+}
+
+/* ---- pending (loading) state: pulsing double ring ---- */
+.bcl-status-icon_pending {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.1rem;
+}
+
+.bcl-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid var(--bcl-accent);
+    opacity: 0;
+    animation: bcl-pulse 1.8s ease-out infinite;
+}
+
+.bcl-ring_delay {
+    animation-delay: 0.9s;
+}
+
+@keyframes bcl-pulse {
+    0%   { transform: scale(0.55); opacity: 0.9; border-color: var(--bcl-accent); }
+    70%  { opacity: 0.15; }
+    100% { transform: scale(1.15); opacity: 0; border-color: var(--bcl-accent-deep); }
+}
+
+.bcl-status-text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--bcl-ink-soft);
+    max-width: 22rem;
+}
+
+.bcl-status-text_pending {
+    color: var(--bcl-accent-deep);
+    font-weight: 600;
+}
+
+/* ---- resolved states: success / error icon ---- */
+.bcl-status-icon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.1rem;
+    animation: bcl-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bcl-pop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.bcl-icon-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bcl-icon-ring {
+    fill: none;
+    stroke-width: 2.5;
+}
+
+.bcl-status-icon_success .bcl-icon-ring {
+    stroke: var(--bcl-success);
+}
+
+.bcl-status-icon_success .bcl-icon-check {
+    stroke: var(--bcl-success);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: bcl-draw 0.35s 0.15s ease-out forwards;
+}
+
+.bcl-status-icon_error .bcl-icon-ring {
+    stroke: var(--bcl-error);
+}
+
+.bcl-status-icon_error .bcl-icon-cross {
+    stroke: var(--bcl-error);
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+@keyframes bcl-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+.bcl-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.9rem 1.5rem;
+    border-top: 1px solid var(--bcl-border);
+    background: var(--bcl-surface-tint);
+}
+
+.bcl-close-btn {
+    appearance: none;
+    border: 1px solid var(--bcl-accent-deep);
+    background: var(--bcl-accent-deep);
+    color: #ffffff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 0.5rem 1.35rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.bcl-close-btn:hover {
+    background: var(--bcl-accent);
+}
+
+.bcl-close-btn:active {
+    transform: scale(0.97);
+}
+
+.bcl-close-btn:focus-visible {
+    outline: 2px solid var(--bcl-accent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bcl-accent-bar,
+    .bcl-ring,
+    .bcl-status-icon,
+    .bcl-icon-check {
+        animation: none !important;
+    }
+}
+/* ---- resolved state: horizontal panel, fills the width instead of
+   leaving empty space beside the centered icon ---- */
+.bcl-status-panel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: 10px;
+    text-align: left;
+    animation: bcl-panel-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bcl-panel-in {
+    0%   { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.bcl-status-panel_success {
+    background: linear-gradient(135deg, rgba(28, 124, 84, 0.07), rgba(28, 124, 84, 0.02));
+    border: 1px solid rgba(28, 124, 84, 0.22);
+}
+
+.bcl-status-panel_error {
+    background: linear-gradient(135deg, rgba(179, 38, 30, 0.07), rgba(179, 38, 30, 0.02));
+    border: 1px solid rgba(179, 38, 30, 0.22);
+}
+
+.bcl-status-panel .bcl-status-icon {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 0;
+}
+
+.bcl-status-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.bcl-status-label {
+    margin: 0 0 0.2rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.bcl-status-panel_success .bcl-status-label {
+    color: var(--bcl-success);
+}
+
+.bcl-status-panel_error .bcl-status-label {
+    color: var(--bcl-error);
+}
+
+.bcl-status-panel .bcl-status-text {
+    margin: 0;
+    text-align: left;
+    max-width: none;
+}

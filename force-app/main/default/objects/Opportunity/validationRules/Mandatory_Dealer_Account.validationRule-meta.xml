@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mandatory_Dealer_Account</fullName>
+    <active>true</active>
+    <description>Dealer account field is mandatory when Customer journey is refer to dealer</description>
+    <errorConditionFormula>AND(
+    ISCHANGED(StageName),
+    ISPICKVAL(PRIORVALUE(StageName), &quot;Nurture&quot;),
+    OR(
+        ISPICKVAL(StageName, &quot;Closed Won&quot;),
+        ISPICKVAL(StageName, &quot;Closed Lost&quot;)
+    ),
+    ISPICKVAL(Customer_Journey__c, &quot;Refer to Dealer&quot;),
+    ISBLANK(DealerAccount__c)
+)</errorConditionFormula>
+    <errorDisplayField>DealerAccount__c</errorDisplayField>
+    <errorMessage>Please fill Dealer filed with a Dealer account as Customer Journey is Refer to Delear</errorMessage>
+</ValidationRule>

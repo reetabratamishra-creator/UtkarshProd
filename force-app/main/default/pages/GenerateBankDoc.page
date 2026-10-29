@@ -1,0 +1,792 @@
+<apex:page standardController="Quote" extensions="QuoteExportController"
+           renderAs="pdf" applyBodyTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style type="text/css" media="print">
+            /* Master Page Layout - Handles all 16+ Pages */
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+
+            @page standard-content {
+                size: A4;
+                margin-top: 130px;
+                margin-right: 15mm;
+                margin-bottom: 90px;
+                margin-left: 15mm;
+                @top-center { content: element(header); }
+                @bottom-center { content: element(footer); }
+            }
+
+            div.document-body {
+                page: standard-content;
+                width: 100%;
+                max-width: 180mm;
+            }
+
+            /* Full-bleed cover pages - no margins, no running header/footer */
+            @page cover {
+                size: A4;
+                margin: 0mm;
+                padding: 0mm;
+                @top-center { content: none; }
+                @bottom-center { content: none; }
+            }
+
+            /* FIX: Strict isolation for front and back covers.
+               overflow: hidden is a backstop so a cover image can never spill
+               onto a second physical page even if its intrinsic size is off. */
+            /* Apply this to both front and back cover classes */
+           /* FIX: Let the 'page' property handle the break natively. 
+               Removing page-break-before/after prevents ghost pages. */
+            .cover-page-front {
+                page: cover;
+                width: 210mm;
+                height: 296mm; 
+                margin: 0;
+                padding: 0;
+                line-height: 0 !important;
+                font-size: 0 !important;
+                overflow: hidden;
+            }
+
+            .cover-page-back {
+                page: cover;
+                width: 210mm;
+                height: 296mm; 
+                margin: 0;
+                padding: 0;
+                line-height: 0 !important;
+                font-size: 0 !important;
+                overflow: hidden;
+            }
+
+            /* Utility classes to kill running headers/footers on demand */
+            .clear-header { position: running(header); height: 0; }
+            .clear-footer { position: running(footer); height: 0; }
+            /* NOTE: cover image sizing is intentionally set INLINE on each
+               image tag (style="width:210mm; height:297mm; ...") rather than
+               through this class selector. Keep any future cover-image sizing 
+               inline, not here. */
+
+            .pdf-header { position: running(header); width: 100%; }
+
+            .pdf-footer { position: running(footer); width: 180mm; }
+
+            /* Global Typography */
+            body {
+                font-family: sans-serif;
+                font-size: 11.5px;
+                color: #333;
+                line-height: 1.5;
+                margin: 0;
+                padding: 0;
+            }
+            h1, h2, h3 { color: #0176d3; margin-bottom: 8px; }
+            h3 { font-size: 13px; background-color: #f3f3f3; padding: 6px; border-left: 4px solid #0176d3; margin-top: 20px;}
+
+            /* Repeating Header (Appears on every page automatically) */
+            div.header {
+                position: running(header);
+                padding-top: 15px;
+                width: 180mm;
+            }
+            .header-title { color: #FFFFFF; font-size: 22px; font-weight: bold; margin: 0; }
+            .header-sub { font-size: 10px; color: #FFFFFF; }
+
+            /* Repeating Footer - the actual running(footer) element used by
+               this document is div.pdf-footer above. */
+            .pagenumber:before { content: counter(page); }
+            .pagecount:before { content: counter(pages); }
+
+            /* Table Styling */
+            table {
+                width: 100%;
+                max-width: 180mm;
+                border-collapse: collapse;
+                margin-bottom: 15px;
+                page-break-inside: avoid;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+            th { background-color: #0176d3; color: white; padding: 6px; border: 1px solid #ccc; font-size: 11px; text-align: left;}
+            td { padding: 6px; border: 1px solid #ccc; font-size: 11px; vertical-align: top;}
+            .no-border-table td { border: none; padding: 2px; }
+
+            /* Utilities */
+            .text-right { text-align: right; }
+            .bold { font-weight: bold; }
+            .page-break { page-break-before: always; }
+            .legal-clause { margin-bottom: 10px; text-align: justify; }
+            table.qrf-table { page-break-inside: auto !important; margin-top: 6px; margin-bottom: 14px; }
+            .qrf-table th { background-color: #f0f0f0; color: #222; font-weight: bold; border: 1px solid #ccc; padding: 4px; }
+            .qrf-table td { border: 1px solid #ccc; padding: 3px 4px; font-size: 9.5px; }
+            .qrf-table tr { page-break-inside: avoid; }
+
+            /* PEB Engineering Specification Document Styles (100% Fidelity) */
+            .peb-spec-chapter {
+                font-size: 11.5px !important;
+                font-weight: bold !important;
+                color: #000000 !important;
+                margin-top: 14px !important;
+                margin-bottom: 5px !important;
+                background: none !important;
+                border: none !important;
+                padding: 0 !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            .peb-spec-subheading {
+                font-size: 10.5px !important;
+                font-weight: bold !important;
+                color: #000000 !important;
+                margin-top: 10px !important;
+                margin-bottom: 4px !important;
+                background: none !important;
+                border: none !important;
+                padding: 0 !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            .peb-spec-subtitle {
+                font-size: 9.5px !important;
+                color: #555555 !important;
+                margin-top: 2px !important;
+                margin-bottom: 4px !important;
+                font-style: normal !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            .peb-spec-text {
+                font-size: 9.5px !important;
+                color: #333333 !important;
+                margin-top: 2px !important;
+                margin-bottom: 3px !important;
+                line-height: 1.35 !important;
+            }
+            table.peb-spec-table {
+                width: 100%;
+                max-width: 180mm;
+                border-collapse: collapse;
+                border-spacing: 0;
+                empty-cells: show;
+                margin-top: 4px;
+                margin-bottom: 8px;
+                page-break-inside: auto;
+                table-layout: fixed;
+            }
+            table.peb-spec-table th,
+            table.peb-spec-table td {
+                border: 1px solid #000000;
+                padding: 3px 5px;
+                font-size: 9.5px;
+                vertical-align: top;
+                word-wrap: break-word;
+                line-height: 1.25;
+                /* Reetabrata (8th October 2026): the V2 building-description
+                   parser keeps "a) ... / b) ..." items on their own lines
+                   inside a cell as \n; pre-wrap prints those breaks. Older
+                   quotes carry no \n in their cells, so they are unchanged. */
+                white-space: pre-wrap;
+            }
+            table.peb-spec-table th {
+                font-weight: bold !important;
+                background-color: #f0f0f0 !important;
+                color: #000000 !important;
+            }
+            table.peb-spec-table tr.subhead-row td {
+                font-weight: bold !important;
+                background-color: #f5f5f5 !important;
+                color: #000000 !important;
+            }
+            table.peb-spec-table td {
+                color: #333333;
+                background-color: #ffffff;
+            }
+            table.peb-spec-table td b,
+            table.peb-spec-table td strong {
+                color: #000000 !important;
+                font-weight: bold !important;
+            }
+            table.peb-spec-table tr {
+                page-break-inside: avoid;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="cover-page-front">
+            <img src="{!$Resource.PebFrontPage}" style="width: 210mm; height: 297mm; display: block; margin: 0; padding: 0; border: none;" />
+        </div>
+
+        <div class="document-body">
+            <div class="header">
+                <img src="{!$Resource.pebUtkarshlogo}" style="width: 100%; height: auto; display: block;" />
+                <hr style="border: 0.5px solid #FFFFFF; margin: 0;"/>
+            </div>
+
+            <div class="pdf-footer">
+                <img src="{!$Resource.UtkarshFooter}" style="width: 100%; height: auto; display: block; margin: 0; padding: 0;" />
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; margin-top: 10px;">
+                <tr>
+                    <td style="width: 50%; border: 1px solid #333; padding: 8px; vertical-align: top;">
+                        Our Bank details:<br/><br/>
+                        Bank: State Bank of India<br/>
+                        Bank Address: Park Street, Kolkata-700016<br/>
+                        Commercial Branch.<br/>
+                        Company Name: Utkarsh India Limited<br/>
+                        IFS Code: SBIN0007502<br/>
+                        CC A/c. No.: 30546455614
+                    </td>
+                    <td style="width: 50%; border: 1px solid #333; padding: 8px; vertical-align: top;">
+                        Contact Person:<br/><br/>
+                        Name: Anindya Sinha<br/>
+                        Phone No.: +91 9433034747.<br/>
+                        E Mail: <a href="mailto:anindya@utkarshindia.in" style="color: blue;">anindya@utkarshindia.in</a>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="no-border-table" style="margin-bottom: 20px;">
+                <tr>
+                    <td style="width: 60%;">
+                        <b>Ref:</b> {!termsRef}<br/><br/>
+                        <b>To:</b><br/><b>{!effectiveBuyerName}</b><apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(effectiveProjectLocation))}"><br/>{!effectiveProjectLocation}</apex:outputPanel>
+                    </td>
+                    <td style="width: 40%;" class="text-right">
+                        <b>Date:</b> {!termsDate}
+                    </td>
+                </tr>
+            </table>
+            <p class="bold">{!pebSubjectLine}</p>
+            <p>Dear Sir/Madam,</p>
+            <p>Your enquiry for supplying of the product as mentioned in the captioned subject has given us this opportunity to connect and introduce our company and the "Utkarsh" brand...</p>
+            <p>We take pride to mention that you have approached one of the leading brands in the country engaged in the manufacturing of the product as described herein...</p>
+
+            
+            <!-- ═══ DYNAMIC BUILDING DESCRIPTION SECTIONS (FROM (A) DESIGN CRITERIA TO END) ═══ -->
+            <apex:outputPanel rendered="{!docSections.size > 0}">
+                <apex:repeat value="{!docSections}" var="sec">
+                    <!-- Chapter Header -->
+                    <apex:outputPanel layout="none" rendered="{!sec.isChapter}">
+                        <p class="peb-spec-chapter"><b><apex:outputText value="{!sec.title}"/></b></p>
+                        <apex:repeat value="{!sec.notes}" var="note">
+                            <p class="peb-spec-text"><apex:outputText value="{!note}"/></p>
+                        </apex:repeat>
+                    </apex:outputPanel>
+
+                    <!-- Section with Table -->
+                    <apex:outputPanel layout="none" rendered="{!sec.isTable}">
+                        <div style="{!IF(sec.isSmallTable, 'page-break-inside: avoid;', '')}">
+                            <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(sec.title))}">
+                                <p class="peb-spec-subheading"><b><apex:outputText value="{!sec.title}"/></b></p>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="none" rendered="{!sec.hasSubtitle}">
+                                <p class="peb-spec-subtitle"><apex:outputText value="{!sec.subtitle}"/></p>
+                            </apex:outputPanel>
+                            <apex:outputText value="{!sec.tableHtml}" escape="false"/>
+                            <apex:outputPanel layout="none" rendered="{!sec.hasNotes}">
+                                <apex:repeat value="{!sec.notes}" var="note">
+                                    <p class="peb-spec-text"><apex:outputText value="{!note}"/></p>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputPanel>
+
+                    <!-- Section with List (e.g. Technical Notes, Material Specifications) -->
+                    <apex:outputPanel layout="none" rendered="{!sec.isList}">
+                        <p class="peb-spec-subheading"><b><apex:outputText value="{!sec.title}"/></b></p>
+                        <div style="margin-top: 2px; margin-bottom: 6px;">
+                            <apex:repeat value="{!sec.listItems}" var="li">
+                                <p class="peb-spec-text" style="padding-left: 8px; margin: 2px 0;"><apex:outputText value="{!li}"/></p>
+                            </apex:repeat>
+                        </div>
+                    </apex:outputPanel>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!-- ═══ FALLBACK: QRF TABULAR FORMAT (IF docSections IS EMPTY) ═══ -->
+            <apex:outputPanel rendered="{!docSections.size == 0 && paramTableRows.size > 0}">
+                <table class="qrf-table" style="font-size: 10px; border-collapse: collapse; width: 100%; margin-top: 6px; margin-bottom: 14px; page-break-inside: auto;">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%; border: 1px solid #ccc; padding: 4px; text-align: center; background: #f0f0f0;">Sl. No.</th>
+                            <th style="width: 28%; border: 1px solid #ccc; padding: 4px; background: #f0f0f0;">Parameter</th>
+                            <th style="width: 9%; border: 1px solid #ccc; padding: 4px; text-align: center; background: #f0f0f0;">Unit / Type</th>
+                            <th style="width: 30%; border: 1px solid #ccc; padding: 4px; background: #f0f0f0;">Value / Description</th>
+                            <th style="width: 10%; border: 1px solid #ccc; padding: 4px; text-align: center; background: #f0f0f0;">Data from</th>
+                            <th style="border: 1px solid #ccc; padding: 4px; background: #f0f0f0;">Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!paramTableRows}" var="row">
+                            <!-- Section header row (A., B., C., D.) -->
+                            <apex:outputPanel layout="none" rendered="{!row.isHeader}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #ccc; padding: 4px 6px; font-weight: bold; background: #e8e8e8;">
+                                        <apex:outputText value="{!row.slNo}"/>&nbsp;<apex:outputText value="{!row.parameter}"/>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                            <!-- Data row -->
+                            <apex:outputPanel layout="none" rendered="{!!row.isHeader}">
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; text-align: center; vertical-align: top;">{!row.slNo}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; vertical-align: top;">{!row.parameter}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; text-align: center; vertical-align: top;">{!row.unit}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; vertical-align: top;">{!row.value}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; text-align: center; vertical-align: top;">{!row.dataFrom}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px 4px; vertical-align: top;">{!row.remark}</td>
+                                </tr>
+                            </apex:outputPanel>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:outputPanel>
+
+            <div class="page-break"></div>
+            <b style="font-size: 13px;">E. SUPPLY PRICE:-</b>
+
+            <table>
+                <tr>
+                    <th style="width: 50%; text-align: center;">Description</th>
+                    <th style="width: 50%; text-align: center;">Price (In INR)</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">Supply Price (Basic)</td>
+                    <td style="text-align: center; font-weight: bold;"><apex:outputText value="{!supplyPriceBasic}"/>/-</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">GST @ 18%</td>
+                    <td style="text-align: center; font-weight: bold;"><apex:outputText value="{!supplyPriceGst}"/>/-</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">Total Supply Price with GST</td>
+                    <td style="text-align: center; font-weight: bold;"><apex:outputText value="{!supplyPriceWithGst}"/>/-</td>
+                </tr>
+            </table>
+
+            <p style="font-weight: bold; margin-bottom: 5px;">
+                Note: - There will be a separate Erection Order, which should be placed directly by the Buyer on our Authorized Builder.
+            </p>
+            <!-- <p style="font-weight: bold; margin-bottom: 15px;">
+                Erection Price: Rs.0/- + GST@18% Extra.
+            </p> -->
+
+            <!-- <ul style="margin-top: 0; font-weight: bold; list-style-type: none; padding-left: 15px; margin-bottom: 20px;">
+                <li>&#10148; Our tentative weight is <apex:outputText value=" {!tentativeWeightMt}"/> MT Steel and sheet. Quantities are subject to +/- 5 % at actual supply.</li>
+            </ul> -->
+
+            <table class="no-border-table">
+                <tr>
+                    <td style="width: 5%; font-weight: bold; vertical-align: top;">E.1</td>
+                    <td style="width: 95%;">
+                        <b style="font-size: 12px;">IMPORTANT TERMS &amp; CONDITIONS</b>
+                        <table class="no-border-table" style="margin-top: 5px;">
+                            <tr><td style="width: 3%; vertical-align: top;">1.</td><td>The Supply Price quoted above is inclusive of freight to Buyer's site from Utkarsh's plant.</td></tr>
+                            <tr><td style="vertical-align: top;">2.</td><td>GST @ 18% extra will be applicable on supply and erection.</td></tr>
+                            <tr><td style="vertical-align: top;">3.</td><td>Defect Liability Period will be 1 year from date of last dispatch document.</td></tr>
+                            <tr><td style="vertical-align: top;">4.</td><td>TCS u/s 206 (1H) @ 0.10% will be charged extra, if applicable.</td></tr>
+                        </table>
+
+                        <ul style="font-weight: bold; margin-top: 10px; margin-bottom: 10px;">
+                            <li>Pedestal top surface finish has to be non-shrink grout by the Buyer before start of Sheeting Work.</li>
+                        </ul>
+
+                        <p style="margin-bottom: 20px; line-height: 1.5; text-align: justify;">
+                            "All data, information, drawings, specifications or any other documents received by either party from the other party shall be treated as confidential and the proprietary information of the other party and both parties shall not disclose such information in any manner than strictly required for the performance of this agreement and shall maintain strict confidentiality for the same. However, <b>Utkarsh</b> may use Customer's name &amp; testimonials as a reference in their customer list."
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top;">E.2</td>
+                    <td style="text-align: justify;">
+                        <b>Rates and Taxes:</b> It is assumed that Octroi and Entry Tax are not applicable, if applicable the same shall have to be borne by the Buyer as per actual. The rates quoted are exclusive of <b>Goods &amp; Service Taxes and/or Excise Duty</b> and therefore the Goods &amp; Service Taxes shall be chargeable extra @18% on the total order value, as also excise duty shall be chargeable extra as at actual. Any changes in the statutory provisions for imposing of rates and taxes made applicable with immediate effect shall be implemented as per the implication of such statutory provisions.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">E.3</td>
+                    <td style="padding-top: 15px;">
+                        <b>Exclusions:</b> The supply price and/or the quoted price does not include the items/components which are not included in the scope of the supply.<br/><br/>
+                        <!-- <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>Any kind of roof accessories except mentioned herein;</td></tr>
+                            <tr><td style="vertical-align: top;">(b)</td><td>Cable Tray, Ventilation duct, Pipe Support Structure;</td></tr>
+                            <tr><td style="vertical-align: top;">(c)</td><td>Any support structure for additional load considered;</td></tr>
+                            <tr><td style="vertical-align: top;">(d)</td><td>Roof Extractors, Roof Fans, vents, pipe flashing;</td></tr>
+                            <tr><td style="vertical-align: top;">(e)</td><td>Wall vents, fans, overhead doors;</td></tr>
+                            <tr><td style="vertical-align: top;">(f)</td><td>Civil, mechanical and electrical design and materials;</td></tr>
+                            <tr><td style="vertical-align: top;">(g)</td><td>Miscellaneous steel except as specified herein;</td></tr>
+                            <tr><td style="vertical-align: top;">(h)</td><td>Concrete embedded plates, expansion bolts or weld plate of any kind;</td></tr>
+                            <tr><td style="vertical-align: top;">(i)</td><td>Construction temporary bracing;</td></tr>
+                            <tr><td style="vertical-align: top;">(j)</td><td>Steel supports/bracing to accept collateral roof loads, except as referenced herein;</td></tr>
+                            <tr><td style="vertical-align: top;">(k)</td><td>Architectural services of any kind;</td></tr>
+                            <tr><td style="vertical-align: top;">(l)</td><td>All kinds of civil works;</td></tr>
+                            <tr><td style="vertical-align: top;">(m)</td><td>Doors, windows and any kind of window framing;</td></tr>
+                            <tr><td style="vertical-align: top;">(n)</td><td>Any other items not included in the building specifications included earlier;</td></tr>
+                            <tr><td style="vertical-align: top;">(o)</td><td>Any kind of internal partitions except those mentioned herein;</td></tr>
+                            <tr><td style="vertical-align: top;">(p)</td><td>Insulation.</td></tr>
+                            <tr><td style="vertical-align: top;">(q)</td><td>Any local issue arising at site should be in the scope of the Buyer.</td></tr>
+                        </table> -->
+                    </td>
+                </tr>
+
+            <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">E.4</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Third Party Sourcing:</b> The Supplier reserves the right to manufacture whole or part of the deliverables in the factories owned by its channel partners under the Supplier's quality and production control environment. Further various accessories will be purchased by the Supplier from its approved vendors as per the requirement of the project.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">E.5</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Payment Terms:</b> Prior to the Supplier's acceptance of the Buyer's supply order, the terms of payment shall have to be mutually agreed and accepted in writing between the Parties hereto and the disbursement of payment can be made as per the following options:
+                            <p>
+
+                        </p>
+                        <!-- <span style="text-decoration: underline; font-weight: bold;">Option - I</span><br/> -->
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>The Buyer shall be liable to remit a sum equivalent to 30% of the total supply order value unto and in favour of the Supplier together with the LOI and/or the supply order;</td></tr>
+                            <tr><td style="vertical-align: top;">(b)</td><td>The Buyer shall be liable to remit a sum equivalent to the next 30% value of the total supply order value in favour of the Supplier within <b>seven</b> days from the date of approval of the GA drawings;</td></tr>
+                            <tr><td style="vertical-align: top;">(c)</td><td>The Buyer shall be liable to remit a sum equivalent to the remaining 40% of the total value of the supply order unto and in favour of the Supplier at least <b>ten</b> days prior to effecting dispatch of the materials.</td></tr>
+                        </table>
+                        <br/>
+
+                        <!-- <span style="text-decoration: underline; font-weight: bold;">Option - II</span><br/>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>The Buyer shall be liable to remit a sum equivalent to 30% of the total supply order value unto and in favour of the Supplier together with the LOI and/or the supply order;</td></tr>
+                            <tr><td style="vertical-align: top;">(b)</td><td>The Buyer shall be liable to remit a sum equivalent to the remaining 70% of the total value of the supply order unto and in favour of the Supplier against irrevocable sight LC (Letter of Credit) which shall have to be opened within seven days from the date of approval of the GA drawings.</td></tr>
+                        </table> -->
+                    </td>
+                </tr>
+
+                <!-- Deepanjan (31st July 2026): this clause used to be a SECOND E.5.
+                    It now renders only when the estimate carries an erection cost,
+                    and takes its number from the controller so the sequence never
+                    duplicates or skips. -->
+                <apex:outputPanel layout="none" rendered="{!showErectionTerms}">
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">{!ptErectionNo}</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Erection Payment Terms:</b> Prior to the Supplier's acceptance of the Buyer's supply order, the terms of payment for erection of the Pre-Engineered Building shall have to be mutually agreed and accepted in writing between the Parties hereto and the disbursement of payment shall be made in the following manner:
+                        <p>
+
+                        </p>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>The Buyer shall be liable to remit a sum equivalent to 20% of the total erection contract value unto and in favour of the erection contractor as and by way of advance payment before mobilization;</td></tr>
+                            <tr><td style="vertical-align: top;">(b)</td><td>The Buyer shall be liable to remit a sum equivalent to next 50% of the total erection contract value unto and in favour of the erection contractor on completion of erection of the structure;</td></tr>
+                            <tr><td style="vertical-align: top;">(c)</td><td>The Buyer shall be liable to remit a sum equivalent to next 20% of the total erection contract value unto and in favour of the erection contractor immediately on completion of sheeting work; and</td></tr>
+                            <tr><td style="vertical-align: top;">(d)</td><td>The Buyer shall be liable to remit a sum equivalent to remaining 10% of the total erection contract value unto and in favour of the erection contractor immediately on completion of work.</td></tr>
+                        </table>
+                    </td>
+                </tr>
+                </apex:outputPanel>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">{!ptDeliveryNo}</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Delivery Schedule:</b> If the delivery date is not accounted for with any subjective precondition in that event the delivery schedule shall be accounted for from the date of the receipt of the supply order however if an advance payment has to be made with the supply order the date of receipt of such advance payment or the supply order, whichever is later shall be the date from which the delivery date shall be accounted for. However this is subject to normal working condition prevailing, the Supplier shall be liable to deliver the entire consignment within a period of <u><b>{!consignmentPeriod}</b></u> from the date of approval of the GA drawing. Be it noted here that any delay caused owing to reasons beyond the reasonable control of the Supplier, the Supplier shall not be held liable or accountable for such delays.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">F.</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>General:</b> Materials other than the products and services included unless specifically indicated otherwise. The Supplier's approval drawings shall consist of anchor bolt layouts and reactions, floor plan layout, typical frame cross sections, elevations, member sizes and related design calculations. If the Supplier is required to change the design based on other parties' details, design practice, special requirements, change in scope and specifications, the Supplier may revise the prices and delivery schedule accordingly.<br/><br/>
+                        As erection order to be placed direct to the Builder/Contractor following terms will be applicable:<br/>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>The Supplier will only be responsible for the supervision of erection, the cost of which is included in the supply quoted value.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(b)</td><td style="padding-top: 10px;">The Supplier will guarantee stability of the building only when the erection is carried out as per the Supplier's drawings and instructions.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(c)</td><td style="padding-top: 10px;">In order to support the erector selection process, we recommend that you use our empanelled erectors as they are familiar with our processes and practices. You may negotiate (price, duration and other terms and conditions) with the given scope and place orders. (Note: Our list of empanelled erections is only suggestive and for reference and the Buyer shall be at liberty to choose any other competent erector of its choice).</td></tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">4.</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Production clearance:</b>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>Any portion of project which is not released or cleared for production due to HOLD or stoppage of work by the customer and/or for non-release of payments as per agreed terms or due to reasons not attributable to the Supplier, will attract consequential variation in pricing.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(b)</td><td style="padding-top: 10px;">Till the extent issue is sorted commercially/on technical side, our procurement and production advice will be kept on hold.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(c)</td><td style="padding-top: 10px;">Revised cost implication (owing to change in RM prices/Transportation cost etc.) shall be indicated to Customer and on subsequent to approval to cost, procurement/production activities shall begin.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(d)</td><td style="padding-top: 10px;">Revised time implication shall be communicated by us after reviewing the availability of production clause/Procurement cycle.</td></tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">5.</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Shipment Clearance/Dispatch Clearance:</b> Any produced materials (after receipt of clearance to start production by customer) is not put under shipment and/or is dispatched within fifteen days from the date of readiness of materials for want of inspection certification and/or shipment clearance or any commercial conditions being settled, till such extent issue is sorted out, the Supplier would identify a warehouse to stack the materials at the expense of Buyer.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">6.</td>
+                    <td style="text-align: justify; padding-top: 15px;">
+                        <b>Cancellation of order:</b>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td>Any orders which will be cancelled for the reasons attributable to customer, the Supplier is liable to the incidental expenses viz.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(b)</td><td style="padding-top: 10px;">Engineering expenses.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(c)</td><td style="padding-top: 10px;">Expenses incurred in RM procured (viz. any steel/accessories/hardware/bought outs which is specifically procured for the job).</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(d)</td><td style="padding-top: 10px;">Finished goods cost (after salvaging the scrap value) shall be recovered from customer.</td></tr>
+                        </table>
+                        <br/>
+                        Note:<br/>
+                        <table class="no-border-table">
+                            <tr><td style="width: 4%; vertical-align: top;">(a)</td><td><b>Direct order on other erector, no supervision by the Supplier:</b> All warranties are limited to supplies only and damages caused due to incorrect site handling, erection or storage shall not make the Supplier liable.</td></tr>
+                            <tr><td style="vertical-align: top; padding-top: 10px;">(b)</td><td style="padding-top: 10px;"><b>Direct order on other erector, UIL to supervise Erection:</b> No financial liabilities or warranties to be linked to erection. All warranties are limited to supplies only and damages caused due to incorrect site handling, erection or storage shall not make the Supplier liable.</td></tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">7.</td>
+                    <td style="padding-top: 15px;">
+                        <b>Validity:</b> This offer shall remain valid for a period of <u><b>{!pebvalidity}</b></u> from the date of issuing of the present quotation thereafter with the efflux of time this offer shall deemed become null and void, unless the same is revalidated in writing.<br/><br/>
+
+                        The Standard Terms and Conditions for the contract are more clearly mentioned and recorded in the <b>Annexure "A"</b> to this quotation. The said Annexure "A" shall for all practical purposes be considered as a part of the present quotation.<br/><br/>
+
+                        If the offer herein is acceptable, you may endorse your agreement below on the form of supply order. Once so enclosed, all the terms of the offer herein shall be deemed to be unconditionally accepted by the Buyer and the Supply Order will constitute a binding contract between the Supplier and the Buyer.
+
+                        <div style="text-align: left; margin-top: 30px; line-height: 1.6;">
+                            Thanking you,<br/><br/>
+                            For <b>Utkarsh India Limited</b><br/><br/><br/><br/>
+                            <b>Authorized Signatory</b><br/>
+                            ___________________________
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="page-break"></div>
+            <div style="margin-top: 20px; padding: 0 15px;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <b style="font-size: 13px; text-decoration: underline; color: #000;">FORMAT FOR SUPPLY ORDER</b>
+                </div>
+
+                <p style="text-align: justify; line-height: 1.6; margin-bottom: 30px;">
+                    We hereby place our Supply order on Utkarsh India Limited (UIL) for design, engineering and supply of Pre-Engineered Steel Building/s (PEB) at our site at _________________________. All the terms of offer of UIL set out above including the Standard Terms and Conditions are acceptable to us. We acknowledge that placement by us of this Supply Order constitute a binding contract between us and UIL enforceable in accordance with above terms.
+                </p>
+
+                <div style="line-height: 1.8;">
+                    ___________________________ Ltd.<br/><br/><br/>
+                    Place for<br/><br/><br/>
+                    Date:
+                </div>
+            </div>
+            <h2 style="text-align: center; margin-bottom: 20px;">ANNEXURE-A</h2>
+            <h3 style="text-align: center; background: none; border: none; text-decoration: underline;">TERMS &amp; CONDITIONS OF THE CONTRACT</h3>
+
+            <div class="legal-clause">
+                <b>1. Buyer:</b> Buyer shall mean {!IF(NOT(ISBLANK(effectiveBuyerName)), effectiveBuyerName, '___________________________')}
+            </div>
+            <div class="legal-clause">
+                <b>2. Supplier:</b> Supplier shall mean Utkarsh India Limited having its office at 95A, Elliot Road, Arrjavv Square, Kolkata 700016.
+            </div>
+            <div class="legal-clause">
+                <b>3. Application:</b>
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                    3.1 These terms and conditions as defined in point No. 2 shall apply to the extent that they are not superseded by provisions in other parts of the Contract.
+                </div>
+                <div style="margin-bottom: 10px;">
+                    3.2 The Buyer signs a Contract with the Supplier for providing the Goods &amp; Technical Services as defined in the technical Offer.
+                </div>
+                <div style="margin-bottom: 10px;">
+                    3.3 The Buyer agrees to buy from the Supplier and the Supplier agrees to sell to the Buyer the Goods &amp; Technical services and deliverable defined in the Contract.
+                </div>
+                <div style="margin-bottom: 15px;">
+                    The Supplier's supplies and/or services shall include all materials and incidental work, which is within the scope of the Contract according to the Technical Offer.
+                </div>
+            </div>
+            <div class="legal-clause">
+                <b>4. Standards:</b> The Goods supplied under this Contract shall conform to standards mentioned in the technical offer.
+            </div>
+            <div class="legal-clause">
+                <b>5. Intellectual property Rights:</b> The Supplier shall defend, indemnify and hold harmless the Buyer against all third party claims of infringement of patents, trademarks, copyrights or other intellectual property rights arising from use of the goods or any part thereof in India.
+            </div>
+            <div class="legal-clause">
+                <b>6. Variation:</b><br/>
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                    6.1 The Buyer may at any time, by a written order given make changes within the general scope of the Contract in any one or more of the following:
+                </div>
+
+                <table class="no-border-table">
+                    <tr>
+                        <td style="width: 4%; vertical-align: top;">(i)</td>
+                        <td>Drawings, designs or specifications, where goods to be furnished under the Contract are to be specifically manufactured for the Buyer;</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">(ii)</td>
+                        <td>The method of shipment or packaging;</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">(iii)</td>
+                        <td>The place of delivery and delivery time; and</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">(iv)</td>
+                        <td>The incidental services to be provided by the Supplier.</td>
+                    </tr>
+                </table>
+
+                <div style="margin-top: 10px; margin-bottom: 10px; text-align: justify;">
+                    2.2 If any such change causes an increase or decrease in the cost of, or the time required for, the Supplier's performance of any provisions under the contract, an equitable adjustment shall be made in the Contract Price or delivery schedule, or both, and the Contract shall accordingly become liable to be amended.
+                </div>
+                <div style="margin-bottom: 15px; text-align: justify;">
+                    2.3 The Seller can make charge on the Buyer's requirement, including any change of drawings, designs or specifications included within the Technical Offer.
+                </div>
+            </div>
+
+            <div class="legal-clause">
+                <b>7. Third Party Sourcing:</b> The Supplier reserves the right to manufacture whole or part of the deliverables in the factories owned by its channel partners under the Supplier's quality and production control environment. Further various accessories will be purchased by the Supplier from its approved vendors as per the requirement of the project.
+            </div>
+
+            <div class="legal-clause">
+                <b>8. Metal Templates:</b> Metal Templates (Temporary Plates) are required to cast the Anchor Bolts at site. This is the Supplier's Property and shall be suitably collected/disposed off by the Supplier at its discretion.
+            </div>
+
+            <div class="legal-clause">
+                <b>9. Residual Materials:</b> Any residual material/fixture/unused after completion of erection/handover shall remain the property of the Supplier and shall be suitably collected/disposed off by the Supplier at its discretion.
+            </div>
+
+            <div class="legal-clause">
+                <b>10. Erection drawings:</b> The Supplier will furnish the Buyer all standard erection drawings soft copy required for the erection of the buildings. The Supplier will also furnish the Buyer with anchor bolts, setting plans and column base reactions.
+            </div>
+
+            <div class="legal-clause">
+                <b>11. Modification or Cancellation:</b> The Buyer cannot unilaterally modify or cancel the supply order without first reaching an agreement in writing with the Supplier. In case of a modification, the Buyer agrees and undertakes to pay to the Supplier all re-engineering and other costs, charges and expenses incurred by the Supplier along with five percent of project handling costs. In case of cancellation, the Buyer shall compensate the Supplier for the value of materials ordered or procured in accordance with respective purchase orders plus value of material under processing or delivered at the agreed unit rate as per purchase order plus 5% of purchase order value towards engineering charges, limited to total purchase order value.
+            </div>
+
+            <div class="legal-clause">
+                <b>12. Safety Materials:</b> Since this is a turn-key pre-engineering building project, which consists of several parts and as per design of the project and site situation, we have to consider some safety buffer in terms of materials of about 1%-2% of total project tonnage/weight to be considering along with the materials. So, after successful completion of the project, these materials lying at site has to be brought back to the plant, as this is the Supplier's property and the Buyer has no right to hold the materials.
+            </div>
+
+            <div class="legal-clause">
+                <b>13. Suspension:</b> In the event of contract suspension by the Buyer for whatever reason, the Supplier shall hold the price for a maximum cumulative suspension period of four weeks, post which the contract execution would resume only upon the Buyer agreeing on a revised contract price and schedule. In the event of non-agreement or cumulative suspension beyond ten weeks the order shall be deemed to be cancelled and the previous of clause 11 above shall apply.
+            </div>
+
+            <div class="legal-clause">
+                <b>14. Packing &amp; Forwarding:</b> The rates quoted for supply of the materials are exclusive of any packing and forwarding charges. Packing and forwarding charges if any shall be borne by the Buyer.
+            </div>
+
+            <div class="legal-clause">
+                <b>15. Transportation &amp; Freight:</b> The rates quoted for the materials and/or goods are on CIF basis and are inclusive of any transportation freight and transit insurance costs or charges, therefore be it mentioned here that the Supplier assumes the responsibility of effecting transportation of the materials to its given destination at __________________ <b>(SETOUT THE DESTINATION WHERE THE MATERIALS ARE TO BE DELIVERED)</b>. HOWEVER BE IT NOTED the Buyer acknowledges that upon the transporter taking delivery of the products from the Supplier at its factory/workshop, the products will be held at the risk and responsibility of the Buyer and any transit loss arising therefrom shall be squarely to the account of the Buyer.
+            </div>
+
+            <div class="legal-clause">
+                <b>16. Manufacturing Clearance:</b> The Buyer shall be liable to issue a written manufacturing clearance in favour of the Supplier and such clearance once granted cannot be withdrawn modified or altered by the Buyer. The Supplier shall undertake to initiate the bulk production only after receipt of the supply order simultaneously with the receipt of advance payments, approved drawings and manufacturing clearance, BE IT NOTED THAT only on simultaneous receipt of the advance payment and all the other documents as mentioned herein the Supplier shall become liable to initiate the process of manufacturing.
+            </div>
+
+            <div class="legal-clause">
+                <b>17. Inspection:</b> The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire quantity offered, by any recognized inspection agency at the Supplier's plant and/or factory or the Buyer may depute its own team at the Supplier's plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it is only after the receipt of the inspection clearance certification the materials shall be put under dispatch. If for any reason the Buyer fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier's plant or factory and such inspection for all practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to delivery or dispatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.
+            </div>
+
+            <div class="legal-clause">
+                <b>18. Drawing:</b> It shall always be the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products based on the drawings. Be it noted here that any delay caused due to insufficient improper illegible and/or inadequate drawings and information provided by the Buyer, the Supplier will not be made liable for such delays caused owing to insufficient improper illegible and/or inadequate drawings and designs as provided by the Buyer.
+            </div>
+
+            <div class="legal-clause">
+                <b>19. Test Certificates:</b> The Supplier will provide at the request of the Buyer such third party test certificates for the materials manufactured and supplied subject to the Buyer having made full payments in favour of the Supplier.
+            </div>
+
+            <div class="legal-clause">
+                <b>20. Warranty:</b> (a) The Supplier warrants that the goods supplied under the contract are new, unused and as specified in the datasheet provided along with the technical offer. The Supplier further warrants that all goods supplied under this contract shall have no defect, arising from design, materials or workmanship or from any act or omission of the Supplier that may develop under normal use of the supplied goods as stipulated in the contract. Such warranty shall exclude normal wear and tear due to normal operation and any issue that may arise due to incorrect use or storage or erection or operation by the Buyer or their agents. (b) The products carry a warranty against any failure due to defective material or workmanship for a period of one year from the date of installation at the Buyer's site unless otherwise stated. A defect must be intimated in writing to Supplier not later than thirty days from the expiry of the period of one year.
+            </div>
+
+            <div class="legal-clause">
+                <b>21. Exclusions:</b> Unless specifically stated in the offer, the supply price do not include any material or labour in connection with foundations, concrete, setting of anchor bolts, grouting under columns or in recess around bottom of wall sheets, electrical installations, plumbing finished painting, heating, masonry, interior finishing partitions, glass and glazing or any item not shown in the Supplier's approval drawing.
+            </div>
+
+            <div class="legal-clause">
+                <b>22. Escalation:</b> Without limiting the other terms herein, the Buyer specifically acknowledges that the supply price shall be liable to increase on account of (a) delay by Buyer in providing to the Supplier approved drawings; or (b) any additional work through change in design being required by the Buyer; or (c) increase in price of input materials including cement, steel and other building materials; or (d) occurrence of an event of force majeure or any other unforeseen event.
+            </div>
+
+            <div class="legal-clause">
+                <b>23. Liability:</b> In no circumstances irrespective of any provisions of the contract or elsewhere to the contrary, shall either party be liable to the other party for any delay, loss of profit, production/business interruption or any incidental, consequential or indirect loss or damage. The Supplier's total liability in respect of any and all claims for direct damages or losses which may arise in case of defect in supply of products only to the extent that the Supplier is covered by the supply of raw material under this contract shall not exceed 100% of the contract price.
+            </div>
+
+            <div class="legal-clause">
+                <b>24. Responsibilities of Buyer:</b> The Buyer shall be responsible generally for all work carried out at the Buyer's site including without limitation: (a) preparing or causing to be prepared civil foundation of adequate strength and quality to support the erection by the Supplier of the products at the Buyer's site. The Buyer acknowledges that any delay, loss or damage arising on account of defect in foundation shall be to the account of Buyer, (b) unloading of products delivered at the Buyer's site; (c) providing erecting and maintaining suitable sheds at the Buyer's site for storage and protection of products pending completion of erection; and (d) making timely payments to the Supplier in accordance with agreed payment schedule. The Buyer acknowledges that any delay in completion of the work on account of delayed payments by the Buyer shall be to the account of the Buyer.
+            </div>
+
+            <div class="legal-clause">
+                <b>25. Transit Insurance and Passing of Risk:</b> The Supplier acknowledges that the products will be transported to the Buyer's site on CIF basis. The Supplier shall be responsible for booking shipping space and arranging the shipment and shall pay for the freight, so as to ensure that the goods will be delivered according to the time schedule stipulated in the contract. The Buyer acknowledges that on delivery to transporter, the products will be held at the risk and responsibility of the Buyer and any loss arising therefrom shall be to the account of the Buyer.
+            </div>
+
+            <div class="legal-clause">
+                <b>26. Termination:</b>
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                    26.1 If the Buyer fails to make timely payments to the Supplier or is otherwise in breach of any of its obligations or responsibilities and the same are not remedied to the satisfaction of the Supplier within a period of fifteen days of receipt of notice in writing from Supplier, it shall be at the option of the Supplier, by giving fifteen days further notice in writing to the Buyer, to terminate the supply order and the Buyer shall be responsible for all consequences arising therefrom. Without affecting the general rights of the Supplier in law or in contract, the Buyer will (a) reimburse to the Supplier all engineering and other costs, charges and expenses incurred by the Supplier as certified by the Supplier's statutory auditors; and (b) pay to the Supplier an amount by way of liquidated damages of not less than 5% of the price of the supply order. The Buyer agrees that the amount of damages is a genuine pre-estimate of damages and the Supplier is not required to prove actual damage. Thereafter, the Supplier will refund all amounts paid by the Buyer after deducting (unless already paid by the Buyer) the foregoing amounts payable by the Buyer, if any.
+                </div>
+                <div style="margin-bottom: 10px;">
+                    26.2 If an event of force majeure subsists for a continuous period more than one hundred and twenty consecutive days, it shall be at the option of either party to terminate the supply order by giving fifteen days notice in writing to the other party. Thereupon the Supplier will refund to the Buyer all amounts paid to it after deducting all engineering and other costs, charges and expenses already incurred by the Supplier as certified by the Supplier's statutory auditors and the Supplier will be entitled to take back all products from the Buyer's site and the Buyer will be obliged to permit the Supplier to do so, however if as per the certification of the Supplier's statutory auditor it is derived that after appropriation of all amount or amounts paid by the Buyer in favour of the Supplier there are additional payments to be made in that event the Buyer shall be liable to make payment of such additional amount or amounts in favour of the Supplier.
+                </div>
+                <div style="margin-bottom: 15px;">
+                    26.3 On termination, the Supplier will be entitled to dismantle remove and take away all products and equipment belonging to it and brought on by the Supplier at the Buyer's site and after all due payments being made, neither party shall have any claim against the other.
+                </div>
+            </div>
+
+            <div class="legal-clause">
+                <b>27. Return of Goods:</b> Be it noted that after obtaining satisfactory inspection clearance certification once the goods are sold and delivered the Buyer will not be entitled to return the same by raising any technical issues or defects.
+            </div>
+
+            <div class="legal-clause">
+                <b>28. Quality:</b> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer's destination, by any independent inspection agency and/or surveyor engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports by two different independent agencies both being appointed by the Buyers. If the Buyer fails to substantiate the claim with proper and acceptable explanation in that event the Buyer's claim on quality related issues shall stand set aside and/or determined.
+            </div>
+
+            <div class="legal-clause">
+                <b>29. Penal interest:</b> In the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.
+            </div>
+
+            <div class="legal-clause">
+                <b>30. Breach &amp; Default:</b> If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in that event the defaulting party shall become liable to compensate the other party by way of damages, however such other party shall become entitled to claim damages provided such claim is duly substantiated with proper evidence. Be it also noted that such damages shall not exceed the total valuation of the contract.
+            </div>
+
+            <div class="legal-clause">
+                <b>31. Lifting of Materials:</b> If for any reason the Buyer fails to take delivery of the materials within two weeks from the date of being notified that the materials are lying ready for taking delivery and/or dispatch and/or from the date of inspection recording acceptance of the materials, whichever is earlier, in that event the Supplier shall become entitled to impose storing charges for holding the materials till the time it is dispatched. Such charges shall be imposed at the rate of 0.25% of the total contract value for every weeks delay caused in taking delivery of the materials including charges of transportation, loading, unloading, security, rental charges and other incidental expenses.
+            </div>
+
+            <div class="legal-clause">
+                <b>32. Late Delivery Charges:</b> Unless prevented by force majeure condition the Supplier shall be liable to deliver the materials within the agreed delivery schedule. However since the Supplier has agreed to supply the materials at an extremely competitive rates it is being made clear that for the purpose of this contract the Buyer shall not be entitled to impose any late delivery charges for any delay caused in delivery of the materials.
+            </div>
+
+            <div class="legal-clause">
+                <b>33. Short Supply:</b> The Supplier will take full care to dispatch material in correct quantum. The Buyer should instruct transporter to acknowledge receipt of goods as per packing list is provided (along with invoice) before shipment. The Buyer shall be liable to depute its own representative at the factory site of the Supplier for checking the packing list and counting the materials as per the packing list in order to avoid any issues of short supply arising after shipment of the materials BE IT NOTED HERE that no subsequent claim for short supply after shipment of materials will be entertained by the Supplier.
+            </div>
+
+            <div class="legal-clause">
+                <b>34. Confidentiality:</b> The terms and conditions described in this contract including its existence shall be confidential information and shall not be disclosed by any party to any third party without the prior written consent of the other party. Each of the Parties agrees, (unless otherwise required by law), that it shall not disclose to any other person the fact that the confidential information has been made available to the other party, that discussions or negotiations are taking place concerning the said enquiry/tender proceedings between the Parties, or any of the terms, conditions or other facts with respect thereto (including the status thereof).
+            </div>
+
+            <div class="legal-clause">
+                <b>35. Erection:</b> The erection of the PEB is not included in the Supplier's scope of work and/or does not form a part or portion of the Supplier's obligation under the present contract. The Supplier only assumes the responsibility of supervision of the erection work of the PEB which is already included within the scope of the Supplier's work. The Supplier also guarantees the stability of the building subject to only when the erection is carried out as per the Supplier's drawing and instruction. In order to facilitate the process of selection of the erectors, the Supplier would recommend a list of its empanelled erectors who are familiar with the processes and practices, however it is the sole discretion of the Buyer either to select an erector from the Supplier's list of empanelled erectors or select any third party from the Buyer's independent source. BE IT NOTED that the erection contract would be a completely separate and independent contract between the Buyer and the erector and the Supplier has no role, obligation or overlapping interest whatsoever toward such contract.
+            </div>
+
+            <div class="legal-clause">
+                <b>36. Force Majeure:</b> (a) In this agreement, "force majeure" means any cause preventing Supplier from performing any or all of its obligations which arises from or is attributable to acts or events beyond the reasonable control of the party so prevented, including, without limitation, strikes, lock-outs or other industrial disputes (whether involving the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or default of suppliers or sub-contractors. (b) If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no liability in respect of the performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is necessary for that party, using all reasonable endeavours, to recommence its affected operations in order for it to perform its obligations. (c) If Supplier is prevented from performance of its obligations for a continuous period in excess of four months, the Buyer and/or the Supplier may terminate this agreement forthwith on service of written notice on the party so prevented, in which case neither party shall have any liability to the other except that rights and liabilities which accrued prior to such termination shall continue to subsist.
+            </div>
+
+            <div class="legal-clause">
+                <b>37. Jurisdiction:</b> No suit or any proceedings in regard to any matter arising in respect of this contract shall be instituted in any court, save in the High Court, Calcutta, City Civil Court at Calcutta or at the Court of small causes at Calcutta. It is agreed that no other court shall have jurisdiction to entertain any suit or proceedings, even though, part of the cause of action might arise within their jurisdiction.
+            </div>
+
+            <div class="legal-clause">
+                <b>38. Miscellaneous:</b> Notwithstanding anything otherwise or contrary recorded anywhere within the purchase/supply order arising from this quotation, the terms and conditions of this quotation shall be deemed to be a part of the consequent supply order and/or contract and in the event of any conflict in interpretation of the clauses of this quotation in that event the clauses of the quotation shall prevail over the clauses of the purchase/supply order.
+            </div>
+
+            <p style="text-align: center; margin-top: 50px;">**********************</p>
+        </div>
+
+        <div class="cover-page-back">
+
+            <div class="clear-header"></div>
+            <div class="clear-footer"></div>
+            <img src="{!$Resource.HM_Last_Page}" style="width: 210mm; height: 296mm; display: block; margin: 0; padding: 0; border: none;" />
+        </div>
+
+    </body>
+</apex:page>

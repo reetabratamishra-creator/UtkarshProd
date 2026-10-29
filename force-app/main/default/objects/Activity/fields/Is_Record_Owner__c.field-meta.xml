@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Record_Owner__c</fullName>
+    <formula>OR(
+    OwnerId = $User.Id,
+    $Profile.Name = &quot;System Administrator&quot;,
+    $Profile.Name = &quot;Utkarsh Admin&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Is Record Owner</label>
+    <type>Checkbox</type>
+</CustomField>

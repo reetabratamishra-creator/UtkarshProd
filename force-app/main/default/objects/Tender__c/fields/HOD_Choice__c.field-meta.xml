@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOD_Choice__c</fullName>
+    <label>HOD Choice</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Review and resend for participation</fullName>
+                <default>false</default>
+                <label>Review and resend for participation</label>
+            </value>
+            <value>
+                <fullName>Accept for participation</fullName>
+                <default>false</default>
+                <label>Accept for participation</label>
+            </value>
+            <value>
+                <fullName>Reject and Create Project</fullName>
+                <default>false</default>
+                <label>Reject and Create Project</label>
+            </value>
+            <value>
+                <fullName>Reject and Close</fullName>
+                <default>false</default>
+                <label>Reject and Close</label>
+            </value>
+            <value>
+                <fullName>Update Account Details</fullName>
+                <default>false</default>
+                <label>Update Account Details</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

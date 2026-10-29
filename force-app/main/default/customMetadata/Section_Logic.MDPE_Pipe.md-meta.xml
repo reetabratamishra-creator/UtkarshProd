@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>MDPE Pipe</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Select_Standard</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">MDPE Pipe</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+	&quot;fields&quot;:[
+		{
+			&quot;apiName&quot;: &quot;mdpe_14885_folder&quot;,
+			&quot;label&quot;: &quot;IS 14885 Details&quot;,
+			&quot;type&quot;: &quot;folder&quot;,
+			&quot;iconColor&quot;: &quot;blue&quot;,
+			&quot;controllingField&quot;: &quot;Standard&quot;,
+			&quot;controllingValues&quot;: [
+				&quot;MDPE Pipe&quot;
+			],
+			&quot;modalConfigsByValue&quot;: {
+				&quot;MDPE Pipe&quot;: {
+                    &quot;title&quot;: &quot;GENERAL DETAILS - IS 14885&quot;,
+                    &quot;modalFields&quot;:[
+                        {
+							&quot;id&quot;: &quot;mdpe_setup_section&quot;,
+							&quot;label&quot;: &quot;Step 1: Configuration Setup&quot;,
+							&quot;expanded&quot;: true,
+							&quot;fields&quot;: [
+								{
+								&quot;apiName&quot;: &quot;mdpe_pipe_count&quot;,
+								&quot;label&quot;: &quot;Number of Line items&quot;,
+								&quot;type&quot;: &quot;number&quot;,
+								&quot;colSpan&quot;: 3,
+								&quot;defaultValue&quot;: 1,
+								&quot;min&quot;: 1,
+								&quot;max&quot;: 10
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_Inspection_Commission&quot;,
+									&quot;label&quot;: &quot;Inspection &amp; Commission %&quot;,
+									&quot;type&quot;: &quot;number&quot;,
+									&quot;colSpan&quot;:3
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_Interest_Charges_on_Payment_type&quot;,
+									&quot;label&quot;: &quot;No of Days for Payment&quot;,
+									&quot;type&quot;: &quot;number&quot;,
+									&quot;colSpan&quot;:3
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_Interest_Charges_on_Payment&quot;,
+									&quot;label&quot;: &quot;Interest charges % per Annum&quot;,
+									&quot;type&quot;: &quot;number&quot;,
+									&quot;colSpan&quot;:3
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_Type_of_transportation&quot;,
+									&quot;label&quot;: &quot;Type of Transaportation&quot;,
+									&quot;type&quot;: &quot;picklist&quot;,
+									&quot;options&quot;:[&quot;F.O.R (Freight on Road)&quot;,&quot;Ex-works&quot;],
+									&quot;pushToParentApiName&quot;:&quot;freight_incoterms_hdpe&quot;,
+									&quot;colSpan&quot;:3
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_Type_of_FOR&quot;,
+									&quot;label&quot;: &quot;F.O.R (Freight on Road)&quot;,
+									&quot;type&quot;: &quot;picklist&quot;,
+									&quot;options&quot;:[&quot;Per Meter&quot;,&quot;Lump Sum&quot;],
+									&quot;controllingField&quot;:&quot;mdpe_Type_of_transportation&quot;,
+									&quot;controllingValues&quot;:[&quot;F.O.R (Freight on Road)&quot;],
+									&quot;colSpan&quot;:3
+								},
+								{
+									&quot;apiName&quot;: &quot;mdpe_LumpSum_Amount&quot;,
+									&quot;label&quot;: &quot;Lump Sum&quot;,
+									&quot;type&quot;: &quot;number&quot;,
+									&quot;controllingField&quot;:&quot;mdpe_Type_of_FOR&quot;,
+									&quot;controllingValues&quot;:[&quot;Lump Sum&quot;],
+									&quot;colSpan&quot;:3
+								}
+							]
+						},
+						{
+							&quot;id&quot;: &quot;mdpe_PE_G_and_PR_Selection_1&quot;,
+							&quot;label&quot;: &quot;Step 2: Pipe Data Entry&quot;,
+							&quot;expanded&quot;: true,
+							&quot;controllingField&quot;: &quot;mdpe_pipe_count&quot;,
+							&quot;controllingValues&quot;: [&quot;&gt;=1&quot;],
+							&quot;fields&quot;: [
+								{
+									&quot;apiName&quot;: &quot;mdpe_vertical_pipe_grid&quot;,
+									&quot;type&quot;: &quot;column-repeater&quot;,
+									&quot;countApiName&quot;: &quot;mdpe_pipe_count&quot;,
+									&quot;maxColumns&quot;: 10,
+									&quot;fields&quot;: [
+										{
+											&quot;apiName&quot;: &quot;mdpe_SDR_Grade_select&quot;,
+											&quot;label&quot;: &quot;SDR Grade&quot;,
+											&quot;type&quot;: &quot;picklist&quot;,
+											&quot;required&quot;: true,
+											&quot;options&quot;: [
+												&quot;SDR 9&quot;,&quot;SDR 11&quot;,&quot;SDR 13.6&quot;,&quot;SDR 17&quot;
+											]
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Nominal_Dia&quot;,
+											&quot;label&quot;: &quot;Nominal Dia&quot;,
+											&quot;type&quot;: &quot;picklist&quot;,
+											&quot;controllingFields&quot;: [&quot;mdpe_SDR_Grade_select&quot;],
+											&quot;required&quot;: true,
+											&quot;options&quot;: [
+												&quot;16&quot;,&quot;20&quot;,&quot;25&quot;,&quot;32&quot;,&quot;40&quot;,&quot;50&quot;,&quot;63&quot;,&quot;75&quot;,&quot;90&quot;,&quot;110&quot;,&quot;125&quot;,&quot;140&quot;,&quot;160&quot;,&quot;180&quot;,&quot;200&quot;,&quot;225&quot;,&quot;250&quot;,&quot;280&quot;,&quot;315&quot;
+											],
+											&quot;dependentOptionsMap&quot;:{
+												&quot;SDR 9&quot;:[&quot;16&quot;,&quot;20&quot;,&quot;25&quot;,&quot;32&quot;,&quot;40&quot;,&quot;50&quot;,&quot;63&quot;,&quot;75&quot;,&quot;90&quot;,&quot;110&quot;,&quot;125&quot;,&quot;140&quot;,&quot;160&quot;,&quot;180&quot;,&quot;200&quot;,&quot;225&quot;,&quot;250&quot;,&quot;280&quot;,&quot;315&quot;],
+												&quot;SDR 11&quot;:[&quot;16&quot;,&quot;20&quot;,&quot;25&quot;,&quot;32&quot;,&quot;40&quot;,&quot;50&quot;,&quot;63&quot;,&quot;75&quot;,&quot;90&quot;,&quot;110&quot;,&quot;125&quot;,&quot;140&quot;,&quot;160&quot;,&quot;180&quot;,&quot;200&quot;,&quot;225&quot;,&quot;250&quot;,&quot;280&quot;,&quot;315&quot;],
+												&quot;SDR 13.6&quot;:[&quot;16&quot;,&quot;20&quot;,&quot;25&quot;,&quot;32&quot;,&quot;40&quot;,&quot;50&quot;,&quot;63&quot;,&quot;75&quot;,&quot;90&quot;,&quot;110&quot;,&quot;125&quot;,&quot;140&quot;,&quot;160&quot;,&quot;180&quot;,&quot;200&quot;,&quot;225&quot;,&quot;250&quot;,&quot;280&quot;,&quot;315&quot;],
+                                                &quot;SDR 17&quot;:[&quot;32&quot;,&quot;40&quot;,&quot;50&quot;,&quot;63&quot;,&quot;75&quot;,&quot;90&quot;,&quot;110&quot;,&quot;125&quot;,&quot;140&quot;,&quot;160&quot;,&quot;180&quot;,&quot;200&quot;,&quot;225&quot;,&quot;250&quot;,&quot;280&quot;,&quot;315&quot;]
+											}
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_unit_of_messurment&quot;,
+											&quot;label&quot;: &quot;UOM&quot;,
+											&quot;required&quot;: true,
+											&quot;type&quot;: &quot;picklist&quot;,
+											&quot;options&quot;: [
+												&quot;mtr&quot;,&quot;Km&quot;
+											]
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_BOQ_Quantity&quot;,
+											&quot;label&quot;: &quot;BOQ QTY&quot;,
+											&quot;required&quot;: true,
+											&quot;type&quot;: &quot;number&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_len_of_coil_pipe&quot;,
+											&quot;label&quot;: &quot;Length of Coil/Pipe (mtr)&quot;,
+											&quot;required&quot;: true,
+											&quot;type&quot;: &quot;number&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_type_of_pipe&quot;,
+											&quot;label&quot;: &quot;Type of Pipe&quot;,
+											&quot;type&quot;: &quot;picklist&quot;,
+											&quot;options&quot;: [
+												&quot;Straight&quot;,&quot;Coil&quot;
+											],
+											&quot;defaultValue&quot;:&quot;Straight&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_No_of_Coil_Pipe&quot;,
+											&quot;label&quot;: &quot;No. of Coil/Pipe&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;readOnly&quot;: true,
+											&quot;formula&quot;: &quot;Math.ceil(mdpe_unit_of_messurment == &apos;mtr&apos; ? (mdpe_BOQ_Quantity / mdpe_len_of_coil_pipe) : mdpe_unit_of_messurment == &apos;Km&apos; ? ((mdpe_BOQ_Quantity * 1000) / mdpe_len_of_coil_pipe): 0)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Weight_mtrs&quot;,
+											&quot;label&quot;: &quot;Weight/mtrs&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;lookupWeight&quot;: true,
+											&quot;readOnly&quot;:true,
+											&quot;controllingFields&quot;: [&quot;mdpe_SDR_Grade_select&quot;,&quot;mdpe_Nominal_Dia&quot;],
+											&quot;weightMap&quot;: {&quot;SDR 9|16&quot;:0.124,&quot;SDR 9|20&quot;:0.165,&quot;SDR 9|25&quot;:0.216,&quot;SDR 9|32&quot;:0.334,&quot;SDR 9|40&quot;:0.519,&quot;SDR 9|50&quot;:0.801,&quot;SDR 9|63&quot;:1.267,&quot;SDR 9|75&quot;:1.779,&quot;SDR 9|90&quot;:2.554,&quot;SDR 9|110&quot;:3.782,&quot;SDR 9|125&quot;:4.88,&quot;SDR 9|140&quot;:6.117,&quot;SDR 9|160&quot;:7.952,&quot;SDR 9|180&quot;:10.027,&quot;SDR 9|200&quot;:12.388,&quot;SDR 9|225&quot;:15.596,&quot;SDR 9|250&quot;:19.226,&quot;SDR 9|280&quot;:24.106,&quot;SDR 9|315&quot;:30.441,&quot;SDR 11|16&quot;:0.124,&quot;SDR 11|20&quot;:0.165,&quot;SDR 11|25&quot;:0.216,&quot;SDR 11|32&quot;:0.289,&quot;SDR 11|40&quot;:0.444,&quot;SDR 11|50&quot;:0.684,&quot;SDR 11|63&quot;:1.075,&quot;SDR 11|75&quot;:1.497,&quot;SDR 11|90&quot;:2.151,&quot;SDR 11|110&quot;:3.184,&quot;SDR 11|125&quot;:4.111,&quot;SDR 11|140&quot;:5.122,&quot;SDR 11|160&quot;:6.701,&quot;SDR 11|180&quot;:8.447,&quot;SDR 11|200&quot;:10.395,&quot;SDR 11|225&quot;:13.138,&quot;SDR 11|250&quot;:16.136,&quot;SDR 11|280&quot;:20.178,&quot;SDR 11|315&quot;:25.494,&quot;SDR 13.6|16&quot;:0.102,&quot;SDR 13.6|20&quot;:0.135,&quot;SDR 13.6|25&quot;:0.176,&quot;SDR 13.6|32&quot;:0.234,&quot;SDR 13.6|40&quot;:0.375,&quot;SDR 13.6|50&quot;:0.573,&quot;SDR 13.6|63&quot;:0.904,&quot;SDR 13.6|75&quot;:1.255,&quot;SDR 13.6|90&quot;:1.794,&quot;SDR 13.6|110&quot;:2.666,&quot;SDR 13.6|125&quot;:3.429,&quot;SDR 13.6|140&quot;:4.288,&quot;SDR 13.6|160&quot;:5.588,&quot;SDR 13.6|180&quot;:7.061,&quot;SDR 13.6|200&quot;:8.654,&quot;SDR 13.6|225&quot;:10.954,&quot;SDR 13.6|250&quot;:13.459,&quot;SDR 13.6|280&quot;:16.828,&quot;SDR 13.6|315&quot;:21.252,&quot;SDR 17|32&quot;:0.234,&quot;SDR 17|40&quot;:0.314,&quot;SDR 17|50&quot;:0.484,&quot;SDR 17|63&quot;:0.759,&quot;SDR 17|75&quot;:1.063,&quot;SDR 17|90&quot;:1.517,&quot;SDR 17|110&quot;:2.241,&quot;SDR 17|125&quot;:2.849,&quot;SDR 17|140&quot;:3.566,&quot;SDR 17|160&quot;:4.639,&quot;SDR 17|180&quot;:5.853,&quot;SDR 17|200&quot;:7.208,&quot;SDR 17|225&quot;:9.095,&quot;SDR 17|250&quot;:11.132,&quot;SDR 17|280&quot;:13.93,&quot;SDR 17|315&quot;:17.584}
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_final_quantity&quot;,
+											&quot;label&quot;: &quot;Final Quantity&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;formula&quot;:&quot;(mdpe_unit_of_messurment == &apos;mtr&apos; ? (mdpe_BOQ_Quantity) : mdpe_unit_of_messurment == &apos;Km&apos; ? (mdpe_BOQ_Quantity * 1000): 0)&quot;,
+											&quot;isQuantity&quot;:true,
+											&quot;readOnly&quot;:true
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Req_Raw_Material_in_MT&quot;,
+											&quot;label&quot;: &quot;Req. Raw Material in MT&quot;,
+											&quot;required&quot;: true,
+											&quot;readOnly&quot;:true,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;formula&quot;:&quot;((mdpe_final_quantity *  mdpe_Weight_mtrs)/1000).toFixed(2)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Realization_raw_material_conversion_cost_Kg&quot;,
+											&quot;label&quot;: &quot;Realization(raw material+ conversion cost)/Kg&quot;,
+											&quot;isBasePrice&quot;: true,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;formula&quot;: &quot;mdpe_Realization_raw_material_conversion_cost_Kg ? mdpe_Realization_raw_material_conversion_cost_Kg : mdpe_pipe_b_rate&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Basic_Price_mtrs&quot;,
+											&quot;label&quot;: &quot;Basic Price/mtrs&quot;,
+											&quot;readOnly&quot;:true,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;isUnitCost&quot;:true,
+											&quot;formula&quot;:&quot;(mdpe_Weight_mtrs * mdpe_Realization_raw_material_conversion_cost_Kg).toFixed(2)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_inspectionAndCommission_Charges&quot;,
+											&quot;label&quot;: &quot;Inspection &amp; Commission Rate/Mtr&quot;,
+											&quot;readOnly&quot;:true,
+											&quot;type&quot;:&quot;number&quot;,
+											&quot;formula&quot;:&quot;((mdpe_Basic_Price_mtrs * mdpe_Inspection_Commission)/100).toFixed(2)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Fittings_Charges&quot;,
+											&quot;label&quot;: &quot;Fitting Charges Rate/Mtr&quot;,
+											&quot;type&quot;: &quot;number&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Freight_including_Unloading_mtrs&quot;,
+											&quot;label&quot;: &quot;Freight Charges/Mtr&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;disableControllingField&quot;:&quot;mdpe_Type_of_FOR&quot;,
+											&quot;disableControllingValues&quot;:[&quot;Per Meter&quot;]
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Interest_Charges&quot;,
+											&quot;label&quot;: &quot;Interest Charges/Mtr&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;readOnly&quot;:true,
+											&quot;formula&quot;:&quot;(((mdpe_Basic_Price_mtrs+mdpe_Fittings_Charges+mdpe_Freight_including_Unloading_mtrs+((mdpe_Basic_Price_mtrs*mdpe_Inspection_Commission)/100))*(1+mdpe_GST/100))*(mdpe_Interest_Charges_on_Payment*(mdpe_Interest_Charges_on_Payment_type/365)/100)).toFixed(2)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_FOR_Price&quot;,
+											&quot;label&quot;: &quot;F.O.R. Price including Inspection, Interest Charges, BG / meter&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;isListPrice&quot;:true,
+											&quot;readOnly&quot;:true,
+											&quot;formula&quot;:&quot;((mdpe_Basic_Price_mtrs+mdpe_Freight_including_Unloading_mtrs+mdpe_Fittings_Charges+((mdpe_Basic_Price_mtrs*mdpe_Inspection_Commission)/100))+ mdpe_Interest_Charges).toFixed(2)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_GST&quot;,
+											&quot;label&quot;: &quot;GST %&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;readOnly&quot;:true,
+											&quot;formula&quot;: &quot;mdpe_pipe_gst&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Total_Per_Mtr&quot;,
+											&quot;label&quot;: &quot;Total Per Mtr&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;isUnitPrice&quot;:true,
+											&quot;readOnly&quot;:true,
+											&quot;formula&quot;:&quot;(mdpe_FOR_Price + (mdpe_FOR_Price * mdpe_GST)/100).toFixed(4)&quot;
+										},
+										{
+											&quot;apiName&quot;: &quot;mdpe_Total_Amount&quot;,
+											&quot;label&quot;: &quot;Total Amount&quot;,
+											&quot;type&quot;: &quot;number&quot;,
+											&quot;readOnly&quot;:true,
+											&quot;formula&quot;:&quot;((mdpe_FOR_Price * mdpe_final_quantity) * (1 + mdpe_GST / 100)).toFixed(2)&quot;
+										}
+									]
+								}													
+							]
+						}
+                    ]
+                }
+            }
+        }
+    ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Price Variation Calculation</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Price_Variation_Factor</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">True</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;price_variation_folder&quot;,
+      &quot;label&quot;: &quot;Price Variation Calculation&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;calculation_of_price_variation&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;*&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;True&quot;: {
+          &quot;title&quot;: &quot;CALCULATION OF PRICE VARIATION&quot;,
+          &quot;requiresCrossModalData&quot;: true,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;pvf_price_variation&quot;,
+              &quot;label&quot;: &quot;Price Variation&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pvf_price_qutoed_confirmed&quot;,
+                  &quot;label&quot;: &quot;PRICE QUOTED / CONFIRMED&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_ms&quot;,
+                  &quot;label&quot;: &quot;MS&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_billets!==&apos;undefined&apos;&amp;&amp;pvt_pv_billets!==null)?Number(pvt_pv_billets||0):0&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_ht&quot;,
+                  &quot;label&quot;: &quot;HT&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_price_module!==&apos;undefined&apos;&amp;&amp;pvt_price_module==&apos;IEEMA&apos;)?Math.round(((Number((typeof pvt_pv_blooms!==&apos;undefined&apos;?pvt_pv_blooms:0)||0)+Number((typeof pvt_pv_billets!==&apos;undefined&apos;?pvt_pv_billets:0)||0))/2)*100)/100:((typeof pvt_price_module!==&apos;undefined&apos;&amp;&amp;pvt_price_module==&apos;PGCIL&apos;)?Math.round(Number((typeof pvt_pv_blooms!==&apos;undefined&apos;?pvt_pv_blooms:0)||0)*100)/100:&apos;&apos;)&quot;
+
+
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_1_month_prior_to_tender&quot;,
+                  &quot;label&quot;: &quot;1 MONTHS PRIOR TO THE TENDERING ( IN CASE OF TENDER)&quot;,
+                  &quot;type&quot;: &quot;header&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_blooms&quot;,
+                  &quot;label&quot;: &quot;Blooms&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_blooms!==&apos;undefined&apos;&amp;&amp;pvt_pv_blooms!=null&amp;&amp;pvt_pv_blooms!==&apos;&apos;)?pvt_pv_blooms:((typeof pvs_pv_blooms!==&apos;undefined&apos;&amp;&amp;pvs_pv_blooms!=null&amp;&amp;pvs_pv_blooms!==&apos;&apos;)?pvs_pv_blooms:0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_billets&quot;,
+                  &quot;label&quot;: &quot;Billets&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_billets!==&apos;undefined&apos;&amp;&amp;pvt_pv_billets!=null&amp;&amp;pvt_pv_billets!==&apos;&apos;)?pvt_pv_billets:((typeof pvs_pv_billets!==&apos;undefined&apos;&amp;&amp;pvs_pv_billets!=null&amp;&amp;pvs_pv_billets!==&apos;&apos;)?pvs_pv_billets:0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_zinc&quot;,
+                  &quot;label&quot;: &quot;Zinc&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_zinc_value_as_IEEMA!==&apos;undefined&apos;&amp;&amp;pvt_pv_zinc_value_as_IEEMA!=null&amp;&amp;pvt_pv_zinc_value_as_IEEMA!==&apos;&apos;)?pvt_pv_zinc_value_as_IEEMA:((typeof pvs_pv_zinc_value_as_per_ieema!==&apos;undefined&apos;&amp;&amp;pvs_pv_zinc_value_as_per_ieema!=null&amp;&amp;pvs_pv_zinc_value_as_per_ieema!==&apos;&apos;)?pvs_pv_zinc_value_as_per_ieema:0)&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;pvf_consumer_price_index&quot;,
+                  &quot;label&quot;: &quot;Consumer Price Index&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;colSpan&quot;: 6,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;formula&quot;: &quot;(typeof pvt_pv_CPI!==&apos;undefined&apos;&amp;&amp;pvt_pv_CPI!=null&amp;&amp;pvt_pv_CPI!==&apos;&apos;)?pvt_pv_CPI:((typeof pvs_pv_CPI!==&apos;undefined&apos;&amp;&amp;pvs_pv_CPI!=null&amp;&amp;pvs_pv_CPI!==&apos;&apos;)?pvt_pv_CPI:0)&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;pv_dispatch_inspection_month&quot;,
+              &quot;label&quot;: &quot;Dispatch/Inspection Month&quot;,
+              &quot;expanded&quot;: false,
+              &quot;showRequired&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;pv_formula&quot;,
+                  &quot;label&quot;: &quot;FORMULA&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;unit&quot;: &quot;MTRS&quot;,
+                  &quot;options&quot;: [
+                    &quot;IEEMA - P = Po/100 {9 + 35(SBLR/SBLRo) + 27(SBIR/SBIRo) + 13(ZN/ZNo) + 16(W/Wo)}&quot;,
+                    &quot;PGCIL - EC1 = ECo [0.15 + 0.52 × (A / Ao) + 0.10 × (B / Bo) + 0.23 × (L / Lo)] − ECo&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_base_month&quot;,
+                  &quot;label&quot;: &quot;BASE MONTH&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;January&quot;,
+                    &quot;February&quot;,
+                    &quot;March&quot;,
+                    &quot;April&quot;,
+                    &quot;May&quot;,
+                    &quot;June&quot;,
+                    &quot;July&quot;,
+                    &quot;August&quot;,
+                    &quot;September&quot;,
+                    &quot;October&quot;,
+                    &quot;November&quot;,
+                    &quot;December&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_base_year&quot;,
+                  &quot;label&quot;: &quot;BASE MONTH&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;required&quot;: false,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ],
+                  &quot;options&quot;: [
+                    &quot;2016&quot;,
+                    &quot;2017&quot;,
+                    &quot;2018&quot;,
+                    &quot;2019&quot;,
+                    &quot;2020&quot;,
+                    &quot;2021&quot;,
+                    &quot;2022&quot;,
+                    &quot;2023&quot;,
+                    &quot;2024&quot;,
+                    &quot;2025&quot;,
+                    &quot;2026&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_blooms&quot;,
+                  &quot;label&quot;: &quot;BLOOMS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_billets&quot;,
+                  &quot;label&quot;: &quot;BILLETS&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_zinc&quot;,
+                  &quot;label&quot;: &quot;ZINC&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                },
+                {
+                  &quot;apiName&quot;: &quot;pv_consumer_price_index&quot;,
+                  &quot;label&quot;: &quot;CONSUMER PRICE INDEX&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;required&quot;: false,
+                  &quot;readOnly&quot;: true,
+                  &quot;controllingField&quot;: &quot;pv_formula&quot;,
+                  &quot;controllingValues&quot;: [
+                    &quot;*&quot;
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

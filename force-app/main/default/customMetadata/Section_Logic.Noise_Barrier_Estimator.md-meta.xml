@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Noise Barrier Estimator</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Crash_Barrier_Estimator</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">Noise Barrier</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+    &quot;fields&quot;: [
+        {
+            &quot;apiName&quot;: &quot;MBCB_NBD_folder_1&quot;,
+            &quot;label&quot;: &quot;Noise Barrier Details&quot;,
+            &quot;type&quot;: &quot;folder&quot;,
+            &quot;iconColor&quot;: &quot;blue&quot;,
+            &quot;controllingField&quot;: &quot;MBCB_Type&quot;,
+            &quot;controllingValues&quot;: [
+                &quot;Noise Barrier&quot;
+            ],
+            &quot;modalConfigsByValue&quot;: {
+                &quot;Noise Barrier&quot;: {
+                    &quot;title&quot;: &quot;GENERAL DETAILS - NOISE BARRIER&quot;,
+                    &quot;modalFields&quot;: [
+                        {
+                            &quot;id&quot;: &quot;std_general_details&quot;,
+                            &quot;label&quot;: &quot;General Details&quot;,
+                            &quot;expanded&quot;: true,
+                            &quot;fields&quot;: [
+                                {
+                                    &quot;apiName&quot;: &quot;sheet_type_select&quot;,
+                                    &quot;label&quot;: &quot;Slect Sheet type&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;options&quot;: [
+                                        &quot;Reflective Sheet&quot;,
+                                        &quot;Absorbtive Sheet&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 12
+                                }
+                            ]
+                        },
+                        {
+                            &quot;id&quot;: &quot;reflective_sheet_details&quot;,
+                            &quot;label&quot;: &quot;Reflective Sheet&quot;,
+                            &quot;expanded&quot;: false,
+                            &quot;controllingField&quot;: &quot;sheet_type_select&quot;,
+                            &quot;controllingValues&quot;: [&quot;Reflective Sheet&quot;],
+                            &quot;fields&quot;: [
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_thickness_header&quot;,
+                                    &quot;label&quot;: &quot;Sheet Thickness (mm)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_thickness&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_heights_header&quot;,
+                                    &quot;label&quot;: &quot;Height (mtr)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_height&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_column_spacing_header&quot;,
+                                    &quot;label&quot;: &quot;Column Spacing (mtr)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_column_spacing&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_installation_header&quot;,
+                                    &quot;label&quot;: &quot;Installation&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_installation&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;options&quot;: [
+                                        &quot;On concrete barrier&quot;,
+                                        &quot;On Ground&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_uom_header&quot;,
+                                    &quot;label&quot;: &quot;UOM&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_uom&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;isUOM&quot;: true,
+                                    &quot;options&quot;: [
+                                        &quot;Running Meter&quot;,
+                                        &quot;Squre Meter&quot;
+                                    ],
+                                    &quot;defaultValue&quot;: &quot;Squre Meter&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_quantity_header&quot;,
+                                    &quot;label&quot;: &quot;Quantity&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_quantity&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;isQuantity&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_realization_header&quot;,
+                                    &quot;label&quot;: &quot;Realization (%)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_realization&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_trans_in_offer_header&quot;,
+                                    &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_trans_in_offer&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                                    &quot;options&quot;: [
+                                        &quot;Ex-works&quot;,
+                                        &quot;F.O.R (Freight on Road)&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+								{
+								  &quot;apiName&quot;: &quot;r_s_types_of_Freight_header&quot;,
+								  &quot;label&quot;: &quot;types of freight&quot;,
+								  &quot;type&quot;: &quot;header&quot;,
+								  &quot;colSpan&quot;: 6,
+								  &quot;controllingField&quot;: &quot;r_s_trans_in_offer&quot;,
+								  &quot;controllingValues&quot;: [
+									&quot;F.O.R (Freight on Road)&quot;
+								  ]
+								},
+								{
+								  &quot;apiName&quot;: &quot;r_s_types_of_Freight&quot;,
+								  &quot;label&quot;: &quot;&quot;,
+								  &quot;type&quot;: &quot;picklist&quot;,
+								  &quot;colSpan&quot;: 6,
+								  &quot;required&quot;: true,
+								  &quot;options&quot;: [
+									&quot;Transportation KG&quot;,
+									&quot;Full Vehicle Freight&quot;
+								  ],
+								  &quot;controllingField&quot;: &quot;r_s_trans_in_offer&quot;,
+								  &quot;controllingValues&quot;: [
+									&quot;F.O.R (Freight on Road)&quot;
+								  ]
+								},
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_tKG_header&quot;,
+                                    &quot;label&quot;: &quot;Transportation KG&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;controllingField&quot;: &quot;r_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Transportation KG&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_tkg&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6,
+                                    &quot;controllingField&quot;: &quot;r_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Transportation KG&quot;
+                                    ]
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_fvf_header&quot;,
+                                    &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;controllingField&quot;: &quot;r_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Full Vehicle Freight&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_s_fvf&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6,
+                                    &quot;min&quot;: 1,
+                                    &quot;controllingField&quot;: &quot;r_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Full Vehicle Freight&quot;
+                                    ]
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;reflective_pricing_sub&quot;,
+                                    &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                                    &quot;type&quot;: &quot;sub-section&quot;,
+                                    &quot;expanded&quot;: false,
+                                    &quot;fields&quot;: [
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column&quot;,
+                                            &quot;label&quot;: &quot;Column Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column_length&quot;,
+                                            &quot;label&quot;: &quot;Column Length (mm)&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_height || 0)*1000&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column_width&quot;,
+                                            &quot;label&quot;: &quot;Column Width (mm)&quot;,
+                                            &quot;defaultValue&quot;: 100,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column_thk&quot;,
+                                            &quot;label&quot;: &quot;Column Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 4,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 1,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_column_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for Column&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((100*r_s_wc_column_thk*2+92*r_s_wc_column_thk)*r_s_wc_column_length*7.85/1000000)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp&quot;,
+                                            &quot;label&quot;: &quot;Base Plate Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp_length&quot;,
+                                            &quot;label&quot;: &quot;Bse Plate Length (mm)&quot;,
+                                            &quot;defaultValue&quot;: 220,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp_width&quot;,
+                                            &quot;label&quot;: &quot;Base Plate Width (mm)&quot;,
+                                            &quot;defaultValue&quot;: 175,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp_thk&quot;,
+                                            &quot;label&quot;: &quot;Base Plate Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 16,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 1,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_bp_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for Base Plate&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((r_s_wc_bp_length*r_s_wc_bp_width*r_s_wc_bp_thk*7.85)/1000000)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp&quot;,
+                                            &quot;label&quot;: &quot;Stiffener Plate Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp_length&quot;,
+                                            &quot;label&quot;: &quot;Stiffener Plate Length (mm)&quot;,
+                                            &quot;defaultValue&quot;: 100,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp_width&quot;,
+                                            &quot;label&quot;: &quot;Stiffener Plate Width (mm)&quot;,
+                                            &quot;defaultValue&quot;: 50,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp_thk&quot;,
+                                            &quot;label&quot;: &quot;Stiffener Plate Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 6,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 1,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sp_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for Stiffener Plate&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((r_s_wc_sp_length*r_s_wc_sp_width*r_s_wc_sp_thk*7.85)/1000000)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin&quot;,
+                                            &quot;label&quot;: &quot;Purlin Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin_length&quot;,
+                                            &quot;label&quot;: &quot;Purlin Length (mm)&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_column_spacing || 0)*1000&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin_width&quot;,
+                                            &quot;label&quot;: &quot;Purlin Width (mm)&quot;,
+                                            &quot;defaultValue&quot;: 40,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin_thk&quot;,
+                                            &quot;label&quot;: &quot;Purlin Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 3.2,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 1,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_purlin_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for Purlin&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((3.5*r_s_wc_purlin_length)/1000)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet&quot;,
+                                            &quot;label&quot;: &quot;Polycarbonate Sheet Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet_length&quot;,
+                                            &quot;label&quot;: &quot;Polycarbonate Sheet Length (mm)&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_height || 0)*1000&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet_width&quot;,
+                                            &quot;label&quot;: &quot;Polycarbonate Sheet Width (mm)&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_column_spacing || 0)*1000&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet_thk&quot;,
+                                            &quot;label&quot;: &quot;Polycarbonate Sheet Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_thickness || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 1,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_pcsheet_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for Polycarbonate Sheet&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 0,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip&quot;,
+                                            &quot;label&quot;: &quot;GI Fixing Strip Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip_length&quot;,
+                                            &quot;label&quot;: &quot;GI Fixing Strip Length (mm)&quot;,
+                                            &quot;formula&quot;: &quot;(r_s_column_spacing || 0)*1000&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip_width&quot;,
+                                            &quot;label&quot;: &quot;GI Fixing Strip Width (mm)&quot;,
+                                            &quot;defaultValue&quot;: 30,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip_thk&quot;,
+                                            &quot;label&quot;: &quot;GI Fixing Strip Thickness (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 2,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip_qty&quot;,
+                                            &quot;label&quot;: &quot;Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 3,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_gi_fix_strip_weight&quot;,
+                                            &quot;label&quot;: &quot;Total Weight for GI Fixing Strip&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((r_s_wc_gi_fix_strip_length*r_s_wc_gi_fix_strip_width*r_s_wc_gi_fix_strip_thk*7.85)*r_s_wc_gi_fix_strip_qty/1000000)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_ab_and_sts&quot;,
+                                            &quot;label&quot;: &quot;Anchor Bolt &amp; Self Tapping Screw Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_ab_length&quot;,
+                                            &quot;label&quot;: &quot;Anchor Bolt Length (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 180,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_ab_width&quot;,
+                                            &quot;label&quot;: &quot;Anchor Bolt Width (mm)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 16,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_ab_qty&quot;,
+                                            &quot;label&quot;: &quot;Anchor Bolt Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 4,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_sts_qty&quot;,
+                                            &quot;label&quot;: &quot;Self Tapping Screw Quantity Per Set&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;defaultValue&quot;: 60,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_overall_total_weight&quot;,
+                                            &quot;label&quot;: &quot;Overall Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;r_s_wc_column_weight + r_s_wc_bp_weight + r_s_wc_sp_weight + r_s_wc_purlin_weight + r_s_wc_pcsheet_weight + r_s_wc_gi_fix_strip_weight&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_price&quot;,
+                                            &quot;label&quot;: &quot;Price Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_price_total_cost_per_sm&quot;,
+                                            &quot;label&quot;: &quot;Price per Squre Meter&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(((r_s_wc_column_weight*(r_Column_Base_Rate || 0)) + (r_s_wc_bp_weight*(r_Base_Plate_Base_Rate || 0)) + (r_s_wc_sp_weight*(r_Stiffener_Plate_Base_Rate || 0)) + (r_s_wc_purlin_weight*(r_Purlin_Base_Rate || 0)) + (((r_Polycarbonate_Sheet_Base_Rate || 0)*r_s_wc_pcsheet_length)/1000*r_s_wc_pcsheet_width/1000) + (r_s_wc_gi_fix_strip_weight*(r_GI_Fixing_Strip_Base_Rate ||0))) / (r_s_height*r_s_column_spacing))&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;r_s_uom&quot;,
+                                            &quot;isUnitCost&quot;: true,
+                                            &quot;controllingValues&quot;: [&quot;Squre Meter&quot;],
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_price_total_cost_per_rm&quot;,
+                                            &quot;label&quot;: &quot;Price per Running Meter&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(((r_s_wc_column_weight*(r_Column_Base_Rate || 0)) + (r_s_wc_bp_weight*(r_Base_Plate_Base_Rate || 0)) + (r_s_wc_sp_weight*(r_Stiffener_Plate_Base_Rate || 0)) + (r_s_wc_purlin_weight*(r_Purlin_Base_Rate || 0)) + (((r_Polycarbonate_Sheet_Base_Rate || 0)*r_s_wc_pcsheet_length)/1000*r_s_wc_pcsheet_width/1000) + (r_s_wc_gi_fix_strip_weight*(r_GI_Fixing_Strip_Base_Rate ||0))) / r_s_column_spacing)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;r_s_uom&quot;,
+                                            &quot;isUnitCost&quot;: true,
+                                            &quot;controllingValues&quot;: [&quot;Running Meter&quot;],
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_base_price_sm&quot;,
+                                            &quot;label&quot;: &quot;Base Price / Squre Mtr&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(Math.ceil( (r_s_wc_price_total_cost_per_sm + (r_s_tkg)  + (r_s_wc_price_total_cost_per_sm*(r_s_realization/100))) / 5) * 5)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;r_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Squre Meter&quot;],
+                                            &quot;isUnitPrice&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;r_s_wc_base_price_rm&quot;,
+                                            &quot;label&quot;: &quot;Base Price / Running Mtr&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(Math.ceil((r_s_wc_price_total_cost_per_rm + (r_s_tkg) +(r_s_wc_price_total_cost_per_rm*(r_s_realization/100))) / 5) * 5)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;r_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Running Meter&quot;],
+                                            &quot;isUnitPrice&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            &quot;id&quot;: &quot;absorbtive_sheet_details&quot;,
+                            &quot;label&quot;: &quot;Absorbtive Sheet&quot;,
+                            &quot;expanded&quot;: false,
+                            &quot;controllingField&quot;: &quot;sheet_type_select&quot;,
+                            &quot;controllingValues&quot;: [&quot;Absorbtive Sheet&quot;],
+                            &quot;fields&quot;: [
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_thickness_header&quot;,
+                                    &quot;label&quot;: &quot;Rockwool Thickness (mm)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_thickness&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_density_header&quot;,
+                                    &quot;label&quot;: &quot;Rockwool Density (Kg/m2)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_density&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_panel_height_header&quot;,
+                                    &quot;label&quot;: &quot;Height of Panel (mtr)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_panel_height&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;defaultValue&quot;: 0.5,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_total_height_header&quot;,
+                                    &quot;label&quot;: &quot;Total Height of (mtr)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_total_height&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_column_spacing_header&quot;,
+                                    &quot;label&quot;: &quot;Column Spacing (mtr)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_column_spacing&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_installation_header&quot;,
+                                    &quot;label&quot;: &quot;Installation&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_installation&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;options&quot;: [
+                                        &quot;On concrete barrier&quot;,
+                                        &quot;On Ground&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_uom_header&quot;,
+                                    &quot;label&quot;: &quot;UOM&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_uom&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;required&quot;: true,
+                                    &quot;isUOM&quot;: true,
+                                    &quot;options&quot;: [
+                                        &quot;Running Meter&quot;,
+                                        &quot;Squre Meter&quot;
+                                    ],
+                                    &quot;defaultValue&quot;: &quot;Squre Meter&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_quantity_header&quot;,
+                                    &quot;label&quot;: &quot;Quantity&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_quantity&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;isQuantity&quot;: true,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_realization_header&quot;,
+                                    &quot;label&quot;: &quot;Realization (%)&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_realization&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_trans_in_offer_header&quot;,
+                                    &quot;label&quot;: &quot;Trans.in offer?&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_trans_in_offer&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;picklist&quot;,
+                                    &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+                                    &quot;options&quot;: [
+                                        &quot;Ex-works&quot;,
+                                        &quot;F.O.R (Freight on Road)&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+								{
+								  &quot;apiName&quot;: &quot;a_s_types_of_Freight_header&quot;,
+								  &quot;label&quot;: &quot;types of freight&quot;,
+								  &quot;type&quot;: &quot;header&quot;,
+								  &quot;colSpan&quot;: 6,
+								  &quot;controllingField&quot;: &quot;a_s_trans_in_offer&quot;,
+								  &quot;controllingValues&quot;: [
+									&quot;F.O.R (Freight on Road)&quot;
+								  ]
+								},
+								{
+								  &quot;apiName&quot;: &quot;a_s_types_of_Freight&quot;,
+								  &quot;label&quot;: &quot;&quot;,
+								  &quot;type&quot;: &quot;picklist&quot;,
+								  &quot;colSpan&quot;: 6,
+								  &quot;required&quot;: true,
+								  &quot;options&quot;: [
+									&quot;Transportation KG&quot;,
+									&quot;Full Vehicle Freight&quot;
+								  ],
+								  &quot;controllingField&quot;: &quot;a_s_trans_in_offer&quot;,
+								  &quot;controllingValues&quot;: [
+									&quot;F.O.R (Freight on Road)&quot;
+								  ]
+								},
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_tKG_header&quot;,
+                                    &quot;label&quot;: &quot;Transportation KG&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;controllingField&quot;: &quot;a_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Transportation KG&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_tkg&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6,
+                                    &quot;controllingField&quot;: &quot;a_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Transportation KG&quot;
+                                    ]
+                                },
+                                
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_fvf_header&quot;,
+                                    &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+                                    &quot;type&quot;: &quot;header&quot;,
+                                    &quot;controllingField&quot;: &quot;a_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Full Vehicle Freight&quot;
+                                    ],
+                                    &quot;colSpan&quot;: 6
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;a_s_fvf&quot;,
+                                    &quot;label&quot;: &quot;&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;colSpan&quot;: 6,
+                                    &quot;min&quot;: 1,
+                                    &quot;controllingField&quot;: &quot;a_s_types_of_Freight&quot;,
+                                    &quot;controllingValues&quot;: [
+                                        &quot;Full Vehicle Freight&quot;
+                                    ]
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;absorbtive_pricing_sub&quot;,
+                                    &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+                                    &quot;type&quot;: &quot;sub-section&quot;,
+                                    &quot;expanded&quot;: false,
+                                    &quot;fields&quot;: [
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_header&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_length&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_column_spacing*1000 + 50 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_width&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Width&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_panel_height*1000 + 50 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_thk&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Thickness&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;0.8&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_qty&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Quantity&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;1&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_ps_weight&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_ps_length*a_s_wc_ps_width*a_s_wc_ps_thk*7850/1000000000*0.55)*a_s_wc_ps_qty)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_header&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_length&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_column_spacing*1000 + 50 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_width&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Width&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;185&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_thk&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Thickness&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;1&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_qty&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Quantity&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;2&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheet_weight&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet top &amp; bottom Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_gisheet_length*a_s_wc_gisheet_width*a_s_wc_gisheet_thk*7850/1000000000)*a_s_wc_gisheet_qty)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_header&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_length&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;212&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_width&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Width&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_panel_height*1000 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_thk&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Thickness&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;1&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_qty&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Quantity&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;2&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_gisheetside_weight&quot;,
+                                            &quot;label&quot;: &quot;GI Sheet Side Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_gisheetside_length*a_s_wc_gisheetside_width*a_s_wc_gisheetside_thk*7850/1000000000)*a_s_wc_gisheetside_qty)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_header&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_length&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_column_spacing*1000 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_width&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Width&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;559&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_thk&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Thickness&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;1&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_qty&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Quantity&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;1&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rfsheetback_weight&quot;,
+                                            &quot;label&quot;: &quot;Roll-formed sheet back Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_rfsheetback_length*a_s_wc_rfsheetback_width*a_s_wc_rfsheetback_thk*7850/1000000000)*a_s_wc_rfsheetback_qty)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rockwoolAndScrew_header&quot;,
+                                            &quot;label&quot;: &quot;Rockwool and Screw Details&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rockwool_length&quot;,
+                                            &quot;label&quot;: &quot;Rockwool Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_column_spacing*1000 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rockwool_width&quot;,
+                                            &quot;label&quot;: &quot;Rockwool Width&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_panel_height*1000 || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_rockwool_thk&quot;,
+                                            &quot;label&quot;: &quot;Rockwool Thickness&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_thickness || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_screw_qty&quot;,
+                                            &quot;label&quot;: &quot;Screw Quantity&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;40&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_cbps_header&quot;,
+                                            &quot;label&quot;: &quot;Column, Base Plate and Stiffner Details&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_column_length&quot;,
+                                            &quot;label&quot;: &quot;Column Length&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_column_spacing || 0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_column_weight&quot;,
+                                            &quot;label&quot;: &quot;Column Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;a_s_wc_column_length * 10&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_bp_weight&quot;,
+                                            &quot;label&quot;: &quot;Base Plate Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;5&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_stiffner_weight&quot;,
+                                            &quot;label&quot;: &quot;Stiffner Total Weight&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;3&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 2
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_total_weight_header&quot;,
+                                            &quot;label&quot;: &quot;Ovreall Total Weight Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_pggrrs_total_weight&quot;,
+                                            &quot;label&quot;: &quot;Perforated Sheet, GI Sheet top, bottom &amp; side, Roll-formed sheet back, Rockwool and Screw Total Weight (A)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_wc_ps_weight + a_s_wc_gisheet_weight + a_s_wc_gisheetside_weight + a_s_wc_rfsheetback_weight)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 6
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_cbps_total_weight&quot;,
+                                            &quot;label&quot;: &quot;Column, Base Plate and Stiffner Total Weight (B)&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_wc_column_weight + a_s_wc_bp_weight + a_s_wc_stiffner_weight)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 6
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_price_calculation_header&quot;,
+                                            &quot;label&quot;: &quot;Price Calculation&quot;,
+                                            &quot;type&quot;: &quot;header&quot;,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_total_amount&quot;,
+                                            &quot;label&quot;: &quot;Total Amount for A and B&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_ps_weight*(Perforated_Sheet_Base_Rate||0) + a_s_wc_gisheet_weight*(GI_Sheet_top_bottom_Base_Rate||0) + a_s_wc_gisheetside_weight*(GI_Sheet_side_Base_Rate||0) + a_s_wc_rfsheetback_weight*(Roll_formed_sheet_back_Base_Rate||0) + a_s_wc_rockwool_length*(Rockwool_Base_Rate||0)/1000*0.5 + a_s_wc_screw_qty*(Screw_Base_Rate||0))*(a_s_total_height/a_s_panel_height)) + (a_s_wc_column_weight*(Column_Base_Rate||0) + a_s_wc_bp_weight*(Base_Plate_Base_Rate||0) + a_s_wc_stiffner_weight*(Stiffner_Base_Rate||0))&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 3
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_fabrication&quot;,
+                                            &quot;label&quot;: &quot;Fabrication Amount&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_pggrrs_total_weight*(a_s_total_height/a_s_panel_height))+a_s_wc_cbps_total_weight)*(Fabrication_Base_Rate||0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 3
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_paint&quot;,
+                                            &quot;label&quot;: &quot;Paint Amount&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;((a_s_wc_pggrrs_total_weight*(a_s_total_height/a_s_panel_height))+a_s_wc_cbps_total_weight)*(Paint_Base_Rate||0)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 3
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_profit_amount&quot;,
+                                            &quot;label&quot;: &quot;Total Amount With Profit&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_wc_total_amount + a_s_wc_fabrication + a_s_wc_paint)*(1+ a_s_realization/100)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;colSpan&quot;: 3
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_total_price_per_sm&quot;,
+                                            &quot;label&quot;: &quot;Price per Squre Meter&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_wc_total_amount + a_s_wc_fabrication + a_s_wc_paint)/((a_s_column_spacing*a_s_total_height))&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;a_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Squre Meter&quot;],
+                                            &quot;isUnitCost&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_total_price_per_rm&quot;,
+                                            &quot;label&quot;: &quot;Price per Running Meter&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(a_s_wc_total_amount + a_s_wc_fabrication + a_s_wc_paint)/(a_s_column_spacing)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;a_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Running Meter&quot;],
+                                            &quot;isUnitCost&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_price_per_sm&quot;,
+                                            &quot;label&quot;: &quot;Base Price / Squre Mtr&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(Math.ceil(((a_s_wc_profit_amount)/((a_s_column_spacing*a_s_total_height))+ (a_s_tkg)) / 5 )*  5)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;a_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Squre Meter&quot;],
+                                            &quot;isUnitPrice&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        },
+                                        {
+                                            &quot;apiName&quot;: &quot;a_s_wc_price_per_rm&quot;,
+                                            &quot;label&quot;: &quot;Base Price / Running Meter&quot;,
+                                            &quot;type&quot;: &quot;number&quot;,
+                                            &quot;formula&quot;: &quot;(Math.ceil(((a_s_wc_profit_amount)/(a_s_column_spacing) +(a_s_tkg)) / 5 ) * 5)&quot;,
+                                            &quot;readOnly&quot;: true,
+                                            &quot;controllingField&quot;: &quot;a_s_uom&quot;,
+                                            &quot;controllingValues&quot;: [&quot;Running Meter&quot;],
+                                            &quot;isUnitPrice&quot;: true,
+                                            &quot;colSpan&quot;: 12
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            &quot;id&quot;: &quot;hidden_rate_card_details&quot;,
+                            &quot;label&quot;: &quot;Rate Card&quot;,
+                            &quot;expanded&quot;: false,
+                            &quot;controllingField&quot;: &quot;sheet_type_select&quot;,
+                            &quot;controllingValues&quot;: [&quot;Hide Sheet&quot;],
+                            &quot;fields&quot;: [
+                                {
+                                    &quot;apiName&quot;: &quot;r_Column_Base_Rate&quot;,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Column&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Base_Plate_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Base Plate&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Stiffener_Plate_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Stiffener Plate&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Purlin_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 75,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Purlin&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Polycarbonate_Sheet_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 905,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Polycarbonate Sheet&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_GI_Fixing_Strip_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 75,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective GI Fixing Strip&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Anchor_Bolt_Rate&quot;,
+                                    &quot;defaultValue&quot;: 50,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Anchor Bolt&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;r_Self_Tapping_Screw_Rate&quot;,
+                                    &quot;defaultValue&quot;: 4,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Reflective Self Tapping Screw&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Perforated_Sheet_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 120,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Perforated Sheet&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;GI_Sheet_top_bottom_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive GI Sheet Top Bottom&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;GI_Sheet_side_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive GI Sheet Side&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Roll_formed_sheet_back_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 80,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Roll Formed Sheet Back&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Rockwool_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 600,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Rockwool&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Screw_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 3,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Screw&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Column_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 55,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Column&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Base_Plate_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 55,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Base Plate&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Stiffner_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 55,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Stiffner&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Fabrication_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 25,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Fabrication&quot;,
+                                    &quot;colSpan&quot;: 2
+                                },
+                                {
+                                    &quot;apiName&quot;: &quot;Paint_Base_Rate&quot;,
+                                    &quot;defaultValue&quot;: 20,
+                                    &quot;type&quot;: &quot;number&quot;,
+                                    &quot;label&quot;: &quot;Absorptive Paint&quot;,
+                                    &quot;colSpan&quot;: 2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,20 @@
+<template>
+    <template lwc:if={isFlowContext}>
+        <div class="slds-p-around_small slds-text-align_center">
+            <lightning-button
+                variant="brand"
+                label="Send Quote to Customer"
+                icon-name="utility:send"
+                onclick={handleSendQuote}
+                disabled={sending}
+            ></lightning-button>
+            <template lwc:if={sending}>
+                <lightning-spinner
+                    alternative-text="Sending quote"
+                    size="small"
+                    class="slds-m-top_small"
+                ></lightning-spinner>
+            </template>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>PEB Rate Config</label>
+    <protected>false</protected>
+    <values>
+        <field>Add_On_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Base_Amount__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Department__c</field>
+        <value xsi:type="xsd:string">PEB - Amta</value>
+    </values>
+    <values>
+        <field>GST__c</field>
+        <value xsi:type="xsd:double">18.0</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;benchmarkRate&quot;: 90,
+  &quot;sectionA&quot;: {
+    &quot;builtUp&quot;: {
+      &quot;label&quot;: &quot;Built up section - Grade 350&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 55
+    },
+    &quot;coldForm&quot;: {
+      &quot;label&quot;: &quot;Cold Form - ASTM A653, 345 N/mm², 120 GSM&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 60
+    },
+    &quot;anchorBolt&quot;: {
+      &quot;label&quot;: &quot;Anchor Bolt&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 100
+    },
+    &quot;hardware&quot;: {
+      &quot;label&quot;: &quot;Hardware - Grade 8.8 or more&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 130
+    },
+    &quot;hotRolled&quot;: {
+      &quot;label&quot;: &quot;Hot Rolled Section - Grade 250&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 50
+    },
+    &quot;deckSheet&quot;: {
+      &quot;label&quot;: &quot;Deck Sheet 0.8 mm thk 120 GSM&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 86
+    },
+    &quot;galvalumeRoof&quot;: {
+      &quot;label&quot;: &quot;Galvalume Sheet - Roof&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 100
+    },
+    &quot;galvalumeWall&quot;: {
+      &quot;label&quot;: &quot;Galvalume Sheet - Wall&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 100
+    },
+    &quot;packingMaterial&quot;: {
+      &quot;label&quot;: &quot;Packing Material&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 50
+    }
+  },
+  &quot;accessories&quot;: {
+    &quot;sTypeLouver&quot;: {&quot;label&quot;: &quot;S - Type Louver&quot;, &quot;unit&quot;: &quot;Sq.M&quot;, &quot;rate&quot;: 2500},
+    &quot;ridgeVent600&quot;: {&quot;label&quot;: &quot;Ridge Vent - 600 mm &quot;, &quot;unit&quot;: &quot;RM&quot;, &quot;rate&quot;: 4500},
+    &quot;ridgeVent900&quot;: {&quot;label&quot;: &quot;Ridge Vent - 900 mm &quot;, &quot;unit&quot;: &quot;RM&quot;, &quot;rate&quot;:5000},
+    &quot;rainDownspout110&quot;: {&quot;label&quot;: &quot;Rain water Down Spout uPVC 110 mm dia (Class II)&quot;, &quot;unit&quot;: &quot;RM&quot;, &quot;rate&quot;: 450, &quot;unitWt&quot;: 1.31},
+	&quot;rainDownspout160&quot;: {&quot;label&quot;: &quot;Rain water Down Spout uPVC 160 mm dia (Class II)&quot;, &quot;unit&quot;: &quot;RM&quot;, &quot;rate&quot;: 450, &quot;unitWt&quot;: 2.79},
+	&quot;rainDownspout200&quot;: {&quot;label&quot;: &quot;Rain water Down Spout uPVC 200 mm dia (Class II)&quot;, &quot;unit&quot;: &quot;RM&quot;, &quot;rate&quot;: 450, &quot;unitWt&quot;: 4.33}
+},
+  &quot;buyouts&quot;: {
+    &quot;polycarbonate2mm&quot;: {&quot;label&quot;: &quot;Polycarbonate Sheet 2 mm thk (3.2 kg/m²)&quot;, &quot;unit&quot;: &quot;Sq.M&quot;, &quot;rate&quot;: 1500, &quot;unitWt&quot;: 3.2},
+    &quot;polycarbonate3mm&quot;: {&quot;label&quot;: &quot;Polycarbonate Sheet 3 mm thk (4.8 kg/m²)&quot;, &quot;unit&quot;: &quot;Sq.M&quot;, &quot;rate&quot;: 2000, &quot;unitWt&quot;: 4.8},
+    &quot;turbovent&quot;: {&quot;label&quot;: &quot;Turbovent with Polycarbonate Base&quot;, &quot;unit&quot;: &quot;Piece&quot;, &quot;rate&quot;: 8000, &quot;unitWt&quot;: 15}
+},
+  &quot;conversion&quot;: {
+    &quot;shotBlasting&quot;: {
+      &quot;label&quot;: &quot;Surface Preparation - Shot Blasting&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 2
+    },
+    &quot;primer&quot;: {
+      &quot;label&quot;: &quot;Primer - Epoxy - 1 Coat&quot;,
+      &quot;unit&quot;: &quot;Ltr&quot;,
+      &quot;rate&quot;: 160
+    },
+    &quot;intermediateCoat&quot;: {
+      &quot;label&quot;: &quot;Intermediate Coat&quot;,
+      &quot;unit&quot;: &quot;Ltr&quot;,
+      &quot;rate&quot;: 160
+    },
+    &quot;finalPaint&quot;: {
+      &quot;label&quot;: &quot;Final paint - Epoxy - 2 Coats Light Smoke Grey Colour - Asian / Berger&quot;,
+      &quot;unit&quot;: &quot;Ltr&quot;,
+      &quot;rate&quot;: 280
+    },
+    &quot;fabricationBuiltUpHR&quot;: {
+      &quot;label&quot;: &quot;Fabrication of Built-Up and Hot Rolled Members&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 15
+    },
+    &quot;profilingColdForm&quot;: {
+      &quot;label&quot;: &quot;Profiling of Cold Form Member&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 4
+    },
+    &quot;profilingGalvalume&quot;: {
+      &quot;label&quot;: &quot;Profiling of Galvalume Sheets&quot;,
+      &quot;unit&quot;: &quot;Sq.M&quot;,
+      &quot;rate&quot;: 4
+    },
+    &quot;design&quot;: {
+      &quot;label&quot;: &quot;Design / Engineering&quot;,
+      &quot;unit&quot;: &quot;Kg&quot;,
+      &quot;rate&quot;: 1.5
+    }
+  }
+}</value>
+    </values>
+    <values>
+        <field>fm_general_detail__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>man_riding_lift__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>rateCard__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>tp_segment__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

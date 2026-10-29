@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distance_KM__c</fullName>
+    <description>Distance traveled in kilometers for own vehicle expenses</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the distance traveled in kilometers (applicable for own vehicle expenses)</inlineHelpText>
+    <label>Distance (KM)</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

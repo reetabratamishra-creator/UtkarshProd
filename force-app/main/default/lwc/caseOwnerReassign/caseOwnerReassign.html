@@ -1,0 +1,70 @@
+<template>
+    <lightning-quick-action-panel header="Change Case Owner">
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-vertical_x-large">
+                <lightning-spinner alternative-text="Loading escalation options" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:else>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-box slds-theme_error slds-m-bottom_small" role="alert">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template lwc:if={isBlocked}>
+                <div class="slds-box slds-theme_shade" role="status">
+                    {blockReason}
+                </div>
+            </template>
+
+            <template lwc:if={showForm}>
+                <dl class="slds-dl_horizontal slds-m-bottom_medium">
+                    <dt class="slds-dl_horizontal__label slds-text-color_weak">Module</dt>
+                    <dd class="slds-dl_horizontal__detail">{moduleName}</dd>
+
+                    <dt class="slds-dl_horizontal__label slds-text-color_weak">Current owner</dt>
+                    <dd class="slds-dl_horizontal__detail">{currentOwnerDisplay}</dd>
+                </dl>
+
+                <lightning-combobox
+                    name="newOwner"
+                    label="New owner"
+                    placeholder="Select a user"
+                    options={options}
+                    value={selectedOwnerId}
+                    onchange={handleChange}
+                    required
+                    disabled={isSaving}>
+                </lightning-combobox>
+
+                <template lwc:if={isSaving}>
+                    <div class="slds-is-relative slds-p-vertical_medium">
+                        <lightning-spinner alternative-text="Saving" size="small"></lightning-spinner>
+                    </div>
+                </template>
+            </template>
+
+        </template>
+
+        <div slot="footer">
+            <lightning-button
+                label="Cancel"
+                onclick={handleClose}>
+            </lightning-button>
+            <template lwc:if={showForm}>
+                <lightning-button
+                    class="slds-m-left_x-small"
+                    variant="brand"
+                    label="Change owner"
+                    disabled={saveDisabled}
+                    onclick={handleSave}>
+                </lightning-button>
+            </template>
+        </div>
+
+    </lightning-quick-action-panel>
+</template>

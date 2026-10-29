@@ -1,0 +1,694 @@
+<apex:page standardController="Quote" extensions="HighMastSOWController"
+           renderAs="pdf" applyBodyTag="false" applyHtmlTag="false"
+           showHeader="false" sidebar="false">
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+
+        /* 1. Global - 0 margin so front cover is full-bleed */
+        @page {
+            size: A4;
+            margin: 0mm;
+        }
+
+        /* 2. Named page for standard document content with running header/footer */
+        @page standard-content {
+            size: A4;
+            margin: 35mm 0mm 28mm 0mm;
+            @top-left {
+                content: element(header);
+            }
+            @bottom-left {
+                content: element(footer);
+            }
+        }
+
+        /* 3. Named page for last cover - strip margins back to 0 */
+        @page final-page {
+            size: A4;
+            margin: 0mm;
+        }
+
+        /* Base reset */
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            color: #222;
+        }
+
+        /* Cover pages - full bleed */
+        div.page-cover {
+            page-break-after: always;
+            width: 210mm;
+            height: 297mm;
+            margin: 0mm;
+        }
+        div.page-cover-last {
+            page-break-before: always;
+            width: 210mm;
+            height: 297mm;
+            margin: 0mm;
+        }
+        .cover-img {
+            width: 210mm;
+            height: 297mm;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Document body uses named page with header/footer */
+        div.document-body {
+            page: standard-content;
+        }
+        div.document-body-inner {
+            padding: 2mm 20mm 2mm 20mm;
+        }
+
+        /* Page break utility */
+        .page-break {
+            page-break-before: always;
+        }
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Running header */
+        div.corporate-header {
+            position: running(header);
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 35mm;
+            color: #222;
+            padding: 0;
+            margin: 0;
+        }
+        .header-lime-line {
+            width: 155%;
+            border-bottom: 3px solid #99cc33;
+        }
+        .header-inner {
+            padding: 4mm 20mm 0mm 20mm;
+        }
+        .header-left {
+            float: left;
+            width: 75%;
+            margin-top: 2mm;
+        }
+        .company-name {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 2px;
+            text-align: right;
+        }
+        .office-details {
+            font-size: 7.5pt;
+            color: #333;
+            line-height: 1.4;
+            text-align: right;
+        }
+        .header-right {
+            float: right;
+            width: 20%;
+            text-align: right;
+            position: relative;
+            z-index: 999;
+        }
+        .logo-img {
+            height: 22mm;
+            width: auto;
+            display: inline-block;
+            background-color: #fff;
+            padding: 1px;
+        }
+
+        /* Running footer */
+        div.corporate-footer {
+            position: running(footer);
+            bottom: 0;
+            left: 0;
+            width: 300%;
+            height: 28mm;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-lime-line {
+            width: 155%;
+            border-top: 3px solid #99cc33;
+        }
+        .footer-inner {
+            padding: 2mm 20mm 0mm 20mm;
+            font-size: 7pt;
+            color: #333;
+            line-height: 1.4;
+            text-align: right;
+        }
+        .factory-details {
+            margin-bottom: 3px;
+        }
+        .social-row {
+            margin-top: 4px;
+            font-size: 7.5pt;
+        }
+
+        /* Section title */
+        .section-title {
+            text-align: center;
+            font-size: 13pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 10px 0 10px 0;
+            color: #1a1a1a;
+        }
+
+        /* Meta table - Ref / Date / Buyer */
+        .meta-table {
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .meta-table td {
+            vertical-align: top;
+            font-size: 10pt;
+            padding: 2px 0;
+        }
+        .meta-label {
+            font-weight: bold;
+            width: 80px;
+        }
+
+        /* Ref/Subject block */
+        .ref-block {
+            margin: 10px 0;
+            font-size: 10pt;
+        }
+        .ref-block p {
+            margin-bottom: 6px;
+        }
+        .subject-line {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Body paragraphs */
+        .body-para {
+            margin-bottom: 10px;
+            font-size: 10pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* Terms */
+        .terms-heading {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+        }
+        .terms-list {
+            list-style: none;
+            padding: 0;
+        }
+        .terms-list li {
+            margin-bottom: 10px;
+            font-size: 10pt;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .term-title {
+            font-weight: bold;
+        }
+
+        /* Divider */
+        hr.light {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+
+        /* Annexure A title */
+        .annex-title {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 14px 0 12px 0;
+            color: #1a1a1a;
+        }
+
+        /* Annexure A table */
+        .annex-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 9pt;
+        }
+        .annex-table th {
+            background-color: #f4f4f4;
+            border: 1px solid #111;
+            font-weight: bold;
+            padding: 6px;
+            text-align: center;
+        }
+        .annex-table td {
+            border: 1px solid #111;
+            padding: 6px;
+            vertical-align: top;
+            word-wrap: break-word;      /* wrap long segment length/thickness lists so the table can't overflow - Reetabrata (8th July 2026) */
+            overflow-wrap: break-word;
+        }
+        .annex-table td.num    { text-align: center; }
+        .annex-table td.right  { text-align: right; }
+        .annex-table td.center { text-align: center; }
+
+        .subtotal-row td {
+            font-weight: bold;
+            background-color: #f9f9f9;
+            border: 1px solid #111;
+        }
+        .total-row td {
+            font-weight: bold;
+            background-color: #f4f4f4;
+            border: 1px solid #111;
+            font-size: 9.5pt;
+        }
+        .tcs-row td {
+            font-weight: bold;
+            font-size: 8pt;
+            border: 1px solid #111;
+            text-align: center;
+            padding: 5px;
+            background-color: #fff9c4;
+        }
+
+        /* Grand total note */
+        .grand-note {
+            text-align: center;
+            font-weight: bold;
+            font-size: 10pt;
+            margin: 12px 0 16px 0;
+        }
+
+        /* Sign-off */
+        .signature-section {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 10pt;
+            line-height: 1.8;
+            page-break-inside: avoid; 
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Running header - referenced by @page standard-content -->
+    <div class="corporate-header">
+        <div class="header-inner">
+            <div class="header-right">
+                <apex:image url="{!$Resource.UtkarshLogo}" styleClass="logo-img"/>
+            </div>
+            <div class="header-left">
+                <div class="company-name">Utkarsh India Limited</div>
+                <div class="office-details">
+                    Corporate Office: Arrjavv Square, 95A Elliot Road, 4th Floor, Kolkata - 700016<br/>
+                    P: 033 2264 6666 / 2265 888 &nbsp;|&nbsp; E: info@utkarshindia.in &nbsp;|&nbsp; W: www.utkarshindia.in
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="header-lime-line"></div>
+    </div>
+
+    <!-- Running footer - referenced by @page standard-content -->
+    <div class="corporate-footer">
+        <div class="footer-lime-line"></div>
+        <div class="footer-inner">
+            <div class="factory-details">
+                F1: Nh6. Vill-Jangalpur, Po: Andul Mouri, Howrah - 711302 &nbsp;|&nbsp; P: 033 2669 0833 / 1151 / 1571
+            </div>
+            <div class="factory-details">
+                F2: NH2, Durgapur Expressway, PO: Gurap, Hoogly - 712303 &nbsp;|&nbsp; P: 03213 253996
+            </div>
+            <div class="social-row">
+                CIN: US1109 WB1995PLC070893 &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 1: Front Cover -->
+    <div class="page-cover">
+        <apex:image url="{!$Resource.HM_Front_Page}" styleClass="cover-img"/>
+    </div>
+
+    <!-- PAGE 2 onwards: Statement of Work + T&amp;C -->
+    <div class="document-body">
+        <div class="document-body-inner">
+
+            <div class="section-title">Statement of Work</div>
+
+            <!-- Ref / Date / Buyer -->
+            <table class="meta-table">
+                <tr>
+                    <td class="meta-label">Ref</td>
+                    <td>- <apex:outputText value="{!soWRef}"/></td>
+                </tr>
+                <tr>
+                    <td class="meta-label">Date</td>
+                    <td>- <apex:outputText value="{!soWDate}"/></td>
+                </tr>
+                <tr>
+                    <td class="meta-label" style="padding-top:6px;">To M/s.</td>
+                    <td style="padding-top:6px;"><strong><apex:outputText value="{!buyerName}"/></strong></td>
+                </tr>
+            </table>
+
+            <hr class="light"/>
+
+            <!-- Enquiry ref + Subject -->
+            <div class="ref-block">
+                <p>
+                    <strong>Ref: Your enquiry No.</strong> <apex:outputText value="{!soWRef}"/>
+                    <strong>dated</strong> <apex:outputText value="{!soWDate}"/>
+                </p>
+                <p class="subject-line">
+                    Sub: Offer for manufacturing and supply of 
+                    <apex:outputText value=" {!opportunityName}"/> "Utkarsh" Brand.
+                </p>
+            </div>
+
+            <!-- Intro paragraphs -->
+            <p class="body-para">
+                Your enquiry for supplying of the product as mentioned in the captioned subject has given us
+                this opportunity to connect and introduce our company and the "Utkarsh" brand and the various
+                range of products of the company. We are obliged to have got this opportunity to submit our
+                offer and/or quotation for manufacturing and supply of the product described in the captioned
+                subject, as against your enquiry No.
+                <strong><apex:outputText value="{!soWRef}"/></strong> dated 
+                <strong> <apex:outputText value="{!soWDate}"/></strong>.
+            </p>
+            <p class="body-para">
+                We take pride to mention that you have approached one of the leading brands in the country
+                engaged in the manufacturing of the product as described herein and we can assure you that if
+                you decide to accept our offer and place the purchase/supply order in our favor you will always
+                feel proud for having made the right decision by relying upon the best quality product.
+            </p>
+            <p class="body-para">
+                Our offer and/or quotation for the
+                <strong>Highmast &amp; Polygonal Poles "Utkarsh"</strong> brand as enquired by you
+                is/are more clearly mentioned and recorded in the <strong>Annexure "A"</strong> to this
+                quotation. The said <strong>Annexure "A"</strong> shall for all practical purposes be
+                considered as a part of the present quotation.
+            </p>
+
+            <!-- Terms and Conditions -->
+            <div class="terms-heading">TERMS &amp; CONDITIONS OF THE CONTRACT:-</div>
+            <ol class="terms-list">
+                <li>
+                    <span class="term-title">1. Buyer:</span> Buyer shall mean
+                    <strong><apex:outputText value="{!buyerName}"/></strong> having its office at
+                    <apex:outputText value="{!buyerAddress}"/>.
+                </li>
+                <li>
+                    <span class="term-title">2. Supplier:</span> Supplier shall mean Utkarsh India Limited
+                    having its office at 95A, Elliot Road, Arrjavv Square, Kolkata - 700016.
+                </li>
+                <li>
+                    <span class="term-title"> 3. Rates and Taxes: </span> The rates quoted are exclusive of Goods &amp; Service Taxes and therefore the Goods &amp; Service Taxes shall be chargeable extra as applicable. Any changes in the statutory provisions for imposing of rates and taxes made applicable with immediate effect shall be implemented as per the implication of such statutory provisions.
+                </li>
+                <li>
+                    <span class="term-title">4. Payment Terms:</span> The Buyer shall have to make full
+                    payments and/or hundred percent payments in advance as against the proforma invoice to be
+                    raised by the Supplier and on receipt of such advance payment the Supplier shall undertake
+                    and initiate the process of manufacturing and supplying of the materials in consonance
+                    with the other terms and conditions of the present supply order.
+                </li>
+                <li>
+                    <span class="term-title">5. Delivery Schedule:</span> If the delivery date is not
+                    accounted for with any subjective precondition in that event the delivery schedule shall
+                    be accounted for from the date of the receipt of the supply order. Subject to normal
+                    working condition prevailing, the Supplier shall be liable to deliver the entire
+                    consignment within {!deliverytime} from the date of the receipt of the supply order.
+                </li>
+                <li>
+                    <span class="term-title">6. Packing &amp; Forwarding:</span> The rates quoted for supply
+                    of the materials are inclusive of standard packing and forwarding charges. Any type of
+                    special packing and forwarding charges shall be extra as applicable and same has to be
+                    borne by the Buyer. The special type of packing if any required has to be intimated to
+                    the supplier before the finalization of the Order.
+                </li>
+                <li>
+                    <span class="term-title">7. Transportation &amp; Freight:</span>
+                    <apex:outputPanel layout="none" rendered="{!transportationType == 'F.O.R (Freight on Road)'}">
+                        The rates quoted for the materials and/or goods are on F.O.R. destination basis and are inclusive of any
+                        transportation and freight charges, therefore be it mentioned here that the Supplier assumes the responsibility
+                        of effecting transportation of the materials to its given destination at <strong><apex:outputText value="{!deliveryAddress}"/></strong>.
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!transportationType == 'Ex-works'}">
+                        The rates quoted for the materials and/or goods are on ex-works basis are exclusive of any transportation and
+                        freight charges, therefore be it mentioned here that if the Supplier has to facilitate the process of
+                        transportation in that event such freight charges shall become chargeable additionally.
+                    </apex:outputPanel>
+                </li>
+                <li>
+                    <span class="term-title">8. Inspection:</span> The Buyer at its own cost shall have to make arrangements for pre-delivery third party inspection of the entire
+quantity offered, by any recognised inspection agency at the Supplier’s plant and/or factory or the Buyer may depute its own team at
+the Supplier’s plant or factory who shall be deemed to have the requisite competence to carry out such pre-delivery inspection and it
+is only after the receipt of the inspection clearance certification the materials shall be put under despatch. If for any reason the Buyer
+fails to depute any third party inspection agency to carry out the pre-delivery inspection in that event the Supplier shall at the cost of
+the Buyer cause such third party pre-delivery inspection to be carried out at the Supplier’s plant or factory and such inspection for all
+practical purposes shall be deemed to have been caused at the behest of the Buyer. Such third party inspection caused prior to
+delivery or despatch of the materials shall be considered and construed as final for all issues on quality and technical parameters.
+                </li>
+                <li>
+                    <span class="term-title">9. Drawing:</span>  It shall always be the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions
+specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products
+based on the drawings. Be it noted here that any delay caused due to insufficient improper illegible and/or inadequate drawings and
+information provided by the Buyer, the Supplier will not be made liable for such delays caused owing to insufficient improper
+illegible and/or inadequate drawings and designs as provided by the Buyer.
+                </li>
+                <li>
+                    <span class="term-title">10. Test Certificates:</span> The Supplier will provide at the
+                    request of the Buyer such third party test certificates for the materials manufactured and
+                    supplied subject to the Buyer having made full payments in favour of the Supplier.
+                </li>
+                <li>
+                    <span class="term-title">11. Warranty:</span> The Supplier’s products are covered by a mechanical guarantee for a period of <strong>{!warrFromDOC}</strong> months from the date of
+commissioning or at the latest <strong>{!warrFromDOD}</strong> months from the date of delivery as per the agreed incoterm, unless a longer period has
+been accepted by the Supplier on case by case basis. The warranty period for a defective material, which has been replaced, shall
+extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials
+shall remain warranted for the balance of the original warranty period.
+                </li>
+                <li>
+                    <span class="term-title">12. Return of Goods:</span> Be it noted that after obtaining
+                    satisfactory inspection clearance certification once the goods are sold and delivered the
+                    Buyer will not be entitled to return the same by raising any technical issues or defects.
+                </li>
+                <li>
+                    <span class="term-title">13. Quality:</span> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in
+conflict with the findings of the inspection made at the Buyer’s destination, by any independent inspection agency and/or surveyor
+engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying
+the reason for such conflicting reports by two different independent agencies both being appointed by the Buyers. If the Buyer fails
+to substantiate the claim with proper and acceptable explanation in that event the Buyer’s claim on quality related issues shall stand
+set aside and/or determined.
+                </li>
+                <li>
+                    <span class="term-title">14. Validity:</span> This offer shall remain valid for a period
+                    of <strong>{!quationValidity} days</strong> from the date of issuing of the present quotation thereafter
+                    with the efflux of time this offer shall deemed become null and void, unless the same is
+                    revalidated in writing.
+                </li>
+                <li>
+                    <span class="term-title">15. Penal interest:</span>  In the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be
+agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10%
+per annum quarterly compoundable.
+                </li>
+                <li>
+                    <span class="term-title">16. Breach &amp; Default:</span> If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in that event the
+defaulting party shall become liable to compensate the other party by way of damages, however such other party shall become
+entitled to claim damages provided such claim is duly substantiated with proper evidence.
+                </li>
+                <li>
+                    <span class="term-title">17. Lifting of Materials:</span> If for any reason the Buyer fails to take delivery of the materials within <strong>two/three</strong> days from the date of
+being notified that the materials are lying ready for taking delivery and/or despatch and/or from the date of inspection recording
+acceptance of the materials, whichever is earlier, in that event the Supplier shall become entitled to impose storing charges for
+holding the materials till the time it is despatched. Such charges shall be imposed at the rate of 5.00% of the total contract value for
+every weeks delay caused in taking delivery of the materials.
+                </li>
+                <li>
+                    <span class="term-title">18. Late Delivery Charges:</span> Unless prevented by force majeure condition the Supplier shall be liable to deliver the materials within
+the agreed delivery schedule. However since the Supplier has agreed to supply the materials at an extremely competitive rates it is
+being made clear that for the purpose of this contract the Buyer shall not be entitled to impose any late delivery charges for any
+delay caused in delivery of the materials.
+                </li>
+                <li>
+                    <span class="term-title">19. Price variation:</span> The rates as quoted herein by the Supplier are subject to factoring of price variation being applicable. If for any
+reason the supplies get carried forward to the next month in that event the next month’s rates shall become applicable. For
+quantities that are proposed to be delivered after <strong>{!priceVariationdays}</strong> days price variation will be applicable as per change of rates between base
+month (that is the month in which the order was placed) and month of dispatch. If there are changes in price of raw materials by
+SAIL/TATA then the prices of the products will also become liable to be changed.
+                </li>
+                <li>
+                    <span class="term-title">20. Short Supply:</span> The Supplier will take full care to despatch material in correct quantum. The Buyer should instruct transporter to
+acknowledge receipt of goods as per packing list is provided (along with invoice) before shipment. The Buyer shall be liable to depute
+its own representative at the factory site of the Supplier for checking the packing list and counting the materials as per the packing
+list in order to avoid any issues of short supply arising after shipment of the materials. However if the Buyer chooses not to depute
+any representative for verification of the packing list at the factory site of the Supplier, under such situation the Buyer shall be liable
+to raise claims of short supply in writing, if any, along with video proof of unloading within a period of seven days from the date of
+despatch of goods from the Supplier’s factory/works.
+                </li>
+                <li>
+                    <span class="term-title">21. Confidentiality:</span> The terms and conditions described in this contract including its existence shall be confidential information and shall not be disclosed by any party to any third party without the prior written consent of the other party. Each of the Parties agrees, (unless otherwise required by law), that it shall not disclose to any other person the fact that the confidential information has been made available to the other party, that discussions or negotiations are taking place concerning the said enquiry/tender proceedings between the Parties, or any of the terms, conditions or other facts with respect thereto (including the status thereof).
+                </li>
+                <li>
+                    <span class="term-title">22. Service Charges:</span> Erection and commissioning work is to be done by the Buyer unless otherwise specified and agreed in writing by
+the Supplier. Be it further noted that separate service charges will be applicable for any additional services like supervision of erection
+and commissioning and such charges shall be indicated as and when requested by the Buyer.
+                </li>
+                <li>
+                    <span class="term-title">23. Force Majeure:</span> (a) In this agreement, “force majeure” means any cause preventing Supplier from performing any or all of its obligations which arises from or is attributable to acts or events beyond the reasonable control of the party so prevented, including, without limitation, strikes, lock-outs or other industrial disputes (whether involving the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or default of suppliers or sub-contractors. (b) If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no liability in respect of the performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is necessary for that party, using all reasonable endeavours, to recommence its affected operations in order for it to perform its obligations. (c) If Supplier is prevented from performance of its obligations for a continuous period in excess of two months, the Buyer and/or the Supplier may terminate this agreement forthwith on service of written notice on the party so prevented, in which case neither party shall have any liability to the other except that rights and liabilities which accrued prior to such termination shall continue to subsist.
+                </li>
+                <li>
+                    <span class="term-title">24. Jurisdiction:</span> No suit or any proceedings in regard to any matter arising in respect of this contract shall be instituted in any court, save in the High Court, Calcutta, City Civil Court at Calcutta or at the Court of small causes at Calcutta. It is agreed that no other court shall have jurisdiction to entertain any suit or proceedings, even though, part of the cause of action might arise within their jurisdiction.
+                </li>
+                <li>
+                    <span class="term-title">25. Miscellaneous:</span> Notwithstanding anything otherwise or contrary recorded anywhere within the purchase/supply order arising from this quotation, the terms and conditions of this quotation shall be deemed to be a part of the contract and in the event of any conflict in interpretation of the clauses of this quotation in that event the clauses of the quotation shall prevail over the clauses of the purchase/supply order.
+                </li>
+            </ol>
+
+            <p class="body-para" style="margin-top:12px;">
+                Hope you will find our rates, terms and conditions competitive and thereby proceed to
+                award the contract in our favour.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- PAGE 3: Annexure A -->
+    <div class="document-body" style="margin-top:40px;">
+        <div class="document-body-inner">
+
+            <div class="annex-title">ANNEXURE - A</div>
+
+            <table class="annex-table">
+                <thead>
+                    <tr>
+                        <th style="width:4%;">Sl No.</th>
+                        <th style="width:36%;">Item Description</th>
+                        <th style="width:8%;">Unit Rate</th>
+                        <th style="width:6%;">GST (%)</th>
+                        <th style="width:9%;">GST Amount</th>
+                        <th style="width:9%;">Freight</th>
+                        <th style="width:9%;">Unit Amount</th>
+                        <th style="width:5%;">Qty</th>
+                        <th style="width:10%;">Total Amount (INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ANNEXURE GROUPING: outer repeat = one line item, inner repeat = its
+                         parts, then that line item's own SUB-TOTAL. The row below is the
+                         original one, unchanged. Reetabrata (18th Aug 2026) -->
+                    <apex:repeat value="{!lineGroups}" var="grp">
+                    <apex:repeat value="{!grp.rows}" var="item">
+                        <tr>
+                            <td class="num"><apex:outputText value="{!item.slNo}"/></td>
+                            <td><apex:outputText escape="false" value="{!item.description}"/></td>  <!-- red Stadium clauses; controller escapes dynamic text. Reetabrata (13th July 2026) -->
+                            <td class="right"><apex:outputText value="{!item.unitRate}"/></td>
+                            <td class="center"><apex:outputText value="{!IF(item.gstPct == '-', '-', item.gstPct & '%')}"/></td>
+                            <td class="right"><apex:outputText value="{!item.gstAmount}"/></td>
+                            <td class="center"><apex:outputText value="{!item.freight}"/></td>
+                            <td class="right"><apex:outputText value="{!item.unitAmount}"/></td>
+                            <td class="center"><apex:outputText value="{!item.qty}"/></td>
+                            <td class="right"><apex:outputText value="{!item.totalAmount}"/></td>
+                        </tr>
+                    </apex:repeat>
+                    <!-- SUB-TOTAL spans Sl No. .. Qty; only the Total Amount cell carries a
+                         figure, the same way the Total row below does. Deepanjan (18th Aug 2026) -->
+                    <apex:outputPanel layout="none" rendered="{!grp.showSubTotal}">
+                        <tr class="subtotal-row">
+                            <td colspan="8" class="center">SUB-TOTAL OF <apex:outputText value="{!mastTypeLabel}"/></td>
+                            <td class="right"><apex:outputText value="{!grp.subTotalAmount}"/></td>
+                        </tr>
+                    </apex:outputPanel>
+                    </apex:repeat>
+                </tbody>
+                <tfoot>
+                    <!-- The document-wide SUB-TOTAL moved into the body, one per line item.
+                         Nothing removed - this row is simply not rendered any more. Set
+                         rendered="true" to bring it back. Reetabrata (18th Aug 2026) -->
+                    <apex:outputPanel layout="none" rendered="false">
+                    <tr class="subtotal-row">
+                        <td colspan="2" class="center">SUB-TOTAL OF <apex:outputText value="{!mastTypeLabel}"/></td>
+                        <td class="right"><apex:outputText value="{!subTotalUnitRate}"/></td>
+                        <td class="center">18%</td>
+                        <td class="right"><apex:outputText value="{!subTotalGST}"/></td>
+                        <td></td>
+                        <td class="right"><apex:outputText value="{!subTotalUnit}"/></td>
+                        <td></td>
+                        <td class="right"><apex:outputText value="{!subTotalAmount}"/></td>
+                    </tr>
+                    </apex:outputPanel>
+                    <tr class="total-row">
+                        <td colspan="8" class="center">Total</td>
+                        <td class="right"><apex:outputText value="{!grandTotal}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="tcs-row">
+                            TC/TDS WILL BE APPLICABLE AS PER GOVT. NORMS WHICH IS OVER &amp; ABOVE ON QUOTATION
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <p class="grand-note">
+                The total order value is of Rs. <apex:outputText value="{!grandTotal}"/> /-
+                ( <apex:outputText value="{!grandTotalWords}"/> ) which is inclusive of all rates,
+                taxes
+                <apex:outputPanel layout="none" rendered="{!transportationType == 'F.O.R (Freight on Road)'}">
+                    and inclusive of any transportation or freight charges.
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!transportationType == 'Ex-works'}">
+                    but exclusive of any transportation or freight charges.
+                </apex:outputPanel>
+            </p>
+
+            <div class="signature-section">
+                Thanking you,<br/>
+                Yours faithfully,<br/>
+                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(loggedInUser)), loggedInUser != 'N/A')}">
+                    <strong>{!loggedInUser}</strong><br/>
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(loggedInUserTitle)), loggedInUserTitle != 'N/A')}">
+                    {!loggedInUserTitle}<br/>
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(loggedInUserPhone)), loggedInUserPhone != 'N/A')}">
+                    Mobile: {!loggedInUserPhone}<br/>
+                </apex:outputPanel>
+                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(loggedInUserEmail)), loggedInUserEmail != 'N/A')}">
+                    Email: {!loggedInUserEmail}
+                </apex:outputPanel>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAGE 4: Last Cover -->
+    <div class="page-cover-last">
+        <apex:image url="{!$Resource.HM_Last_Page}" styleClass="cover-img"/>
+    </div>
+
+</body>
+</html>
+</apex:page>

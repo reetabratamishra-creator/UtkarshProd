@@ -1,0 +1,2435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Conventional Type T-beam</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;CT-Thrie-SSSB&quot;: [
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_items&quot;,
+      &quot;label&quot;: &quot;ITEMS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 12
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_beamThickness&quot;,
+      &quot;label&quot;: &quot;BEAM THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_beamThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;2&quot;,
+        &quot;2.2&quot;,
+        &quot;2.3&quot;,
+        &quot;2.5&quot;,
+        &quot;2.7&quot;,
+        &quot;2.8&quot;,
+        &quot;2.9&quot;,
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_spacerThickness&quot;,
+      &quot;label&quot;: &quot;SPACER THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_spacerThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_postThickness&quot;,
+      &quot;label&quot;: &quot;POST THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_postThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_spaceLength&quot;,
+      &quot;label&quot;: &quot;Spacer Length (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_spaceLength_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: 550,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_roundBolt&quot;,
+      &quot;label&quot;: &quot;ROUND BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_roundBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_hexBolt&quot;,
+      &quot;label&quot;: &quot;HEX BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_hexBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_zincCoating&quot;,
+      &quot;label&quot;: &quot;ZINC COATING&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_zincCoating_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Regular&quot;,
+        &quot;Medium 55 micron&quot;,
+        &quot;Average 77 microns over Crash Tested Rates&quot;,
+        &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_nutsBolts&quot;,
+      &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_nutsBolts_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_weight_header&quot;,
+      &quot;label&quot;: &quot;WEIGHT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_weight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;formula&quot;: &quot;(Thrie_SSSB_total_wt || 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_quantity_rm_header&quot;,
+      &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_quantity_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_trans_in_offer_rm_header&quot;,
+      &quot;label&quot;: &quot;Trans.in offer?&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_trans_in_offer_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_types_of_Freight_header&quot;,
+      &quot;label&quot;: &quot;types of freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_types_of_Freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Transportation KG&quot;,
+        &quot;Full Vehicle Freight&quot;
+      ],
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_transportation_header&quot;,
+      &quot;label&quot;: &quot;Transportation KG&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ],
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_transportation&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_full_Vehicle_freight_header&quot;,
+      &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_full_Vehicle_freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;min&quot;: 1,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_margin_header&quot;,
+      &quot;label&quot;: &quot;MARGIN&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_margin&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;2&quot;,
+      &quot;isMargin&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_postHeight&quot;,
+      &quot;label&quot;: &quot;POST HEIGHT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_postHeight_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;1800&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_basePlate_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bplength_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE LENGTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bplength&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bpwidth_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE WIDTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bpwidth&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bpheight_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE THICKNESS (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_bpheight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSSB_pricing_sub&quot;,
+      &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+      &quot;type&quot;: &quot;sub-section&quot;,
+      &quot;expanded&quot;: false,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_calculation_for_beam&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_blk_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;BLK WT For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((4.318 * ((Thrie_SSSB_beamThickness_input || 0) / 1000) * 0.725 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_zn_consumption_for_beam&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_finish_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((4.318 * 0.725 * ((Thrie_SSSB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_SSSB_blk_wt_for_beam || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSSB_finish_wt_for_beam || 0) * 250) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_calculation_for_post&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_blk_wt_for_post&quot;,
+          &quot;label&quot;: &quot;BLK WT For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_SSSB_postHeight_input || 0) / 1000) * ((Thrie_SSSB_postThickness_input || 0) / 1000) * 0.28) * 7850)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_zn_consumption_for_post&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_finish_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_SSSB_postHeight_input || 0) / 1000) * 0.28 * ((Thrie_SSSB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_SSSB_blk_wt_for_post || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSSB_finish_wt_for_post || 0) * 500 ) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_calculation_for_spacer&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Spacer&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_blk_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;BLK WT For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_SSSB_spaceLength_input || 0) /1000)* ((Thrie_SSSB_spacerThickness_input || 0)/ 1000) * 0.28 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_zn_consumption_for_spacer&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_finish_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_SSSB_spaceLength_input || 0) /1000)* 0.28 * ((Thrie_SSSB_zn_consumption_for_spacer || 0) / 1000)) * 2) + (Thrie_SSSB_blk_wt_for_spacer || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSSB_finish_wt_for_spacer || 0) * 500) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_calculation_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Base Plate&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_blk_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;BLK WT For BASE PLATE &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_SSSB_bplength || 0) /1000)* ((Thrie_SSSB_bpwidth || 0)/ 1000) * ((Thrie_SSSB_bpheight || 0) /1000) * 7850) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_zn_consumption_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_finish_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Base Plate&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_SSSB_bplength || 0) /1000)* ((Thrie_SSSB_bpwidth || 0)/ 1000) * ((Thrie_SSSB_zn_consumption_for_baseplate || 0) / 1000)) * 2) + (Thrie_SSSB_blk_wt_for_baseplate || 0)) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSSB_finish_wt_for_baseplate || 0) * 500) / 1000) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_calculation_for_rhb&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Round &amp; Hex Bolt&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_rb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Round bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((4000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt_for_hb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Hex bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((1000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_total_wt&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Thrie_SSSB_total_wt_for_beam || 0) + (Thrie_SSSB_total_wt_for_post || 0) + (Thrie_SSSB_total_wt_for_spacer || 0) + ((Thrie_SSSB_total_wt_for_rb || 0) + (Thrie_SSSB_total_wt_for_hb || 0)) + (Thrie_SSSB_total_wt_for_baseplate || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_weight_beam_price_calculation&quot;,
+          &quot;label&quot;: &quot;Price Calculation&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSSB_id&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil((Thrie_SSSB_total_wt || 0) * ((b_rate || 0) + ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (t_SSSB || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil(((b_rate || 0) + ((Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_SSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (Thrie_SSSB_transportation || 0) + (Thrie_SSSB_margin || 0) + (t_SSSB || 0)) * (Thrie_SSSB_total_wt || 0))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSSB_rate_rm&quot;,
+          &quot;label&quot;: &quot;RATE/RM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isCalculated&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Thrie_SSSB_unit_price&quot;
+        }
+      ]
+    }
+  ],
+  &quot;CT-Thrie-SSDB&quot;: [
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_items&quot;,
+      &quot;label&quot;: &quot;ITEMS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 12
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_beamThickness&quot;,
+      &quot;label&quot;: &quot;BEAM THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_beamThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;2&quot;,
+        &quot;2.2&quot;,
+        &quot;2.3&quot;,
+        &quot;2.5&quot;,
+        &quot;2.7&quot;,
+        &quot;2.8&quot;,
+        &quot;2.9&quot;,
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_spacerThickness&quot;,
+      &quot;label&quot;: &quot;SPACER THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_spacerThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_postThickness&quot;,
+      &quot;label&quot;: &quot;POST THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_postThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_spaceLength&quot;,
+      &quot;label&quot;: &quot;Spacer Length (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_spaceLength_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: 550,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_roundBolt&quot;,
+      &quot;label&quot;: &quot;ROUND BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_roundBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_hexBolt&quot;,
+      &quot;label&quot;: &quot;HEX BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_hexBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_zincCoating&quot;,
+      &quot;label&quot;: &quot;ZINC COATING&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_zincCoating_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Regular&quot;,
+        &quot;Medium 55 micron&quot;,
+        &quot;Average 77 microns over Crash Tested Rates&quot;,
+        &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_nutsBolts&quot;,
+      &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_nutsBolts_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_weight_header&quot;,
+      &quot;label&quot;: &quot;WEIGHT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_weight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;formula&quot;: &quot;(Thrie_SSDB_total_wt || 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_quantity_rm_header&quot;,
+      &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_quantity_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_trans_in_offer_rm_header&quot;,
+      &quot;label&quot;: &quot;Trans.in offer?&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_trans_in_offer_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_types_of_Freight_header&quot;,
+      &quot;label&quot;: &quot;types of freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_types_of_Freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Transportation KG&quot;,
+        &quot;Full Vehicle Freight&quot;
+      ],
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_transportation_header&quot;,
+      &quot;label&quot;: &quot;Transportation KG&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ],
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_transportation&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_full_Vehicle_freight_header&quot;,
+      &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_full_Vehicle_freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;min&quot;: 1,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_margin_header&quot;,
+      &quot;label&quot;: &quot;MARGIN&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_margin&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;defaultValue&quot;: &quot;2&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;isMargin&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_postHeight&quot;,
+      &quot;label&quot;: &quot;POST HEIGHT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_postHeight_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;1800&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_basePlate_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bplength_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE LENGTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bplength&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bpwidth_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE WIDTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bpwidth&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bpheight_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE THICKNESS (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_bpheight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_SSDB_pricing_sub&quot;,
+      &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+      &quot;type&quot;: &quot;sub-section&quot;,
+      &quot;expanded&quot;: false,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_calculation_for_beam&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_blk_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;BLK WT For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((4.318 * ((Thrie_SSDB_beamThickness_input || 0) / 1000) * 0.725 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_zn_consumption_for_beam&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_finish_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((4.318 * 0.725 * ((Thrie_SSDB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_SSDB_blk_wt_for_beam || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSDB_finish_wt_for_beam || 0) * 500) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_calculation_for_post&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_blk_wt_for_post&quot;,
+          &quot;label&quot;: &quot;BLK WT For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_SSDB_postHeight_input || 0) / 1000) * ((Thrie_SSDB_postThickness_input || 0) / 1000) * 0.28) * 7850)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_zn_consumption_for_post&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_finish_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_SSDB_postHeight_input || 0) / 1000) * 0.28 * ((Thrie_SSDB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_SSDB_blk_wt_for_post || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSDB_finish_wt_for_post || 0) * 500 ) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_calculation_for_spacer&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Spacer&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_blk_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;BLK WT For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_SSDB_spaceLength_input || 0) /1000)* ((Thrie_SSDB_spacerThickness_input || 0)/ 1000) * 0.28 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_zn_consumption_for_spacer&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_finish_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_SSDB_spaceLength_input || 0) /1000)* 0.28 * ((Thrie_SSDB_zn_consumption_for_spacer || 0) / 1000)) * 2) + (Thrie_SSDB_blk_wt_for_spacer || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSDB_finish_wt_for_spacer || 0) * 500) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_calculation_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Base Plate&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_blk_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;BLK WT For BASE PLATE &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_SSDB_bplength || 0) /1000)* ((Thrie_SSDB_bpwidth || 0)/ 1000) * ((Thrie_SSDB_bpheight || 0) /1000) * 7850) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_zn_consumption_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_finish_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Base Plate&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_SSDB_bplength || 0) /1000)* ((Thrie_SSDB_bpwidth || 0)/ 1000) * ((Thrie_SSDB_zn_consumption_for_baseplate || 0) / 1000)) * 2) + (Thrie_SSDB_blk_wt_for_baseplate || 0)) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_SSDB_finish_wt_for_baseplate || 0) * 500) / 1000) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_calculation_for_rhb&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Round &amp; Hex Bolt&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_rb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Round bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((8000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt_for_hb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Hex bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((2000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_total_wt&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Thrie_SSDB_total_wt_for_beam || 0) + (Thrie_SSDB_total_wt_for_post || 0) + (Thrie_SSDB_total_wt_for_spacer || 0) + ((Thrie_SSDB_total_wt_for_rb || 0) + (Thrie_SSDB_total_wt_for_hb || 0)) + (Thrie_SSDB_total_wt_for_baseplate || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_weight_beam_price_calculation&quot;,
+          &quot;label&quot;: &quot;Price Calculation - SSDB&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_SSDB_id&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil((Thrie_SSDB_total_wt || 0) * ((b_rate || 0) + ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (t_SSDB || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil(((b_rate || 0) + ((Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_SSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (Thrie_SSDB_transportation || 0) + (Thrie_SSDB_margin || 0) + (t_SSDB || 0)) * (Thrie_SSDB_total_wt || 0))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_SSDB_rate_rm&quot;,
+          &quot;label&quot;: &quot;RATE/RM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isCalculated&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Thrie_SSDB_unit_price&quot;
+        }
+      ]
+    }
+  ],
+  &quot;CT-Thrie-DSSB&quot;: [
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_items&quot;,
+      &quot;label&quot;: &quot;ITEMS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 12
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_beamThickness&quot;,
+      &quot;label&quot;: &quot;BEAM THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_beamThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;2&quot;,
+        &quot;2.2&quot;,
+        &quot;2.3&quot;,
+        &quot;2.5&quot;,
+        &quot;2.7&quot;,
+        &quot;2.8&quot;,
+        &quot;2.9&quot;,
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_spacerThickness&quot;,
+      &quot;label&quot;: &quot;SPACER THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_spacerThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_postThickness&quot;,
+      &quot;label&quot;: &quot;POST THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_postThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_spaceLength&quot;,
+      &quot;label&quot;: &quot;Spacer Length (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_spaceLength_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: 550,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_roundBolt&quot;,
+      &quot;label&quot;: &quot;ROUND BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_roundBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_hexBolt&quot;,
+      &quot;label&quot;: &quot;HEX BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_hexBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_zincCoating&quot;,
+      &quot;label&quot;: &quot;ZINC COATING&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_zincCoating_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Regular&quot;,
+        &quot;Medium 55 micron&quot;,
+        &quot;Average 77 microns over Crash Tested Rates&quot;,
+        &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_nutsBolts&quot;,
+      &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_nutsBolts_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_header&quot;,
+      &quot;label&quot;: &quot;WEIGHT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_weight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;formula&quot;: &quot;(Thrie_DSSB_total_wt || 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_quantity_rm_header&quot;,
+      &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_quantity_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_trans_in_offer_rm_header&quot;,
+      &quot;label&quot;: &quot;Trans.in offer?&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_trans_in_offer_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_types_of_Freight_header&quot;,
+      &quot;label&quot;: &quot;types of freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_types_of_Freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Transportation KG&quot;,
+        &quot;Full Vehicle Freight&quot;
+      ],
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_transportation_header&quot;,
+      &quot;label&quot;: &quot;Transportation KG&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ],
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_transportation&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_full_Vehicle_freight_header&quot;,
+      &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_full_Vehicle_freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;min&quot;: 1,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_margin_header&quot;,
+      &quot;label&quot;: &quot;MARGIN&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_margin&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;2&quot;,
+      &quot;isMargin&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_postHeight&quot;,
+      &quot;label&quot;: &quot;POST HEIGHT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_postHeight_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;1800&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_basePlate_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bplength_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE LENGTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bplength&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bpwidth_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE WIDTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bpwidth&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bpheight_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE THICKNESS (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_bpheight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSSB_pricing_sub&quot;,
+      &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+      &quot;type&quot;: &quot;sub-section&quot;,
+      &quot;expanded&quot;: false,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_calculation_for_beam&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_blk_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;BLK WT For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((4.318 * ((Thrie_DSSB_beamThickness_input || 0) / 1000) * 0.725 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_zn_consumption_for_beam&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_finish_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((4.318 * 0.725 * ((Thrie_DSSB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_DSSB_blk_wt_for_beam || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSSB_finish_wt_for_beam || 0) * 500) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_calculation_for_post&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_blk_wt_for_post&quot;,
+          &quot;label&quot;: &quot;BLK WT For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_DSSB_postHeight_input || 0) / 1000) * ((Thrie_DSSB_postThickness_input || 0) / 1000) * 0.28) * 7850)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_zn_consumption_for_post&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_finish_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_DSSB_postHeight_input || 0) / 1000) * 0.28 * ((Thrie_DSSB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_DSSB_blk_wt_for_post || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSSB_finish_wt_for_post || 0) * 500 ) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_calculation_for_spacer&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Spacer&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_blk_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;BLK WT For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_DSSB_spaceLength_input || 0) /1000)* ((Thrie_DSSB_spacerThickness_input || 0)/ 1000) * 0.28 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_zn_consumption_for_spacer&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_finish_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_DSSB_spaceLength_input || 0) /1000)* 0.28 * ((Thrie_DSSB_zn_consumption_for_spacer || 0) / 1000)) * 2) + (Thrie_DSSB_blk_wt_for_spacer || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSSB_finish_wt_for_spacer || 0) * 1000) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_calculation_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Base Plate&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_blk_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;BLK WT For BASE PLATE &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_DSSB_bplength || 0) /1000)* ((Thrie_DSSB_bpwidth || 0)/ 1000) * ((Thrie_DSSB_bpheight || 0) /1000) * 7850) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_zn_consumption_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_finish_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Base Plate&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_DSSB_bplength || 0) /1000)* ((Thrie_DSSB_bpwidth || 0)/ 1000) * ((Thrie_DSSB_zn_consumption_for_baseplate || 0) / 1000)) * 2) + (Thrie_DSSB_blk_wt_for_baseplate || 0)) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSSB_finish_wt_for_baseplate || 0) * 500) / 1000) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_calculation_for_rhb&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Round &amp; Hex Bolt&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_rb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Round bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((8000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt_for_hb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Hex bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((2000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_total_wt&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Thrie_DSSB_total_wt_for_beam || 0) + (Thrie_DSSB_total_wt_for_post || 0) + (Thrie_DSSB_total_wt_for_spacer || 0) + ((Thrie_DSSB_total_wt_for_rb || 0) + (Thrie_DSSB_total_wt_for_hb || 0)) + (Thrie_DSSB_total_wt_for_baseplate || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_weight_beam_price_calculation&quot;,
+          &quot;label&quot;: &quot;Price Calculation - DSSB&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSSB_id&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil((Thrie_DSSB_total_wt || 0) * ((b_rate || 0) + ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (t_DSSB || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil(((b_rate || 0) + ((Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_DSSB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (Thrie_DSSB_transportation || 0) + (Thrie_DSSB_margin || 0) + (t_DSSB || 0)) * (Thrie_DSSB_total_wt || 0))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSSB_rate_rm&quot;,
+          &quot;label&quot;: &quot;RATE/RM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isCalculated&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Thrie_DSSB_unit_price&quot;
+        }
+      ]
+    }
+  ],
+  &quot;CT-Thrie-DSDB&quot;: [
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_items&quot;,
+      &quot;label&quot;: &quot;ITEMS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 12
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_beamThickness&quot;,
+      &quot;label&quot;: &quot;BEAM THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_beamThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;2&quot;,
+        &quot;2.2&quot;,
+        &quot;2.3&quot;,
+        &quot;2.5&quot;,
+        &quot;2.7&quot;,
+        &quot;2.8&quot;,
+        &quot;2.9&quot;,
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_spacerThickness&quot;,
+      &quot;label&quot;: &quot;SPACER THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_spacerThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_postThickness&quot;,
+      &quot;label&quot;: &quot;POST THICKNESS BLACK(MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_postThickness_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;3.6&quot;,
+        &quot;3.8&quot;,
+        &quot;3.9&quot;,
+        &quot;4&quot;,
+        &quot;4.2&quot;,
+        &quot;4.4&quot;,
+        &quot;4.5&quot;,
+        &quot;4.7&quot;,
+        &quot;4.8&quot;,
+        &quot;4.9&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_spaceLength&quot;,
+      &quot;label&quot;: &quot;Spacer Length (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_spaceLength_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: 550,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_roundBolt&quot;,
+      &quot;label&quot;: &quot;ROUND BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_roundBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_hexBolt&quot;,
+      &quot;label&quot;: &quot;HEX BOLT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_hexBolt_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;M16 x 40&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_zincCoating&quot;,
+      &quot;label&quot;: &quot;ZINC COATING&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_zincCoating_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Regular&quot;,
+        &quot;Medium 55 micron&quot;,
+        &quot;Average 77 microns over Crash Tested Rates&quot;,
+        &quot;Minimum 77 microns ( Delta over Crash Tested Rates )&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_nutsBolts&quot;,
+      &quot;label&quot;: &quot;NUTS &amp; BOLTS&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_nutsBolts_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;4.6 / 4.8&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_weight_header&quot;,
+      &quot;label&quot;: &quot;WEIGHT&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_weight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;colSpan&quot;: 6,
+      &quot;formula&quot;: &quot;(Thrie_DSDB_total_wt || 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_quantity_rm_header&quot;,
+      &quot;label&quot;: &quot;QUANTITY(RM)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_quantity_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_trans_in_offer_rm_header&quot;,
+      &quot;label&quot;: &quot;Trans.in offer?&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_trans_in_offer_rm&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;pushToParentApiName&quot;: &quot;freight_incoterms&quot;,
+      &quot;options&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_types_of_Freight_header&quot;,
+      &quot;label&quot;: &quot;types of freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_types_of_Freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Transportation KG&quot;,
+        &quot;Full Vehicle Freight&quot;
+      ],
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_trans_in_offer_rm&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_transportation_header&quot;,
+      &quot;label&quot;: &quot;Transportation KG&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ],
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_transportation&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Transportation KG&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_full_Vehicle_freight_header&quot;,
+      &quot;label&quot;: &quot;Full Vehicle Freight&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_full_Vehicle_freight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;min&quot;: 1,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_types_of_Freight&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Full Vehicle Freight&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_margin_header&quot;,
+      &quot;label&quot;: &quot;MARGIN&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_margin&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;defaultValue&quot;: &quot;2&quot;,
+      &quot;isMargin&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_postHeight&quot;,
+      &quot;label&quot;: &quot;POST HEIGHT (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_postHeight_input&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;required&quot;: true,
+      &quot;defaultValue&quot;: &quot;1800&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_basePlate_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;,
+      &quot;colSpan&quot;: 6
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bplength_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE LENGTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bplength&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bpwidth_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE WIDTH (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bpwidth&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bpheight_header&quot;,
+      &quot;label&quot;: &quot;BASE PLATE THICKNESS (mm)&quot;,
+      &quot;type&quot;: &quot;header&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_bpheight&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 6,
+      &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+      &quot;controllingValues&quot;: [
+        true
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;Thrie_DSDB_pricing_sub&quot;,
+      &quot;label&quot;: &quot;Weight &amp; Pricing Calculations&quot;,
+      &quot;type&quot;: &quot;sub-section&quot;,
+      &quot;expanded&quot;: false,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_calculation_for_beam&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_blk_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;BLK WT For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((4.318 * ((Thrie_DSDB_beamThickness_input || 0) / 1000) * 0.725 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_zn_consumption_for_beam&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_finish_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((4.318 * 0.725 * ((Thrie_DSDB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_DSDB_blk_wt_for_beam || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_beam&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For THRIE BEAM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSDB_finish_wt_for_beam || 0) * 1000) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_calculation_for_post&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For POST&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_blk_wt_for_post&quot;,
+          &quot;label&quot;: &quot;BLK WT For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_DSDB_postHeight_input || 0) / 1000) * ((Thrie_DSDB_postThickness_input || 0) / 1000) * 0.28) * 7850)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_zn_consumption_for_post&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_finish_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((((Thrie_DSDB_postHeight_input || 0) / 1000) * 0.28 * ((Thrie_DSDB_zn_consumption_for_beam || 0) / 1000)) * 2) + (Thrie_DSDB_blk_wt_for_post || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_post&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For POST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSDB_finish_wt_for_post || 0) * 500 ) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_calculation_for_spacer&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Spacer&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_blk_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;BLK WT For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_DSDB_spaceLength_input || 0) /1000)* ((Thrie_DSDB_spacerThickness_input || 0)/ 1000) * 0.28 * 7850) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_zn_consumption_for_spacer&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_finish_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_DSDB_spaceLength_input || 0) /1000)* 0.28 * ((Thrie_DSDB_zn_consumption_for_spacer || 0) / 1000)) * 2) + (Thrie_DSDB_blk_wt_for_spacer || 0)) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_spacer&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Spacer&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSDB_finish_wt_for_spacer || 0) * 2000) / 1000) * 100) / 100&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_calculation_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Base Plate&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_blk_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;BLK WT For BASE PLATE &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(( ((Thrie_DSDB_bplength || 0) /1000)* ((Thrie_DSDB_bpwidth || 0)/ 1000) * ((Thrie_DSDB_bpheight || 0) /1000) * 7850) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_zn_consumption_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Zn consumption (gm/sqm) For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1) ? (con_zinc_reg || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1) ? (con_zinc_avg_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1) ? (con_zinc_min_77 || 0) : ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1) ? (con_zinc_medium_55 || 0) : 0) * 7.1577574967405) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_finish_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Finish wt/pcs For Base Plate&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round(((( ((Thrie_DSDB_bplength || 0) /1000)* ((Thrie_DSDB_bpwidth || 0)/ 1000) * ((Thrie_DSDB_zn_consumption_for_baseplate || 0) / 1000)) * 2) + (Thrie_DSDB_blk_wt_for_baseplate || 0)) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_baseplate&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Base Plate &quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.round((((Thrie_DSDB_finish_wt_for_baseplate || 0) * 500) / 1000) * 100) / 100&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_basePlate&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_calculation_for_rhb&quot;,
+          &quot;label&quot;: &quot;Weight Calculation For Round &amp; Hex Bolt&quot;,
+          &quot;type&quot;: &quot;header&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_rb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Round bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((16000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt_for_hb&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr For Hex bolt&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Math.round(((4000 * 0.14) / 1000) * 100) / 100)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_total_wt&quot;,
+          &quot;label&quot;: &quot;Total wt/mtr&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;colSpan&quot;: 2,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(Thrie_DSDB_total_wt_for_beam || 0) + (Thrie_DSDB_total_wt_for_post || 0) + (Thrie_DSDB_total_wt_for_spacer || 0) + ((Thrie_DSDB_total_wt_for_rb || 0) + (Thrie_DSDB_total_wt_for_hb || 0)) + (Thrie_DSDB_total_wt_for_baseplate || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_weight_beam_price_calculation&quot;,
+          &quot;label&quot;: &quot;Price Calculation - DSDB&quot;,
+          &quot;type&quot;: &quot;header&quot;,
+          &quot;controllingField&quot;: &quot;Thrie_DSDB_id&quot;,
+          &quot;controllingValues&quot;: [
+            true
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil((Thrie_DSDB_total_wt || 0) * ((b_rate || 0) + ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (t_DSDB || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Math.ceil(((b_rate || 0) + ((Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Minimum 77&apos;) &gt; -1 ? (zinc_min_77 || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Average 77&apos;) &gt; -1 ? (zinc_avg_77 || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Medium 55&apos;) &gt; -1 ? (zinc_medium_55_delta || 0) : (Thrie_DSDB_zincCoating_input || &apos;&apos;).indexOf(&apos;Regular&apos;) &gt; -1 ? (zinc_reg || 0) : 0) + (Thrie_DSDB_transportation || 0) + (Thrie_DSDB_margin || 0) + (t_DSDB || 0)) * (Thrie_DSDB_total_wt || 0))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;Thrie_DSDB_rate_rm&quot;,
+          &quot;label&quot;: &quot;RATE/RM&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isCalculated&quot;: true,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;Thrie_DSDB_unit_price&quot;
+        }
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

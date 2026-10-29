@@ -1,0 +1,93 @@
+<template>
+    <lightning-quick-action-panel header="Assign Case">
+
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-p-vertical_x-large">
+                <lightning-spinner alternative-text="Loading departments" size="small"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:else>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-box slds-theme_error slds-m-bottom_small" role="alert">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template lwc:if={isBlocked}>
+                <div class="slds-box slds-theme_shade" role="status">
+                    {blockReason}
+                </div>
+            </template>
+
+            <template lwc:if={showForm}>
+                <dl class="slds-dl_horizontal slds-m-bottom_medium">
+                    <dt class="slds-dl_horizontal__label slds-text-color_weak">Current owner</dt>
+                    <dd class="slds-dl_horizontal__detail">{currentOwnerName}</dd>
+                </dl>
+
+                <lightning-combobox
+                    name="department"
+                    label="Department"
+                    placeholder="Select a department"
+                    options={departments}
+                    value={selectedDepartment}
+                    onchange={handleDepartmentChange}
+                    required
+                    disabled={isSaving}
+                    class="slds-m-bottom_small">
+                </lightning-combobox>
+
+                <template lwc:if={isLoadingUsers}>
+                    <div class="slds-is-relative slds-p-vertical_medium">
+                        <lightning-spinner alternative-text="Loading users" size="small"></lightning-spinner>
+                    </div>
+                </template>
+
+                <template lwc:if={showUserPicker}>
+                    <lightning-combobox
+                        name="assignee"
+                        label="Assign to"
+                        placeholder="Select a user"
+                        options={users}
+                        value={selectedUserId}
+                        onchange={handleUserChange}
+                        required
+                        disabled={isSaving}>
+                    </lightning-combobox>
+                </template>
+
+                <template lwc:if={showNoUsers}>
+                    <div class="slds-box slds-theme_shade slds-m-top_small" role="status">
+                        No active user carries the {selectedDepartment} department.
+                    </div>
+                </template>
+
+                <template lwc:if={isSaving}>
+                    <div class="slds-is-relative slds-p-vertical_medium">
+                        <lightning-spinner alternative-text="Assigning" size="small"></lightning-spinner>
+                    </div>
+                </template>
+            </template>
+
+        </template>
+
+        <div slot="footer">
+            <lightning-button
+                label="Cancel"
+                onclick={handleClose}>
+            </lightning-button>
+            <template lwc:if={showForm}>
+                <lightning-button
+                    class="slds-m-left_x-small"
+                    variant="brand"
+                    label="Assign case"
+                    disabled={saveDisabled}
+                    onclick={handleSave}>
+                </lightning-button>
+            </template>
+        </div>
+
+    </lightning-quick-action-panel>
+</template>

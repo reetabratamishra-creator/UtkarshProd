@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vehicle_Type__c</fullName>
+    <description>Type of vehicle used for roadways and own vehicle expenses</description>
+    <inlineHelpText>Select the vehicle type for roadways or own vehicle expenses</inlineHelpText>
+    <label>Vehicle Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>OLA/UBER</fullName>
+                <default>false</default>
+                <label>OLA/UBER</label>
+            </value>
+            <value>
+                <fullName>Car Rental</fullName>
+                <default>false</default>
+                <label>Car Rental</label>
+            </value>
+            <value>
+                <fullName>Taxi</fullName>
+                <default>false</default>
+                <label>Taxi</label>
+            </value>
+            <value>
+                <fullName>Auto</fullName>
+                <default>false</default>
+                <label>Auto</label>
+            </value>
+            <value>
+                <fullName>Bus</fullName>
+                <default>false</default>
+                <label>Bus</label>
+            </value>
+            <value>
+                <fullName>2-Wheeler</fullName>
+                <default>false</default>
+                <label>2-Wheeler</label>
+            </value>
+            <value>
+                <fullName>4-Wheeler</fullName>
+                <default>false</default>
+                <label>4-Wheeler</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

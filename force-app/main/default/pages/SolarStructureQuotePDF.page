@@ -1,0 +1,452 @@
+<apex:page standardController="Quote" extensions="SolarQuoteOfferController"
+           renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+<head>
+<style type="text/css">
+    /* 1. GLOBAL DEFAULT: 0mm margins, no headers (Perfect for covers) */
+    @page {
+        size: A4;
+        margin: 0mm;
+    }
+
+    /* 2. NAMED PAGE: specifically for your standard document content */
+    @page standard-content {
+        size: A4;
+        margin-top: 38mm;
+        margin-bottom: 35mm; 
+        margin-left: 14mm;
+        margin-right: 14mm;
+        @top-center   { content: element(header); }
+        @bottom-left  { content: element(footer); } 
+    }
+
+    /* 3. ASSIGN THE BODY CONTENT TO THE NAMED PAGE */
+    div.document-body {
+        page: standard-content; 
+    }
+
+    /* Front cover container */
+    div.cover-page {
+        page-break-after: always;
+        width: 210mm;
+        height: 297mm;
+        margin: 0mm;
+    }
+
+    body { font-family: Arial, sans-serif; font-size: 10px; color: #000; line-height: 1.5; padding: 0; margin: 0; }
+
+    /* ── Running header / footer ── */
+    .pdf-header { position: running(header); width: 100%; }
+    .pdf-header img { width: 100%; height: auto; }
+    
+    .pdf-footer { position: running(footer); width: 182mm; }
+    .pdf-footer img { width: 182mm; height: auto; display: block; margin: 0; padding: 0; }
+
+    /* ── Letter meta row ── */
+    .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+    .meta-table td { padding: 1px 3px; vertical-align: top; font-size: 10px; }
+
+    /* ── Section headings ── */
+    .section-heading { font-weight: bold; text-decoration: underline; font-size: 11px; margin: 14px 0 6px 0; }
+
+    /* ── Main product table ── */
+    .product-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    .product-table .table-title-row td { background-color: #fff; text-align: center; font-weight: bold; font-size: 11px; border: 1px solid #000; padding: 6px; letter-spacing: 1px; }
+    .product-table th { background-color: #92D050; border: 1px solid #000; padding: 5px 4px; text-align: center; font-size: 9.5px; font-weight: bold; }
+    .product-table td { border: 1px solid #000; padding: 5px 4px; text-align: center; vertical-align: middle; font-size: 10px; }
+    .product-table td.left { text-align: left; }
+
+    /* ── Supply Technical Particulars ── */
+    .supply-section { margin: 16px 0; font-size: 10px; }
+    .supply-section p { margin: 3px 0; }
+    .bullet-list { margin: 4px 0 4px 16px; }
+    .bullet-list li { margin-bottom: 3px; }
+
+    /* ── TAndC ── */
+    .tc-section { margin-top: 16px; font-size: 9.5px; line-height: 1.55; }
+    .tc-section ol > li { margin-bottom: 8px; }
+
+    /* ── Closing ── */
+    .closing { margin-top: 20px; font-size: 10px; line-height: 1.7; }
+     .signature-section {
+                margin-top: 30px;
+            }
+    .avoid-break {
+                page-break-inside: avoid;
+            }
+</style>
+</head>
+<body>
+<div class="cover-page">
+        <img src="{!$Resource.SolarCover}" style="width: 210mm; height: 297mm; display: block; margin: 0; padding: 0;" />
+    </div>
+
+    <div class="pdf-header">
+        <img src="{!$Resource.UtkarshHeader}" style="width: 500px; height: auto;" />
+    </div>
+    
+
+<!-- ══════════════════════════════════════════════════
+     LETTER HEADER
+     ══════════════════════════════════════════════════ -->
+<div class="document-body">
+<table class="meta-table">
+    <tr>
+        <td style="width: 1%; white-space: nowrap;"><b>Ref:</b>-</td>
+        <td style="width: 55%;">{!quoteRecord.Quote_Reference__c}</td>
+        
+        <td style="width: 1%; white-space: nowrap;"><b>Date:</b>-</td>
+        <td style="width: 34%;">
+            <apex:outputText value="{0,date,dd.MM.yyyy}">
+                <apex:param value="{!TODAY()}"/>
+            </apex:outputText>
+        </td>
+    </tr>
+</table>
+
+<p style="margin:10px 0 2px 0;"><b>To,</b></p>
+<p style="margin:0 0 2px 0;"><b>{!contactName}</b></p>
+<p style="margin:0 0 14px 0;">
+    <b>{!accountName}</b>
+    <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(quoteRecord.BillingStreet))}">
+        <br/>{!quoteRecord.BillingStreet}
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingCity))}">, {!quoteRecord.BillingCity}</apex:outputText>
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingState))}">, {!quoteRecord.BillingState}</apex:outputText>
+        <apex:outputText rendered="{!NOT(ISBLANK(quoteRecord.BillingPostalCode))}"> - {!quoteRecord.BillingPostalCode}</apex:outputText>
+    </apex:outputPanel>
+</p>
+
+<p style="margin-bottom:10px;">Dear Sir/Madam,</p>
+
+<p style="margin-bottom:8px;">
+    <b>Sub: RFQ {!dynamicSubjectHeader} {!tcSubjectLine}</b>
+</p>
+
+<p style="margin-bottom:6px; width:85%;">
+    We refer to your enquiry for Manufacturing, Galvanizing and Supply for
+    <b>{!dynamicSubjectBody}.</b>
+    We note your requirement in this enquiry and considering our
+    manufacturing capacity we are confident that we can supply the structure material.
+</p>
+
+<p style="margin-bottom:14px;">
+    We are pleased to submit herewith our offer for Manufacturing, and Supply of
+    <b>{!dynamicSupplyOfText}</b>.
+</p>
+
+<p>Details of our proposal are as under:</p>
+
+<!-- ══════════════════════════════════════════════════
+     A. PRICES
+     ══════════════════════════════════════════════════ -->
+<p style="margin:10px 0 4px 0;"><b><u>A. PRICES:</u></b></p>
+<p style="margin-bottom:8px;">
+    a. Please refer to our below price Offer for the subject enquiry for&nbsp;<b><apex:outputText value="{!jsonData['incoterms']}"/> {!tcSubjectLine}</b>, India:
+</p>
+
+<apex:outputPanel layout="none" rendered="{!LOWER(unitOfMeasurement) != 'pcs'}">
+            <table class="spec-table" cellspacing="0" cellpadding="4" style="border-collapse: collapse; border: 1px solid black; width: 85%; table-layout: fixed; word-wrap: break-word;">
+                <thead>
+                    <tr>
+                        <td colspan="6" style="border: 1px solid black; text-align: center; font-weight: bold; background-color: #f2f2f2; font-size: 11px; padding: 6px;">
+                            MODULE MOUNTING STRUCTURE
+                        </td>
+                    </tr>
+                    <tr style="background-color: #92D050;">
+                        <th style="border: 1px solid black; width: 6%; text-align: center;">Sr . No</th>
+                        <th style="border: 1px solid black; width: 34%; text-align: center;">Material</th>
+                        <th style="border: 1px solid black; width: 15%; text-align: center;">Thickness</th>
+                        <th style="border: 1px solid black; width: 15%; text-align: center;">Coating/Grade</th>
+                        <th style="border: 1px solid black; width: 15%; text-align: center;">Total Weight (MT)</th>
+                        <th style="border: 1px solid black; width: 15%; text-align: center;">Price FOR Per MT (INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable var="index" value="{!1}"/>
+                    <apex:repeat value="{!solarItems}" var="item">
+                        <tr>
+                            <td style="border: 1px solid black; text-align: center; vertical-align: middle;">{!index}</td>
+                            
+                            <td style="border: 1px solid black; text-align: left; vertical-align: middle; font-weight: bold;">
+                                {!item.material}
+                            </td>
+                            
+                            <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                {!item.thickness}<apex:outputText rendered="{!item.thickness != null && item.thickness != '-'}"> mm</apex:outputText>
+                            </td>
+                            
+                            <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                {!item.grade}
+                                <apex:outputPanel layout="none" rendered="{!item.micron != null && item.micron != '-'}">
+                                    <br/><span style="font-size: 9px;">Avg. {!item.micron}µ</span>
+                                </apex:outputPanel>
+                            </td>
+                            
+                            <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0}">
+                                    <apex:param value="{!item.weight}" />
+                                </apex:outputText>
+                            </td>
+                            
+                            <td style="border: 1px solid black; text-align: right; vertical-align: middle; padding-right: 8px; font-weight: bold;">
+                                <apex:outputText value="{0, number, #,##0}">
+                                    <apex:param value="{!item.rate}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <apex:variable var="index" value="{!index + 1}"/>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="none" rendered="{!LOWER(unitOfMeasurement) == 'pcs'}">
+            <table class="spec-table" cellspacing="0" cellpadding="4" style="border-collapse: collapse; border: 1px solid black; width: 85%; font-size: 9px; table-layout: fixed; word-wrap: break-word;">
+            <thead>
+                <tr style="background-color: #92D050;">
+                    <th style="border: 1px solid black; width: 5%; text-align: center;">Sr. No</th>
+                    <th style="border: 1px solid black; width: 22%; text-align: left;">Material</th>
+                    <th style="border: 1px solid black; width: 9%; text-align: center;">Thickness</th>
+                    <th style="border: 1px solid black; width: 14%; text-align: center;">Coating/Grade</th>
+                    <th style="border: 1px solid black; width: 10%; text-align: right;">Unit Weight<br/>(MT)</th>
+                    <th style="border: 1px solid black; width: 11%; text-align: right;">Price FOR<br/>Per MT (INR)</th>
+                    <th style="border: 1px solid black; width: 7%; text-align: center;">Total<br/>Qty</th>
+                    <th style="border: 1px solid black; width: 10%; text-align: right; padding-right: 4px;">Per Pcs Price<br/>(INR)</th>
+                    <th style="border: 1px solid black; width: 12%; text-align: right; padding-right: 4px;">Total Price FOR<br/>(INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:variable var="index" value="{!1}"/>
+                <apex:repeat value="{!solarItems}" var="item">
+                    <tr>
+                        <td style="border: 1px solid black; text-align: center;">{!index}</td>
+                        
+                        <td style="border: 1px solid black; text-align: left; font-weight: bold;">
+                            {!item.material}
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: center;">
+                            {!item.thickness}<apex:outputText rendered="{!item.thickness != null && item.thickness != '-'}"> mm</apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: center;">
+                            {!item.grade}
+                            <apex:outputPanel layout="none" rendered="{!item.micron != null && item.micron != '-'}">
+                                <br/><span style="font-size: 8px;">Avg. {!item.micron}µ</span>
+                            </apex:outputPanel>
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: right;">
+                            <apex:outputText value="{0, number, #,##0.000}">
+                                <apex:param value="{!item.unitWeight}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: right;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!item.unitCost}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: center;">
+                            <apex:outputText value="{0, number, #,##0}">
+                                <apex:param value="{!item.quantity}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid black; text-align: right; padding-right: 4px; font-weight: bold;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!item.unitWeight * item.unitCost}" />
+                            </apex:outputText>
+                        </td>
+        
+                        <td style="border: 1px solid black; text-align: right; padding-right: 4px; font-weight: bold;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!(item.unitWeight * item.unitCost) * item.quantity}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <apex:variable var="index" value="{!index + 1}"/>
+                </apex:repeat>
+            </tbody>
+        </table>
+        </apex:outputPanel>
+
+<!-- ══════════════════════════════════════════════════
+     B. SUPPLY TECHNICAL PARTICULARS
+     ══════════════════════════════════════════════════ -->
+<div class="supply-section"  Style = "width: 85%">
+    <p><b><u>B. SUPPLY TECHNICAL PARTICULARS:</u></b></p>
+    <p style="margin-top:8px;">
+        We shall manufacture Piers as per drawings and technical specifications shared by
+        <b>{!accountName}.</b>
+    </p>
+  
+        <td style="font-weight: bold;">Bolts/Nuts:</td>
+        <td>Not in our scope</td>
+        <tr>
+                    <td style="font-weight: bold;">Galvanizing:</td>
+                    <td>
+                        All steels shall be hot dipped galvanized and shall conform to ASTM A 123 or equivalent standard of IS 2629, IS 4759, IS 2633, IS 6745 with average coating weight of <strong>{!micronThickness}µ Minimum</strong>.
+                    </td>
+                </tr>
+   
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     GENERAL TERMS & CONDITIONS
+     ══════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════
+     GENERAL TERMS & CONDITIONS
+     ══════════════════════════════════════════════════ -->
+<div class="tc-section" style="width: 85%">
+    <p class="section-heading">GENERAL TERMS &amp; CONDITIONS:</p>
+    <ol style="list-style-type: decimal; padding-left: 20px;">
+        <li><b>Buyer:</b> Buyer shall mean {!accountName}.</li>
+        <li><b>Supplier:</b> Supplier shall mean Utkarsh India Limited having its office at 95A, Elliot Road, Arrjavv Square, Kolkata.</li>
+        <li><b>Payment Terms:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li><apex:outputText value="{!dynamicPaymentTerms}" escape="false" /></li>
+                <li><b>Loading Charges:</b> Loading charges of INR 300 per MT shall be applicable extra and shall be charged over and above the quoted prices.</li>
+                <li><b>Material Lifting &amp; Storage Charges:</b> The Buyer shall arrange lifting/dispatch of the inspected material within 3 days from the date of inspection acceptance or notification of material readiness, whichever is earlier. In case of delay in lifting the material, full balance payment shall remain due as per the agreed payment terms, and the Supplier reserves the right to levy storage charges at the rate of 5% of the total contract value for every week of delay until the material is dispatched.</li>
+                <li>Final BOM, tonnage, and drawings shall be mutually finalized and agreed upon prior to order confirmation.</li>
+                <li>Billing shall be considered on the basis of the actual finished weight. Any alternate billing basis, if applicable, shall be subject to corresponding price revision.</li>
+                <li>The final BOM with confirmed quantities and approved drawings shall be provided and frozen at the time of order finalization.</li>
+                <li>The above-mentioned prices are exclusive of taxes. GST @ 18% shall be charged extra.</li>
+            </ol>
+        </li>
+        <li><b>Scope of Work:</b> Manufacturing, Galvanizing and Supply of Solar -MMS</li>
+        <li><b>Exclusions:</b> Above prices are exclusive of the followings:
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>Welded items</li>
+                <li>Anti-Fall Brackets</li>
+                <li>Grid Mesh</li>
+                <li>Helicopter Platform</li>
+                <li>Earthing Material</li>
+                <li>Number Plate, Danger Plate, Phase Plate and Arial Plate</li>
+            </ol>
+        </li>
+        <li><b>Delivery:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>All deliveries to be completed by 60 days from the date of PO, advance payment or Manufacturing clearance for mass production.</li>
+                <li>Deliveries shall be made lot wise as per the number of Manufacturing Clearances issued with mutual agreement.</li>
+                <li>In case of DDP/CIP Deliveries, the goods shall be unloaded at site in an expeditious manner.</li>
+                <li>Any demurrages claimed by the Logistics Service Provider for reasons not attributable to UIL shall be borne by the Buyer.</li>
+            </ol>
+        </li>
+        <li><b>Commencement Date:</b> Date of receipt of the following, whichever is later:
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>Purchase Order</li>
+                <li>Advance payment</li>
+                <li>Operative Letter of Credit</li>
+                <li>Detailed Approved Structural Drawings, Shop Sketch Drawings</li>
+                <li>Final Manufacturing clearance</li>
+            </ol>
+        </li>
+        <li><b>Packing &amp; Forwarding:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>The prices quoted for supply of the materials are inclusive of standard packing and forwarding charges.</li>
+                <li>Any type of special packing and forwarding charges shall be extra as applicable and same has to be borne by the Buyer.</li>
+                <li>The special type of packing if any required has to be intimated to the supplier before the finalization of the Order.</li>
+                <li>Loading Charges 300 Extra on the quoted price</li>
+            </ol>
+        </li>
+        <li><b>Price Basis:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>Firm on FOR Kolkata (INCOTERMS 2020).</li>
+                <li>This offer is based on the assumption that full quantity clearance will be given with Purchase Order.</li>
+                <li>The prices will be subject to revision with any change in the MFC issuance</li>
+                <li>Prices shall be inclusive of Freight up to site and has the validity for entire Project including transit insurance. Applicable GST will be extra as applicable (Incoterm - <apex:outputText value="{!jsonData['incoterms']}"/> {!quoteRecord.Opportunity.Name})</li>
+            </ol>
+        </li>
+        <li><b>Inspection:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>We have not considered any third-party inspection fees. However, we will provide necessary facilities to carryout routine Inspection as per our standard procedure at our works by your authorized representatives.</li>
+                <li>Any travelling, lodging, boarding expenses of the representatives shall be borne by the Buyer.</li>
+                <li>The raw material testing is conducted at UIL's in house laboratory.</li>
+                <li>Any testing required at a 3rd party laboratory shall be conducted at extra charge.</li>
+                <li>Any requirement of third-party inspection of testing shall be at Buyer's scope.</li>
+                <li>If for any reason the Buyer fails to depute any third-party inspection agency to carry out the pre-delivery inspection, the Supplier shall at the cost of the Buyer conduct such third-party pre-delivery inspection at the Supplier's factory and such inspection for all practical purposes shall be deemed to have been conducted at the behest of the Buyer. Such third-party inspection conducted prior to delivery or dispatch of the materials shall be considered as final for all issues on quality and technical parameters.</li>
+            </ol>
+        </li>
+        <li><b>Drawing:</b> It shall always at the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions' specifications and information of the product in order to facilitate the Supplier to undertake the manufacturing of the products based on the drawings.</li>
+        <li><b>Warranty:</b> We shall warrant the goods against defective material/ workmanship error for a period of 12 months from the date of dispatch. The warranty set forth here shall not apply to
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>The normal wear and tear of the material.</li>
+                <li>The deterioration of the material due to negligence or incorrect installation/ operation/ storage which is not in conformity with the technical specification/ requirement.</li>
+                <li>Defects resulting from modifications or repairs performed by Client/ Customer or third parties.</li>
+                <li>Misuse, fault or negligence of or by Client/ Customer.</li>
+                <li>Accident, disaster or event of Force Majeure.</li>
+                <li>Use of the goods in a manner for which they were not designed.</li>
+            </ol>
+            <p style="margin-top:4pt;">The warranty period for a defective material, which has been replaced, shall extend only to the extent of the unexpired term of such warranty from the date of replacement. Repaired or corrected materials shall remain warranted for the balance of the original warranty period.</p>
+        </li>
+        <li><b>Return of Goods:</b> After obtaining satisfactory inspection clearance certificate, once the goods are dispatched, the Buyer will not be entitled to return the same by raising any technical issues or defects.</li>
+        <li><b>Quality:</b> In the event if the results of the pre-delivery inspection carried out at the behest of the Buyer are found to be in conflict with the findings of the inspection made at the Buyer's destination, by any independent inspection agency and/or surveyor engaged by the Buyer, under such circumstances the Buyer shall have to provide a reasonable and acceptable explanation justifying the reason for such conflicting reports by two different independent agencies both being appointed by the Buyers. If the Buyer fails to substantiate the claim with proper and acceptable explanation in that event the Buyer's claim on quality related issues shall stand set aside.</li>
+        <li><b>Validity:</b> This Offer shall remain valid for a period of&nbsp;<apex:outputText value="{!jsonData['tc_offer_validity']}"/> from the date of issuance of this Offer, unless the same is revalidated in writing.</li>
+        <li><b>Penal interest:</b> In the event if the Buyer fails to make payment of the invoices raised within seven days and/or as may be agreed otherwise, from the date of receipt of the same in that event the Supplier shall be entitled to impose penal interest @10% per annum quarterly compoundable.</li>
+        <li><b>Breach &amp; Default:</b> If the Buyer or the Supplier fails to comply with the terms and conditions of this agreement in that event the defaulting party shall become liable to compensate the other party by way of damages, however such other party shall become entitled to claim damages provided such claim is duly substantiated with proper evidence.</li>
+        <li><b>Lifting of Materials:</b> If for any reason, the Buyer fails to take delivery of the materials within two/three days from the date of being notified that the materials are lying ready for taking delivery and/or dispatch and/or from the date of inspection recording acceptance of the materials, whichever is earlier, in that event the Supplier shall become entitled to impose storing charges for holding the materials till the time it is dispatched. Such charges shall be imposed at the rate of 5.00% of the total contract value for every week's delay caused in taking delivery of the materials.</li>
+        <li><b>Late Delivery Charges:</b> Unless prevented by force majeure condition, the Supplier shall be liable to deliver the materials within the agreed delivery schedule. However, since the Supplier has agreed to supply the materials at an extremely competitive price it is being made clear that for the purpose of this contract the Buyer shall not be entitled to impose any late delivery charges for any delay caused in delivery of the materials.</li>
+        <li><b>Shortages:</b> The Supplier will take full care to dispatch material in correct quantum. The Buyer should instruct transporter to acknowledge receipt of goods as per packing list is provided (along with invoice) before shipment. The Buyer shall be liable to depute its own representative at the factory site of the Supplier for checking the packing list and counting the materials as per the packing list in order to avoid any issues of short supply arising after shipment of the materials. However, if the Buyer chooses not to depute any representative for verification of the packing list at the factory site of the Supplier, under such situation the Buyer shall not be liable to raise claims of short supply after successful shipment of the Goods.</li>
+        <li><b>Confidentiality:</b> The terms and conditions described in this contract including its existence shall be confidential information and shall not be disclosed by any party to any third party without the prior written consent of the other party.</li>
+        <li><b>Force Majeure:</b>
+            <ol style="list-style-type: lower-roman; padding-left: 25px; margin-top: 6px;">
+                <li>In this agreement, "force majeure" means any cause preventing Supplier from performing any or all of its obligations which arises from or is attributable to acts or events beyond the reasonable control of the party so prevented, including, without limitation, strikes, lock-outs or other industrial disputes (whether involving the workforce of the party so prevented or of any other party), act of god, war, riot, civil commotion, malicious damage, accident, breakdown of plant or machinery, fire, flood, storm or default of suppliers or sub-contractors.</li>
+                <li>If Supplier is prevented or delayed in the performance of any of its obligations under this contract by force majeure, that party shall forthwith serve notice in writing on the other party specifying the nature and extent of the circumstances giving rise to force majeure and subject to service of such notices such party shall have no liability in respect of the performance of such of its obligations as are prevented by the force majeure events during the continuation of such events and for such time after they cease as is necessary for that party, using all reasonable endeavors, to recommence its affected operations in order for it to perform its obligations.</li>
+                <li>If Supplier is prevented from performance of its obligations for a continuous period in excess of two months, the Buyer and/or the Supplier may terminate this agreement forthwith on service of written notice on the party so prevented, in which case neither party shall have any liability to the other except that rights and liabilities which accrued prior to such termination shall continue to subsist.</li>
+            </ol>
+        </li>
+        <li><b>Jurisdiction:</b> No suit or any proceedings in regard to any matter arising in respect of this contract shall be instituted in the High Court, Calcutta, City Civil Court at Calcutta or at the Court of small causes at Calcutta. It is agreed that no other court shall have jurisdiction to entertain any suit or proceedings, even though, part of the cause of action might arise within their jurisdiction.</li>
+        <li><b>Miscellaneous:</b> Notwithstanding anything otherwise or contrary recorded anywhere within the purchase/supply order arising from this quotation, the terms and conditions of this quotation shall be deemed to be a part of the contract and in the event of any conflict in interpretation of the clauses of this quotation in that event the clauses of the quotation shall prevail over the clauses of the purchase/supply order.</li>
+    </ol>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     CLOSING
+     ══════════════════════════════════════════════════ -->
+<div class="closing">
+    <p>We hope, you will find our offer competitive Techno-commercially and we trust our offer
+       meets your requirements.<br/>
+       We look forward to receiving your valued order which shall receive our best attention.</p>
+    <div class="signature-section avoid-break">
+         <p style="margin-top:16px;">
+        Thanking you,<br/>
+        Yours truly,<br/>
+             <apex:outputPanel layout="none" rendered="{!hasSignature}">
+            <img src="{!URLFOR($Resource['Signature_' + $User.Alias])}" style="height: 80px; width: auto; margin-left: -10px;" alt="Authorized Signature" />
+        </apex:outputPanel>
+        
+        <!-- 👉 BLANK SPACE FALLBACK (IF NO IMAGE EXISTS) -->
+        <apex:outputPanel layout="none" rendered="{!NOT(hasSignature)}">
+            <!-- This maintains the exact same spacing so the layout doesn't collapse -->
+            <div style="height: 80px; width: 100%;"></div>
+        </apex:outputPanel>
+       <p style="margin-top: 5px;">
+            <b style="text-transform: uppercase;">{!$User.FirstName} {!$User.LastName}</b><br/>
+            
+            <!-- Only renders the Title line if the user has a Title filled out -->
+            <apex:outputText rendered="{!NOT(ISBLANK($User.Title))}">
+                {!$User.Title}<br/>
+            </apex:outputText>
+            
+            <b>UTKARSH INDIA LIMITED</b><br/>
+            
+            <!-- Only renders the Mobile line if the user has a Mobile filled out -->
+            <apex:outputText rendered="{!NOT(ISBLANK($User.MobilePhone))}">
+                Mobile No. {!$User.MobilePhone}
+            </apex:outputText>
+        </p>
+    </p>
+    </div>
+   
+</div>
+    </div>
+
+
+<div style="page-break-before: always;">
+        <img src="{!$Resource.SolarBackCover}" style="width: 210mm; height: 297mm; display: block; margin: 0; padding: 0; border: none;" />
+    </div>
+    
+</body>
+</apex:page>

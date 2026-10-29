@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Due Date And Time Of Sending Hardcopy At</label>
+    <protected>false</protected>
+    <values>
+        <field>Key_Api_name__c</field>
+        <value xsi:type="xsd:string">Due_date_and_time_of_sending_hardcopy_at_site</value>
+    </values>
+    <values>
+        <field>Key_Name__c</field>
+        <value xsi:type="xsd:string">Due Date And Time Of Sending Hardcopy At Site</value>
+    </values>
+    <values>
+        <field>Serial_Number__c</field>
+        <value xsi:type="xsd:double">13.0</value>
+    </values>
+</CustomMetadata>

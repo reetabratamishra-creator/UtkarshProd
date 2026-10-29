@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Bills__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Indicates whether bills are mandatory for all food expenses</description>
+    <inlineHelpText>All food expenses must be supported by bills per Standing Instructions</inlineHelpText>
+    <label>Require Bills</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

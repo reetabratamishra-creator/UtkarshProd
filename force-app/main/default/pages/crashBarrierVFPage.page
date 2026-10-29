@@ -1,0 +1,1861 @@
+<apex:page standardController="Quote" extensions="CrashBarrierQuoteController" renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <html>
+    <head>
+        <style type="text/css">
+            @page {
+                size: A4;
+                /* Create physical space at the top and bottom of every page for the header/footer */
+                margin-top: 40mm;    
+                margin-bottom: 35mm; /* Increased to 50mm so the footer doesn't chop your text */
+                margin-left: 15mm;   /* Increased to 15mm for standard professional borders */
+                margin-right: 15mm;
+                /* This injects the running elements into the page margins */
+                @top-center {
+                    content: element(header);
+                }
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+	
+			<apex:outputPanel layout="none" rendered="{!jsonData['MBCB_Type'] != 'Noise Barrier'}">
+                @page :first {
+                    margin: 0mm;
+                    @top-center { content: normal; }
+                    @bottom-center { content: normal; }
+                }
+            </apex:outputPanel>
+
+            .cover-page {
+                page-break-after: always; 
+                line-height: 0; 
+                font-size: 0;
+                margin: 0;
+                padding: 0;
+                height: 290mm; /* 🛑 Restricts the container to slightly under A4 height */
+                overflow: hidden; /* 🛑 Brutally chops off any microscopic decimal spillage */
+            }
+            
+            body {
+                font-family: sans-serif;
+                font-size: 11px;
+                color: #333;
+                white-space: normal; /* Ensures text wraps normally */
+            }
+            
+            /* ── Assign the header and footer to the running elements ── */
+            .pdf-header {
+                position: running(header);
+            }
+            
+            .pdf-footer {
+                position: running(footer);
+                text-align: right;
+                font-size: 8px;
+                line-height: 1.3;
+                color: #333;
+            }
+            /* 1. Prevents table rows from splitting in half */
+            tr {
+                page-break-inside: avoid;
+            }
+
+            /* 2. Prevents Terms  Conditions paragraphs from slicing horizontally */
+            p {
+                page-break-inside: avoid;
+            }
+
+            /* 3. Keeps headers attached to their following paragraphs */
+            .keep-together {
+                page-break-after: avoid;
+            }
+            
+            * {
+                box-sizing: border-box !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+            
+            html, body {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .keepTogether {
+                page-break-inside: avoid;
+            }
+            
+            /* ── LAST PAGE (back cover) — Deepanjan (10th September 2026) ── */
+            @page final-page {
+                margin: 0mm;
+                @top-center { content: normal; }
+                @bottom-center { content: normal; }
+            }
+
+                        .cover-page-last {
+                page: final-page;
+                page-break-before: always;
+                line-height: 0;
+                font-size: 0;
+                margin: 0;
+                padding: 0;
+            }
+           
+        </style>
+    </head>
+    <body>
+       <apex:outputPanel layout="none" rendered="{!jsonData['MBCB_Type'] != 'Noise Barrier'}">
+            <div class="cover-page">
+                <img src="{!$Resource.CrashBarrierCover}" style="width: 100%; height: 296mm; display: block; margin: 0; padding: 0; border: none;" />
+            </div>
+        </apex:outputPanel>
+        
+        <div class="pdf-header">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 0; font-family: sans-serif; margin-top: 10mm;">
+                <tr>
+                    <td style="width: 100%; text-align: right; vertical-align: bottom; padding-bottom: 5px;">
+                        <img src="{!$Resource.UtkarshHeader}" alt="Utkarsh header" style="width: 85%; height: auto;"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        
+
+        <table style="width: 85%; font-size: 10px; font-weight: bold; margin-bottom: 25px;">
+            <tr>
+                <td style="text-align: left; text-decoration: underline;">REF: {!quoteRecord.Quote_Reference__c}</td>
+                <td style="text-align: right; text-decoration: underline;">DATE: {!todayDate}</td>
+            </tr>
+        </table>
+        <div style="margin-bottom: 20px; width: 85%;"><b>To,</b><br/>{!accountName}</div>
+        <div style="margin-bottom: 20px; width: 85%;"><b>KIND ATTN: Mr/Ms. {!contactName}</b><br/><b>EMAIL ID: {!contactEmail}</b></div>
+        <div style="margin-bottom: 20px; width: 85%;"><b>SUB: Our offer of "Utkarsh" Brand.</b></div>
+       <div style="margin-bottom: 25px; line-height: 1.6; width: 85%; word-wrap: break-word; overflow-wrap: break-word;">
+            Dear Madam / Sir<br/><br/>
+            <span style="font-weight: bold;white-space: normal; display: inline;">Please refer to your enquiry &amp; the discussion had with Mr/Ms. {!$User.FirstName} {!$User.LastName}</span><br/>
+        </div>
+
+        <apex:variable var="rowNum" value="{!1}"/>
+
+        <!-- ------NATRAX------ -->
+        <apex:repeat value="{!lineItems}" var="row">
+
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'NATRAX')}">
+                <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                    <apex:outputText value="{!IF(CONTAINS(row['name'], 'Thrie'), 'NATRAX CRASH TESTED THRIE BEAM', 'NATRAX CRASH TESTED W BEAM')}"/>
+                </div>
+                <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">UNIT</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">QTY</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">RATE/MTR</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(row['name'], 'Thrie'), 'Thrie Beam', 'W Beam')}</strong> Metal Crash Barrier <strong>Single Side Single Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_beam_thickness'], jsonData['wb_natrax_beam_thickness'])} MM</strong> having width of <strong>{!IF(CONTAINS(row['name'], 'Thrie'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                            </td>
+                            <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                            <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                            <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText>
+                            </td>
+                            <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                Spacer channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_spacer_thickness'], jsonData['wb_natrax_spacer_thickness'])} MM thick x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_spacer_length'], jsonData['wb_natrax_spacer_length'])} MM long.</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_post_thickness'], jsonData['wb_natrax_post_thickness'])} MM thick x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_post_height'], jsonData['wb_natrax_post_height'])} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>Required Fasteners (M16x40) Button Type for fixing as per: {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_nuts_bolts'], jsonData['wb_natrax_nuts_bolts'])}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 4}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>Required Fasteners (M16x40) Hexagonal Type for fixing as per: {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_nuts_bolts'], jsonData['wb_natrax_nuts_bolts'])}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                All thickness/weight tolerances as per IS standard/drawing applicable
+                            </td>
+                        </tr>
+                        <apex:variable var="natraxFreight" value="{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_natrax_fvf'], jsonData['wb_natrax_fvf'])}" />
+                        <apex:outputPanel layout="none" rendered="{!natraxFreight > 0}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!natraxFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + natraxFreight) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + natraxFreight)  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + natraxFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </tbody>
+                </table>
+                <apex:variable var="rowNum" value="{!rowNum + 5}"/>
+            </apex:outputPanel>
+        </apex:repeat>
+			
+        <!--------ALKA------- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'ALKA')}">
+                <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                    <apex:outputText value="{!IF(CONTAINS(row['name'], 'Thrie'), 'ALKA CRASH TESTED THRIE BEAM', 'ALKA CRASH TESTED W BEAM')}"/>
+                </div>
+                <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(row['name'], 'Thrie'), 'Thrie Beam', 'W Beam')}</strong> Metal Crash Barrier <strong>Single Side Single Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_beam_thickness'], jsonData['wb_alka_beam_thickness'])} MM</strong> having width of <strong>{!IF(CONTAINS(row['name'], 'Thrie'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                                <apex:outputPanel rendered="{!CONTAINS(row['name'], 'Thrie')}">
+                                    <br/><span style=" font-weight: bold;">MATERIAL GRADE: E-250</span>
+                                </apex:outputPanel>
+                            </td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText>
+                            </td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>{!IF(CONTAINS(row['name'], 'Thrie'), '125 MM x 62.5 MM', '62.5 MM x 125 MM')} x 25 MM x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_post_thickness'], jsonData['wb_alka_post_thickness'])} MM thick x {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_post_height'], jsonData['wb_alka_post_height'])} MM long</strong> with <strong>{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_centre_to_centre'], jsonData['wb_alka_centre_to_centre'])} MTR</strong> center to center Post spacing.
+                                <apex:outputPanel rendered="{!CONTAINS(row['name'], 'Thrie')}">
+                                    <br/><span style="font-weight: bold;">MATERIAL GRADE: E-350</span>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>Required Fasteners (M16x40) Button Type for fixing as per: {!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_nuts_bolts'], jsonData['wb_alka_nuts_bolts'])}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                All thickness/weight tolerances as per IS standard/drawing applicable
+                            </td>
+                        </tr>
+                       <apex:variable var="alkaFreight" value="{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_alka_fvf'], jsonData['wb_alka_fvf'])}" />
+                        <apex:outputPanel layout="none" rendered="{!alkaFreight > 0}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!alkaFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + alkaFreight) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + alkaFreight)  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + alkaFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </tbody>
+                </table>
+                <apex:variable var="rowNum" value="{!rowNum + 3}"/>
+            </apex:outputPanel>
+        </apex:repeat>
+        
+       <!-- ========================================== -->
+        <!-- NOISE BARRIER SECTION (ANNEXURE A) -->
+        <!-- ========================================== -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'NOISE BARRIER')}">
+                
+                <div style=" margin-bottom: 25px; line-height: 1.6; width: 85%; word-wrap: break-word; overflow-wrap: break-word; ">
+                    Your enquiry for supplying of the product as mentioned in the captioned subject has given us this opportunity to connect and introduce our company and the “Utkarsh” brand and the various range of products of the company including and not limited to the <strong>“Noise Barriers”</strong>. We are obliged to have got this opportunity to submit our offer and/or quotation for manufacturing and supply of the product described in the captioned subject, as against your enquiry No. dated<strong> {!todayDate}</strong>.<br/><br/>
+                    We take pride to mention that you have approached one of the leading brands in the country engaged in the manufacturing of the product as described herein and we can assure you that if you decide to accept our offer and place the purchase/supply order in our favor you will always feel proud for having made the right decision by relying upon the best quality product.<br/><br/>
+                    Our offer and/or quotation for the Noise Barriers “Utkarsh” brand as enquired by you is/are more clearly mentioned and recorded in the Annexure “A” to this quotation. The said Annexure “A” shall for all practical purposes be considered as a part of the present quotation.
+                </div>
+                <div class="keepTogether">
+                    <div style="text-align: right; margin-bottom: 5px; font-weight: bold; width: 85%;">
+                        <span style=" padding: 2px 4px;">ANNEXURE - A</span>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">Sl. No.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">Item Description</th>
+                                
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 15%; font-weight: bold;">
+                                    Quantity {!IF(CONTAINS(UPPER(IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_uom'], jsonData['a_s_uom'])), 'SQ'), 'SMT', 'RMT')}
+                                </th>
+                                
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 15%; font-weight: bold;">
+                                    Rate IN {!IF(CONTAINS(UPPER(IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_uom'], jsonData['a_s_uom'])), 'SQ'), 'SMT', 'RMT')}
+                                </th>
+                                
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 20%; font-weight: bold;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top; line-height: 1.5;">
+                                    <span style="text-decoration: underline;">Type – {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), 'Reflective Barrier', 'Absorptive Barrier')}</span><br/>
+                                    {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), 'Polycarbonate Sheet', 'Rockwool Sheet')} – {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_thickness'], jsonData['a_s_thickness'])} mm {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), '', '')}<br/>
+                                    Height – {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_height'], jsonData['a_s_total_height'])} meter<br/>
+                                    Column Spacing – {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_column_spacing'], jsonData['a_s_column_spacing'])} meters<br/>
+                                    Installation – {!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_installation'], jsonData['a_s_installation'])}
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0}"><apex:param value="{!row['quantity']}" /></apex:outputText>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText>
+                                </td>
+                               <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9; text-transform: uppercase;">
+                                    ALL THICKNESS/ WEIGHT TOLERANCES AS PER IS STANDARD / DRAWING APPLICABLE
+                                </td>
+                            </tr>
+                            
+                            <!-- Freight Row (Only displays if FVF > 0) -->
+                            
+                            <apex:variable var="rsFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'REFLECTIVE'), jsonData['r_s_fvf'], jsonData['a_s_fvf'])}" />
+                            <apex:outputPanel layout="none" rendered="{!rsFreight > 0}">
+                                <tr>
+                                    <!-- Changed colspan from 5 to 4 -->
+                                    <td colspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; text-transform: uppercase;">
+                                        Transportation charges
+                                    </td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!rsFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                            <!-- Interest must print whenever the separate-interest flag is on, even when this section carries no full-vehicle freight. -->
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                                <tr>
+                                    <td colspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(rsFreight > 0, rsFreight, 0)) * (intrestfactor - 1)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(rsFreight > 0, rsFreight, 0)) * intrestfactor}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                                <tr>
+                                    <td colspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!(row['quantity'] * row['unitPrice']) + rsFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+        
+        <!-- ========================================== -->
+        <!-- PEDESTRIAN GUARD RAIL SECTION (ANNEXURE A) -->
+        <!-- ========================================== -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'PEDESTRIAN GUARD RAIL')}">
+                
+                <!-- 👉 NEW PEDESTRIAN GUARD RAIL INTRO TEXT (WITH DYNAMIC DATE) -->
+                <div style="width: 85%; word-wrap: break-word; overflow-wrap: break-word; margin-bottom: 25px; line-height: 1.6; ">
+                    Your enquiry for supplying of the product as mentioned in the captioned subject has given us this opportunity to connect and introduce our company and the “Utkarsh” brand and the various range of products of the company including and not limited to the<strong> “Pedestrian Guard Rail” </strong>. We are obliged to have got this opportunity to submit our offer and/or quotation for manufacturing and supply of the product described in the captioned subject, as against your enquiry No. dated<strong> {!todayDate} </strong>.<br/><br/>
+                    We take pride to mention that you have approached one of the leading brands in the country engaged in the manufacturing of the product as described herein and we can assure you that if you decide to accept our offer and place the purchase/supply order in our favor you will always feel proud for having made the right decision by relying upon the best quality product.<br/><br/>
+                    Our offer and/or quotation for the Pedestrian Guard Rail “Utkarsh” brand as enquired by you is/are more clearly mentioned and recorded in the Annexure “A” to this quotation. The said Annexure “A” shall for all practical purposes be considered as a part of the present quotation.
+                </div>
+                <!-- END INTRO TEXT -->
+
+                <div class="keepTogether">
+                    
+                    <!-- Split Header for Pedestrian Guard Rail -->
+                    <table style="width: 85%; border: none; font-weight: bold; margin-bottom: 5px; font-size: 11px;">
+                        <tr>
+                            <td style="text-align: left; padding: 0;">
+                                <span style=" padding: 2px 4px;">PEDESTRIAN GUARD RAIL</span>
+                            </td>
+                            <td style="text-align: right; padding: 0;">
+                                <span style=" padding: 2px 4px;">ANNEXURE - A</span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Main Data Table -->
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 6%; font-weight: bold;">Sl. No.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 44%; font-weight: bold;">Item Description</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">Unit</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">Qty.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 15%; font-weight: bold;">Rate</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 15%; font-weight: bold;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- Bullet Point instead of Sl No -->
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle; font-size: 14px;">&#8226;</td>
+                                
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: middle; text-transform: uppercase;">
+                                    {!jsonData['PGR_itemName']}
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                                    MTR
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0}"><apex:param value="{!row['quantity']}" /></apex:outputText>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice'] / row['quantity']}" /></apex:outputText>
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                    <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText>
+                                </td>
+                            </tr>
+                            
+                            <!-- Standard Tolerance Footer -->
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9; text-transform: uppercase;">
+                                    ALL THICKNESS/ WEIGHT TOLERANCES AS PER IS STANDARD / DRAWING APPLICABLE
+                                </td>
+                            </tr>
+                            
+                            <!-- Freight Row (Only displays if FVF > 0) -->
+                            <apex:outputPanel layout="none" rendered="{!jsonData['PGR_full_vehicle_freight'] > 0}">
+                                <tr>
+                                    <td colspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; text-transform: uppercase;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!jsonData['PGR_full_vehicle_freight']}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['unitPrice']) + jsonData['PGR_full_vehicle_freight']) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!(( row['unitPrice']) + jsonData['PGR_full_vehicle_freight'])  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['unitPrice']) + jsonData['PGR_full_vehicle_freight']}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        </tbody>
+                    </table>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <!-- -------TRANSPOLIS-------- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'TRANSPOLIS')}">
+                <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                    TRANSPOLIS CRASH TESTED W BEAM
+                </div>
+                <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>"Utkarsh"</strong> make <strong>W Beam</strong> Metal Crash Barrier <strong>Single Side Single Beam</strong> guard rail comprising of <strong>{!jsonData['wb_trans_beam_thickness']} MM</strong> having width of <strong>312 MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                            </td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText>
+                            </td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;">
+                                <apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>62.5 MM x 125 MM x 25 MM x {!jsonData['wb_trans_post_thickness']} MM thick x {!jsonData['wb_trans_post_height']} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>Required Fasteners (M16x40) Button Type for fixing as per: {!jsonData['wb_trans_nuts_bolts']}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                All thickness/weight tolerances as per IS standard/drawing applicable
+                            </td>
+                        </tr>
+                        <apex:variable var="transFreight" value="{!IF(CONTAINS(row['name'], 'Thrie'), jsonData['tb_trans_fvf'], jsonData['wb_trans_fvf'])}" />
+                        <apex:outputPanel layout="none" rendered="{!transFreight > 0}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!transFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + transFreight) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + transFreight)  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + transFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        </tbody>
+                </table>
+                <apex:variable var="rowNum" value="{!rowNum + 3}"/>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <!-- ----------RAILWAY GRADED------- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'RAILWAY') && NOT(CONTAINS(UPPER(row['name']), 'NON'))}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        RAILWAY GRADED
+                    </div>
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                   <strong>"Utkarsh"</strong> make <strong>W Beam</strong> Metal Crash Barrier <strong>Single Side Double Beam</strong> guard rail comprising of <strong>{!jsonData['print_graded_thickness']} MM</strong> having width of <strong>312 MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                                    <br/><span style="font-weight: bold;">MATERIAL GRADE: YST205 OR equivalent</span>
+                                </td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x 4 MM thick x 2700 MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                    <br/><span style="font-weight: bold;">MATERIAL GRADE: E350 OR equivalent</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16x40) Button Type for fixing as per IS: 1367</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16x40) Hexagonal Type for fixing as per IS: 1367</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9; text-transform: uppercase;">
+                                    ALL THICKNESS/ WEIGHT TOLERANCES AS PER IS STANDARD / DRAWING APPLICABLE
+                                </td>
+                            </tr>
+                            <apex:outputPanel layout="none" rendered="{!jsonData['rlw_full_Vehicle_freight'] > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; text-transform: uppercase;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!jsonData['rlw_full_Vehicle_freight']}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + jsonData['rlw_full_Vehicle_freight']) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + jsonData['rlw_full_Vehicle_freight'])  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + jsonData['rlw_full_Vehicle_freight']}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 4}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <!-- ----------RAILWAY NON-GRADED---- -->
+        <apex:repeat value="{!lineItems}" var="row">
+           <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'RAILWAY') && CONTAINS(UPPER(row['name']), 'NON')}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        RAILWAY NON - GRADED
+                    </div>
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    <strong>"Utkarsh"</strong> make <strong>W Beam</strong> Metal Crash Barrier <strong>Single Side Double Beam</strong> guard rail comprising of <strong>{!jsonData['print_nongraded_thickness']} MM</strong> having width of <strong>312 MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                                </td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="4" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x 4 MM thick x 2700 MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16x40) Button Type for fixing as per IS: 1367</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16x40) Hexagonal Type for fixing as per IS: 1367</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9; text-transform: uppercase;">
+                                    ALL THICKNESS/ WEIGHT TOLERANCES AS PER IS STANDARD / DRAWING APPLICABLE
+                                </td>
+                            </tr>
+                            <apex:outputPanel layout="none" rendered="{!jsonData['rlw_non_graded_full_Vehicle_freight'] > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; text-transform: uppercase;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!jsonData['rlw_non_graded_full_Vehicle_freight']}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + jsonData['rlw_non_graded_full_Vehicle_freight']) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + jsonData['rlw_non_graded_full_Vehicle_freight'])  * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + jsonData['rlw_non_graded_full_Vehicle_freight']}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                            </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 4}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <!-- ---------NON SPACER------------ -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'NON-SPACER')}">
+                <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                    <apex:outputText value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'THRIE BEAM WITHOUT SPACER DESIGN REGULAR GRADE MATERIAL', 'W - BEAM WITHOUT SPACER DESIGN REGULAR GRADE MATERIAL')}"/>
+                </div>
+                <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'Thrie Beam', 'W Beam')}</strong> Metal Crash Barrier <strong>Single Side Single Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_beam_thickness_input'], jsonData['ns_w_beam_section_beam_thickness_input'])} MM</strong> having width of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length <strong>4.318 MTR. (Effective length 4.0 MTR).</strong>
+                            </td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                            <td rowspan="3" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '125 MM x 62.5 MM', '62.5 MM x 125 MM')} x 25 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_post_thickness_input'], jsonData['ns_w_beam_section_post_thickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_post_height_input'], jsonData['ns_w_beam_section_post_height_input'])} MM long</strong> with <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_centre_to_centre_input'], jsonData['ns_w_beam_section_centre_to_centre_input'])} MTR</strong> center to center Post spacing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                <strong>Required Fasteners (M16x40) Button Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_nuts_bolts_input'], jsonData['ns_w_beam_section_nuts_bolts_input'])}</strong>
+                            </td>
+                        </tr>
+                        <tr><td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">All thickness/weight tolerances as per IS standard/drawing applicable</td></tr>
+                        
+                        <apex:variable var="nsFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['ns_thrie_beam_section_full_Vehicle_freight'], jsonData['ns_w_beam_section_full_Vehicle_freight'])}" />             
+                        <apex:outputPanel layout="none" rendered="{!nsFreight > 0}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; text-transform: uppercase;">
+                                    Transportation charges
+                                </td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!nsFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+
+                        <!-- Interest must print whenever the separate-interest flag is on, even when this section carries no full-vehicle freight. -->
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + nsFreight) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!((row['quantity'] * row['unitPrice']) + nsFreight) * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!(row['quantity'] * row['unitPrice']) + nsFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    </tbody>
+                </table>
+                <apex:variable var="rowNum" value="{!rowNum + 3}"/>
+            </apex:outputPanel>
+           
+        </apex:repeat>
+
+        <!-- -------CONVENTIONAL W/T SSSB---- -->
+         <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSSB')}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold; display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        CONVENTIONAL TYPE - {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'THRIE', 'W')} BEAM - SINGLE SIDE SINGLE BEAM
+                    </div>
+                    
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'Thrie-Beam', 'W-Beam')}</strong> Metal Crash Barrier <strong>Single Side Single Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_beamThickness_input'], jsonData['w_SSSB_w_beam_beamThickness_input'])} MM</strong> having width of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length 4.318 Mtr. (effective length 4.0 Mtr.)
+                                </td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_postThickness_input'], jsonData['w_SSSB_w_beam_postThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_postHeight_input'], jsonData['w_SSSB_w_beam_postHeight_input'])} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Spacer channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_spacerThickness_input'], jsonData['w_SSSB_w_beam_spacerThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_spaceLength_input'], jsonData['w_SSSB_w_beam_spaceLength_input'])} MM long.</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Button Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_nutsBolts_input'], jsonData['w_SSSB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 4}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Hexagonal Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_nutsBolts_input'], jsonData['w_SSSB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">All thickness/weight tolerances as per IS standard/drawing applicable</td>
+                            </tr>
+
+                            <!-- Consolidated Freight Row: Filters by product type (THRIE vs W-Beam) -->
+                            <apex:variable var="currentFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSSB_full_Vehicle_freight'], jsonData['w_SSSB_w_beam_full_Vehicle_freight'])}" />
+                            
+                            <apex:outputPanel layout="none" rendered="{!VALUE(TEXT(currentFreight)) > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!currentFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+
+                            <!-- Total Charges (Without Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!(row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 5}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+	
+        <!-- --------CONVENTIONAL W/T SSDB----- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'SSDB')}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold; display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        CONVENTIONAL TYPE - {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'THRIE', 'W')} BEAM - SINGLE SIDE DOUBLE BEAM
+                    </div>
+                    
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'Thrie-Beam', 'W-Beam')}</strong> Metal Crash Barrier <strong>Single Side Double Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_beamThickness_input'], jsonData['w_SSDB_w_beam_beamThickness_input'])} MM</strong> having width of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length 4.318 Mtr. (effective length 4.0 Mtr.)
+                                </td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_postThickness_input'], jsonData['w_SSDB_w_beam_postThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_postHeight_input'], jsonData['w_SSDB_w_beam_postHeight_input'])} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Spacer channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_spacerThickness_input'], jsonData['w_SSDB_w_beam_spacerThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_spaceLength_input'], jsonData['w_SSDB_w_beam_spaceLength_input'])} MM long.</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Button Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_nutsBolts_input'], jsonData['w_SSDB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 4}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Hexagonal Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_nutsBolts_input'], jsonData['w_SSDB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">All thickness/weight tolerances as per IS standard/drawing applicable</td>
+                            </tr>
+        
+                            <!-- Consolidated Freight Variable: Pick either THRIE or W-BEAM freight key for SSDB -->
+                            <apex:variable var="currentFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_SSDB_full_Vehicle_freight'], jsonData['w_SSDB_w_beam_full_Vehicle_freight'])}" />
+                            
+                            <!-- Transportation Charges -->
+                            <apex:outputPanel layout="none" rendered="{!VALUE(TEXT(currentFreight)) > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!currentFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Total Charges (Without Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!(row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Interest Charges & Total Charges (With Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * (intrestfactor - 1)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * intrestfactor}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                        </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 5}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+    
+        <!-- --------CONVENTIONAL W/T DSSB----- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSSB')}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold; display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        CONVENTIONAL TYPE - {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'THRIE', 'W')} BEAM - DOUBLE SIDE SINGLE BEAM
+                    </div>
+                    
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'Thrie-Beam', 'W-Beam')}</strong> Metal Crash Barrier <strong>Double Side Single Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_beamThickness_input'], jsonData['w_DSSB_w_beam_beamThickness_input'])} MM</strong> having width of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length 4.318 Mtr. (effective length 4.0 Mtr.)
+                                </td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_postThickness_input'], jsonData['w_DSSB_w_beam_postThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_postHeight_input'], jsonData['w_DSSB_w_beam_postHeight_input'])} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Spacer channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_spacerThickness_input'], jsonData['w_DSSB_w_beam_spacerThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_spaceLength_input'], jsonData['w_DSSB_w_beam_spaceLength_input'])} MM long.</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Button Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_nutsBolts_input'], jsonData['w_DSSB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 4}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Hexagonal Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_nutsBolts_input'], jsonData['w_DSSB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">All thickness/weight tolerances as per IS standard/drawing applicable</td>
+                            </tr>
+        
+                            <!-- Consolidated Freight Variable: Pick THRIE or W-BEAM freight key for DSSB -->
+                            <apex:variable var="currentFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSSB_full_Vehicle_freight'], jsonData['w_DSSB_w_beam_full_Vehicle_freight'])}" />
+                            
+                            <!-- Transportation Charges -->
+                            <apex:outputPanel layout="none" rendered="{!VALUE(TEXT(currentFreight)) > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!currentFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Total Charges (Without Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!(row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Interest Charges & Total Charges (With Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * (intrestfactor - 1)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * intrestfactor}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                        </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 5}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+        
+        <!-- -------CONVENTIONAL W/T DSDB----- -->
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel rendered="{!row['isMainProduct'] && CONTAINS(UPPER(row['name']), 'CONVENTIONAL') && CONTAINS(UPPER(row['name']), 'DSDB')}">
+                <div class="keepTogether">
+                    <div style="margin-top: 20px; font-weight: bold; display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                        CONVENTIONAL TYPE - {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'THRIE', 'W')} BEAM - DOUBLE SIDE DOUBLE BEAM
+                    </div>
+                    
+                    <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ITEM DESCRIPTION</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 10%; font-weight: bold;">HSN Code</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">UNIT</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 8%; font-weight: bold;">QTY</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">RATE/MTR</th>
+                                <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; font-weight: bold;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;">{!rowNum}</td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    <strong>"Utkarsh"</strong> make <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), 'Thrie-Beam', 'W-Beam')}</strong> Metal Crash Barrier <strong>Double Side Double Beam</strong> guard rail comprising of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_beamThickness_input'], jsonData['w_DSDB_w_beam_beamThickness_input'])} MM</strong> having width of <strong>{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), '502', '312')} MM</strong> and depth <strong>83 MM</strong> with hot dip galvanized having total length 4.318 Mtr. (effective length 4.0 Mtr.)
+                                </td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">73089090</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">MTR</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['unitPrice']}" /></apex:outputText></td>
+                                <td rowspan="5" style="border: 1px solid #000; padding: 4px; text-align: right; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['quantity'] * row['unitPrice']}" /></apex:outputText></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 1}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Post channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_postThickness_input'], jsonData['w_DSDB_w_beam_postThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_postHeight_input'], jsonData['w_DSDB_w_beam_postHeight_input'])} MM long</strong> with <strong>2.0 MTR</strong> center to center Post spacing.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 2}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;">
+                                    Spacer channel made of <strong>"C"</strong> Section having hot dip galvanized having size of <strong>75 MM x 150 MM x 75 MM x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_spacerThickness_input'], jsonData['w_DSDB_w_beam_spacerThickness_input'])} MM thick x {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_spaceLength_input'], jsonData['w_DSDB_w_beam_spaceLength_input'])} MM long.</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 3}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Button Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_nutsBolts_input'], jsonData['w_DSDB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: top;"><apex:outputText value="{!rowNum + 4}"/></td>
+                                <td style="border: 1px solid #000; padding: 4px; vertical-align: top;"><strong>Required Fasteners (M16 x 40) Hexagonal Type for fixing as per: {!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_nutsBolts_input'], jsonData['w_DSDB_w_beam_nutsBolts_input'])}</strong></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">All thickness/weight tolerances as per IS standard/drawing applicable</td>
+                            </tr>
+        
+                            <!-- Consolidated Freight Variable: Pick THRIE or W-BEAM freight key for DSDB -->
+                            <apex:variable var="currentFreight" value="{!IF(CONTAINS(UPPER(row['name']), 'THRIE'), jsonData['Thrie_DSDB_full_Vehicle_freight'], jsonData['w_DSDB_w_beam_full_Vehicle_freight'])}" />
+                            
+                            <!-- Transportation Charges -->
+                            <apex:outputPanel layout="none" rendered="{!VALUE(TEXT(currentFreight)) > 0}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!currentFreight}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Total Charges (Without Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, #,##0.00}">
+                                            <apex:param value="{!(row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                            <!-- Interest Charges & Total Charges (With Separate Interest) -->
+                            <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * (intrestfactor - 1)}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total charges</td>
+                                    <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                        <apex:outputText value="{0, number, ##,##,##0.00}">
+                                            <apex:param value="{!((row['quantity'] * row['unitPrice']) + IF(VALUE(TEXT(currentFreight)) > 0, currentFreight, 0)) * intrestfactor}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+        
+                        </tbody>
+                    </table>
+                    <apex:variable var="rowNum" value="{!rowNum + 5}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:repeat>
+
+
+     <apex:variable var="hasAcc" value="{!0}"/>
+        <apex:variable var="hasMisc" value="{!0}"/>
+        <apex:variable var="hasAddlMisc" value="{!0}"/>
+        
+        <apex:repeat value="{!lineItems}" var="row">
+            <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ACCESSORY:')}">
+                <apex:variable var="hasAcc" value="{!1}"/>
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'MISC:') && NOT(CONTAINS(UPPER(row['name']), 'ADD MISC:'))}">
+                <apex:variable var="hasMisc" value="{!1}"/>
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ADD MISC:')}">
+                <apex:variable var="hasAddlMisc" value="{!1}"/>
+            </apex:outputPanel>
+        </apex:repeat>
+
+        <apex:outputPanel rendered="{!hasAcc > 0}">
+                <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                    ACCESSORIES DETAILS
+                </div>
+                
+                <table cellspacing="0" cellpadding="0" style="width: 85%; table-layout: fixed; border-collapse: collapse; border: 1px solid #000; border-bottom: none; font-family: sans-serif; font-size: 10px; word-wrap: break-word; margin-bottom: 0;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2;">
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ACCESSORIES DESCRIPTION</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">UOM</th>
+                            
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">QUANTITY (NO.)</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">PER/ PRICE</th>
+                            <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <apex:variable var="accIndex" value="{!1}"/>
+            
+                <apex:repeat value="{!lineItems}" var="row">
+                    
+                    <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'ACCESSORY:') && (row['expenses'] == 0 || row['expenses'] == null), 'table-row', 'none')};">
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!accIndex}</td>
+                        <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;">{!row['name']}</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['uom']}</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!row['per_price']}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!row['per_price_total']}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+
+                    <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'ACCESSORY:') && row['expenses'] > 0, 'table-row', 'none')};">
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!accIndex}</td>
+                        <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;"><strong>{!row['name']}</strong></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">1</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!row['expenses']}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+
+                    <tr style="display: none;">
+                        <td>
+                            <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ACCESSORY:')}">
+                                <apex:variable var="accIndex" value="{!accIndex + 1}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+
+                </apex:repeat>
+                </tbody>
+            </table>    
+            
+            <table cellspacing="0" cellpadding="0" style="width: 85%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-family: sans-serif; font-size: 10px; margin-top: 0;">
+                <tbody>
+                    <tr>
+                        <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                    All thickness/weight tolerances as per IS standard/drawing applicable
+                                </td>
+                    </tr>
+                    <apex:outputPanel layout="none" rendered="{!jsonData['acc_section_anchor_fastner'] == true}">
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                    Anchor Fastners, if required, extra @ {!jsonData['acc_section_anchor_fastner_amount']} per piece plus GST
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!jsonData['acc_section_fvf'] > 0}">
+                        <tr>
+                            <td colspan="6"
+                                style="border:1px solid #000;padding:4px;text-align:center;font-weight:bold;">
+                                Transportation charges
+                            </td>
+                            <td style="border:1px solid #000;padding:4px;text-align:right;">
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!jsonData['acc_section_fvf']}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    <!-- Interest Charges (30th July 2026): when "show separate interest" is
+                         ticked, the controller leaves these line prices at factor 1.00 - exactly
+                         as it does for the MBCB types - so the interest has to appear as its own
+                         row here. Same formula and layout as every MBCB section:
+                         (section total + its freight) x (intrestfactor - 1). With the flag off,
+                         the original Total Charge row below runs untouched.
+                         Deepanjan (30th July 2026) -->
+                    <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                        <tr>
+                            <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                <apex:outputText value="{0, number, ##,##,##0.00}">
+                                    <apex:param value="{!(totalAccessoriesAmount + IF(jsonData['acc_section_fvf'] > 0, jsonData['acc_section_fvf'], 0)) * (intrestfactor - 1)}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                                <apex:outputText value="{0, number, ##,##,##0.00}">
+                                    <apex:param value="{!(totalAccessoriesAmount + IF(jsonData['acc_section_fvf'] > 0, jsonData['acc_section_fvf'], 0)) * intrestfactor}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                    <tr>
+                        <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                            <apex:outputText value="{0,number,#,##0.00}">
+                                <apex:param value="{!totalAccessoriesAmount + IF(jsonData['acc_section_fvf'] > 0, jsonData['acc_section_fvf'], 0)}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    </apex:outputPanel>
+                    
+                </tbody>
+            </table>
+            
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!hasMisc > 0}">
+            <div style="margin-top: 20px; font-weight: bold;display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                MISCELLANEOUS DETAILS
+            </div>
+            <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">MISCELLANEOUS DESCRIPTION</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">UOM</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">QUANTITY (NO.)</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">PER/ PRICE</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable var="miscIndex" value="{!1}"/>
+                    
+                    <apex:repeat value="{!lineItems}" var="row">
+                        
+                        <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'MISC:') && NOT(CONTAINS(UPPER(row['name']), 'ADD MISC:')) && (row['expenses'] == 0 || row['expenses'] == null), 'table-row', 'none')};">
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!miscIndex}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;">{!row['name']}</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['uom']}</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!row['per_price']}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">
+                            <apex:outputText value="{0, number, #,##0.00}">
+                                <apex:param value="{!row['per_price_total']}" />
+                            </apex:outputText>
+                        </td>
+                        </tr>
+
+                        <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'MISC:') && NOT(CONTAINS(UPPER(row['name']), 'ADD MISC:')) && row['expenses'] > 0, 'table-row', 'none')};">
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!miscIndex}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;"><strong>{!row['name']}</strong></td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">1</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['expenses']}" /></apex:outputText></td>
+                        </tr>
+
+                        <tr style="display: none;">
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'MISC:') && NOT(CONTAINS(UPPER(row['name']), 'ADD MISC:'))}">
+                                    <apex:variable var="miscIndex" value="{!miscIndex + 1}"/>
+                                </apex:outputPanel>
+                             </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+            <table cellspacing="0" cellpadding="0" style="width: 85%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-family: sans-serif; font-size: 10px; margin-top: 0;">
+                    <tbody>
+                        <tr>
+                            <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                All thickness/weight tolerances as per IS standard/drawing applicable
+                            </td>
+                        </tr>
+                        <apex:outputPanel layout="none" rendered="{!jsonData['acc_section_anchor_fastner'] == true}">
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                    Anchor Fastners, if required, extra @ {!jsonData['acc_section_anchor_fastner_amount']} per piece plus GST
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:variable var="miscFreight" value="{!jsonData['misc_section_fvf']}" />
+                        <apex:outputPanel layout="none" rendered="{!miscFreight > 0}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Transportation charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, #,##0.00}">
+                                        <apex:param value="{!miscFreight}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <!-- Interest Charges (30th July 2026): when "show separate interest" is
+                             ticked, the controller leaves these line prices at factor 1.00 - exactly
+                             as it does for the MBCB types - so the interest has to appear as its own
+                             row here. Same formula and layout as every MBCB section:
+                             (section total + its freight) x (intrestfactor - 1). With the flag off,
+                             the original Total Charge row below runs untouched.
+                             Deepanjan (30th July 2026) -->
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!(totalMiscAmount + IF(miscFreight > 0, miscFreight, 0)) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!(totalMiscAmount + IF(miscFreight > 0, miscFreight, 0)) * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                        <tr>
+                            <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!totalMiscAmount + IF(miscFreight > 0, miscFreight, 0)}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        </apex:outputPanel>
+                        
+                    </tbody>
+                </table>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!hasAddlMisc > 0}">
+            <div style="margin-top: 20px; font-weight: bold;  display: inline-block; padding: 3px 6px; font-size: 11px; page-break-after: avoid;">
+                ADDITIONAL MISCELLANEOUS DETAILS
+            </div>
+            <table style="width: 85%; border-collapse: collapse; border: 1px solid #000; font-family: sans-serif; font-size: 10px; table-layout: fixed; word-wrap: break-word; margin-bottom: -1px;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 5%; font-weight: bold;">SL. NO.</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 45%; font-weight: bold;">ADDITIONAL MISC DESCRIPTION</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">UOM</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">QTY</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">PER/ PRICE</th>
+                        <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12.5%; font-weight: bold;">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:variable var="addlMiscIndex" value="{!1}"/>
+                    
+                    <apex:repeat value="{!lineItems}" var="row">
+                        
+                        <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'ADD MISC:') && (row['expenses'] == 0 || row['expenses'] == null), 'table-row', 'none')};">
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!addlMiscIndex}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;">{!row['name']}</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['uom']}</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!row['quantity']}</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['per_price']}" /></apex:outputText></td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['per_price_total']}" /></apex:outputText></td>
+                        </tr>
+
+                        <tr style="display: {!IF(CONTAINS(UPPER(row['name']), 'ADDL MISC:') && row['expenses'] > 0, 'table-row', 'none')};">
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">{!addlMiscIndex}</td>
+                            <td style="border: 1px solid #000; padding: 4px; vertical-align: middle;"><strong>{!row['name']}</strong></td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">1</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;">-</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center; vertical-align: middle;"><apex:outputText value="{0, number, #,##0.00}"><apex:param value="{!row['expenses']}" /></apex:outputText></td>
+                        </tr>
+
+                        <tr style="display: none;">
+                            <td>
+                                <apex:outputPanel layout="none" rendered="{!CONTAINS(UPPER(row['name']), 'ADDL MISC:')}">
+                                    <apex:variable var="addlMiscIndex" value="{!addlMiscIndex + 1}"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+
+                    </apex:repeat>
+                </tbody>
+            </table>
+            <table cellspacing="0" cellpadding="0" style="width: 85%; border-collapse: collapse; border: 1px solid #000; border-top: none; font-family: sans-serif; font-size: 10px; margin-top: 0;">
+                    <tbody>
+                        <tr>
+                            <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                        All thickness/weight tolerances as per IS standard/drawing applicable
+                                    </td>
+                        </tr>
+                        <apex:outputPanel layout="none" rendered="{!jsonData['acc_section_anchor_fastner'] == true}">
+                            <tr>
+                                <td colspan="7" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">
+                                    Anchor Fastners, if required, extra @ {!jsonData['acc_section_anchor_fastner_amount']} per piece plus GST
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!jsonData['add_misc_fvf'] > 0}">
+                        <tr>
+                            <td colspan="6"
+                                style="border:1px solid #000;padding:4px;text-align:center;font-weight:bold;">
+                                Transportation charges
+                            </td>
+                            <td style="border:1px solid #000;padding:4px;text-align:right;">
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!jsonData['add_misc_fvf']}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                        <!-- Interest Charges (30th July 2026): when "show separate interest" is
+                             ticked, the controller leaves these line prices at factor 1.00 - exactly
+                             as it does for the MBCB types - so the interest has to appear as its own
+                             row here. Same formula and layout as every MBCB section:
+                             (section total + its freight) x (intrestfactor - 1). With the flag off,
+                             the original Total Charge row below runs untouched.
+                             Deepanjan (30th July 2026) -->
+                        <apex:outputPanel layout="none" rendered="{!showSeperateInterest}">
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Interest Charges</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!(totalAddlMiscAmount + IF(jsonData['add_misc_fvf'] > 0, jsonData['add_misc_fvf'], 0)) * (intrestfactor - 1)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                                <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                                    <apex:outputText value="{0, number, ##,##,##0.00}">
+                                        <apex:param value="{!(totalAddlMiscAmount + IF(jsonData['add_misc_fvf'] > 0, jsonData['add_misc_fvf'], 0)) * intrestfactor}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!NOT(showSeperateInterest)}">
+                        <tr>
+                            <td colspan="6" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold;">Total Charge</td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!totalAddlMiscAmount + IF(jsonData['add_misc_fvf'] > 0, jsonData['add_misc_fvf'], 0)}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        </apex:outputPanel>
+                    </tbody>
+                </table>
+        </apex:outputPanel>
+        
+        
+
+
+       
+        
+        <div style="margin-top: 30px; font-size: 9px; line-height: 1.5; text-align: justify; font-family: sans-serif; width: 85%; word-wrap: break-word; overflow-wrap: break-word;">
+            
+            <p style="font-weight: bold; text-decoration: underline; font-size: 10px; margin-bottom: 15px;">TERMS &amp; CONDITIONS OF THE CONTRACT:-</p>
+
+            <p style="margin-bottom: 8px;">1. <strong>Rates and Taxes:</strong> The rates quoted are exclusive of <strong>Goods &amp; Service Taxes</strong> and therefore the Goods &amp; Service Taxes shall be chargeable extra at 18% on the total order value.</p>
+            
+            <p style="margin-bottom: 15px;">2. <strong>Payment Terms:</strong> {!dynamicPaymentTerms}</p>
+            <p style="margin-bottom: 8px; text-align: left;">
+                3. <strong>Transportation &amp; Freight:</strong> <apex:outputText value="{!dynamicFreightTerm}" />
+            </p>
+            
+            <p style="margin-bottom: 8px;">4. <strong>Inspection:</strong> The Buyer at its own cost shall have to make arrangements for pre-delivery third party/own team inspection.</p>
+            
+            <p style="margin-bottom: 8px;">5. <strong>Drawing:</strong> It shall always be the absolute obligation of the Buyer to provide a proper legible valid drawing with all dimensions specifications and information of the product in order to undertake the manufacturing of the products based on the drawings. <strong>A 50% advance is mandatory along with the purchase order to undertake manufacturing of product based on drawing and balance before dispatch.</strong></p>
+            
+            <p style="margin-bottom: 8px;">6. UIL shall be responsible for the material as per specifications mentioned in drawing/PO. However, in case of any change in design by NHAI or any Other competent authority, post the dispatch, UIL will not take back material on account of the same.</p>
+            
+            <p style="margin-bottom: 8px;">7. UIL shall not be responsible for any issues arising out of improper installation or storage.</p>
+            
+            <p style="margin-bottom: 8px;">8. <strong>Quality:</strong> All quality related complaint to be informed to us in writing within 72 hours of receipt of material at site. Thereafter UIL may not accept any quality complaints.</p>
+            
+            <p style="margin-bottom: 8px;">9. <strong>Weigh Bridge Tolerance</strong> - Industry Standard Weigh Bridge tolerance of 0.5% applicable.</p>
+            
+            <p style="margin-bottom: 8px;">10. <strong>LD Clause / Penalty</strong> - No LD Clause / Penalty in any form acceptable for any reason even if mentioned in PO.</p>
+            
+            <p style="margin-bottom: 8px;">11. <strong>Validity:</strong> This offer shall remain valid for a period of <strong><apex:outputText value="{!validityDays}" /> </strong> days from the date of quotation. UIL may withdraw the quotes at its discretion before the expiry of validity period incase of exceptional circumstances.</p>
+            
+            <p style="margin-bottom: 8px;">12. <strong>Price variation:</strong> UIL may seek a revision in prices in Purchase Order placed to us in the event of hike in raw material prices or increased cost of production due to factors beyond are control.</p>
+            
+           <div style="margin-bottom: 8px;">
+                <div style="margin-bottom: 4px;">13. <strong>Confidentiality:</strong></div>
+                <div style="padding-left: 20px;">
+                    <div style="margin-bottom: 4px;">(A) During the term of this Agreement, each party (the "disclosing party") may communicate to the other party (the "receiving party") information which it considers to be confidential ("Confidential Information"). All Confidential Information shall be specifically designated as confidential. Such Confidential Information may include, without limitation, trade secrets, know-how, inventions, technical data or specifications, testing methods, business or financial information, research and development activities, product and marketing plans, and customer and supplier information. Confidential Information that is disclosed orally or visually shall be documented in a written notice prepared by the disclosing party and delivered to the receiving party within thirty (30) days of the date of disclosure; such notice shall summarize the Confidential Information disclosed to the receiving party and reference to the time and place of disclosure.</div>
+                    
+                    <div style="margin-bottom: 4px;">(B) The receiving party agrees that it shall: (a) maintain all Confidential Information in strict confidence, except that the receiving party may disclose or permit the disclosure of any Confidential Information to its directors, officers, employees, consultants, and advisors who are obligated to maintain the confidential nature of such Confidential Information and who need to know such Confidential Information for the purpose set forth in this Agreement; (b) use all Confidential Information solely for the purpose set forth in this Agreement; and (c) allow its directors, officers, employees, consultants, and advisors to reproduce the Confidential Information only to the extent necessary to effect the purposes set forth in this Agreement, with all such reproductions being considered Confidential Information.</div>
+                    
+                    <div style="margin-bottom: 4px;">(C) The obligations of the receiving party under Clause B above shall not apply to the extent that the receiving party can demonstrate that certain Confidential Information: (a) was in the public domain prior to the time of its disclosure under this Agreement; (b) entered the public domain after the time of its disclosure under this Agreement through means other than an unauthorized disclosure resulting from an act or omission by the receiving party; (c) was independently developed or discovered by receiving party without use of the Confidential Information; (d) is or was disclosed to the receiving party at any time, whether prior to or after the time of its disclosure under this Agreement, by a third party having no fiduciary relationship with the disclosing party and having no obligation of confidentiality with respect to such Confidential Information; or (e) is required to be disclosed to comply with application laws or regulation, or with a court or administrative order, provided that, the disclosing party receives prior written notice of such disclosure and that the receiving party takes all reasonable and lawful actions to obtain confidential treatment for such disclosure and, if possible, to minimize the extent of such disclosure.</div>
+                    
+                    <div>(D) The obligations set forth in this Article shall remain in effect for a period of five (5) years after the expiration or the earlier termination of this Agreement.</div>
+                </div>
+            </div>
+            
+            <p style="margin-bottom: 8px;">14. <strong>Force Majeure:</strong> (a) Neither Party will be liable for any failure to perform its obligations hereunder, other than payment obligations, due to unforeseen circumstances or causes beyond the Party's reasonable control, including, without limitation, acts of God, war, riot, embargoes, acts of civil or military authorities, acts of terrorism or sabotage, electronic viruses, worms or corrupting microcode, fire, flood, earthquake, accident, strikes, radiation, inability to secure transportation, failure of communications or electrical lines, facilities, fuel, energy, labour or materials. In an event of force majeure, either Party's time for delivery or other performance will be extended for a period equal to the duration of the delay caused thereby. The Party subject to the force majeure shall (A)give notice of suspension of its obligations as soon as reasonably practicable stating the date and extent of such suspension and the cause thereof, (B)use its best efforts to remedy or remove such force majeure with the least practicable delay, and (C)resume the performance of its obligations as soon as reasonably practicable after the remediation or removal of the cause. Notwithstanding anything to the contrary herein, if an event of force majeure can reasonably be expected to prevent the affected Party from performing its obligations for a period of at least three (3)months, then the other Party may terminate this Agreement upon not less than fifteen days written notice to the affected Party.</p>
+            
+            <div style="margin-bottom: 8px;">
+                <div style="margin-bottom: 4px;">15. <strong>Governing LAW, Arbitration and Jurisdiction::</strong></div>
+                <div style="padding-left: 20px;">
+                    <div style="margin-bottom: 4px;">The Courts at Kolkata shall have exclusive jurisdiction over all unresolved disputes relating to this Agreement. The Parties expressly consent to this jurisdiction and waive, as well as undertake, that they will not assert any claim, with respect to personal applicability, inconvenience of forum, venue or any other hardship related to jurisdiction.</div>
+                    
+                    <div style="margin-bottom: 4px;">Should there be any dispute or difference of opinion regarding this contract, both the parties will make all efforts to amicably settle such disputes. Efforts at reaching an amicable settlement will be deemed to have failed as soon as one of the contractual parties informs the other in writing about such a deadlock. If efforts at amicable settlement fail, all disputes arising out of this contract or its validity will be finally decided in accordance with the provisions of the Arbitration and Conciliation Act 1996, as amended from time to time. The arbitration proceedings shall be headed by a sole arbitrator. The decision of the sole arbitrator shall be binding upon the parties. The arbitration proceedings shall be held at KOLKATA, India and conducted in English language.</div>
+                    
+                    
+                </div>
+            </div>
+            
+            
+            <p style="margin-bottom: 8px;">16. <strong>Miscellaneous:</strong> The Company would issue various work orders from time to time during the tenure of this agreement and the present Agreement contains the general terms and conditions of the contract which would govern and administer the work order issued by the Company from time to time. Any specific terms and conditions not mentioned in this agreement but mentioned in the work order shall prevail and govern the contract. Any specific terms and conditions mentioned herein but not mentioned in the work order shall also continue to prevail and govern the contract. However, in the event of any conflicting interpretation of any clauses of this Agreement with the work order, the present agreement shall prevail over the work order.</p>
+            
+            <p style="margin-bottom: 15px;">17. <strong>Quotation to have Overriding Effect:</strong> The terms and conditions of this quotation shall override/supersede the terms and conditions mentioned in the Purchase order, notwithstanding the fact that the Purchase Order has been signed and stamped by Utkarsh India Limited. Any subsequent placement of Purchase Order post submission of this or any other revised Quotation shall automatically be deemed as acceptance of this clause.</p>
+            
+            <p style="margin-bottom: 25px;">Hope you will find our rates, terms and conditions competitive and thereby proceed to award the Purchase Order in our favor.</p>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <div style="margin-bottom: 4px;">Thanking you,</div>
+                <div><strong>For UTKARSH INDIA LIMITED</strong></div>
+            </div>
+            
+            <p style="margin-top: 40px; margin-bottom: 5px;"><strong>Utkarsh India Limited</strong></p>
+            <p style="margin-bottom: 5px;"><strong>Email :</strong> {!contactEmail}</p>
+            <p><strong>web:</strong> <a href="http://www.utkarshindia.in" style="color: #0000EE;">www.utkarshindia.in</a></p>
+            
+        </div>
+        
+        <div class="cover-page-last" style="text-align: center;">
+    <img src="{!$Resource.HM_Last_Page}" style="width: 100%; height: auto; margin: 0; padding: 0; border: none;" />
+</div>
+
+    </body>
+    </html>
+</apex:page>

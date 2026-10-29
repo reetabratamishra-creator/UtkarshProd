@@ -1,0 +1,56 @@
+<template>
+    <template if:true={open}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium slds-hyphenate">
+                        Timeline – {employeeName}
+                    </h2>
+                    <button class="slds-button slds-modal__close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                    </button>
+                </header>
+
+                <!-- BODY -->
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <!-- Active Punch Record -->
+                    <template if:true={punchRecord}>
+                        <div class="punch-header">
+                            <div>
+                                <strong>Punch Status:</strong> {punchRecord.status}
+                            </div>
+                            <div>
+                                <strong>Punch Time:</strong> {punchRecord.time}
+                            </div>
+                        </div>
+
+                        <div class="slds-m-vertical_small">
+                            <strong>Tasks under this Punch</strong>
+                        </div>
+                    </template>
+
+                    <!-- Task logs -->
+                    <template if:true={taskLogs}>
+                        <template for:each={taskLogs} for:item="t">
+                            <div key={t.id} class="task-card">
+                                <div class="task-time">{t.time}</div>
+                                <div class="task-desc">{t.description}</div>
+                            </div>
+                        </template>
+                    </template>
+
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,0 +1,16 @@
+<apex:page standardController="Campaign"
+  recordSetVar="campaigns"
+  extensions="CampaignStatsListBridgeController"
+  action="{!redirectToLwc}"
+  showHeader="true"
+  sidebar="false"
+>
+  <apex:pageMessages />
+  <apex:outputPanel layout="block" style="padding: 1.5rem; font-family: Arial, sans-serif;">
+    <apex:outputText value="{!errorMessage}" />
+    <p>
+      Select one or more Campaigns on the list view, then click
+      <strong>Campaign Report</strong> again.
+    </p>
+  </apex:outputPanel>
+</apex:page>

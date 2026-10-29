@@ -1,0 +1,3099 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>latching mast blueprints</label>
+    <protected>false</protected>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;tp_s1_pole&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg1_tp_pole_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;tp_s1_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;tp_pole_type&quot;,
+          &quot;label&quot;: &quot;POLE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Polygonal&quot;,
+            &quot;Conical&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_height_of_pole&quot;,
+          &quot;label&quot;: &quot;HEIGHT OF POLE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;Meter&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_top_diameter&quot;,
+          &quot;label&quot;: &quot;TOP DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_bottom_diameter&quot;,
+          &quot;label&quot;: &quot;BOTTOM DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_no_of_polygonal_side&quot;,
+          &quot;label&quot;: &quot;NO. OF POLYGONAL SIDE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;side&quot;,
+          &quot;options&quot;: [
+            &quot;0&quot;,
+            &quot;6&quot;,
+            &quot;8&quot;,
+            &quot;12&quot;,
+            &quot;16&quot;,
+            &quot;20&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_segment_length&quot;,
+          &quot;label&quot;: &quot;SEGMENT LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;tp_height_of_pole * 1000&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_segment_thickness&quot;,
+          &quot;label&quot;: &quot;SEGMENT THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_bearing_plate_type&quot;,
+          &quot;label&quot;: &quot;BEARING PLATE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Square&quot;,
+            &quot;Circular&quot;,
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_size_dia_of_bearing_plate&quot;,
+          &quot;label&quot;: &quot;SIZE DIA OF BEARING PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;formula&quot;: &quot;tp_bottom_diameter + 100&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_thickness_of_bearing_plate&quot;,
+          &quot;label&quot;: &quot;THICKNESS OF BEARING PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_pole_cab_dia&quot;,
+          &quot;label&quot;: &quot;POLE CAB DIA&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;tp_pole_type == &apos;Polygonal&apos; ? Math.round((tp_top_diameter || 0) / Math.cos(Math.PI / (Number(tp_no_of_polygonal_side) || 1)) + 20) : Math.round((tp_top_diameter || 0) + 20)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_pole_cab_thickness&quot;,
+          &quot;label&quot;: &quot;POLE CAB THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_dan&quot;,
+          &quot;label&quot;: &quot;DAN&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_note&quot;,
+          &quot;label&quot;: &quot;**NOTE&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_qty&quot;,
+          &quot;label&quot;: &quot;QTY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_extra_micron&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+          &quot;type&quot;: &quot;checkbox&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_extra_micron_value&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON VALUE? &quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;controllingField&quot;: &quot;tp_extra_micron&quot;,
+          &quot;controllingValues&quot;: [
+            &quot;true&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_realization&quot;,
+          &quot;label&quot;: &quot;REALIZATION&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;defaultValue&quot;: 5,
+          &quot;isRealization&quot;: true,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_total_realization_on_segment_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON SEGMENT PRICE&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;formula&quot;: &quot;(Base_Amount__c + tp_realization)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_segment_weight&quot;,
+          &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;( (tp_pole_type == &apos;Polygonal&apos; ? ((((((tp_top_diameter || 0) + (tp_bottom_diameter || 0)) / 2) - (tp_segment_thickness || 0)) * Math.tan(Math.PI / (Number(tp_no_of_polygonal_side) || 1)) * (Number(tp_no_of_polygonal_side) || 0)) / 1000 * (tp_height_of_pole || 0) * (tp_segment_thickness || 0) * 7.85) : (tp_pole_type == &apos;Conical&apos; ? ((22/7) * (((((tp_top_diameter || 0) + (tp_bottom_diameter || 0)) / 2) / 1000) * (tp_height_of_pole || 0) * (tp_segment_thickness || 0) * 7.85)) : 0)) + (((tp_top_diameter || 0) / 1000) * 0.05 * 5 * 7.85) + (tp_bearing_plate_type == &apos;Circular&apos; ? ((((tp_size_dia_of_bearing_plate || 0) * (tp_size_dia_of_bearing_plate || 0)) / 4 / 1000000 * 3.14) * (tp_thickness_of_bearing_plate || 0) * 7.85) : (tp_bearing_plate_type == &apos;Square&apos; ? ((((tp_size_dia_of_bearing_plate || 0) * (tp_size_dia_of_bearing_plate || 0)) / 1000000) * (tp_thickness_of_bearing_plate || 0) * 7.85) : 0)) + (0.13 * 4) + (((22/7) * Math.pow(((tp_pole_cab_dia || 0) / 2), 2) / 1000000 * (tp_pole_cab_thickness || 0) * 7.85) + 0.22) ) * (1 + (5/100))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_base_price&quot;,
+          &quot;label&quot;: &quot;BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(((tp_total_realization_on_segment_price || 0 ) * (tp_segment_weight || 0))) + (tp_qty || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (tp_segment_weight || 0)) + (0 / (Number(tp_qty) || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;tp_s2_pole&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg2_tp_pole_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;tp_s2_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;tp_s2_pole_type&quot;,
+          &quot;label&quot;: &quot;POLE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Polygonal&quot;,
+            &quot;Conical&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_height_of_pole&quot;,
+          &quot;label&quot;: &quot;HEIGHT OF POLE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;Meter&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_top_diameter&quot;,
+          &quot;label&quot;: &quot;TOP DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_bottom_diameter&quot;,
+          &quot;label&quot;: &quot;BOTTOM DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_no_of_polygonal_side&quot;,
+          &quot;label&quot;: &quot;NO. OF POLYGONAL SIDE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;side&quot;,
+          &quot;options&quot;: [
+            &quot;0&quot;,
+            &quot;6&quot;,
+            &quot;8&quot;,
+            &quot;12&quot;,
+            &quot;16&quot;,
+            &quot;20&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_segment2_length_top&quot;,
+          &quot;label&quot;: &quot;SEGMENT -2 LENGTH (TOP)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_length_bot&quot;,
+          &quot;label&quot;: &quot;SEGMENT -1 LENGTH (BOT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_segment2_thickness_top&quot;,
+          &quot;label&quot;: &quot;SEGMENT -2 THICKNESS (TOP)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_thickness_bot&quot;,
+          &quot;label&quot;: &quot;SEGMENT -1 THICKNESS (BOT)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_overlap&quot;,
+          &quot;label&quot;: &quot;OVERLAP&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;tp_segment2_length_top + tp_s2_length_bot - (tp_s2_height_of_pole * 1000)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_bearing_plate_type&quot;,
+          &quot;label&quot;: &quot;BEARING PLATE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Square&quot;,
+            &quot;Circular&quot;,
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_size_dia_of_bearing_plate&quot;,
+          &quot;label&quot;: &quot;SIZE DIA OF BEARING PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;formula&quot;: &quot;tp_s2_bottom_diameter + 100&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_thickness_of_bearing_plate&quot;,
+          &quot;label&quot;: &quot;THICKNESS OF BEARING PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_pole_cab_dia&quot;,
+          &quot;label&quot;: &quot;POLE CAB DIA&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;tp_s2_pole_type == &apos;Polygonal&apos; ? Math.round((tp_s2_top_diameter || 0) / Math.cos(Math.PI / (Number(tp_s2_no_of_polygonal_side) || 1)) + 20) : Math.round((tp_s2_top_diameter || 0) + 20)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_pole_cab_thickness&quot;,
+          &quot;label&quot;: &quot;POLE CAB THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_dan&quot;,
+          &quot;label&quot;: &quot;DAN&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_note&quot;,
+          &quot;label&quot;: &quot;**NOTE&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_qty&quot;,
+          &quot;label&quot;: &quot;QTY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_extra_micron&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+          &quot;type&quot;: &quot;checkbox&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_extra_micron&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON VALUE&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;controllingField&quot;: &quot;s1_need_extra_micron&quot;,
+          &quot;controllingValues&quot;: [
+            &quot;true&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_realization&quot;,
+          &quot;label&quot;: &quot;REALIZATION&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;defaultValue&quot;: 5,
+          &quot;isRealization&quot;: true,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_total_realization_on_segment_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON SEGMENT PRICE&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;formula&quot;: &quot;(Base_Amount__c + tp_s2_realization)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_segment_weight&quot;,
+          &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;(() =&gt; { const N = (v) =&gt; Number(String(v).replace(/,/g, &apos;&apos;)) || 0; const type = String(tp_s2_pole_type).trim(); const topDia = N(tp_s2_top_diameter); const botDia = N(tp_s2_bottom_diameter); const height = N(tp_s2_height_of_pole) || 1; const side = N(tp_s2_no_of_polygonal_side) || 1; const tTop = N(tp_segment2_thickness_top); const tBot = N(tp_s2_thickness_bot); const lTop = N(tp_segment2_length_top); const lBot = N(tp_s2_length_bot); const bpType = String(tp_s2_bearing_plate_type).trim(); const bpDia = N(tp_s2_size_dia_of_bearing_plate); const bpThick = N(tp_s2_thickness_of_bearing_plate); const cabDia = N(tp_s2_pole_cab_dia); const cabThick = N(tp_s2_pole_cab_thickness); const real = N(tp_s2_realization); const taper = (botDia - (topDia - (tTop + 1) * 2)) / height; const topAvg = (topDia + (taper * (lTop / 1000) + topDia)) / 2; const botAvg = (botDia - taper * (lBot / 1000) + botDia) / 2; let w1 = 0; if (type === &apos;Polygonal&apos;) { w1 = (topAvg - tTop) * Math.tan(Math.PI / side) * side / 1000 * (lTop / 1000) * tTop * 7.85; } else if (type === &apos;Conical&apos;) { w1 = (22/7) * (topAvg / 1000) * (lTop / 1000) * tTop * 7.85; } let w2 = 0; if (type === &apos;Polygonal&apos;) { w2 = (botAvg - tTop) * Math.tan(Math.PI / side) * side / 1000 * (lBot / 1000) * tBot * 7.85; } else if (type === &apos;Conical&apos;) { w2 = (22/7) * (botAvg / 1000) * (lBot / 1000) * tBot * 7.85; } let bp = 0; if (bpType === &apos;Circular&apos;) { bp = (bpDia * bpDia / 4 / 1000000 * 3.14) * bpThick * 7.85; } else if (bpType === &apos;Square&apos;) { bp = (bpDia * bpDia / 1000000) * bpThick * 7.85; } const hw = 0.13 * 4; const cap = ((22/7) * Math.pow(cabDia / 2, 2) / 1000000 * cabThick * 7.85) + 0.22; return (w1 + w2 + bp + hw + cap) * (1 + (real / 100)); })()&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_base_price&quot;,
+          &quot;label&quot;: &quot;BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_unit_price&quot;,
+          &quot;label&quot;: &quot;UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(((tp_s2_total_realization_on_segment_price || 0) * (tp_s2_segment_weight || 0))) + (tp_s2_qty || 0)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;tp_s2_unit_cost&quot;,
+          &quot;label&quot;: &quot;UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(tp_s2_segment_weight || 0) * Base_Amount__c&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lm_segment_1&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_1_hdr_top&quot;,
+      &quot;label&quot;: &quot;TOP SEGMENT 1 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 1&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_height_of_mast * 1000&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 1&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_oaf_bottom&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 1&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_quantity&quot;,
+      &quot;label&quot;: &quot;Quantity&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;formula&quot;:&quot;lm_quantity&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_segment_weight&quot;,
+      &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isWeightTotal&quot;: true,
+      &quot;formula&quot;: &quot;( ((((lm_1_oaf_top||0)-(lm_1_thickness||0))*(lm_no_of_sides||1)*Math.tan(Math.PI/(lm_no_of_sides||1))+((lm_1_oaf_bottom||0)-(lm_1_thickness||0))*(lm_no_of_sides||1)*Math.tan(Math.PI/(lm_no_of_sides||1)))/2)*(lm_1_length||0)*(lm_1_thickness||0)*7.85/1000000+10+((lm_base_plate_type==&apos;Circular&apos;?(((Math.PI*(lm_od_of_base_plate||0)*(lm_od_of_base_plate||0)/4)-((((lm_1_oaf_bottom||0)-(lm_1_thickness||0))*((lm_1_oaf_bottom||0)-(lm_1_thickness||0))/4)*(lm_no_of_sides||1)*Math.tan(Math.PI/(lm_no_of_sides||1))))*(lm_thickness_of_base_plate||0)*7.85/1000000):((((lm_od_of_base_plate||0)*(lm_od_of_base_plate||0))-((((lm_1_oaf_bottom||0)-(lm_1_thickness||0))*((lm_1_oaf_bottom||0)-(lm_1_thickness||0))/4)*(lm_no_of_sides||1)*Math.tan(Math.PI/(lm_no_of_sides||1))))*(lm_thickness_of_base_plate||0)*7.85/1000000)))+((((lm_od_of_base_plate||0)-(lm_1_oaf_bottom||0))/2/1000)*0.25*(lm_fdn_stiffner_thickness||0)*7.85/2)*(lm_fdn_no_of_bolt||0)+((lm_1_oaf_bottom||0)&lt;=400?18:(lm_1_oaf_bottom||0)&lt;=460?26:(lm_1_oaf_bottom||0)&lt;=610?30:(lm_1_oaf_bottom||0)&lt;=750?35:40)+20 ) * (1 + ( 5/100))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_base_price&quot;,
+      &quot;label&quot;: &quot;BASE PRICE&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isBasePrice&quot;: true,
+      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_realization&quot;,
+      &quot;label&quot;: &quot;REALIZATION&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isRealization&quot;: true,
+      &quot;formula&quot;: &quot;lm_realization&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_unit_price&quot;,
+      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+      &quot;isUnitPrice&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c + (lm_realization || 0)) * (lm_1_segment_weight || 0)) + (lm_pu_paint ? (lm_pu_paint_unit_price || 0) : 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_1_unit_cost&quot;,
+      &quot;label&quot;: &quot;UNIT COST&quot;,
+      &quot;isUnitCost&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lm_1_segment_weight || 0))&quot;
+    }
+  ],
+  &quot;lm_segment_2&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_2_hdr_top&quot;,
+      &quot;label&quot;: &quot;TOP SEGMENT 2 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_top_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_top_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_top_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_top_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_2_top_oaf_top + (lm_2_top_length / 1000 * ((lm_bot2_oaf_bot - (lm_2_top_oaf_top - (lm_2_top_thickness + 1) * 2)) / lm_height_of_mast))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_bot2&quot;,
+      &quot;label&quot;: &quot;BOTTOM SEGMENT 2 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_2_top_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_2_top_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_ovr_bot2_length&gt; 0 ? lm_bot2_oaf_bot - (lm_ovr_bot2_length / 1000 * ((lm_bot2_oaf_bot - (lm_2_top_oaf_top - (lm_2_top_thickness + 1) * 2)) / lm_height_of_mast)) : lm_bot2_oaf_bot - (lm_bot2_length / 1000 * ((lm_bot2_oaf_bot - (lm_2_top_oaf_top - (lm_2_top_thickness + 1) * 2)) / lm_height_of_mast))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_bot2&quot;,
+      &quot;label&quot;: &quot;Override segment 2 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_ovr_bot2_length&gt; 0 ? lm_bot2_oaf_bot - (lm_ovr_bot2_length / 1000 * ((lm_bot2_oaf_bot - (lm_2_top_oaf_top - (lm_2_top_thickness + 1) * 2)) / lm_height_of_mast)) : lm_bot2_oaf_bot - (lm_bot2_length / 1000 * ((lm_bot2_oaf_bot - (lm_2_top_oaf_top - (lm_2_top_thickness + 1) * 2)) / lm_height_of_mast))&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_bot2_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_quantity&quot;,
+      &quot;label&quot;: &quot;Quantity&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;formula&quot;:&quot;lm_quantity&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_segment_weight&quot;,
+      &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isWeightTotal&quot;: true,
+      &quot;formula&quot;: &quot;(( (((( (Math.tan(Math.PI/(lm_no_of_sides||1))*(lm_no_of_sides||1)*((lm_2_top_oaf_top||0)-(lm_2_top_thickness||0)-1)) + (Math.tan(Math.PI/(lm_no_of_sides||1))*(lm_no_of_sides||1)*((lm_2_top_oaf_bot||0)+1-(lm_2_top_thickness||0))) )/2)/1000)*((lm_2_top_thickness||0)/1000)*(lm_2_top_length||0)*7.85) ) + ( (((( (Math.tan(Math.PI/(lm_no_of_sides||1))*(lm_no_of_sides||1)*((lm_override_bot2?lm_ovr_bot2_oaf_top:lm_bot2_oaf_top||0)-1-(lm_override_bot2?lm_ovr_bot2_thickness:lm_bot2_thickness||0))) + (Math.tan(Math.PI/(lm_no_of_sides||1))*(lm_no_of_sides||1)*((lm_override_bot2?lm_ovr_bot2_oaf_bot:lm_bot2_oaf_bot||0)+1-(lm_override_bot2?lm_ovr_bot2_thickness:lm_bot2_thickness||0))) )/2)/1000)*((lm_override_bot2?lm_ovr_bot2_thickness:lm_bot2_thickness||0)/1000)*(lm_override_bot2?lm_ovr_bot2_length:lm_bot2_length||0)*7.85) ) + ( (lm_base_plate_type==&apos;Circular&apos;?((( (22/7 * Math.pow((lm_od_of_base_plate || 0), 2) / 4) - (Math.pow(((lm_override_bot2 ? (lm_ovr_bot2_oaf_bot || 0) : (lm_bot2_oaf_bot || 0)) - (lm_override_bot2 ? (lm_ovr_bot2_thickness || 0) : (lm_bot2_thickness || 0))), 2) / 4 * (lm_no_of_sides || 1) * Math.tan((22/7) / (lm_no_of_sides || 1))) ) * (lm_thickness_of_base_plate || 0) * 7.85) / 1000000):(((Math.pow((lm_od_of_base_plate || 0), 2) - (Math.pow(((lm_override_bot2 ? (lm_ovr_bot2_oaf_bot || 0) : (lm_bot2_oaf_bot || 0)) - (lm_override_bot2 ? (lm_ovr_bot2_thickness || 0) : (lm_bot2_thickness || 0))), 2) / 4 * (lm_no_of_sides || 1) * Math.tan((22/7) / (lm_no_of_sides || 1)))) * (lm_thickness_of_base_plate || 0) * 7.85) / 1000000)) ) + ( (((lm_od_of_base_plate||0)-(lm_bot2_oaf_bot||0))/2/1000)*0.25*(lm_fdn_stiffner_thickness||0)*7.85/2*(lm_fdn_no_of_bolt||0) ) + ( ((lm_bot2_oaf_bot||0)&lt;=400?18:((lm_bot2_oaf_bot||0)&lt;=460?26:((lm_bot2_oaf_bot||0)&lt;=610?30:((lm_bot2_oaf_bot||0)&lt;=750?35:40)))) )   + 20 + ((lm_override_bot2?(lm_ovr_bot2_thickness||0):(lm_bot2_thickness||0))&gt;=5?0:10))  * (1 + (5/100))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_base_price&quot;,
+      &quot;label&quot;: &quot;BASE PRICE&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isBasePrice&quot;: true,
+      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_realization&quot;,
+      &quot;label&quot;: &quot;REALIZATION&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isRealization&quot;: true,
+      &quot;formula&quot;: &quot;lm_realization&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_unit_price&quot;,
+      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+      &quot;isUnitPrice&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c + (lm_realization || 0)) * (lm_2_segment_weight || 0)) + (lm_pu_paint ? (lm_pu_paint_unit_price || 0) : 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_unit_cost&quot;,
+      &quot;label&quot;: &quot;UNIT COST&quot;,
+      &quot;isUnitCost&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lm_2_segment_weight || 0))&quot;
+    }
+  ],
+  &quot;lm_segment_3&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_3_hdr_top&quot;,
+      &quot;label&quot;: &quot;TOP SEGMENT 3 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_top_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_top_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_top_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_top_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_3_top_oaf_top + (lm_3_top_length / 1000 * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_ovr_mid2_thickness&gt;0?lm_ovr_mid2_thickness:lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast)))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid2&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 2 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (lm_3_top_length) : lm_mid2_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (lm_3_top_thickness) : lm_mid2_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (((lm_mid2_oaf_bot - ((lm_override_mid2 ? lm_ovr_mid2_length : lm_mid2_length) / 1000 * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast))))) : lm_mid2_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (((lm_bot3_oaf_top + (lm_ovr_m_b / 1000 * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast)) + ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2))) : lm_mid2_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid2&quot;,
+      &quot;label&quot;: &quot;Override segment 2 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (((lm_mid2_oaf_bot - ((lm_override_mid2 ? lm_ovr_mid2_length : lm_mid2_length) / 1000 * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast))))) : lm_ovr_mid2_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 3 ? (((lm_bot3_oaf_top + (lm_ovr_m_b / 1000 * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast)) + ((lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2))) : lm_ovr_mid2_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_bot3&quot;,
+      &quot;label&quot;: &quot;BOTTOM SEGMENT 3 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_3_top_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_3_top_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_bot3_oaf_bot - (((lm_ovr_bot3_length&gt;0?lm_ovr_bot3_length:lm_bot3_length) / 1000) * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_ovr_mid2_thickness&gt;0?lm_ovr_mid2_thickness:lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast))) &quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_bot3&quot;,
+      &quot;label&quot;: &quot;Override segment 3 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;(lm_bot3_oaf_bot - (((lm_ovr_bot3_length&gt;0?lm_ovr_bot3_length:lm_bot3_length) / 1000) * ((lm_bot3_oaf_bot - (lm_3_top_oaf_top - ((lm_ovr_mid2_thickness&gt;0?lm_ovr_mid2_thickness:lm_mid2_thickness) + lm_3_top_thickness + 2) * 2)) / lm_height_of_mast)))&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_bot3_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_quantity&quot;,
+      &quot;label&quot;: &quot;Quantity&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;formula&quot;:&quot;lm_quantity&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_segment_weight&quot;,
+      &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isWeightTotal&quot;: true,
+      &quot;formula&quot;: &quot;((((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_3_top_oaf_top-(lm_3_top_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_3_top_oaf_bot-(lm_3_top_thickness)+1)))/2/1000)*(lm_3_top_length/1000)*(lm_3_top_thickness)*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_top:lm_mid2_oaf_top)-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_bot:lm_mid2_oaf_bot)-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)+1)))/2/1000)*((lm_override_mid2?lm_ovr_mid2_length:lm_mid2_length)/1000)*(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)*7.85)+(((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_bot3?lm_ovr_bot3_oaf_top:lm_bot3_oaf_top)-(lm_override_bot3?lm_ovr_bot3_thickness:lm_bot3_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_bot3_oaf_bot-(lm_override_bot3?lm_ovr_bot3_thickness:lm_bot3_thickness)+1)))/2/1000)*((lm_override_bot3?lm_ovr_bot3_length:lm_bot3_length)/1000)*(lm_override_bot3?lm_ovr_bot3_thickness:lm_bot3_thickness)*7.85)+((lm_override_bot3?(lm_ovr_bot3_oaf_top||0):(lm_bot3_oaf_top||0))&gt;=5?0:10)))+((lm_base_plate_type==&apos;Circular&apos;?((Math.PI*Math.pow(lm_od_of_base_plate,2)/4)-((lm_no_of_sides*Math.pow(lm_bot3_oaf_bot-(lm_override_bot3?lm_ovr_bot3_thickness:lm_bot3_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000:((Math.pow(lm_od_of_base_plate,2)-((lm_no_of_sides*Math.pow(lm_bot3_oaf_bot-(lm_override_bot3?lm_ovr_bot3_thickness:lm_bot3_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000))+((((lm_od_of_base_plate-lm_bot3_oaf_bot)/2/1000)*0.3*lm_fdn_stiffner_thickness*7.85/2*lm_fdn_no_of_bolt))+((lm_bot3_oaf_bot&lt;=400?18:lm_bot3_oaf_bot&lt;=460?26:lm_bot3_oaf_bot&lt;=610?30:lm_bot3_oaf_bot&lt;=750?35:40)) +20)) * (1 + (5/100))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_base_price&quot;,
+      &quot;label&quot;: &quot;BASE PRICE&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isBasePrice&quot;: true,
+      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_realization&quot;,
+      &quot;label&quot;: &quot;REALIZATION&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isRealization&quot;: true,
+      &quot;formula&quot;: &quot;lm_realization&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_unit_price&quot;,
+      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+      &quot;isUnitPrice&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c + (lm_realization || 0)) * (lm_3_segment_weight || 0)) + (lm_pu_paint ? (lm_pu_paint_unit_price || 0) : 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_unit_cost&quot;,
+      &quot;label&quot;: &quot;UNIT COST&quot;,
+      &quot;isUnitCost&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lm_3_segment_weight || 0))&quot;
+    }
+  ],
+  &quot;lm_segment_4&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_4_hdr_top&quot;,
+      &quot;label&quot;: &quot;TOP SEGMENT 4 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_top_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_top_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_top_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_top_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_4_top_oaf_top + ((lm_4_top_length / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_override_mid3 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid2&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 2 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_4_top_length) : lm_mid2_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_4_top_thickness) : lm_mid2_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid2_oaf_bot - (((lm_ovr_mid2_length &gt; 0 ? lm_ovr_mid2_length : lm_mid2_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast))) : lm_mid2_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid3_oaf_top + ((lm_ovr_m1_m2 / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)) + (( (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2)) : lm_mid2_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid2&quot;,
+      &quot;label&quot;: &quot;Override segment 2 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid2_oaf_bot - (((lm_ovr_mid2_length &gt; 0 ? lm_ovr_mid2_length : lm_mid2_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast))) : lm_ovr_mid2_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid3_oaf_top + ((lm_ovr_m1_m2 / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)) + (( (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2)) : lm_ovr_mid2_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid3&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 3 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_4_top_length) : lm_mid3_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_4_top_thickness) : lm_mid3_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid3_oaf_bot - ((( lm_ovr_mid3_length &gt; 0 ? lm_ovr_mid3_length : lm_mid3_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - (( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast))) : lm_mid3_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_bot4_oaf_top + ((lm_ovr_m2_b / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + ( lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)) + ((( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + 1) * 2)) : lm_mid3_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid3&quot;,
+      &quot;label&quot;: &quot;Override segment 3 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_mid3_oaf_bot - ((( lm_ovr_mid3_length &gt; 0 ? lm_ovr_mid3_length : lm_mid3_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - (( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast))) : lm_mid3_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 4 ? (lm_bot4_oaf_top + ((lm_ovr_m2_b / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - ((lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + ( lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)) + ((( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + 1) * 2)) : lm_ovr_mid3_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_bot4&quot;,
+      &quot;label&quot;: &quot;BOTTOM SEGMENT 4 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot4_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_4_top_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot4_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_4_top_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot4_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_bot4_oaf_bot - (((lm_ovr_bot4_length &gt; 0 ? lm_ovr_bot4_length : lm_bot4_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - (( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot4_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_bot4&quot;,
+      &quot;label&quot;: &quot;Override segment 4 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot4_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot4_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot4_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;(lm_bot4_oaf_bot - (((lm_ovr_bot4_length &gt; 0 ? lm_ovr_bot4_length : lm_bot4_length) / 1000) * ((lm_bot4_oaf_bot - (lm_4_top_oaf_top - (( lm_ovr_mid3_thickness &gt; 0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness &gt; 0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_4_top_thickness + 3) * 2)) / lm_height_of_mast)))&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot4_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_bot4_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_quantity&quot;,
+      &quot;label&quot;: &quot;Quantity&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;formula&quot;:&quot;lm_quantity&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_segment_weight&quot;,
+      &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isWeightTotal&quot;: true,
+      &quot;formula&quot;: &quot;((((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_4_top_oaf_top-(lm_4_top_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_4_top_oaf_bot+1-(lm_4_top_thickness))))/2/1000)*(lm_4_top_length/1000)*(lm_4_top_thickness)*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_top:lm_mid2_oaf_top)-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_bot:lm_mid2_oaf_bot)+1-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness))))/2/1000)*((lm_override_mid2?lm_ovr_mid2_length:lm_mid2_length)/1000)*(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid3?lm_ovr_mid3_oaf_top:lm_mid3_oaf_top)-(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid3?lm_ovr_mid3_oaf_bot:lm_mid3_oaf_bot)+1-(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness))))/2/1000)*((lm_override_mid3?lm_ovr_mid3_length:lm_mid3_length)/1000)*(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness)*7.85)+(((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_bot4?lm_ovr_bot4_oaf_top:lm_bot4_oaf_top)-(lm_override_bot4?lm_ovr_bot4_thickness:lm_bot4_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_bot4_oaf_bot+1-(lm_override_bot4?lm_ovr_bot4_thickness:lm_bot4_thickness))))/2/1000)*((lm_override_bot4?lm_ovr_bot4_length:lm_bot4_length)/1000)*(lm_override_bot4?lm_ovr_bot4_thickness:lm_bot4_thickness)*7.85)+((lm_override_bot3?(lm_ovr_mid3_oaf_top||0):(lm_mid3_oaf_top||0))&gt;=5?0:10)))+((lm_base_plate_type==&apos;Circular&apos;?((Math.PI*Math.pow(lm_od_of_base_plate,2)/4)-((lm_no_of_sides*Math.pow(lm_bot4_oaf_bot-(lm_override_bot4?lm_ovr_bot4_thickness:lm_bot4_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000:((Math.pow(lm_od_of_base_plate,2)-((lm_no_of_sides*Math.pow(lm_bot4_oaf_bot-(lm_override_bot4?lm_ovr_bot4_thickness:lm_bot4_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000))+(((lm_od_of_base_plate-lm_bot4_oaf_bot)/2/1000)*0.3*lm_fdn_stiffner_thickness*7.85/2*lm_fdn_no_of_bolt)+((lm_bot4_oaf_bot&lt;=400?18:lm_bot4_oaf_bot&lt;=460?26:lm_bot4_oaf_bot&lt;=610?30:lm_bot4_oaf_bot&lt;=750?35:40))+20)) * (1 + (5/100))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_base_price&quot;,
+      &quot;label&quot;: &quot;BASE PRICE&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isBasePrice&quot;: true,
+      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_realization&quot;,
+      &quot;label&quot;: &quot;REALIZATION&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isRealization&quot;: true,
+      &quot;formula&quot;: &quot;lm_realization&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_unit_price&quot;,
+      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+      &quot;isUnitPrice&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c + (lm_realization || 0)) * (lm_4_segment_weight || 0)) + (lm_pu_paint ? (lm_pu_paint_unit_price || 0) : 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_unit_cost&quot;,
+      &quot;label&quot;: &quot;UNIT COST&quot;,
+      &quot;isUnitCost&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lm_4_segment_weight || 0))&quot;
+    }
+  ],
+  &quot;lm_segment_5&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_5_hdr_top&quot;,
+      &quot;label&quot;: &quot;TOP SEGMENT 5 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_top_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_top_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_top_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_top_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_5_top_oaf_top + ((lm_5_top_length / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid2&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 2 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_length) : lm_mid2_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_thickness) : lm_mid2_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid2_oaf_bot - (((lm_ovr_mid2_length&gt;0 ? lm_ovr_mid2_length : lm_mid2_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_mid2_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid3_oaf_top + ((lm_ovr_m1_m2 / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2)) : lm_mid2_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid2&quot;,
+      &quot;label&quot;: &quot;Override segment 2 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid2_oaf_bot - (((lm_ovr_mid2_length&gt;0 ? lm_ovr_mid2_length : lm_mid2_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_ovr_mid2_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid2_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 2&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid3_oaf_top + ((lm_ovr_m1_m2 / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + 1) * 2)) : lm_ovr_mid2_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid2&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid3&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 3 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_length) : lm_mid3_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_thickness) : lm_mid3_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid3_oaf_bot - (((lm_ovr_mid3_length&gt;0 ? lm_ovr_mid3_length : lm_mid3_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_mid3_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid4_oaf_top + ((lm_ovr_m2_m3 / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + 1) * 2)) : lm_mid3_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid3&quot;,
+      &quot;label&quot;: &quot;Override segment 3 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid3_oaf_bot - (((lm_ovr_mid3_length&gt;0 ? lm_ovr_mid3_length : lm_mid3_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_mid3_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid3_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 3&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid4_oaf_top + ((lm_ovr_m2_m3 / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + 1) * 2)) : lm_ovr_mid3_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid3&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_mid4&quot;,
+      &quot;label&quot;: &quot;MIDDLE SEGMENT 4 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid4_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_length) : lm_mid4_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid4_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_5_top_thickness) : lm_mid4_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid4_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid4_oaf_bot - (((lm_ovr_mid4_length&gt;0 ? lm_ovr_mid4_length : lm_mid4_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_mid4_oaf_top&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_mid4_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_bot5_oaf_top + ((lm_ovr_m3_b / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + 1) * 2)) : lm_mid4_oaf_bot&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_mid4&quot;,
+      &quot;label&quot;: &quot;Override segment 4 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid4_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid4_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_mid4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid4_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_mid4_oaf_bot - (((lm_ovr_mid4_length&gt;0 ? lm_ovr_mid4_length : lm_mid4_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast))) : lm_ovr_mid4_oaf_top&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_mid4_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 4&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_no_of_segment == 5 ? (lm_bot5_oaf_top + ((lm_ovr_m3_b / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_ovr_mid3_thickness&gt;0 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_ovr_mid2_thickness&gt;0 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)) + (((lm_ovr_mid4_thickness&gt;0 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + 1) * 2)) : lm_ovr_mid4_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_mid4&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_hdr_bot5&quot;,
+      &quot;label&quot;: &quot;BOTTOM SEGMENT 5 (MM)&quot;,
+      &quot;type&quot;: &quot;header&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot5_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_5_top_length&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot5_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_5_top_thickness&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot5_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;(lm_bot5_oaf_bot - (((lm_override_bot5 ? lm_ovr_bot5_length : lm_bot5_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_override_mid4 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_override_mid3 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_bot5_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_override_bot5&quot;,
+      &quot;label&quot;: &quot;Override segment 5 (mm)&quot;,
+      &quot;type&quot;: &quot;checkbox&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot5_length&quot;,
+      &quot;label&quot;: &quot;LENGTH OF SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot5&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot5_thickness&quot;,
+      &quot;label&quot;: &quot;THICKNESS&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;lm_override_bot5&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot5_oaf_top&quot;,
+      &quot;label&quot;: &quot;OAF TOP SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;(lm_bot5_oaf_bot - (((lm_override_bot5 ? lm_ovr_bot5_length : lm_bot5_length) / 1000) * ((lm_bot5_oaf_bot - (lm_5_top_oaf_top - ((lm_override_mid4 ? lm_ovr_mid4_thickness : lm_mid4_thickness) + (lm_override_mid3 ? lm_ovr_mid3_thickness : lm_mid3_thickness) + (lm_override_mid2 ? lm_ovr_mid2_thickness : lm_mid2_thickness) + lm_5_top_thickness + 4) * 2)) / lm_height_of_mast)))&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot5&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_bot5_oaf_bot&quot;,
+      &quot;label&quot;: &quot;OAF BOTTOM SEG 5&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;colSpan&quot;: 3,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;lm_bot5_oaf_bot&quot;,
+      &quot;controllingField&quot;: &quot;lm_override_bot5&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;true&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_quantity&quot;,
+      &quot;label&quot;: &quot;Quantity&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isQuantity&quot;: true,
+      &quot;formula&quot;:&quot;lm_quantity&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_segment_weight&quot;,
+      &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isWeightTotal&quot;: true,
+      &quot;formula&quot;: &quot;((((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_5_top_oaf_top-lm_5_top_thickness-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_5_top_oaf_bot+1-lm_5_top_thickness)))/2/1000)*(lm_5_top_length/1000)*lm_5_top_thickness*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_top:lm_mid2_oaf_top)-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid2?lm_ovr_mid2_oaf_bot:lm_mid2_oaf_bot)+1-(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness))))/2/1000)*((lm_override_mid2?lm_ovr_mid2_length:lm_mid2_length)/1000)*(lm_override_mid2?lm_ovr_mid2_thickness:lm_mid2_thickness)*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid3?lm_ovr_mid3_oaf_top:lm_mid3_oaf_top)-(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid3?lm_ovr_mid3_oaf_bot:lm_mid3_oaf_bot)+1-(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness))))/2/1000)*((lm_override_mid3?lm_ovr_mid3_length:lm_mid3_length)/1000)*(lm_override_mid3?lm_ovr_mid3_thickness:lm_mid3_thickness)*7.85)+((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid4?lm_ovr_mid4_oaf_top:lm_mid4_oaf_top)-(lm_override_mid4?lm_ovr_mid4_thickness:lm_mid4_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_mid4?lm_ovr_mid4_oaf_bot:lm_mid4_oaf_bot)+1-(lm_override_mid4?lm_ovr_mid4_thickness:lm_mid4_thickness))))/2/1000)*((lm_override_mid4?lm_ovr_mid4_length:lm_mid4_length)/1000)*(lm_override_mid4?lm_ovr_mid4_thickness:lm_mid4_thickness)*7.85)+(((((Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*((lm_override_bot5?lm_ovr_bot5_oaf_top:lm_bot5_oaf_top)-(lm_override_bot5?lm_ovr_bot5_thickness:lm_bot5_thickness)-1))+(Math.tan(Math.PI/lm_no_of_sides)*lm_no_of_sides*(lm_bot5_oaf_bot+1-(lm_override_bot5?lm_ovr_bot5_thickness:lm_bot5_thickness))))/2/1000)*((lm_override_bot5?lm_ovr_bot5_length:lm_bot5_length)/1000)*(lm_override_bot5?lm_ovr_bot5_thickness:lm_bot5_thickness)*7.85)+((lm_override_bot3?(lm_ovr_mid3_oaf_top||0):(lm_mid3_oaf_top||0))&gt;=5?0:10)))+(lm_base_plate_type==&apos;Circular&apos;?((Math.PI*Math.pow(lm_od_of_base_plate,2)/4)-((lm_no_of_sides*Math.pow(lm_bot5_oaf_bot-(lm_override_bot5?lm_ovr_bot5_thickness:lm_bot5_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000:((Math.pow(lm_od_of_base_plate,2)-((lm_no_of_sides*Math.pow(lm_bot5_oaf_bot-(lm_override_bot5?lm_ovr_bot5_thickness:lm_bot5_thickness),2)/4)*Math.tan(Math.PI/lm_no_of_sides)))*lm_thickness_of_base_plate*7.85/1000000))+(((lm_od_of_base_plate-lm_bot5_oaf_bot)/2/1000)*0.3*lm_fdn_stiffner_thickness*7.85/2*lm_fdn_no_of_bolt)+(lm_bot5_oaf_bot&lt;=400?18:lm_bot5_oaf_bot&lt;=460?26:lm_bot5_oaf_bot&lt;=610?30:lm_bot5_oaf_bot&lt;=750?35:40)+20) * (1 + (5/100))&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_base_price&quot;,
+      &quot;label&quot;: &quot;BASE PRICE&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isBasePrice&quot;: true,
+      &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_realization&quot;,
+      &quot;label&quot;: &quot;REALIZATION&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;isRealization&quot;: true,
+      &quot;formula&quot;: &quot;lm_realization&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_unit_price&quot;,
+      &quot;label&quot;: &quot;UNIT PRICE&quot;,
+      &quot;isUnitPrice&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c + (lm_realization || 0)) * (lm_5_segment_weight || 0)) + (lm_pu_paint ? (lm_pu_paint_unit_price || 0) : 0)&quot;
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_unit_cost&quot;,
+      &quot;label&quot;: &quot;UNIT COST&quot;,
+      &quot;isUnitCost&quot;: true,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lm_5_segment_weight || 0))&quot;
+    }
+  ],
+  &quot;lm_overlap_details&quot;: [
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_t_b&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP (T &amp; B)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((lm_ovr_bot2_length&gt;0?lm_ovr_bot2_length : lm_bot2_length )+ lm_2_top_length) - (lm_height_of_mast * 1000)&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;2&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_t_m&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 1 (T &amp; M)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;3&quot;,
+        &quot;4&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_m_b&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 2 (M &amp; B)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;((lm_3_top_length + (lm_ovr_mid2_length&gt;0?lm_ovr_mid2_length : lm_mid2_length) + (lm_ovr_bot3_length&gt;0? lm_ovr_bot3_length : lm_bot3_length)) - (lm_height_of_mast * 1000) - lm_ovr_t_m)&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_m1_m2&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 2 (M1 &amp; M2)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;4&quot;,
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_m2_b&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 3 (M2 &amp; B)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;formula&quot;: &quot;lm_4_top_length + lm_mid2_length + lm_mid3_length + lm_bot4_length - (lm_height_of_mast * 1000) - (lm_ovr_t_m + lm_ovr_m1_m2)&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;4&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_m2_m3&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 3 (M2 &amp; M3)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_ovr_m3_b&quot;,
+      &quot;label&quot;: &quot;LENGTH OF OVERLAP 4 (M3 &amp; B)&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;unit&quot;: &quot;mm&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;formula&quot;: &quot;(lm_5_top_length + (lm_ovr_mid2_length&gt;0 ? lm_ovr_mid2_length : lm_mid2_length) + (lm_ovr_mid3_length&gt;0 ? lm_ovr_mid3_length : lm_mid3_length) + (lm_ovr_mid4_length&gt;0 ? lm_ovr_mid4_length : lm_mid4_length) + (lm_ovr_bot5_length&gt;0 ? lm_ovr_bot5_length : lm_bot5_length) - (lm_height_of_mast * 1000) - (lm_ovr_t_m + lm_ovr_m1_m2 + lm_ovr_m2_m3))&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;5&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_2_longitudinal_welding&quot;,
+      &quot;label&quot;: &quot;NO. OF LONGITUDINAL WELDING&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_bot2_oaf_bot &lt;= 600 ? 1 : 2&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;2&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_3_longitudinal_welding&quot;,
+      &quot;label&quot;: &quot;NO. OF LONGITUDINAL WELDING&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_bot3_oaf_bot &lt;= 600 ? 1 : 2&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;3&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_4_longitudinal_welding&quot;,
+      &quot;label&quot;: &quot;NO. OF LONGITUDINAL WELDING&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_bot4_oaf_bot &lt;= 600 ? 1 : 2&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;4&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;lm_5_longitudinal_welding&quot;,
+      &quot;label&quot;: &quot;NO. OF LONGITUDINAL WELDING&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;readOnly&quot;: true,
+      &quot;defaultValue&quot;: 0,
+      &quot;formula&quot;: &quot;lm_bot5_oaf_bot &lt;= 600 ? 1 : 2&quot;,
+      &quot;controllingField&quot;: &quot;lm_no_of_segment&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;5&quot;
+      ]
+    }
+  ],
+  &quot;lp_s1_pole&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg1_pole_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s1_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s1_pole_type&quot;,
+          &quot;label&quot;: &quot;POLE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Polygonal&quot;,
+            &quot;Conical&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_height_of_pole&quot;,
+          &quot;label&quot;: &quot;HEIGHT OF POLE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Meter&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_top_diameter&quot;,
+          &quot;label&quot;: &quot;TOP DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_bottom_diameter&quot;,
+          &quot;label&quot;: &quot;BOTTOM DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_no_of_polygonal_side&quot;,
+          &quot;label&quot;: &quot;NO. OF POLYGONAL SIDE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;0&quot;,
+            &quot;6&quot;,
+            &quot;8&quot;,
+            &quot;12&quot;,
+            &quot;16&quot;,
+            &quot;20&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_segment_length&quot;,
+          &quot;label&quot;: &quot;SEGMENT LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;s1_height_of_pole * 1000&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_segment_thickness&quot;,
+          &quot;label&quot;: &quot;SEGMENT THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;required&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_door_height&quot;,
+          &quot;label&quot;: &quot;DOOR HEIGHT&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;Cutout size (mm)&quot;,
+          &quot;options&quot;: [
+            &quot;350&quot;,
+            &quot;420&quot;,
+            &quot;500&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_base_plate_type&quot;,
+          &quot;label&quot;: &quot;BASE PLATE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Square&quot;,
+            &quot;Circular&quot;,
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_size_dia_of_base_plate&quot;,
+          &quot;label&quot;: &quot;SIZE / DIA OF BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_thickness_of_base_plate&quot;,
+          &quot;label&quot;: &quot;THICKNESS OF BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_stiffener_at_base&quot;,
+          &quot;label&quot;: &quot;STIFFENER AT BASE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Yes&quot;,
+            &quot;No&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_dia_of_rectangular_base_plate&quot;,
+          &quot;label&quot;: &quot;DIA OF RECTANGULAR BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_base_plate_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_extra_micron&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_pu_paint_pole_brackets&quot;,
+          &quot;label&quot;: &quot;PU PAINT (POLE &amp; BRACKETS)&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Description&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_pu_paint_pole&quot;,
+          &quot;label&quot;: &quot;PU PAINT (POLE)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_solar_structure&quot;,
+          &quot;label&quot;: &quot;SOLAR STRUCTURE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_battery_box&quot;,
+          &quot;label&quot;: &quot;BATTERY BOX&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_extra_pole_1_name&quot;,
+          &quot;label&quot;: &quot;Extra Pole 1&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;,
+          &quot;hideLabelLayout&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_extra_pole_2_name&quot;,
+          &quot;label&quot;: &quot;Extra Pole 2&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;,
+          &quot;hideLabelLayout&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_s1_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_s1_realization_on_segment_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON SEGMENT PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_s1_segment_weight&quot;,
+          &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;( (s1_pole_type == &apos;Polygonal&apos; ? ((((((s1_top_diameter || 0) + (s1_bottom_diameter || 0)) / 2) - (s1_segment_thickness || 0)) * Math.tan(Math.PI / (s1_no_of_polygonal_side || 1)) * (s1_no_of_polygonal_side || 1)) / 1000 * (s1_height_of_pole || 0) * (s1_segment_thickness || 0) * 7.85) : (s1_pole_type == &apos;Conical&apos; ? ((22/7) * ((((s1_top_diameter || 0) + (s1_bottom_diameter || 0)) / 2) / 1000 * (s1_height_of_pole || 0) * (s1_segment_thickness || 0) * 7.85)) : 0)) + ((s1_door_height == &apos;350&apos; ? 2 : (s1_door_height == &apos;420&apos; || s1_door_height == &apos;500&apos; ? 2.5 : 0)) + ((s1_segment_length || 0) &gt; 10000 ? 3 : 0)) + (s1_base_plate_type == &apos;Circular&apos; ? ((((s1_size_dia_of_base_plate || 0) * (s1_size_dia_of_base_plate || 0) / 4 / 1000000 * 3.14) - (((s1_bottom_diameter || 0) * (s1_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s1_thickness_of_base_plate || 0) * 7.85) : (s1_base_plate_type == &apos;Square&apos; ? (((((s1_size_dia_of_base_plate || 0) * (s1_size_dia_of_base_plate || 0)) / 1000000) - (((s1_bottom_diameter || 0) * (s1_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s1_thickness_of_base_plate || 0) * 7.85) : 0)) + (s1_stiffener_at_base == &apos;Yes&apos; ? ((((s1_size_dia_of_base_plate || 0) - (s1_bottom_diameter || 0)) / 2 / 2 / 1000) * 0.2 * 5 * 7.85 * (s1_bolt_quantity || 1)) : 0) ) * (1 + (5/100))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment_base_price&quot;,
+          &quot;label&quot;: &quot;SEGMENT BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment_unit_price&quot;,
+          &quot;label&quot;: &quot;SEGMENT UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(((Base_Amount__c + (lp_s1_realization_on_segment_price || 0)) * (lp_s1_segment_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment_unit_cost&quot;,
+          &quot;label&quot;: &quot;SEGEMENT UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (lp_s1_segment_weight || 0)) + (0 / (Number(lp_s1_quantity) || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lp_s1_foundation&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg1_foundation_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s1_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s1_foundation_bolt_diameter&quot;,
+          &quot;label&quot;: &quot;FOUNDATION BOLT DIAMETER&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;options&quot;: [
+            &quot;16&quot;,
+            &quot;20&quot;,
+            &quot;24&quot;,
+            &quot;27&quot;,
+            &quot;30&quot;,
+            &quot;33&quot;,
+            &quot;39&quot;,
+            &quot;45&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_nr_fb_diameter&quot;,
+          &quot;label&quot;: &quot;N.R FB DIAMETER&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;options&quot;: [
+            &quot;16&quot;,
+            &quot;20&quot;,
+            &quot;24&quot;,
+            &quot;27&quot;,
+            &quot;30&quot;,
+            &quot;33&quot;,
+            &quot;39&quot;,
+            &quot;45&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s1_foundation_bolt_diameter&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_foundation_bolt_length&quot;,
+          &quot;label&quot;: &quot;FOUNDATION BOLT LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_bolt_quantity&quot;,
+          &quot;label&quot;: &quot;BOLT QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;pcs&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_pcd&quot;,
+          &quot;label&quot;: &quot;P.C.D&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;s1_size_dia_of_base_plate&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_template&quot;,
+          &quot;label&quot;: &quot;TEMPLATE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;1:1 = Single Template Weight (Qty&lt;10 Nos Poles)&quot;,
+            &quot;1:10 = Multiple of 10 Nos (Qty&gt;10 Nos Pole)&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_fdn_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_realization_on_foundation_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON FOUNDATION PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_foundation_weight&quot;,
+          &quot;label&quot;: &quot;FOUNDATION WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;( ( ((22/7) * Math.pow(((s1_foundation_bolt_diameter == &apos;N.R.&apos; ? (s1_nr_fb_diameter || 0) : (s1_foundation_bolt_diameter || 0)) / 2), 2) / 1000000 * (s1_foundation_bolt_length || 0) * 7.85 * (s1_bolt_quantity || 0)) + ((s1_foundation_bolt_length || 0) == 0 ? 0 : ( ({&apos;16&apos;:0.05, &apos;20&apos;:0.1, &apos;24&apos;:0.15, &apos;27&apos;:0.2, &apos;30&apos;:0.3, &apos;33&apos;:0.35, &apos;36&apos;:0.5, &apos;39&apos;:0.6, &apos;42&apos;:0.7, &apos;45&apos;:0.8}[String(s1_foundation_bolt_diameter == &apos;N.R.&apos; ? (s1_nr_fb_diameter || 0) : (s1_foundation_bolt_diameter || 0))] || 0) * 3 * (s1_bolt_quantity || 0) )) + ((s1_foundation_bolt_length || 0) == 0 ? 0 : ( (s1_template == &apos;1:1 = Single Template Weight (Qty&lt;10 Nos Poles)&apos; ? 1 : (s1_template == &apos;1:10 = Multiple of 10 Nos (Qty&gt;10 Nos Pole)&apos; ? 0.1 : 0)) * (s1_base_plate_type == &apos;Circular&apos; ? ((((s1_size_dia_of_base_plate || 0) * (s1_size_dia_of_base_plate || 0) / 4 / 1000000 * 3.14) - (((s1_bottom_diameter || 0) * (s1_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s1_thickness_of_base_plate || 0) * 7.85) : (s1_base_plate_type == &apos;Square&apos; ? (((((s1_size_dia_of_base_plate || 0) * (s1_size_dia_of_base_plate || 0)) / 1000000) - (((s1_bottom_diameter || 0) * (s1_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s1_thickness_of_base_plate || 0) * 7.85) : 0)) / (s1_thickness_of_base_plate || 1) * 4 )) ) * (1 + (5 / 100)) )&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation_base_price&quot;,
+          &quot;label&quot;: &quot;FOUNDATION BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation_unit_price&quot;,
+          &quot;label&quot;: &quot;FOUNDATION UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s1_foundation_bolt_diameter == &apos;N.R.&apos;) ? 0 : (((Base_Amount__c + (s1_realization_on_foundation_price || 0)) * (s1_foundation_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation_unit_cost&quot;,
+          &quot;label&quot;: &quot;FOUNDATION UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s1_foundation_bolt_diameter == &apos;N.R.&apos;) ? 0 : ((Base_Amount__c || 0) * (s1_foundation_weight || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lp_s1_bracket&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg1_bracket_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s1_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s1_bracket_type&quot;,
+          &quot;label&quot;: &quot;BRACKET TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;Standard&quot;,
+            &quot;Customized&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_type_of_arm&quot;,
+          &quot;label&quot;: &quot;NO. OF ARM&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;1&quot;,
+            &quot;2&quot;,
+            &quot;3&quot;,
+            &quot;4&quot;,
+            &quot;Ring&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_sleeve_dia_od&quot;,
+          &quot;label&quot;: &quot;SLEEVE DIA (OD)&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ],
+          &quot;options&quot;: [
+            &quot;Pole Top 70 = 88.9 (OD)&quot;,
+            &quot;Pole Top 75 = 101.6 (OD)&quot;,
+            &quot;Pole Top 80 = 114.3 (OD)&quot;,
+            &quot;Pole Top 90 = 114.3 (OD)&quot;,
+            &quot;Pole Top 100 = 127 (OD)&quot;,
+            &quot;Pole Top 110 = 152.4 (OD)&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_sleeve_length&quot;,
+          &quot;label&quot;: &quot;SLEEVE LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_arm_dia_od&quot;,
+          &quot;label&quot;: &quot;ARM DIA (OD)&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;options&quot;: [
+            &quot;26.9&quot;,
+            &quot;33.7&quot;,
+            &quot;42.4&quot;,
+            &quot;48.3&quot;,
+            &quot;60.3&quot;,
+            &quot;76.1&quot;,
+            &quot;88.9&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_arm_length&quot;,
+          &quot;label&quot;: &quot;ARM LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_stiffener&quot;,
+          &quot;label&quot;: &quot;STIFFENER&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;formula&quot;: &quot;s1_arm_length &gt; 1000 ? &apos;Yes&apos; : &apos;No&apos;&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_brk_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_ring_weight&quot;,
+          &quot;label&quot;: &quot;RING WEIGHT&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;kg&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_ring_description&quot;,
+          &quot;label&quot;: &quot;RING DESCRIPTION&quot;,
+          &quot;type&quot;: &quot;textarea&quot;,
+          &quot;unit&quot;: &quot;Text&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_customized_description&quot;,
+          &quot;label&quot;: &quot;CUSTOMIZED DESCRIPTION&quot;,
+          &quot;type&quot;: &quot;textarea&quot;,
+          &quot;unit&quot;: &quot;Text&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Customized&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_customized_weight&quot;,
+          &quot;label&quot;: &quot;CUSTOMIZED WEIGHT&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;kg&quot;,
+          &quot;disableControllingField&quot;: &quot;s1_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Customized&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_pu_paint_brackets&quot;,
+          &quot;label&quot;: &quot;PU PAINT (BRACKETS)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_realization_on_bracket_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON BRACKET PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;s1_bracket_weight&quot;,
+          &quot;label&quot;: &quot;BRACKET WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;(s1_bracket_type == &apos;N.R.&apos; ? 0 : (s1_bracket_type == &apos;Customized&apos; ? (s1_customized_weight || 0) : (( (s1_sleeve_dia_od == &apos;Pole Top 70 = 88.9 (OD)&apos; ? 8.5 : s1_sleeve_dia_od == &apos;Pole Top 75 = 101.6 (OD)&apos; ? 9.63 : (s1_sleeve_dia_od == &apos;Pole Top 80 = 114.3 (OD)&apos; || s1_sleeve_dia_od == &apos;Pole Top 90 = 114.3 (OD)&apos;) ? 12.2 : s1_sleeve_dia_od == &apos;Pole Top 100 = 127 (OD)&apos; ? 14.5 : s1_sleeve_dia_od == &apos;Pole Top 110 = 152.4 (OD)&apos; ? 17.5 : 0) * ((s1_sleeve_length || 0) / 1000) + (((s1_sleeve_length || 0) &gt; 0) ? (0.08 * 4) : 0) ) + ( (s1_arm_dia_od == &apos;26.9&apos; ? 1.6 : s1_arm_dia_od == &apos;33.7&apos; ? 2.5 : s1_arm_dia_od == &apos;42.4&apos; ? 3.2 : s1_arm_dia_od == &apos;48.3&apos; ? 3.6 : s1_arm_dia_od == &apos;60.3&apos; ? 5.1 : s1_arm_dia_od == &apos;76.1&apos; ? 6.5 : s1_arm_dia_od == &apos;88.9&apos; ? 8.4 : 0) * (((s1_arm_length || 0) + 50) / 1000) * (Number(s1_type_of_arm) || 0) ) + (s1_stiffener == &apos;Yes&apos; ? (0.06 * 0.15 * 5 * 7.85 / 2 * (Number(s1_type_of_arm) || 0)) : 0) + (s1_type_of_arm == &apos;Ring&apos; ? (s1_ring_weight || 0) : 0)))) * (1 + (5 / 100))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket_base_price&quot;,
+          &quot;label&quot;: &quot;BRACKET BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket_unit_price&quot;,
+          &quot;label&quot;: &quot;BRACKET UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s1_bracket_type == &apos;N.R.&apos;) ? 0 : (((Base_Amount__c + (s1_realization_on_bracket_price || 0)) * (s1_bracket_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket_unit_cost&quot;,
+          &quot;label&quot;: &quot;BRACKET UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s1_bracket_type == &apos;N.R.&apos;) ? 0 : ((Base_Amount__c || 0) * (s1_bracket_weight || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lp_s2_pole&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg2_pole_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s2_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s2_pole_type&quot;,
+          &quot;label&quot;: &quot;POLE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Polygonal&quot;,
+            &quot;Conical&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_height_of_pole&quot;,
+          &quot;label&quot;: &quot;HEIGHT OF POLE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Meter&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_top_diameter&quot;,
+          &quot;label&quot;: &quot;TOP DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_bottom_diameter&quot;,
+          &quot;label&quot;: &quot;BOTTOM DIAMETER (OUTER A/F)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_no_of_polygonal_side&quot;,
+          &quot;label&quot;: &quot;NO. OF POLYGONAL SIDE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;0&quot;,
+            &quot;6&quot;,
+            &quot;8&quot;,
+            &quot;12&quot;,
+            &quot;16&quot;,
+            &quot;20&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_segment2_top_length&quot;,
+          &quot;label&quot;: &quot;SEGMENT 2 - TOP LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_segment1_bottom_length&quot;,
+          &quot;label&quot;: &quot;SEGMENT 1 - BOTTOM LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_segment2_top_thickness&quot;,
+          &quot;label&quot;: &quot;SEGMENT 2 - TOP THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_segment1_bottom_thickness&quot;,
+          &quot;label&quot;: &quot;SEGMENT 1 - BOTTOM THICKNESS&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_overlap&quot;,
+          &quot;label&quot;: &quot;OVERLAP&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;((s2_segment2_top_length || 0) + (s2_segment1_bottom_length || 0)) - ((s2_height_of_pole || 0) * 1000)&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_door_height&quot;,
+          &quot;label&quot;: &quot;DOOR HEIGHT&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;Cutout size (mm)&quot;,
+          &quot;options&quot;: [
+            &quot;350&quot;,
+            &quot;420&quot;,
+            &quot;500&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_base_plate_type&quot;,
+          &quot;label&quot;: &quot;BASE PLATE TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Square&quot;,
+            &quot;Circular&quot;,
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_size_dia_of_base_plate&quot;,
+          &quot;label&quot;: &quot;SIZE / DIA OF BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_thickness_of_base_plate&quot;,
+          &quot;label&quot;: &quot;THICKNESS OF BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_stiffener_at_base&quot;,
+          &quot;label&quot;: &quot;STIFFENER AT BASE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;required&quot;: true,
+          &quot;options&quot;: [
+            &quot;Yes&quot;,
+            &quot;No&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_dia_of_rectangular_base_plate&quot;,
+          &quot;label&quot;: &quot;DIA OF RECTANGULAR BASE PLATE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_base_plate_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Rectangle&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_extra_micron&quot;,
+          &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_pu_paint_pole_brackets&quot;,
+          &quot;label&quot;: &quot;PU PAINT (POLE &amp; BRACKETS)&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Description&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_pu_paint_pole&quot;,
+          &quot;label&quot;: &quot;PU PAINT (POLE)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_solar_structure&quot;,
+          &quot;label&quot;: &quot;SOLAR STRUCTURE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_battery_box&quot;,
+          &quot;label&quot;: &quot;BATTERY BOX&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_extra_pole_1_name&quot;,
+          &quot;label&quot;: &quot;Extra Pole 1&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;,
+          &quot;hideLabelLayout&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_extra_pole_2_name&quot;,
+          &quot;label&quot;: &quot;Extra Pole 2&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;unit&quot;: &quot;Weight&quot;,
+          &quot;hideLabelLayout&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;required&quot;: true,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_realization_on_segment_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON SEGMENT PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_segment_weight&quot;,
+          &quot;label&quot;: &quot;SEGMENT WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;( (s2_pole_type == &apos;Polygonal&apos; ? ((((((s2_top_diameter||0) + (s2_bottom_diameter||0)) / 2) - (s2_segment2_top_thickness||0)) * Math.tan(Math.PI / (s2_no_of_polygonal_side||1)) * (s2_no_of_polygonal_side||1)) / 1000 * (s2_segment2_top_length||0) / 1000 * (s2_segment2_top_thickness||0) * 7.85) : (s2_pole_type == &apos;Conical&apos; ? ((22/7) * ((((s2_top_diameter||0) + (s2_bottom_diameter||0)) / 2) / 1000) * (s2_segment2_top_length||0) / 1000 * (s2_segment2_top_thickness||0) * 7.85) : 0)) + (s2_pole_type == &apos;Polygonal&apos; ? ((((((s2_top_diameter||0) + (s2_bottom_diameter||0)) / 2) - (s2_segment1_bottom_thickness||0)) * Math.tan(Math.PI / (s2_no_of_polygonal_side||1)) * (s2_no_of_polygonal_side||1)) / 1000 * (s2_segment1_bottom_length||0) / 1000 * (s2_segment1_bottom_thickness||0) * 7.85) : (s2_pole_type == &apos;Conical&apos; ? ((22/7) * ((((s2_top_diameter||0) + (s2_bottom_diameter||0)) / 2) / 1000) * (s2_segment1_bottom_length||0) / 1000 * (s2_segment1_bottom_thickness||0) * 7.85) : 0)) + ((s2_door_height == &apos;350&apos; ? 2 : (s2_door_height == &apos;420&apos; || s2_door_height == &apos;500&apos; ? 2.5 : 0)) + (((s2_segment2_top_length||0) + (s2_segment1_bottom_length||0)) &gt; 10000 ? 3 : 0)) + (s2_base_plate_type == &apos;Circular&apos; ? ((((s2_size_dia_of_base_plate||0) * (s2_size_dia_of_base_plate||0) / 4 / 1000000 * 3.14) - (((s2_bottom_diameter||0) * (s2_bottom_diameter||0) / 4) / 1000000 * 3.14)) * (s2_thickness_of_base_plate||0) * 7.85) : (s2_base_plate_type == &apos;Square&apos; ? (((((s2_size_dia_of_base_plate||0) * (s2_size_dia_of_base_plate||0)) / 1000000) - (((s2_bottom_diameter||0) * (s2_bottom_diameter||0) / 4) / 1000000 * 3.14)) * (s2_thickness_of_base_plate||0) * 7.85) : 0)) + (s2_stiffener_at_base == &apos;Yes&apos; ? ((((s2_size_dia_of_base_plate||0) - (s2_bottom_diameter||0)) / 2 / 2 / 1000) * 0.2 * 5 * 7.85 * (s2_bolt_quantity||1)) : 0) ) * (1 + (5 / 100))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment2_base_price&quot;,
+          &quot;label&quot;: &quot;SEGMENT 2 BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment2_unit_price&quot;,
+          &quot;label&quot;: &quot;SEGMENT 2 UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(((Base_Amount__c + (s2_realization_on_segment_price || 0)) * (s2_segment_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_segment2_unit_cost&quot;,
+          &quot;label&quot;: &quot;SEGEMENT 2 UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;((Base_Amount__c || 0) * (s2_segment_weight || 0)) + (0 / (Number(s2_quantity) || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lp_s2_foundation&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg2_foundation_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s2_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s2_foundation_bolt_diameter&quot;,
+          &quot;label&quot;: &quot;FOUNDATION BOLT DIAMETER&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;options&quot;: [
+            &quot;16&quot;,
+            &quot;20&quot;,
+            &quot;24&quot;,
+            &quot;27&quot;,
+            &quot;30&quot;,
+            &quot;33&quot;,
+            &quot;39&quot;,
+            &quot;45&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_nr_fb_diameter&quot;,
+          &quot;label&quot;: &quot;N.R FB DIAMETER&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;mm&quot;,
+          &quot;options&quot;: [
+            &quot;16&quot;,
+            &quot;20&quot;,
+            &quot;24&quot;,
+            &quot;27&quot;,
+            &quot;30&quot;,
+            &quot;33&quot;,
+            &quot;39&quot;,
+            &quot;45&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s2_foundation_bolt_diameter&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_foundation_bolt_length&quot;,
+          &quot;label&quot;: &quot;FOUNDATION BOLT LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_bolt_quantity&quot;,
+          &quot;label&quot;: &quot;BOLT QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;pcs&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_pcd&quot;,
+          &quot;label&quot;: &quot;P.C.D&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;s2_size_dia_of_base_plate&quot;,
+          &quot;unit&quot;: &quot;mm&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_template&quot;,
+          &quot;label&quot;: &quot;TEMPLATE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;1:1 = Single Template Weight (Qty&lt;10 Nos Poles)&quot;,
+            &quot;1:10 = Multiple of 10 Nos (Qty&gt;10 Nos Pole)&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_fdn_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_realization_on_foundation_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON FOUNDATION PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_foundation_weight&quot;,
+          &quot;label&quot;: &quot;FOUNDATION WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;( ( ((22/7) * Math.pow(((s2_foundation_bolt_diameter == &apos;N.R.&apos; ? (s2_nr_fb_diameter || 0) : (s2_foundation_bolt_diameter || 0)) / 2), 2) / 1000000 * (s2_foundation_bolt_length || 0) * 7.85 * (s2_bolt_quantity || 0)) + ((s2_foundation_bolt_length || 0) == 0 ? 0 : ( ({&apos;16&apos;:0.05, &apos;20&apos;:0.1, &apos;24&apos;:0.15, &apos;27&apos;:0.2, &apos;30&apos;:0.3, &apos;33&apos;:0.35, &apos;36&apos;:0.5, &apos;39&apos;:0.6, &apos;42&apos;:0.7, &apos;45&apos;:0.8}[String(s2_foundation_bolt_diameter == &apos;N.R.&apos; ? (s2_nr_fb_diameter || 0) : (s2_foundation_bolt_diameter || 0))] || 0) * 3 * (s2_bolt_quantity || 0) )) + ((s2_foundation_bolt_length || 0) == 0 ? 0 : ( (s2_template == &apos;1:1 = Single Template Weight (Qty&lt;10 Nos Poles)&apos; ? 1 : (s2_template == &apos;1:10 = Multiple of 10 Nos (Qty&gt;10 Nos Pole)&apos; ? 0.1 : 0)) * (s2_base_plate_type == &apos;Circular&apos; ? ((((s2_size_dia_of_base_plate || 0) * (s2_size_dia_of_base_plate || 0) / 4 / 1000000 * 3.14) - (((s2_bottom_diameter || 0) * (s2_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s2_thickness_of_base_plate || 0) * 7.85) : (s2_base_plate_type == &apos;Square&apos; ? (((((s2_size_dia_of_base_plate || 0) * (s2_size_dia_of_base_plate || 0)) / 1000000) - (((s2_bottom_diameter || 0) * (s2_bottom_diameter || 0) / 4) / 1000000 * 3.14)) * (s2_thickness_of_base_plate || 0) * 7.85) : 0)) / (s2_thickness_of_base_plate || 1) * 4 )) ) * (1 + (5 / 100))+ ( s2_foundation_weight*(5/100)) )&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation2_base_price&quot;,
+          &quot;label&quot;: &quot;FOUNDATION 2 BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation2_unit_price&quot;,
+          &quot;label&quot;: &quot;FOUNDATION 2 UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s2_foundation_bolt_diameter == &apos;N.R.&apos;) ? 0 : (((Base_Amount__c + (s2_realization_on_foundation_price || 0)) * (s2_foundation_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_foundation2_unit_cost&quot;,
+          &quot;label&quot;: &quot;FOUNDATION 2 UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s2_foundation_bolt_diameter == &apos;N.R.&apos;) ? 0 : ((Base_Amount__c || 0) * (s2_foundation_weight || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lp_s2_bracket&quot;: [
+    {
+      &quot;apiName&quot;: &quot;seg2_bracket_grid&quot;,
+      &quot;type&quot;: &quot;column-repeater&quot;,
+      &quot;countApiName&quot;: &quot;s2_no_of_items&quot;,
+      &quot;maxColumns&quot;: 10,
+      &quot;fields&quot;: [
+        {
+          &quot;apiName&quot;: &quot;s2_bracket_type&quot;,
+          &quot;label&quot;: &quot;BRACKET TYPE&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;Standard&quot;,
+            &quot;Customized&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_type_of_arm&quot;,
+          &quot;label&quot;: &quot;NO. OF ARM&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;options&quot;: [
+            &quot;1&quot;,
+            &quot;2&quot;,
+            &quot;3&quot;,
+            &quot;4&quot;,
+            &quot;Ring&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_sleeve_dia_od&quot;,
+          &quot;label&quot;: &quot;SLEEVE DIA (OD)&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ],
+          &quot;options&quot;: [
+            &quot;Pole Top 70 = 88.9 (OD)&quot;,
+            &quot;Pole Top 75 = 101.6 (OD)&quot;,
+            &quot;Pole Top 80 = 114.3 (OD)&quot;,
+            &quot;Pole Top 90 = 114.3 (OD)&quot;,
+            &quot;Pole Top 100 = 127 (OD)&quot;,
+            &quot;Pole Top 110 = 152.4 (OD)&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_sleeve_length&quot;,
+          &quot;label&quot;: &quot;SLEEVE LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_arm_dia_od&quot;,
+          &quot;label&quot;: &quot;ARM DIA (OD)&quot;,
+          &quot;type&quot;: &quot;picklist&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;options&quot;: [
+            &quot;26.9&quot;,
+            &quot;33.7&quot;,
+            &quot;42.4&quot;,
+            &quot;48.3&quot;,
+            &quot;60.3&quot;,
+            &quot;76.1&quot;,
+            &quot;88.9&quot;
+          ],
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_arm_length&quot;,
+          &quot;label&quot;: &quot;ARM LENGTH&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;MM&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_stiffener&quot;,
+          &quot;label&quot;: &quot;STIFFENER&quot;,
+          &quot;type&quot;: &quot;text&quot;,
+          &quot;formula&quot;: &quot;s2_arm_length &gt; 1000 ? &apos;Yes&apos; : &apos;No&apos;&quot;,
+          &quot;readOnly&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_brk_quantity&quot;,
+          &quot;label&quot;: &quot;QUANTITY&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;isQuantity&quot;: true
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_ring_weight&quot;,
+          &quot;label&quot;: &quot;RING WEIGHT&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;kg&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_ring_description&quot;,
+          &quot;label&quot;: &quot;RING DESCRIPTION&quot;,
+          &quot;type&quot;: &quot;textarea&quot;,
+          &quot;unit&quot;: &quot;Text&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Standard&quot;,
+            &quot;N.R.&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_customized_description&quot;,
+          &quot;label&quot;: &quot;CUSTOMIZED DESCRIPTION&quot;,
+          &quot;type&quot;: &quot;textarea&quot;,
+          &quot;unit&quot;: &quot;Text&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Customized&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_customized_weight&quot;,
+          &quot;label&quot;: &quot;CUSTOMIZED WEIGHT&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;kg&quot;,
+          &quot;disableControllingField&quot;: &quot;s2_bracket_type&quot;,
+          &quot;disableControllingValues&quot;: [
+            &quot;Customized&quot;
+          ]
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_pu_paint_brackets&quot;,
+          &quot;label&quot;: &quot;PU PAINT (BRACKETS)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_realization_on_bracket_price&quot;,
+          &quot;label&quot;: &quot;REALIZATION ON BRACKET PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;unit&quot;: &quot;Value&quot;,
+          &quot;defaultValue&quot;: 5
+        },
+        {
+          &quot;apiName&quot;: &quot;s2_bracket_weight&quot;,
+          &quot;label&quot;: &quot;BRACKET WEIGHT (KG)&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isWeightTotal&quot;: true,
+          &quot;formula&quot;: &quot;(s2_bracket_type == &apos;N.R.&apos; ? 0 : (s2_bracket_type == &apos;Customized&apos; ? (s2_customized_weight || 0) : (( (s2_sleeve_dia_od == &apos;Pole Top 70 = 88.9 (OD)&apos; ? 8.5 : s2_sleeve_dia_od == &apos;Pole Top 75 = 101.6 (OD)&apos; ? 9.63 : (s2_sleeve_dia_od == &apos;Pole Top 80 = 114.3 (OD)&apos; || s2_sleeve_dia_od == &apos;Pole Top 90 = 114.3 (OD)&apos;) ? 12.2 : s2_sleeve_dia_od == &apos;Pole Top 100 = 127 (OD)&apos; ? 14.5 : s2_sleeve_dia_od == &apos;Pole Top 110 = 152.4 (OD)&apos; ? 17.5 : 0) * ((s2_sleeve_length || 0) / 1000) + (((s2_sleeve_length || 0) &gt; 0) ? (0.08 * 4) : 0) ) + ( (s2_arm_dia_od == &apos;26.9&apos; ? 1.6 : s2_arm_dia_od == &apos;33.7&apos; ? 2.5 : s2_arm_dia_od == &apos;42.4&apos; ? 3.2 : s2_arm_dia_od == &apos;48.3&apos; ? 3.6 : s2_arm_dia_od == &apos;60.3&apos; ? 5.1 : s2_arm_dia_od == &apos;76.1&apos; ? 6.5 : s2_arm_dia_od == &apos;88.9&apos; ? 8.4 : 0) * (((s2_arm_length || 0) + 50) / 1000) * (Number(s2_type_of_arm) || 0) ) + (s2_stiffener == &apos;Yes&apos; ? (0.06 * 0.15 * 5 * 7.85 / 2 * (Number(s2_type_of_arm) || 0)) : 0) + (s2_type_of_arm == &apos;Ring&apos; ? (s2_ring_weight || 0) : 0)))) * (1 + (5 / 100))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket2_base_price&quot;,
+          &quot;label&quot;: &quot;BRACKET 2 BASE PRICE&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;isBasePrice&quot;: true,
+          &quot;formula&quot;: &quot;Base_Amount__c&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket2_unit_price&quot;,
+          &quot;label&quot;: &quot;BRACKET 2 UNIT PRICE&quot;,
+          &quot;isUnitPrice&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s2_bracket_type == &apos;N.R.&apos;) ? 0 : (((Base_Amount__c + (s2_realization_on_bracket_price || 0)) * (s2_bracket_weight || 0)))&quot;
+        },
+        {
+          &quot;apiName&quot;: &quot;lp_bracket2_unit_cost&quot;,
+          &quot;label&quot;: &quot;BRACKET 2 UNIT COST&quot;,
+          &quot;isUnitCost&quot;: true,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;readOnly&quot;: true,
+          &quot;formula&quot;: &quot;(s2_bracket_type == &apos;N.R.&apos;) ? 0 : ((Base_Amount__c || 0) * (s2_bracket_weight || 0))&quot;
+        }
+      ]
+    }
+  ],
+  &quot;lm_addition_details&quot;:[
+    {
+        &quot;apiName&quot;: &quot;lm_ad_description&quot;,
+        &quot;label&quot;: &quot;ADDITIONAL DETAIL DESCRIPTION&quot;,
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;colSpan&quot;: 4
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_basis&quot;,
+        &quot;label&quot;: &quot;WEIGHT OR PRICE&quot;,
+        &quot;type&quot;: &quot;picklist&quot;,
+        &quot;options&quot;: [
+        &quot;Weight&quot;,
+        &quot;Price&quot;
+        ],
+        &quot;defaultValue&quot;: &quot;Weight&quot;,
+        &quot;colSpan&quot;: 3
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_weight&quot;,
+        &quot;label&quot;: &quot;VALUE (WEIGHT)&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;unit&quot;: &quot;Kg&quot;,
+        &quot;colSpan&quot;: 3,
+        &quot;isWeightTotal&quot;: true,
+        &quot;controllingField&quot;: &quot;lm_ad_basis&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;Weight&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_price_input&quot;,
+        &quot;label&quot;: &quot;VALUE (PRICE)&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;colSpan&quot;: 3,
+        &quot;controllingField&quot;: &quot;lm_ad_basis&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;Price&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_base_price&quot;,
+        &quot;label&quot;: &quot;BASE PRICE&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;readOnly&quot;: true,
+        &quot;colSpan&quot;: 2,
+        &quot;formula&quot;: &quot;Base_Amount__c&quot;
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_unit_price&quot;,
+        &quot;label&quot;: &quot;UNIT PRICE&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;readOnly&quot;: true,
+        &quot;colSpan&quot;: 3,
+        &quot;isUnitPrice&quot;: true,
+        &quot;formula&quot;: &quot;(lm_ad_basis == &apos;Price&apos; ? (lm_ad_price_input || 0) : (((Base_Amount__c || 0) + (lm_realization || 0)) * (lm_ad_weight || 0)))&quot;
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_ad_unit_cost&quot;,
+        &quot;label&quot;: &quot;UNIT COST&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;readOnly&quot;: true,
+        &quot;colSpan&quot;: 3,
+        &quot;isUnitCost&quot;: true,
+        &quot;formula&quot;: &quot;(lm_ad_basis == &apos;Price&apos; ? (lm_ad_price_input || 0) : ((Base_Amount__c || 0) * (lm_ad_weight || 0)))&quot;
+    }
+  ],
+  &quot;lm_addition_micron_pu_paint&quot;:[
+    {
+        &quot;apiName&quot;: &quot;lm_is_extra_micron&quot;,
+        &quot;label&quot;: &quot;EXTRA MICRON?&quot;,
+        &quot;type&quot;: &quot;checkbox&quot;,
+        &quot;colSpan&quot;: 3
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_extra_micron&quot;,
+        &quot;label&quot;: &quot;EXTRA MICRON VALUE?&quot;,
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;colSpan&quot;: 3,
+        &quot;controllingField&quot;: &quot;lm_is_extra_micron&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint&quot;,
+        &quot;label&quot;: &quot;PU PAINT?&quot;,
+        &quot;type&quot;: &quot;checkbox&quot;,
+        &quot;colSpan&quot;: 3
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint_note&quot;,
+        &quot;label&quot;: &quot;PU PAINT NOTE&quot;,
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;colSpan&quot;: 3,
+        &quot;controllingField&quot;: &quot;lm_pu_paint&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint_value&quot;,
+        &quot;label&quot;: &quot;PU PAINT PRICE VALUE&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;colSpan&quot;: 2,
+        &quot;controllingField&quot;: &quot;lm_pu_paint&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint_realization_value&quot;,
+        &quot;label&quot;: &quot;PU PAINT REALIZATION %&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;defaultValue&quot;:5,
+        &quot;isRealization&quot;: true,
+        &quot;colSpan&quot;: 2,
+        &quot;controllingField&quot;: &quot;lm_pu_paint&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint_unit_price&quot;,
+        &quot;label&quot;: &quot;PU PAINT UNIT PRICE&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;readOnly&quot;: true,
+        &quot;colSpan&quot;: 2,
+        &quot;isUnitPrice&quot;: true,
+        &quot;formula&quot;: &quot;(lm_pu_paint_value || 0) * (1 + (lm_pu_paint_realization_value || 0)/100 )&quot;,
+        &quot;controllingField&quot;: &quot;lm_pu_paint&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    },
+    {
+        &quot;apiName&quot;: &quot;lm_pu_paint_unit_cost&quot;,
+        &quot;label&quot;: &quot;PU PAINT UNIT COST&quot;,
+        &quot;type&quot;: &quot;number&quot;,
+        &quot;readOnly&quot;: true,
+        &quot;colSpan&quot;: 2,
+        &quot;isUnitCost&quot;: true,
+        &quot;formula&quot;: &quot;(lm_pu_paint_value || 0)&quot;,
+        &quot;controllingField&quot;: &quot;lm_pu_paint&quot;,
+        &quot;controllingValues&quot;: [
+        &quot;true&quot;
+        ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

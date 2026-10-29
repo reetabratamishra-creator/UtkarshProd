@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Account Creation based on profile</description>
+    <label>Account creation allowed</label>
+    <pluralLabel>Accounts creation allowed</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

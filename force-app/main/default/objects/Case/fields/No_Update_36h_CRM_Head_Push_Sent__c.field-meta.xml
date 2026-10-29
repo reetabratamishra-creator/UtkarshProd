@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Update_36h_CRM_Head_Push_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Tracks whether the 36-hour no-update CRM Head push notification has been sent.</description>
+    <label>No Update 36h CRM Head Push Sent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

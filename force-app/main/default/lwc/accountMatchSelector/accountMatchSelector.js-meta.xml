@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Account Match &amp; Select</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountName" type="String"  label="Account Name"        role="inputOnly"/>
+            <property name="phone"       type="String"  label="Phone"               role="inputOnly"/>
+            <property name="email"       type="String"  label="Email"               role="inputOnly"/>
+            <property name="label"       type="String"  label="Input Label"         role="inputOnly" default="Account Name"/>
+            <property name="required"    type="Boolean" label="Required"            role="inputOnly"/>
+
+            <property name="selectedAccountId"   type="String"  label="Selected Account Id"  role="outputOnly"/>
+            <property name="isExistingAccount"   type="Boolean" label="Is Existing Account"  role="outputOnly"/>
+            <property name="resolvedAccountName" type="String"  label="Resolved Account Name" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

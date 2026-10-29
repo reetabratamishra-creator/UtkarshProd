@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accordion_Section__c</fullName>
+    <description>Metadata relationship linking this JSON logic payload to its parent Accordion tab.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Metadata relationship linking this JSON logic payload to its parent Accordion tab.</inlineHelpText>
+    <label>Accordion Section</label>
+    <referenceTo>Accordion_Section__mdt</referenceTo>
+    <relationshipLabel>Sections Logic</relationshipLabel>
+    <relationshipName>Sections_Logic</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

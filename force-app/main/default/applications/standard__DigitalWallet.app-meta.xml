@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Digital Wallet</label>
+    <navType>Standard</navType>
+    <tabs>standard-DigitalWalletHome</tabs>
+    <tabs>standard-ConsumptionCards</tabs>
+    <tabs>standard-ConsumptionTags</tabs>
+    <tabs>standard-ConsumptionAnalytics</tabs>
+    <tabs>standard-LicenseUtilization</tabs>
+    <tabs>standard-ProductLimits</tabs>
+    <tabs>standard-SalesforceContract</tabs>
+    <tabs>standard-SalesforceInvoice</tabs>
+    <tabs>standard-SfdcPartnerSbscrOffer</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

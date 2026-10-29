@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Grade__c</fullName>
+    <description>Employee grade associated with this eligibility level</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the employee grade (e.g., P1, P2, E1, E2, M1, etc.)</inlineHelpText>
+    <label>Grade</label>
+    <length>100</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

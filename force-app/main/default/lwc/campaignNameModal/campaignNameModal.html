@@ -1,0 +1,89 @@
+<template>
+    <template if:true={isOpen}>
+        <div class="journey-modal-overlay campaign-name-modal">
+            <div class="journey-modal-overlay__backdrop" onclick={handleCancel}></div>
+            <section
+                role="dialog"
+                tabindex="-1"
+                aria-modal="true"
+                class="journey-modal-overlay__dialog"
+                onclick={stopModalClick}
+            >
+                <div class="journey-modal__container">
+                    <header class="journey-modal__header">
+                        <div class="journey-modal__header-icon">
+                            <lightning-icon icon-name="standard:campaign" size="small" variant="inverse"></lightning-icon>
+                        </div>
+                        <div class="journey-modal__title-wrap">
+                            <h2 class="journey-modal__title">{modalTitle}</h2>
+                            <p class="journey-modal__subtitle">{modalSubtitle}</p>
+                        </div>
+                        <button
+                            class="slds-button slds-button_icon journey-modal__close"
+                            title="Close"
+                            onclick={handleCancel}
+                            disabled={isSending}
+                        >
+                            <lightning-icon icon-name="utility:close" alternative-text="Close" size="x-small" variant="inverse"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </header>
+
+                    <div class="journey-modal__content">
+                        <template if:true={isNameStep}>
+                            <lightning-input
+                                label="Campaign Name"
+                                value={campaignName}
+                                onchange={handleCampaignNameChange}
+                                required
+                                maxlength="255"
+                                disabled={isSending}
+                            ></lightning-input>
+                        </template>
+                        <template if:false={isNameStep}>
+                            <lightning-input
+                                type="date"
+                                label="Date"
+                                value={scheduleDate}
+                                onchange={handleScheduleDateChange}
+                                required
+                                disabled={isSending}
+                            ></lightning-input>
+                            <lightning-input
+                                class="schedule-time"
+                                type="time"
+                                label="Time"
+                                value={scheduleTime}
+                                onchange={handleScheduleTimeChange}
+                                required
+                                disabled={isSending}
+                            ></lightning-input>
+                        </template>
+                    </div>
+
+                    <footer class="journey-modal__footer">
+                        <template if:false={isNameStep}>
+                            <lightning-button
+                                label="Back"
+                                onclick={handleBack}
+                                disabled={isSending}
+                            ></lightning-button>
+                        </template>
+                        <lightning-button
+                            label="Cancel"
+                            onclick={handleCancel}
+                            disabled={isSending}
+                        ></lightning-button>
+                        <lightning-button
+                            variant="brand"
+                            label={primaryLabel}
+                            icon-name={primaryIcon}
+                            onclick={handleConfirm}
+                            disabled={isConfirmDisabled}
+                        ></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </template>
+</template>

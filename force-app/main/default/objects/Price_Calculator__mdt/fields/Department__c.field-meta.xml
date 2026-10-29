@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Department__c</fullName>
+    <description>The exact name of the product department. This acts as the &quot;Handshake Key&quot; to fetch the correct pricing record. (CRITICAL: Values entered here must exactly match the text in the LWC Template dropdown, e.g., &quot;Transmission Pole&quot;).</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Department</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

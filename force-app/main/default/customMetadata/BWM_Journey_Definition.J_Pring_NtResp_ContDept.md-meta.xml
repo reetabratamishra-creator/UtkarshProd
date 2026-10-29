@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Prospecting callback dept</label>
+    <protected>false</protected>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Journey_Name__c</field>
+        <value xsi:type="xsd:string">Prospecting_not_responding_cont_dept</value>
+    </values>
+    <values>
+        <field>Payload_JSON__c</field>
+        <value xsi:type="xsd:string">{&quot;journeyname&quot;:&quot;Prospecting_not_responding_cont_dept&quot;,&quot;journeypayload&quot;:{&quot;nodes&quot;:{&quot;1&quot;:{&quot;templateType&quot;:&quot;WHATSAPP&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;poly_nt_res_pros_lead&quot;}},&quot;2&quot;:{&quot;templateType&quot;:&quot;RCSMESSAGE&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;pol_nt_res_pros_lea&quot;,&quot;headerData&quot;:{},&quot;bodyData&quot;:{&quot;{{1}}&quot;:&quot;lead_Owner_name&quot;,&quot;{{2}}&quot;:&quot;lead_Owner_phone&quot;,&quot;{{3}}&quot;:&quot;lead_Owner_email&quot;,&quot;{{4}}&quot;:&quot;Department_crm_name&quot;,&quot;{{5}}&quot;:&quot;Department_crm_number&quot;,&quot;{{6}}&quot;:&quot;Department_crm_email&quot;},&quot;footerData&quot;:{},&quot;cardData&quot;:[]}},&quot;3&quot;:{&quot;templateType&quot;:&quot;SMS&quot;,&quot;data&quot;:{&quot;templateName&quot;:&quot;Prospect_not_resp&quot;,&quot;variableMappings&quot;:{&quot;1&quot;:&quot;Lead.Owner.Phone&quot;}}}}}}</value>
+    </values>
+    <values>
+        <field>Sort_Order__c</field>
+        <value xsi:type="xsd:double">92.0</value>
+    </values>
+</CustomMetadata>

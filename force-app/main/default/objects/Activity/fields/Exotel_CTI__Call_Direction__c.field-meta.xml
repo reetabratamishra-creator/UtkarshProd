@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exotel_CTI__Call_Direction__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Identifies the direction of the call whether it is inbound or outbound</description>
+    <externalId>false</externalId>
+    <label>Call Direction</label>
+    <length>50</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Current status of the expense request in the approval workflow</description>
+    <inlineHelpText>Tracks the expense through submission, approval, and reimbursement stages</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Pending HOD Approval</fullName>
+                <default>false</default>
+                <label>Pending HOD Approval</label>
+            </value>
+            <value>
+                <fullName>Pending HR Approval</fullName>
+                <default>false</default>
+                <label>Pending HR Approval</label>
+            </value>
+            <value>
+                <fullName>Pending ED Approval</fullName>
+                <default>false</default>
+                <label>Pending ED Approval</label>
+            </value>
+            <value>
+                <fullName>Rejected by HOD</fullName>
+                <default>false</default>
+                <label>Rejected by HOD</label>
+            </value>
+            <value>
+                <fullName>Rejected by HR</fullName>
+                <default>false</default>
+                <label>Rejected by HR</label>
+            </value>
+            <value>
+                <fullName>Rejected by ED</fullName>
+                <default>false</default>
+                <label>Rejected by ED</label>
+            </value>
+            <value>
+                <fullName>Approved by ED</fullName>
+                <default>false</default>
+                <label>Approved by ED</label>
+            </value>
+            <value>
+                <fullName>Reimbursed</fullName>
+                <default>false</default>
+                <label>Reimbursed</label>
+            </value>
+            <value>
+                <fullName>Draft</fullName>
+                <default>false</default>
+                <label>Draft</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>HOD Approved</fullName>
+                <default>false</default>
+                <label>HOD Approved</label>
+            </value>
+            <value>
+                <fullName>ED Approved</fullName>
+                <default>false</default>
+                <label>ED Approved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

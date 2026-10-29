@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Section_Name__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Section Name</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Calender Details</fullName>
+                <default>true</default>
+                <label>Calender Details</label>
+            </value>
+            <value>
+                <fullName>Related To</fullName>
+                <default>false</default>
+                <label>Related To</label>
+            </value>
+            <value>
+                <fullName>System Information</fullName>
+                <default>false</default>
+                <label>System Information</label>
+            </value>
+            <value>
+                <fullName>Other Information</fullName>
+                <default>false</default>
+                <label>Other Information</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

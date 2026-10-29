@@ -1,0 +1,134 @@
+<template>
+    <lightning-card title="Create Activity for Opportunity" icon-name="standard:task">
+
+        <template lwc:if={saving}>
+            <lightning-spinner alternative-text="Saving" size="small"></lightning-spinner>
+        </template>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+
+            <!-- ============ STEP 1: choose a category ============ -->
+            <template lwc:if={showMenu}>
+                <p class="slds-m-vertical_small">
+                    Choose what you want to create. Only one open record is allowed per category.
+                </p>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_small">
+                        <lightning-button stretch variant="brand" label="Call"
+                            icon-name="utility:call" disabled={callOpen} onclick={selectCall}>
+                        </lightning-button>
+                        <template lwc:if={callOpen}>
+                            <p class="slds-text-color_error slds-text-body_small slds-m-top_xx-small">
+                                An open Call already exists.
+                            </p>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_small">
+                        <lightning-button stretch variant="brand" label="Event"
+                            icon-name="utility:event" disabled={eventOpen} onclick={selectEvent}>
+                        </lightning-button>
+                        <template lwc:if={eventOpen}>
+                            <p class="slds-text-color_error slds-text-body_small slds-m-top_xx-small">
+                                An open Event already exists.
+                            </p>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-m-bottom_small">
+                        <lightning-button stretch variant="brand" label="Visit"
+                            icon-name="utility:location" disabled={visitOpen} onclick={selectVisit}>
+                        </lightning-button>
+                        <template lwc:if={visitOpen}>
+                            <p class="slds-text-color_error slds-text-body_small slds-m-top_xx-small">
+                                An open Visit already exists.
+                            </p>
+                        </template>
+                    </div>
+                </div>
+                <div class="slds-m-top_small slds-text-align_right">
+                    <lightning-button label="Close" onclick={closeAction}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ CALL FORM ============ -->
+            <template lwc:if={showCallForm}>
+                <lightning-input label="Subject" value={call.subject} data-field="subject"
+                    onchange={handleCallChange} required></lightning-input>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input type="date" label="Date" value={call.date} data-field="date"
+                            min={todayDate} onchange={handleCallChange} required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="time" label="Time" value={call.time} data-field="time"
+                            onchange={handleCallChange} required></lightning-input>
+                    </div>
+                </div>
+                <template lwc:if={pastCallError}>
+                    <p class="slds-text-color_error slds-text-body_small slds-m-bottom_x-small">
+                        Call date/time cannot be in the past.
+                    </p>
+                </template>
+                <lightning-combobox label="Assign To" value={call.assignedTo} data-field="assignedTo"
+                    options={assignableUserOptions} onchange={handleCallChange} required></lightning-combobox>
+                <lightning-textarea label="Comments" value={call.comments} data-field="comments"
+                    onchange={handleCallChange}></lightning-textarea>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Back" onclick={backToMenu}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save Call" onclick={saveCall}
+                        disabled={callInvalid}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ EVENT FORM ============ -->
+            <template lwc:if={showEventForm}>
+                <lightning-input label="Subject" value={event.subject} data-field="subject"
+                    onchange={handleEventChange} required></lightning-input>
+                <lightning-input type="datetime-local" label="Start" value={event.start}
+                    data-field="start" min={nowLocal} onchange={handleEventChange}
+                    message-when-range-underflow="Start cannot be in the past." required></lightning-input>
+                <lightning-input type="datetime-local" label="End" value={event.end}
+                    data-field="end" onchange={handleEventChange} required></lightning-input>
+                <template lwc:if={pastEventError}>
+                    <p class="slds-text-color_error slds-text-body_small slds-m-bottom_x-small">
+                        Event start cannot be in the past.
+                    </p>
+                </template>
+                <lightning-combobox label="Assign To" value={event.assignedTo} data-field="assignedTo"
+                    options={assignableUserOptions} onchange={handleEventChange} required></lightning-combobox>
+                <lightning-textarea label="Comment" value={event.comments} data-field="comments"
+                    onchange={handleEventChange}></lightning-textarea>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Back" onclick={backToMenu}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save Event" onclick={saveEvent}
+                        disabled={eventInvalid}></lightning-button>
+                </div>
+            </template>
+
+            <!-- ============ VISIT FORM ============ -->
+            <template lwc:if={showVisitForm}>
+                <lightning-combobox label="Visit Type" value={visit.visitType} data-field="visitType"
+                    options={visitTypeOptions} onchange={handleVisitChange} required></lightning-combobox>
+                <lightning-combobox label="Reason for Visit" value={visit.reason} data-field="reason"
+                    options={reasonOptions} onchange={handleVisitChange} required></lightning-combobox>
+                <lightning-input type="date" label="Schedule Date" value={visit.scheduleDate}
+                    data-field="scheduleDate" min={todayDate} onchange={handleVisitChange} required></lightning-input>
+                <template lwc:if={pastVisitError}>
+                    <p class="slds-text-color_error slds-text-body_small slds-m-bottom_x-small">
+                        Schedule Date cannot be in the past.
+                    </p>
+                </template>
+                <lightning-combobox label="Assign To" value={visit.assignedTo} data-field="assignedTo"
+                    options={assignableUserOptions} onchange={handleVisitChange} required></lightning-combobox>
+                <div class="slds-m-top_medium slds-text-align_right">
+                    <lightning-button label="Back" onclick={backToMenu}
+                        class="slds-m-right_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save Visit" onclick={saveVisit}
+                        disabled={visitInvalid}></lightning-button>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

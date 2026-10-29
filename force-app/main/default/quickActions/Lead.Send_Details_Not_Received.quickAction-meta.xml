@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Queues Prospecting details-not-received journey and email to the Lead phone/email by department.</description>
+    <flowDefinition>Lead_Send_Details_Not_Received</flowDefinition>
+    <label>Send Details Not Received</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

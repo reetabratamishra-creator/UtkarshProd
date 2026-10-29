@@ -1,0 +1,13 @@
+<template>
+    <lightning-button
+        label="Cost Sheet"
+        icon-name="utility:table"
+        variant="neutral"
+        onclick={handleGenerate}
+        disabled={isBusy}
+        class="slds-m-left_x-small">
+    </lightning-button>
+    <template lwc:if={isBusy}>
+        <lightning-spinner alternative-text="Building cost sheet" size="small"></lightning-spinner>
+    </template>
+</template>

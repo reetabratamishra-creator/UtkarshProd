@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Project Set-up Details For Std Mast</label>
+    <protected>false</protected>
+    <values>
+        <field>Accordion_Section__c</field>
+        <value xsi:type="xsd:string">Project_Set_up_Details</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Blueprint_Library__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Controlling_Value__c</field>
+        <value xsi:type="xsd:string">*</value>
+    </values>
+    <values>
+        <field>JSON_Payload__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;fields&quot;: [
+    {
+      &quot;apiName&quot;: &quot;transportation_as&quot;,
+      &quot;label&quot;: &quot;Transportation as&quot;,
+      &quot;type&quot;: &quot;picklist&quot;,
+      &quot;required&quot;: true,
+      &quot;options&quot;: [
+        &quot;Lump sum&quot;,
+        &quot;Per pole/Mast&quot;
+      ],
+      &quot;controllingField&quot;: &quot;freight_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;F.O.R (Freight on Road)&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;transportation_charges&quot;,
+      &quot;label&quot;: &quot;Transportation Charges&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;required&quot;: true,
+      &quot;controllingField&quot;: &quot;transportation_as&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Lump sum&quot;,
+        &quot;Per pole/Mast&quot;
+      ]
+    },
+    {
+      &quot;apiName&quot;: &quot;customer_address_override&quot;,
+      &quot;label&quot;: &quot;Customer Address Override&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;freight_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;CUSTOMER ADDRESS DETAILS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;shipping_address&quot;,
+              &quot;label&quot;: &quot;Shipping Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;def_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingStreet@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingCity@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_zip&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingPostalCode@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingState@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@ShippingCountry@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;def_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;text&quot;,
+                  &quot;readOnly&quot;: true,
+                  &quot;defaultValue&quot;: &quot;@@Phone@@&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;override_existing_address&quot;,
+                  &quot;label&quot;: &quot;OVERRIDE EXISTING ADDRESS?&quot;,
+                  &quot;type&quot;: &quot;checkbox&quot;
+                }
+              ]
+            },
+            {
+              &quot;id&quot;: &quot;override_shipping_address&quot;,
+              &quot;label&quot;: &quot;Override Shipping Address&quot;,
+              &quot;expanded&quot;: true,
+              &quot;controllingField&quot;: &quot;override_existing_address&quot;,
+              &quot;controllingValues&quot;: [
+                &quot;true&quot;
+              ],
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;ovr_street&quot;,
+                  &quot;label&quot;: &quot;STREET&quot;,
+                  &quot;type&quot;: &quot;text&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ovr_city&quot;,
+                  &quot;label&quot;: &quot;CITY&quot;,
+                  &quot;type&quot;: &quot;text&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ovr_zip&quot;,
+                  &quot;label&quot;: &quot;ZIP-CODE&quot;,
+                  &quot;type&quot;: &quot;number&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ovr_state&quot;,
+                  &quot;label&quot;: &quot;STATE&quot;,
+                  &quot;type&quot;: &quot;text&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ovr_country&quot;,
+                  &quot;label&quot;: &quot;COUNTRY&quot;,
+                  &quot;type&quot;: &quot;text&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;ovr_phone&quot;,
+                  &quot;label&quot;: &quot;PHONE NUMBER&quot;,
+                  &quot;type&quot;: &quot;number&quot;
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      &quot;apiName&quot;: &quot;terms_and_conditions&quot;,
+      &quot;label&quot;: &quot;Terms &amp; Conditions&quot;,
+      &quot;type&quot;: &quot;folder&quot;,
+      &quot;iconColor&quot;: &quot;blue&quot;,
+      &quot;controllingField&quot;: &quot;freight_incoterms&quot;,
+      &quot;controllingValues&quot;: [
+        &quot;Ex-works&quot;,
+        &quot;F.O.R (Freight on Road)&quot;
+      ],
+      &quot;modalConfigsByValue&quot;: {
+        &quot;default&quot;: {
+          &quot;title&quot;: &quot;TERMS &amp; CONDITIONS&quot;,
+          &quot;modalFields&quot;: [
+            {
+              &quot;id&quot;: &quot;terms_and_conditions_details&quot;,
+              &quot;label&quot;: &quot;Terms &amp; Conditions Details&quot;,
+              &quot;expanded&quot;: true,
+              &quot;fields&quot;: [
+                {
+                  &quot;apiName&quot;: &quot;tc_del_schedule&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 10
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_del_schedule_in&quot;,
+                  &quot;label&quot;: &quot;Delivery Schedule In&quot;,
+                  &quot;type&quot;: &quot;picklist&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;options&quot;: [
+                    &quot;Days&quot;,
+                    &quot;Weeks&quot;,
+                    &quot;Months&quot;
+                  ],
+ &quot;defaultValue&quot;: &quot;Days&quot;
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_price_variation&quot;,
+                  &quot;label&quot;: &quot;Price Variation (Days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+&quot;defaultValue&quot;: 30,
+                  &quot;colSpan&quot;: 4
+                },
+{
+                  &quot;apiName&quot;: &quot;tc_quot_validity&quot;,
+                  &quot;label&quot;: &quot;Quotation Validity (in days)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 5
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_comm_months&quot;,
+                  &quot;label&quot;: &quot;Warranty From the date of Commissioning (in months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 12
+                },
+                {
+                  &quot;apiName&quot;: &quot;tc_del_months&quot;,
+                  &quot;label&quot;: &quot;Warranty From the Date of Delivery (in months)&quot;,
+                  &quot;type&quot;: &quot;number&quot;,
+                  &quot;colSpan&quot;: 4,
+                  &quot;defaultValue&quot;: 18
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  &quot;_lineItemAdjustments&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;transportation_as&quot;,
+      &quot;conditionValue&quot;: &quot;Per pole/Mast&quot;,
+      &quot;chargeField&quot;: &quot;transportation_charges&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;divideByQuantity&quot;: false,
+      &quot;targetItemNameIncludes&quot;: [
+        &quot;CUSTOM LIGHTNING MAST (5 SEGMENTS) - CLM - Segment&quot;,
+        &quot;LATCHING MAST (5 SEGMENTS) - LM - Segment&quot;,
+        &quot;SIGNAGE MAST - LM - Segment&quot;,
+        &quot;LIGHTNING CUM LIGHTING MAST - LM - Segment&quot;,
+        &quot;LIGHTING MAST (SEGMENT ABOVE 5) - LM - Segment&quot;,
+        &quot;STADIUM MAST - Segment Dimension&quot;,
+        &quot;FLAG MAST - FM - Segment&quot;,
+        &quot;LCLM - LM - Segment&quot;,
+        &quot;STANDARD LIGHTNING POLE - Segment&quot;,
+        &quot;CUSTOM LIGHTNING POLE - Segment&quot;,
+        &quot;MID HINGE POLE - Mid Hinge Pole Details&quot;,
+        &quot;LIGHTING MAST (5 SEGMENTS) - LM - Segment&quot;,
+        &quot;TRANSMISSION POLE - Segment&quot;,
+        &quot;STADIUM MAST - ESTIMATOR - Segment Dimension&quot;,
+        &quot;FLAG MAST - ESTIMATOR - FM - Segment&quot;
+      ],
+      &quot;applyTo&quot;: [
+        &quot;unitPrice&quot;,
+        &quot;unitCost&quot;
+      ]
+    }
+  ],
+  &quot;_newLineItemGenerators&quot;: [
+    {
+      &quot;conditionField&quot;: &quot;transportation_as&quot;,
+      &quot;conditionValue&quot;: &quot;Lump sum&quot;,
+      &quot;chargeField&quot;: &quot;transportation_charges&quot;,
+      &quot;applyGST&quot;: false,
+      &quot;itemName&quot;: &quot;Transportation Charges (Lump Sum)&quot;,
+      &quot;applyTo&quot;: [
+        &quot;expenses&quot;
+      ]
+    }
+  ]
+}</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,80 @@
+<template>
+  <lightning-card title="Campaign Report" icon-name="standard:campaign">
+    <div class="slds-p-around_medium">
+      <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+
+      <template if:true={errorMessage}>
+        <div class="slds-notify slds-notify_alert slds-theme_error slds-m-bottom_small" role="alert">
+          <span class="slds-assistive-text">error</span>
+          <h2>{errorMessage}</h2>
+        </div>
+      </template>
+
+      <template if:true={hasOptions}>
+        <lightning-combobox
+          name="campaign"
+          label="Campaign Name"
+          value={selectedCampaignId}
+          placeholder="Select a campaign"
+          options={campaignOptions}
+          onchange={handleCampaignChange}
+          required
+        ></lightning-combobox>
+
+        <div class="slds-m-top_small">
+          <lightning-radio-group
+            name="product"
+            label="Product Name"
+            options={productOptions}
+            value={selectedProduct}
+            type="radio"
+            onchange={handleProductChange}
+            required
+          ></lightning-radio-group>
+        </div>
+
+        <div class="slds-m-top_medium slds-grid slds-gutters">
+          <div class="slds-col">
+            <lightning-button
+              variant="brand"
+              label="Fetch Report"
+              onclick={handleFetch}
+              disabled={disableFetch}
+            ></lightning-button>
+          </div>
+          <div class="slds-col">
+            <lightning-button
+              variant="neutral"
+              label="Back to Campaigns"
+              onclick={handleBackToList}
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+
+      <template if:true={hasReport}>
+        <div class="slds-m-top_large">
+          <h2 class="slds-text-heading_small slds-m-bottom_small">Report</h2>
+          <dl class="slds-dl_horizontal">
+            <dt class="slds-dl_horizontal__label">Journey Name</dt>
+            <dd class="slds-dl_horizontal__detail">{journeyName}</dd>
+            <dt class="slds-dl_horizontal__label">Journey Campaign Name</dt>
+            <dd class="slds-dl_horizontal__detail">{journeyCampaignName}</dd>
+            <dt class="slds-dl_horizontal__label">Product Name</dt>
+            <dd class="slds-dl_horizontal__detail">{productName}</dd>
+          </dl>
+
+          <lightning-datatable
+            key-field="indexNo"
+            data={statsRows}
+            columns={columns}
+            hide-checkbox-column
+            class="slds-m-top_small"
+          ></lightning-datatable>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

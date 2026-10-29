@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dealer_Opportunity</fullName>
+    <active>true</active>
+    <businessProcess>Opportunity Sales Process</businessProcess>
+    <label>Dealer Opportunity</label>
+    <picklistValues>
+        <picklist>CountryCode__c</picklist>
+        <values>
+            <fullName>%2B1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B30</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B33</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B39</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B44</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B45</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B46</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B47</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B49</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B61</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B64</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B65</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B852</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B86</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B91</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%2B971</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Country__c</picklist>
+        <values>
+            <fullName>Australia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>China</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Denmark</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dubai</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>France</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Germany</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greece</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hong Kong</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>India</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Italy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Zealand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Norway</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Russia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Singapore</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sweden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UAE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>USA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Customer_Category__c</picklist>
+        <values>
+            <fullName>Borewell Contractor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contractors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dealer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distributor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPC Contractor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>End-user</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government %2F PSU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Contractor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Govt%2E Entity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infrastructure Company</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PSU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Developer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retailer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Installer %2F Integrator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telecom Infrastructure Company</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Utility %2F Power Company</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Supply %2F Utility Project</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Customer_Journey__c</picklist>
+        <values>
+            <fullName>Direct Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refer to Dealer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Department_Name__c</picklist>
+        <values>
+            <fullName>Crash Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Mast %26 Polygonal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polymer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Engineering Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railway Electrification Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Tubular Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission %26 Telecom Tower</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Industry__c</picklist>
+        <values>
+            <fullName>Agriculture %26 Irrigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Automobile Ancilllaries</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aviation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chemical %26 Petrochemical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial %26 Business Complex</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction %26 EPC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Drugs %26 Pharmaceutical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electronics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government %2F PSU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospitality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infrastructure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manufacturing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mining</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oil %26 Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Packaging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Power %26 Utilities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railways</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Real Estate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renewable Energy %28Solar%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Residential</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel %26 Metal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telecommunications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission %26 distribution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warehousing %26 Logistics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Infrastructure</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>CRM RESOURCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EMAIL CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EVENT ACTIVATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FACEBOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FB LEAD ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND EMAIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIAMART</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIAMART V2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFFLINE CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ONLINE CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offline Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAY PER CLICK ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PROJECTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TENDER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WEBSITE BOT CHAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WHATSAPP CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Reason__c</picklist>
+        <values>
+            <fullName>Lost to Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Budget %2F Lost Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Decision %2F Non-Responsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender Lost</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lost_Reason__c</picklist>
+        <values>
+            <fullName>Customer details not received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Future Prospect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internal Problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost to Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Minimum Quantity not met</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Budget %2F Lost Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Decision %2F Non-Responsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not responding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out of Service Area</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchased from Other Brands</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rate Issue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender lost</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Nurture_Negotiation__c</picklist>
+        <values>
+            <fullName>Negotiation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nurture</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Opportunity_Source__c</picklist>
+        <values>
+            <fullName>CRM RESOURCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EMAIL CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EVENT ACTIVATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FACEBOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FB LEAD ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND EMAIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIAMART</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIAMART V2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFFLINE CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ONLINE CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offline Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAY PER CLICK ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TENDER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WEBSITE BOT CHAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WHATSAPP CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Previous_Source__c</picklist>
+        <values>
+            <fullName>EMAIL CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EVENT ACTIVATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FACEBOOK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FB LEAD ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND EMAIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDIAMART</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indiamart V2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFFLINE CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ONLINE CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTBOUND PHONE CALL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAY PER CLICK ADS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TENDER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WEBSITE BOT CHAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WHATSAPP CAMPAIGNING</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Product_Category__c</picklist>
+        <values>
+            <fullName>Agriculture Pipes %26 Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BFB %28Broad Flanged Beam%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ballast Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bollard Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Borewell Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Buffer End Return</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bull Nose</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CCTV Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CCTV Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHANNEL SLEEPER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COLOUR COATED SHEET</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPVC Pipes %26 Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cantilever Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Column Riser Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conical pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DECK SHEET</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dead-end tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distribution Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ELASTIC RAIL CLIP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERW Hollow Section Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>End Beam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>End Connector %2F End Shoe Connector %2F Terminal Connector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipemnt Supply Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fish Tail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Roof Mounting Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flag Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GI pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gantry Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gantry Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gantry Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Garden Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ground Mounted Fixed Tilt Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H-BEAM CHANNEL SLEEPER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>H-BEAM SLEEPER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE PLB Duct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HDPE Pipes %26 Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Mast Lighting Towers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kavach Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kusum Project Solar Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LANCING PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LCLM %28Lightning Conductor Lightning Mast%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lighting Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MDPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MS Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Melt</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mix Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJB Connector</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Noise Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OHE MAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OHE SPS %28Small Parts Steel%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OHE Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Octagonal Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Overhead Electrification Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Casing Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RDS FILTER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RDS Strainer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RMS FILTER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC RMS Strainer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Ribbed Filter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Slotted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Slotted Filter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Slotted RDS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Slotted RMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PVC Slotted Strainer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pedestrian Guardrail %28PGR%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Piers Tracker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polygonal Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Portals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-engineered Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAILWAY ELECTRIFICATION MAST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAILWAY SLEEPER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECTANGULAR PIPE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSJ %28Rolled Steel Joist%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSJ Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railway Crash Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Railway Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roller Crash Barrier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rooftop Module Mounting Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Round Pipe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SPRINKLER PIPES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SSP %28Sub-sectioning and Paralleling Post%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SWR Pipes %26 Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signage Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Panel Carport</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solar Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Square Pipes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stadium Mast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steel Tubular Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Street Light Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Street Lighting pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Substation Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suspension tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Swaged Steel Tubular Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Swan Neck Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TSS %28Traction Sub Station Structure%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TTC %28Two Track Cantilever%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telecom Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Thrie Beam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Torque Tube Tracker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tracking System Mounting Structure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Traffic Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission Line Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission Monopoles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission Power Distribution Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transmission Tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>U Bend Shoulder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UPVC Pipes %26 Fittings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Utility Poles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Via-duct Pole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>W Beam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Tanks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>lattice tower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>solar tubes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reassaign_Reason__c</picklist>
+        <values>
+            <fullName>Due to Week Off</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Due to technical Issue %28Reassign Done%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Duplicate lead with the same user</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interested in other Utkarsh Projects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Looking For other User</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Owner Change Request Due as per management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unwell%2FEarly Leave</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Refer_to_Dealer_PO_upload__c</picklist>
+        <values>
+            <fullName>Delivery from stock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PO is required</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>State__c</picklist>
+        <values>
+            <fullName>Andaman and Nicobar Islands</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andhra Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arunachal Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bihar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chandigarh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chhattisgarh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dadra and Nagar Haveli and Daman and Diu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delhi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gujarat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Haryana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Himachal Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jammu and Kashmir</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jharkhand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Karnataka</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kerala</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ladakh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lakshadweep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Madhya Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maharashtra</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manipur</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meghalaya</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mizoram</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nagaland</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Odisha</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Puducherry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Punjab</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rajasthan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sikkim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tamil Nadu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telangana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tripura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uttar Pradesh</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uttarakhand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>West Bengal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Stage__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budgetary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tender</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tender_Loss_Reason__c</picklist>
+        <values>
+            <fullName>Lost Due to Make Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost Due to Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lost Due to Technical Issue</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>UOM__c</picklist>
+        <values>
+            <fullName>Alternative Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bundle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kgs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Metric Ton</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pcs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Set</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Zone__c</picklist>
+        <values>
+            <fullName>East</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>North</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>North-East</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South-West</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>West</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

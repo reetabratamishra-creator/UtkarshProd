@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <choices>
+        <name>CRM_RESOURCE</name>
+        <choiceText>CRM RESOURCE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>CRM RESOURCE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>EMAIL_CAMPAIGNING</name>
+        <choiceText>EMAIL CAMPAIGNING</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>EMAIL CAMPAIGNING</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>EVENT_ACTIVATION</name>
+        <choiceText>EVENT ACTIVATION</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>EVENT ACTIVATION</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>INBOUND_EMAIL</name>
+        <choiceText>INBOUND EMAIL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>INBOUND EMAIL</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>INBOUND_PHONE_CALL</name>
+        <choiceText>INBOUND PHONE CALL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>INBOUND PHONE CALL</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>OFFLINE_CRM</name>
+        <choiceText>OFFLINE CRM</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>OFFLINE CRM</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Offline_Marketing</name>
+        <choiceText>Offline Marketing</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Offline Marketing</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>OUTBOUND_PHONE_CALL</name>
+        <choiceText>OUTBOUND PHONE CALL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>OUTBOUND PHONE CALL</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PROJECTS</name>
+        <choiceText>PROJECTS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>PROJECTS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>TENDER</name>
+        <choiceText>TENDER</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>TENDER</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>WHATSAPP_CAMPAIGNING</name>
+        <choiceText>WHATSAPP CAMPAIGNING</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>WHATSAPP CAMPAIGNING</stringValue>
+        </value>
+    </choices>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
+        </value>
+    </customProperties>
+    <decisions>
+        <name>Doc_Required</name>
+        <label>Doc Required?</label>
+        <locationX>405</locationX>
+        <locationY>400</locationY>
+        <defaultConnector>
+            <targetReference>update_Opportunity_Source</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Required</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>DocRequiredforAdmin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>REQUIRED</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>DocRequiredforCRMHead</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>REQUIRED</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>DocRequiredforUtkarshCRM_HOD</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>REQUIRED</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>DocRequiredforUtkarshSales</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>REQUIRED</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Opportunity_Source_Screen_0</targetReference>
+            </connector>
+            <label>Required</label>
+        </rules>
+    </decisions>
+    <description>Created from v2: Opportunity Source Changes
+Created from v1: Added File upload scenario based on source</description>
+    <dynamicChoiceSets>
+        <name>OpportunitySource1</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Opportunity_Source__c</picklistField>
+        <picklistObject>Opportunity</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>PreviousSource</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Previous_Source__c</picklistField>
+        <picklistObject>Opportunity</picklistObject>
+    </dynamicChoiceSets>
+    <environments>Default</environments>
+    <formulas>
+        <name>currentUserProfileName</name>
+        <dataType>String</dataType>
+        <expression>{!$Profile.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>DocRequiredforAdmin</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!OpportunitySource_Admin1},
+    &apos;FACEBOOK&apos;, &apos;REQUIRED&apos;,
+    &apos;FB LEAD ADS&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;INBOUND EMAIL&apos;, &apos;REQUIRED&apos;,
+    &apos;INBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;INDIAMART&apos;, &apos;REQUIRED&apos;,
+    &apos;INDIAMART V2&apos;, &apos;REQUIRED&apos;,
+    &apos;ONLINE CAMPAIGNING&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;PAY PER CLICK ADS&apos;, &apos;REQUIRED&apos;,
+    &apos;WEBSITE&apos;, &apos;REQUIRED&apos;,
+    &apos;WHATSAPP CAMPAIGNING&apos;, &apos;REQUIRED&apos;,
+    &apos;EMAIL CAMPAIGNING&apos;, &apos;REQUIRED&apos;,
+    &apos;Offline Marketing&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;OUTBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;EVENT ACTIVATION&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;TENDER&apos;, &apos;REQUIRED&apos;,
+    &apos;CRM RESOURCE&apos;, &apos;NOT REQUIRED&apos;,
+     &apos;WEBSITE BOT CHAT&apos;, &apos;REQUIRED&apos;,
+     &apos;OFFLINE CRM&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>DocRequiredforCRMHead</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!OpportunitySource_UtkarshCRM_HOD1},
+    &apos;INBOUND EMAIL&apos;, &apos;REQUIRED&apos;,
+    &apos;INBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;EMAIL CAMPAIGNING&apos;, &apos;REQUIRED&apos;,
+    &apos;Offline Marketing&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;OUTBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;TENDER&apos;, &apos;REQUIRED&apos;,
+    &apos;CRM RESOURCE&apos;, &apos;NOT REQUIRED&apos;,
+     &apos;OFFLINE CRM&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>DocRequiredforUtkarshCRM_HOD</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!OpportunitySource_CRMHead1},
+    &apos;FACEBOOK&apos;, &apos;REQUIRED&apos;,
+    &apos;FB LEAD ADS&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;INBOUND EMAIL&apos;, &apos;REQUIRED&apos;,
+    &apos;INBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;INDIAMART&apos;, &apos;REQUIRED&apos;,
+     &apos;INDIAMART V2&apos;, &apos;REQUIRED&apos;,
+    &apos;ONLINE CAMPAIGNING&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;PAY PER CLICK ADS&apos;, &apos;REQUIRED&apos;,
+    &apos;WEBSITE&apos;, &apos;REQUIRED&apos;,
+    &apos;WHATSAPP CAMPAIGNING&apos;, &apos;REQUIRED&apos;,
+    &apos;EMAIL CAMPAIGNING&apos;, &apos;REQUIRED&apos;,
+    &apos;Offline Marketing&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;OUTBOUND PHONE CALL&apos;, &apos;REQUIRED&apos;,
+    &apos;EVENT ACTIVATION&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;TENDER&apos;, &apos;REQUIRED&apos;,
+    &apos;CRM RESOURCE&apos;, &apos;NOT REQUIRED&apos;,
+     &apos;WEBSITE BOT CHAT&apos;, &apos;REQUIRED&apos;,
+      &apos;OFFLINE CRM&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>DocRequiredforUtkarshSales</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+    {!OpportunitySource_Sales},
+    &apos;Offline Marketing&apos;, &apos;NOT REQUIRED&apos;,
+    &apos;TENDER&apos;, &apos;REQUIRED&apos;,
+    &apos;&apos;
+)</expression>
+    </formulas>
+    <formulas>
+        <name>OpportunitySourceFormula</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    NOT(ISBLANK({!OpportunitySource_Admin1})),
+    {!OpportunitySource_Admin1},
+    IF(
+        NOT(ISBLANK({!OpportunitySource_UtkarshCRM_HOD1})),
+        {!OpportunitySource_UtkarshCRM_HOD1},
+        IF(
+            NOT(ISBLANK({!OpportunitySource_CRMHead1})),
+            {!OpportunitySource_CRMHead1},
+            {!OpportunitySource_Sales}
+        )
+    )
+)</expression>
+    </formulas>
+    <interviewLabel>Opportunity: Change Opportunity Source {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity: Change Opportunity Source</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>get_Opportunity</name>
+        <label>get Opportunity</label>
+        <locationX>734</locationX>
+        <locationY>235</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Opportunity_Source_Screen</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordRollbacks>
+        <name>Rollback</name>
+        <label>Rollback</label>
+        <locationX>1004</locationX>
+        <locationY>438</locationY>
+        <connector>
+            <targetReference>Fault_Screen</targetReference>
+        </connector>
+    </recordRollbacks>
+    <recordUpdates>
+        <name>update_Opportunity_Source</name>
+        <label>update Opportunity Source</label>
+        <locationX>737</locationX>
+        <locationY>535</locationY>
+        <connector>
+            <targetReference>Success_Screen</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Rollback</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Opportunity_Source__c</field>
+            <value>
+                <elementReference>OpportunitySourceFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Previous_Source__c</field>
+            <value>
+                <elementReference>Previous_Source</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <screens>
+        <name>Fault_Screen</name>
+        <label>Fault Screen</label>
+        <locationX>1035</locationX>
+        <locationY>259</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>FaultMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(208, 12, 12);&quot;&gt;{!$Flow.FaultMessage}&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Opportunity_Source_Screen</name>
+        <label>Opportunity Source Screen</label>
+        <locationX>737</locationX>
+        <locationY>387</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Doc_Required</targetReference>
+        </connector>
+        <fields>
+            <name>Opportunity_Source_Screen_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Opportunity_Source_Screen_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>OpportunitySource_Admin1</name>
+                    <choiceReferences>OpportunitySource1</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>get_Opportunity.Opportunity_Source__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Opportunity Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>or</conditionLogic>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>System Administrator</stringValue>
+                            </rightValue>
+                        </conditions>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utkarsh Admin</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <name>OpportunitySource_CRMHead1</name>
+                    <choiceReferences>INBOUND_EMAIL</choiceReferences>
+                    <choiceReferences>INBOUND_PHONE_CALL</choiceReferences>
+                    <choiceReferences>EMAIL_CAMPAIGNING</choiceReferences>
+                    <choiceReferences>OUTBOUND_PHONE_CALL</choiceReferences>
+                    <choiceReferences>OFFLINE_CRM</choiceReferences>
+                    <choiceReferences>TENDER</choiceReferences>
+                    <choiceReferences>CRM_RESOURCE</choiceReferences>
+                    <choiceReferences>Offline_Marketing</choiceReferences>
+                    <choiceReferences>WHATSAPP_CAMPAIGNING</choiceReferences>
+                    <choiceReferences>PROJECTS</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>get_Opportunity.Opportunity_Source__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Opportunity Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>or</conditionLogic>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utkarsh CRM</stringValue>
+                            </rightValue>
+                        </conditions>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utakrsh Department CRM User</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <name>OpportunitySource_UtkarshCRM_HOD1</name>
+                    <choiceReferences>INBOUND_EMAIL</choiceReferences>
+                    <choiceReferences>INBOUND_PHONE_CALL</choiceReferences>
+                    <choiceReferences>EMAIL_CAMPAIGNING</choiceReferences>
+                    <choiceReferences>OUTBOUND_PHONE_CALL</choiceReferences>
+                    <choiceReferences>EVENT_ACTIVATION</choiceReferences>
+                    <choiceReferences>OFFLINE_CRM</choiceReferences>
+                    <choiceReferences>TENDER</choiceReferences>
+                    <choiceReferences>CRM_RESOURCE</choiceReferences>
+                    <choiceReferences>Offline_Marketing</choiceReferences>
+                    <choiceReferences>WHATSAPP_CAMPAIGNING</choiceReferences>
+                    <choiceReferences>PROJECTS</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>get_Opportunity.Opportunity_Source__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Opportunity Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>or</conditionLogic>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>CRM Head</stringValue>
+                            </rightValue>
+                        </conditions>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utkarsh HOD</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <name>OpportunitySource_Sales</name>
+                    <choiceReferences>TENDER</choiceReferences>
+                    <choiceReferences>Offline_Marketing</choiceReferences>
+                    <dataType>String</dataType>
+                    <defaultValue>
+                        <elementReference>get_Opportunity.Opportunity_Source__c</elementReference>
+                    </defaultValue>
+                    <fieldText>Opportunity Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>and</conditionLogic>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utkarsh Sales</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
+                    <name>Opportunity_Source</name>
+                    <choiceReferences>PROJECTS</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Opportunity Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>and</conditionLogic>
+                        <conditions>
+                            <leftValueReference>currentUserProfileName</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <stringValue>Utkarsh Projects</stringValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>Opportunity_Source_Screen_Section1_Column2</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Previous_Source</name>
+                    <choiceReferences>PreviousSource</choiceReferences>
+                    <dataType>String</dataType>
+                    <fieldText>Previous Source</fieldText>
+                    <fieldType>DropdownBox</fieldType>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>or</conditionLogic>
+                        <conditions>
+                            <leftValueReference>OpportunitySource_Admin1</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <elementReference>CRM_RESOURCE</elementReference>
+                            </rightValue>
+                        </conditions>
+                        <conditions>
+                            <leftValueReference>OpportunitySource_CRMHead1</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <elementReference>CRM_RESOURCE</elementReference>
+                            </rightValue>
+                        </conditions>
+                        <conditions>
+                            <leftValueReference>OpportunitySource_UtkarshCRM_HOD1</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <elementReference>CRM_RESOURCE</elementReference>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Opportunity_Source_Screen_0</name>
+        <label>Opportunity Source Screen</label>
+        <locationX>415</locationX>
+        <locationY>609</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>update_Opportunity_Source</targetReference>
+        </connector>
+        <fields>
+            <name>Opportunity_Source_Screen_0_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Opportunity_Source_Screen_0_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>SizeCaution_0</name>
+                    <fieldText>&lt;p&gt;&lt;strong style=&quot;color: rgb(218, 10, 10); background-color: rgb(255, 255, 255);&quot;&gt;Keep your file size less than 25MB&lt;/strong&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <fields>
+                    <name>UploadDocument</name>
+                    <extensionName>forceContent:fileUpload</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>label</name>
+                        <value>
+                            <stringValue>Upload Document</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>multiple</name>
+                        <value>
+                            <booleanValue>true</booleanValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>contentDocIds</name>
+                        <value>
+                            <elementReference>contentDocId</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>recordId</name>
+                        <value>
+                            <elementReference>recordId</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <validationRule>
+                        <errorMessage>&lt;p&gt;&lt;strong style=&quot;color: rgb(221, 8, 8); background-color: rgb(255, 255, 255);&quot;&gt;This is a required to upload a file for the Lead source &lt;/strong&gt;&lt;/p&gt;</errorMessage>
+                        <formulaExpression>IF(LEN({!UploadDocument.contentDocIds})&gt;2, TRUE,FALSE)</formulaExpression>
+                    </validationRule>
+                </fields>
+                <fields>
+                    <name>UploadedFilesNames</name>
+                    <fieldText>&lt;p&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!UploadDocument.fileNames}&lt;/strong&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>Opportunity_Source_Screen_0_Section1_Column2</name>
+                <fieldType>Region</fieldType>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>6</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Success_Screen</name>
+        <label>Success Screen</label>
+        <locationX>961</locationX>
+        <locationY>634</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>SuccessMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(24, 147, 5);&quot;&gt;Opportunity Source has been updated&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>609</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>get_Opportunity</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>contentDocId</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

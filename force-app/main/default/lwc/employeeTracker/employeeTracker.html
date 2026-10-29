@@ -1,0 +1,340 @@
+<template>
+    <template if:true={hasTrackerAccess}>
+        <lightning-tabset variant="scoped">
+            <!-- TAB 1: Map View (Original Tracker) -->
+            <lightning-tab label="Map View">
+                <div class="et-container">
+                    <!-- LEFT: Employees list -->
+                    <div class="et-left">
+                        <!-- Header + Search -->
+                        <div class="et-header">
+                            <div class="et-title">
+                                Employees ({employees.length})
+                            </div>
+                            <lightning-input type="date"
+                                             variant="label-hidden"
+                                             value={selectedDate}
+                                             onchange={handleDateChange}
+                                             class="et-date-select"
+                                             required>
+                            </lightning-input>
+                            <lightning-input type="search"
+                                             variant="label-hidden"
+                                             placeholder="Search Employees..."
+                                             value={searchKey}
+                                             onchange={handleSearchChange}
+                                             class="et-search">
+                            </lightning-input>
+                        </div>
+
+                        <!-- Status pills -->
+                        <div class="et-status-row">
+                            <button class={allBtnClass} data-value="ALL" onclick={handleStatusFilter}>
+                                <span class="et-pill-count et-pill-all">{employees.length}</span>
+                                All
+                            </button>
+                            <button class={inBtnClass} data-value="IN" onclick={handleStatusFilter}>
+                                <span class="et-pill-count et-pill-in">{punchedInCount}</span>
+                                In
+                            </button>
+                            <button class={outBtnClass} data-value="OUT" onclick={handleStatusFilter}>
+                                <span class="et-pill-count et-pill-out">{punchedOutCount}</span>
+                                Out
+                            </button>
+                        </div>
+
+                        <!-- Employee cards -->
+                        <div class="et-list">
+                            <template if:true={filteredEmployees}>
+                                <template for:each={filteredEmployees} for:item="emp">
+                                    <article key={emp.Id} class="et-card">
+                                        <div class="et-card-header">
+                                            <div class="et-avatar">{emp.initials}</div>
+                                            <div class="et-card-main">
+                                                <div class="et-name">{emp.employeeName}</div>
+                                                <div class="et-phone">{emp.phone}</div>
+                                            </div>
+                                            <template if:true={emp.hasBattery}>
+                                                <div class="et-battery">
+                                                    <lightning-icon icon-name="utility:battery" size="x-small"></lightning-icon>
+                                                    <span>{emp.batteryPercentage}%</span>
+                                                </div>
+                                            </template>
+                                        </div>
+
+                                        <!-- Pending WFH/WFO Requests -->
+                                        <template if:true={emp.hasPendingRequests}>
+                                            <div class="et-pending-requests">
+                                                <div class="et-pending-header">Pending Requests</div>
+                                                <template for:each={emp.pendingRequests} for:item="req">
+                                                    <div key={req.requestId} class="et-req-card">
+                                                        <div class="et-req-info-col" style="flex: 1; margin-right: 0.5rem;">
+                                                            <div class="et-req-date">
+                                                                <span class="et-badge-type">{req.requestType}</span>
+                                                                Date: {req.formattedDate}
+                                                            </div>
+                                                            <div class="et-req-time">{req.formattedStartTime} - {req.formattedEndTime}</div>
+                                                            <template if:true={canApproveWfhRequests}>
+                                                                <div class="et-req-remarks-wrapper" style="margin-top: 0.3rem;">
+                                                                    <lightning-input 
+                                                                        type="text" 
+                                                                        placeholder="HOD remarks..." 
+                                                                        data-id={req.requestId}
+                                                                        onchange={handleRemarksChange}
+                                                                        variant="label-hidden"
+                                                                        class="et-remarks-input">
+                                                                    </lightning-input>
+                                                                </div>
+                                                            </template>
+                                                        </div>
+                                                        <template if:true={canApproveWfhRequests}>
+                                                            <div class="et-req-actions">
+                                                                <lightning-button-icon icon-name="utility:check" variant="border-filled" data-id={req.requestId} onclick={handleApproveWFH} title="Approve"></lightning-button-icon>
+                                                                <lightning-button-icon icon-name="utility:close" variant="border-filled" data-id={req.requestId} onclick={handleRejectWFH} title="Reject"></lightning-button-icon>
+                                                            </div>
+                                                        </template>
+                                                        <template if:false={canApproveWfhRequests}>
+                                                            <span class="et-req-status">Pending</span>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
+
+                                        <div class="et-card-sub">
+                                            <span class={emp.statusClass}>{emp.statusLabel}</span>
+                                            <span class={emp.attendanceBadgeClass}>{emp.summary.attendanceStatus}</span>
+                                        </div>
+
+                                        <div class="et-location">
+                                            <lightning-icon icon-name="utility:location" size="x-small"></lightning-icon>
+                                            <span>{emp.lastKnownAddress}</span>
+                                        </div>
+
+                                        <div class="et-card-stats">
+                                            <div class="et-stat">
+                                                <span class="et-stat-lbl">In / Out</span>
+                                                <span class="et-stat-val">{emp.summary.punchInTime} – {emp.summary.punchOutTime}</span>
+                                            </div>
+                                            <div class="et-stat">
+                                                <span class="et-stat-lbl">Hours</span>
+                                                <span class="et-stat-val">{emp.formattedHours}</span>
+                                            </div>
+                                            <div class="et-stat">
+                                                <span class="et-stat-lbl">Visits</span>
+                                                <span class="et-stat-val">{emp.summary.visitsCount}</span>
+                                            </div>
+                                            <div class="et-stat">
+                                                <span class="et-stat-lbl">Distance</span>
+                                                <span class="et-stat-val">{emp.formattedDistance}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="et-card-meta">
+                                            <span class={emp.gpsBadgeClass}>GPS: {emp.summary.gpsStatus}</span>
+                                            <!-- <span class="et-battery-meta">Batt: {emp.summary.batteryLevel}</span> -->
+                                        </div>
+
+                                        <div class="et-expand-row">
+                                            <lightning-button class="et-expand-btn" label={emp.expandLabel} data-id={emp.Id} onclick={toggleExpand}></lightning-button>
+                                        </div>
+
+                                        <template if:true={emp.isExpanded}>
+                                            <div class="et-expanded-msg">Viewing historical path on map...</div>
+
+                                            <template if:true={emp.timeline.length}>
+                                                <div class="timeline">
+                                                    <template for:each={emp.timeline} for:item="t">
+                                                        <div key={t.id} class="timeline-item">
+                                                            <div class="timeline-marker">
+                                                                <div class="timeline-icon">
+                                                                    <lightning-icon icon-name={t.iconName} size="x-small" variant={t.iconVariant}></lightning-icon>
+                                                                </div>
+                                                                <template if:true={t.nodeDistance}>
+                                                                    <span class="dot-distance-val">{t.nodeDistance}</span>
+                                                                </template>
+                                                            </div>
+                                                            <div class="timeline-content">
+                                                                <div class="timeline-header">
+                                                                    <span class="timeline-time">{t.time}</span>
+                                                                    <span class={t.badgeClass}>{t.badgeLabel}</span>
+                                                                </div>
+
+                                                                <template if:true={t.client}>
+                                                                    <div class="timeline-client">
+                                                                        <lightning-icon icon-name="utility:company" size="xx-small"></lightning-icon>
+                                                                        {t.client}
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={t.isTask}>
+                                                                    <div class="timeline-quick-meta">
+                                                                        <template if:true={t.checkInTime}>
+                                                                            <div class="timeline-chip">
+                                                                                <span class="timeline-chip-lbl">In</span>
+                                                                                <span class="timeline-chip-val">{t.checkInTime}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={t.checkOutTime}>
+                                                                            <div class="timeline-chip">
+                                                                                <span class="timeline-chip-lbl">Out</span>
+                                                                                <span class="timeline-chip-val">{t.checkOutTime}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={t.visitDuration}>
+                                                                            <div class="timeline-chip timeline-chip-duration">
+                                                                                <span class="timeline-chip-lbl">Duration</span>
+                                                                                <span class="timeline-chip-val">{t.visitDuration}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                    </div>
+                                                                </template>
+
+                                                                <template if:true={t.text}>
+                                                                    <div class="timeline-text">{t.text}</div>
+                                                                </template>
+
+                                                                <template if:true={t.hasDetails}>
+                                                                    <div class="timeline-details">
+                                                                        <template if:true={t.isPunch}>
+                                                                            <template if:true={t.punchType}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Mode:</strong> {t.punchType}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.hasTransport}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <lightning-icon icon-name="utility:travel_and_transit" size="xx-small"></lightning-icon>
+                                                                                    {t.transportLabel}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.hasOdometer}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <lightning-icon icon-name="utility:rating" size="xx-small"></lightning-icon>
+                                                                                    Odometer: {t.odometer} km
+                                                                                </div>
+                                                                            </template>
+                                                                        </template>
+
+                                                                        <template if:true={t.isTask}>
+                                                                            <template if:true={t.visitType}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Visit Type:</strong> {t.visitType}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.visitCategory}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Category:</strong> {t.visitCategory}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.checkInTime}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Check-In:</strong> {t.checkInTime}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.checkOutTime}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Check-Out:</strong> {t.checkOutTime}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.visitDuration}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Duration:</strong> {t.visitDuration}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.reasonForVisit}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Reason:</strong> {t.reasonForVisit}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.visitOutcome}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Outcome:</strong> {t.visitOutcome}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.mom}>
+                                                                                <div class="timeline-detail-row timeline-mom">
+                                                                                    <strong>MOM:</strong> {t.mom}
+                                                                                </div>
+                                                                            </template>
+                                                                            <template if:true={t.nextAction}>
+                                                                                <div class="timeline-detail-row">
+                                                                                    <strong>Next Action:</strong> {t.nextAction}
+                                                                                </div>
+                                                                            </template>
+                                                                        </template>
+
+                                                                        <template if:true={t.address}>
+                                                                            <div class="timeline-detail-row">
+                                                                                <lightning-icon icon-name="utility:checkin" size="xx-small"></lightning-icon>
+                                                                                {t.address}
+                                                                            </div>
+                                                                        </template>
+
+                                                                        <template if:true={t.hasMedia}>
+                                                                            <div class="timeline-captures">
+                                                                                <template if:true={t.selfieUrl}>
+                                                                                    <button class="timeline-cap-btn" onclick={openFullImage} data-url={t.selfieUrl} type="button">
+                                                                                        <img src={t.selfieUrl} class="timeline-img" alt="Selfie" />
+                                                                                        Selfie
+                                                                                    </button>
+                                                                                </template>
+                                                                                <template if:true={t.odometerUrl}>
+                                                                                    <button class="timeline-cap-btn" onclick={openFullImage} data-url={t.odometerUrl} type="button">
+                                                                                        <img src={t.odometerUrl} class="timeline-img" alt="Odometer" />
+                                                                                        Odometer
+                                                                                    </button>
+                                                                                </template>
+                                                                            </div>
+                                                                        </template>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                            <template if:false={emp.timeline.length}>
+                                                <div class="et-timeline-empty">No punch or visit activity for this date.</div>
+                                            </template>
+                                        </template>
+                                    </article>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Map -->
+                    <div class="et-right">
+                        <div class="map-container-wrapper">
+                            <iframe src={mapUrl} class="map-iframe" lwc:dom="manual"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+    </template>
+
+    <template if:true={showAccessDenied}>
+        <div class="access-denied">
+            <lightning-icon icon-name="utility:lock" size="large" variant="error"></lightning-icon>
+            <h1>Access Denied</h1>
+            <p>You do not have permission to view Force Tracker.</p>
+        </div>
+    </template>
+
+    <!-- Image Preview Modal -->
+    <template if:true={showImageModal}>
+        <section class="et-modal-backdrop" onclick={closeImageModal}>
+            <div class="et-modal-content" onclick={stopBubble}>
+                <div class="et-modal-header">
+                    <h2>Image Preview</h2>
+                    <button class="et-close-btn" onclick={closeImageModal}>&times;</button>
+                </div>
+                <div class="et-modal-body">
+                    <img src={fullImageUrl} alt="Full size" class="et-full-image" />
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

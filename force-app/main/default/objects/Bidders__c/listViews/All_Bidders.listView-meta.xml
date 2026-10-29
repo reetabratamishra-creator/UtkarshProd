@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Bidders</fullName>
+    <columns>Bidder_Name_Link__c</columns>
+    <columns>Tender__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>All Bidders</label>
+</ListView>
